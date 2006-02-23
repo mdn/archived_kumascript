@@ -1,3 +1,2 @@
-<span class="comment">- 1 - インターフェース名   - 2 - ソースの @topsrc@/mozilla/ からの相対位置   - 3 - FROZEN/unfrozen/UNDER_REVIEW   - 4 - {{mediawiki.external('date/milestone')}}からの経過 (in unfrozen case, last-changed-in)   - 5 - Scriptable? (yes/no)</span>
-<code>{{web.html($0)}}</code> は {{wiki.template('Source', mediawiki.args([$1]))}} と {{wiki.template(mediawiki.path('InterfaceStatus:' + $2, "ja"), mediawiki.args([$3]))}} で定義されます。
-これは {{wiki.template(mediawiki.path('InterfaceStatus:Scriptable_' + $4, "ja"))}} です。
+<span class="comment">- 1 - Interface Name   - 2 - Source Location relative to @topsrc@/mozilla/   - 3 - FROZEN/unfrozen/UNDER_REVIEW/EXPERIMENTAL   - 4 - Since {{mediawiki.external('date/milestone')}} (in unfrozen case, last-changed-in)   - 5 - Scriptable? (yes/no)</span>
+<code>{{web.html($0)}}</code> is defined in {{wiki.template('Source', mediawiki.args([$1]))}}, and {{wiki.template(mediawiki.path('InterfaceStatus:' + $2, "en"), mediawiki.args([$3]))}}.  It is {{wiki.template(mediawiki.path('InterfaceStatus:Scriptable_' + $4, "en"))}}.
