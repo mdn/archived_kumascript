@@ -1,1 +1,1 @@
-<span style="border: 1px solid #818151; background-color: #FFFFE1; font-size: 9px; vertical-align: text-top;">New in Firefox {{web.html($0)}}</span>
+<span style="border: 1px solid #818151; background-color: #FFFFE1; font-size: 9px; vertical-align: text-top;">New in {{wiki.pageexists(mediawiki.localurl("en", 'Firefox ' + $0 + ' for developers')) ? web.html(mediawiki.internal('Firefox ' + $0 + ' for developers', "en")) : web.html('Firefox ' + $0)}}</span>
