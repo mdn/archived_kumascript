@@ -1,12 +1,14 @@
+<div class="includeonly">
 <div class="prevnext">
-<p><span style="float:left;">« {{mediawiki.internal('DevNews:' + $0 + '|' + $0, "ja")}}</span>
-<span style="float:right;">{{mediawiki.internal('DevNews:' + $1 + '|' + $1, "ja")}} »</span>
+<p>{{web.html($0 || '<span style=\"float:left;\">' + «  + {{mediawiki.internal('DevNews:' + $0 + '|' + $0, "ja")}} + '</span>')}}
+{{web.html($1 || '<span style=\"float:right;\">' + »  + {{mediawiki.internal('DevNews:' + $0 + '|' + $0, "ja")}} + '</span>')}}
 </p>
+</div>
 </div>
 <span class="comment">Comment here to ensure newlines get recognized</span>
 
 <div class="noinclude">
-<p>このテンプレートは <a class="external" href="http://developer.mozilla.org/devnews/">DevNews</a> の翻訳に使われています。
+<p>このテンプレートは <a class="external" href="http://developer.mozilla.org/devnews/">DevNews</a> の翻訳 (<a href="ja/DevNews">DevNews</a>)に使われています。
 </p><p>このテンプレートを使うには以下の内容を記事の先頭に追加してください。
 </p>
 <pre>{{DevNewsPreviousNext|前の記事のページ名|次の記事のページ名}}</pre>
