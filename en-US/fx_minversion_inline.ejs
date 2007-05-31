@@ -1,11 +1,13 @@
-<span style="border: 1px solid #818151; background-color: #FFFFE1; font-size: 9px; vertical-align: text-top;">Nowość w {{wiki.pageexists(mediawiki.localurl("pl", 'Firefox ' + $0 + ' dla programistów')) ? web.html(mediawiki.internal('Firefox ' + $0 + ' dla programistów|Firefoksie ' + $0, "pl")) : web.html('Firefoksie ' + $0)}}</span><div class="noinclude">
+<span style="border: 1px solid #818151; background-color: #FFFFE1; font-size: 9px; vertical-align: text-top;">Novidade no {{wiki.pageexists(mediawiki.localurl("pt", 'Firefox ' + $0 + ' para desenvolvedores')) ? web.html(mediawiki.internal('Firefox ' + $0 + ' para desenvolvedores|Firefox ' + $0, "pt")) : web.html('Firefox ' + $0)}}</span>
+
+<div class="noinclude">
 <hr />
-<p>Jeden z <a href="Project:pl/W%c5%82asne_szablony#Szablony_informuj.C4.85ce_o_wersji">szablonów informujących o wersji</a>. Na przykład:
+<p>One of the <a href="Project:pt/Custom_Templates#Version_information_templates">Version information templates</a>. For example:
 </p>
 <pre class="eval"><span class="plain">{{fx minversion inline|3}}</span>
 </pre>
-<p>Wyświetli:
+<p>results in:
 {{template.Fx_minversion_inline(3)}}
-</p><p>Szablon ten powinien być stosowany kiedy indywidualne pozycje na liście lub w tabeli wyświetlają wersję N Firefoksa. W momencie gdy cała strona lub sekcja opisuje cechy Firefoksa, ten szablon wyświetli te, które są w nowej wersji Firefoksa, aby to zrobić należy zastosować <a href="Template:Fx_minversion_header">Szablon:fx minversion header</a>.
+</p><p>This template should be used when an individual item in a list or a table appeared in Firefox version N. When a whole page or section describes a feature that appeared in a new Firefox version, use <a href="Template:Fx_minversion_header">Template:fx minversion header</a>.
 </p>
 </div>
