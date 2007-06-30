@@ -1,13 +1,12 @@
-<span style="border: 1px solid #818151; background-color: #FFFFE1; font-size: 9px; vertical-align: text-top;">Novidade no {{wiki.pageexists(mediawiki.localurl("pt", 'Firefox ' + $0 + ' para desenvolvedores')) ? web.html(mediawiki.internal('Firefox ' + $0 + ' para desenvolvedores|Firefox ' + $0, "pt")) : web.html('Firefox ' + $0)}}</span>
-
-<div class="noinclude">
+<span style="border: 1px solid #818151; background-color: #FFFFE1; font-size: 9px; vertical-align: text-top;">{{wiki.pageexists(mediawiki.localurl("ja", 'Firefox ' + $0 + ' for developers')) ? web.html(mediawiki.internal('Firefox ' + $0 + ' for developers|Firefox ' + $0, "ja")) : web.html('Firefox ' + $0)}} の新機能</span><div class="noinclude">
 <hr />
-<p>One of the <a href="Project:pt/Custom_Templates#Version_information_templates">Version information templates</a>. For example:
+<p><a href="Project:ja/Custom_Templates#Version_information_templates">バージョン情報テンプレート</a> の 1 つです。例えば:
 </p>
 <pre class="eval"><span class="plain">{{fx minversion inline|3}}</span>
 </pre>
-<p>results in:
+<p>は:
 {{template.Fx_minversion_inline(3)}}
-</p><p>This template should be used when an individual item in a list or a table appeared in Firefox version N. When a whole page or section describes a feature that appeared in a new Firefox version, use <a href="Template:Fx_minversion_header">Template:fx minversion header</a>.
+という結果になります。
+</p><p>このテンプレートはリストやテーブルの (Firefox バージョン N で登場した) 個々の項目に使うべきです。ページか章全体が Firefox の新バージョンで登場した機能について述べているなら、 <a href="Template:Fx_minversion_header">Template:fx minversion header</a> を使ってください。
 </p>
 </div>
