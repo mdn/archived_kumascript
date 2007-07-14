@@ -1,12 +1,1 @@
-<span style="border: 1px solid #818151; background-color: #FFFFE1; font-size: 9px; vertical-align: text-top;">{{wiki.pageexists(mediawiki.localurl("ja", 'Firefox ' + $0 + ' for developers')) ? web.html(mediawiki.internal('Firefox ' + $0 + ' for developers|Firefox ' + $0, "ja")) : web.html('Firefox ' + $0)}} の新機能</span><div class="noinclude">
-<hr />
-<p><a href="Project:ja/Custom_Templates#Version_information_templates">バージョン情報テンプレート</a> の 1 つです。例えば:
-</p>
-<pre class="eval"><span class="plain">{{fx minversion inline|3}}</span>
-</pre>
-<p>は:
-{{template.Fx_minversion_inline(3)}}
-という結果になります。
-</p><p>このテンプレートはリストやテーブルの (Firefox バージョン N で登場した) 個々の項目に使うべきです。ページか章全体が Firefox の新バージョンで登場した機能について述べているなら、 <a href="Template:Fx_minversion_header">Template:fx minversion header</a> を使ってください。
-</p>
-</div>
+<span style="border: 1px solid #818151; background-color: #FFFFE1; font-size: 9px; vertical-align: text-top;">Wymaga Gecko {{web.html($0)}}</span>
