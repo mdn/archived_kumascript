@@ -1,10 +1,5 @@
 <div class="originaldocinfo">
 <h3 name="Original_Document_Information">Original Document Information</h3>
-<ul><li> Author(s): {{web.html($author)}}
-</li></ul>
-<p>{{string.trim(($others || '')) !== '' ? web.html('* Other Contributors: ' + $others) : ''}}
-</p>
-<ul><li> Last Updated Date: {{web.html($last_date)}}
-</li><li> Copyright Information: {{web.html($copyright)}}
+<ul><li> Author(s): {{web.html($author)}} {{string.trim(($others || '')) !== '' ? web.html('* Other Contributors: ' + $others) : ''}} {{string.trim(($date || '')) !== '' ? web.html('* Last Updated Date: ' + $date) : ''}} {{string.trim(($copyright || '')) !== '' ? web.html('* Copyright Information: ' + $copyright) : ''}}
 </li></ul>
 </div>
