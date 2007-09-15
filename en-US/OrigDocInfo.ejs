@@ -1,5 +1,36 @@
+<div class="includeonly">
 <div class="originaldocinfo">
-<h3 name="Original_Document_Information">Original Document Information</h3>
-<ul><li> Author(s): {{web.html($author)}} {{string.trim(($others || '')) !== '' ? web.html('* Other Contributors: ' + $others) : ''}} {{string.trim(($date || '')) !== '' ? web.html('* Last Updated Date: ' + $date) : ''}} {{string.trim(($copyright || '')) !== '' ? web.html('* Copyright Information: ' + $copyright) : ''}}
-</li></ul>
+<h2 name="Original_Document_Information"> Original Document Information </h2>
+<p>{{string.trim(($author || '')) !== '' ? web.html('* Author(s): ' + $author) : ''}}{{string.trim(($others || '')) !== '' ? web.html('* Other Contributors: ' + $others) : ''}}{{string.trim(($date || '')) !== '' ? web.html('* Last Updated Date: ' + $date) : ''}}{{string.trim(($copyright || '')) !== '' ? web.html('* Copyright Information: ' + $copyright) : ''}}{{string.trim(($original || '')) !== '' ? web.html('* Original Location: ' + $original) : ''}}{{string.trim(($note || '')) !== '' ? web.html('* Note: ' + $note) : ''}}
+</p>
 </div>
+</div>
+<div class="noinclude">
+<pre>
+
+Copy & paste this empty template:
+(delete any unused fields, all fields are optional.)
+
+{{OrigDocInfo
+ |author= 
+ |others= 
+ |date= 
+ |copyright= 
+ |history=
+ |original= 
+ |note= 
+}}
+
+Example usage:
+
+{{OrigDocInfo
+|author= Larry, Moe, and Curly
+|others= The People of Shemp & Co. (Polish translation)
+|date= April 1st, 1959
+|copyright= ©1959 Netscape Studios
+|original= http://www.mozilla.org/somewhere/is/moe.html
+|note=final note.
+}}</pre>
+<p>Example output:
+</p>
+{{template.OrigDocInfo{ author : " Larry, Moe, and Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "final note.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (Polish translation)" }}}</div>
