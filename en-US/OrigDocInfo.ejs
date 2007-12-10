@@ -1,15 +1,15 @@
 <div class="includeonly">
 <div class="originaldocinfo">
-<h2 name="Original_Document_Information"> Original Document Information </h2>
-<p>{{string.trim(($author || '')) !== '' ? web.html('* Author(s): ' + $author) : ''}}{{string.trim(($others || '')) !== '' ? web.html('* Other Contributors: ' + $others) : ''}}{{string.trim(($date || '')) !== '' ? web.html('* Last Updated Date: ' + $date) : ''}}{{string.trim(($copyright || '')) !== '' ? web.html('* Copyright Information: ' + $copyright) : ''}}{{string.trim(($original || '')) !== '' ? web.html('* Original Location: ' + $original) : ''}}{{string.trim(($note || '')) !== '' ? web.html('* Note: ' + $note) : ''}}
+<h3 name=".E5.8E.9F.E6.96.87.E6.9B.B8.E3.81.AE.E6.83.85.E5.A0.B1">原文書の情報</h3>
+<p>{{string.trim(($author || '')) !== '' ? web.html('* 著者: ' + $author) : ''}}{{string.trim(($others || '')) !== '' ? web.html('* 貢献者: ' + $others) : ''}}{{string.trim(($date || '')) !== '' ? web.html('* 最終変更日: ' + $date) : ''}}{{string.trim(($copyright || '')) !== '' ? web.html('* 著作権: ' + $copyright) : ''}}{{string.trim(($original || '')) !== '' ? web.html('* 原文書の場所: ' + $original) : ''}}{{string.trim(($note || '')) !== '' ? web.html('* 注記: ' + $note) : ''}}
 </p>
 </div>
 </div>
 <div class="noinclude">
 <pre>
 
-Copy & paste this empty template:
-(delete any unused fields, all fields are optional.)
+以下のテンプレートをコピー & ペーストしてください:
+(不要なフィールドは削除してください。すべてのフィールドは任意です。)
 
 {{OrigDocInfo
  |author= 
@@ -19,18 +19,4 @@ Copy & paste this empty template:
  |history=
  |original= 
  |note= 
-}}
-
-Example usage:
-
-{{OrigDocInfo
-|author= Larry, Moe, and Curly
-|others= The People of Shemp & Co. (Polish translation)
-|date= April 1st, 1959
-|copyright= ©1959 Netscape Studios
-|original= http://www.mozilla.org/somewhere/is/moe.html
-|note=final note.
-}}</pre>
-<p>Example output:
-</p>
-{{template.OrigDocInfo{ author : " Larry, Moe, and Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "final note.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (Polish translation)" }}}</div>
+}}</pre></div>
