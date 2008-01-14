@@ -1,0 +1,13 @@
+<div style="border: 1px solid #818151; background-color: #FFFFE1; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;"><p style="margin: 4px 0px 4px 0px; font-weight: bold;">{{wiki.pageexists(mediawiki.localurl("en", 'Firefox ' + $0 + ' for developers')) ? web.html(mediawiki.internal('Firefox ' + $0 + ' for developers|Firefox ' + $0, "en")) : web.html('Firefox ' + $0 + ' note')}}</p><p style="margin: 4px 0px 4px 0px;">{{web.html($1)}}</div>
+</p><div class="noinclude">
+<hr />
+<p>One of the <a href="Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:
+</p>
+<pre class="eval"><span class="plain">{{fx_minversion_note|3|The <code>foobar()</code> method works differently in Firefox 3.}}</span>
+</pre>
+<p>results in:
+{{template.Fx_minversion_note(3, "The <code>foobar()</code> method works differently in Firefox 3.")}}
+</p><p>This template should be used when you need to insert a Firefox version-specific note into an article. For individual items in a list or a table use <a href="Template:Fx_minversion_inline">Template:fx minversion inline</a>, and to mark a whole page or section, use <a href="Template:Fx_minversion_header">Template:fx_minversion_header</a>.
+</p>
+</div>
+</div>
