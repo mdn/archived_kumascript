@@ -1,1 +1,1 @@
-{{mediawiki.external('http://mxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + $3)}}
+{{mediawiki.external('http://mxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + (string.trim($3) !== '' ? web.html($3) : web.html('LXR ' + ($1 == 'ident' ? 'ID' : '') + ' Search for <code>' + $2 + '</code>')))}}
