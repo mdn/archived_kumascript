@@ -1,18 +1,12 @@
-<div class="onlyinclude"><div class="includeonly"><small style="margin-left: 1em;"><i><code>{{web.html($0)}}</code> インスタンスから継承されている{{string.tolower($1)}}については、{{mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + $1 + '_2|' + $0 + ' インスタンスの ' + $1, "ja")}} を参照してください</i> </small></div></div>
-<p>{{wiki.template('英語版章題', [ "Syntax" ])}}
+<div class="onlyinclude"><div class="includeonly"><small style="margin-left: 1em;"><i>For {{string.tolower($1)}} inherited by <code>{{string.toupperfirst(string.tolower($0))}}</code> instances, see {{mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' of ' + string.toupperfirst(string.tolower($0)) + ' instances', "en")}}.</i></small></div></div>
+<h3 name="Syntax"> Syntax </h3>
+<p><code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | Properties<span class="plain">}}</span></code><br />
+<code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | Methods<span class="plain">}}</span></code>
 </p>
-<h3 name=".E6.A7.8B.E6.96.87"> 構文 </h3>
-<p><code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | プロパティ<span class="plain">}}</span></code><br />
-<code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | メソッド<span class="plain">}}</span></code>
-</p><p>{{wiki.template('英語版章題', [ "Parameters" ])}}
-</p>
-<h3 name=".E5.BC.95.E6.95.B0"> 引数 </h3>
+<h3 name="Parameters"> Parameters </h3>
 <dl><dt> constructor
-</dt><dd> 現在のページの題名と一致する JavaScript コンストラクタ
+</dt><dd> JavaScript constructor that is the subject of the current page
 </dd></dl>
-<p>二番目の引数に <code>{{wiki.template('原語併記', [ "プロパティ", "Properties" ])}}</code> や <code>{{wiki.template('原語併記', [ "メソッド", "Methods" ])}}</code> を指定するときは、複数形や最初の文字を大文字にするなど、章題と完全に一致させることが重要となります。{{wiki.template('訳注', [ "そのページに英語版章題がある場合、実際の章題を \"プロパティ\" と訳して、このテンプレートで \"Properties\" と指定しても問題は生じません。ただし、問題がないというだけの話であり、章題を \"プロパティ\" と訳す以上は、文書中での訳の整合性を保つという意味で、このテンプレートでも \"プロパティ\" と指定してください。" ])}}
-</p><p>{{wiki.template('英語版章題', [ "説明" ])}}
-</p>
-<h3 name=".E8.AA.AC.E6.98.8E"> 説明 </h3>
-<p>そのページのプロトタイプオブジェクトのプロパティ/メソッドの一覧へ誘導するポインタを提供するために使われます。特定の冒頭の下に置いてください。
+<h3 name="Description"> Description </h3>
+<p>Should be used to provide a helpful pointer to the included property/method list of the subject's prototype object. Place below the appropriate heading.
 </p>
