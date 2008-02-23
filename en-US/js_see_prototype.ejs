@@ -1,1 +1,14 @@
-<small style="margin-left: 1em;"><i>For {{string.tolower($1)}} inherited by <code>{{web.html($0)}}</code> instances, see {{mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + $1 + '_2|' + $1 + ' of ' + $0 + ' instances', "en")}}.</i></small>
+<div class="onlyinclude"><div class="includeonly"><small style="margin-left: 1em;"><i>For {{string.tolower($1)}} inherited by <code>{{web.html($0)}}</code> instances, see {{mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + $1 + '_2|' + $1 + ' of ' + $0 + ' instances', "en")}}.</i></small></div></div>
+<h3 name="Syntax"> Syntax </h3>
+<p><code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | Properties<span class="plain">}}</span></code><br />
+<code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | Methods<span class="plain">}}</span></code>
+</p>
+<h3 name="Parameters"> Parameters </h3>
+<dl><dt> constructor
+</dt><dd> JavaScript constructor that is the subject of the current page
+</dd></dl>
+<p>When specifying the second parameter as <code>Properties</code> or <code>Methods</code>, it's important that you specify the plural form and capitalize the first letter.
+</p>
+<h3 name="Description"> Description </h3>
+<p>Should be used to provide a helpful pointer to the included property/method list of the subject's prototype object. Place below the appropriate heading.
+</p>
