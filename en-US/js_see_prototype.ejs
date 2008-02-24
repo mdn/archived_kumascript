@@ -1,12 +1,26 @@
-<div class="onlyinclude"><div class="includeonly"><small style="margin-left: 1em;"><i>For {{string.tolower($1)}} inherited by <code>{{string.toupperfirst(string.tolower($0))}}</code> instances, see {{mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' of ' + string.toupperfirst(string.tolower($0)) + ' instances', "en")}}.</i></small></div></div>
-<h3 name="Syntax"> Syntax </h3>
-<p><code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | Properties<span class="plain">}}</span></code><br />
-<code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | Methods<span class="plain">}}</span></code>
+<div class="onlyinclude"><div class="includeonly"><small style="margin-left: 1em;"><i><code>{{string.toupperfirst(string.tolower($0))}}</code> インスタンスから継承されている{{string.tolower($1)}}については、[[Core JavaScript 1.5 Reference:Global Objects:{{string.toupperfirst(string.tolower($1))}}_2|{{string.toupperfirst(string.tolower($0))}} インスタンスの {{ucfirst:{{string.tolower($1)}}} を参照してください</i> </small></div></div>
+<p>{{wiki.template('英語版章題', [ "Syntax" ])}}
 </p>
-<h3 name="Parameters"> Parameters </h3>
+<h3 name=".E6.A7.8B.E6.96.87"> 構文 </h3>
+<p><code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | プロパティ<span class="plain">}}</span></code><br />
+<code><span class="plain">{{</span>{{page.unprefixedpath}} | <i>constructor</i> | メソッド<span class="plain">}}</span></code>
+</p><p>{{wiki.template('英語版章題', [ "Parameters" ])}}
+</p>
+<h3 name=".E5.BC.95.E6.95.B0"> 引数 </h3>
 <dl><dt> constructor
-</dt><dd> JavaScript constructor that is the subject of the current page
+</dt><dd> 現在のページの題名と一致する JavaScript コンストラクタ
 </dd></dl>
-<h3 name="Description"> Description </h3>
-<p>Should be used to provide a helpful pointer to the included property/method list of the subject's prototype object. Place below the appropriate heading.
+<p>{{wiki.template('英語版章題', [ "説明" ])}}
+</p>
+<h3 name=".E8.AA.AC.E6.98.8E"> 説明 </h3>
+<p>そのページのプロトタイプオブジェクトのプロパティ/メソッドの一覧へ誘導するポインタを提供するために使われます。特定の冒頭の下に置いてください。
+</p>
+<h3 name=".E6.97.A5.E6.9C.AC.E8.AA.9E.E7.89.88.E3.81.A7.E3.81.AE.E5.88.A9.E7.94.A8.E3.81.AB.E3.81.A4.E3.81.84.E3.81.A6.E3.81.AE.E6.B3.A8.E6.84.8F"> 日本語版での利用についての注意 </h3>
+<p>これは、取りこまれるページの章題が取り込むページにも存在することを前提としたテンプレートです。実際の章題は、取りこむページの TOC によって自動で調整されるため、特に問題はありませんが、英語版章題は、取り込まれるページの方で調整する必要があります。重複する英語版章題を noinclude とし、includeonly とした重複する英語版章題 2 を追加してください。
+</p>
+<pre>
+<noinclude>{{英語版章題|Methods}}</noinclude>
+<includeonly>{{英語版章題|Methods 2}}</includeonly>
+</pre>
+<p>そうして調整した英語版章題がある場合、実際の章題を "プロパティ" と訳して、このテンプレートで "Properties" と指定しても問題は生じません。ただし、問題がないというだけの話であり、章題を "プロパティ" と訳す以上は、文書中での訳の整合性を保つという意味で、このテンプレートでも "プロパティ" と指定してください。
 </p>
