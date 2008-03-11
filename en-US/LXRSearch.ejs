@@ -1,1 +1,7 @@
-{{mediawiki.external('http://mxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + (string.trim($3) !== '' ? web.html($3) : web.html('LXR ' + ($1 == 'ident' ? 'ID' : '') + ' Search for <code>' + $2 + '</code>')))}}
+<span lang='en' class='lang lang-en'>{{mediawiki.external('http://mxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('LXR ' + ($0 == 'ident' ? 'ID' : '') + ' Search for <code>' + $2 + '</code>')))}}
+</span><span lang='*' class='lang lang-*'>{{mediawiki.external('http://mxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('LXR ' + ($0 == 'ident' ? 'ID' : '') + ' Search for <code>' + $2 + '</code>')))}}
+</span><span lang='fr' class='lang lang-fr'>{{mediawiki.external('http://lxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + $3)}}
+</span><span lang='ja' class='lang lang-ja'>{{mediawiki.external('http://mxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('LXR で <code>' + $2 + '</code> を ' + ($0 == 'ident' ? 'ID' : '') + ' 検索')))}}
+</span><span lang='ko' class='lang lang-ko'>{{mediawiki.external('http://lxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + $3)}}
+</span><span lang='pl' class='lang lang-pl'>{{mediawiki.external('http://lxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + $3)}}
+</span>
