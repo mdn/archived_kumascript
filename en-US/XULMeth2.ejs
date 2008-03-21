@@ -1,1 +1,8 @@
-{{mediawiki.internal('XUL:Méthode:' + $0 + '|' + $0 + $1, "fr")}}
+{{mediawiki.internal('XUL:Method:' + $0 + '|' + (string.trim(($2 || '')) !== '' ? web.html($2) : web.html($0)) + $1, "ja")}}<div class="noinclude">
+<p>example:
+</p>
+<pre class="eval"><span class="plain">{{XULMeth2|menulist.appendItem|( label, value, description )|appendItem}}</span>
+</pre>
+<p>{{template.XULMeth2("menulist.appendItem", "( label, value, description )", "appendItem")}}
+</p>
+</div>
