@@ -1,1 +1,25 @@
-<code>{{mediawiki.internal('DOM:' + $0 + '|' + $0, "de")}}</code>
+<div class="noinclude">
+<h3 name="Parameter">Parameter</h3>
+<ol><li> DOM-Element
+</li><li> Linkbeschriftung (optional)
+</li></ol>
+<h3 name="Beispiel">Beispiel</h3>
+<table class="standard-table">
+
+<tr>
+<td class="header">Eingabe
+</td><td class="header">Ausgabe
+</td></tr>
+
+<tr>
+<td><span class="plain">{{domxref|window.dump|dump()}}</span>
+</td><td>{{template.Domxref("window.dump", "dump()")}}
+</td></tr>
+
+<tr>
+<td><span class="plain">{{domxref|window.dump}}</span>
+</td><td> {{template.Domxref("window.dump", "")}}
+</td></tr>
+</table>
+</div>
+<div class="includeonly"><code>{{string.trim(($1 || '')) !== '' ? web.html(mediawiki.internal('DOM:' + $0 + '|' + $1, "de")) : web.html(mediawiki.internal('DOM:' + $0 + '|' + $0, "de"))}}</code></div>
