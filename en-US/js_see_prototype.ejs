@@ -44,10 +44,7 @@
 <h3 name=".E8.AA.AC.E6.98.8E">説明</h3>
 <p>そのページのプロトタイプオブジェクトのプロパティ/メソッドの一覧へ誘導するポインタを提供するために使われます。特定の冒頭の下に置いてください。</p>
 <h3 name=".E6.97.A5.E6.9C.AC.E8.AA.9E.E7.89.88.E3.81.A7.E3.81.AE.E5.88.A9.E7.94.A8.E3.81.AB.E3.81.A4.E3.81.84.E3.81.A6.E3.81.AE.E6.B3.A8.E6.84.8F">日本語版での利用についての注意</h3>
-<p>これは、取りこまれるページの章題が取り込むページにも存在することを前提としたテンプレートです。実際の章題は、取りこむページの TOC によって自動で調整されるため、特に問題はありませんが、英語版章題は、取り込まれるページの方で調整する必要があります。重複する英語版章題を noinclude とし、includeonly とした重複する英語版章題 2 を追加してください。そのとき、以下の例のように改行せずに続けて記述してください（無意味な br 要素が追加されるのを防ぐため）。</p>
-<pre><noinclude>{{英語版章題|Methods}}</noinclude><includeonly>{{英語版章題|Methods 2}}</includeonly>
-</pre>
-<p>そうして調整した英語版章題がある場合、実際の章題を "プロパティ" と訳して、このテンプレートで "Properties" と指定しても問題は生じません。ただし、問題がないというだけの話であり、章題を "プロパティ" と訳す以上は、文書中での訳の整合性を保つという意味で、このテンプレートでも "プロパティ" と指定してください。</p>
+<p>これは、取りこまれるページの章題が取り込むページにも存在することを前提としたテンプレートです。英語版章題がある場合、実際の章題を "プロパティ" と訳して、このテンプレートで "Properties" と指定しても問題は生じません。ただし、問題がないというだけの話であり、章題を "プロパティ" と訳す以上は、文書中での訳の整合性を保つという意味で、このテンプレートでも "プロパティ" と指定してください。取りこみ側で英語版章題を調整する必要は、dekiwiki 移行に伴い、必要なくなりました。</p>
 </div>
 </span><span lang="zh-cn" class="lang lang-zh-cn"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">web.html($0)</span></code> instances, see <span class="script">mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' of ' + $0 + ' instances', "zh-cn")</span>.</em></small>
 <div class="noinclude">
