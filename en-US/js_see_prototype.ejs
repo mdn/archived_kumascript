@@ -1,40 +1,42 @@
 
-<p><span lang="en" class="lang lang-en"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">page.name</span></code> instances, see <span class="script">web.link(page.uri + '#' + string.toupperfirst(string.tolower($1)) + '_2', string.toupperfirst(string.tolower($1)) + ' of ' + page.name + ' instances')</span>.</em></small>
+<p><span lang="en" class="lang lang-en"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">web.html($0)</span></code> instances, see <span class="script">mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' of ' + $0 + ' instances', "en")</span>.</em></small>
 <div class="noinclude">
 <h3 name="Syntax">Syntax</h3>
-<p><code><span class="nowiki">{{</span>template.Js_see_prototype<span class="nowiki">(<em>constructor</em>, "Properties")}}</span></code><br />
-<code><span class="nowiki">{{</span>template.Js_see_prototype<span class="nowiki">(<em>constructor</em>, "Methods")}}</span></code></p>
+<p><code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Properties<span class="nowiki">}}</span></code><br />
+<code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Methods<span class="nowiki">}}</span></code></p>
 <h3 name="Parameters">Parameters</h3>
-<dl><dt> constructor </dt><dd> <span lang="*" class="lang lang-*">JavaScript constructor that is the subject of the current page. The value of this argument is no longer necessary, since it's now automatically generated with DekiScript</span></dd></dl>
+<dl><dt> constructor </dt><dd> JavaScript constructor that is the subject of the current page </dd></dl>
+<p>The object named by the constructor parameter is case sensitive, although the second parameter is not.</p>
 <h3 name="Description">Description</h3>
 <p>Should be used to provide a helpful pointer to the included property/method list of the subject's prototype object. Place below the appropriate heading.</p>
 </div>
-</span><span lang="*" class="lang lang-*"><small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">page.name</span></code> instances, see <span class="script">web.link(page.uri + '#' + string.toupperfirst(string.tolower($1)) + '_2', string.toupperfirst(string.tolower($1)) + ' of ' + page.name + ' instances')</span>.</em></small>
+</span><span lang="*" class="lang lang-*"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">web.html($0)</span></code> instances, see <span class="script">mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' of ' + $0 + ' instances', "en")</span>.</em></small>
 <div class="noinclude">
 <h3 name="Syntax">Syntax</h3>
-<p><code><span class="nowiki">{{</span>template.Js_see_prototype<span class="nowiki">(<em>constructor</em>, "Properties")}}</span></code><br />
-<code><span class="nowiki">{{</span>template.Js_see_prototype<span class="nowiki">(<em>constructor</em>, "Methods")}}</span></code></p>
+<p><code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Properties<span class="nowiki">}}</span></code><br />
+<code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Methods<span class="nowiki">}}</span></code></p>
 <h3 name="Parameters">Parameters</h3>
-<dl><dt> constructor </dt><dd> JavaScript constructor that is the subject of the current page. The value of this argument is no longer necessary, since it's now automatically generated with DekiScript. </dd></dl>
+<dl><dt> constructor </dt><dd> JavaScript constructor that is the subject of the current page </dd></dl>
+<p>The object named by the constructor parameter is case sensitive, although the second parameter is not.</p>
 <h3 name="Description">Description</h3>
 <p>Should be used to provide a helpful pointer to the included property/method list of the subject's prototype object. Place below the appropriate heading.</p>
 </div>
-</span><span lang="fr" class="lang lang-fr"> <small style="margin-left: 1em;"><em>Pour les <span class="script">string.tolower($1)</span> héritées par les instances de <code><span class="script">page.name</span></code> consultez <span class="script">web.link(page.uri + '#' + string.toupperfirst(string.tolower($1)) + '_2', string.toupperfirst(string.tolower($1)) + ' des instances de ' + $0)</span>.</em></small>
+</span><span lang="fr" class="lang lang-fr"> <small style="margin-left: 1em;"><em>Pour les <span class="script">string.tolower($1)</span> héritées par les instances de <code><span class="script">web.html($0)</span></code> consultez <span class="script">mediawiki.internal('Référence de JavaScript 1.5 Core:Objets globaux:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' des instances de ' + $0, "fr")</span>.</em></small>
 <div class="noinclude">
 <h3 name="Syntaxe">Syntaxe</h3>
-<p><code><span class="nowiki">{{</span>template.Js_see_prototype(<em>constructeur</em>, "Propriétés"<span class="nowiki">}}</span></code><br />
-<code><span class="nowiki">{{</span>template.Js_see_prototype(<em>constructeur</em>, "Méthodes"<span class="nowiki">}}</span></code></p>
+<p><code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructeur</em> | Propriétés<span class="nowiki">}}</span></code><br />
+<code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructeur</em> | Méthodes<span class="nowiki">}}</span></code></p>
 <h3 name="Param.C3.A8tres">Paramètres</h3>
 <dl><dt> constructeur </dt><dd> Constructeur JavaScript sujet de la page courante </dd></dl>
 <p>L'objet appelé par le paramètre du constructeur est sensible à la casse, même si le second paramètre ne l'est pas.</p>
 <h3 name="Description">Description</h3>
 <p>Doit être utilisé pour fournir un pointeur vers la liste des propriétés/méthodes de l'objet prototype du sujet. À placer en dessous du titre approprié.</p>
 </div>
-</span><span lang="ja" class="lang lang-ja"> <small style="margin-left: 1em;"><em><code><span class="script">string.toupperfirst(string.tolower($0))</span></code> インスタンスから継承されている<span class="script">page.name</span>については、<span class="script">web.link(page.uri + '#' + string.toupperfirst(string.tolower($1)) + '_2', + string.toupperfirst(string.tolower($0)) + ' インスタンスの ' + string.toupperfirst(string.tolower($1)) + ' ')</span>を参照してください</em> </small>
+</span><span lang="ja" class="lang lang-ja"> <small style="margin-left: 1em;"><em><code><span class="script">string.toupperfirst(string.tolower($0))</span></code> インスタンスから継承されている<span class="script">string.tolower($1)</span>については、<span class="script">mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($0)) + ' インスタンスの ' + string.toupperfirst(string.tolower($1)) + ' ', "ja")</span>を参照してください</em> </small>
 <div class="noinclude">
 <h3 name=".E6.A7.8B.E6.96.87">構文</h3>
-<p><code><span class="nowiki">{{</span>template.Js_see_prototype(<em>constructor</em>, "プロパティ"<span class="nowiki">}}</span></code><br />
-<code><span class="nowiki">{{</span>template.Js_see_prototype(<em>constructor</em>, "メソッド"<span class="nowiki">}}</span></code></p>
+<p><code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | プロパティ<span class="nowiki">}}</span></code><br />
+<code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | メソッド<span class="nowiki">}}</span></code></p>
 <p><span class="script">wiki.template('英語版章題', [ "Parameters" ])</span></p>
 <h3 name=".E5.BC.95.E6.95.B0">引数</h3>
 <dl><dt> constructor </dt><dd> 現在のページの題名と一致する JavaScript コンストラクタ </dd></dl>
@@ -44,13 +46,14 @@
 <h3 name=".E6.97.A5.E6.9C.AC.E8.AA.9E.E7.89.88.E3.81.A7.E3.81.AE.E5.88.A9.E7.94.A8.E3.81.AB.E3.81.A4.E3.81.84.E3.81.A6.E3.81.AE.E6.B3.A8.E6.84.8F">日本語版での利用についての注意</h3>
 <p>これは、取りこまれるページの章題が取り込むページにも存在することを前提としたテンプレートです。英語版章題がある場合、実際の章題を "プロパティ" と訳して、このテンプレートで "Properties" と指定しても問題は生じません。ただし、問題がないというだけの話であり、章題を "プロパティ" と訳す以上は、文書中での訳の整合性を保つという意味で、このテンプレートでも "プロパティ" と指定してください。取りこみ側で英語版章題を調整する必要は、dekiwiki 移行に伴い、必要なくなりました。</p>
 </div>
-</span><span lang="zh-cn" class="lang lang-zh-cn"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">page.name</span></code> instances, see <span class="script">web.link(page.uri + '#' + string.toupperfirst(string.tolower($1)) + '_2', string.toupperfirst(string.tolower($1)) + ' of ' + page.name + ' instances')</span>.</em></small>
+</span><span lang="zh-cn" class="lang lang-zh-cn"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">web.html($0)</span></code> instances, see <span class="script">mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' of ' + $0 + ' instances', "zh-cn")</span>.</em></small>
 <div class="noinclude">
 <h3 name="Syntax">Syntax</h3>
-<p><code><span class="nowiki">{{</span>template.Js_see_prototype(<em>constructor</em>, "Properties"}}</code><br />
-<code><span class="nowiki">{{</span>template.Js_see_prototype(<em>constructor</em>, "Methods"}}</code></p>
+<p><code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Properties<span class="nowiki">}}</span></code><br />
+<code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Methods<span class="nowiki">}}</span></code></p>
 <h3 name="Parameters">Parameters</h3>
-<dl><dt> constructor </dt><dd><span lang="*" class="lang lang-*">JavaScript constructor that is the subject of the current page. The value of this argument is no longer necessary, since it's now automatically generated with DekiScript</span></dd></dl>
+<dl><dt> constructor </dt><dd> JavaScript constructor that is the subject of the current page </dd></dl>
+<p>The object named by the constructor parameter is case sensitive, although the second parameter is not.</p>
 <h3 name="Description">Description</h3>
 <p>Should be used to provide a helpful pointer to the included property/method list of the subject's prototype object. Place below the appropriate heading.</p>
 </div>
