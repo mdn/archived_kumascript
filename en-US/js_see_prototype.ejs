@@ -1,23 +1,22 @@
 
-<p><span lang="en" class="lang lang-en"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">web.html($0)</span></code> instances, see <span class="script">mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' of ' + $0 + ' instances', "en")</span>.</em></small>
+<p><span lang="en" class="lang lang-en"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">page.name</span></code> instances, see <span class="script">web.link(page.uri + '#' + string.toupperfirst(string.tolower($1)) + '_2', string.toupperfirst(string.tolower($1)) + ' of ' + page.name + ' instances')</span>.</em></small>
 <div class="noinclude">
 <h3 name="Syntax">Syntax</h3>
-<p><code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Properties<span class="nowiki">}}</span></code><br />
-<code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Methods<span class="nowiki">}}</span></code></p>
+<p><code><span class="nowiki">{{</span>template.Js_see_prototype<span class="nowiki">(<em>constructor</em>, "Properties")}}</span></code><br />
+<code><span class="nowiki">{{</span>template.Js_see_prototype<span class="nowiki">(<em>constructor</em>, "Methods")}}</span></code></p>
 <h3 name="Parameters">Parameters</h3>
 <dl><dt> constructor </dt><dd> JavaScript constructor that is the subject of the current page </dd></dl>
 <p>The object named by the constructor parameter is case sensitive, although the second parameter is not.</p>
 <h3 name="Description">Description</h3>
 <p>Should be used to provide a helpful pointer to the included property/method list of the subject's prototype object. Place below the appropriate heading.</p>
 </div>
-</span><span lang="*" class="lang lang-*"> <small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">web.html($0)</span></code> instances, see <span class="script">mediawiki.internal('Core JavaScript 1.5 Reference:Global Objects:' + $0 + '#' + string.toupperfirst(string.tolower($1)) + '_2|' + string.toupperfirst(string.tolower($1)) + ' of ' + $0 + ' instances', "en")</span>.</em></small>
+</span><span lang="*" class="lang lang-*"><small style="margin-left: 1em;"><em>For <span class="script">string.tolower($1)</span> inherited by <code><span class="script">page.name</span></code> instances, see <span class="script">web.link(page.uri + '#' + string.toupperfirst(string.tolower($1)) + '_2', string.toupperfirst(string.tolower($1)) + ' of ' + page.name + ' instances')</span>.</em></small>
 <div class="noinclude">
 <h3 name="Syntax">Syntax</h3>
-<p><code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Properties<span class="nowiki">}}</span></code><br />
-<code><span class="nowiki">{{</span><span class="script">page.unprefixedpath</span> | <em>constructor</em> | Methods<span class="nowiki">}}</span></code></p>
+<p><code><span class="nowiki">{{</span>template.Js_see_prototype<span class="nowiki">(<em>constructor</em>, "Properties")}}</span></code><br />
+<code><span class="nowiki">{{</span>template.Js_see_prototype<span class="nowiki">(<em>constructor</em>, "Methods")}}</span></code></p>
 <h3 name="Parameters">Parameters</h3>
-<dl><dt> constructor </dt><dd> JavaScript constructor that is the subject of the current page </dd></dl>
-<p>The object named by the constructor parameter is case sensitive, although the second parameter is not.</p>
+<dl><dt> constructor </dt><dd> JavaScript constructor that is the subject of the current page. The value of this argument is no longer necessary, since it's now automatically generated with DekiScript. </dd></dl>
 <h3 name="Description">Description</h3>
 <p>Should be used to provide a helpful pointer to the included property/method list of the subject's prototype object. Place below the appropriate heading.</p>
 </div>
