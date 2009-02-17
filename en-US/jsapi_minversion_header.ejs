@@ -1,37 +1,34 @@
-<span lang='en' class='lang lang-en'><div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;"><p style="margin: 4px 0px 4px 0px;">This article covers features introduced in SpiderMonkey {{web.html($0)}}.</p></div>
-<div class="noinclude">
-<hr />
-<p>One of the <a href="Project:en/Custom_Templates#Version_information_templates">version information templates</a>. For example:
-</p>
-<pre class="eval"><span class="plain">{{jsapi_minversion_header|1.8}}</span>
-</pre>
-<p>results in:
-{{template.Jsapi_minversion_header(1.8)}}
-</p><p>This template should be used when the content of the whole page or section applies to JSAPI version N or higher. For individual items in a list or a table use <a href="Template:Jsapi_minversion_inline">Template:jsapi_minversion_inline</a>.
-</p>
+
+<p><span lang="en" class="lang lang-en">
+<div style="border: 1px solid rgb(129, 129, 81); margin: 10px 0px; padding: 0px 10px; background-color: rgb(255, 255, 225); font-weight: bold; text-align: center;">
+<p style="margin: 4px 0px;">This article covers features introduced in SpiderMonkey <span class="script">$0 == "1.8" ? "1.8 (coming soon)" : $0 == "1.8.1" ? "1.8.1 (not yet released)" : web.html($0)</span>.</p>
 </div>
-</span><span lang='*' class='lang lang-*'><div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;"><p style="margin: 4px 0px 4px 0px;">This article covers features introduced in SpiderMonkey {{web.html($0)}}.</p></div>
-<div class="noinclude">
-<hr />
-<p>One of the <a href="Project:en/Custom_Templates#Version_information_templates">version information templates</a>. For example:
-</p>
-<pre class="eval"><span class="plain">{{jsapi_minversion_header|1.8}}</span>
+<div class="noinclude"><hr />
+<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">version information templates</a>. For example:</p>
+<pre class="eval"><span class="nowiki">{{template.jsapi_minversion_header("1.8")}}</span>
 </pre>
-<p>results in:
-{{template.Jsapi_minversion_header(1.8)}}
-</p><p>This template should be used when the content of the whole page or section applies to JSAPI version N or higher. For individual items in a list or a table use <a href="Template:Jsapi_minversion_inline">Template:jsapi_minversion_inline</a>.
-</p>
+<p>This template should be used when the content of the whole page or section applies to JSAPI version N or higher. For individual items in a list or a table use <a title="Template:jsapi_minversion_inline" href="/Template:jsapi_minversion_inline">Template:jsapi_minversion_inline</a>.</p>
 </div>
-</span><span lang='ja' class='lang lang-ja'><div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;"><p style="margin: 4px 0px 4px 0px;">この記事は SpiderMonkey {{web.html($0)}} の新機能について書かれています。</p></div>
-<div class="noinclude">
-<hr />
-<p><a href="Project:ja/Custom_Templates#Version_information_templates">バージョン情報テンプレート</a>の一つ。例えば:
-</p>
-<pre class="eval"><span class="plain">{{jsapi_minversion_header|1.8}}</span>
+</span><span lang="*" class="lang lang-*">
+<div style="border: 1px solid rgb(129, 129, 81); margin: 10px 0px; padding: 0px 10px; background-color: rgb(255, 255, 225); font-weight: bold; text-align: center;">
+<p style="margin: 4px 0px;">This article covers features introduced in SpiderMonkey <span lang="en" class="lang lang-en"><span class="script">$0 == "1.8" ? "1.8 (coming soon)" : $0 == "1.8.1" ? "1.8.1 (not yet released)" : web.html($0)</span></span>.</p>
+</div>
+<div class="noinclude"><hr />
+<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">version information templates</a>. For example:</p>
+<pre class="eval"><span class="nowiki">{{template.jsapi_minversion_header("1.8")}}</span>
 </pre>
-<p>これは、このようになる:
-{{template.Jsapi_minversion_header(1.8)}}
-</p><p>このテンプレートは、ページ全体またはセクションが JSAPI バージョン N 以降について書かれている場合に使用します。リストや表の個々の項目については <a href="Template:Jsapi_minversion_inline">Template:jsapi_minversion_inline</a> を使用してください。
-</p>
+<p>This template should be used when the content of the whole page or section applies to JSAPI version N or higher. For individual items in a list or a table use <a title="Template:jsapi_minversion_inline" href="/Template:jsapi_minversion_inline">Template:jsapi_minversion_inline</a>.</p>
 </div>
-</span>
+</span><span lang="ja" class="lang lang-ja">
+<div style="border: 1px solid rgb(129, 129, 81); margin: 10px 0px; padding: 0px 10px; background-color: rgb(255, 255, 225); font-weight: bold; text-align: center;">
+<p style="margin: 4px 0px;">この記事は SpiderMonkey <span lang="en" class="lang lang-en"><span class="script">$0 == "1.8" ? "1.8 (coming soon)" : $0 == "1.8.1" ? "1.8.1 (not yet released)" : web.html($0)</span></span> の新機能について書かれています。</p>
+</div>
+<div class="noinclude"><hr />
+<p><a title="Project:ja/Custom_Templates#Version_information_templates" href="/Project:ja/Custom_Templates#Version_information_templates">バージョン情報テンプレート</a>の一つ。例えば:</p>
+<pre class="eval"><span class="nowiki">{{template.jsapi_minversion_header("1.8")}}</span>
+</pre>
+<p>これは、このようになる: <span class="script">template.Jsapi_minversion_header(1.8)</span></p>
+<p>このテンプレートは、ページ全体またはセクションが JSAPI バージョン N 以降について書かれている場合に使用します。リストや表の個々の項目については <a title="Template:jsapi_minversion_inline" href="/Template:jsapi_minversion_inline">Template:jsapi_minversion_inline</a> を使用してください。</p>
+</div>
+</span></p>
+<p> </p>
