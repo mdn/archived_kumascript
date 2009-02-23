@@ -3,6 +3,10 @@
 <div style="margin: 10px 0px; padding: 0px 10px; background-color: rgb(255, 255, 225); font-weight: bold; text-align: center;">
 <p style="margin: 4px 0px;">Introduced in Gecko <span class="script">web.html($0)</span></p>
 <p if="show" init="var show=false; if (string.compare($0, '1.9.1') == 0) show=true;">Applies to Firefox 3.1 and Thunderbird 3</p>
+<p if="show" init="var show=false; if (string.startswith($0, '1.9')) show=true;">Applies to Firefox 3</p>
+</div>
+<div class="noinclude"><hr />
+<p if="show" init="var show=false; if (string.startswith($0, '1.8')) show=true;">Applies to Firefox 2 and Thunderbird 2</p>
 </div>
 <div class="noinclude"><hr />
 <p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
@@ -15,6 +19,10 @@
 <div style="margin: 10px 0px; padding: 0px 10px; background-color: rgb(255, 255, 225); font-weight: bold; text-align: center;">
 <p style="margin: 4px 0px;">Introduced in Gecko <span class="script">web.html($0)</span></p>
 <p if="show" init="var show=false; if (string.compare($0, '1.9.1') == 0) show=true;">Applies to Firefox 3.1 and Thunderbird 3</p>
+<p if="show" init="var show=false; if (string.startswith($0, '1.9')) show=true;">Applies to Firefox 3</p>
+</div>
+<div class="noinclude"><hr />
+<p if="show" init="var show=false; if (string.startswith($0, '1.8')) show=true;">Applies to Firefox 2 and Thunderbird 2</p>
 </div>
 <div class="noinclude"><hr />
 <p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
