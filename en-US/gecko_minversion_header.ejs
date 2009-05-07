@@ -59,7 +59,12 @@
 </div>
 </span><span lang="ja" class="lang lang-ja">
 <div style="border: 1px solid rgb(129, 129, 81); margin: 10px 0px; padding: 0px 10px; background-color: rgb(255, 255, 225); font-weight: bold; text-align: center;">
-<p style="margin: 4px 0px;">Gecko <span class="script">web.html($0)</span> で導入</p>
+<p style="margin: 4px 0px;"><span class="script">web.html($0)</span> で導入</p>
+<div if="show" init="var show=false; if (string.compare($0, '1.9.2') == 0) show=true;">Applies to future releases of Firefox and Thunderbird</div>
+<div if="show" init="var show=false; if (string.compare($0, '1.9.1') == 0) show=true;">Firefox 3.5 と Thunderbird 3 以降に適用されます</div>
+<div if="show" init="var show=false; if (string.compare($0, '1.9') == 0) show=true;">Firefox 3 と Thunderbird 3 以降に適用されます</div>
+<div if="show" init="var show=false; if (string.compare($0, '1.8.1') == 0) show=true;">Firefox 2 と Thunderbird 2 以降に適用されます</div>
+<div if="show" init="var show=false; if (string.compare($0, '1.8') == 0) show=true;">Firefox 1.5 と Thunderbird 1.5 以降に適用されます</div>
 </div>
 <div class="noinclude"><hr />
 <p><a title="Project:ja/Custom_Templates#Version_information_templates" href="/Project:ja/Custom_Templates#Version_information_templates">バージョン情報テンプレート</a> の 1 つです。例えば:</p>
