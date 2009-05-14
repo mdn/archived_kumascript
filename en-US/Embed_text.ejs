@@ -1,13 +1,14 @@
 
 <p><span class="script"><br />
-  web.text("Embedding text: " + args[0]);<br />
+  var found = false;<br />
   var allFiles = map.values(page.files);<br />
-  web.html("<p>First file: '" + allFiles[0].name + "'</p>");<br />
-  var fileList = map.select(page.files, "string.compare($.value.name, '" + args[0] + "', true)");<br />
-  if (#fileList > 0) {<br />
-    var textFile = map.values(fileList)[0];<br />
-    web.text(textFile.uri);<br />
-  } else {<br />
+  foreach(var aFile in allFiles) {<br />
+    if (!string.compare(args[0], aFile.name, true)) {<br />
+      found = true;<br />
+      break;<br />
+    }<br />
+  }<br />
+  if (!found) {<br />
     web.html("<p>Unable to find file '" + args[0] + "'.</p>");<br />
   }<br />
 </span></p>
