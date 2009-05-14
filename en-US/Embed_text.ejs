@@ -2,9 +2,8 @@
 <p><span class="script"><br />
   var found = false;<br />
   var allFiles = map.values(page.files);<br />
-  web.text("name: " + allFiles[0].name);<br />
   foreach(var aFile in allFiles) {<br />
-<br />
+    web.text("Name: " + aFile.name);<br />
   }<br />
   if (found == false) {<br />
     web.html("<p>Unable to find file '" + args[0] + "'.</p>");<br />
