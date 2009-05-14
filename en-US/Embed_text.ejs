@@ -1,8 +1,4 @@
 
 <p><span class="script"><br />
-  var fileList = map.select(page.files, "string.compare($.value.name, " + __request.args[0] + ", true)");<br />
-  if (#fileList > 0) {<br />
-    var textFile = map.values(fileList)[0];<br />
-    web.text(textFile.uri);<br />
-  }<br />
+  web.text("Embedding text: " + args[0]);<br />
 </span></p>
