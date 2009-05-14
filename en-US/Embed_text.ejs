@@ -3,7 +3,7 @@
   var found = false;<br />
   var allFiles = map.values(page.files);<br />
   foreach(var aFile in allFiles) {<br />
-    if (string.compare("foo", "bar", true) == 0) {<br />
+    if (args[0] == aFile.name) {<br />
       found = true;<br />
       web.text(aFile.uri);<br />
       break;<br />
