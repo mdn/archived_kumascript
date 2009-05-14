@@ -1,2 +1,3 @@
 
-<p><span class="script"> var fileList = map.select(page.files, "string.compare($.value.name, {{$0}}, true)"); if (#fileList > 0) { var textFile = map.values(fileList)[0]; web.text(textFile.uri); } </span></p>
+<pre>{{ var fileList = map.select(page.files, "string.compare($.value.name, {{$0}}, true)"); if (#fileList > 0) { var textFile = map.values(fileList)[0]; web.text(textFile.uri); } }}
+%>
