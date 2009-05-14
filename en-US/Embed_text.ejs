@@ -5,5 +5,7 @@
   if (#fileList > 0) {<br />
     var textFile = map.values(fileList)[0];<br />
     web.text(textFile.uri);<br />
-  }<br />
+  } else {<br />
+    web.text("Unable to find file '" + args[0] + "'.");<br />
+  }<br />
 </span></p>
