@@ -1,9 +1,10 @@
 
 <p><span class="script"><br />
   var found = false;<br />
+  var fileName = args[0];<br />
   var allFiles = map.values(page.files);<br />
   foreach(var aFile in allFiles) {<br />
-    if (string.compare(args[0], aFile.name, true) == 0) {<br />
+    if (string.compare(fileName, aFile.name, true) == 0) {<br />
       found = true;<br />
       web.text(aFile.uri);<br />
       break;<br />
