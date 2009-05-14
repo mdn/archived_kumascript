@@ -3,7 +3,11 @@
   var found = false;<br />
   var allFiles = map.values(page.files);<br />
   foreach(var aFile in allFiles) {<br />
-    web.text("Name: " + aFile.name);<br />
+    if (string.compare(args[0], aFile.name, true) == 0) {<br />
+      found = true;<br />
+      web.text(aFile.uri);<br />
+      break;<br />
+    }<br />
   }<br />
   if (found == false) {<br />
     web.html("<p>Unable to find file '" + args[0] + "'.</p>");<br />
