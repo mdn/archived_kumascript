@@ -1,9 +1,11 @@
 
-<p><span class="script"><br />
+<p>{{<br />
   web.text("Embedding text: " + args[0]);<br />
   var fileList = map.select(page.files, "string.compare($.value.name, '" + args[0] + "', true)");<br />
   if (#fileList > 0) {<br />
     var textFile = map.values(fileList)[0];<br />
     web.text(textFile.uri);<br />
-  }<br />
-</span></p>
+  } else {<br />
+    web.text("Unable to find file '" + args[0] + '.");<br />
+  }<br />
+}}</p>
