@@ -7,7 +7,9 @@
       found = true;<br />
       web.text(aFile.uri);<br />
       break;<br />
-    }<br />
+    } else {<br />
+      found = found;<br />
+    }<br />
   }<br />
   if (found == false) {<br />
     web.html("<p>Unable to find file '" + args[0] + "'.</p>");<br />
