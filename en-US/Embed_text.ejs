@@ -5,7 +5,11 @@
   foreach(var aFile in allFiles) {<br />
     if (string.compare(args[0], aFile.name, true) == 0) {<br />
       found = true;<br />
-      web.text(aFile.uri);<br />
+      if (#args > 1) {<br />
+        web.html("<pre function='syntax." + args[1] + "' class='script'>" + aFile.uri + "</pre>");<br />
+      } else {<br />
+        web.text(aFile.uri);<br />
+      }<br />
       break;<br />
     }<br />
   }<br />
