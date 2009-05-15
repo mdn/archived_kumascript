@@ -6,7 +6,7 @@
     if (string.compare(args[0], aFile.name, true) == 0) {<br />
       found = true;<br />
       if (#args > 1) {<br />
-        syntax[args[1]](aFile.uri);<br />
+        syntax[args[1]](web.text(aFile.uri));<br />
       } else {<br />
         web.text(aFile.uri);<br />
       }<br />
