@@ -59,4 +59,16 @@
 <p>results in: <span class="script">template.Js_minversion_note(1.8, "This feature was implemented in JavaScript 1.8.")</span></p>
 <p>This template should be used when you need to insert a JavaScript version-specific note into an article. For individual items in a list or a table use <a title="Template:js_minversion_inline" href="/Template:js_minversion_inline">Template:js minversion inline</a>, and to mark a whole page or section, use <a title="Template:js_minversion_header" href="/Template:js_minversion_header">Template:js_minversion_header</a>.</p>
 </div>
+</span><span lang="zh-tw" class="lang lang-zh-tw">
+<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
+<p style="margin: 4px 0px; font-weight: bold;"><span class="script">wiki.pageexists(mediawiki.localurl("zh-tw", 'New in JavaScript ' + $0)) ? web.html(mediawiki.internal('New in JavaScript ' + $0 + '|JavaScript ' + $0 + ' 附註', "zh-tw")) : web.html('JavaScript ' + $0 + ' <span lang="zh-tw" class="lang lang-zh-tw">附註</span>')</span></p>
+<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
+</div>
+<div class="noinclude"><hr />
+<p><a title="Project:zh-tw/Custom_Templates#Version_information_templates" href="/Project:zh-tw/Custom_Templates#Version_information_templates">版本資訊模板</a> 的一例。使用範例如下︰</p>
+<pre class="eval"><span class="nowiki">{{js_minversion_note|1.8|本機能實作於 JavaScript 1.8。}}</span>
+</pre>
+<p>顯示結果： <span class="script">template.Js_minversion_note(1.8, "本機能實作於 JavaScript 1.8。")</span></p>
+<p>當你需要在文章裡插入<span lang="en" class="lang lang-en"> JavaScript 指定版本的附註時，就應該使用本模板。針對列表或表格裡的單獨項目，請使用 <a title="Template:js_minversion_inline" href="/Template:js_minversion_inline">Template:js minversion inline</a>。標記整個頁面或章節，請使用 <a title="Template:js_minversion_header" href="/Template:js_minversion_header">Template:js_minversion_header</a></span>。</p>
+</div>
 </span></p>
