@@ -1,0 +1,22 @@
+
+<pre class="script">
+var prefix = string.ToLower($0 || $prefix || '');
+var path = $1 || $path;
+var title = $2 || $title || path;
+var lang = page.language;
+
+if (lang === '') { 'Unknown language: ' + lang + '.'; } else {
+
+switch(prefix) {
+case 'wikipedia':
+    <a class=(prefix) title=(title) href=('http://' + lang + '.wikipedia.org/wiki' & path)> title </a>;
+    break;
+case 'wikimo':
+    <a class=(prefix) title=(title) href=('http://wiki.mozilla.org/' + path)> title </a>;
+    break;
+default:
+    'Unknown prefix: ' + prefix + '.';
+}
+}
+
+%>
