@@ -4,12 +4,12 @@
 <div class="originaldocinfo">
 <h3 name="Original_Document_Information">Original Document Information</h3>
 <ul>
-<span class="script">string.trim(($author || '')) !== '' ? web.html('<li>Author(s): ' + $author) : '</li>'</span>
-<span class="script">string.trim(($others || '')) !== '' ? web.html('<li>Other Contributors: ' + $others) : '</li>'</span>
-<span class="script">string.trim(($date || '')) !== '' ? web.html('<li>Last Updated Date: ' + $date) : '</li>'</span>
-<span class="script">string.trim(($copyright || '')) !== '' ? web.html('<li>Copyright Information: ' + $copyright) : '</li>'</span>
-<span class="script">string.trim(($original || '')) !== '' ? web.html('<li>Original Location: ' + $original) : '</li>'</span>
-<span class="script">string.trim(($note || '')) !== '' ? web.html('<li>Note: ' + $note) : '</li>'</span>
+<span class="script">string.trim(($author || '')) !== '' ? web.html('<li>Author(s): ' + $author + '</li>') : ''</span>
+<span class="script">string.trim(($others || '')) !== '' ? web.html('<li>Other Contributors: ' + $others + '</li>') : ''</span>
+<span class="script">string.trim(($date || '')) !== '' ? web.html('<li>Last Updated Date: ' + $date + '</li>') : ''</span>
+<span class="script">string.trim(($copyright || '')) !== '' ? web.html('<li>Copyright Information: ' + $copyright + '</li>') : ''</span>
+<span class="script">string.trim(($original || '')) !== '' ? web.html('<li>Original Location: ' + $original + '</li>') : ''</span>
+<span class="script">string.trim(($note || '')) !== '' ? web.html('<li>Note: ' + $note + '</li>') : ''</span>
 </ul>
 </div>
 </div>
@@ -18,102 +18,161 @@
 Copy & paste this empty template:
 (delete any unused fields, all fields are optional.)
 
-{{OrigDocInfo
- |author= 
- |others= 
- |date= 
- |copyright= 
- |history=
- |original= 
- |note= 
-}}
+{{OrigDocInfo {
+  author : ""
+  others : ""
+  date : ""
+  copyright : ""
+  history : ""
+  original : ""
+  note : ""
+}}}
 
 Example usage:
 
-{{OrigDocInfo
-|author= Larry, Moe, and Curly
-|others= The People of Shemp & Co. (Polish translation)
-|date= April 1st, 1959
-|copyright= ©1959 Netscape Studios
-|original= http://www.mozilla.org/somewhere/is/moe.html
-|note=final note.
-}}
+{{OrigDocInfo [
+  author : "Larry, Moe, and Curly"
+  others : "The People of Shemp & Co. (Polish translation)"
+  date : "April 1st, 1959"
+  copyright : ©"1959 Netscape Studios"
+  original : "http://www.mozilla.org/somewhere/is/moe.html"
+  note : "final note."
+}}}
 </pre>
 <p>Example output:</p>
-<span class="script">template.OrigDocInfo{ author : " Larry, Moe, and Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "final note.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (Polish translation)" }</span></div>
+<span class="script">template.OrigDocInfo { author : " Larry, Moe, and Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "final note.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (Polish translation)"
+}</span>
+</div>
 </span><span lang="*" class="lang lang-*">
 <div class="includeonly">
 <div class="originaldocinfo">
 <h3 name="Original_Document_Information">Original Document Information</h3>
-<p><span class="script">string.trim(($author || '')) !== '' ? web.html('* Author(s): ' + $author) : ''</span><span class="script">string.trim(($others || '')) !== '' ? web.html('* Other Contributors: ' + $others) : ''</span><span class="script">string.trim(($date || '')) !== '' ? web.html('* Last Updated Date: ' + $date) : ''</span><span class="script">string.trim(($copyright || '')) !== '' ? web.html('* Copyright Information: ' + $copyright) : ''</span><span class="script">string.trim(($original || '')) !== '' ? web.html('* Original Location: ' + $original) : ''</span><span class="script">string.trim(($note || '')) !== '' ? web.html('* Note: ' + $note) : ''</span></p> </div> </div> <div class="noinclude"> <pre>
-
+<ul>
+<span class="script">string.trim(($author || '')) !== '' ? web.html('<li>Author(s): ' + $author + '</li>') : ''</span>
+<span class="script">string.trim(($others || '')) !== '' ? web.html('<li>Other Contributors: ' + $others + '</li>') : ''</span>
+<span class="script">string.trim(($date || '')) !== '' ? web.html('<li>Last Updated Date: ' + $date + '</li>') : ''</span>
+<span class="script">string.trim(($copyright || '')) !== '' ? web.html('<li>Copyright Information: ' + $copyright + '</li>') : ''</span>
+<span class="script">string.trim(($original || '')) !== '' ? web.html('<li>Original Location: ' + $original + '</li>') : ''</span>
+<span class="script">string.trim(($note || '')) !== '' ? web.html('<li>Note: ' + $note + '</li>') : ''</span>
+</ul>
+</div>
+</div>
+<div class="noinclude">
+<pre>
 Copy & paste this empty template:
 (delete any unused fields, all fields are optional.)
 
-{{OrigDocInfo
- |author= 
- |others= 
- |date= 
- |copyright= 
- |history=
- |original= 
- |note= 
-}}
+{{OrigDocInfo {
+  author : "",
+  others : "",
+  date : "",
+  copyright : "",
+  history : "",
+  original : "",
+  note : ""
+}}}
 
 Example usage:
 
-{{OrigDocInfo
-|author= Larry, Moe, and Curly
-|others= The People of Shemp & Co. (Polish translation)
-|date= April 1st, 1959
-|copyright= ©1959 Netscape Studios
-|original= http://www.mozilla.org/somewhere/is/moe.html
-|note=final note.
-}}</pre> <p>Example output:</p> <span class="script">template.OrigDocInfo{ author : " Larry, Moe, and Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "final note.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (Polish translation)" }</span></div> </span><span lang="ja" class="lang lang-ja"> <div class="includeonly"> <div class="originaldocinfo"> <h3 name=".E5.8E.9F.E6.96.87.E6.9B.B8.E3.81.AE.E6.83.85.E5.A0.B1">原文書の情報</h3> <p><span class="script">string.trim(($author || '')) !== '' ? web.html('* 著者: ' + $author) : ''</span><span class="script">string.trim(($others || '')) !== '' ? web.html('* 貢献者: ' + $others) : ''</span><span class="script">string.trim(($date || '')) !== '' ? web.html('* 最終変更日: ' + $date) : ''</span><span class="script">string.trim(($copyright || '')) !== '' ? web.html('* 著作権: ' + $copyright) : ''</span><span class="script">string.trim(($original || '')) !== '' ? web.html('* 原文書の場所: ' + $original) : ''</span><span class="script">string.trim(($note || '')) !== '' ? web.html('* 注記: ' + $note) : ''</span></p> </div> </div> <div class="noinclude"> <pre>
-
+{{OrigDocInfo {
+  author : "Larry, Moe, and Curly",
+  others : "The People of Shemp & Co. (Polish translation)",
+  date : "April 1st, 1959",
+  copyright : ©"1959 Netscape Studios",
+  original : "http://www.mozilla.org/somewhere/is/moe.html",
+  note : "final note."
+}}
+</pre>
+<p>Example output:</p>
+<span class="script">template.OrigDocInfo { author : " Larry, Moe, and Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "final note.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (Polish translation)"
+}</span>
+</div>
+</span><span lang="ja" class="lang lang-ja">
+<div class="includeonly">
+<div class="originaldocinfo">
+<h3 name=".E5.8E.9F.E6.96.87.E6.9B.B8.E3.81.AE.E6.83.85.E5.A0.B1">原文書の情報</h3>
+<ul>
+<span class="script">string.trim(($author || '')) !== '' ? web.html('<li>著者: ' + $author + '</li>' : ''</span>
+<span class="script">string.trim(($others || '')) !== '' ? web.html('<li>貢献者: ' + $others + '</li>' : ''</span>
+<span class="script">string.trim(($date || '')) !== '' ? web.html('<li>最終変更日: ' + $date + '</li>' : ''</span>
+<span class="script">string.trim(($copyright || '')) !== '' ? web.html('<li>著作権: ' + $copyright + '</li>' : ''</span>
+<span class="script">string.trim(($original || '')) !== '' ? web.html('<li>原文書の場所: ' + $original + '</li>' : ''</span>
+<span class="script">string.trim(($note || '')) !== '' ? web.html('<li>注記: ' + $note + '</li>' : ''</span>
+</ul>
+</div>
+</div>
+<div class="noinclude">
+<pre>
 以下のテンプレートをコピー & ペーストしてください:
 (不要なフィールドは削除してください。すべてのフィールドは任意です。)
 
-{{OrigDocInfo
- |author= 
- |others= 
- |date= 
- |copyright= 
- |history=
- |original= 
- |note= 
-}}
+{{OrigDocInfo {
+  author : "",
+  others : "",
+  date : "",
+  copyright : "",
+  history : "",
+  original : "",
+  note : ""
+}}}
 
 使用例:
 
-{{OrigDocInfo
-|author= Larry, Moe, and Curly
-|others= The People of Shemp & Co. (Polish translation)
-|date= April 1st, 1959
-|copyright= ©1959 Netscape Studios
-|original= http://www.mozilla.org/somewhere/is/moe.html
-|note=final note.
-}}</pre> <p>出力例:</p> <span class="script">template.OrigDocInfo{ author : " Larry, Moe, and Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "final note.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (Polish translation)" }</span></div> </span><span lang="pl" class="lang lang-pl"> <div class="includeonly"> <div class="originaldocinfo"> <h3 name="Informacje_o_oryginalnym_dokumencie">Informacje o oryginalnym dokumencie</h3> <p><span class="script">string.trim(($author || '')) !== '' ? web.html('* Autor(zy): ' + $author) : ''</span><span class="script">string.trim(($others || '')) !== '' ? web.html('* Inni współpracownicy: ' + $others) : ''</span><span class="script">string.trim(($date || '')) !== '' ? web.html('* Data ostatniej aktualizacji: ' + $date) : ''</span><span class="script">string.trim(($copyright || '')) !== '' ? web.html('* Informacja o prawach autorskich: ' + $copyright) : ''</span><span class="script">string.trim(($original || '')) !== '' ? web.html('* Pierwotna lokalizacja: ' + $original) : ''</span><span class="script">string.trim(($note || '')) !== '' ? web.html('* Uwagi: ' + $note) : ''</span></p> </div> </div> <div class="noinclude"> <pre>
+{{OrigDocInfo {
+  author : "Larry, Moe, and Curly",
+  others : "The People of Shemp & Co. (Polish translation)",
+  date : "April 1st, 1959",
+  copyright : ©"1959 Netscape Studios",
+  original : "http://www.mozilla.org/somewhere/is/moe.html",
+  note : "final note."
+}}}
+</pre>
+<p>出力例:</p>
+<span class="script">template.OrigDocInfo { author : " Larry, Moe, and Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "final note.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (Polish translation)"
+}</span>
+</div>
+</span><span lang="pl" class="lang lang-pl">
+<div class="includeonly">
+<div class="originaldocinfo">
+<h3 name="Informacje_o_oryginalnym_dokumencie">Informacje o oryginalnym dokumencie</h3>
+<ul>
+<span class="script">string.trim(($author || '')) !== '' ? web.html('<li>Autor(zy): ' + $author + '</li>' : ''</span>
+<span class="script">string.trim(($others || '')) !== '' ? web.html('<li>Inni współpracownicy: ' + $others + '</li>' : ''</span>
+<span class="script">string.trim(($date || '')) !== '' ? web.html('<li>Data ostatniej aktualizacji: ' + $date + '</li>' : ''</span>
+<span class="script">string.trim(($copyright || '')) !== '' ? web.html('<li>Informacja o prawach autorskich: ' + $copyright + '</li>' : ''</span>
+<span class="script">string.trim(($original || '')) !== '' ? web.html('<li>Pierwotna lokalizacja: ' + $original + '</li>' : ''</span>
+<span class="script">string.trim(($note || '')) !== '' ? web.html('<li>Uwagi: ' + $note + '</li>' : ''</span>
+</ul>
+</div>
+</div>
+<div class="noinclude">
+<pre>
 
 Skopiuj i wklej ten pusty szablon (usuń wszelkie nieużywane pola, wszystkie pola są opcjonalne):
 
-{{OrigDocInfo
- |author= 
- |others= 
- |date= 
- |copyright= 
- |history=
- |original= 
- |note= 
-}}
+{{OrigDocInfo {
+  author : "",
+  others : "",
+  date : "",
+  copyright : "",
+  history : "",
+  original : "",
+  note : ""
+}}}
 
 Przykładowe zastosowanie:
 
-{{OrigDocInfo
-|author= Larry, Moe i Curly
-|others= The People of Shemp & Co. (polskie tłumaczenie)
-|date= April 1st, 1959
-|copyright= ©1959 Netscape Studios
-|original= http://www.mozilla.org/somewhere/is/moe.html
-|note=końcowa uwaga.
-}}</pre> <p>Przykładowe wyjście:</p> <span class="script">template.OrigDocInfo{ author : " Larry, Moe i Curly", copyright : " ©1959 Netscape Studios", date : " April 1st, 1959", note : "końcowa uwaga.", original : " http://www.mozilla.org/somewhere/is/moe.html", others : " The People of Shemp & Co. (polskie tłumaczenie)" }</span></div> </span></p>
+{{template.OrigDocInfo {
+  author : " Larry, Moe i Curly",
+  others : " The People of Shemp & Co. (polskie tłumaczenie)",
+  date : " April 1st, 1959",
+  copyright : " ©1959 Netscape Studios",
+  original : " http://www.mozilla.org/somewhere/is/moe.html",
+  note : "końcowa uwaga."
+}}}
+</pre>
+<p>Przykładowe wyjście:</p>
+<span class="script">template.OrigDocInfo { author : " Larry, Moe i Curly", others : " The People of Shemp & Co. (polskie tłumaczenie)", date : " April 1st, 1959", copyright : " ©1959 Netscape Studios", original : " http://www.mozilla.org/somewhere/is/moe.html", note : "końcowa uwaga."
+}</span>
+</div>
+</span></p>
