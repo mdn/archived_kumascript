@@ -8,9 +8,11 @@ var lang = string.ToLower(u.path[0]);
 if(string.Contains(lang, "project")) {
  lang = string.Substr(lang, 8);
 }
+/*
 if (lang === 'zh_cw' || 'cn' ) {
     lang = 'zh';
 }
+*/
 switch(prefix) {
 case 'wikipedia':
     <a class=(prefix) title=(title) href=('http://' + lang + '.wikipedia.org/wiki' & path)> title </a>;
@@ -21,5 +23,4 @@ case 'wikimo':
 default:
     'Unknown prefix: ' + prefix + '.';
 }
-
-%>
+</pre>
