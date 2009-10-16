@@ -1,5 +1,4 @@
 
-<p> </p>
 <pre class="script">
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
@@ -8,7 +7,6 @@ var lang = u.path[0];
 /* check $0 exists */
 if(wiki.pageExists(wiki.uri(lang + '/' + $0))) {
     web.link(wiki.uri(page.language + '/' + $0), $0);
-} else {
-    <<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>lang + '/' + $0<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new') </span>>$0</<span class="end-tag">a</span>>
-}
-%>
+} else {
+    <span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>lang + '/' + $0<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new') </span>>$0</<span class="end-tag">a</span>>
+}</pre>
