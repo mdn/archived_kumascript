@@ -1,4 +1,15 @@
 
 <div class="noinclude">Example: <span class="script">template.cssxref("border-color")</span><hr />
 </div>
-<p><span lang="en" class="lang lang-en"><code><span class="script">web.link("/en/CSS/" + $0, ($1 || $0))</span></code></span><span lang="*" class="lang lang-*"><code><span class="script">web.link("/en/CSS/" + $0, ($1 || $0))</span></code></span><span lang="es" class="lang lang-es"><code><span class="script">web.link("/es/CSS/" + $0, ($1 || $0))</span></code></span><span lang="fr" class="lang lang-fr"><code><span class="script">web.link("/fr/CSS/" + $0, ($1 || $0))</span></code></span><span lang="ja" class="lang lang-ja"><code><span class="script">web.link("/ja/CSS/" + $0, ($1 || $0))</span></code></span><span lang="ko" class="lang lang-ko"><code><span class="script">web.link("/ko/CSS/" + $0, $0)</span></code></span><span lang="pl" class="lang lang-pl"><code><span class="script">web.link("/pl/CSS/" + $0, ($1 || $0))</span></code></span><span lang="pt" class="lang lang-pt"><code><span class="script">web.link("/en/CSS/" + $0, $0)</span> (en)</code></span><span lang="zh-cn" class="lang lang-zh-cn"><code><span class="script">web.link("/zh-cn/CSS/" + $0, $0)</span></code></span><span lang="zh-tw" class="lang lang-zh-tw"><code><span class="script">web.link("/zh-tw/CSS/" + $0, ($1 || $0))</span></code></span></p>
+<pre class="script">
+/* get a page's language (Don't use page.language!) */
+var u = Uri.Parts(Page.uri);
+var lang = u.path[0];
+
+/* check $0 exists */
+if(wiki.pageExists(lang + '/CSS/' + $0)) {
+    <code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;
+} else {
+    <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>lang + '/CSS/' + $0<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span> ($1 || $0) </<span class="end-tag">a></span></code>;
+}
+%>
