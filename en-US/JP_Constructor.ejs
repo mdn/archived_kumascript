@@ -1,8 +1,16 @@
 
-<div class="constructor">
-<h4><span class="constructor-name"><span class="script">$constructorName</span></span>(<span class="script">buf = [];foreach(var param in $params){buf += [param.name+" as "+param.type]};string.join(buf,", ") </span>) as <span class="constructor-type"><span class="script">$constructorType</span></span></h4>
-<div class="label"><strong>Description</strong></div>
-<div class="description"><span class="script">web.format($constructorDescr)</span></div>
-<span class="script">foreach(var param in $params) {
-<div class="param-description"><span class="param-description-label">{{param.name}}</span></div>
-} </span></div>
+<p><h1>Template:JP Constructor</h1></p>
+<br />
+<p><div class="constructor"></p>
+<br />
+<p><h4><span class="constructor-name"><span class="script">$constructorName</span></span>(<span class="script">buf = [];foreach(var param in $params){buf += [param.name+" as "+param.type]};string.join(buf,", ") </span>) as <span class="constructor-type"><span class="script">$constructorType</span></span></h4></p>
+<br />
+<p><div class="label"><strong>Description</strong></div></p>
+<br />
+<p><div class="description"><span class="script">web.format($constructorDescr)</span></div></p>
+<br />
+<p>{{foreach(var param in $params) {</p>
+<br />
+<p><div class="param-description"><span class="param-description-label"><span class="script">param.name</span></span></div></p>
+<br />
+<p>} }}</div></p>
