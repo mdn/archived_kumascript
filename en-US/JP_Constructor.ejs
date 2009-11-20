@@ -1,6 +1,6 @@
 
 <div class="constructor">
-<h4><span class="constructor-name"><span class="script">$constructorName</span></span>(<span class="script">string.join(foreach(var param in $params){param.name+" as "+param.type},",") </span>) as <span class="constructor-type"><span class="script">$constructorType</span></span></h4>
+<h4><span class="constructor-name"><span class="script">$constructorName</span></span>(<span class="script">buf = [];foreach(var param in $params){buf += [param.name+" as "+param.type]; string.join(buf,",")},",") </span>) as <span class="constructor-type"><span class="script">$constructorType</span></span></h4>
 <div class="label"><strong>Description</strong></div>
 <div class="description"><span class="script">web.format($constructorDescr)</span></div>
 </div>
