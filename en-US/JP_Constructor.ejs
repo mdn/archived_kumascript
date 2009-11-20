@@ -2,4 +2,4 @@
 <h4 class="constructor"><span class="constructor-name"><span class="script">$constructorName</span></span>(<span class="script">buf = [];foreach(var param in $params){buf += [param.name+" as "+param.type]};string.join(buf,", ") </span>) as <span class="constructor-type"><span class="script">$constructorType</span></span></h4>
 <div class="label"><strong>Description</strong></div>
 <div class="description"><span class="script">web.format($constructorDescr)</span></div>
-<div class="foo"><span class="script">$params[0].description</span></div>
+foreach (var $param in $params) {<div class="foo"><span class="script">$param.description</span></div>}
