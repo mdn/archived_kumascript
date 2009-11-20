@@ -3,4 +3,4 @@
 <div class="label"><strong>Description</strong></div>
 <div class="description"><span class="script">web.format($constructorDescr)</span></div>
 <div class="params-descr">{{buf = [];foreach(var param in $params){buf += [' <div class="param-descr"><span class="param-descr-label">'+param.name+'</span>. <span class="param-descr-body">'+param.description+'</span></div>
-<p>']};'<div>'+string.join(buf,"")+'</div>'; }}</p>
+<p>']};web.format('<div>'+string.join(buf,"")+'</div>'); }}</p>
