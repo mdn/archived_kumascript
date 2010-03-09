@@ -2,7 +2,7 @@
 <pre class="script">
 /* accepts as input one required parameter: DOM API to create a xref to */
 /* this will first try to link to DOM:$0, then DOM/$0 if that doesn't exist */
-/* if $1 is specified and non-zero, the item is displayed as a method name with parens */
+/* if $1 is specified, the item is displayed as a method name with parens */
 
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
@@ -11,15 +11,17 @@ var title = $0;
 
 /* build displayed title */
 
-if ($1) {
-  title = title + "()";
+var useparens = $1 || 0;
+if (useparens) {
+  title = title + '()';
 }
 
 /* check $0 exists */
 var dest = lang + '/' + 'DOM:' + $0;
-if(wiki.pageExists(dest)) {
+if (wiki.pageExists(dest)) {
     <code>(web.link(wiki.uri(dest), $0))</code>;
 } else {
     <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), $0))</code>;
 }
-</pre>
+
+%>
