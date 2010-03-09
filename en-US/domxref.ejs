@@ -2,6 +2,8 @@
 <pre class="script">
 /* accepts as input one required parameter: DOM API to create a xref to */
 /* this will first try to link to DOM:parm1, then DOM/parm1 if that doesn't exist */
+/* if you specify the API name with parens (ie, "foo()"), the link is to lang/DOM/foo */
+/* but the title is displayed as "foo()" to make it clear it's a function */
 
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
@@ -21,5 +23,4 @@ if (wiki.pageExists(dest)) {
 } else {
     <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + api), $0))</code>;
 }
-
-%>
+</pre>
