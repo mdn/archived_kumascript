@@ -11,13 +11,5 @@ if(wiki.pageExists(dest)) {
 } else {
     <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), $0))</code>;
 }
-</pre>
-<div class="noinclude">
-<h3 name="Parameter">Parameter</h3>
-<ol> <li>DOM-Element</li> <li>Linkbeschriftung (optional)</li>
-</ol>
-<h3 name="Beispiel">Beispiel</h3>
-<table class="standard-table"> <tbody> <tr> <td class="header">Eingabe</td> <td class="header">Ausgabe</td> </tr> <tr> <td><span class="nowiki">{{domxref|window.dump|dump()}}</span></td> <td><span class="script">template.Domxref("window.dump", "dump()")</span></td> </tr> <tr> <td><span class="nowiki">{{domxref|window.dump}}</span></td> <td><span class="script">template.Domxref("window.dump", "")</span></td> </tr> </tbody>
-</table>
-</div>
-<p><span lang="fr" class="lang lang-fr"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "fr")</span></code> </span><span lang="ja" class="lang lang-ja"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "ja")</span></code> </span><span lang="ko" class="lang lang-ko"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "ko")</span></code> </span><span lang="pl" class="lang lang-pl"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "pl")</span></code> </span><span lang="zh-cn" class="lang lang-zh-cn"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "zh-cn")</span></code> </span></p>
+
+%>
