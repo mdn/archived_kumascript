@@ -7,20 +7,21 @@
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
 var lang = u.path[0];
-var title = $0;
+var ttl = $0;
 
 /* build displayed title */
 
-var useparens = 0;
+var useparens = $1 || 0;
 if (useparens) {
-  title = title + '()';
+  ttl = ttl + '()';
 }
 
 /* check $0 exists */
 var dest = lang + '/' + 'DOM:' + $0;
 if (wiki.pageExists(dest)) {
-    <code>(web.link(wiki.uri(dest), $0))</code>;
+    <code>(web.link(wiki.uri(dest), ttl))</code>;
 } else {
-    <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), $0))</code>;
+    <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), ttl))</code>;
 }
-</pre>
+
+%>
