@@ -9,8 +9,8 @@ var lang = u.path[0];
 var api = $0;
 
 if (string.endswith($0, '()')) {
-  var len = string.length($0) - 2;
-  api = string.substr($0, 0, len);
+  var len = string.length(api) - 2;
+  api = string.substr(api, 0, len);
 }
 
 var dest = lang + '/' + 'DOM:' + api;
@@ -19,5 +19,4 @@ if (wiki.pageExists(dest)) {
 } else {
     <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + api), $0))</code>;
 }
-
-%>
+</pre>
