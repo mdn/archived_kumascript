@@ -21,7 +21,7 @@ var dest = lang + '/' + 'DOM:' + $0;
 if (wiki.pageExists(dest)) {
     <code>(web.link(wiki.uri(dest), ttl))</code>;
 } else {
-    <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), ttl))</code>;
+    dest = lang + '/' + 'DOM/' + $0;
+    <code>(web.link(wiki.uri(dest), ttl))</code>;
 }
-
-%>
+</pre>
