@@ -1,6 +1,17 @@
 
-<p><span lang="en" class="lang lang-en"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "en")</span></code> </span> <span lang="es" class="lang lang-es"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "es")</span></code> </span> <span lang="*" class="lang lang-*"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "en")</span></code> </span> <span lang="de" class="lang lang-de">
-<div class="includeonly"><code><span class="script">string.trim(($1 || '')) !== '' ? web.html(mediawiki.internal('DOM:' + $0 + '|' + $1, "de")) : web.html(mediawiki.internal('DOM:' + $0 + '|' + $0, "de"))</span></code></div>
+<pre class="script">
+/* get a page's language (Don't use page.language!) */
+var u = Uri.Parts(Page.uri);
+var lang = u.path[0];
+
+/* check $0 exists */
+var dest = lang + '/' + 'DOM:' + $0;
+if(wiki.pageExists(dest)) {
+    <code>(web.link(wiki.uri(dest), $0))</code>;
+} else {
+    <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), $0))</code>;
+}
+</pre>
 <div class="noinclude">
 <h3 name="Parameter">Parameter</h3>
 <ol> <li>DOM-Element</li> <li>Linkbeschriftung (optional)</li>
@@ -9,4 +20,4 @@
 <table class="standard-table"> <tbody> <tr> <td class="header">Eingabe</td> <td class="header">Ausgabe</td> </tr> <tr> <td><span class="nowiki">{{domxref|window.dump|dump()}}</span></td> <td><span class="script">template.Domxref("window.dump", "dump()")</span></td> </tr> <tr> <td><span class="nowiki">{{domxref|window.dump}}</span></td> <td><span class="script">template.Domxref("window.dump", "")</span></td> </tr> </tbody>
 </table>
 </div>
-</span><span lang="fr" class="lang lang-fr"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "fr")</span></code> </span><span lang="ja" class="lang lang-ja"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "ja")</span></code> </span><span lang="ko" class="lang lang-ko"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "ko")</span></code> </span><span lang="pl" class="lang lang-pl"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "pl")</span></code> </span><span lang="zh-cn" class="lang lang-zh-cn"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "zh-cn")</span></code> </span></p>
+<p><span lang="fr" class="lang lang-fr"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "fr")</span></code> </span><span lang="ja" class="lang lang-ja"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "ja")</span></code> </span><span lang="ko" class="lang lang-ko"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "ko")</span></code> </span><span lang="pl" class="lang lang-pl"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "pl")</span></code> </span><span lang="zh-cn" class="lang lang-zh-cn"><code><span class="script">mediawiki.internal('DOM:' + $0 + '|' + $0, "zh-cn")</span></code> </span></p>
