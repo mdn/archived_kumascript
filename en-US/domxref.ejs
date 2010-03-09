@@ -6,6 +6,9 @@
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
 var lang = u.path[0];
+if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
+ lang = string.Substr(lang, 8);
+}
 var api = $0;
 
 if (string.endswith($0, '()')) {
@@ -18,4 +21,5 @@ if (wiki.pageExists(dest)) {
 } else {
     <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + api), $0))</code>;
 }
-</pre>
+
+%>
