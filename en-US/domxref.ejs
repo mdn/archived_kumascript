@@ -1,7 +1,6 @@
 
 <pre class="script">
 /* accepts as input one required parameter: DOM API to create a xref to */
-/* this will first try to link to DOM:parm1, then DOM/parm1 if that doesn't exist */
 
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
@@ -15,5 +14,4 @@ if (wiki.pageExists(dest)) {
     dest = lang + '/' + 'DOM/' + $0;
     <code>(web.link(wiki.uri(dest), $0))</code>;
 }
-
-%>
+</pre>
