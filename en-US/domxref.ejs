@@ -8,14 +8,11 @@ var u = Uri.Parts(Page.uri);
 var lang = u.path[0];
 var api = $0;
 
-if (string.endswith($0, '()')) {
-  api = string.remove($0, string.length($0) - 2, 2);
-}
-
 var dest = lang + '/' + 'DOM:' + api;
 if (wiki.pageExists(dest)) {
     <code>(web.link(wiki.uri(dest), $0))</code>;
 } else {
     <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + api), $0))</code>;
 }
-</pre>
+
+%>
