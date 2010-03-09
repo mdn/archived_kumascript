@@ -5,7 +5,7 @@ var path = $1 || $path;
 var title = $2 || $title || path;
 var u = Uri.Parts(Page.uri);
 var lang = string.ToLower(u.path[0]);
-if(string.Contains(lang, "project")) {
+if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
  lang = string.Substr(lang, 8);
 }
 if (lang === 'zh_tw' || lang === 'cn') {
@@ -21,5 +21,4 @@ case 'wikimo':
 default:
     'Unknown prefix: ' + prefix + '.';
 }
-
-%>
+</pre>
