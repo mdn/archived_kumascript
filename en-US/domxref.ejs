@@ -6,12 +6,17 @@
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
 var lang = u.path[0];
-var ttl = $0;
+var api = $0;
 
-var dest = lang + '/' + 'DOM:' + $0;
-if (wiki.pageExists(dest)) {
-    <code>(web.link(wiki.uri(dest), ttl))</code>;
-} else {
-    <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), ttl))</code>;
+if (string.endswith($0, '()')) {
+  dest = string.remove($0, string.length($0) - 2, 2);
 }
-</pre>
+
+var dest = lang + '/' + 'DOM:' + api;
+if (wiki.pageExists(dest)) {
+    <code>(web.link(wiki.uri(dest), $0))</code>;
+} else {
+    <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + api), $0))</code>;
+}
+
+%>
