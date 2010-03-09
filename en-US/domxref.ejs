@@ -11,7 +11,7 @@ var title = $0;
 
 /* build displayed title */
 
-var useparens = $1 || 0;
+var useparens = 0;
 if (useparens) {
   title = title + '()';
 }
@@ -23,5 +23,4 @@ if (wiki.pageExists(dest)) {
 } else {
     <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), $0))</code>;
 }
-
-%>
+</pre>
