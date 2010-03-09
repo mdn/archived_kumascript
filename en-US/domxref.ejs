@@ -1,19 +1,19 @@
 
 <pre class="script">
-/* accepts as input one required parameter: DOM API to create a xref to */
-/* this will first try to link to DOM:parm1, then DOM/parm1 if that doesn't exist */
-/* if parm2 is specified, the item is displayed as a method name with parens */
+/* accepts as input one required parameter: DOM API to create a xref to */
+/* this will first try to link to DOM:parm1, then DOM/parm1 if that doesn't exist */
+/* if parm2 is specified, the item is displayed as a method name with parens */
 
-/* get a page's language (Don't use page.language!) */
+/* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
 var lang = u.path[0];
 var ttl = $0;
 
-/* build displayed title */
+/* build displayed title */
 
 var useparens = $1 || 0;
-if (useparens) {
-  ttl = ttl + '()';
+if (useparens) {
+    ttl = ttl + '()';
 }
 
 /* check first parm exists */
@@ -23,4 +23,5 @@ if (wiki.pageExists(dest)) {
 } else {
     <code>(web.link(wiki.uri(lang + '/' + 'DOM/' + $0), ttl))</code>;
 }
-</pre>
+
+%>
