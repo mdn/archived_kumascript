@@ -1,6 +1,20 @@
 
-<div style="border: 1px solid rgb(204, 204, 204); margin: 10px 0px; padding: 0px 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+<div style="border: 1px solid rgb(204, 204, 204); margin: 10px 0px; padding: 0px 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%;">
 <pre class="script">
+/**
+ * Replaces Template:JSInherits. Given an object and a list of properties or
+ * methods implemented elsewhere, output a list of the properties or methods
+ * inherited from that object.
+ *
+ * TODO: make it work with an inheritance chain, e.g., if you want inherited
+ * properties or methods from both Function and Object, where Function itself
+ * overrides methods from Object. We don't want to see that it inherits a
+ * "valueOf" method from Function and again on Object.
+ *
+ * @param the object to inherit from
+ * @param "properties" or "methods"
+ * @param a list of properties or methods overridden by this object
+ */
 var prototypes = {
   Array: {
     methods: [
