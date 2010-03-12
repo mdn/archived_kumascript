@@ -288,7 +288,10 @@ var prototypes = {
     ]
   }
 };
-var prefix = '/en/Core_JavaScript_1.5_Reference/Global_Objects/';
+var prefix;
+if(string.toLower(page.language) == 'en' || page.language == '') {
+  prefix = '/en/Core_JavaScript_1.5_Reference/Global_Objects/';
+}
 var captiontext = string.toUpperFirst(string.toLower($1)) + ' inherited from ';
 var pageuri = wiki.uri(prefix + $0);
 var htmlstring;
