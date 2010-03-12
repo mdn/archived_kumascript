@@ -295,7 +295,7 @@ var htmlstring;
 htmlstring = '<span style="font-weight:bold;">' + captiontext +
                  ' <a href="' + pageuri + '"><code>' + $0 +
                  '</code></a></span>:<br />';
-web.text(htmlstring);
+web.html(htmlstring);
 var desiredprototype = prototypes[$0][string.toLower($1)];
 foreach (var override in $2) {
   var index = list.indexOf(desiredprototype, override);
