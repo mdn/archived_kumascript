@@ -294,7 +294,7 @@ var pageuri = wiki.uri(prefix + $0);
 var htmlstring = '<span style="font-weight:bold;">' + captiontext +
                  ' <a href="'; + pageuri; + '"><code>' + $0 +
                  '</code></a></span>:<br />';
-web.html(htmlstring);
+/*web.html(htmlstring);*/
 var desiredprototype = prototypes[$0][string.toLower($1)];
 foreach (var override in $2) {
   var index = list.indexOf(desiredprototype, override);
@@ -316,6 +316,6 @@ foreach (var p in desiredprototype) {
   i = i + 1;
 }
 htmlstring += '</span>';
-web.html(htmlstring);
+/*web.html(htmlstring);*/
 </pre>
 </div>
