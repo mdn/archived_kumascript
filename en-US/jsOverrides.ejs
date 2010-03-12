@@ -292,9 +292,7 @@ var prefix = '/en/Core_JavaScript_1.5_Reference/Global_Objects/';
 var captiontext = string.toUpperFirst(string.toLower($1)) + ' inherited from ';
 var pageuri = wiki.uri(prefix + $0);
 var htmlstring;
-htmlstring = '<span style="font-weight:bold;">' + captiontext +
-                 ' <a href="'; + pageuri; + '"><code>' + $0 +
-                 '</code></a></span>:<br />';
+htmlstring = '<span style="font-weight:bold;">' + captiontext + ' <a href="'; + pageuri; + '"><code>' + $0 + '</code></a></span>:<br />';
 /*
 web.text(htmlstring);
 var desiredprototype = prototypes[$0][string.toLower($1)];
