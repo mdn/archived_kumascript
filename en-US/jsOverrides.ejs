@@ -1,7 +1,6 @@
 
 <div style="border: 1px solid rgb(204, 204, 204); margin: 10px 0px; padding: 0px 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
 <pre class="script">
-/*
 var prototypes = {
   Array: {
     methods: [
@@ -289,6 +288,7 @@ var prototypes = {
     ]
   }
 };
+/*
 var prefix = '/en/Core_JavaScript_1.5_Reference/Global_Objects/';
 var captiontext = string.toUpperFirst(string.toLower($1)) + ' inherited from ';
 var pageuri = wiki.uri(prefix + $0);
@@ -296,7 +296,7 @@ var htmlstring;
 htmlstring = '<span style="font-weight:bold;">' + captiontext +
                  ' <a href="'; + pageuri; + '"><code>' + $0 +
                  '</code></a></span>:<br />';
-web.text(htmlstring);*/
+web.text(htmlstring);
 var desiredprototype = prototypes[$0][string.toLower($1)];
 foreach (var override in $2) {
   var index = list.indexOf(desiredprototype, override);
