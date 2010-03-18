@@ -7,19 +7,18 @@ if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
  lang = string.Substr(lang, 8);
 }
 
+prevStr = 'Previous';
+nextStr = 'Next;
+
 if (lang == 'en') {
   prevStr = 'Previous';
   nextStr = 'Next';
 } else if (lang == 'de') {
   prevStr = 'zurück';
   nextStr = 'weiter';
-} else {
-  prevStr = 'Previous';
-  nextStr = 'Next;
 }
 
 <div class="prevnext">
 <p align="right"><span style="float: left;">(web.link(wiki.uri(lang + '/' + $0), prevStr))</span> + (web.link(wiki.uri(lang + '/' + $1), nextStr))</p>
 </div>
-
-%>
+</pre>
