@@ -14,13 +14,13 @@ var nextStr = 'Next »';
 
 /* fix for other languages */
 
-web.text(string.length(lang))
 if (string.compare(lang, "de", true)) {
   prevStr = "« zurück";
   nextStr = "weiter »";
 }
 
 <div class="prevnext">
-<p align="right"><span style="float: left;">(web.link(wiki.uri($0), prevStr))</span>(web.link(wiki.uri($1), nextStr))</p>
+<p align="right"><span style="float: left;">(web.link(wiki.uri($0), prevStr + string.length(lang)))</span>(web.link(wiki.uri($1), nextStr))</p>
 </div>
-</pre>
+
+%>
