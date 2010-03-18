@@ -14,12 +14,31 @@ var nextStr = 'Next »';
 
 /* fix for other languages */
 
-if (string.compare(lang, "de", true)) {
+if (!string.compare(lang, "de", true)) {
   prevStr = "« zurück";
   nextStr = "weiter »";
+} else if (!string.compare(lang, "es", true)) {
+  prevStr = "« Anterior";
+  nextStr = "Siguiente »";
+} else if (!string.compare(lang, "ja", true)) {
+  prevStr = "« 前";
+  nextStr = "次 »";
+} else if (!string.compare(lang, "ko", true)) {
+  prevStr = "« 이전";
+  nextStr = "다음 »";
+} else if (!string.compare(lang, "pl", true)) {
+  prevStr = "« Poprzedni";
+  nextStr = "Następny »";
+} else if (!string.compare(lang, "ru", true)) {
+  prevStr = "« Предыдущая статья";
+  nextStr = "Следующая статья »";
+} else if (!string.compare(lang, "zh-tw", true)) {
+  prevStr = "« 前頁";
+  nextStr = "次頁 »";
 }
 
 <div class="prevnext">
 <p align="right"><span style="float: left;">(web.link(wiki.uri($0), prevStr))</span>(web.link(wiki.uri($1), nextStr))</p>
 </div>
-</pre>
+
+%>
