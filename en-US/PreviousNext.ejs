@@ -9,8 +9,8 @@ if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
 
 /* assume English */
 
-prevStr = 'Previous';
-nextStr = 'Next;
+var prevStr = 'Previous';
+var nextStr = 'Next;
 
 /* fix for other languages */
 
@@ -22,5 +22,4 @@ if (string.compare(lang, 'de', true)) {
 <div class="prevnext">
 <p align="right"><span style="float: left;">(web.link(wiki.uri(lang + '/' + $0), prevStr))</span> + (web.link(wiki.uri(lang + '/' + $1), nextStr))</p>
 </div>
-
-%>
+</pre>
