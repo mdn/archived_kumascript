@@ -1,5 +1,4 @@
 
-<p> </p>
 <pre class="script">
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
@@ -20,6 +19,7 @@ if (lang == 'en') {
 }
 
 <div class="prevnext">
-<p align="right"><span style="float: left;">(web.text('«' )) + (web.link(wiki.uri(lang + '/' + $0), prevStr))</span>(web.link(wiki.uri(lang + '/' + $1), nextStr))(web.text(' »'))</p>
+<p align="right"><span style="float: left;">(web.text('«' )) + (web.link(wiki.uri(lang + '/' + $0), prevStr))</span>(web.link(wiki.uri(lang + '/' + $1), nextStr)) + (web.text(' »'))</p>
 </div>
-</pre>
+
+%>
