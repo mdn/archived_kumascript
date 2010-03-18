@@ -2,18 +2,19 @@
 <pre class="script">
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
-var lang = string.tolower(u.path[0]);
+var lang = u.path[0];
 if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
  lang = string.Substr(lang, 8);
 }
 
+/* assume English */
+
 prevStr = 'Previous';
 nextStr = 'Next;
 
-if (lang == 'en') {
-  prevStr = 'Previous';
-  nextStr = 'Next';
-} else if (lang == 'de') {
+/* fix for other languages */
+
+if (string.compare(lang, 'de', true)) {
   prevStr = 'zurück';
   nextStr = 'weiter';
 }
@@ -21,4 +22,5 @@ if (lang == 'en') {
 <div class="prevnext">
 <p align="right"><span style="float: left;">(web.link(wiki.uri(lang + '/' + $0), prevStr))</span> + (web.link(wiki.uri(lang + '/' + $1), nextStr))</p>
 </div>
-</pre>
+
+%>
