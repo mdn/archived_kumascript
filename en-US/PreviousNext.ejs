@@ -1,42 +1,25 @@
 
-<p><span lang="en" class="lang lang-en">
+<p> </p>
+<pre class="script">
+/* get a page's language (Don't use page.language!) */
+var u = Uri.Parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
+ lang = string.Substr(lang, 8);
+}
+
+if (lang == 'en') {
+  prevStr = 'Previous';
+  nextStr = 'Next';
+} else if (lang == 'de') {
+  prevStr = 'zurück';
+  nextStr = 'weiter';
+} else {
+  prevStr = 'Previous';
+  nextStr = 'Next;
+}
+
 <div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|Previous', "en")</span></span><span class="script">mediawiki.internal($1 + '|Next', "en")</span> »</p>
+<p align="right"><span style="float: left;">« (web.link(wiki.uri(lang + '/' + $0), prevStr))</span>(web.link(wiki.uri(lang + '/' + $1), nextStr)) »</p>
 </div>
-<span class="comment">Comment here to ensure newlines get recognized</span> </span> <span lang="*" class="lang lang-*">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|Previous', "en")</span></span><span class="script">mediawiki.internal($1 + '|Next', "en")</span> »</p>
-</div>
-<span class="comment">Comment here to ensure newlines get recognized</span> </span> <span lang="de" class="lang lang-de">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|zurück', "de")</span></span><span class="script">mediawiki.internal($1 + '|weiter', "de")</span> »</p>
-</div>
-<span class="comment">Kommentar, damit Zeilenumbruch erkannt wird</span> </span> <span lang="es" class="lang lang-es">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|Anterior', "es")</span></span><span class="script">mediawiki.internal($1 + '|Siguiente', "es")</span> »</p>
-</div>
-<span class="comment">Comment here to ensure newlines get recognized</span> </span> <span lang="ja" class="lang lang-ja">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|前', "ja")</span></span><span class="script">mediawiki.internal($1 + '|次', "ja")</span> »</p>
-</div>
-<span class="comment">Comment here to ensure newlines get recognized</span> </span> <span lang="ko" class="lang lang-ko">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|이전', "ko")</span></span><span class="script">mediawiki.internal($1 + '|다음', "ko")</span> »</p>
-</div>
-<span class="comment">Comment here to ensure newlines get recognized</span> </span> <span lang="pl" class="lang lang-pl">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|Poprzedni', "pl")</span></span><span class="script">mediawiki.internal($1 + '|Następny', "pl")</span> »</p>
-</div>
-<span class="comment">Komentarz po to aby zagwaranrowac rozpoznanie nowych linii :)</span> </span> <span lang="ru" class="lang lang-ru">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|Предыдущая статья', "ru")</span></span><span class="script">mediawiki.internal($1 + '|Следующая статья', "ru")</span> »</p>
-</div>
-<span class="comment">Comment here to ensure newlines get recognized</span> </span> <span lang="zh-cn" class="lang lang-zh-cn">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|Previous', "zh-cn")</span></span><span class="script">mediawiki.internal($1 + '|Next', "zh-cn")</span> »</p>
-</div>
-<span class="comment">Comment here to ensure newlines get recognized</span> </span> <span lang="zh-tw" class="lang lang-zh-tw">
-<div class="prevnext">
-<p align="right"><span style="float: left;">« <span class="script">mediawiki.internal($0 + '|前頁', "zh-tw")</span></span><span class="script">mediawiki.internal($1 + '|次頁', "zh-tw")</span> »</p>
-</div>
-<span class="comment">Comment here to ensure newlines get recognized 分隔分隔</span> </span></p>
+</pre>
