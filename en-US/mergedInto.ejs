@@ -1,2 +1,3 @@
 
-<p><span class="script">Note("This page is obsolete and has been merged into " + web.link(string.SubStr($0, string.IndexOf($0, "/") + 1), wiki.getPage($0).title))</span></p>
+<p><span class="script">var i = string.IndexOf($0, "#");<br />
+Note("This page is obsolete and has been merged into " + web.link(string.SubStr($0, string.IndexOf($0, "/") + 1), wiki.getPage(string.SubStr($0, 0, ((i == -1) ? string.Length(s) : i))).title))</span></p>
