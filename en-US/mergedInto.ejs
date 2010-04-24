@@ -1,3 +1,10 @@
 
-<p><span class="script">var i = string.IndexOf($0, "#");<br />
-Note("This page is obsolete and has been merged into " + web.link("/" + $0, wiki.getPage(string.SubStr($0, 0, ((i == -1) ? string.Length(s) : i))).title) + ".")</span></p>
+<p><span class="script"> var s = $0;<br />
+var homePageURI = site.homePage.URI;<br />
+if string.startsWith(s, homePageURI){<br />
+  s = string.subStr(s, string.length(homePageURI) - 1);<br />
+}<br />
+else if !string.startsWith(s, "/"){<br />
+  s = "/" + s;<br />
+}<br />
+Note("This page is obsolete and has been merged into " + web.link(s, wiki.getPage(string.remove(s, string.IndexOf(s, "#"))).title) + ".")</span></p>
