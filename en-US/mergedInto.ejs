@@ -1,15 +1,3 @@
 
-<p><span class="script"> var s = $0;<br />
-var siteList = ["https://developer.mozilla.org/"];<br />
-var foundSiteName = false;<br />
-foreach (var i in siteList){<br />
-  if (string.startsWith(s, i)){<br />
-    s = string.subStr(s, #i - 1);<br />
-    foundSiteName = true;<br />
-    break;<br />
-  }<br />
-}<br />
-if (!foundSiteName && !string.startsWith(s, "/")){<br />
-  s = "/" + s;<br />
-}<br />
+<p><span class="script"> var s = getRelativeURL($0);<br />
 Note("This page is obsolete and has been merged into " + web.link(s, wiki.getPage(string.remove(s, string.IndexOf(s, "#"))).title) + ".")</span></p>
