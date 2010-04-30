@@ -4,12 +4,12 @@ var i = list.indexOf(chapterList, $0);<br />
 if (i != -1){<br />
   switch (i){<br />
     case 0:<br />
-      ["FIRST", chapterList[1]];<br />
+      next(getRelativeURL(chapterList1[1], true));<br />
       break;<br />
     case (#chapterList) - 1:<br />
-      [chapterList[(#chapterList) - 2], "LAST"];<br />
+      previous(getRelativeURL(chapterList[(#chapterList) - 2], true));<br />
       break;<br />
     default:<br />
-      [chapterList[i - 1], chapterList[i + 1]];<br />
+      previousNext(getRelativeURL(chapterList[i - 1], true), getRelativeURL(chapterList[i + 1], true));<br />
   }<br />
 }</span></p>
