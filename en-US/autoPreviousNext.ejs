@@ -1,0 +1,20 @@
+
+<p><span class="script"> var chapterList = string.deserialize(JSGChapters());<br />
+if ($0 is nil){<br />
+  chapterList;<br />
+}<br />
+else {<br />
+  var i = list.indexOf(chapterList, $0);<br />
+  if (i != -1){<br />
+    switch (i){<br />
+      case 0:<br />
+        ["FIRST", chapterList[1]];<br />
+        break;<br />
+      case (#chapterList) - 1:<br />
+        [chapterList[(#chapterList) - 2], "LAST"];<br />
+        break;<br />
+      default:<br />
+        [chapterList[i - 1], chapterList[i + 1]];<br />
+    }<br />
+  }<br />
+}</span></p>
