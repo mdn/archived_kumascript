@@ -1,6 +1,5 @@
 
-<p><span class="script">var chapterList = [<br />
-  "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/About",<br />
+<p><span class="script">["https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/About",<br />
   "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/JavaScript_Overview",<br />
   "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Values%2c_Variables%2c_and_Literals",<br />
   "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Expressions_and_Operators",<br />
@@ -14,22 +13,4 @@
   "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Iterators_and_Generators",<br />
   "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Details_of_the_Object_Model",<br />
   "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/LiveConnect_Overview",<br />
-  "https://developer.mozilla.org/En/E4X/Processing_XML_with_E4X"];<br />
-if ($0 is nil){<br />
-  chapterList;<br />
-}<br />
-else {<br />
-  var i = list.indexOf(chapterList, $0);<br />
-  if (i != -1){<br />
-    switch (i){<br />
-      case 0:<br />
-        chapterList[1];<br />
-        break;<br />
-      case (#chapterList) - 1:<br />
-        chapterList[(#chapterList) - 2];<br />
-        break;<br />
-      default:<br />
-        [chapterList[i - 1], chapterList[i + 1]];<br />
-    }<br />
-  }<br />
-}</span></p>
+  "https://developer.mozilla.org/En/E4X/Processing_XML_with_E4X"]</span></p>
