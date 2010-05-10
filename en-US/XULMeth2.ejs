@@ -1,13 +1,42 @@
 
+<pre class="script">
 /* parameters: first the method name, second the parameter list, third the display name for the method */
 /* get the page language */
+
 var u = uri.parts(Page.uri);
-var lang = u.path[0]; if (string.contains(lang, "project") || string.contains(lang, "Project")) { lang = string.substr(lang, 8);
-} /* set up the page name based on language */ var methodName = "Method";
-var dispApi = $0; if ($2) { dispApi = $2;
-} switch(lang) { case 'de': methodName = "Methoden"; break; case 'fr': methodName = "Méthodes"; break; case 'pl': methodName = "Metoda"; break;
-} var destOldType = lang + '/XUL:' + methodName + ':' + $0;
-var destNewType = lang + '/XUL/' + methodName + '/' + $0; if (wiki.pageExists(destNewType)) { <code>(web.link(wiki.uri(destNewType), dispApi))</code>
-} else if (wiki.pageExists(destOldType)) { <code>(web.link(wiki.uri(destOldType), dispApi))</code>
-} else { <code><span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>
+var lang = u.path[0];
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
 }
+
+/* set up the page name based on language */
+
+var methodName = "Method";
+var dispApi = $0;
+if ($2) {
+  dispApi = $2;
+}
+
+switch(lang) {
+  case 'de':
+    methodName = "Methoden";
+    break;
+  case 'fr':
+    methodName = "Méthodes";
+    break;
+  case 'pl':
+    methodName = "Metoda";
+    break;
+}
+
+var destOldType = lang + '/XUL:' + methodName + ':' + $0;
+var destNewType = lang + '/XUL/' + methodName + '/' + $0;
+if (wiki.pageExists(destNewType)) {
+  <code>(web.link(wiki.uri(destNewType), dispApi))</code>
+} else if (wiki.pageExists(destOldType)) {
+  <code>(web.link(wiki.uri(destOldType), dispApi))</code>
+} else {
+  <code><span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>
+}
+
+%>
