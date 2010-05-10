@@ -12,6 +12,7 @@ if (string.contains(lang, "project") || string.contains(lang, "Project")) {
 /* set up the page name based on language */
 
 var methodName = "Method";
+var anch = "m-" + $0;
 var dispApi = $0;
 if ($2) {
   dispApi = $2;
@@ -31,13 +32,12 @@ switch(lang) {
 
 var destOldType = lang + '/XUL:' + methodName + ':' + $0;
 var destNewType = lang + '/XUL/' + methodName + '/' + $0;
-web.html("<a name="m-" + $0 + "" />");
+
 if (wiki.pageExists(destNewType)) {
-  <code>(web.link(wiki.uri(destNewType), dispApi))</code>
+  <code><span id=" + anch + ">(web.link(wiki.uri(destNewType), dispApi))</code></span>
 } else if (wiki.pageExists(destOldType)) {
   <code>(web.link(wiki.uri(destOldType), dispApi))</code>
 } else {
   <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
 }
-
-%>
+</pre>
