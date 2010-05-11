@@ -11,8 +11,8 @@ if (string.contains(lang, "project") || string.contains(lang, "Project")) {
 
 /* set up the page name based on language */
 
-var attrName = "Method";
-var anch = "m-" + $0;
+var attrName = "Attribute";
+var anch = "a-" + $0;
 var dispApi = $0;
 if ($1) {
   dispApi = $1;
@@ -37,5 +37,4 @@ if (wiki.pageExists(destNewType)) {
 } else {
   <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
 }
-
-%>
+</pre>
