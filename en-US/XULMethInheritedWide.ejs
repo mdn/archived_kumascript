@@ -1,7 +1,8 @@
 
 <pre class="script">
-var ttl = 1;  // 3600 = 60 minute ttl
+var ttl = 3600;  // 3600 = 60 minute ttl
 var lang = page.language;
 var cacheKey = lang + '-XULMethInheritedWide';
 webcache.fetch(cacheKey) || webcache.store(cacheKey, template.XULMethInheritedWideNoCache(), ttl);
-</pre>
+
+%>
