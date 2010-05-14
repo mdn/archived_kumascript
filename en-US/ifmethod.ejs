@@ -3,6 +3,7 @@
 /* creates a link to a method in an interface */
 /* parameters: interface name then method name */
 /* get a page's language (Don't use page.language!) */
+var u = Uri.Parts(Page.uri);
 var lang = string.toLower(u.path[0]);
 if(string.Contains(lang, "project")) {
  lang = string.Substr(lang, 8);
@@ -23,5 +24,4 @@ if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
 } else { /* the page doesn't exist */
     <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>(apiString)</<span class="end-tag">a></span></code>;
 }
-
-%>
+</pre>
