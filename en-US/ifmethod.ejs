@@ -1,30 +1,21 @@
-<span lang='en' class='lang lang-en'><code>{{mediawiki.internal($0 + '#' + $1 + '()|' + $1 + '()', "en")}}</code><div class="noinclude">
-<p>The ifmethod template lets you easily place a link to a method in a specified interface.  For example:
-</p><p><span class="plain">{{ifmethod|nsINavBookmarksService|createFolder}}</span>
-</p><p>Results in:
-</p><p>{{template.Ifmethod("nsINavBookmarksService", "createFolder")}}
-</p>
-</div>
-</span><span lang='*' class='lang lang-*'><code>{{mediawiki.internal($0 + '#' + $1 + '()|' + $1 + '()', "en")}}</code><div class="noinclude">
-<p>The ifmethod template lets you easily place a link to a method in a specified interface.  For example:
-</p><p><span class="plain">{{ifmethod|nsINavBookmarksService|createFolder}}</span>
-</p><p>Results in:
-</p><p>{{template.Ifmethod("nsINavBookmarksService", "createFolder")}}
-</p>
-</div>
-</span><span lang='fr' class='lang lang-fr'><code>{{mediawiki.internal($0 + '#' + $1 + '()|' + $1 + '()', "fr")}}</code><div class="noinclude">
-<p>Le modèle ifmethod permet de placer facilement un lien vers une méthode d'une interface précise. Par exemple :
-</p><p><span class="plain">{{ifmethod|nsINavBookmarksService|createFolder}}</span>
-</p><p>Donnera :
-</p><p>{{template.Ifmethod("nsINavBookmarksService", "createFolder")}}
-</p>
-</div>
-</span><span lang='ja' class='lang lang-ja'><code>{{mediawiki.internal($0 + '#' + $1 + '()|' + $1 + '()', "ja")}}</code><div class="noinclude">
-<p>この ifmethod テンプレートを使うと、特定のインタフェースのメソッドへ簡単にリンクを張ることができます。例えば、
-</p><p>The ifmethod template lets you easily place a link to a method in a specified interface.  For example:
-</p><p><span class="plain">{{ifmethod|nsINavBookmarksService|createFolder}}</span>
-</p><p>この結果は、
-</p><p>{{template.Ifmethod("nsINavBookmarksService", "createFolder")}}
-</p>
-</div>
-</span>
+
+<pre class="script">
+/* get a page's language (Don't use page.language!) */
+var u = Uri.Parts(Page.uri);
+var lang = u.path[0];
+if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
+ lang = string.Substr(lang, 8);
+}
+
+var destOldType = lang + '/' + $0;
+var destNewType = lang + '/XPCOM Interface Reference/' + $0;
+
+if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
+    <code>(web.link(wiki.uri(destOldType), $0 + '()'))</code>;
+} else if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
+    <code>(web.link(wiki.uri(destNewType), $0 + '()'))</code>;
+} else { /* the page doesn't exist */
+    <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
+}
+
+%>
