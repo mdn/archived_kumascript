@@ -1,4 +1,26 @@
-<span lang='en' class='lang lang-en'>« {{mediawiki.internal($0 + '|' + $1 + ' Page', "en")}}
-</span><span lang='*' class='lang lang-*'>« {{mediawiki.internal($0 + '|' + $1 + ' Page', "en")}}
-</span><span lang='ja' class='lang lang-ja'>« {{mediawiki.internal($0 + '|' + $1 + ' ページ', "ja")}}
-</span>
+
+<pre class="script">
+/* two parameters: topic page name, topic page title */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var langName = $1 + " Page";
+
+switch(lang) {
+  case 'ja':
+    langName = $1 " ページ";
+    break;
+}
+var dest = lang + '/' + $0;
+web.link(wiki.uri(dest), "« " + langName);
+
+%>
