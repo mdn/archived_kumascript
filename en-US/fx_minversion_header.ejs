@@ -46,7 +46,7 @@ switch(lang) {
   case 'zh-cn':
     newIn = "该条目记录了 ";
     break;
-  case 'zh-tw":
+  case 'zh-tw':
     newIn = "本文描述 ";
     articleName = "Firefox " + $0 + " 技術文件";
     break;
@@ -56,5 +56,4 @@ switch(lang) {
 }
 
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"><p style="margin: 4px 0px;">(web.text(newIn));(web.link(wiki.uri(lang + '/' + articleName), "Firefox " + $0 + '.'))</p></span>
-
-%>
+</pre>
