@@ -1,5 +1,5 @@
 
 <pre class="script">
-web.link(site.homepage.uri + "User:" + $0, $0);
-
-%>
+var u = wiki.getuser($0);
+web.link(site.homepage.uri + "User:" + u.name, u.name);
+</pre>
