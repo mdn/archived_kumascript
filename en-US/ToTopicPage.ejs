@@ -38,6 +38,7 @@ switch(lang) {
     langName = $0 + " 主题页面";
     break;
 }
-var dest = lang + $0;
+var dest = lang + '/' + $0;
 web.link(wiki.uri(dest), "« " + langName);
-</pre>
+
+%>
