@@ -17,10 +17,9 @@ var langName = $1 + " Page";
 
 switch(lang) {
   case 'ja':
-    langName = $1 " ページ";
+    langName = $1 + " ページ";
     break;
 }
 var dest = lang + '/' + $0;
 web.link(wiki.uri(dest), "« " + langName);
-
-%>
+</pre>
