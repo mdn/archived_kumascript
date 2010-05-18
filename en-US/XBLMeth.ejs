@@ -1,5 +1,40 @@
-<span lang='en' class='lang lang-en'>{{mediawiki.internal('XBL:XBL 1.0 Reference:DOM Interfaces#' + $0 + '|' + $0, "en")}}
-</span><span lang='*' class='lang lang-*'>{{mediawiki.internal('XBL:XBL 1.0 Reference:DOM Interfaces#' + $0 + '|' + $0, "en")}}
-</span><span lang='ja' class='lang lang-ja'>{{mediawiki.internal('XBL:XBL 1.0 Reference:DOM Interfaces#' + $0 + '|' + $0, "ja")}}
-</span><span lang='pl' class='lang lang-pl'>{{mediawiki.internal('XBL:Dokumentacja XBL 1.0:Interfejsy DOM#' + $0 + '|' + $0, "pl")}}
-</span>
+
+<pre class="script">
+/* one parameter: method name */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var refName = "XBL 1.0 Reference";
+var elemName = "DOM Interfaces";
+
+switch(lang) {
+  case 'fr':
+    refName = "Référence XBL 1.0";
+    elemName = "Éléments";
+    break;
+  case 'pl':
+    refName = "Dokumentacja XBL 1.0";
+    elemName = "Interfejsy DOM";
+    break;
+}
+var destOldType = lang + '/XBL:' + refName + ':' + elemName;
+var destNewType = lang + '/XBL/' + refName + '/' + elemName;
+
+if (wiki.pageExists(destNewType)) {
+ <code>(web.link(wiki.uri(destNewType) + '#' + $0, $0))</code>
+} else if (wiki.pageExists(destOldType)) {
+  <code>(web.link(wiki.uri(destOldType) + '#' + $0, $0))</code>
+} else {
+  <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
+}
+
+%>
