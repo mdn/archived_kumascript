@@ -14,11 +14,11 @@ else if (string.StartsWith(lang, "user:")) {
 
 /* check $0 exists */
 if(wiki.pageExists(lang + '/XPCOM_Interface_Reference/' + $0)) {
-    <code>(web.link(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0), $1))</code>;
+    (web.link(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0), $1));
 } else if(wiki.pageExists(lang + '/' + $0)) {
-    <code>(web.link(wiki.uri(lang + '/' + $0), $1))</code>;
+    (web.link(wiki.uri(lang + '/' + $0), $1));
 } else {
-    <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>lang + '/' + $0<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$1</<span class="end-tag">a></span></code>;
+    <<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>lang + '/' + $0<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$1</<span class="end-tag">a></span>;
 }
 
 %>
