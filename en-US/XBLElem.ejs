@@ -8,6 +8,10 @@ var lang = u.path[0];
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
   lang = string.substr(lang, 8);
 }
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
 
 var refName = "XBL 1.0 Reference";
 var elemName = "Elements";
@@ -32,5 +36,4 @@ if (wiki.pageExists(destNewType)) {
 } else {
   <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
 }
-
-%>
+</pre>
