@@ -1,14 +1,37 @@
 
-<p><span lang="en" class="lang lang-en"><span class="script">web.link('Gecko Plugin API Reference:' + $0, $0)</span>
+<pre class="script">
+/* one parameter: attribute name */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var langName = "Gecko Plugin API Reference";
+
+switch(lang) {
+  case 'pl':
+    langName = "Dokumentacja wtyczek Gecko";
+    break;
+}
+var destOldType = lang + '/' + langName + ':' + $0;
+var destNewType = lang + '/' + langName + '/' + $0;
+
+if (wiki.pageExists(destNewType)) {
+ (web.link(wiki.uri(destNewType), $0))
+} else if (wiki.pageExists(destOldType)) {
+  (web.link(wiki.uri(destOldType), $0))
+} else {
+  <<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span>;
+}
+</pre>
 <div class="noinclude">
 <p>See <a title="Talk:en/Gecko_Plugin_API_Reference" href="/Talk:en/Gecko_Plugin_API_Reference">Talk:Gecko Plugin API Reference</a> for usage guidelines.</p>
-</div>
-</span><span lang="*" class="lang lang-*"><span class="script">web.link('Gecko Plugin API Reference:' + $0, $0)</span>
-<div class="noinclude">
-<p>See <a title="Talk:en/Gecko_Plugin_API_Reference" href="/Talk:en/Gecko_Plugin_API_Reference">Talk:Gecko Plugin API Reference</a> for usage guidelines.</p>
-</div>
-</span><span lang="ja" class="lang lang-ja"><span class="script">mediawiki.internal('Gecko Plugin API Reference:' + $0 + '|' + $0, "ja")</span> </span><span lang="pl" class="lang lang-pl"><span class="script">mediawiki.internal('Dokumentacja wtyczek Gecko:' + $0 + '|' + $0, "pl")</span>
-<div class="noinclude">
 <p>Zobacz również <a title="Talk:pl/Dokumentacja_wtyczek_Gecko" href="/Talk:pl/Dokumentacja_wtyczek_Gecko">Dyskusja:Dokumentacja wtyczek Gecko</a>.</p>
 </div>
-</span></p>
