@@ -21,11 +21,9 @@ switch(lang) {
     break;
 }
 var destOldType = lang + '/' + langName + ':' + $0;
-var destNewType = lang + '/' + langName + '/' + $0;
 
-if (wiki.pageExists(destNewType)) {
- (web.link(wiki.uri(destNewType), $0))
-} else if (wiki.pageExists(destOldType)) {
+
+if if (wiki.pageExists(destOldType)) {
   (web.link(wiki.uri(destOldType), $0))
 } else {
   <<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span>;
