@@ -25,5 +25,5 @@ switch(lang) {
     bug = " błąd ";
     break;
 }
-<a class="external" rel="external" target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=(web.text(+ $0))">(web.text(bug + $0))</a>
+web.link('https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0, bug + $0);
 %>
