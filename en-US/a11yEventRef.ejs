@@ -1,8 +1,8 @@
 
 <pre class="script">
-/* get the page language */
 /* Used in: en/Accessibility/AT-APIs/AT-SPI/Events */
 
+/* get the page language */
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
