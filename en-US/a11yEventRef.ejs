@@ -12,5 +12,5 @@ if (string.contains(lang, "project") || string.contains(lang, "Project")) {
 else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
-<a href="mks://localhost/(web.text(lang))/Accessibility/AT-APIs/Gecko/Events#(web.text($0))">(web.text($0))</a>
+<a href="mks://localhost/{{web.text(lang)}}/Accessibility/AT-APIs/Gecko/Events#{{web.text($0)}}">{{web.text($0)}}</a>
 %>
