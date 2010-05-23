@@ -33,7 +33,7 @@ switch(lang) {
     break;
   case 'ja':
     newIn = "この記事は ";
-    newInEnd = "の新機能について述べています";
+    newInEnd = " の新機能について述べています";
     break;
   case 'ko':
     newIn = "이 문서는 Firefox 개발자들을 위한 정보입니다. ";
@@ -61,5 +61,4 @@ switch(lang) {
 }
 
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"><p style="margin: 4px 0px;">(web.text(newIn));(web.link(wiki.uri(lang + '/' + articleName), "Firefox " + $0));(web.text(newInEnd));</p></div>
-
-%>
+</pre>
