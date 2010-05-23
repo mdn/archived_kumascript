@@ -15,11 +15,13 @@ else if (string.StartsWith(lang, "user:")) {
 
 var articleName = "Firefox " + $0 + " for developers";
 var newIn = "This content covers features introduced in ";
+var newInEnd = ".";
 
 switch(lang) {
   case 'de':
     articleName = "Firefox " + $0 + " für Entwickler";
     newIn = "Dieser Artikel umfasst Features, die in ";
+    newInEnd = "eingeführt wurden.";
     break;
   case 'es':
     articleName = "Firefox " + $0 + " para desarrolladores";
@@ -31,6 +33,7 @@ switch(lang) {
     break;
   case 'ja':
     newIn = "この記事は ";
+    newInEnd = "の新機能について述べています";
     break;
   case 'ko':
     newIn = "이 문서는 Firefox 개발자들을 위한 정보입니다. ";
@@ -45,16 +48,18 @@ switch(lang) {
     break;
   case 'zh-cn':
     newIn = "该条目记录了 ";
+    newInEnd = "引入的新特性";
     break;
   case 'zh-tw':
     newIn = "本文描述 ";
     articleName = "Firefox " + $0 + " 技術文件";
+    newInEnd = "之後加入的功能。";
     break;
   case 'ru':
     articleName = "Firefox " + $0 + " для разработчиков";
     break;
 }
 
-<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"><p style="margin: 4px 0px;">(web.text(newIn));(web.link(wiki.uri(lang + '/' + articleName), "Firefox " + $0));(web.text("."));</p></div>
+<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"><p style="margin: 4px 0px;">(web.text(newIn));(web.link(wiki.uri(lang + '/' + articleName), "Firefox " + $0));(web.text(newInEnd));</p></div>
 
 %>
