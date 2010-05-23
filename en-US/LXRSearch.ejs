@@ -1,2 +1,25 @@
 
-<p><span lang="en" class="lang lang-en"><span class="script">mediawiki.external('http://mxr.mozilla.org/mozilla-central/' + $0 + '?' + $1 + '=' + $2 + ' ' + (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('LXR ' + ($0 == 'ident' ? 'ID' : '') + ' Search for <code>' + $2 + '</code>')))</span> </span><span lang="*" class="lang lang-*"><span class="script">mediawiki.external('http://mxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('LXR ' + ($0 == 'ident' ? 'ID' : '') + ' Search for <code>' + $2 + '</code>')))</span> </span><span lang="fr" class="lang lang-fr"><span class="script">mediawiki.external('http://lxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + $3)</span> </span><span lang="ja" class="lang lang-ja"><span class="script">mediawiki.external('http://mxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('LXR で <code>' + $2 + '</code> を ' + ($0 == 'ident' ? 'ID' : '') + ' 検索')))</span> </span><span lang="ko" class="lang lang-ko"><span class="script">mediawiki.external('http://lxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + $3)</span> </span><span lang="pl" class="lang lang-pl"><span class="script">mediawiki.external('http://lxr.mozilla.org/mozilla/' + $0 + '?' + $1 + '=' + $2 + ' ' + $3)</span> </span></p>
+<pre class="script">
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var searchfor = ' Search for <code>' + $2 + '</code>';
+
+switch(lang) {
+  case 'de':
+    searchfor = ' Suche nach <code>' + $2 + '</code>';
+    break;
+  case 'ja':
+    searchfor = ' で <code>' + $2 + '</code> を';
+    break;
+}
+web.link('http://mxr.mozilla.org/mozilla-central/' + $0 + '?' + $1 + '=' + $2 + , (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('LXR ' + ($0 == 'ident' ? 'ID' : '') + searchfor)));
+%>
