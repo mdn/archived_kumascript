@@ -1,8 +1,37 @@
-<span lang='en' class='lang lang-en'>{{mediawiki.external('http://developer.mozilla.org/samples/cssref/' + $0 + '.html View Live Examples')}}
-</span><span lang='*' class='lang lang-*'>{{mediawiki.external('http://developer.mozilla.org/samples/cssref/' + $0 + '.html View Live Examples')}}
-</span><span lang='es' class='lang lang-es'>{{mediawiki.external('http://developer.mozilla.org/samples/cssref/' + $0 + '.html Ver ejemplos en acción')}}
-</span><span lang='fr' class='lang lang-fr'>{{mediawiki.external('http://developer.mozilla.org/samples/cssref/' + $0 + '.html Voir des exemples en ligne (en)')}}
-</span><span lang='ko' class='lang lang-ko'>{{mediawiki.external('http://developer.mozilla.org/samples/cssref/' + $0 + '.html 실제 예제 보기')}}
-</span><span lang='pl' class='lang lang-pl'>{{mediawiki.external('http://developer.mozilla.org/samples/cssref/' + $0 + '.html Zobacz przykład')}}
-</span><span lang='zh-cn' class='lang lang-zh-cn'>{{mediawiki.external('http://developer.mozilla.org/samples/cssref/' + $0 + '.html View Live Examples')}}
-</span>
+
+<pre class="script">
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var linktext = "View Live Examples";
+
+switch(lang) {
+  case 'de':
+    linktext = "Beispiel ansehen";
+    break;
+  case 'es':
+    linktext = "Ver ejemplos en acción";
+    break;
+  case 'fr':
+    linktext = "Voir des exemples en ligne (en)";
+    break;
+  case 'ko':
+    linktext = "실제 예제 보기";
+    break;
+  case 'pl':
+    linktext = "Zobacz przykład";
+    break;
+}
+var link = 'http://developer.mozilla.org/samples/cssref/' + $0 + '.html';
+
+<a rel="custom" href=(link)>(linktext)</a>
+
+%>
