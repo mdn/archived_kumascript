@@ -1,20 +1,19 @@
-<span lang='en' class='lang lang-en'><code>{{mediawiki.internal($0 + '|' + $0 + '(' + ($1 || '') + ')', "en")}}</code><div class="noinclude"><hr />
-<p>See the documentation at <a href="Project:en/Custom_Templates">MDC:Custom Templates</a>. Some examples:
-</p><p><code><span class="plain">{{funcref|MyCoolFunction}}</span></code>: {{template.Funcref("MyCoolFunction")}}
-</p><p><code><span class="plain">{{funcref|MyCoolFunction|param1, param2}}</span></code>:{{template.Funcref("MyCoolFunction", "param1, param2")}}
-</p>
+
+<pre class="script">
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+web.link(wiki.uri(lang + '/' + $0), $0 + '(' + ($1 || '') + ')');
+</pre>
+<div class="noinclude"><hr />
+<p>See the documentation at <a title="Project:en/Custom_Templates" href="/Project:en/Custom_Templates">MDC:Custom Templates</a>. Some examples:</p>
+<p><code><span class="nowiki">{{Funcref("MyCoolFunction")}}</span></code></p>
+<p><code><span class="nowiki">{{Funcref("MyCoolFunction", "param1, param2")}}</span></code></p>
 </div>
-</span><span lang='*' class='lang lang-*'><code>{{mediawiki.internal($0 + '|' + $0 + '(' + ($1 || '') + ')', "en")}}</code><div class="noinclude"><hr />
-<p>See the documentation at <a href="Project:en/Custom_Templates">MDC:Custom Templates</a>. Some examples:
-</p><p><code><span class="plain">{{funcref|MyCoolFunction}}</span></code>: {{template.Funcref("MyCoolFunction")}}
-</p><p><code><span class="plain">{{funcref|MyCoolFunction|param1, param2}}</span></code>:{{template.Funcref("MyCoolFunction", "param1, param2")}}
-</p>
-</div>
-</span><span lang='ja' class='lang lang-ja'><code>{{mediawiki.internal($0 + '|' + $0 + '(' + ($1 || '') + ')', "ja")}}</code><div class="noinclude"><hr />
-<p>See the documentation at <a href="Project:ja/Custom_Templates">MDC:Custom Templates</a>. Some examples:
-</p><p><code><span class="plain">{{funcref|MyCoolFunction}}</span></code>: {{template.Funcref("MyCoolFunction")}}
-</p><p><code><span class="plain">{{funcref|MyCoolFunction|param1, param2}}</span></code>:{{template.Funcref("MyCoolFunction", "param1, param2")}}
-</p>
-</div>
-</span><span lang='pl' class='lang lang-pl'><code>{{mediawiki.internal($0 + '|' + $0 + '()', "pl")}}</code>
-</span>
