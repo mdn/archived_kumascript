@@ -1,38 +1,83 @@
 
-<p><span lang="en" class="lang lang-en">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' as a mailing list')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' as a newsgroup')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' as a Google Group')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds as a Web feed')</span></li>
+<pre class="script">
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var mailingList = " as a mailing list";
+var newsgroup = " as a newsgroup";
+var googleGroup = " as a Google Group";
+var webFeed = " as a Web feed";
+
+switch(lang) {
+  case 'ca':
+    mailingList = " com una llista de correu";
+    newsgroup = " com un grup de discussió";
+    googleGroup = " com un grup de Google";
+    webFeed = " com un canal web";
+    break;
+  case 'de':
+    mailingList = " als Mailing-Liste";
+    newsgroup = " als Newsgroup";
+    googleGroup = " als Google Group";
+    webFeed = " als Web Feed";
+    break;
+  case 'es':
+    mailingList = " como lista de correo";
+    newsgroup = " como grupo de noticias";
+    googleGroup = " como grupo de Google";
+    webFeed = " Flux de syndication";
+    break;
+  case 'fr':
+    mailingList = " Liste de diffusion";
+    newsgroup = " Newsgroup";
+    googleGroup = " Groupe Google";
+    webFeed = " como RSS";
+    break;
+  case 'it':
+    mailingList = " come mailing list";
+    newsgroup = " come newsgroup";
+    googleGroup = " come Gruppo su Google";
+    webFeed = " come Web feed";
+    break;
+  case 'ja':
+    mailingList = " メーリングリストとして";
+    newsgroup = " ニュースグループとして";
+    googleGroup = " Google Group として";
+    webFeed = " フィードとして";
+    break;
+  case 'ko':
+    mailingList = " 메일링 리스트";
+    newsgroup = " 뉴스그룹";
+    googleGroup = " Google 그룹";
+    webFeed = " 웹 Feed";
+    break;
+  case 'pl':
+    mailingList = " jako listę dyskusyjna";
+    newsgroup = " jako newsgroup";
+    googleGroup = " jako grupę Google";
+    webFeed = " jako kanał";
+    break;
+  case 'zh-cn':
+    mailingList = " 邮件列表";
+    newsgroup = " 新闻组";
+    googleGroup = " Google Group（中文）";
+    webFeed = " Web feed";
+    break;
+}
+
+<ul>
+  <li>web.link('https://lists.mozilla.org/listinfo/' + $0, mailinglist)</li>
+  <li>web.link('news://news.mozilla.org/' + $1, newsgroup)</li>
+  <li>web.link('http://groups.google.com/group/' + $1, googleGroup)</li>
+  <li>web.link('http://groups.google.com/group/' + $1 + '/feeds', webFeed)</li>
 </ul>
-</span><span lang="*" class="lang lang-*">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' as a mailing list')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' as a newsgroup')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' as a Google Group')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds as a Web feed')</span></li>
-</ul>
-</span><span lang="ca" class="lang lang-ca">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' com una llista de correu')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' com un grup de discussió')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' com un grup de Google')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds com un canal web')</span></li>
-</ul>
-</span><span lang="de" class="lang lang-de">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' als Mailing-Liste')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' als Newsgroup')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' als Google Group')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds als Web Feed')</span></li>
-</ul>
-</span><span lang="es" class="lang lang-es">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' como lista de correo')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' como grupo de noticias')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' como grupo de Google')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds como RSS')</span></li>
-</ul>
-</span><span lang="fr" class="lang lang-fr">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' Liste de diffusion')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' Newsgroup')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' Groupe Google')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds Flux de syndication')</span></li>
-</ul>
-</span><span lang="it" class="lang lang-it">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' come mailing list')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' come newsgroup')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' come Gruppo su Google')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds come Web feed')</span></li> <li><a class="external" href="http://groups.google.com/group/mozilla.dev.general.it">Guarda il newsgroup italiano</a></li>
-</ul>
-</span><span lang="ja" class="lang lang-ja">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' メーリングリストとして')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' ニュースグループとして')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' Google Group として')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds Web フィードとして')</span></li>
-</ul>
-</span><span lang="ko" class="lang lang-ko">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' 메일링 리스트')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' 뉴스그룹')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' Google 그룹')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds 웹 Feed')</span></li>
-</ul>
-</span><span lang="pl" class="lang lang-pl">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' jako listę dyskusyjna')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' jako newsgroup')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' jako grupę Google')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds jako kanał')</span></li>
-</ul>
-</span><span lang="ru" class="lang lang-ru">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' as a mailing list')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' as a newsgroup')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + ' as a Google Group')</span></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds as a Web feed')</span></li>
-</ul>
-</span><span lang="zh-cn" class="lang lang-zh-cn">
-<ul> <li><span class="script">mediawiki.external('https://lists.mozilla.org/listinfo/' + $0 + ' 邮件列表')</span></li> <li><span class="script">mediawiki.external('news://news.mozilla.org/' + $1 + ' 新闻组')</span></li> <li><a class="external" href="http://groups.google.com/group/mozilla-dev-platform-cn">Google Group（中文）</a></li> <li><span class="script">mediawiki.external('http://groups.google.com/group/' + $1 + '/feeds Web feed')</span></li>
-</ul>
-</span></p>
+
+%>
