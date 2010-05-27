@@ -1,6 +1,6 @@
 
-<p><span class="script"> var chapterList = string.deserialize($0);<br />
-var i = list.indexOf(chapterList, $1);<br />
+<p><span class="script"> var chapterList = string.deserialize(wiki.template($0));<br />
+var i = list.indexOf(chapterList, xml.text(getRelativeURL($1)));<br />
 if (i != -1){<br />
   switch (i){<br />
     case 0:<br />
