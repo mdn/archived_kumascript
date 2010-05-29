@@ -1,28 +1,43 @@
 
 <div class="noinclude"><span class="script">deprecated_header()</span><hr />
 </div>
-<p />
+<p> </p>
+<pre class="script">
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var deprecated = "Deprecated";
+
+switch(lang) {
+  case 'de':
+    deprecated = "Unerwünscht (Deprecated)";
+    break;
+  case 'fr':
+    deprecated = "Déprécié";
+    break;
+  case 'ja':
+    deprecated = "非推奨";
+    break;
+  case 'pl':
+    deprecated = "Wycofywany";
+    break;
+  case 'zh-tw':
+    deprecated = "已正式宣告棄用";
+    break;
+}
+
 <div style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Deprecated</p>
+  <p style="margin: 4px 0px 4px 0px;">
+    deprecated;
+  </p>
 </div>
-<p><span lang="*" class="lang lang-*">
-<div style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Deprecated</p>
-</div>
-</span><span lang="de" class="lang lang-de">
-<div style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Unerwünscht (Deprecated)</p>
-</div>
-</span><span lang="fr" class="lang lang-fr">
-<div style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Déprécié</p>
-</div>
-</span><span lang="ja" class="lang lang-ja">
-<div style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">非推奨</p>
-</div>
-</span><span lang="pl" class="lang lang-pl">
-<div style="overflow:hidden; border: 1px solid #4646DC; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Wycofywany</p>
-</div>
-</span><span lang="zh-tw" class="lang lang-zh-tw"><span class="script">wiki.template('Template:棄用標題', args)</span></span></p>
+</pre>
