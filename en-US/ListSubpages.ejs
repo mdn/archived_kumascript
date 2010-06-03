@@ -4,7 +4,7 @@ var children = Page.subpages;
 if (# children) {
   <ul>
   foreach(var p in children) {
-    <li>p.title</li>
+    <li><a href=p.unprefixedPath>p.title</a></li>
   }
   </ul>
 } else {
