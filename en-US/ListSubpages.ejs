@@ -4,11 +4,10 @@ var children = Page.subpages;
 if (# children) {
   <ul>
   foreach(var p in children) {
-    <li><a href=p.unprefixedPath>p.title</a></li>
+    <li><a href=(p.unprefixedPath)>p.title</a></li>
   }
   </ul>
 } else {
   wiki.localize('System.API.page-generated-for-subpage');
 }
-
-%>
+</pre>
