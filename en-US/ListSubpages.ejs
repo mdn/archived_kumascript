@@ -1,8 +1,7 @@
 
 <pre class="script">
 var children = Page.subpages;
-if (# children) {
-  list.sort(children, "title");
+if (# children) { 
   <ul>
   foreach(var p in children) {
     <li><a href=(p.path)>p.title</a></li>
@@ -11,4 +10,5 @@ if (# children) {
 } else {
   wiki.localize('System.API.page-generated-for-subpage');
 }
-</pre>
+
+%>
