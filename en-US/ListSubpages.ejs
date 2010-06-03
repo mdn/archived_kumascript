@@ -2,7 +2,7 @@
 <pre class="script">
 var children = Page.subpages;
 if (# children) {
-  <ul>
+  The following subpages are available for this topic. It would be nice if someone made a pretty version of this page.
   foreach(var p in children) {
     <li>p.title</li>
   }
@@ -10,4 +10,5 @@ if (# children) {
 } else {
   wiki.localize('System.API.page-generated-for-subpage');
 }
-</pre>
+
+%>
