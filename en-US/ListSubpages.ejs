@@ -2,7 +2,6 @@
 <pre class="script">
 var children = Page.subpages;
 if (# children) {
-  wiki.text("The following topics are available:");
   <ul>
   foreach(var p in children) {
     <li>p.title</li>
@@ -11,4 +10,5 @@ if (# children) {
 } else {
   wiki.localize('System.API.page-generated-for-subpage');
 }
-</pre>
+
+%>
