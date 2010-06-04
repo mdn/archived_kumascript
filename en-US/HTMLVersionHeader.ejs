@@ -29,7 +29,8 @@ switch(lang) {
 
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(174, 218, 229); font-weight: bold; text-align: center;">
   <p style="margin: 4px 0px;">
-    msgStart;if (link != "") {web.link(link, "HTML " + $0);} else { (HTML $0);}msgEnd;
+    msgStart;if (link != "") {web.link(link, "HTML " + $0);} else {web.text("HTML " + $0)}msgEnd;
   </p>
 </div>
-</pre>
+
+%>
