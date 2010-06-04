@@ -1,0 +1,30 @@
+
+<pre class="script">
+/* one parameter: HTML version */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var msg = "";
+
+switch(lang) {
+  default:
+    msg = "Introduced in HTML " + $0;
+    break;
+}
+
+<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(174, 218, 229); font-weight: bold; text-align: center;">
+  <p style="margin: 4px 0px;">
+    msg;
+  </p>
+</div>
+
+%>
