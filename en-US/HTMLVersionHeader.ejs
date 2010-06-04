@@ -21,13 +21,16 @@ switch(lang) {
   default:
     msgStart = "Introduced in ";
     msgEnd = "";
-    link = "/en/HTML/HTML5";
+    if ($0 == "5") {
+      link = "/en/HTML/HTML5";
+    }
     break;
 }
 
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(174, 218, 229); font-weight: bold; text-align: center;">
   <p style="margin: 4px 0px;">
-    msgStart;web.link(link, "HTML " + $0);msgEnd;
+    msgStart;if (link != "") {web.link(link, "HTML " + $0);}msgEnd;
   </p>
 </div>
-</pre>
+
+%>
