@@ -1,0 +1,30 @@
+
+<pre class="script">
+/* one parameter: HTML version */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var link = "";
+
+switch(lang) {
+  default:
+    switch($0) {
+      case "5":
+        link = "/en/HTML/HTML5";
+        break;
+    }
+    break;
+}
+
+<span style="border: 1px solid rgb(129, 129, 250); background-color: rgb(174, 218, 229); font-size: x-small; white-space: nowrap; padding: 2px;">if (link != "") {web.link(link, "HTML " + $0);} else {web.text("HTML " + $0)}</span>
+
+%>
