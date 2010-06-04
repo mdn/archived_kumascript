@@ -13,18 +13,22 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var msg = "";
+var msgStart = "";
+var msgEnd = "";
+var link = "";
 
 switch(lang) {
   default:
-    msg = "Introduced in HTML " + $0;
+    msgStart = "Introduced in ";
+    msgEnd = "";
+    link = "en/HTML/HTML5";
     break;
 }
 
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(174, 218, 229); font-weight: bold; text-align: center;">
   <p style="margin: 4px 0px;">
-    msg;
+    msgStart;web.link(link, "HTML " + $0);msgEnd;
   </p>
 </div>
-
-%>
+</pre>
+<p> </p>
