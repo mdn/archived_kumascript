@@ -14,5 +14,6 @@ else if (string.StartsWith(lang, "user:")) {
 if (wiki.pageExists(dest)) { /* the page exists */
     <code>(web.link(wiki.uri(dest), $0))</code>;
 } else { /* the page doesn't exist */
-    <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(dest</span><span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
-}</pre>
+    <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')>$0</a></code>
+}
+%>
