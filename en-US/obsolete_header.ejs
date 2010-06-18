@@ -1,28 +1,64 @@
 
 <div class="noinclude"><span class="script">obsolete_header(<span class="nowiki">"1.9.1"</span>)</span> (note that the parameter is optional)<hr />
 </div>
-<p><span lang="en" class="lang lang-en">
-<div style="overflow:hidden; border: 1px solid #FF5151; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Obsolete <span class="script"> if ($0) { ' in Gecko ' + $0 }</span></p>
-</div>
-</span><span lang="*" class="lang lang-*">
-<div style="overflow:hidden; border: 1px solid #FF5151; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Obsolete <span class="script"> if ($0) { ' in Gecko ' + $0 }</span></p>
-</div>
-</span><span lang="de" class="lang lang-de">
-<div style="overflow:hidden; border: 1px solid #FF5151; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Veraltet <span class="script"> if ($0) { ' Gecko ' + $0 }</span></p>
-</div>
-</span><span lang="fr" class="lang lang-fr">
-<div style="overflow:hidden; border: 1px solid #FF5151; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Obsolète <span class="script"> if ($0) { ' Gecko ' + $0 }</span></p>
-</div>
-</span><span lang="ja" class="lang lang-ja">
-<div style="overflow:hidden; border: 1px solid #FF5151; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">廃止 <span class="script"> if ($0) { ' Gecko ' + $0 }</span></p>
-</div>
-</span><span lang="pl" class="lang lang-pl">
+<pre class="script">
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "Obsolete";
+
+/* Two paths, one for Gecko version, one without. */
+/* Allows languages with different to English */
+/*  sentence structures more flexibility. */
+
+if ($0) {
+  str = "Obsolete in Gecko " + $0;
+
+  switch(lang) {
+    case 'de':
+      str = "Veraltet Gecko " + $0;
+      break;
+    case 'fr':
+      str = "Obsolète Gecko " + $0;
+      break;
+    case 'ja':
+      str = "廃止 Gecko " + $0;
+      break;
+    case 'pl':
+      str = "Przestarzały Gecko " + $0;
+      break;
+  }
+}
+else {
+  switch(lang) {
+    case 'de':
+      str = "Veraltet";
+      break;
+    case 'fr':
+      str = "Obsolète";
+      break;
+    case 'ja':
+      str = "廃止";
+      break;
+    case 'pl':
+      str = "Przestarzały";
+      break;
+  }
+}
+
 <div style="overflow:hidden; border: 1px solid #FF0000; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Przestarzały <span class="script"> if ($0) { ' Gecko ' + $0 }</span></p>
+  <p style="margin: 4px 0px 4px 0px;">
+    str;
+  </p>
 </div>
-</span></p>
+
+%>
