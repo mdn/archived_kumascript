@@ -29,7 +29,7 @@ if (wiki.pageExists(destNewType)) {
 } else if (wiki.pageExists(destOldType)) {
   (web.link(wiki.uri(destOldType), $1))
 } else {
-<a href="(destNewType)" rel="internal" class="new">($1)</a>
+<a href=(destNewType) rel="internal" class="new">($1)</a>
 }
 
 %>
