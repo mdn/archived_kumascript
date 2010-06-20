@@ -21,15 +21,16 @@ switch(lang) {
     langName = "Gecko Plugin API Referenz";
     break;
 }
-var destOldType = lang + '/' + langName + ':' + $0 + '#' +$1;
-var destNewType = lang + '/' + langName + '/' + $0 + '#' +$1;
+var destOldType = lang + '/' + langName + ':' + $0;
+var destNewType = lang + '/' + langName + '/' + $0;
+var link = '#' +$1;
 
 if (wiki.pageExists(destNewType)) {
- (web.link(wiki.uri(destNewType), $1))
+ (web.link(wiki.uri(destNewType + link), $1))
 } else if (wiki.pageExists(destOldType)) {
-  (web.link(wiki.uri(destOldType), $1))
+  (web.link(wiki.uri(destOldType + link), $1))
 } else {
-<a href=(destNewType) class="new">($1)</a>
+<a href=(destNewType + link) class="new">($1)</a>
 }
 
 %>
