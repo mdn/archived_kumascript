@@ -1,14 +1,36 @@
 
 <p><span lang="en" class="lang lang-en"><span class="script">web.link('Gecko Plugin API Reference:' + $0 + '#' + $1, $1)</span> </span></p>
-<p><span lang="de" class="lang lang-de"><span class="script">web.link('Gecko_Plugin_API_Referenz/' + $0 + '#' + $1, $1)</span></span></p>
-<div class="noinclude">
-<p>See <a title="Talk:en/Gecko_Plugin_API_Reference" href="/Talk:en/Gecko_Plugin_API_Reference">Talk:Gecko Plugin API Reference</a> for usage guidelines.</p>
-</div>
-<p><span lang="*" class="lang lang-*"><span class="script">web.link('Gecko Plugin API Reference:' + $0 + '#' + $1, $1)</span> </span></p>
-<div class="noinclude">
-<p>See <a title="Talk:en/Gecko_Plugin_API_Reference" href="/Talk:en/Gecko_Plugin_API_Reference">Talk:Gecko Plugin API Reference</a> for usage guidelines.</p>
-</div>
-<p><span lang="ja" class="lang lang-ja"><span class="script">mediawiki.internal('Gecko Plugin API Reference:' + $0 + '#' + $1 + '|' + $1, "ja")</span> </span><span lang="pl" class="lang lang-pl"><span class="script">mediawiki.internal('Dokumentacja wtyczek Gecko:' + $0 + '#' + $1 + '|' + $1, "pl")</span>
-<div class="noinclude">
-<p>Zobacz również <a title="Talk:pl/Dokumentacja_wtyczek_Gecko" href="/Talk:pl/Dokumentacja_wtyczek_Gecko">Dyskusja:Dokumentacja wtyczek Gecko</a>.</p>
-</div></span></p>
+<pre class="script">
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var langName = "Gecko Plugin API Reference";
+
+switch(lang) {
+  case 'pl':
+    langName = "Dokumentacja wtyczek Gecko";
+    break;
+  case 'de':
+    langName = "Gecko Plugin API Referenz";
+    break;
+}
+var destOldType = lang + '/' + langName + ':' + $0 + '#' +$1;
+var destNewType = lang + '/' + langName + '/' + $0 + '#' +$1;
+
+if (wiki.pageExists(destNewType)) {
+ (web.link(wiki.uri(destNewType), $1))
+} else if (wiki.pageExists(destOldType)) {
+  (web.link(wiki.uri(destOldType), $1))
+} else {
+<a href="wiki.uri(destNewType)" rel="internal" class="new">$1</a>
+}
+
+%>
