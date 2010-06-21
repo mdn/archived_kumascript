@@ -10,7 +10,7 @@ if (string.contains(lang, "project") || string.contains(lang, "Project")) {
 else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
- var link = lang + '/' + $0
+ var link = lang + '/' + $0;
 
 if (wiki.pageExists(link)) {
 web.link(wiki.uri(link), $0 + '(' + ($1 || '') + ')');
