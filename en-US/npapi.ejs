@@ -1,2 +1,21 @@
 
-<p><span lang="en" class="lang lang-en"><code><span class="script">web.link("/en/" + $0, $0)</span></code></span><span lang="*" class="lang lang-*"><code><span class="script">web.link("/en/" + $0, $0)</span></code> </span><span lang="ja" class="lang lang-ja"><code><span class="script">web.link("/ja/" + $0, $0)</span></code> </span><span lang="pl" class="lang lang-pl"><code><span class="script">web.link("/pl/" + $0, $0)</span></code></span><span lang="de" class="lang lang-de"><code><span class="script">web.link("/de/" + $0, $0)</span></code></span></p>
+<pre class="script">
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+ var link = lang + '/' + $0;
+
+if (wiki.pageExists(link)) {
+web.link(wiki.uri(link), $0 );
+} else {
+<a href=(link) class="new">($0)</a>
+}
+
+%>
