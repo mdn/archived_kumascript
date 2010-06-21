@@ -10,7 +10,13 @@ if (string.contains(lang, "project") || string.contains(lang, "Project")) {
 else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
-web.link(wiki.uri(lang + '/' + $0), $0 + '(' + ($1 || '') + ')');
+ var link = lang + '/' + $0
+
+if (wiki.pageExists(link)) {
+web.link(wiki.uri(link), $0 + '(' + ($1 || '') + ')');
+} else {
+<a href=(link) class="new">($0 + '(' + ($1 || '') + ')')</a>
+}
 </pre>
 <div class="noinclude"><hr />
 <p>See the documentation at <a title="Project:en/Custom_Templates" href="/Project:en/Custom_Templates">MDC:Custom Templates</a>. Some examples:</p>
