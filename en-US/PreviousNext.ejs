@@ -35,9 +35,13 @@ if (!string.compare(lang, "de", true)) {
 } else if (!string.compare(lang, "zh-tw", true)) {
   prevStr = "« 前頁";
   nextStr = "次頁 »";
+} else if (!string.compare(lang, "cn", true)) {
+  prevStr = "« 上一页";
+  nextStr = "下一页 »";
 }
 
 <div class="prevnext">
 <p align="right"><span style="float: left;">(web.link(wiki.uri(lang + '/' + $0), prevStr))</span>(web.link(wiki.uri(lang + '/' + $1), nextStr))</p>
 </div>
-</pre>
+
+%>
