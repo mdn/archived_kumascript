@@ -1,2 +1,34 @@
 
-<p><span lang="en" class="lang lang-en"><span id="{{'s-' + $0}}"><span class="script">wiki.template(mediawiki.path(':XUL:Style:' + $0, "en"))</span></span> </span> <span lang="es" class="lang lang-es"><span id="{{'s-' + $0}}"><span class="script">wiki.template(mediawiki.path(':XUL:Style:' + $0, "es"))</span></span> </span> <span lang="*" class="lang lang-*"><span id="{{'s-' + $0}}"><span class="script">wiki.template(mediawiki.path(':XUL:Style:' + $0, "en"))</span></span> </span> <span lang="de" class="lang lang-de"><span id="{{'s-' + $0}}"><span class="script">wiki.page('de/XUL/Style/' + $0)</span></span> </span> <span lang="fr" class="lang lang-fr"><span id="{{'s-' + $0}}"><span class="script">wiki.template(mediawiki.path(':XUL:Style:' + $0, "fr"))</span></span> </span> <span lang="ja" class="lang lang-ja"><span id="{{'s-' + $0}}"><span class="script">wiki.template(mediawiki.path(':XUL:Style:' + $0, "ja"))</span></span> </span> <span lang="pl" class="lang lang-pl"><span id="{{'s-' + $0}}"><span class="script">wiki.template(mediawiki.path(':XUL:Styl:' + $0, "pl"))</span></span> </span> <span lang="zh-cn" class="lang lang-zh-cn"><span id="{{'s-' + $0}}"><span class="script">wiki.template(mediawiki.path(':XUL:Style:' + $0, "zh-cn"))</span></span> </span></p>
+<pre class="script">
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = u.path[0];
+
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+
+/* set up the page name based on language */
+
+var StyleName = "Style";
+
+switch(lang) {
+  case 'pl':
+    StyleName = "Styl";
+    break;
+  }
+
+/* get the Style name */
+
+var api = $0;
+var destOldType = lang + '/' + 'XUL:' + StyleName + ':' + api;
+var destNewType = lang + '/' + 'XUL/' + StyleName + '/' + api;
+
+if (wiki.pageExists(destNewType)) { /* the page exists from the deki age */
+  wiki.page(destNewType);
+} else if(wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
+  wiki.page(destOldType);
+} else { /* the page doesn't exist */
+  <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
+}
+</pre>
