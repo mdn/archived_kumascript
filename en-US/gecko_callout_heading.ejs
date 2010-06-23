@@ -20,6 +20,7 @@ switch(lang) {
     str = "Hinweis zu Gecko " + $0;
     break;
 }
-(web.html('<div class="geckoVersionHeading">' + str + '<div style="font-size:8px; position:relative; top:-5px; font-style:italic;">+ temlate.geckoRelease($0) + "</div></div>"
+<div class="geckoVersionHeading">(web.text(str))
+<div style="font-size:8px; position:relative; top:-5px; font-style:italic;">template.geckoRelease($0)</div></div>
 
 %>
