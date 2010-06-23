@@ -1,26 +1,44 @@
 
-<p><code><span lang="en" class="lang lang-en"><span class="script">mediawiki.internal('XUL:Method:' + $0 + '|' + (string.trim(($2 || '')) !== '' ? web.html($2) : web.html($0)) + $1, "en")</span></span></code><span lang="en" class="lang lang-en">
-<div class="noinclude">
-<p>example:</p>
-<pre class="eval"><span class="nowiki">{{XULMeth2|menulist.appendItem|( label, value, description )|appendItem}}</span>
-</pre>
-</div>
-</span> <code><span lang="*" class="lang lang-*"><span class="script">mediawiki.internal('XUL:Method:' + $0 + '|' + (string.trim(($2 || '')) !== '' ? web.html($2) : web.html($0)) + $1, "en")</span> </span></code><span lang="*" class="lang lang-*">
-<div class="noinclude">
-<p>example:</p>
-<pre class="eval"><span class="nowiki">{{XULMeth2|menulist.appendItem|( label, value, description )|appendItem}}</span>
-</pre>
-</div>
-</span> <code><span lang="es" class="lang lang-es"><span class="script">mediawiki.internal('XUL:Method:' + $0 + '|' + (string.trim(($2 || '')) !== '' ? web.html($2) : web.html($0)) + $1, "es")</span></span></code><span lang="es" class="lang lang-es">
-<div class="noinclude">
-<p>ejemplo:</p>
-<pre class="eval"><span class="nowiki">{{XULMeth2|menulist.appendItem|( label, value, description )|appendItem}}</span>
-</pre>
-</div>
-</span> <code><span lang="fr" class="lang lang-fr"><span class="script">mediawiki.internal('XUL:Méthodes:' + $0 + '|' + $0 + $1, "fr")</span> </span> <span lang="ja" class="lang lang-ja"><span class="script">mediawiki.internal('XUL:Method:' + $0 + '|' + (string.trim(($2 || '')) !== '' ? web.html($2) : web.html($0)) + $1, "ja")</span></span></code><span lang="ja" class="lang lang-ja">
-<div class="noinclude">
-<p>例:</p>
-<pre class="eval"><span class="nowiki">{{XULMeth2|menulist.appendItem|( label, value, description )|appendItem}}</span>
-</pre>
-</div>
-</span> <code><span lang="ko" class="lang lang-ko"><span class="script">mediawiki.internal('XUL:Method:' + $0 + '|' + $0 + $1, "ko")</span> </span> <span lang="pl" class="lang lang-pl"><span class="script">mediawiki.internal('XUL:Metoda:' + $0 + '|' + $0 + ' ' + $1, "pl")</span></span></code></p>
+<pre class="script">
+/* parameters: first the method name, second the parameter list, third the display name for the method */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = u.path[0];
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+
+/* set up the page name based on language */
+
+var methodName = "Method";
+var anch = "m-" + $0;
+var dispApi = $0;
+if ($2) {
+  dispApi = $2;
+}
+
+switch(lang) {
+  case 'de':
+    methodName = "Methoden";
+    break;
+  case 'fr':
+    methodName = "Méthodes";
+    break;
+  case 'pl':
+    methodName = "Metoda";
+    break;
+}
+
+var destOldType = lang + '/XUL:' + methodName + ':' + $0;
+var destNewType = lang + '/XUL/' + methodName + '/' + $0;
+
+if (wiki.pageExists(destNewType)) {
+ <code><span id=(anch)>(web.link(wiki.uri(destNewType), dispApi))</span></code>
+} else if (wiki.pageExists(destOldType)) {
+  <code><span id=(anch)>(web.link(wiki.uri(destOldType), dispApi))</span></code>
+} else {
+  <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
+}
+
+%>
