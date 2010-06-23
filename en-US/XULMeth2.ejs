@@ -18,6 +18,8 @@ if ($2) {
   dispApi = $2;
 }
 
+dispApi = dispApi + '(' + $0 + ')';
+
 switch(lang) {
   case 'de':
     methodName = "Methoden";
@@ -39,6 +41,6 @@ if (wiki.pageExists(destNewType)) {
   <code><span id=(anch)>(web.link(wiki.uri(destOldType), dispApi))</span></code>
 } else {
   <code><a rel=('internal') href=(wiki.uri(destNewType)) class=('new')>$0</a></code>;
-}($1)
+}
 
 %>
