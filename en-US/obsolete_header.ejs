@@ -21,20 +21,25 @@ var str = "Obsolete";
 /*  sentence structures more flexibility. */
 
 if ($0) {
-  str = "Obsolete in Gecko " + $0;
+  /* Work around of Gecko 1.9.3 renamed to 2. */
+  if ($0 == "1.9.3") {
+    $0 = "2";
+  }
+
+  str = "Obsolete in Gecko " + $0 + " " + geckoRelease($0);
 
   switch(lang) {
     case 'de':
-      str = "Veraltet Gecko " + $0;
+      str = "Veraltet Gecko " + $0 + " " + geckoRelease($0);
       break;
     case 'fr':
-      str = "Obsolète Gecko " + $0;
+      str = "Obsolète Gecko " + $0 + " " + geckoRelease($0);
       break;
     case 'ja':
-      str = "廃止 Gecko " + $0;
+      str = "廃止 Gecko " + $0 + " " + geckoRelease($0);
       break;
     case 'pl':
-      str = "Przestarzały Gecko " + $0;
+      str = "Przestarzały Gecko " + $0 + " " + geckoRelease($0);
       break;
   }
 }
@@ -60,5 +65,4 @@ else {
     str;
   </p>
 </div>
-
-%>
+</pre>
