@@ -22,24 +22,25 @@ var str = "Obsolete";
 
 if ($0) {
   /* Work around of Gecko 1.9.3 renamed to 2. */
-  if ($0 == "1.9.3") {
-    $0 = "2";
+  var geckoVersion = $0
+  if (geckoVersion == "1.9.3") {
+    geckoVersion = "2";
   }
 
-  str = "Obsolete in Gecko " + $0 + " " + geckoRelease($0);
+  str = "Obsolete in Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
 
   switch(lang) {
     case 'de':
-      str = "Veraltet Gecko " + $0 + " " + geckoRelease($0);
+      str = "Veraltet Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
       break;
     case 'fr':
-      str = "Obsolète Gecko " + $0 + " " + geckoRelease($0);
+      str = "Obsolète Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
       break;
     case 'ja':
-      str = "廃止 Gecko " + $0 + " " + geckoRelease($0);
+      str = "廃止 Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
       break;
     case 'pl':
-      str = "Przestarzały Gecko " + $0 + " " + geckoRelease($0);
+      str = "Przestarzały Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
       break;
   }
 }
@@ -65,5 +66,4 @@ else {
     str;
   </p>
 </div>
-
-%>
+</pre>
