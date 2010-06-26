@@ -1,0 +1,19 @@
+
+<div class="noinclude">Example: <span class="script">htmlattrxref("placeholder","textarea")</span><hr />
+</div>
+<pre class="script">
+/* get a page's language (Don't use page.language!) */
+var u = Uri.Parts(Page.uri);
+var lang = u.path[0];
+if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
+ lang = string.Substr(lang, 8);
+}
+
+<code>($0)</code>
+/* check $1 exists */
+if(wiki.pageExists(lang + '/HTML/Element/' + $1)) {
+    <code>(web.link(wiki.uri(lang + '/HTML/Element/' + $1 + '#attr-' + $0), ($1 || $0)))</code>;
+} else {
+    <code><a rel=('internal') href=(wiki.uri(lang + '/HTML/Element/' + $1 + '#attr-' + $0)) class=('new')>($1 || $0)</a></code>;
+}
+%>
