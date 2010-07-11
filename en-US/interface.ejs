@@ -11,13 +11,21 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
+var str = "/XPCOM_Interface_Reference/";
+
+switch(lang) {
+  case 'de':
+    str = "/XPCOM_Interface_Referenz/";
+    break;
+}
+
 /* check $0 exists */
-if(wiki.pageExists(lang + '/XPCOM_Interface_Reference/' + $0)) {
-<code>(web.link(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0), $0))</code>;
+if(wiki.pageExists(lang + str + $0)) {
+<code>(web.link(wiki.uri(lang + str + $0), $0))</code>;
 } else if(wiki.pageExists(lang + '/' + $0)) {
     <code>(web.link(wiki.uri(lang + '/' + $0), $0))</code>;
 } else {
-    <code><a rel=('internal') href=(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0)) class=('new')>$0</a></code>
+    <code><a rel=('internal') href=(wiki.uri(lang + str + $0)) class=('new')>$0</a></code>
 }
 
 %>
