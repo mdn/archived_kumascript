@@ -23,7 +23,7 @@ switch(lang) {
 }
 var destOldType = lang + '/' + langName + ':' + $0;
 var destNewType = lang + '/' + langName + '/' + $0;
-var link = '#' +$1;
+var link = uri.decode('#') + $1;
 
 if (wiki.pageExists(destNewType)) {
  (web.link(wiki.uri(destNewType + link), $1))
