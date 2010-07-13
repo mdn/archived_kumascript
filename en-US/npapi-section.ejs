@@ -25,9 +25,9 @@ var destOldType = lang + '/' + langName + ':' + $0;
 var destNewType = lang + '/' + langName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
- (web.link(wiki.uri(destNewType + '#' + $1), $1))
+  <a href=(destNewType + '#' + $1)>($1)</a>
 } else if (wiki.pageExists(destOldType)) {
-  (web.link(wiki.uri(destOldType + '#' + $1), $1))
+  <a href=(destOldType + '#' + $1) >($1)</a>
 } else {
 <a href=(destNewType + '#' + $1) class="new">($1)</a>
 }
