@@ -46,6 +46,5 @@ if (s){
 else
   s = "";
 
-web.html('<a rel="external" href=(bugPageURL) class="external"' + s + '>(bug + $0)</a>');
-
-%>
+web.html('<a rel="external" href=' + bugPageURL + ' class="external"' + s + '>' + bug + $0 + '</a>');
+</pre>
