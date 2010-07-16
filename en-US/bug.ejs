@@ -25,10 +25,13 @@ switch(lang){
 
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
+<p>#bugPageXML</p>;
+<p>xml.text(bugPageXML, '//title')</p>
 
 var s = "";
 if (!bugPageXML)
   s = "Couldn't access bug's page. Try reloading this page to see bug's status and summary in this tooltip.";
+  <p>"!bugPageXML"</p>;
 else{
   s = xml.text(bugPageXML, '//span[@id="static_bug_status"]');
   if (s){
@@ -54,5 +57,4 @@ else{
 }
 
 web.html('<a rel="external" href=' + bugPageURL + ' class="external" title="' + s + '">' + bug + $0 + '</a>');
-
-%>
+</pre>
