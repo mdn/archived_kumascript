@@ -28,7 +28,7 @@ var bugPageXML = web.xml(bugPageURL);
 
 var s = "";
 if (#bugPageXML == 0)
-  s = "Couldn't access bug's page. Try reloading this page to see bug's status and summary in this tooltip.";
+  s = "Unable to access bug's page. Try reloading this page to see bug's status and summary in this tooltip.";
 else{
   s = xml.text(bugPageXML, '//span[@id="static_bug_status"]');
   if (s){
@@ -54,5 +54,4 @@ else{
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>bug + $0</a>;
-
-%>
+</pre>
