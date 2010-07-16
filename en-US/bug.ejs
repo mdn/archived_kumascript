@@ -4,18 +4,19 @@
 
 // var u = uri.parts(Page.uri);
 var lang = string.tolower(uri.parts(Page.uri).path[0]);
-lang;
-if (string.contains(lang, "project")) {
-  lang = string.substr(lang, 8);
-}
+//if (string.contains(lang, "project")){
+//  lang = string.substr(lang, 8);
+//}
 /* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+if (string.StartsWith(lang, "user:"))
+  lang = page.language;
+else if (string.contains(lang, ":")
+  lang = string.substr(lang, string.indexOf(lang, ":") + 1);
+lang;
 
 var bug = "bug ";
 
-switch(lang) {
+switch(lang){
   case 'ca':
     bug = "errada ";
     break;
@@ -30,4 +31,5 @@ var link = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var linktext = bug + $0;
 
 <a rel="external" href=(link) class="external">(linktext)</a>
-</pre>
+
+%>
