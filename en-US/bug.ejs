@@ -12,22 +12,21 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var bug = " bug ";
+var bug = "bug ";
 
 switch(lang) {
   case 'ca':
-    bug = " errada ";
+    bug = "errada ";
     break;
   case 'cs':
-    bug = " chyba ";
+    bug = "chyba ";
     break;
   case 'pl':
-    bug = " błąd ";
+    bug = "błąd ";
     break;
 }
 var link = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var linktext = bug + $0;
 
 <a rel="external" href=(link) class="external">(linktext)</a>
-
-%>
+</pre>
