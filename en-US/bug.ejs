@@ -41,10 +41,11 @@ if (s){
       s3 = s[i];
     }
   }
-  s = " title=" + s2 + "- " + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]');
+  s = ' title="' + s2 + '- ' + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]') + '"';
 }
 else
   s = "";
 
 web.html('<a rel="external" href=' + bugPageURL + ' class="external"' + s + '>' + bug + $0 + '</a>');
-</pre>
+
+%>
