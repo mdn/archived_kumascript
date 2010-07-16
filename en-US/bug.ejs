@@ -26,7 +26,7 @@ switch(lang){
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
 <p>#bugPageXML</p>;
-<p>xml.text(bugPageXML, '//title')</p>
+<p>xml.text(bugPageXML, '//title')</p>;
 
 var s = "";
 if (!bugPageXML)
@@ -57,4 +57,5 @@ else{
 }
 
 web.html('<a rel="external" href=' + bugPageURL + ' class="external" title="' + s + '">' + bug + $0 + '</a>');
-</pre>
+
+%>
