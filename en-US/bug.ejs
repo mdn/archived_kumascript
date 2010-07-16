@@ -2,8 +2,9 @@
 <pre class="script">
 /* get the page language */
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
+// var u = uri.parts(Page.uri);
+var lang = string.tolower(uri.parts(Page.uri).path[0]);
+lang;
 if (string.contains(lang, "project")) {
   lang = string.substr(lang, 8);
 }
@@ -29,5 +30,4 @@ var link = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var linktext = bug + $0;
 
 <a rel="external" href=(link) class="external">(linktext)</a>
-
-%>
+</pre>
