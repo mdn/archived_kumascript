@@ -25,9 +25,8 @@ switch(lang){
 
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 web.toggle(web.xml(bugPageURL), "bugPageURL");
-var bugPageXML = web.xml(bugPageURL, '//form[@name="changeform"]', _, 60);
-web.toggle(web.pre(xml.text(bugPageXML, _, _, true)), "bugPageXML");
+//var bugPageXML = web.xml(bugPageURL, '//form[@name="changeform"]', _, 60);
+//web.toggle(web.pre(xml.text(bugPageXML, _, _, true)), "bugPageXML");
 
 <a rel="external" href=(bugPageURL) class="external" title=(xml.text(bugPageXML, '//span[@id="static_bug_status"]') + " - " + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]'))>(bug + $0)</a>
-
-%>
+</pre>
