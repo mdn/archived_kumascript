@@ -24,10 +24,21 @@ switch(lang){
 }
 
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
-//var path1 = '//form[@name="changeform"]';
-var path1 = _;
-var bugPageXML = web.xml(bugPageURL, path1, _, 60);
+var bugPageXML = web.xml(bugPageURL);
 
-<a rel="external" href=(bugPageURL) class="external" title=(xml.text(bugPageXML, '//span[@id="static_bug_status"]') + " - " + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]'))>(bug + $0)</a>
+/* Remove \n and redundant spaces */
+var s = string.replace(xml.text(bugPageXML, '//span[@id="static_bug_status"]'), "\n", "");
+var s2 = "";
+var s3 = "";
+foreach(var i in num.series(0, #s - 1)){
+  if ((s[i] == " ") && (s3 == " ")){
+    continue;
+  }
+  else{
+    s2 += s[i];
+    s3 = s[i];
+  }
+}
 
-%>
+<a rel="external" href=(bugPageURL) class="external" title=(s2 + "- " + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]'))>(bug + $0)</a>
+</pre>
