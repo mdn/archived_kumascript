@@ -27,7 +27,7 @@ var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
 
 var s = "";
-if (!bugPageXML)
+if (#bugPageXML = 0)
   s = "Couldn't access bug's page. Try reloading this page to see bug's status and summary in this tooltip.";
 else{
   s = xml.text(bugPageXML, '//span[@id="static_bug_status"]');
@@ -54,5 +54,4 @@ else{
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>bug + $0</a>;
-
-%>
+</pre>
