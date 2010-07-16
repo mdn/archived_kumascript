@@ -2,17 +2,12 @@
 <pre class="script">
 /* get the page language */
 
-// var u = uri.parts(Page.uri);
-var lang = string.tolower(uri.parts(Page.uri).path[0]);
-//if (string.contains(lang, "project")){
-//  lang = string.substr(lang, 8);
-//}
+var lang = string.tolower(uri.parts(page.uri).path[0]);
 /* fall back to page.language on a user page */
 if (string.StartsWith(lang, "user:"))
   lang = page.language;
 else if (string.contains(lang, ":"))
   lang = string.substr(lang, string.indexOf(lang, ":") + 1);
-lang;
 
 var bug = "bug ";
 
@@ -27,8 +22,7 @@ switch(lang){
     bug = "błąd ";
     break;
 }
-var link = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
-var linktext = bug + $0;
 
-<a rel="external" href=(link) class="external">(linktext)</a>
-</pre>
+<a rel="external" href=('https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0) class="external">(bug + $0)</a>
+
+%>
