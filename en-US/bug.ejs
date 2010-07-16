@@ -26,26 +26,31 @@ switch(lang){
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
 
-var s = xml.text(bugPageXML, '//span[@id="static_bug_status"]');
-if (s){
-  /* Remove \n and redundant spaces */
-  s = string.replace(s, "\n", "");
-  var s2 = "";
-  var s3 = "";
-  foreach(var i in num.series(0, #s - 1)){
-    if ((s[i] == " ") && (s3 == " ")){
-      continue;
-    }
-    else{
-      s2 += s[i];
-      s3 = s[i];
-    }
+if (!bugPageXML)
+  var s = "Couldn't access bug's page. Try reloading this page to see bug's status and summary in this tooltip.";
+else{
+  var s = xml.text(bugPageXML, '//span[@id="static_bug_status"]');
+  if (s){
+    /* Remove \n and redundant spaces */
+    s = string.replace(s, "\n", "");
+    var s2 = "";
+    var s3 = "";
+    foreach(var i in num.series(0, #s - 1)){
+      if ((s[i] == " ") && (s3 == " ")){
+        continue;
+      }
+      else{
+        s2 += s[i];
+        s3 = s[i];
+      }
+    }
+    s = s2 + '- ' + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]');
   }
-  s = ' title="' + s2 + '- ' + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]') + '"';
+  else if (xml.text(bugPageXML, '//title') == "Access Denied")
+    s = "The access to the bug's page is restricted.";
+  else
+    s = "";
 }
-else
-  s = "";
 
-web.html('<a rel="external" href=' + bugPageURL + ' class="external"' + s + '>' + bug + $0 + '</a>');
-
-%>
+web.html('<a rel="external" href=' + bugPageURL + ' class="external" title="' + s + '">' + bug + $0 + '</a>');
+</pre>
