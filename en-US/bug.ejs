@@ -47,11 +47,12 @@ else{
     }
     s = s2 + '- ' + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]');
   }
-  else if (xml.text(bugPageXML, '//title') == "Access Denied")
+  else if (string.contains(bugPageXML, "Access Denied"))
     s = "The access to the bug's page is restricted.";
   else
     s = "";
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>bug + $0</a>;
-</pre>
+
+%>
