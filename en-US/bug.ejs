@@ -23,6 +23,8 @@ switch(lang){
     break;
 }
 
-<a rel="external" href=('https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0) class="external">(bug + $0)</a>
+var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
+var bugPageXML = web.xml(bugPageURL, '//form[@name="changeform"]', _, 60);
 
-%>
+<a rel="external" href=(bugPageURL) class="external" title=(xml.text(bugPageXML, '//span[@id="static_bug_status"]') + " - " + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]'))>(bug + $0)</a>
+</pre>
