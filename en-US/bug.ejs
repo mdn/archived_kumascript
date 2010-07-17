@@ -35,7 +35,7 @@ else{
     /* Remove \n and redundant spaces */
     //s = string.replace(s, "\n", "");
     s = string.trimEnd(string.replace(s, "\n", ""));
-    if (string.contains(s, " ")
+    if (string.contains(s, " "))
       s = string.join(list.select(string.split(s, " "), "#$>0"), " ");
 /*    var s2 = "";
     var s3 = "";
@@ -57,4 +57,5 @@ else{
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>bug + $0</a>;
-</pre>
+
+%>
