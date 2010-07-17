@@ -33,8 +33,11 @@ else{
   s = xml.text(bugPageXML, '//span[@id="static_bug_status"]');
   if (s){
     /* Remove \n and redundant spaces */
-    s = string.replace(s, "\n", "");
-    var s2 = "";
+    //s = string.replace(s, "\n", "");
+    s = string.trimEnd(string.replace(s, "\n", ""));
+    if (string.contains(s, " ")
+      s = string.join(list.select(string.split(s, " "), "#$>0"), " ");
+/*    var s2 = "";
     var s3 = "";
     foreach(var i in num.series(0, #s - 1)){
       if ((s[i] == " ") && (s3 == " ")){
@@ -44,8 +47,8 @@ else{
         s2 += s[i];
         s3 = s[i];
       }
-    }
-    s = s2 + '- ' + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]');
+    }*/
+    s += ' - ' + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]');
   }
   else if (string.contains(bugPageXML, "Access Denied"))
     s = "The access to the bug's page is restricted.";
@@ -54,5 +57,4 @@ else{
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>bug + $0</a>;
-
-%>
+</pre>
