@@ -19,7 +19,7 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var geckoVersion = web.html("<span title=geckoRelease($0)>$0</span>");
+var geckoVersion = web.html("<span>$0</span>");
 var str = "Gecko " + geckoVersion + " note";
 
 
@@ -32,4 +32,5 @@ switch(lang) {
   <p style="margin: 4px 0px; font-weight: bold;">(str)</p>
   <p style="margin: 4px 0px;">($1)</p>
 </div>
-</pre>
+
+%>
