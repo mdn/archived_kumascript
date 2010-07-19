@@ -7,7 +7,6 @@
 <p>This template should be used when you need to insert a Firefox version-specific note into an article. For individual items in a list or a table use <a title="Template:gecko_minversion_inline" href="/Template:gecko_minversion_inline">Template:gecko minversion inline</a>, and to mark a whole page or section, use <a title="Template:gecko_minversion_header" href="/Template:gecko_minversion_header">Template:gecko_minversion_header</a>.</p>
 </div>
 <pre class="script">
-/* one parameter: Gecko version */
 /* get the page language */
 
 var u = uri.parts(Page.uri);
@@ -20,15 +19,18 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var str = "Gecko " + $0 + " note";
+var geckoVersion = <span title="geckoRelease($0)">($0)</span>
+var str = "Gecko " + geckoVersion + " note";
+
 
 switch(lang) {
   case 'de':
-    str = "Hinweis zu Gecko " + $0;
+    str = "Hinweis zu Gecko " + geckoVersion;
     break;
 }
 <div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
   <p style="margin: 4px 0px; font-weight: bold;">(str)</p>
   <p style="margin: 4px 0px;">($1)</p>
 </div>
-</pre>
+
+%>
