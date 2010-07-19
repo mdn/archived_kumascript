@@ -1,26 +1,35 @@
 
-<p><span lang="en" class="lang lang-en">
-<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;">Gecko <span class="script">web.html($0)</span> note</p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
-</div>
 <div class="noinclude"><hr />
 <p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
 <pre class="eval"><span class="nowiki">{{gecko_minversion_note|1.9|The <code>foobar()</code> method works differently in Gecko 1.9.}}</span>
 </pre>
-<p>results in: <span class="script">template.Gecko_minversion_note(1.9, "The <code>foobar()</code> method works differently in Gecko 1.9.")</span></p>
+<p>results in: <span class="script">gecko_minversion_note(1.9, "The <code>foobar()</code> method works differently in Gecko 1.9.")</span></p>
 <p>This template should be used when you need to insert a Firefox version-specific note into an article. For individual items in a list or a table use <a title="Template:gecko_minversion_inline" href="/Template:gecko_minversion_inline">Template:gecko minversion inline</a>, and to mark a whole page or section, use <a title="Template:gecko_minversion_header" href="/Template:gecko_minversion_header">Template:gecko_minversion_header</a>.</p>
 </div>
-</span><span lang="*" class="lang lang-*">
+<pre class="script">
+/* one parameter: Gecko version */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "Gecko " + $0 + " note";
+
+switch(lang) {
+  case 'de':
+    str = "Hinweis zu Gecko " + $0;
+    break;
+}
 <div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;">Gecko <span class="script">web.html($0)</span> note</p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
+  <p style="margin: 4px 0px; font-weight: bold;">(str)</p>
+  <p style="margin: 4px 0px;">{{web.html($1)}}</p>
 </div>
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
-<pre class="eval"><span class="nowiki">{{gecko_minversion_note|1.9|The <code>foobar()</code> method works differently in Gecko 1.9.}}</span>
-</pre>
-<p>results in: <span class="script">template.Gecko_minversion_note(1.9, "The <code>foobar()</code> method works differently in Gecko 1.9.")</span></p>
-<p>This template should be used when you need to insert a Firefox version-specific note into an article. For individual items in a list or a table use <a title="Template:gecko_minversion_inline" href="/Template:gecko_minversion_inline">Template:gecko minversion inline</a>, and to mark a whole page or section, use <a title="Template:gecko_minversion_header" href="/Template:gecko_minversion_header">Template:gecko_minversion_header</a>.</p>
-</div>
-</span></p>
+
+%>
