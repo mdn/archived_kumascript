@@ -17,6 +17,9 @@ var nextStr = 'Next »';
 if (!string.compare(lang, "de", true)) {
   prevStr = "« zurück";
   nextStr = "weiter »";
+} else if (!string.compare(lang, "fr", true)) {
+  prevStr = "« Précédent";
+  nextStr = "Suivant »";
 } else if (!string.compare(lang, "es", true)) {
   prevStr = "« Anterior";
   nextStr = "Siguiente »";
@@ -43,5 +46,4 @@ if (!string.compare(lang, "de", true)) {
 <div class="prevnext">
 <p align="right"><span style="float: left;">(web.link(wiki.uri(lang + '/' + $0), prevStr))</span>(web.link(wiki.uri(lang + '/' + $1), nextStr))</p>
 </div>
-
-%>
+</pre>
