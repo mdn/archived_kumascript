@@ -25,6 +25,8 @@ if (!string.compare(lang, "de", true)) {
   nextStr = "Następny »";
 } else if (!string.compare(lang, "ru", true)) {
   nextStr = "Следующая статья »";
+} else if (!string.compare(lang, "fr", true)) {
+  nextStr = "Suivant »";
 } else if (!string.compare(lang, "zh-tw", true)) {
   nextStr = "次頁 »";
 }
@@ -33,4 +35,5 @@ if (!string.compare(lang, "de", true)) {
 <p align="right">(web.link(wiki.uri(lang + '/' + $0), nextStr))</p>
 </div>
 <br />
-</pre>
+
+%>
