@@ -10,21 +10,8 @@ var lang = xml.text(getLanguageFromURL(page.uri));
 if (!map.contains(bug, lang))
   lang = "en";
 
-/* switch(xml.text(getLanguageFromURL(page.uri))){
-  case 'ca':
-    bug = "errada ";
-    break;
-  case 'cs':
-    bug = "chyba ";
-    break;
-  case 'pl':
-    bug = "błąd ";
-    break;
-}*/
-
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
-
 var s = "";
 if (#bugPageXML == 0)
   s = "Unable to access bug's page. Try reloading this page to see bug's status and summary in this tooltip.";
@@ -42,5 +29,4 @@ else{
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>bug[lang] + $0</a>;
-
-%>
+</pre>
