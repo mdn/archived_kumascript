@@ -1,5 +1,5 @@
 
-<pre class="script" style="font-size: 16px;">
+<pre class="script" style="font-size: 16px; clear: both;">
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
 var s = "";
@@ -19,4 +19,5 @@ else{
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>localString({en: "bug ", ca: "errada ", cs: "chyba ", pl: "błąd "}) + $0</a>;
-</pre>
+
+%>
