@@ -1,6 +1,6 @@
 
 <pre class="script">
-var bug = {
+/* var bug = {
   en: "bug ",
   ca: "errada ",
   cs: "chyba ",
@@ -8,7 +8,7 @@ var bug = {
 };
 var lang = xml.text(getLanguageFromURL(page.uri));
 if (!map.contains(bug, lang))
-  lang = "en";
+  lang = "en";*/
 
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
@@ -28,5 +28,6 @@ else{
     s = "The access to the bug's page is restricted.";
 }
 
-<a rel="external" href=(bugPageURL) class="external" title=(s)>bug[lang] + $0</a>;
-</pre>
+<a rel="external" href=(bugPageURL) class="external" title=(s)>localString({en: "bug ", ca: "errada ", cs: "chyba ", pl: "błąd "}) + $0</a>;
+
+%>
