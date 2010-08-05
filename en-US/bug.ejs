@@ -1,17 +1,8 @@
 
 <pre class="script">
-/* get the page language */
-
-var lang = string.tolower(uri.parts(page.uri).path[0]);
-/* fall back to page.language on a user page */
-if (string.StartsWith(lang, "user:"))
-  lang = page.language;
-else if (string.contains(lang, ":"))
-  lang = string.substr(lang, string.indexOf(lang, ":") + 1);
-
 var bug = "bug ";
 
-switch(lang){
+switch(xml.text(getLanguageFromURL(page.uri))){
   case 'ca':
     bug = "errada ";
     break;
@@ -43,5 +34,4 @@ else{
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>bug + $0</a>;
-
-%>
+</pre>
