@@ -1,8 +1,16 @@
 
 <pre class="script">
-var bug = "bug ";
+var bug = {
+  en: "bug ",
+  ca: "errada ",
+  cs: "chyba ",
+  pl: "błąd "
+};
+var lang = xml.text(getLanguageFromURL(page.uri));
+if (!map.contains(bug, lang))
+  lang = "en";
 
-switch(xml.text(getLanguageFromURL(page.uri))){
+/* switch(xml.text(getLanguageFromURL(page.uri))){
   case 'ca':
     bug = "errada ";
     break;
@@ -12,7 +20,7 @@ switch(xml.text(getLanguageFromURL(page.uri))){
   case 'pl':
     bug = "błąd ";
     break;
-}
+}*/
 
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
@@ -33,5 +41,6 @@ else{
     s = "The access to the bug's page is restricted.";
 }
 
-<a rel="external" href=(bugPageURL) class="external" title=(s)>bug + $0</a>;
-</pre>
+<a rel="external" href=(bugPageURL) class="external" title=(s)>bug[lang] + $0</a>;
+
+%>
