@@ -1,15 +1,5 @@
 
 <pre class="script">
-/* var bug = {
-  en: "bug ",
-  ca: "errada ",
-  cs: "chyba ",
-  pl: "błąd "
-};
-var lang = xml.text(getLanguageFromURL(page.uri));
-if (!map.contains(bug, lang))
-  lang = "en";*/
-
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
 var s = "";
@@ -29,5 +19,4 @@ else{
 }
 
 <a rel="external" href=(bugPageURL) class="external" title=(s)>localString({en: "bug ", ca: "errada ", cs: "chyba ", pl: "błąd "}) + $0</a>;
-
-%>
+</pre>
