@@ -1,5 +1,5 @@
 
-<pre style="font-size: 16px;" class="script">
+<pre class="script" style="font-size: 16px;">
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var bugPageXML = web.xml(bugPageURL);
 var s = "";
@@ -18,6 +18,5 @@ else{
     s = "The access to the bug's page is restricted.";
 }
 
-<a rel="external" href=(bugPageURL) class="external" title=(s)>xml.text(localString({en: "bug ", ca: "errada ", cs: "chyba ", pl: "błąd "})) + $0</a>;
-
-%>
+<a rel="external" href=(bugPageURL) class="external" title=(s)>localString({en: "bug ", ca: "errada ", cs: "chyba ", pl: "błąd "}) + $0</a>;
+</pre>
