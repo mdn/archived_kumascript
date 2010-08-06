@@ -1,5 +1,5 @@
 
-<pre style="font-size: 16px;" class="script">
+<pre class="script" style="font-size: 16px;">
 var prevStr = {
   en: "Previous",
   de: "zurück",
@@ -9,7 +9,7 @@ var prevStr = {
   ko: "이전",
   pl: "Poprzedni",
   ru: "Предыдущая статья",
-  zh-tw: "前頁",
+  "zh-tw": "前頁",
   cn: "上一页"};
 var nextStr = {
   en: "Next",
@@ -20,7 +20,7 @@ var nextStr = {
   ko: "다음",
   pl: "Następny",
   ru: "Следующая статья",
-  zh-tw: "次頁",
+  "zh-tw": "次頁",
   cn: "下一页"};
 var chapterList = string.deserialize(wiki.template($0));
 var i = 0;
@@ -39,5 +39,4 @@ if (i != -1){
     default:
       <p style="text-align: right;"><span style="float: left;">web.link(chapterList[i - 1], "« " + localString(prevStr), wiki.getPage(chapterList[i - 1]).title)</span>web.link(chapterList[i + 1], localString(nextStr) + " »", wiki.getPage(chapterList[i + 1]).title)</p>;
   }
-}
-%>
+}</pre>
