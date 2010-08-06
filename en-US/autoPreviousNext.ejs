@@ -1,6 +1,6 @@
 
 <div>
-<pre style="font-size: 16px; clear: both;" class="script">
+<pre class="script" style="font-size: 16px; clear: both;">
 var prevStr = {
   en: "Previous",
   de: "zurück",
@@ -38,6 +38,8 @@ if (i != -1){
       <p>web.link(chapterList[(#chapterList) - 2], "« " + localString(prevStr), wiki.getPage(chapterList[(#chapterList) - 2]).title)</p>;
       break;
     default:
+      /* This should be done like <p>Previous<span style="float: right;">Next</span></p>
+         but Internet Explorer 8 doesn't render it properly */
       <p style="text-align: right;"><span style="float: left;">web.link(chapterList[i - 1], "« " + localString(prevStr), wiki.getPage(chapterList[i - 1]).title)</span>web.link(chapterList[i + 1], localString(nextStr) + " »", wiki.getPage(chapterList[i + 1]).title)</p>;
   }
 }</pre>
