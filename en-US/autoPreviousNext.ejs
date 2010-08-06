@@ -1,6 +1,6 @@
 
 <div>
-<pre class="script" style="font-size: 16px; clear: both;">
+<pre style="font-size: 16px; clear: both;" class="script">
 var prevStr = {
   en: "Previous",
   de: "zurück",
@@ -31,8 +31,8 @@ else
   i = list.indexOf(chapterList, xml.text(getRelativeURL($1)));
 if (i != -1){
   switch (i){
-    case 0: <p>"hello world"</p>;
-      //<p style="text-align: right;">web.link(chapterList[1], localString(nextStr) + " »", wiki.getPage(chapterList[1]).title)</p>;
+    case 0:
+      <p style="text-align: right;">web.link(chapterList[1], localString(nextStr) + " »", wiki.getPage(chapterList[1]).title)</p>;
       break;
     case (#chapterList) - 1:
       <p>web.link(chapterList[(#chapterList) - 2], "« " + localString(prevStr), wiki.getPage(chapterList[(#chapterList) - 2]).title)</p>;
