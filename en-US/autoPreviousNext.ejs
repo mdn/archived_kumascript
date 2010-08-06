@@ -1,15 +1,44 @@
 
-<p><span class="script"> var chapterList = string.deserialize(wiki.template($0));<br />
-var i = list.indexOf(chapterList, xml.text(getRelativeURL($1)));<br />
-if (i != -1){<br />
-  switch (i){<br />
-    case 0:<br />
-      next(getRelativeURL(chapterList[1], true));<br />
-      break;<br />
-    case (#chapterList) - 1:<br />
-      previous(getRelativeURL(chapterList[(#chapterList) - 2], true));<br />
-      break;<br />
-    default:<br />
-      previousNext(getRelativeURL(chapterList[i - 1], true), getRelativeURL(chapterList[i + 1], true));<br />
-  }<br />
-}</span></p>
+<pre class="script" style="font-size: 16px;">
+var prevStr = {
+  en: "Previous",
+  de: "zurück",
+  es: "Anterior",
+  fr: "Précédent",
+  ja: "前",
+  ko: "이전",
+  pl: "Poprzedni",
+  ru: "Предыдущая статья",
+  zh-tw: "前頁",
+  cn: "上一页"
+};
+var nextStr = {
+  en: "Next",
+  de: "weiter",
+  es: "Siguiente",
+  fr: "Suivant",
+  ja: "次",
+  ko: "다음",
+  pl: "Następny",
+  ru: "Следующая статья",
+  zh-tw: "次頁",
+  cn: "下一页"
+};
+var chapterList = string.deserialize(wiki.template($0));
+var i = 0;
+if (!$1)
+  i = list.indexOf(chapterList, xml.text(getRelativeURL(page.path)));
+else
+  i = list.indexOf(chapterList, xml.text(getRelativeURL($1)));
+if (i != -1){
+  switch (i){
+    case 0:
+      <p style="text-align: right;">web.link(chapterList[1], localString(nextStr) + " »", wiki.getPage(chapterList[1]).title)</p>;
+      break;
+    case (#chapterList) - 1:
+      <p>web.link(chapterList[(#chapterList) - 2], "« " + localString(prevStr), wiki.getPage(chapterList[(#chapterList) - 2]).title)</p>;
+      break;
+    default:
+      <p style="text-align: right;"><span style="float: left;">web.link(chapterList[i - 1], "« " + localString(prevStr), wiki.getPage(chapterList[i - 1]).title)</span>web.link(chapterList[i + 1], localString(nextStr) + " »", wiki.getPage(chapterList[i + 1]).title)</p>;
+  }
+}</pre>
