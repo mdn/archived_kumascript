@@ -1,6 +1,6 @@
 
 <div>
-<pre style="font-size: 16px; clear: both;" class="script">
+<pre class="script" style="font-size: 16px; clear: both;">
 var prevStr = {
   en: "Previous",
   de: "zurück",
@@ -28,8 +28,8 @@ var nextStr = {
 var chapterList = string.deserialize(wiki.template($0));
 var i = 0;
 if (!$1){
-  i = list.indexOf(chapterList, uri.build("", "/" + page.path));
-  uri.build("", "/" + page.path);}
+  i = list.indexOf(chapterList, uri.build("/", page.path));
+  uri.build("/", page.path);}
 else
   i = list.indexOf(chapterList, xml.text(getRelativeURL($1)));
 if (i != -1){
