@@ -18,7 +18,7 @@ else if (string.StartsWith(lang, "user:")) {
 }
 
 var articleName = "Thunderbird " + $0 + " for developers";
-var link = '<a href="(lang + '/'+ articleName)">Thunderbird + $0</a>';
+var link = web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
 var text = "This article covers features introduced in " + link;
 
 switch(lang) {
@@ -62,7 +62,7 @@ switch(lang) {
 
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;">
   <p style="margin: 4px 0px;">
-    text;
+    web.html(text);
   </p>
 </div>
 
