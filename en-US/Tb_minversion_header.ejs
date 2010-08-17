@@ -18,51 +18,51 @@ else if (string.StartsWith(lang, "user:")) {
 }
 
 var articleName = "Thunderbird " + $0 + " for developers";
-var text = "This article covers features introduced in " + link;
+var text = "This article covers features introduced in " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
 
 switch(lang) {
   case 'de':
     articleName = "Thunderbird " + $0 + " für Entwickler";
-    text = "Dieser Artikel umfasst Features die in " + link + " eingeführt wurden";
+    text = "Dieser Artikel umfasst Features die in " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0) + " eingeführt wurden";
     break;
   case 'es':
     articleName = "Thunderbird " + $0 + " para desarrolladores";
-    text = "Este artículo cubre características introducidas en " + link;
+    text = "Este artículo cubre características introducidas en " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
     break;
   case 'fr':
     articleName = "Thunderbird " + $0 + " pour les développeurs";
-    text = "Cet article traite de fonctionnalités introduites dans " + link;
+    text = "Cet article traite de fonctionnalités introduites dans " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
     break;
   case 'ja':
     articleName = "Thunderbird " + $0 + " for developers";
-    text = "この記事は " + link + "  の新機能について述べています";
+    text = "この記事は " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0) + "  の新機能について述べています";
     break;
   case 'ko':
     articleName = "Thunderbird " + $0 + " for developers";
-    text = "이 문서는 Thunderbird 개발자들을 위한 정보입니다. " + link;
+    text = "이 문서는 Thunderbird 개발자들을 위한 정보입니다. " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
     break;
   case 'pl':
     articleName = "Thunderbird " + $0 + " dla programistów";
-    text = "Ten artykuł obejmuje funkcje wprowadzone w " + link;
+    text = "Ten artykuł obejmuje funkcje wprowadzone w " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
     break;
   case 'pt':
     articleName = "Thunderbird " + $0 + " para desenvolvedores";
-    text = "Este artigo cobre características introduzidas no " + link;
+    text = "Este artigo cobre características introduzidas no " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
     break;
   case 'zh-cn':
     articleName = "Thunderbird " + $0 + " for developers";
-    text = "该条目记录了 " + link + " 引入的新特性";
+    text = "该条目记录了 " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0) + " 引入的新特性";
     break;
   case 'zh-tw':
     articleName = "Thunderbird " + $0 + " 技術文件";
-    text = "本文描述 " + link + " 之後加入的功能。";
+    text = "本文描述 " + web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0) + " 之後加入的功能。";
     break;
 }
-var link = web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
 
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;">
   <p style="margin: 4px 0px;">
     web.html(text);
   </p>
 </div>
-</pre>
+
+%>
