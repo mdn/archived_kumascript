@@ -19,7 +19,7 @@ else if (string.StartsWith(lang, "user:")) {
 
 var articleName = "Thunderbird " + $0 + " for developers";
 var link = web.link(wiki.uri(lang + '/' + articleName), "Thunderbird " + $0);
-var text = "This article covers features introduced in ";
+var text = "This article covers features introduced in " + link;
 
 switch(lang) {
   case 'de':
@@ -65,5 +65,4 @@ switch(lang) {
     text;
   </p>
 </div>
-
-%>
+</pre>
