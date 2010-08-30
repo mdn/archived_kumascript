@@ -1,18 +1,3 @@
 
-<pre class="script">
-/* Used in: en/Accessibility/AT-APIs/AT-SPI/Events */
-
-/* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-var href = 'https://developer.mozilla.org/' + lang + '/Accessibility/AT-APIs/Gecko/Events#' + $0;
-
-<<span class="start-tag">a</span><span class="attribute-name"> href</span><span>=</span><span>(</span>href<span>)</span>>$0</<span class="end-tag">a></span>
-%>
+<p><br />
+</p>
