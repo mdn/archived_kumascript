@@ -1,14 +1,16 @@
 
-<pre class="script" style="font-size: 16px;">
+<pre style="font-size: 16px;" class="script">
 <table class="standard-table">
   <thead>
     <tr><th scope="col">$0</th><th scope="col">"Description"</th></tr>
-  </thead>
+  </thead>;
+if ($1)
+  var type1 = typeof $1;
 foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
   <tr>
     <td><a href=(i.value.uri) rel="internal" style="white-space: nowrap;">
       if ($1)
-        switch (typeof $1){
+        switch (type1){
           case "bool":
             i.value.title;
             break;
@@ -29,5 +31,4 @@ foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
     </td>
   </tr>;
 </table>;
-
-%>
+</pre>
