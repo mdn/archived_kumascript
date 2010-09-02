@@ -1,11 +1,12 @@
 
-<pre style="font-size: 16px;" class="script">
+<pre class="script" style="font-size: 16px;">
 <table class="standard-table">
   <thead>
     <tr><th scope="col">$0</th><th scope="col">"Description"</th></tr>
   </thead>;
+var type1 = "";
 if ($1)
-  var type1 = typeof $1;
+  type1 = typeof $1;
 foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
   <tr>
     <td><a href=(i.value.uri) rel="internal" style="white-space: nowrap;">
@@ -31,4 +32,5 @@ foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
     </td>
   </tr>;
 </table>;
-</pre>
+
+%>
