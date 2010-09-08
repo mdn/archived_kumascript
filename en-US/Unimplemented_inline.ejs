@@ -16,7 +16,7 @@ else if (string.StartsWith(lang, "user:")) {
 var str = "Unimplemented";
 
 if ($0) {
-  str = str + " (see " + bug($0) + ")";
+  str = str + " (see " + template.bug($0) + ")";
 }
 
 switch(lang) {
