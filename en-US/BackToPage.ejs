@@ -20,7 +20,6 @@ switch(lang) {
     langName = $1 + " ページ";
     break;
 }
-var dest = lang + '/' + $0;
+var dest = 'https://developer.mozilla.org/' + lang + '/' + $0;
 web.link(dest, "« " + langName);
-
-%>
+</pre>
