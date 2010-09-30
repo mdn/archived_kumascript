@@ -14,7 +14,7 @@ else if (string.StartsWith(lang, "user:")) {
 }
 
 var str = "Unimplemented";
-var see = "see";
+var see = "see";
  
 switch(lang) {
   case 'fr':
@@ -22,8 +22,12 @@ switch(lang) {
     break;
   case 'de':
     str = "Nicht implementiert";
-    see = "siehe";
-    break;
+    see = "siehe";
+    break;
+  case 'ja':
+    str = "未実装";
+    see = "参照";
+    break;
 }
 
 if ($0) {
