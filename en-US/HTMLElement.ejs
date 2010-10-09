@@ -9,11 +9,14 @@ if (string.contains(lang, "project") || string.contains(lang, "Project")) {
 else if (string.StartsWith(lang, "user:")) {
   lang = page.language;
 }
-var dest = lang + '/' + 'HTML/Element/' + $0;
+var name = $0;
+if (args.title) {
+  name = args.title;
+}
+var dest = lang + '/' + 'HTML/Element/' + name;
 
 if (wiki.pageExists(dest)) { /* the page exists */
-    <code>(web.link(wiki.uri(dest), '<' + $0 + '>'))</code>;
+    <code>(web.link(wiki.uri(dest), '<' + name + '>'))</code>;
 } else { /* the page doesn't exist */
-    <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')><$0></a></code>
-}
-%>
+    <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')><web.text(name)></a></code>
+}</pre>
