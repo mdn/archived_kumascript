@@ -13,6 +13,6 @@ if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
 if(wiki.pageExists(lang + '/HTTP/Headers')) {
     <code>(web.link(wiki.uri(lang + '/HTTP/Headers' ) + '#' + $0, $0 +':'))</code>;
 } else {
-    <code><a rel=('internal') href=(wiki.uri(lang + '/'/HTTP/Headers' ) + '#' + $0, class=('new')>$0 +':'</a></code>;
-}</pre>
-<br />
+    <code><a rel=('internal') href=(wiki.uri(lang + '/HTTP/Headers' ) + '#' + $0) class=('new')>$0 +':'</a></code>;
+}
+%>
