@@ -11,8 +11,7 @@ if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
 
 /* check $1 exists */
 if(wiki.pageExists(lang + '/HTML/Element/' + $1)) {
-    <b>(web.link(wiki.uri(lang + '/HTML/Element/' + $1 ) + '#attr-' + $0, ($2 || $0)))</b>;
+    <code>(web.link(wiki.uri(lang + '/HTML/Element/' + $1 ) + '#attr-' + $0, ($2 || $0)))</code>;
 } else {
-    <b><a rel=('internal') href=(wiki.uri(lang + '/HTML/Element/' + $1 ) + '#attr-' + $0) class=('new')>($2 || $0)</a></b>;
-}
-%>
+    <code><a rel=('internal') href=(wiki.uri(lang + '/HTML/Element/' + $1 ) + '#attr-' + $0) class=('new')>($2 || $0)</a></code>;
+}</pre>
