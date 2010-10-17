@@ -1,5 +1,5 @@
 
-<pre class="script" style="font-size: 16px;">
+<pre style="font-size: 16px;" class="script">
 <dl>;
 var type1 = "";
 if ($1)
@@ -22,10 +22,9 @@ foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
     else
       <code>i.value.title</code>;
   </a></dt>
-  <dd>
+  <dd>;
     var s2 = xml.text(wiki.page(i.value.path, "Summary"), "//p", _, true);
     web.html(string.substr(s2, 3, #s2 - 7));
-  </dd>
+  </dd>;
 </dl>;
-
-%>
+</pre>
