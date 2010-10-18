@@ -1,2 +1,17 @@
 
+<pre class="script">
+/* one parameter: Gecko version */
+/* get page language first */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
 <div style="background-color:eee;">(web.html($0))</div>
+%>
