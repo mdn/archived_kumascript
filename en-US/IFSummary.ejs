@@ -1,6 +1,6 @@
 
 <pre class="script">
-/* one parameter: Gecko version */
+/* parameters: path of IDL, parent class, scriptable/not scriptable, last Gecko version changed in, summary */
 /* get page language first */
 
 var u = uri.parts(Page.uri);
@@ -31,7 +31,8 @@ switch($2) {
 }
 
 <div style="border:#dddddd 1px;">
-<div style="background:#eeeeee; margin:1px;">(web.html($0))<span style="text-align:right;">(web.html(scriptable))</span></div>
+<div style="background:#eeeeee; margin:1px;">(web.html($0))<span>(web.html(scriptable))</span></div>
 (web.html($4))
 </div>
-</pre>
+
+%>
