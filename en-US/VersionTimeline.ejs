@@ -3,6 +3,7 @@
 /* parameters: version created, version last changed, version deprecated (optional), version obsoleted (optional) */
 /* get page language first */
 
+var currentGecko = 2;  // Update this to current Gecko version
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
@@ -13,11 +14,17 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var introStyle = '<div style="font-size:x-small; line-height:1.0; color:white; text-align:center;">';
+<div style="height:24px; background:#222222; padding:2px; padding-right:262px;">
 
-var introduced = "Introduced:<br>Gecko " + $0 + "<br>" + template.geckoRelease($0);
+// Compute length of initial red block, if any
 
-<div style="height:4em; background:#222222;">
-(web.html(introStyle + introduced + "</span>"));
+var start = 0;
+var end = 0;
+if ($0 > 1) {
+  end = $0/currentGecko;
+  <div style="height:20px; background:#dd0000;"></div>
+}
+
 </div> 
-</pre>
+
+%>
