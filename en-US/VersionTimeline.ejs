@@ -26,15 +26,15 @@ var st = "";
 
 // Draw version legend
 
-<div style="top:0px; font-size:9px; position:absolute; color:white;">1.0</div>
-<div style="top:0px; font-size:9px; position:absolute; color:white; text-align:right; float:right; width:100%; padding-right:4px;">(currentGecko)</div>
+<div style="top:0px; font-size:11px; position:absolute; color:white;">1.0</div>
+<div style="top:0px; font-size:11px; position:absolute; color:white; text-align:right; float:right; width:100%; margin-right:4px;">(currentGecko)</div>
 
 // Compute length of initial red block, if any. This will run from version 1.0 to $0
 
 v = template.xverblob($0) - template.xverblob(1);
 if (v) {
   end = 100*(v/currentBlob);
-  st = "height:20px; top:14px; background:#dd0000; position:absolute; width:" + end + "%";
+  st = "height:14px; top:16px; background:#dd0000; position:absolute; width:" + end + "%";
   <div style=(st)></div>
 }
 start = end;
@@ -45,14 +45,14 @@ start = end;
 if ($3) {
   v = template.xverblob($3) - template.xverblob(1);
   end = 100*(v/currentBlob);
-  st = "height:20px; top:14px; left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
+  st = "height:14px; top:16px; left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
   <div style=(st)></div>
   start = end;
 
   // now do the deprecated part
   v = template.xverblob($2) - template.xverblob(1);
   end = 100*(v/currentBlob);
-  st = "height:20px; top:14px; left:" + start + "%; background:#ddaa00; position:absolute; width:" + end-start + "%";
+  st = "height:14px; top:16px; left:" + start + "%; background:#ddaa00; position:absolute; width:" + end-start + "%";
   <div style=(st)></div>
   start = end;
 }
@@ -60,8 +60,9 @@ if ($3) {
 // obsolete section
  
 if ($2) {
-  st = "height:20px; top:14px; left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";
+  st = "height:14px; top:16px; left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";
   <div style=(st)></div>
 }
 </div> 
-</pre>
+
+%>
