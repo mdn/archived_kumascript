@@ -34,7 +34,7 @@ var st = "";
 v = template.xverblob($0) - template.xverblob(1);
 if (v) {
   end = 100*(v/currentBlob);
-  st = "height:20px; top:2px; background:#dd0000; position:absolute; width:" + end + "%";
+  st = "height:20px; top:12px; background:#dd0000; position:absolute; width:" + end + "%";
   <div style=(st)></div>
 }
 start = end;
@@ -60,9 +60,8 @@ if ($3) {
 // obsolete section
  
 if ($2) {
-  st = "height:20px; top:2px; left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";
+  st = "height:20px; top:12px; left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";
   <div style=(st)></div>
 }
 </div> 
-
-%>
+</pre>
