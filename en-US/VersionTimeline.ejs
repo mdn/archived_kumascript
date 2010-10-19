@@ -17,7 +17,7 @@ else if (string.StartsWith(lang, "user:")) {
 
 var availLength = currentBlob - template.xverblob($0);
 
-<div style="height:42px; background:#222222; position:absolute; padding:2px; width:70%;">
+<div style="height:42px; position:absolute; padding:2px; width:70%;">
 
 var start = 0;
 var end = 0;
@@ -26,8 +26,8 @@ var st = "";
 
 // Draw version legend
 
-<div style="top:0px; font-size:11px; position:absolute; color:white;">(web.html("1.0"));</div>
-<div style="top:0px; font-size:11px; position:absolute; color:white; text-align:right; width:100%;">(currentGecko)</div>
+<div style="top:0px; font-size:11px; position:absolute;">(web.html("1.0"));</div>
+<div style="top:0px; font-size:11px; position:absolute; text-align:right; width:100%;">(currentGecko)</div>
 
 // Compute length of initial red block, if any. This will run from version 1.0 to $0
 
@@ -36,9 +36,9 @@ if (v) {
   end = 100*(v/currentBlob);
   st = "height:14px; top:16px; background:#dd0000; position:absolute; width:" + end + "%";
   <div style=(st)></div>
-  st = "top:0px; font-size:11px; position:absolute; color:white; left:" + end + "%;";
+  st = "top:0px; font-size:11px; position:absolute; left:" + end + "%;";
   <div style=(st)>(web.html("Introduced"));</div>
-  st = "top:28px; font-size:11px; position:absolute; color:white; left:" + end + "%;";
+  st = "top:28px; font-size:11px; position:absolute; left:" + end + "%;";
   <div style=(st)>(web.html("Gecko " + $0));</div>
 }
 start = end;
@@ -66,11 +66,10 @@ if ($3) {
 if ($2) {
   st = "height:14px; top:16px; left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";
   <div style=(st)></div>
-  st = "top:0px; font-size:11px; position:absolute; color:white; left:0px; text-align:right; float: right; width:" + start + "%;";
+  st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
   <div style=(st)>(web.html("Obsolete"));</div>
-  st = "top:28px; font-size:11px; position:absolute; color:white; left:0px; text-align:right; float: right; width:" + start + "%;";
+  st = "top:28px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
   <div style=(st)>(web.html("Gecko " + $2));</div>
 }
 </div> 
-
-%>
+</pre>
