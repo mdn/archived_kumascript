@@ -15,7 +15,7 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var availLength = currentGecko - $0;
+var availLength = currentGeckoBlob - template.xverblob($0);
 
 <div style="height:24px; background:#222222; padding:2px; padding-right:262px;">
 
@@ -25,9 +25,10 @@ var start = 0;
 var end = 0;
 
 var v = template.xverblob($1);
-end = 100*(v/currentBlob);
+end = 100*(v/availLength);
 var st = "height:20px; background:#00dd00; width:" + end + "%";
 <div style=(st)></div>
 (web.html("availLength: " + availLength + ", end: " + end));
 </div> 
-</pre>
+
+%>
