@@ -30,6 +30,7 @@ switch($2) {
         scriptable = "Not scriptable";
         break;
     }
+    scriptable = '<span style="color:#cc0000; font-weight:bold;">' + scriptable + '</span>';
     break;
 }
 
@@ -37,5 +38,4 @@ switch($2) {
 <div style="background:#eeeeee; padding:2px;">(web.html(template.source($0)));<span style="text-align:right; float:right;">(web.html(scriptable));</span></div>
 (web.html($4))
 </div>
-
-%>
+</pre>
