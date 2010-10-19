@@ -1,6 +1,6 @@
 
 <pre class="script">
-/* parameters: version created, version last changed, version deprecated (optional), version obsoleted (optional) */
+/* parameters: version created, version last changed, version obsoleted (optional), version deprecated (optional) */
 /* get page language first */
 
 var currentGecko = "2.0";  // Update this to current Gecko version
@@ -19,14 +19,32 @@ var availLength = currentBlob - template.xverblob($0);
 
 <div style="height:24px; background:#222222; padding:2px; padding-right:262px;">
 
-// Compute length of initial red block, if any. This will run from version 0.0 to $0
-
 var start = 0;
-var v = template.xverblob($0) - template.xverblob(1);
-var end = 100*(v/currentBlob);
-var st = "height:20px; background:#dd0000; width:" + end + "%";
-<div style=(st)></div>
-(web.html("v: " + v + ", end: " + end + ", currentBlob: " + currentBlob));
-</div> 
+var end = 0;
+var v = 0;
+var st = "";
 
-%>
+// Compute length of initial red block, if any. This will run from version 1.0 to $0
+
+v = template.xverblob($0) - template.xverblob(1);
+if (v) {
+  end = 100*(v/currentBlob);
+  st = "height:20px; background:#dd0000; width:" + end + "%";
+  <div style=(st)></div>
+}
+ 
+// Now do the green block representing "implemented"; this will go up to $3 if it exists, or $2 if that exists,
+// or to the end if neither does
+
+if ($3) {
+  v = template.xverblob($3) - template.xverblob(1);
+  end = 100*(v/currentBlob);
+  st = "height:20px; background:#00dd00; width:" + end + "%";
+  <div style=(st)></div>
+}
+
+start = end;
+v = template.xverblob($
+
+</div> 
+</pre>
