@@ -29,7 +29,7 @@ var st = "";
 v = template.xverblob($0) - template.xverblob(1);
 if (v) {
   end = 100*(v/currentBlob);
-  st = "height:20px; top:0px; background:#dd0000; position:relative; width:" + end + "%";
+  st = "height:20px; top:0px; background:#dd0000; position:absolute; width:" + end + "%";
   <div style=(st)></div>
 }
 start = end;
@@ -40,10 +40,11 @@ start = end;
 if ($3) {
   v = template.xverblob($3) - template.xverblob(1);
   end = 100*(v/currentBlob);
-  st = "height:20px; top:0px; left:" + start + "px; background:#00dd00; position:relative; width:" + end-start + "%";
+  st = "height:20px; top:0px; left:" + start + "px; background:#00dd00; position:absolute; width:" + end-start + "%";
   (web.html("start: " + start + ", end: " + end));
   <div style=(st)></div>
 }
 
 </div> 
-</pre>
+
+%>
