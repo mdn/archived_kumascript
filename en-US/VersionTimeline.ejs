@@ -4,6 +4,7 @@
 /* get page language first */
 
 var currentGecko = 2.0;  // Update this to current Gecko version
+var currentBlob = template.xverblob(currentGecko);
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
@@ -23,10 +24,10 @@ var availLength = currentGecko - $0;
 var start = 0;
 var end = 0;
 
-end = 100*($1/availLength);
+var v = template.xverblob($1);
+end = 100*(v/currentBlob);
 var st = "height:20px; background:#00dd00; width:" + end + "%";
 <div style=(st)></div>
 (web.html("availLength: " + availLength + ", end: " + end));
 </div> 
-
-%>
+</pre>
