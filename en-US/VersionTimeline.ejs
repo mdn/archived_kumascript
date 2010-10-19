@@ -36,8 +36,10 @@ if (v) {
   end = 100*(v/currentBlob);
   st = "height:14px; top:16px; background:#dd0000; position:absolute; width:" + end + "%";
   <div style=(st)></div>
+  st = "top:0px; font-size:11px; position:absolute; color:white; left:" + end + "%;";
+  <div style=(st)>(web.html("Introduced"));</div>
   st = "top:28px; font-size:11px; position:absolute; color:white; left:" + end + "%;";
-  <div style=(st)>(web.html("Introduced: Gecko " + $0));</div>
+  <div style=(st)>(web.html("Gecko " + $0));</div>
 }
 start = end;
 
@@ -64,8 +66,11 @@ if ($3) {
 if ($2) {
   st = "height:14px; top:16px; left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";
   <div style=(st)></div>
+  st = "top:0px; font-size:11px; position:absolute; color:white; left:0px; text-align:right; float: right; width:" + start + "%;";
+  <div style=(st)>(web.html("Obsolete"));</div>
   st = "top:28px; font-size:11px; position:absolute; color:white; left:0px; text-align:right; float: right; width:" + start + "%;";
-  <div style=(st)>(web.html("Obsolete: Gecko " + $2));</div>
+  <div style=(st)>(web.html("Gecko " + $2));</div>
 }
 </div> 
-</pre>
+
+%>
