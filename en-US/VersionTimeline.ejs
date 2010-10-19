@@ -13,8 +13,10 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var introduced = "Introduced:<br>Gecko " + $0 + "<br>" + template.geckoRelease($0)
+var introduced = "Introduced:<br>Gecko " + $0 + "<br>" + template.geckoRelease($0);
+
 <div style="height:24px; background:#222222;">
-(web.html(introduced))
+(web.html(introduced));
 </div> 
-</pre>
+
+%>
