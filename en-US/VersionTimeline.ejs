@@ -3,7 +3,7 @@
 /* parameters: version created, version last changed, version deprecated (optional), version obsoleted (optional) */
 /* get page language first */
 
-var currentGecko = 2.0;  // Update this to current Gecko version
+var currentGecko = "2.0";  // Update this to current Gecko version
 var currentBlob = template.xverblob(currentGecko);
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
@@ -25,7 +25,6 @@ var v = template.xverblob($1);
 var end = 100*(v/availLength);
 var st = "height:20px; background:#00dd00; width:" + end + "%";
 <div style=(st)></div>
-(web.html("availLength: " + availLength + ", v: " + v + ", end: " + end));
+(web.html("availLength: " + availLength + ", v: " + v + ", end: " + end + ", currentBlob: " + currentBlob));
 </div> 
-
-%>
+</pre>
