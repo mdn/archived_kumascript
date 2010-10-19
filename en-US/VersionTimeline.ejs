@@ -30,7 +30,7 @@ v = template.xverblob($0) - template.xverblob(1);
 if (v) {
   end = 100*(v/currentBlob);
   st = "height:20px; background:#dd0000; width:" + end + "%";
-  <div style=(st)></div>
+  <span style=(st)></span>
 }
 start = end;
 
@@ -40,10 +40,9 @@ start = end;
 if ($3) {
   v = template.xverblob($3) - template.xverblob(1);
   end = 100*(v/currentBlob);
-  st = "height:20px; background:#00dd00; width:" + end + "%";
-  <div style=(st)></div>
+  st = "height:20px; background:#00dd00; width:" + end-start + "%";
+  <span style=(st)></span>
 }
 
 </div> 
-
-%>
+</pre>
