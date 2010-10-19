@@ -64,8 +64,9 @@ if ($3) {
 if ($2) {
   st = "height:14px; top:16px; left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";
   <div style=(st)></div>
-  st = "top:28px; font-size:11px; position:absolute; color:white; text-align:right; float: right; right:" + end + "%;";
+  st = "top:28px; font-size:11px; position:absolute; color:white; left:" + start + " text-align:right; float: right; width:" + 100-start + "%;";
   <div style=(st)>(web.html("Obsolete: Gecko " + $2));</div>
 }
 </div> 
-</pre>
+
+%>
