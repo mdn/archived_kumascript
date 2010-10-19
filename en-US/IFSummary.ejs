@@ -22,16 +22,20 @@ switch($2) {
         scriptable = "Scriptable";
         break;
     }
+    scriptable = '<span style="text-color:#ddffdd; font-weight:bold;">' + scriptable + '</span>';
+    break;
   case "not scriptable":
     switch(lang) {
       default:
         scriptable = "Not scriptable";
         break;
     }
+    break;
 }
 
 <div style="border:solid #dddddd 1px;">
 <div style="background:#eeeeee; padding:2px;">(web.html(template.source($0)));<span style="text-align:right; float:right;">(web.html(scriptable));</span></div>
 (web.html($4))
 </div>
-</pre>
+
+%>
