@@ -21,13 +21,11 @@ var availLength = currentBlob - template.xverblob($0);
 
 // Compute length of initial green block
 
-var start = 0;
-var end = 0;
-
 var v = template.xverblob($1);
-end = 100*(v/availLength);
+var end = 100*(v/availLength);
 var st = "height:20px; background:#00dd00; width:" + end + "%";
 <div style=(st)></div>
-(web.html("availLength: " + availLength + ", end: " + end));
+(web.html("availLength: " + availLength + ", v: " + v + ", end: " + end));
 </div> 
-</pre>
+
+%>
