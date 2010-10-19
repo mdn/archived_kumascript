@@ -19,12 +19,14 @@ var availLength = currentBlob - template.xverblob($0);
 
 <div style="height:24px; background:#222222; padding:2px; padding-right:262px;">
 
-// Compute length of initial green block
+// Compute length of initial red block, if any. This will run from version 0.0 to $0
 
-var v = template.xverblob($1);
-var end = 100*(v/availLength);
-var st = "height:20px; background:#00dd00; width:" + end + "%";
+var start = 0;
+var v = template.xverblob($0);
+var end = 100*(v/currentBlob);
+var st = "height:20px; background:#dd0000; width:" + end + "%";
 <div style=(st)></div>
-(web.html("availLength: " + availLength + ", v: " + v + ", end: " + end + ", currentBlob: " + currentBlob));
+(web.html("v: " + v + ", end: " + end + ", currentBlob: " + currentBlob));
 </div> 
-</pre>
+
+%>
