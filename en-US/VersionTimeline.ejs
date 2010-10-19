@@ -41,9 +41,9 @@ if ($3) {
   v = template.xverblob($3) - template.xverblob(1);
   end = 100*(v/currentBlob);
   st = "height:20px; top:0px; left:" + start + "px; background:#00dd00; width:" + end-start + "%";
+  (web.html("start: " + start + ", end: " + end));
   <div style=(st)></div>
 }
 
 </div> 
-
-%>
+</pre>
