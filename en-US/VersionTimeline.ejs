@@ -27,11 +27,12 @@ var st = "";
 // Compute length of initial red block, if any. This will run from version 1.0 to $0
 
 v = template.xverblob($0) - template.xverblob(1);
+if (v) {
   end = 100*(v/currentBlob);
-  st = "height:20px; top:0px; background:#dd0000; width:" + end + "%";
+  st = "height:20px; top:0px; background:#dd0000; position:relative; width:" + end + "%";
   <div style=(st)></div>
-  start = end;
-
+}
+start = end;
 
 // Now do the green block representing "implemented"; this will go up to $3 if it exists, or $2 if that exists,
 // or to the end if neither does
@@ -39,11 +40,10 @@ v = template.xverblob($0) - template.xverblob(1);
 if ($3) {
   v = template.xverblob($3) - template.xverblob(1);
   end = 100*(v/currentBlob);
-  st = "height:20px; top:0px; left:" + start + "px; background:#00dd00; width:" + end-start + "%";
+  st = "height:20px; top:0px; left:" + start + "px; background:#00dd00; position:relative; width:" + end-start + "%";
   (web.html("start: " + start + ", end: " + end));
   <div style=(st)></div>
 }
 
 </div> 
-
-%>
+</pre>
