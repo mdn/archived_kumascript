@@ -32,7 +32,8 @@ if (v) {
   st = "height:20px; background:#dd0000; width:" + end + "%";
   <div style=(st)></div>
 }
- 
+start = end;
+
 // Now do the green block representing "implemented"; this will go up to $3 if it exists, or $2 if that exists,
 // or to the end if neither does
 
@@ -43,8 +44,6 @@ if ($3) {
   <div style=(st)></div>
 }
 
-start = end;
-v = template.xverblob($
-
 </div> 
-</pre>
+
+%>
