@@ -1,0 +1,21 @@
+
+<pre class="script">
+/* parameters: version created, version last changed, version deprecated (optional), version obsoleted (optional) */
+/* get page language first */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var introduced = "Introduced:<br>Gecko " + $0 + "<br>" + template.geckoRelease($0)
+<div style="height:24px;background:#222222;">
+(web.html(introduced));
+</div> 
+
+%>
