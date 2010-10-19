@@ -52,6 +52,12 @@ if ($3) {
   start = end;
 }
 
+// obsolete section
+ 
+if ($2) {
+  st = "height:20px; top:2px; left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";}
+  <div style=(st)></div>
+}
 </div> 
-
-%>
+</pre>
+<p> </p>
