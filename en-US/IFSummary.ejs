@@ -14,6 +14,7 @@ else if (string.StartsWith(lang, "user:")) {
 }
 
 var scriptable = "Unknown";
+var scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
 
 switch($2) {
   case "scriptable":
@@ -22,7 +23,7 @@ switch($2) {
         scriptable = "Scriptable";
         break;
     }
-    scriptable = '<span style="color:#00cc00; font-weight:bold;">' + scriptable + '</span>';
+    scriptable = '<a style="color:#00cc00; font-weight:bold;" href="' + scriptableLink + '">' + scriptable + '</span>';
     break;
   case "not scriptable":
     switch(lang) {
@@ -30,7 +31,7 @@ switch($2) {
         scriptable = "Not scriptable";
         break;
     }
-    scriptable = '<span style="color:#cc0000; font-weight:bold;">' + scriptable + '</span>';
+    scriptable = '<a style="color:#cc0000; font-weight:bold;">' + scriptable + '</span>';
     break;
 }
 
@@ -39,5 +40,4 @@ switch($2) {
 <span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;">(web.html($4));</span>
 <div style="background:#eeeeee; padding:2px;">(web.html("Inherits from: " + template.interface($1)));<span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
-
-%>
+</pre>
