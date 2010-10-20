@@ -58,6 +58,11 @@ switch(string.tolower($2)) {
 if ($1 != "") {
   (web.html("Inherits from: " + template.interface($1)));
 }
+else
+{
+<span></span>
+}
 <span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
-</pre>
+
+%>
