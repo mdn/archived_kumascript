@@ -6,11 +6,11 @@
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
+  lang = string.substr(lang, 8);
 }
 /* fall back to page.language on a user page */
 else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
+ lang = page.language;
 }
 
 /* defaults to English */
@@ -20,35 +20,35 @@ var notscriptable = "Not scriptable";
 var scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
 
 switch(lang) {
-  case "fr":
-    var scriptable = "Scriptable";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "fr/Interfaces/À_propos_des_interfaces_scriptables";
-    break;
-  case "ja":
-    var scriptable = "Scriptable";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces";
-    break;
-  case "ko":
-    var scriptable = "스크립트에서 사용 가능";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "ko/Interfaces/About_Scriptable_Interfaces";
-    break;
-  case "pl":
-    var scriptable = "skryptowalny";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
-    break;
+  case "fr":
+    var scriptable = "Scriptable";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "fr/Interfaces/À_propos_des_interfaces_scriptables";
+    break;
+  case "ja":
+    var scriptable = "Scriptable";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces";
+    break;
+  case "ko":
+    var scriptable = "스크립트에서 사용 가능";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "ko/Interfaces/About_Scriptable_Interfaces";
+    break;
+  case "pl":
+    var scriptable = "skryptowalny";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
+    break;
 }
 
-switch($2) {
-  case "scriptable":
-    scriptableOutput = '<a style="color:#00cc00; font-weight:bold;" href="' + scriptableLink + '">' + scriptable + '</a>';
-    break;
-  case "not scriptable":
-    scriptableOutput = '<span style="color:#cc0000; font-weight:bold;">' + notscriptable + '</span>';
-    break;
+switch(string.tolower($2)) {
+  case "scriptable":
+    scriptableOutput = '<a style="color:#00cc00; font-weight:bold;" href="' + scriptableLink + '">' + scriptable + '</a>';
+    break;
+  case "not scriptable":
+    scriptableOutput = '<span style="color:#cc0000; font-weight:bold;">' + notscriptable + '</span>';
+    break;
 }
 
 <div style="border:solid #dddddd 2px; margin-right:262px;">
@@ -56,6 +56,4 @@ switch($2) {
 <span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;">(web.html($4));</span>
 <div style="background:#eeeeee; padding:2px;">(web.html("Inherits from: " + template.interface($1)));<span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
-
-
 %>
