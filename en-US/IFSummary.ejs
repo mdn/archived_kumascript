@@ -13,32 +13,48 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var scriptable = "Unknown";
+var scriptableOutput = "Unknown";
+
+var scriptable = "Scriptable";
+var notscriptable = "Not scriptable";
 var scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
 
-switch($2) {
-  case "scriptable":
-    switch(lang) {
-      default:
-        scriptable = "Scriptable";
-        break;
-    }
-    scriptable = '<a style="color:#00cc00; font-weight:bold;" href="' + scriptableLink + '">' + scriptable + '</a>';
-    break;
-  case "not scriptable":
-    switch(lang) {
-      default:
-        scriptable = "Not scriptable";
-        break;
-    }
-    scriptable = '<span style="color:#cc0000; font-weight:bold;">' + scriptable + '</span>';
-    break;
+switch(lang) {
+  case "fr":
+    var scriptable = "Scriptable";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "fr/Interfaces/À_propos_des_interfaces_scriptables";
+    break;
+  case "ja":
+    var scriptable = "Scriptable";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces";
+    break;
+  case "ko":
+    var scriptable = "스크립트에서 사용 가능";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "ko/Interfaces/About_Scriptable_Interfaces";
+    break;
+  case "pl":
+    var scriptable = "skryptowalny";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
+    break;
+}
+
+switch($2) {
+  case "scriptable":
+    scriptableOutput = '<a style="color:#00cc00; font-weight:bold;" href="' + scriptableLink + '">' + scriptable + '</a>';
+    break;
+  case "not scriptable":
+    scriptableOutput = '<span style="color:#cc0000; font-weight:bold;">' + notscriptable + '</span>';
+    break;
 }
 
 <div style="border:solid #dddddd 2px; margin-right:262px;">
-<div style="background:#eeeeee; padding:2px;">(web.html(template.source($0)));<span style="text-align:right; float:right;">(web.html(scriptable));</span></div>
+<div style="background:#eeeeee; padding:2px;">(web.html(template.source($0)));<span style="text-align:right; float:right;">(web.html(scriptableOutput));</span></div>
 <span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;">(web.html($4));</span>
 <div style="background:#eeeeee; padding:2px;">(web.html("Inherits from: " + template.interface($1)));<span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
 
-%>
+</pre>
