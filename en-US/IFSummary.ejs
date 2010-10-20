@@ -13,8 +13,8 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
+/* defaults to English */
 var scriptableOutput = "Unknown";
-
 var scriptable = "Scriptable";
 var notscriptable = "Not scriptable";
 var scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
@@ -57,4 +57,5 @@ switch($2) {
 <div style="background:#eeeeee; padding:2px;">(web.html("Inherits from: " + template.interface($1)));<span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
 
-</pre>
+
+%>
