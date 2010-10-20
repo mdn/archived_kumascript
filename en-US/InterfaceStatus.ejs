@@ -11,8 +11,7 @@ switch(string.tolower($4)) {
     break;
 }
 
-var gecko = string.replace(string.replace(string.replace(string.tolower($3), "gecko"),"mozilla")," ");
-
+/*var gecko = $3;*/
+var gecko = string.replace(string.replace(string.replace(string.tolower($3), "gecko" , "") ,"mozilla", "") ," ", ""); 
 template.IFSummary($1, "", scriptable, gecko, "");
-
-%>
+</pre>
