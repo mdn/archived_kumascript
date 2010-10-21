@@ -35,7 +35,12 @@ var st = "";
 // Draw version legend
 
 <div style="top:22px; font-size:11px; position:absolute;">(web.html("1.0"));</div>
-<div style="top:22px; font-size:11px; position:absolute; text-align:right; width:100%;">(currentGecko)</div>
+
+// Only draw the "current version" legend if obsolete doesn't collide with it
+
+if ($2 != currentGecko) {
+  <div style="top:22px; font-size:11px; position:absolute; text-align:right; width:100%;">(currentGecko)</div>
+}
 
 // Compute length of initial red block, if any. This will run from version 1.0 to $0
 
@@ -114,5 +119,4 @@ if ($1) {
   st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
   <div style=(st) title=(title)></div>
 }
-</div>
-%>
+</div></pre>
