@@ -58,7 +58,8 @@ start = end;
 // Now do the green block representing "implemented"; this will go up to $3 if it exists, or $2 if that exists,
 // or to the end if neither does
 
-  introTitle = "Introduced in Gecko " + $0 + " " + template.GeckoRelease($0) + ".";if ($3) {
+  introTitle = "Introduced in Gecko " + $0 + " " + template.GeckoRelease($0);
+if ($3) {
   v = template.xverblob($3) - unitBlob;
   end = 100*(v/currentBlob);
   st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
@@ -77,7 +78,7 @@ start = end;
     <div style=(st)>(web.html("Gecko " + $3));</div>
    }
   st = barTopHeight + "left:" + start + "%; background:#ff8000; position:absolute; width:" + end-start + "%";
-  title = "Deprecated in Gecko " + $3 + " " + template.GeckoRelease($3) + ".";
+  title = "Deprecated in Gecko " + $3 + " " + template.GeckoRelease($3);
   <div style=(st) title=(title)></div>
   start = end;
 } else if ($2) {
@@ -96,7 +97,7 @@ start = end;
 // obsolete section
  
 if ($2) {
-  title = "Obsolete in Gecko " + $2 + " " + template.geckoRelease($2) + ".";
+  title = "Obsolete in Gecko " + $2 + " " + template.geckoRelease($2);
   st = barTopHeight + "left:" + start + "%; background:#000000; position:absolute; width:" + 100-start + "%";
   <div style=(st) title=(title)></div>
   st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
@@ -107,4 +108,5 @@ if ($2) {
 </div>
 <br />
 <br />
-</pre>
+
+%>
