@@ -39,7 +39,11 @@ var st = "";
 
 // Compute length of initial red block, if any. This will run from version 1.0 to $0
 
-v = template.xverblob($0) - unitBlob;
+var startVer = $0;
+if (startVer < 1) {
+  startVer = 1;    // deal with cases where the start version predates 1.0
+}
+v = template.xverblob(startVer) - unitBlob;
 if (v) {
   end = 100*(v/currentBlob);
   st = barTopHeight + "background:#dd0000; position:absolute; width:" + end + "%";
@@ -101,5 +105,4 @@ if ($2) {
 </div>
 <br />
 <br />
-
-%>
+</pre>
