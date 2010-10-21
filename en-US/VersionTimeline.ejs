@@ -109,13 +109,12 @@ if ($2) {
 // draw an indicator for the last-changed version
 
 if ($1) {
-  start = (100 * ((template.xverblob($0) - unitBlob) / currentBlob)) - 0.5;
-  title = "Last changed in Gecko " + $0 + " " + template.geckoRelease($0);
-  st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%;";
+  start = (100 * ((template.xverblob($1) - unitBlob) / currentBlob)) - 0.5;
+  title = "Last changed in Gecko " + $1 + " " + template.geckoRelease($0);
+  st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
   <div style=(st) title=(title)></div>
 }
 </div>
 <br />
 <br />
-
-%>
+</pre>
