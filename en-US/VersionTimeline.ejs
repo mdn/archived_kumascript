@@ -12,8 +12,8 @@ var unitBlob = template.xverblob(1);
 
 // Variables defining positioning of items in the diagram
 
-var barTopHeight = "height:14px; top:16px;";
-var underTextTop = "top:28px;";
+var barTopHeight = "height:8px; top:16px;";
+var underTextTop = "top:22px;";
 
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
   lang = string.substr(lang, 8);
@@ -91,7 +91,7 @@ if ($3) {
 // obsolete section
  
 if ($2) {
-  st = barTopHeight + "left:" + start + "%; background:#dd0000; position:absolute; width:" + 100-start + "%";
+  st = barTopHeight + "left:" + start + "%; background:#000000; position:absolute; width:" + 100-start + "%";
   <div style=(st)></div>
   st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
   <div style=(st)>(web.html("Obsolete"));</div>
@@ -101,5 +101,4 @@ if ($2) {
 </div>
 <br />
 <br />
-
-%>
+</pre>
