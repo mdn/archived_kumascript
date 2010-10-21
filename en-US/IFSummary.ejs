@@ -1,6 +1,7 @@
 
 <pre class="script">
-/* parameters: path of IDL, parent class, scriptable/not scriptable, last Gecko version changed in, summary */
+/* parameters: path of IDL, parent class, scriptable/not scriptable, last Gecko version changed in, summary (optional) */
+/* version introduced, version deprecated, version obsoleted (all optional; timeline will draw if version introduced provided) */
 /* get page language first */
 
 var u = uri.parts(Page.uri);
@@ -54,6 +55,9 @@ switch(string.tolower($2)) {
 <div style="border:solid #dddddd 2px; margin-right:262px; margin-bottom:12px;">
 <div style="background:#eeeeee; padding:2px;">(web.html(template.source($0)));<span style="text-align:right; float:right;">(web.html(scriptableOutput));</span></div>
 <span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;">(web.html($4));</span>
+if ($5) {
+  template.VersionTimeline($5, $3, $7, $6);
+}
 <div style="background:#eeeeee; padding:2px;">
 if ($1 != "") {
   (web.html("Inherits from: " + template.interface($1)));
@@ -64,5 +68,4 @@ else
 }
 <span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
-
-%>
+</pre>
