@@ -96,8 +96,9 @@ if ($3) {
 // obsolete section
  
 if ($2) {
-  st = barTopHeight + "left:" + start + "%; background:#000000; position:absolute; width:" + 100-start + "%";
-  <div style=(st)></div>
+  title = "Obsolete in Gecko " + $2 + " " + template.geckoRelease($2) + ".";
+  st = barTopHeight + "left:" + start + "%; background:#000000; position:absolute; width:" + 100-start + "%";
+  <div style=(st) title=(title)></div>
   st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
   <div style=(st)>(web.html("Obsolete"));</div>
   st = underTextTop + "font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
@@ -106,4 +107,5 @@ if ($2) {
 </div>
 <br />
 <br />
-</pre>
+
+%>
