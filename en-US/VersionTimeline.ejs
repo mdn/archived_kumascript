@@ -58,11 +58,11 @@ start = end;
 // Now do the green block representing "implemented"; this will go up to $3 if it exists, or $2 if that exists,
 // or to the end if neither does
 
-if ($3) {
+  introTitle = "Introduced in Gecko " + $0 + " " + template.GeckoRelease($0) + ".";if ($3) {
   v = template.xverblob($3) - unitBlob;
   end = 100*(v/currentBlob);
-  st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
-  <div style=(st)></div>
+  st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
+  <div style=(st) title=(introTitle)></div>
   start = end;
 
   // now do the deprecated part
@@ -84,12 +84,12 @@ if ($3) {
   v = template.xverblob($2) - unitBlob;
   end = 100*(v/currentBlob);
   st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
-  <div style=(st)></div>
+  <div style=(st) title=(introTitle)></div>
   start = end;
 } else {
   end = 100;
   st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
-  <div style=(st)></div>
+  <div style=(st) title=(introTitle)></div>
   start = end;
 }
 
@@ -107,5 +107,4 @@ if ($2) {
 </div>
 <br />
 <br />
-
-%>
+</pre>
