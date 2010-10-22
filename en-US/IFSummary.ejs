@@ -58,9 +58,6 @@ var summary = $4;
 if (!$4 || $4 == "") {
   summary = "<i>Please add a summary to this article.</i>";
 }
-else if ($4 == "--InterfaceStatus--") {
-  summary = "";
-}
 <span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;">(web.html(summary));</span>
 if ($5) {
   template.VersionTimeline($5, $3, $7, $6);
@@ -75,4 +72,5 @@ else
 }
 <span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
-</pre>
+
+%>
