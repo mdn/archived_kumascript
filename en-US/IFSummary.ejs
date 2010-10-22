@@ -55,7 +55,7 @@ switch(string.tolower($2)) {
 <div style="border:solid #dddddd 2px; margin-right:262px; margin-bottom:12px;">
 <div style="background:#eeeeee; padding:2px;">(web.html(template.source($0)));<span style="text-align:right; float:right;">(web.html(scriptableOutput));</span></div>
 var summary = $4;
-if (!$4 || $4 == "") {
+if (!$4) {
   summary = "<i>Please add a summary to this article.</i>";
 }
 <span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;">(web.html(summary));</span>
@@ -72,5 +72,4 @@ else
 }
 <span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
-
-%>
+</pre>
