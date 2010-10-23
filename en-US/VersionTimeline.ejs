@@ -60,9 +60,9 @@ if (v) {
   }
   <div style=(st)>(web.html("Introduced"));</div>
   if (startVer == currentGecko) {
-    st = underTextTop + "font-size:11px; position:absolute; left:" + end + "%;";
+    st = underTextTop + "font-size:11px; position:absolute; text-align:right; left:" + end + "%;";
   } else {
-    st = underTextTop + "font-size:11px; position:absolute; text-align:right; width:" + end + "%;";
+    st = underTextTop + "font-size:11px; position:absolute; width:" + end + "%;";
   }
   <div style=(st)>(web.html("Gecko " + $0));</div>
 }
@@ -127,4 +127,5 @@ if ($1) {
   st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
   <div style=(st) title=(title)></div>
 }
-</div></pre>
+</div>
+%>
