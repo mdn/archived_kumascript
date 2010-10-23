@@ -36,9 +36,9 @@ var st = "";
 
 <div style="top:22px; font-size:11px; position:absolute;">(web.html("1.0"));</div>
 
-// Only draw the "current version" legend if obsolete doesn't collide with it
+// Only draw the "current version" legend if nothing collides with it
 
-if ($2 != currentGecko) {
+if (($2 != currentGecko) && ($0 != currentGecko) && ($3 != currentGecko)) {
   <div style="top:22px; font-size:11px; position:absolute; text-align:right; width:100%;">(currentGecko)</div>
 }
 
@@ -127,4 +127,5 @@ if ($1) {
   st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
   <div style=(st) title=(title)></div>
 }
-</div></pre>
+</div>
+%>
