@@ -53,9 +53,17 @@ if (v) {
   end = 100*(v/currentBlob);
   st = barTopHeight + "background:#dd0000; position:absolute; width:" + end + "%";
   <div style=(st)></div>
-  st = "top:0px; font-size:11px; position:absolute; left:" + end + "%;";
+  if (startVer == currentGecko) {
+    st = "top:0px; font-size:11px; position:absolute; width:" + end + "%;";
+  } else {
+    st = "top:0px; font-size:11px; position:absolute; left:" + end + "%;";    
+  }
   <div style=(st)>(web.html("Introduced"));</div>
-  st = underTextTop + "font-size:11px; position:absolute; left:" + end + "%;";
+  if (startVer == currentGecko) {
+    st = underTextTop + "font-size:11px; position:absolute; left:" + end + "%;";
+  } else {
+    st = underTextTop + "font-size:11px; position:absolute; width:" + end + "%;";
+  }
   <div style=(st)>(web.html("Gecko " + $0));</div>
 }
 start = end;
@@ -63,7 +71,7 @@ start = end;
 // Now do the green block representing "implemented"; this will go up to $3 if it exists, or $2 if that exists,
 // or to the end if neither does
 
-  introTitle = "Introduced in Gecko " + $0 + " " + template.GeckoRelease($0);
+introTitle = "Introduced in Gecko " + $0 + " " + template.GeckoRelease($0);
 if ($3) {
   v = template.xverblob($3) - unitBlob;
   end = 100*(v/currentBlob);
@@ -119,4 +127,5 @@ if ($1) {
   st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
   <div style=(st) title=(title)></div>
 }
-</div></pre>
+</div>
+%>
