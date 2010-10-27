@@ -5,7 +5,9 @@
 /* $1 = link text (optional) */
 /* $2 = status of specification (optional). Possible values: WD, LC, CR, PR, REC. */
 
-switch($2) {
+var status = $2;
+
+switch(status) {
   case 'WD':
     color = "#ff0";
     title = "Working Draft";
@@ -31,8 +33,7 @@ switch($2) {
 web.link( $0, ($1 || $0) );
 
 if ($2) {
-  status = '<span title="(title)" style="background-color:(color); font-size: x-small; white-space: nowrap; padding: 2px;">($2)</span>'; 
+  status = '<span title="(title)" style="background-color:(color); font-size: x-small; white-space: nowrap; padding: 2px;">(status)</span>'; 
   web.html(status);
 }
-
-%>
+</pre>
