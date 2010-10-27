@@ -6,6 +6,8 @@
 /* $2 = status of specification (optional). Possible values: WD, LC, CR, PR, REC. */
 
 var status = $2;
+var title = "";
+var color = "";
 
 switch(status) {
   case 'WD':
@@ -35,5 +37,4 @@ web.link( $0, ($1 || $0) );
 if ($2) {
   <span title=(title) style=('background-color:' + color+ '; font-size: x-small; white-space: nowrap; padding: 2px;')>(status)</span>
 }
-
-%>
+</pre>
