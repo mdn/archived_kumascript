@@ -33,7 +33,6 @@ switch(status) {
 web.link( $0, ($1 || $0) );
 
 if ($2) {
-  web.html("<span title='(title)' style='background-color:(color); font-size: x-small; white-space: nowrap; padding: 2px;'>(status)</span>");
+  web.html('<span title="(web.text(title))" style="background-color:(web.text(color)); font-size: x-small; white-space: nowrap; padding: 2px;">(web.text(status))</span>');
 }
-
-%>
+</pre>
