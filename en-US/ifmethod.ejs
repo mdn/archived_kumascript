@@ -12,15 +12,14 @@ if(string.Contains(lang, "project")) {
 else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
-var destOldType = lang + '/' + $0;
 var destNewType = lang + '/XPCOM Interface Reference/' + $0;
+var destOldType = lang + '/' + $0;
 var apiString = $0 + '.' + $1 + '()';
-if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
-    <code>(web.link(wiki.uri(destOldType) + '#' + $1 + '()', apiString))</code>;
-} else if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
+if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
     <code>(web.link(wiki.uri(destNewType) + '#' + $1 + '()', apiString))</code>;
+} else if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
+    <code>(web.link(wiki.uri(destOldType) + '#' + $1 + '()', apiString))</code>;
 } else { /* the page doesn't exist */
     <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)</span> + '#' + $1 + '()'<span>) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>(apiString)</<span class="end-tag">a></span></code>;
 }
-
-%>
+</pre>
