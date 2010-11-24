@@ -10,14 +10,19 @@ else if (string.StartsWith(lang, "user:")) {
   lang = page.language;
 }
 var name = $0;
+var sectionname = "Element";
+
+if (!string.compare("es", string.tolower(lang)) {
+  sectionname = "Elemento";
+}
+
 if (args.title) {
   name = args.title;
 }
-var dest = lang + '/' + 'HTML/Element/' + name;
+var dest = lang + '/' + 'HTML/' + sectionname + '/' + name;
 
 if (wiki.pageExists(dest)) { /* the page exists */
   <code>(web.link(wiki.uri(dest), '<' + name + '>'))</code>;
 } else { /* the page doesn't exist */
   <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')><web.text(name)></a></code>
-}
-%>
+}</pre>
