@@ -25,6 +25,13 @@ switch(lang) {
       link = "/fr/HTML/HTML5";
     }
     break;
+  case "es":
+    msgStart = "Introducido en ";
+    msgEnd = "";
+    if ($0 == "5") {
+      link = "/es/HTML/HTML5";
+    }
+    break;
   default:
     msgStart = "Introduced in ";
     msgEnd = "";
@@ -39,5 +46,4 @@ switch(lang) {
     msgStart;if (link != "") {web.link(link, "HTML " + $0);} else {web.text("HTML " + $0)}msgEnd;
   </p>
 </div>
-
-%>
+</pre>
