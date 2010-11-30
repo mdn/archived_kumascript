@@ -1,36 +1,43 @@
 
 <div class="noinclude"><span class="script">template("Non-standard_header")</span><hr />
 </div>
-<p />
+<pre class="script">
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "Non-standard";
+
+switch(lang) {
+  case 'de':
+    str = "Kein Standard";
+    break;
+  case 'fr':
+    str = "Non standard";
+    break;
+  case 'ja':
+    str = "非標準";
+    break;
+  case 'pl':
+    str = "Niestandardowy";
+    break;
+  case 'ru':
+    str = "Не стандартно";
+    break;
+}
+
 <div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Non-standard</p>
+  <p style="margin: 4px 0px 4px 0px;">
+    str;
+  </p>
 </div>
-<p><span lang="*" class="lang lang-*">
-<div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Non-standard</p>
-</div>
-</span><span lang="de" class="lang lang-de">
-<div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Kein Standard</p>
-</div>
-</span><span lang="fr" class="lang lang-fr">
-<div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Non standard</p>
-</div>
-</span><span lang="ja" class="lang lang-ja">
-<div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">非標準</p>
-</div>
-</span><span lang="pl" class="lang lang-pl">
-<div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Niestandardowy</p>
-</div>
-</span><span lang="ru" class="lang lang-ru">
-<div style="overflow: hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Не стандартно</p>
-</div>
-<p />
-<div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">No estándar</p>
-</div>
-</span></p>
+
+%>
