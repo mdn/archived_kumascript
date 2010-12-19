@@ -1,0 +1,36 @@
+
+<pre class="script">
+/* one parameter: path of sample's file under developer.mozilla.org/+. */
+/* Example: {{LiveSample("samples/svg/svganimdemo1.html")}} */
+/* Other templates: CSSLiveSample, DOMLiveSample, SVGLiveSample */
+
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "View the live example";
+var target = "/" + $0;
+
+if (string.StartsWith($0, "/")) {
+  target = $0;
+}
+
+// Localizers: add a case to this switch statement
+// for your language
+
+switch(lang) {
+  case 'de':
+    str = "Live-Beispiel ansehen";
+    break;
+}
+
+<a href=(target)><span style="cursor:pointer; padding: 5px; border: solid 1px #333; color: black; -moz-box-shadow:1px 1px 0 #ccc; -webkit-box-shadow:1px 1px 0 #ccc; -o-box-shadow:1px 1px 0 #ccc; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; background:-moz-linear-gradient(90deg, #FEF49C, #FFFFFF);">(web.text(str))</span></a>
+
+%>
