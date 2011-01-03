@@ -34,11 +34,10 @@ var destOldType = lang + '/XUL:' + propName + ':' + $0;
 var destNewType = lang + '/XUL/' + propName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
- <code><span id=(anch)>(web.link(wiki.uri(destNewType), dispApi))</span></code>
+ <code><span>(web.link(wiki.uri(destNewType), dispApi))</span></code>
 } else if (wiki.pageExists(destOldType)) {
-  <code><span id=(anch)>(web.link(wiki.uri(destOldType), dispApi))</span></code>
+  <code><span>(web.link(wiki.uri(destOldType), dispApi))</span></code>
 } else {
   <code><a rel=('internal') href=(wiki.uri(destNewType)) class=('new')>$0</a></code>;
 }
-
-%>
+</pre>
