@@ -20,12 +20,12 @@ if (string.endswith($0, '()')) {
 var destOldType = lang + '/' + 'DOM:' + api;
 var destNewType = lang + '/' + 'DOM/' + api;
 
+if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
+    <code>(web.link(wiki.uri(destNewType),$0))</code>;
+} else 
 if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
     <code>(web.link(wiki.uri(destOldType),$0))</code>;
-} else if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
-    <code>(web.link(wiki.uri(destNewType),$0))</code>;
 } else { /* the page doesn't exist */
     <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
 }
-
-%>
+</pre>
