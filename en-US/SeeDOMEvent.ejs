@@ -15,7 +15,7 @@ else if (string.StartsWith(lang, "user:")) {
 }
 
 var str = "";
-var target = lang + "DOM/Event/" + $1;
+var target = "/" + lang + "/DOM/Event/" + $1;
 
 switch(lang) {
   default:
@@ -24,5 +24,4 @@ switch(lang) {
 }
 
 web.html(str);
-
-%>
+</pre>
