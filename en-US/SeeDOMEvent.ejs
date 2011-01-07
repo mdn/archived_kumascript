@@ -1,0 +1,28 @@
+
+<pre class="script">
+/* generates a basic "this Gecko interface implements this standard DOM event" page */
+/* two parameters: Gecko interface name, DOM event name */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "";
+var target = lang + "DOM/Event/" + $1;
+
+switch(lang) {
+  default:
+    str = "The " + template.interface($0) + " interface implements the DOM " + template.domxref($1) + " interface. See that page for details.";
+    break;
+}
+
+web.html(str);
+</pre>
+<p> </p>
