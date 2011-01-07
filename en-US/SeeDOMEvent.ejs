@@ -19,9 +19,10 @@ var target = lang + "DOM/Event/" + $1;
 
 switch(lang) {
   default:
-    str = "The " + template.interface($0) + " interface implements the DOM " + target + " interface. See that page for details.";
+    str = "The " + template.interface($0) + " interface implements the DOM " + web.link(target, $1) + " interface. See that page for details.";
     break;
 }
 
 web.html(str);
-</pre>
+
+%>
