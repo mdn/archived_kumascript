@@ -1,0 +1,31 @@
+
+<pre class="script">
+/* one parameter: JavaScript version (optional) */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "";
+var dest = "";
+
+switch(lang) {
+  case 'en':
+    str = "Obsolete";
+    if ($0) {
+      str = str + " in JavaScript " + $0;
+      dest = "en/JavaScript/New in JavaScript/" + $0;
+    }
+    break;
+}
+
+<span style="border: 1px solid rgb(255, 153, 153); background-color: rgb(255, 219, 219); font-size: x-small; white-space: nowrap; padding: 0px 2px;">(if (string.length(dest)) {web.link(dest, str)} else { web.text(str)})</span>
+
+%>
