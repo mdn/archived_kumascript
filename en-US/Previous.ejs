@@ -1,12 +1,16 @@
 
-<p><span lang="en" class="lang lang-en">
+<p />
 <div class="prevnext">
 <pre class="script">
 /* get a page's language (Don't use page.language!) */
-var u = Uri.Parts(Page.uri);
-var lang = u.path[0];
-if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
- lang = string.Substr(lang, 8);
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
 }
 
 /* assume English */
@@ -39,4 +43,3 @@ if (!string.compare(lang, "de", true)) {
 <br />
 </pre>
 </div>
-</span></p>
