@@ -1,22 +1,45 @@
 
-<p />
+<pre class="script">
+/* optional parameter: bug number */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "Unimplemented";
+var see = "see";
+ 
+switch(lang) {
+  case 'fr':
+    str = "Non implémenté";
+    break;
+  case 'de':
+    str = "Nicht implementiert";
+    see = "siehe";
+    break;
+  case 'ja':
+    str = "未実装";
+    see = "参照";
+    break;
+  case 'es':
+    str = "No implementado";
+    see = "mira";
+    break;
+}
+
+if ($0) {
+  str = str + " (" + see + bug($0) + ")";
+}
+
 <div style="overflow:hidden; border: 1px solid rgb(255, 205, 154); background-color: rgb(255, 153, 204); font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Unimplemented</p>
+<p style="margin: 4px 0px 4px 0px;">(web.html(str))</p>
 </div>
-<p><span lang="de" class="lang lang-de">
-<div style="overflow:hidden; border: 1px solid rgb(255, 205, 154); background-color: rgb(255, 153, 204); font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Nicht implementiert</p>
-</div>
-</span><span lang="fr" class="lang lang-fr">
-<div style="overflow:hidden; border: 1px solid rgb(255, 205, 154); background-color: rgb(255, 153, 204); font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Inimplémenté</p>
-</div>
-</span><span lang="ja" class="lang lang-ja">
-<div style="overflow:hidden; border: 1px solid rgb(255, 205, 154); background-color: rgb(255, 153, 204); font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">未実装</p>
-</div>
-<p />
-<div style="overflow:hidden; border: 1px solid rgb(255, 205, 154); background-color: rgb(255, 153, 204); font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">No implementado</p>
-</div>
-</span></p>
+</pre>
+<p class="noinclude"><span class="script">Unimplemented_header()</span></p>
