@@ -19,10 +19,9 @@ var title = "";
 switch(lang) {
   default:
     str = "Mobile Only in Gecko " + $0;
-    title = "Available only in Firefox Mobile as of Gecko $0 " + template.geckoRelease($0);
+    title = "Available only in Firefox Mobile as of Gecko " + $0 + " " + template.geckoRelease($0);
     break;
 }
 
 <span title=(title) style="border: 1px solid rgb(129, 129, 81); background-color: rgb(255, 225, 190); font-size: x-small; white-space: nowrap; padding: 0px 2px;">(web.text(str))</span>
-
-%>
+</pre>
