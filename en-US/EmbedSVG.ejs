@@ -5,7 +5,7 @@ var allFiles = map.values(page.files);
 foreach(var aFile in allFiles) {
   if (string.compare($0, aFile.name, true) == 0) {
     found=true;
-    <pre function="syntax2.Svg" class="deki-transform">(web.text(aFile.uri))</pre>
+    <pre function="Svg" class="deki-transform">(web.text(aFile.uri))</pre>
     break;
   }
 }
@@ -13,5 +13,4 @@ foreach(var aFile in allFiles) {
 if (found == false) {
   web.html("<p>Unable to find file '" + $0 + "'.</p>");
 }
-
-%>
+</pre>
