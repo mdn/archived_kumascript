@@ -1,2 +1,16 @@
 
-<p><span class="script">svg(web.text($0))</span></p>
+<pre class="script">
+var found=false;
+var allFiles = map.values(page.files);
+foreach(var aFile in allFiles) {
+  if (string.compare($0, aFile.name, true) == 0) {
+    found=true;
+    svg((web.text(aFile.uri));
+    break;
+  }
+}
+
+if (found == false) {
+  web.html("<p>Unable to find file '" + $0 + "'.</p>");
+}
+</pre>
