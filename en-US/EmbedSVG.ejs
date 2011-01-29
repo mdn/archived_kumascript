@@ -5,7 +5,7 @@
   foreach(var aFile in allFiles) {<br />
     if (string.compare(args[0], aFile.name, true) == 0) {<br />
       found = true;<br />
-      syntax[Svg](aFile.uri);<br />
+      syntax.Svg(aFile.uri);<br />
       break;<br />
     }<br />
   }<br />
