@@ -21,11 +21,10 @@ switch(lang) {
 
 /* check $0 exists */
 if(wiki.pageExists(lang + str + $0)) {
-<code>(web.link(wiki.uri(lang + str + $0), $0))</code>;
+  <code>(web.link(wiki.uri(lang + str + $0), $0))</code>;
 } else if(wiki.pageExists(lang + '/' + $0)) {
-    <code>(web.link(wiki.uri(lang + '/' + $0), $0))</code>;
+  <code>(web.link(wiki.uri(lang + '/' + $0), $0))</code>;
 } else {
-    <code><a rel=('internal') href=(wiki.uri(lang + str + $0)) class=('new')>$0</a></code>
+  <code><a rel=('internal') href=(wiki.uri(lang + str + $0)) class=('new')>$0</a></code>
 }
-
-%>
+</pre>
