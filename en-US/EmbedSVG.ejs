@@ -1,6 +1,6 @@
 
 <pre class="script">
-var width = "100%";
+var width = 250;
 var height = 250;
 if ($1 > 0) {
     width = $1;
@@ -14,12 +14,11 @@ var allFiles = map.values(page.files);
 foreach(var aFile in allFiles) {
   if (string.compare($0, aFile.name, true) == 0) {
     found=true;
-    svg(web.text(aFile.uri), web.text(width), web.text(height));
+    svg(web.text(aFile.uri), width, height);
     break;
   }
 }
 if (found == false) {
   web.html("<p>Unable to find file '" + $0 + "'.</p>");
 }
-
-%>
+</pre>
