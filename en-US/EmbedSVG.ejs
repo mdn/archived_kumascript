@@ -2,10 +2,10 @@
 <pre class="script">
 var width = "100%";
 var height = 250;
-if (!(num.isnan($1) && $1 > 0)) {
+if ($1 > 0) {
     width = $1;
 }
-if (!(num.isnan($2) && $2 > 0)) {
+if ($2 > 0) {
     height = $2;
 }
 
@@ -21,5 +21,4 @@ foreach(var aFile in allFiles) {
 if (found == false) {
   web.html("<p>Unable to find file '" + $0 + "'.</p>");
 }
-
-%>
+</pre>
