@@ -1,6 +1,4 @@
 
-<div class="noinclude">Example: <span class="script">cssxref("border-color")</span><hr />
-</div>
 <pre class="script">
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
@@ -8,7 +6,6 @@ var lang = u.path[0];
 if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
  lang = string.Substr(lang, 8);
 }
-
 /* check $0 exists */
 if(wiki.pageExists(lang + '/CSS/' + $0)) {
     <code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;
