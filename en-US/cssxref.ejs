@@ -11,9 +11,8 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 /* check $0 exists */
-if(wiki.pageExists(lang + '/CSS/' + $0)) {
-    <code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;
-} else {
-    <code><a rel=('internal') href=(wiki.uri(lang + '/CSS/' + $0)) class=('new')>($1 || $0)</a></code>;
-}
-%>
+if(wiki.pageExists(lang + '/CSS/' + $0))
+    {<code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;}
+else
+    {<code><a rel=('internal') href=(wiki.uri(lang + '/CSS/' + $0)) class=('new')>($1 || $0)</a></code>;}
+</pre>
