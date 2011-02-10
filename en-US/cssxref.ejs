@@ -1,16 +1,4 @@
 
 <pre class="script">
-/* get a page's language (Don't use page.language!) */
-var u = Uri.Parts(Page.uri);
-var lang = string.toLower(u.path[0]);
-if(string.Contains(lang, "project")) {
- lang = string.Substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-/* check $0 exists */
-if(wiki.pageExists(lang + '/CSS/' + $0)) {<code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;} else {<code><a rel=('internal') href=(wiki.uri(lang + '/CSS/' + $0)) class=('new')>($1 || $0)</a></code>;}
-
-%>
+var u = Uri.Parts(Page.uri);var lang = string.toLower(u.path[0]);if(string.Contains(lang, "project")) {lang = string.Substr(lang, 8);} else if (string.StartsWith(lang, "user:")) {lang = page.language;} if(wiki.pageExists(lang + '/CSS/' + $0)) {<code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;} else {<code><a rel=('internal') href=(wiki.uri(lang + '/CSS/' + $0)) class=('new')>($1 || $0)</a></code>;}
+</pre>
