@@ -13,8 +13,7 @@ else if (string.StartsWith(lang, "user:")) {
 var dest = lang + '/' + 'SpiderMonkey/JSAPI_Reference/' + $0;
 
 if (wiki.pageExists(dest)) { /* the page exists */
-    <code>(web.link(wiki.uri(dest), '<' + $0 + '>'))</code>;
+    <code>(web.link(wiki.uri(dest), $0))</code>;
 } else { /* the page doesn't exist */
-    <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')><$0></a></code>
-}
-%>
+    <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')>$0</a></code>
+}</pre>
