@@ -1,5 +1,20 @@
-<span lang='en' class='lang lang-en'><code>{{mediawiki.internal($0, "en")}}</code>
-</span><span lang='*' class='lang lang-*'><code>{{mediawiki.internal($0, "en")}}</code>
-</span><span lang='ja' class='lang lang-ja'>{{mediawiki.internal('JSAPI Reference:' + $0 + '|' + $0, "ja")}}
-</span><span lang='pl' class='lang lang-pl'>{{mediawiki.internal($0, "pl")}}
-</span>
+
+<pre class="script">
+/* accepts as input one required parameter: JSAPI page to create a xref to */ 
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+  lang = page.language;
+}
+var dest = lang + '/' + 'SpiderMonkey/JSAPI_Reference/' + $0;
+
+if (wiki.pageExists(dest)) { /* the page exists */
+    <code>(web.link(wiki.uri(dest), '<' + $0 + '>'))</code>;
+} else { /* the page doesn't exist */
+    <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')><$0></a></code>
+}
+%>
