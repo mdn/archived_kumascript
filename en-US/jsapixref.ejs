@@ -10,10 +10,17 @@ if (string.contains(lang, "project") || string.contains(lang, "Project")) {
 else if (string.StartsWith(lang, "user:")) {
   lang = page.language;
 }
-var dest = lang + '/' + 'SpiderMonkey/JSAPI_Reference/' + $0;
+var api = $0;
+
+if (string.endswith($0, '()')) {
+    api = string.remove(api, string.length(api) - 2);
+}
+
+var dest = lang + '/' + 'SpiderMonkey/JSAPI_Reference/' + api;
 
 if (wiki.pageExists(dest)) { /* the page exists */
     <code>(web.link(wiki.uri(dest), $0))</code>;
 } else { /* the page doesn't exist */
     <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')>$0</a></code>
-}</pre>
+}
+%>
