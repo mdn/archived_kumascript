@@ -1,0 +1,19 @@
+
+<script type="text/javascript"><![CDATA[
+        $(function() {
+            $('.htab').append($('#compat-desktop'));
+            $('.htab').append($('#compat-mobile'));
+            var $items = $('.htab>ul>li');
+            $items.click(function() {
+                $items.removeClass('selected');
+                $(this).addClass('selected');
+
+                var index = $items.index($(this));
+                $('.htab>div').hide().eq(index).show();
+            }).eq(0).click();
+        });
+    ]]></script>
+<div class="htab">
+<ul> <li class="selected">Desktop</li> <li>Mobile</li>
+</ul>
+</div>
