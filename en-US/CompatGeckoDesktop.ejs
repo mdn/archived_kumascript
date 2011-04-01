@@ -1,0 +1,40 @@
+
+<pre class="script">
+var fxVer = '';
+switch($0)
+{
+  case '1.8':
+    fxVer = '1.5';
+    break;
+  case '1.8.1':
+    fxVer = '2.0';
+    break;
+  case '1.9':
+    fxVer = '3.0';
+    break;
+  case '1.9.1':
+    fxVer = '3.5';
+    break;
+  case '1.9.1.4':
+    fxVer = '3.5.4';
+    break;
+  case '1.9.2':
+    fxVer = '3.6';
+    break;
+  case '1.9.2.4':
+    fxVer = '3.6.4';
+    break;
+  case '1.9.2.5':
+    fxVer = '3.6.5';
+    break;
+  case '1.9.2.9':
+    fxVer = '3.6.9';
+    break;
+  case '2':
+  case '2.0':
+    fxVer = '4.0';
+    break;
+}
+fxVer = fxVer + "(" + $0 + ")";
+fxVer;
+%>
