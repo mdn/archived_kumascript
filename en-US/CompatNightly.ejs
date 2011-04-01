@@ -17,8 +17,12 @@ var url = '';
     case 'chrome':
       url = 'http://build.chromium.org/f/chromium/snapshots/';
       break;
-  }
+    case 'opera':
+      url = 'http://snapshot.opera.com/';
+      break;
+  }
 } if (string.length(url)) {
   str = web.link(url, str);
 }
-web.html('<em>' + str + '</em>');</pre>
+web.html('<em>' + str + '</em>');
+%>
