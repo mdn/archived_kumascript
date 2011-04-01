@@ -1,7 +1,7 @@
 
 <pre class="script">
 /* can eventually add code to link to nightlies for a specified browser */
-var str = '<em>Nightly build<em>';
+var str = 'Nightly build';
 var url = '';
 switch (string.tolower($0)) {
   case 'firefox':
@@ -20,5 +20,4 @@ switch (string.tolower($0)) {
 if (string.length(url)) {
   str = web.link(url, str);
 }
-web.text(str);
-%>
+web.html('<em>' + str + '</em>');</pre>
