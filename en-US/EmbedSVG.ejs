@@ -14,12 +14,11 @@ var allFiles = map.values(page.files);
 foreach(var aFile in allFiles) {
   if (string.compare($0, aFile.name, true) == 0) {
     found=true;
-    web.html("<object type='image/svg+xml' data='" + aFile.uri + "' width='" + width + "' height='" + height + "'>Your browser doesn't support SVG.</object>");
+    svg(web.text(aFile.uri), width, height);
     break;
   }
 }
 if (found == false) {
   web.html("<p>Unable to find file '" + $0 + "'.</p>");
 }
-
-%>
+</pre>
