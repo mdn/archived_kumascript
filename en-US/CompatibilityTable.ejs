@@ -3,6 +3,8 @@
         $(function() {
             $('.htab').append($('#compat-desktop'));
             $('.htab').append($('#compat-mobile'));
+            $('#compat-desktop').width("100%");
+            $('#compat-mobile').width("100%");
             var $items = $('.htab>ul>li');
             $items.click(function() {
                 $items.removeClass('selected');
