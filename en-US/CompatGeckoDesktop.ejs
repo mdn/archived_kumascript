@@ -1,8 +1,13 @@
 
 <pre class="script">
 var fxVer = '';
-switch($0)
+var geckoVer = $0; 
+switch(geckoVer)
 {
+  case '1.0':
+    fxVer = '1.0';
+    geckoVer = '1.7 or earlier'; 
+    break;
   case '1.7 or earlier':
   case '1.7':
     fxVer = '1.0';
@@ -39,5 +44,6 @@ switch($0)
     fxVer = '4.0';
     break;
 }
-fxVer = fxVer + " (" + $0 + ")";
-fxVer;</pre>
+fxVer = fxVer + " (" + geckoVer + ")";
+fxVer;
+%>
