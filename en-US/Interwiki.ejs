@@ -13,12 +13,13 @@ if (lang === 'zh_tw' || lang === 'cn') {
 }
 switch(prefix) {
 case 'wikipedia':
-    <a class=(prefix) title=(title) href=('http://' + lang + '.wikipedia.org/wiki' & path)> title </a>;
+    <a class=(prefix) title=(title) href=('http://' + lang + '.wikipedia.org/wiki' + path)>title</a>;
     break;
 case 'wikimo':
-    <a class=(prefix) title=(title) href=('http://wiki.mozilla.org/' + path)> title </a>;
+    <a class=(prefix) title=(title) href=('http://wiki.mozilla.org/' + path)>title</a>;
     break;
 default:
     'Unknown prefix: ' + prefix + '.';
 }
-</pre>
+
+%>
