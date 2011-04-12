@@ -2,6 +2,7 @@
 <pre class="script">
 var parts = string.split($0, "/");
 var fname = parts[#parts-1];
-var str = '<pre>#include "' + web.link('http://mxr.mozilla.org/mozilla-central/find?string=' + fname) + '"</pre>';
+var str = '<pre>#include "' + web.link('http://mxr.mozilla.org/mozilla-central/find?string=' + fname, fname) + '"</pre>';
 web.html(str);
-</pre>
+
+%>
