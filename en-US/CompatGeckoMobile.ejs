@@ -1,7 +1,7 @@
 
 <pre class="script">
 var fxVer = '';
-if (string.startswith($0, "1.")) {
+if (string.startswith($0, "1.") || !string.compare($0, "1")) {
   fxVer = '1.0';
 } else {
   switch($0) {
@@ -12,4 +12,5 @@ if (string.startswith($0, "1.")) {
   }
 }
 fxVer = fxVer + " (" + $0 + ")";
-fxVer;</pre>
+fxVer;
+%>
