@@ -10,9 +10,7 @@ if (string.contains(lang, "project") || string.contains(lang, "Project")) {
 else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
-
 var searchfor = ' Search for <code>' + $2 + '</code>';
-
 switch(lang) {
   case 'de':
     searchfor = ' Suche nach <code>' + $2 + '</code>';
