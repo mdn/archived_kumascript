@@ -3,6 +3,7 @@
 var ar = string.split($0, ".");
 var len = #ar;
 
+if (ar[0] >= 5) { ar[0] = ar[0] - 2; } /* fix for Gecko skipping from 2.0 to 5.0 */
 var b = 100000 * ar[0];	// First component is always *100000
 
 if (len > 1) {
@@ -15,5 +16,4 @@ if (len > 3) {
   b = b + ar[3];  // fourth component isn't multiplied
 }
 (b); 
-
-%>
+</pre>
