@@ -2,6 +2,7 @@
 <pre class="script">
 var parts = string.split($0, "/");
 var fname = parts[#parts-1];
-var str = '<pre>#include "' + LXRSearch("find", "string", fname, fname) + '"</pre>';
+var str = '<code>#include "' + LXRSearch("find", "string", fname, fname) + '"</code>';
 web.html(str);
-</pre>
+
+%>
