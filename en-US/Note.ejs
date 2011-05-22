@@ -1,20 +1,45 @@
 
-<p><span lang="en" class="lang lang-en">
-<div class="note"><strong>Note:</strong> <span class="script">web.html($0)</span></div>
-</span><span lang="*" class="lang lang-*">
-<div class="note"><strong>Note:</strong> <span class="script">web.html($0)</span></div>
-</span><span lang="es" class="lang lang-es">
-<div class="note"><strong>Nota:</strong> <span class="script">web.html($0)</span></div>
-</span><span lang="fr" class="lang lang-fr">
-<div class="note"><strong>Note :</strong> <span class="script">web.html($0)</span></div>
-</span><span lang="pl" class="lang lang-pl">
-<div class="note"><strong>Uwaga:</strong> <span class="script">web.html($0)</span></div>
-</span><span lang="ja" class="lang lang-ja">
-<div class="note"><strong>註:</strong> <span class="script">web.html($0)</span></div>
-</span><span lang="ko" class="lang lang-ko"> <blockquote>
-<div class="note"><strong>주의:</strong> <span class="script">web.html($0)</span></div>
-</blockquote> </span><span lang="zh-tw" class="lang lang-zh-tw"> <blockquote>
-<div class="note"><strong>註：</strong> <span class="script">web.html($0)</span></div>
-</blockquote> </span> <span lang="de" class="lang lang-de">
-<div class="note"><strong>Hinweis:</strong> <span class="script">web.html($0)</span></div>
-</span></p>
+<pre class="script">
+/* Purpose: Important paragraphs, NOT endnotes or footnotes */
+
+/* get page language first */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+/* defaults to English */
+var note = "Note:";
+
+switch(lang) {
+  case "de":
+    var note = "Hinweis:";
+    break;
+  case "es":
+    var note = "Nota:";
+    break;
+  case "fr":
+    var note = "Note:";
+    break;
+  case "ja":
+    var note = "註:";
+    break;
+  case "ko":
+    var note = "주의:";
+    break;
+  case "pl":
+    var note = "Uwaga:";
+    break;
+  case "zh-tw":
+    var note = "註：";
+    break;
+}
+
+<div class="note"><strong>web.html(note)</strong> web.html($0)</div>
+
+%>
