@@ -53,7 +53,7 @@ switch(string.tolower($2)) {
     break;
 }
 
-if (date.DiffMonths(date.now, Page.date) > 4) {
+if (date.DiffMonths(date.now, Page.date) > 10000) {
   template.note(outdated);
 }
 <div style="border:solid #dddddd 2px; margin-right:262px; margin-bottom:12px;">
@@ -76,5 +76,4 @@ else
 }
 <span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + template.geckoRelease($3)));</span></div>
 </div>
-
-%>
+</pre>
