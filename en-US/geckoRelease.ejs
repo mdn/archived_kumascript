@@ -1,59 +1,75 @@
 
 <pre class="script">
+/* Appending a "+" to the version number you specify means that version and all later versions. */
 var geckoRelease = '';
-switch($0)
+var arg = $0;
+var plus = false;
+var extraMessage = '';
+if (string.EndsWith(arg, '+')) {
+  arg = string.SubStr(arg, 0, string.Length(arg) - 1);
+  plus = true;
+}
+switch(arg)
 {
   case '1.8':
-    geckoRelease = '(Firefox 1.5 / Thunderbird 1.5 / SeaMonkey 1.0)';
+    geckoRelease = ['Firefox 1.5', 'Thunderbird 1.5', 'SeaMonkey 1.0'];
     break;
   case '1.8.1':
-    geckoRelease = '(Firefox 2 / Thunderbird 2 / SeaMonkey 1.1)';
+    geckoRelease = ['Firefox 2', 'Thunderbird 2', 'SeaMonkey 1.1'];
     break;
   case '1.9':
-    geckoRelease = '(Firefox 3)';
+    geckoRelease = ['Firefox 3'];
     break;
   case '1.9.1':
-    geckoRelease = '(Firefox 3.5 / Thunderbird 3.0 / SeaMonkey 2.0)';
+    geckoRelease = ['Firefox 3.5', 'Thunderbird 3.0', 'SeaMonkey 2.0'];
     break;
   case '1.9.1.4':
-    geckoRelease = '(Firefox 3.5.4)';
+    geckoRelease = ['Firefox 3.5.4'];
     break;
   case '1.9.2':
-    geckoRelease = '(Firefox 3.6 / Thunderbird 3.1 / Fennec 1.0)';
+    geckoRelease = ['Firefox 3.6', 'Thunderbird 3.1', 'Fennec 1.0'];
     break;
   case '1.9.2.4':
-    geckoRelease = '(Firefox 3.6.4)';
+    geckoRelease = ['Firefox 3.6.4'];
     break;
   case '1.9.2.5':
-    geckoRelease = '(Firefox 3.6.5)';
+    geckoRelease = ['Firefox 3.6.5'];
     break;
-  case '1.9.2.9':
-    geckoRelease = '(Firefox 3.6.9)';
-    break;
+  case '1.9.2.9':
+    geckoRelease = ['Firefox 3.6.9'];
+    break;
   case '1.9.3':
-    geckoRelease = '(Firefox 4 - update this reference to Gecko 2!)';
+    geckoRelease = ['Firefox 4'];
+    extraMessage = ' <- update this template reference to Gecko 2!';
     break;
   case '2.0b2':
-    geckoRelease = '(Firefox 4.0b2)';
+    geckoRelease = ['Firefox 4.0b2'];
     break;
   case '2.0b4':
-    geckoRelease = '(Firefox 4.0b4)';
+    geckoRelease = ['Firefox 4.0b4'];
     break;
   case '2':
   case '2.0':
-    geckoRelease = '(Firefox 4 / Thunderbird 3.3 / SeaMonkey 2.1)';
+    geckoRelease = ['Firefox 4', 'Thunderbird 3.3', 'SeaMonkey 2.1'];
     break;
-  case '2.1':
-    geckoRelease = '(Firefox 4 Mobile)';
-    break;
-  case '5':
-  case '5.0':
-    geckoRelease = '(Firefox 5.0)';
+  case '2.1':
+    geckoRelease = ['Firefox 4 Mobile'];
     break;
-  case '6':
-  case '6.0':
-    geckoRelease = '(Firefox 6.0)';
-    break;
+  case '5':
+  case '5.0':
+    geckoRelease = ['Firefox 5.0'];
+    break;
+  case '6':
+  case '6.0':
+    geckoRelease = ['Firefox 6.0'];
+    break;
 }
+if (plus) {
+  geckoRelease = string.Join(geckoRelease, '+ / ') + '+';
+} else {
+  geckoRelease = string.Join(geckoRelease, ' / ');
+}
+geckoRelease = '(' + geckoRelease + ')' + extraMessage;
 geckoRelease;
-</pre>
+
+%>
