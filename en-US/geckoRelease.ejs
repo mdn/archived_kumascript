@@ -1,13 +1,7 @@
 
 <pre class="script">
 var geckoRelease = '';
-var arg = $0;
-var plus = false;
-if (arg.substr(-1) == '+') {
-  arg = arg.substr(0, arg.length - 1);
-  plus = true;
-}
-switch(arg)
+switch($0)
 {
   case '1.8':
     geckoRelease = '(Firefox 1.5 / Thunderbird 1.5 / SeaMonkey 1.0)';
@@ -61,9 +55,5 @@ switch(arg)
     geckoRelease = '(Firefox 6.0)';
     break;
 }
-if (plus) {
-  geckoRelease = geckoRelease + '+';
-}
 geckoRelease;
-
-%>
+</pre>
