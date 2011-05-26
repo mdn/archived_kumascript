@@ -63,13 +63,18 @@ switch(arg)
   case '6.0':
     geckoRelease = ['Firefox 6.0'];
     break;
+  case '7':
+  case '7.0':
+    geckoRelease = ['Firefox 7.0'];
+    break;
 }
-if (plus) {
-  geckoRelease = string.Join(geckoRelease, '+ / ') + '+';
-} else {
-  geckoRelease = string.Join(geckoRelease, ' / ');
+if (geckoRelease != "") {
+  if (plus) {
+    geckoRelease = string.Join(geckoRelease, '+ / ') + '+';
+  } else {
+    geckoRelease = string.Join(geckoRelease, ' / ');
+  }
+  geckoRelease = '(' + geckoRelease + ')' + extraMessage;
 }
-geckoRelease = '(' + geckoRelease + ')' + extraMessage;
 geckoRelease;
-
-%>
+</pre>
