@@ -24,5 +24,6 @@ var dest = lang + '/' + 'HTML/' + sectionname + '/' + name;
 if (wiki.pageExists(dest)) { /* the page exists */
   <code>(web.link(wiki.uri(dest), '<' + name + '>'))</code>;
 } else { /* the page doesn't exist */
-  <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')><web.text('<' + name + '>')></a></code>
-}</pre>
+  <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')>web.text('<' + name + '>')</a></code>
+}
+%>
