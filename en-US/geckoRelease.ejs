@@ -2,7 +2,7 @@
 <pre class="script">
 /* Appending a "+" to the version number you specify means that version and all later versions. */
 var geckoRelease = '';
-var arg = $0;
+var arg = string.trim($0);
 var plus = false;
 var extraMessage = '';
 if (string.EndsWith(arg, '+')) {
@@ -77,4 +77,5 @@ if (geckoRelease != "") {
   geckoRelease = '(' + geckoRelease + ')' + extraMessage;
 }
 geckoRelease;
-</pre>
+
+%>
