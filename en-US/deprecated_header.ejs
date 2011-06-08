@@ -2,54 +2,20 @@
 <div class="noinclude"><span class="script">deprecated_header()</span><hr />
 </div>
 <pre class="script">
-/* get the page language */
+/* one parameter: version of deprecation (optional) */
+/* prepend version with HTML, CSS, JS or Gecko for those techs */
+/* for backwards compatibility unprefixed is Gecko, please avoid this */
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var str = "";
 
-var str = "Deprecated";
-
-switch(lang) {
-  case 'de':
-    str = "Unerwünscht";
-    break;
-  case 'fr':
-    str = "Déprécié";
-    break;
-  case 'it':
-    str = "Deprecato";
-    break;
-  case 'ja':
-    str = "非推奨";
-    break;
-  case 'ko':
-    str = "Deprecated";
-    break;
-  case 'pl':
-    str = "Wycofywany";
-    break;
-  case 'zh-cn':
-    str = "不推荐";
-    break;
-  case 'zh-tw':
-    str = "已正式宣告棄用";
-    break;
-  case 'ru':
-    str = "Не рекомендуется";
-    break;
+if ($0) {
+  if (string.isdigit($0)) {
+    str = "gecko" + $0;
+  }
+  else {
+    str = $0
+  }
 }
 
-<div class="deprecatedHeaderTemplate" style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-  <p style="margin: 4px 0px 4px 0px;">
-    str;
-  </p>
-</div>
-
-%>
+template.deprecatedGeneric("header",str);
+</pre>
