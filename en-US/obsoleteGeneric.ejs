@@ -1,0 +1,141 @@
+
+<pre class="script">
+/* first parameter: inline/header */
+/* second parameter: version of obsolescence (optional) */
+/* prepend version with HTML, CSS, or JS for those techs; unprefixed is Gecko */
+
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "";
+var ver = "";
+var link = "";
+var tip = "";
+
+if ($1) {
+  var t = string.tolower($1);
+  var n = "";
+
+  if (string.isdigit(t)) {
+    n = t;
+    ver = "Gecko ";
+    tip = template.geckoRelease(n);
+  } else if (string.startswith(t, "js")) {
+    n = string.substr(t, 2);
+    ver = "JavaScript ";
+  } else if (string.startswith(t, "css")) {
+    n = string.substr(t, 3);
+    ver = "CSS ";
+  } else if (string.startswith(t, "html")) {
+    n = string.substr(t, 4);
+    ver = "HTML";
+    switch(lang) {
+      case "de":
+        switch(n) {
+          case "4":
+            link = "/de/HTML";
+            break;
+          case "5":
+            link = "/de/HTML/HTML5";
+            break;
+        }
+        break;
+      case "fr":
+        switch(n) {
+          case "5":
+            link = "/fr/HTML/HTML5";
+            break;
+        }
+        break;
+      default:
+        switch(n) {
+          case "4":
+            link = "/en/HTML";
+            break;
+          case "5":
+            link = "/en/HTML/HTML5";
+            break;
+        }
+        break;
+    }
+  } else if (string.startswith(t, "gecko")) {
+    n = string.substr(t, 4);
+    ver = "Gecko ";
+    tip = template.geckoRelease(n);
+  }
+
+  n = string.trim(n);
+  if (string.length(n) > 0) {
+    ver = ver + n;
+  }
+}
+
+switch(lang) {
+  case 'en':
+    str = "Obsolete";
+    if (string.length(ver)) {
+      str = str + " since " + ver;
+    }
+    break;
+  case 'de':
+    str = "Veraltet";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'es':
+    str = "Obsoleto";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'fr':
+    str = "Obsolète";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'ja':
+    str = "廃止";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'ko':
+    str = "안씀";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'pl':
+    str = "Przestarzały";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+}
+
+if (string.length(link)) {
+  str = web.link(link, str);
+}
+
+switch($0) {
+  case 'inline':
+    <span style="border: 1px solid rgb(255, 153, 153); background-color: rgb(255, 219, 219); font-size: x-small; white-space: nowrap; padding: 2px;" title="(web.text(tip))">(web.text(str))</span>
+    break;
+  case 'header':
+    <div class="obsoleteHeaderTemplate" style="overflow:hidden; border: 1px solid #FF0000; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
+      <p style="margin: 4px 0px 4px 0px;">(web.text(str))</p>
+    </div>
+    break;
+}
+
+%>
