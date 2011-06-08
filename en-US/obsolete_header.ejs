@@ -1,76 +1,19 @@
 
-<div class="noinclude"><span class="script">obsolete_header(<span class="nowiki">"1.9.1"</span>)</span> (note that the parameter is optional)<hr />
-</div>
 <pre class="script">
-/* get the page language */
+/* one parameter: version of obsolescence (optional) */
+/* prepend version with HTML, CSS, JS or Gecko for those techs */
+/* for backwards compatibility unprefixed is Gecko, please avoid this */
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-
-var str = "Obsolete";
-
-/* Two paths, one for Gecko version, one without. */
-/* Allows languages with different to English */
-/*  sentence structures more flexibility. */
+var str = "";
 
 if ($0) {
-  /* Work around of Gecko 1.9.3 renamed to 2. */
-  var geckoVersion = $0;
-  if (geckoVersion == "1.9.3") {
-    geckoVersion = "2";
-  }
-
-  str = "Obsolete in Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
-
-  switch(lang) {
-    case 'de':
-      str = "Veraltet Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
-      break;
-    case 'fr':
-      str = "Obsolète Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
-      break;
-    case 'ja':
-      str = "廃止 Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
-      break;
-    case 'pl':
-      str = "Przestarzały Gecko " + geckoVersion + " " + geckoRelease(geckoVersion);
-      break;
-    case 'es':
-      str = "Obsoleto en " + geckoVersion + " " + geckoRelease(geckoVersion);
-      break;
-  }
-}
-else {
-  switch(lang) {
-    case 'de':
-      str = "Veraltet";
-      break;
-    case 'fr':
-      str = "Obsolète";
-      break;
-    case 'ja':
-      str = "廃止";
-      break;
-    case 'pl':
-      str = "Przestarzały";
-      break;
-    case 'es':
-      str = "Obsoleto";
-      break;
+  if (string.isdigit($0)) {
+    str = "gecko" + $0;
+  }
+  else {
+    str = $0
   }
 }
 
-<div class="obsoleteHeaderTemplate" style="overflow:hidden; border: 1px solid #FF0000; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-  <p style="margin: 4px 0px 4px 0px;">
-    str;
-  </p>
-</div>
-
-%>
+template.obsoleteGeneric("header",str);
+</pre>
