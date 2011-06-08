@@ -67,7 +67,7 @@ if ($1) {
         break;
     }
   } else if (string.startswith(t, "gecko")) {
-    n = string.substr(t, 4);
+    n = string.substr(t, 5);
     ver = "Gecko ";
     tip = template.geckoRelease(n);
   }
@@ -136,4 +136,5 @@ switch($0) {
     </div>
     break;
 }
-</pre>
+
+%>
