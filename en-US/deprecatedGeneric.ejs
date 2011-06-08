@@ -1,0 +1,154 @@
+
+<pre class="script">
+/* first parameter: inline/header */
+/* second parameter: version of deprecation (optional) */
+/* prepend version with HTML, CSS, JS, or Gecko for those techs */
+
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "";
+var ver = "";
+var link = "";
+var tip = "";
+
+if ($1) {
+  var t = string.tolower($1);
+  var n = "";
+
+  if (string.startswith(t, "js")) {
+    n = string.trim(string.substr(t, 2));
+    ver = "JavaScript ";
+    if (string.length(n) > 0) {
+      if(wiki.pageExists('/' + lang + '/JavaScript/New_in_JavaScript/' + n)) {
+        link = '/' + lang + '/JavaScript/New_in_JavaScript/' + n;
+      } else if(wiki.pageExists('/en/JavaScript/New_in_JavaScript/' + n)) {
+        link = '/en/JavaScript/New_in_JavaScript/' + n;
+      }
+    }
+  } else if (string.startswith(t, "css")) {
+    n = string.trim(string.substr(t, 3));
+    ver = "CSS ";
+  } else if (string.startswith(t, "html")) {
+    n = string.trim(string.substr(t, 4));
+    ver = "HTML";
+    if (string.length(n) > 0) {
+      if(wiki.pageExists('/' + lang + '/HTML/HTML' + n)) {
+        link = '/' + lang + '/HTML/HTML' + n;
+      } else if(wiki.pageExists('/en/HTML/HTML' + n)) {
+        link = '/en/HTML/HTML' + n;
+      } else if(wiki.pageExists('/' + lang + '/HTML')) {
+        link = '/' + lang + '/HTML';
+      } else {
+        link = '/en/HTML';
+      }
+    }
+  } else if (string.startswith(t, "gecko")) {
+    n = string.trim(string.substr(t, 5));
+    ver = "Gecko ";
+    tip = template.geckoRelease(n);
+  }
+
+  n = string.trim(n);
+  if (string.length(n) > 0) {
+    ver = ver + n;
+  }
+  else {
+    ver = "";
+  }
+}
+
+if (string.length(link)) {
+  ver = web.link(link, ver);
+}
+switch(lang) {
+  case 'de':
+    str = "Unerwünscht";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'es':
+    str = "Desaprobado";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'fr':
+    str = "Déprécié";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'it':
+    str = "Deprecato";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'ja':
+    str = "非推奨";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'ko':
+    str = "Deprecated";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'pl':
+    str = "Wycofywany";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'ru':
+    str = "Не рекомендуется";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'zh-cn':
+    str = "不推荐";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  case 'zh-tw':
+    str = "已正式宣告棄用";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
+  default:
+    str = "Deprecated";
+    if (string.length(ver)) {
+      str = str + " since " + ver;
+    }
+    break;
+}
+
+switch($0) {
+  case 'inline':
+    <span class="deprecatedInlineTemplate" style="border: 1px solid rgb(152, 152, 240); background-color: rgb(221, 221, 255); font-size: x-small; white-space: nowrap; padding: 2px;" title=(tip)>(web.html(str))</span>
+    break;
+  case 'header':
+    if (string.length(tip)) {
+      str = str + " " + tip;
+    }
+    <div class="deprecatedHeaderTemplate" style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
+      <p style="margin: 4px 0px 4px 0px;">(web.html(str))</p>
+    </div>
+    break;
+}
+</pre>
