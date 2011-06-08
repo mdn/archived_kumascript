@@ -1,7 +1,7 @@
 
 <pre class="script">
 /* first parameter: inline/header */
-/* second parameter: version of deprecation (optional) */
+/* second parameter: version of obsolescence (optional) */
 /* prepend version with HTML, CSS, JS, or Gecko for those techs */
 
 /* get the page language */
@@ -71,67 +71,43 @@ if (string.length(link)) {
 }
 switch(lang) {
   case 'de':
-    str = "Unerwünscht";
+    str = "Veraltet";
     if (string.length(ver)) {
       str = str + " " + ver;
     }
     break;
   case 'es':
-    str = "Desaprobado";
+    str = "Obsoleto";
     if (string.length(ver)) {
       str = str + " " + ver;
     }
     break;
   case 'fr':
-    str = "Déprécié";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'it':
-    str = "Deprecato";
+    str = "Obsolète";
     if (string.length(ver)) {
       str = str + " " + ver;
     }
     break;
   case 'ja':
-    str = "非推奨";
+    str = "廃止";
     if (string.length(ver)) {
       str = str + " " + ver;
     }
     break;
   case 'ko':
-    str = "Deprecated";
+    str = "안씀";
     if (string.length(ver)) {
       str = str + " " + ver;
     }
     break;
   case 'pl':
-    str = "Wycofywany";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'ru':
-    str = "Не рекомендуется";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'zh-cn':
-    str = "不推荐";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'zh-tw':
-    str = "已正式宣告棄用";
+    str = "Przestarzały";
     if (string.length(ver)) {
       str = str + " " + ver;
     }
     break;
   default:
-    str = "Deprecated";
+    str = "Obsolete";
     if (string.length(ver)) {
       str = str + " since " + ver;
     }
@@ -140,7 +116,7 @@ switch(lang) {
 
 switch($0) {
   case 'inline':
-    <span class="deprecatedInlineTemplate" style="border: 1px solid rgb(152, 152, 240); background-color: rgb(221, 221, 255); font-size: x-small; white-space: nowrap; padding: 2px;" title=(tip)>(web.html(str))</span>
+    <span style="border: 1px solid rgb(255, 153, 153); background-color: rgb(255, 219, 219); font-size: x-small; white-space: nowrap; padding: 2px;" title=(tip)>(web.html(str))</span>
     break;
   case 'header':
     if (string.length(tip)) {
@@ -151,5 +127,4 @@ switch($0) {
     </div>
     break;
 }
-
-%>
+</pre>
