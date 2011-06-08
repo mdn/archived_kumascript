@@ -2,7 +2,7 @@
 <pre class="script">
 /* first parameter: inline/header */
 /* second parameter: version of obsolescence (optional) */
-/* prepend version with HTML, CSS, or JS for those techs; unprefixed is Gecko */
+/* prepend version with HTML, CSS, JS, or Gecko for those techs */
 
 /* get the page language */
 var u = uri.parts(Page.uri);
@@ -24,11 +24,7 @@ if ($1) {
   var t = string.tolower($1);
   var n = "";
 
-  if (string.isdigit(t)) {
-    n = string.trim(t);
-    ver = "Gecko ";
-    tip = template.geckoRelease(n);
-  } else if (string.startswith(t, "js")) {
+  if (string.startswith(t, "js")) {
     n = string.trim(string.substr(t, 2));
     ver = "JavaScript ";
     if (string.length(n) > 0) {
@@ -131,5 +127,4 @@ switch($0) {
     </div>
     break;
 }
-
-%>
+</pre>
