@@ -1,39 +1,14 @@
 
 <pre class="script">
 /* one parameter: JavaScript version (optional) */
-/* get the page language */
-
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+/* please use obsolete header instead of this template */
 
 var str = "";
 
 if ($0) {
-  switch(lang) {
-    default:
-      str = "Obsolete in JavaScript " + $0;
-      break;
-  }
-}
-else {
-  switch(lang) {
-    default:
-      str = "Obsolete";
-      break;
-  }
+  str = "js" + $0;
 }
 
-<div class="obsoleteHeaderTemplate" style="overflow:hidden; border: 1px solid #FF0000; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-  <p style="margin: 4px 0px 4px 0px;">
-    str;
-  </p>
-</div>
+template.obsoleteGeneric("header",str);
 
-</pre>
+%>
