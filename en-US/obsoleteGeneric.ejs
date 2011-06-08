@@ -32,11 +32,11 @@ if ($1) {
     n = string.trim(string.substr(t, 2));
     ver = "JavaScript ";
     if(wiki.pageExists(lang + '/JavaScript/New_in_JavaScript/' + n)) {
-      link = lang + '/JavaScript/New_in_JavaScript/' + n;
+      link = '/' + lang + '/JavaScript/New_in_JavaScript/' + n;
     } else if(wiki.pageExists('en/JavaScript/New_in_JavaScript/' + n)) {
-      link = 'en/JavaScript/New_in_JavaScript/' + n;
+      link = '/en/JavaScript/New_in_JavaScript/' + n;
     }
-  } else if (string.startswith(t, "css")) {
+  } else if (string.startswith(t, "css")) {
     n = string.substr(t, 3);
     ver = "CSS ";
   } else if (string.startswith(t, "html")) {
@@ -144,5 +144,4 @@ switch($0) {
     </div>
     break;
 }
-
-%>
+</pre>
