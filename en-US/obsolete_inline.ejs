@@ -1,94 +1,19 @@
 
 <pre class="script">
 /* one parameter: version of obsolescence (optional) */
-/* prepend version with HTML, CSS, or JS for those techs; unprefixed is Gecko */
-
-/* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+/* prepend version with HTML, CSS, JS or Gecko for those techs */
+/* for backwards compatibility unprefixed is Gecko, please avoid this */
 
 var str = "";
-var ver = "";
 
 if ($0) {
-  var t = string.tolower($0);
-  var n = "";
-
-  if (string.isdigit(t)) {
-    n = t;
-    ver = "Gecko ";
-  } else if (string.startswith(t, "js")) {
-    n = string.substr(t, 2);
-    ver = "JavaScript ";
-  } else if (string.startswith(t, "css")) {
-    n = string.substr(t, 3);
-    ver = "CSS ";
-  } else if (string.startswith(t, "html")) {
-    n = string.substr(t, 4);
-    ver = "HTML";
-  } else if (string.startswith(t, "gecko")) {
-    n = string.substr(t, 4);
-    ver = "Gecko ";
+  if (string.isdigit($0)) {
+    str = "gecko" + $0;
   }
-
-  n = string.trim(n);
-  if (string.length(n) > 0) {
-    ver = ver + n;
-  }
+  else {
+    str = $0
+  }
 }
 
-switch(lang) {
-  case 'en':
-    str = "Obsolete";
-    if (string.length(ver)) {
-      str = str + " since " + ver;
-    }
-    break;
-  case 'de':
-    str = "Veraltet";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'es':
-    str = "Obsoleto";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'fr':
-    str = "Obsolète";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'ja':
-    str = "廃止";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'ko':
-    str = "안씀";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'pl':
-    str = "Przestarzały";
-    if (string.length(ver)) {
-      str = str + " " + ver;
-    }
-    break;
-}
-
-<span style="border: 1px solid rgb(255, 153, 153); background-color: rgb(255, 219, 219); font-size: x-small; white-space: nowrap; padding: 2px;">(web.text(str))</span>
-
-%>
+template.obsoleteGeneric("inline",str);
+</pre>
