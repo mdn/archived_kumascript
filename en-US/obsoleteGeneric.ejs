@@ -130,10 +130,9 @@ switch($0) {
     if (string.length(tip)) {
       str = str + " " + tip;
     }
-    <div class="obsoleteHeaderTemplate" style="overflow:hidden; border: 1px solid #FF0000; background-color: #FEBCBC; font-weight: bold; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-      <span style="font-size: small; float: right; vertical-align: middle;">(web.html(str))</span>
-      <h3>(web.html($2) + '()')</h3>
-    </div>
+    <span style="border: 1px solid #FF5151; background-color: #FEBCBC; padding: 2px; color: black; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;">(web.html(str))</span>
+    <h3>(web.html($2) + '()')</h3>
     break;
 }
-</pre>
+
+%>
