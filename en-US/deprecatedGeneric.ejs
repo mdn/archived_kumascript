@@ -1,9 +1,10 @@
 
 <pre class="script">
-/* first parameter: inline/header */
-/* second parameter: version of deprecation (optional) */
-/* prepend version with HTML, CSS, JS, or Gecko for those techs */
-
+/* first parameter: inline/header/method */
+/* second parameter: version of obsolescence (optional) */
+/*   prepend version with HTML, CSS, JS, or Gecko for those techs */
+/* third parameter: additional information required for the type specified by the first parameter */
+/*   method requires the method name */
 /* get the page language */
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
@@ -140,7 +141,7 @@ switch(lang) {
 
 switch($0) {
   case 'inline':
-    <span class="deprecatedInlineTemplate" style="border: 1px solid rgb(152, 152, 240); background-color: rgb(221, 221, 255); font-size: x-small; white-space: nowrap; padding: 2px;" title=(tip)>(web.html(str))</span>
+    <span class="deprecatedInlineTemplate" style="border: 1px solid #5151FF; background-color: #B9B9FF; font-size: x-small; white-space: nowrap; padding: 2px;" title=(tip)>(web.html(str))</span>
     break;
   case 'header':
     if (string.length(tip)) {
@@ -150,5 +151,15 @@ switch($0) {
       <p style="margin: 4px 0px 4px 0px;">(web.html(str))</p>
     </div>
     break;
+  case 'method':
+    if (string.length(tip)) {
+      str = str + " " + tip;
+    }
+    <div>
+      <span class="deprecatedMethodTemplate" style="border: 1px solid #5151FF;; background-color: #B9B9FF; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;">(web.html(str))</span>
+      <h3>(web.html($2) + '()')</h3>
+    </div>
+    break;
 }
-</pre>
+
+%>
