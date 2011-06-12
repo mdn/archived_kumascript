@@ -2,60 +2,11 @@
 <div class="noinclude"><span class="script">method_deprecated("MethodName","GeckoVersion")</span><hr />
 </div>
 <pre class="script">
-/* get the page language */
+/* first parameter: method name */
+/* second parameter: version of obsolescence */
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var str = "gecko" + $1;
 
-var str = "Deprecated";
-var inGecko = " in Gecko ";
+template.deprecatedGeneric("method",str,$0);
 
-switch(lang) {
-  case 'de':
-    str = "Unerwünscht";
-    inGecko = " ab Gecko ";
-    break;
-  case 'fr':
-    str = "Déprécié";
-    break;
-  case 'it':
-    str = "Deprecato";
-    break;
-  case 'ja':
-    str = "非推奨";
-    break;
-  case 'ko':
-    str = "Deprecated";
-    break;
-  case 'pl':
-    str = "Wycofywany";
-    break;
-  case 'zh-cn':
-    str = "不推荐";
-    break;
-  case 'zh-tw':
-    str = "已正式宣告棄用";
-    break;
-  case 'ru':
-    str = "Не рекомендуется";
-    break; 
-  case 'es':
-    str = "Desaprobado";
-    break;
-}
-if ($1) {
-  str = str + inGecko + $1 + " " + geckoRelease($1);
-}
-
-<span class="deprecatedMethodTemplate" style="border: 1px solid rgb(152, 152, 240); background-color: rgb(221, 221, 255); padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;">
-str
-</span>
-<h3>$0 + "()"</h3>
-</pre>
+%>
