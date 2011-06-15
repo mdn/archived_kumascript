@@ -1,6 +1,6 @@
 
-<pre function="syntax.dekiscript" class="deki-transform">
-
+<pre class="deki-transform" function="syntax.dekiscript">
+{{
   var found = false;
   var allFiles = map.values(page.files);
   foreach(var aFile in allFiles) {
@@ -17,4 +17,5 @@
   if (found == false) {
     web.html("<p>Unable to find file '" + args[0] + "'.</p>");
   }
-</pre>
+}}
+%>
