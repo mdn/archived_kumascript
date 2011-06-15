@@ -1,21 +1,19 @@
 
-<pre class="deki-transform" function="syntax.dekiscript">
-{{
-  var found = false;
-  var allFiles = map.values(page.files);
-  foreach(var aFile in allFiles) {
-    if (string.compare(args[0], aFile.name, true) == 0) {
-      found = true;
-      if (#args > 1) {
-        syntax[args[1]](web.text(aFile.uri));
-      } else {
-        web.text(aFile.uri);
-      }
-      break;
-    }
-  }
-  if (found == false) {
-    web.html("<p>Unable to find file '" + args[0] + "'.</p>");
-  }
-}}
-%>
+<p><span class="script"><br />
+  var found = false;<br />
+  var allFiles = map.values(page.files);<br />
+  foreach(var aFile in allFiles) {<br />
+    if (string.compare(args[0], aFile.name, true) == 0) {<br />
+      found = true;<br />
+      if (#args > 1) {<br />
+        syntax[args[1]](web.text(aFile.uri));<br />
+      } else {<br />
+        web.text(aFile.uri);<br />
+      }<br />
+      break;<br />
+    }<br />
+  }<br />
+  if (found == false) {<br />
+    web.html("<p>Unable to find file '" + args[0] + "'.</p>");<br />
+  }<br />
+</span></p>
