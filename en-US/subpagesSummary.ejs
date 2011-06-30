@@ -1,8 +1,29 @@
 
-<pre class="script" style="font-size: 16px;">
+<pre class="script">
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var description = "Description";
+var summary = "Summary";
+
+switch(lang) {
+  case 'fr':
+    description = "Description";
+    summary = "Résumé";
+    break;
+}
+
 <table class="standard-table">
   <thead>
-    <tr><th scope="col">$0</th><th scope="col">"Description"</th></tr>
+    <tr><th scope="col">$0</th><th scope="col">"(description)"</th></tr>
   </thead>;
 var type1 = "";
 if ($1)
@@ -27,10 +48,9 @@ foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
         <code>i.value.title</code>;
     </a></td>
     <td>
-      var s2 = xml.text(wiki.page(i.value.path, "Summary"), "//p", _, true);
+      var s2 = xml.text(wiki.page(i.value.path, summary), "//p", _, true);
       web.html(string.substr(s2, 3, #s2 - 7));
     </td>
   </tr>;
 </table>;
-
-%>
+</pre>
