@@ -4,12 +4,24 @@ var fxVer = '';
 if (string.startswith($0, "1.") || !string.compare($0, "1")) {
   fxVer = '1.0';
 } else {
-  switch($0) {
-    case '2':
-    case '2.0':
-      fxVer = '4.0';
-      break;
-  }
+  switch($0) {
+    case '2':
+    case '2.0':
+      fxVer = '4.0';
+      break;
+    case '5':
+    case '5.0':
+      fxVer = '5.0';
+      break;
+    case '6':
+    case '6.0':
+      fxVer = '6.0';
+      break;
+    case '7':
+    case '7.0':
+      fxVer = '7.0';
+      break;
+   }
 }
 fxVer = fxVer + " (" + $0 + ")";
 fxVer;
