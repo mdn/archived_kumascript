@@ -13,6 +13,6 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-<p>Firefox $0, based on Gecko $1, will ship in $2. This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox {{0}} are {{web.link("ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-" + $3, "currently available")}} on the {{string.ToUpperFirst($3)}} channel.</p>
+web.text("Firefox " + $0 + ", based on Gecko " + $1 + ", will ship in " + $2 + ". This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox " + $0 + " are " + web.link("ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-" + $3, "currently available") + " on the " + string.ToUpperFirst($3) + " channel.");
 
 %>
