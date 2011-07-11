@@ -1,2 +1,18 @@
 
-<p>Firefox $0, based on Gecko $1, will ship in $2. This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox <span class="script">0</span> are <span class="script">web.link("ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-" + $3, "currently available")</span> on the <span class="script">string.ToUpperFirst($3)</span> channel.</p>
+<pre class="script">
+/* parameters: Firefox version, Gecko version, target release date, channel name */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+<p>Firefox $0, based on Gecko $1, will ship in $2. This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox {{0}} are {{web.link("ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-" + $3, "currently available")}} on the {{string.ToUpperFirst($3)}} channel.</p>
+
+%>
