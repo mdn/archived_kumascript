@@ -4,7 +4,7 @@
 /* specify 0 for obsoleted if it's deprecated but not yet obsolete */
 /* get page language first */
 
-var currentGecko = "7.0";  // Update this to current Gecko version
+var currentGecko = "8.0";  // Update this to current Gecko version
 var currentBlob = template.xverblob(currentGecko) - template.xverblob(1);
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
@@ -127,4 +127,5 @@ if ($1) {
   st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
   <div style=(st) title=(title)></div>
 }
-</div></pre>
+</div>
+%>
