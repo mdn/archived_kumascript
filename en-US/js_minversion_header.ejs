@@ -1,69 +1,62 @@
 
-<p><span lang="en" class="lang lang-en">
+<pre class="script">
+/* one parameter: JavaScript version */
+
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project")) {
+  lang = string.substr(lang, 8);
+}
+
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var link = '';
+
+/* check if English 'New in JavaScript/$0' page exists for fallback */
+if(wiki.pageExists('en/JavaScript/New_in_JavaScript/' + $0)) {
+  link = web.link(wiki.uri('en/JavaScript/New_in_JavaScript/' + $0), 'JavaScript ' + $0);
+} else {
+  link = 'JavaScript ' + $0;
+}
+
+var str = "Introduced in " + link;
+
+switch(lang) {
+  case 'fr':
+    if(wiki.pageExists(lang + '/JavaScript/Nouveautés_dans_JavaScript/' + $0)) {
+      link = web.link(wiki.uri(lang + '/JavaScript/Nouveautés_dans_JavaScript/' + $0), 'JavaScript ' + $0);
+    } else if(wiki.pageExists(lang + '/Nouveautés_dans_JavaScript_' + $0)) {
+      link = web.link(wiki.uri(lang + '/Nouveautés_dans_JavaScript_' + $0), 'JavaScript ' + $0);
+    }
+    str = "Introduit dans " + link;
+    break;
+  case 'ja':
+    if(wiki.pageExists(lang + '/JavaScript/New_in_JavaScript/' + $0)) {
+      link = web.link(wiki.uri(lang + '/JavaScript/New_in_JavaScript/' + $0), 'JavaScript ' + $0);
+    } else if(wiki.pageExists(lang + '/New_in_JavaScript_' + $0)) {
+      link = web.link(wiki.uri(lang + '/New_in_JavaScript_' + $0), 'JavaScript ' + $0);
+    }
+    str = link + " で導入";
+    break;
+  case 'pl':
+    if(wiki.pageExists(lang + '/JavaScript/Nowości_w_JavaScript/' + $0)) {
+      link = web.link(wiki.uri(lang + '/JavaScript/Nowości_w_JavaScript/' + $0), 'JavaScript ' + $0);
+    } else if(wiki.pageExists(lang + '/Nowości_w_JavaScript_' + $0)) {
+      link = web.link(wiki.uri(lang + '/Nowości_w_JavaScript_' + $0), 'JavaScript ' + $0);
+    }
+    str = "Wprowadzono w " + link;
+    break;
+  case 'zh-tw':
+    str = "在 " + link + "引入";
+    break;
+}
+
 <div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Introduced in <span class="script">var path1 = <span lang="en" class="lang lang-en">"/en/JavaScript/New_in_JavaScript/" + $0; </span>wiki.pageexists(path1) ? web.link(path1, "JavaScript " + $0) : "JavaScript " + $0</span></p>
+<p style="margin: 4px 0px 4px 0px;">(str)</p>
 </div>
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
-<pre class="eval"><span class="nowiki">{{js minversion header|1.7}}</span>
-</pre>
-<p>results in: <span class="script">template.Js_minversion_header(1.7)</span></p>
-<p>This template should be used when the whole page or section documents a feature of JavaScript version N or higher. For individual items in a list or a table use <a title="Template:js_minversion_inline" href="/Template:js_minversion_inline">Template:js minversion inline</a>.</p>
-</div>
-</span><span lang="*" class="lang lang-*">
-<div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Introduced in <span class="script"><span lang="en" class="lang lang-en">var path1 = <span lang="en" class="lang
-lang-en">"/en/JavaScript/New_in_JavaScript/" + $0; </span>wiki.pageexists(path1) ? web.link(path1, "JavaScript " + $0) : "JavaScript " + $0</span></span></p>
-</div>
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
-<pre class="eval"><span class="nowiki">{{js minversion header|1.7}}</span>
-</pre>
-<p>results in: <span class="script">template.Js_minversion_header(1.7)</span></p>
-<p>This template should be used when the whole page or section documents a feature of JavaScript version N or higher. For individual items in a list or a table use <a title="Template:js_minversion_inline" href="/Template:js_minversion_inline">Template:js minversion inline</a>.</p>
-</div>
-</span><span lang="fr" class="lang lang-fr">
-<div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Introduit dans <span class="script">wiki.pageexists(mediawiki.localurl("fr", 'Nouveautés dans JavaScript ' + $0)) ? web.html(mediawiki.internal('Nouveautés dans JavaScript ' + $0 + '|JavaScript ' + $0, "fr")) : web.html('JavaScript ' + $0)</span></p>
-</div>
-<div class="noinclude"><hr />
-<p>Un des <a title="Project:fr/Modèles_personnalisés#Mod.C3.A8les_d.27informations_sur_les_versions" href="/Project:fr/Modèles_personnalisés#Mod.C3.A8les_d.27informations_sur_les_versions">modèles d'informations sur les versions</a>. Par exemple :</p>
-<pre class="eval"><span class="nowiki">{{js minversion header|1.7}}</span>
-</pre>
-<p>donnera : <span class="script">template.Js_minversion_header(1.7)</span></p>
-<p>Ce modèle doit être utilisé lorsque la page ou section entière documente une fonctionnalité de JavaScript version N ou supérieure. Pour des éléments individuels dans une liste ou un tableau, utilisez <a title="Template:js_minversion_inline" href="/Template:js_minversion_inline">Modèle:js minversion inline</a>.</p>
-</div>
-</span><span lang="ja" class="lang lang-ja">
-<div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;"><span class="script">wiki.pageexists(mediawiki.localurl("ja", 'New in JavaScript ' + $0)) ? web.html(mediawiki.internal('New in JavaScript ' + $0 + '|JavaScript ' + $0, "ja")) : web.html('JavaScript ' + $0)</span> で導入</p>
-</div>
-<div class="noinclude"><hr />
-<p><a title="Project:ja/Custom_Templates#Version_information_templates" href="/Project:ja/Custom_Templates#Version_information_templates">バージョン情報テンプレート</a> の 1 つです。例えば:</p>
-<pre class="eval"><span class="nowiki">{{js minversion header|1.7}}</span>
-</pre>
-<p>は <span class="script">template.Js_minversion_header(1.7)</span> という結果になります。</p>
-<p>このテンプレートはページか章全体の内容が JavaScript バージョン N 以上について述べている場合に使うべきです。リストや表の個々の項目には <a title="Template:js_minversion_inline" href="/Template:js_minversion_inline">Template:js minversion inline</a> を使ってください。</p>
-</div>
-</span><span lang="pl" class="lang lang-pl">
-<div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">Wprowadzono w <span class="script">wiki.pageexists(mediawiki.localurl("pl", 'Nowości w JavaScript ' + $0)) ? web.html(mediawiki.internal('Nowości w JavaScript ' + $0 + '|JavaScript ' + $0, "pl")) : web.html('JavaScript ' + $0)</span></p>
-</div>
-<div class="noinclude"><hr />
-<p>Jeden z <a title="Project:pl/Własne_szablony#Szablony_informuj.C4.85ce_o_wersji" href="/Project:pl/Własne_szablony#Szablony_informuj.C4.85ce_o_wersji">szablonów informujących o wersji</a>. Na przykład:</p>
-<pre class="eval"><span class="nowiki">{{js minversion header|1.7}}</span>
-</pre>
-<p>wyświetli: <span class="script">template.Js_minversion_header(1.7)</span></p>
-<p>Szablon ten powinien być stosowany, gdy cała strona lub jej część opisuje funkcję JavaScriptu wersji N lub wyższej. Dla pojedynczych elementów listy lub tabeli należy użyć <a title="Template:js_minversion_inline" href="/Template:js_minversion_inline">Szablon:js minversion inline</a>.</p>
-</div>
-</span><span lang="zh-tw" class="lang lang-zh-tw">
-<div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">在 <span class="script">wiki.pageexists(mediawiki.localurl("en", 'New in JavaScript ' + $0)) ? web.html(mediawiki.internal('New in JavaScript ' + $0 + '|JavaScript ' + $0, "en")) : web.html('JavaScript ' + $0)</span> 引入</p>
-</div>
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
-<pre class="eval"><span class="nowiki">{{js minversion header|1.7}}</span>
-</pre>
-<p>results in: <span class="script">template.Js_minversion_header(1.7)</span></p>
-<p>This template should be used when the whole page or section documents a feature of JavaScript version N or higher. For individual items in a list or a table use <a title="Template:js_minversion_inline" href="/Template:js_minversion_inline">Template:js minversion inline</a>.</p>
-</div>
-</span></p>
+
+%>
