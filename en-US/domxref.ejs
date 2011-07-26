@@ -11,12 +11,17 @@
 /*   The text to use for the link.  If omitted, the value of the first */
 /*   parameter will be used */
 
-/* get a page's language (Don't use page.language!) */
+/* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
-var lang = u.path[0];
-if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
- lang = string.Substr(lang, 8);
+var lang = string.toLower(u.path[0]);
+if(string.Contains(lang, "project")) {
+  lang = string.Substr(lang, 8);
 }
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+  lang = page.language;
+}
+
 var api = $0;
 var str = $0;
 
@@ -25,18 +30,18 @@ if ($1) {
 }
 
 if (string.endswith($0, '()')) {
-    api = string.remove(api, string.length(api) - 2);
+  api = string.remove(api, string.length(api) - 2);
 }
 
 var destOldType = lang + '/' + 'DOM:' + api;
 var destNewType = lang + '/' + 'DOM/' + api;
 
 if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
-    <code>(web.link(wiki.uri(destNewType),str))</code>;
-} else 
-if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
-    <code>(web.link(wiki.uri(destOldType),str))</code>;
+  <code>(web.link(wiki.uri(destNewType),str))</code>;
+} else if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
+  <code>(web.link(wiki.uri(destOldType),str))</code>;
 } else { /* the page doesn't exist */
-    <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>(str)</<span class="end-tag">a></span></code>;
+  <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>(str)</<span class="end-tag">a></span></code>;
 }
-</pre>
+
+%>
