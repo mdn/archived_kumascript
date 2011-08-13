@@ -1,0 +1,27 @@
+
+<pre class="script">
+/* Creates a note for indicating that an Interface has been merged into another Interface */
+/* @param */
+/*   The Gecko version when the Interface was merged */
+/* @param */
+/*   The Interface that it was merged into */
+
+/* get the page language */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var note = "In " + template.gecko($0) + " this Interface was merged into the " + template.interface($1) + " Interface.";
+
+<div class="geckoVersionNote">
+template.gecko_callout_heading($0);
+<p>(note)</p>
+</div>
+
+%>
