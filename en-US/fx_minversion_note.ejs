@@ -12,8 +12,7 @@ else if (string.StartsWith(lang, "user:")) {
 }
 
 var version = $0
-if (string.EndsWith($0, ".0"))
-{
+if (string.EndsWith(version, ".0")) {
   version = string.substr(version, 0, string.length(version)-2);
 } 
 
