@@ -3,7 +3,7 @@
 /* get the page language */
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+if (string.contains(lang, "project")) {
   lang = string.substr(lang, 8);
 }
 /* fall back to page.language on a user page */
@@ -11,28 +11,34 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var articleUrl = "Firefox " + $0 + " for developers";
+var version = $0
+if (string.EndsWith($0, ".0"))
+{
+  version = string.substr(version, 0, string.length(version)-2)
+} 
+
+var articleUrl = "Firefox " + version + " for developers";
 var note = "Firefox " + $0 + " note";
 
 switch(lang) {
   case 'de':
-    articleUrl = "Firefox " + $0 + " für Entwickler";
+    articleUrl = "Firefox " + version + " für Entwickler";
     note = "Hinweis zu Firefox " + $0;
     break;
   case 'es':
-    articleUrl = "Firefox " + $0 + " para desarrolladores";
+    articleUrl = "Firefox " + version + " para desarrolladores";
     note = "Nota sobre Firefox " + $0;
     break;
   case 'fr':
-    articleUrl = "Firefox " + $0 + " pour les développeurs";
+    articleUrl = "Firefox " + version + " pour les développeurs";
     note = "Note concernant Firefox " + $0;
     break;
   case 'ja':
-    articleUrl = "Firefox " + $0 + " for developers";
+    articleUrl = "Firefox " + version + " for developers";
     note = "Firefox " + $0 + " における注記";
     break;
   case 'pl':
-    articleUrl = "Firefox " + $0 + " dla programistów";
+    articleUrl = "Firefox " + version + " dla programistów";
     note = "Uwaga dotycząca Firefoksa " + $0;
     break;
 }
