@@ -20,10 +20,14 @@ if (args.title) {
   name = args.title;
 }
 var dest = lang + '/' + 'HTML/' + sectionname + '/' + name;
-
+var destEng = 'en/HTML/Element/' + name;
 if (wiki.pageExists(dest)) { /* the page exists */
   <code>(web.link(wiki.uri(dest), '<' + name + '>'))</code>;
+} else if (lang == 'zh_tw' && wiki.pageExists(destEng)){
+  /* the MozTW community consider links to English pages better than red ones. 
+     I'll write about this to mozilla.dev.mdc later */   
+  <code>(web.link(wiki.uri(destEng), '<' + name + '>'))</code>;
 } else { /* the page doesn't exist */
   <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')>web.text('<' + name + '>')</a></code>
-}
-%>
+}</pre>
+<p> </p>
