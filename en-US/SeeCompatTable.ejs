@@ -1,8 +1,27 @@
 
 <pre class="script">
+var header = "";
+var textBeforeLink = "";
+var linkText = "";
+var textAfterLink = "";
+
+switch(page.language){
+  case 'zh-tw':
+    header = "這是一個實驗中的功能";
+    textBeforeLink = "此功能在某些瀏覽器尚在開發中，請參考";
+    linkText = "以得到不同瀏覽器用的前輟。";
+    break;
+  default: /*en*/
+    header = "This is an experimental feature";
+    textBeforeLink = "Because this feature is still in development in some browsers, check the ";
+    linkText = "compatibility table";  
+    textAfterLink = " for the proper prefixes to use in various browsers.";
+    break;
+}
+
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
   <p style="margin: 4px 0px;">
-    web.html("<strong>This is an experimental feature</strong><br>Because this feature is still in development in some browsers, check the <a href='#AutoCompatibilityTable'>compatibility table</a> for the proper prefixes to use in various browsers.");
+    web.html("<strong>" + header + "</strong><br>" + textBeforeLink + "<a href='#AutoCompatibilityTable'>" + linkText + "</a>" + textAfterLink);
   </p>
-</div>
-%>
+</div></pre>
+<p> </p>
