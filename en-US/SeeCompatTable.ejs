@@ -9,7 +9,8 @@ switch(page.language){
   case 'zh-tw':
     header = "這是一個實驗中的功能";
     textBeforeLink = "此功能在某些瀏覽器尚在開發中，請參考";
-    linkText = "以得到不同瀏覽器用的前輟。";
+    linkText = "兼容表格";
+    textAfterLink = "以得到不同瀏覽器用的前輟。";
     break;
   default: /*en*/
     header = "This is an experimental feature";
@@ -23,5 +24,4 @@ switch(page.language){
   <p style="margin: 4px 0px;">
     web.html("<strong>" + header + "</strong><br>" + textBeforeLink + "<a href='#AutoCompatibilityTable'>" + linkText + "</a>" + textAfterLink);
   </p>
-</div>
-%>
+</div></pre>
