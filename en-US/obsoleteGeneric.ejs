@@ -108,6 +108,13 @@ switch(lang) {
       str = str + " " + ver;
     }
     break;
+  case 'zh_tw':
+  case 'tw':
+    str = "已過時";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
   default:
     str = "Obsolete";
     if (string.length(ver)) {
@@ -138,4 +145,5 @@ switch($0) {
     </div>
     break;
 }
-</pre>
+
+%>
