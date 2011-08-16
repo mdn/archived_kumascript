@@ -1,4 +1,18 @@
 
 <pre class="script">
-var u = Uri.Parts(Page.uri);var lang = string.toLower(u.path[0]);if(string.Contains(lang, "project")) {lang = string.Substr(lang, 8);} else if (string.StartsWith(lang, "user:")) {lang = page.language;} if(wiki.pageExists(lang + '/CSS/' + $0)) {<code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;} else {<code><a rel=('internal') href=(wiki.uri(lang + '/CSS/' + $0)) class=('new')>($1 || $0)</a></code>;}
-</pre>
+var u = Uri.Parts(Page.uri);
+var lang = string.toLower(u.path[0]);
+if(string.Contains(lang, "project")) {
+  lang = string.Substr(lang, 8);
+} else if (string.StartsWith(lang, "user:")) {
+  lang = page.language;
+} 
+if(wiki.pageExists(lang + '/CSS/' + $0)) {
+  <code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;
+} else if (lang == 'zh_tw' && wiki.pageExists('en/CSS/' + $0)){
+  <code>(web.link(wiki.uri('en/CSS/' + $0), ($1 || $0)))</code>;  
+} else {
+  <code><a rel=('internal') href=(wiki.uri(lang + '/CSS/' + $0)) class=('new')>($1 || $0)</a></code>;
+}
+
+%>
