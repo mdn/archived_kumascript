@@ -5,6 +5,8 @@
 /*   The Gecko version when the Interface was merged */
 /* @param */
 /*   The Interface that it was merged into */
+/* @param (optional) */
+/*   Additional notes */
 
 /* get the page language */
 var u = uri.parts(Page.uri);
@@ -22,5 +24,9 @@ var note = "In " + template.gecko($0) + " this Interface was merged into the " +
 <div class="geckoVersionNote">
 template.gecko_callout_heading($0);
 <p>(web.html(note))</p>
+if ($2) {
+  <p>(web.html($2))</p>
+}
 </div>
-</pre>
+
+%>
