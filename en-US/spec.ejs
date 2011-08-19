@@ -3,13 +3,17 @@
 /* parameters: */
 /* $0 = link to specification */
 /* $1 = link text (optional) */
-/* $2 = status of specification (optional). Possible values: WD, LC, CR, PR, REC. */
+/* $2 = status of specification (optional). Possible values: ED, WD, LC, CR, PR, REC. */
 
 var status = $2;
 var title = "";
 var color = "";
 
 switch(status) {
+  case 'ED':
+    color = "#f00";
+    title = "Editor's Draft (unofficial)";
+    break;
   case 'WD':
     color = "#ff0";
     title = "Working Draft";
@@ -35,7 +39,6 @@ switch(status) {
 web.link( $0, ($1 || $0) );
 
 if ($2) {
-      <span title=(title) style=('background-color:' + color+ '; font-size: x-small; margin-left:6px; white-space: nowrap; padding: 2px;')>(status)</span>
+   <span title=(title) style=('background-color:' + color+ '; font-size: x-small; margin-left: 6px; white-space: nowrap; padding: 2px;')>(status)</span>
 }
-
-%>
+</pre>
