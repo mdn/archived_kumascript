@@ -5,33 +5,40 @@
 /* $1 = link text (optional) */
 /* $2 = status of specification (optional). Possible values: ED, WD, LC, CR, PR, REC. */
 
-var status = $2;
+var status = $2;
 var title = "";
 var color = "";
+var bgcolor = "";
 
 switch(status) {
   case 'ED':
-    color = "#f00";
+    color = "#fff";
+    bgcolor = "#e61919";
     title = "Editor's Draft (unofficial)";
     break;
   case 'WD':
-    color = "#ff0";
+    color = "#fff";
+    bgcolor = "#e66e33";
     title = "Working Draft";
     break;
   case 'LC':
-    color = "#fc0";
+    color = "#333";
+    bgcolor = "#e2a669";
     title = "Last Call";
     break;
   case 'CR':
-    color = "#0f0";
+    color = "#333";
+    bgcolor = "#cfd510";
     title = "Candidate Recommendation";
     break;
   case 'PR':
-    color = "#0cf";
+    color = "#fff";
+    bgcolor = "#72ac35";
     title = "Proposed Recommendation";
     break;
   case 'REC':
-    color = "#39f";
+    color = "#fff";
+    bgcolor = "#309c40";
     title = "Recommendation";
     break;
 }
@@ -39,6 +46,7 @@ switch(status) {
 web.link( $0, ($1 || $0) );
 
 if ($2) {
-   <span title=(title) style=('background-color:' + color+ '; font-size: x-small; margin-left: 6px; white-space: nowrap; padding: 2px;')>(status)</span>
+   <span title=(title) style=('color:' + color + '; background-color:' + bgcolor+ '; display: inline-block; font-size: x-small; margin-left: 6px; white-space: nowrap; padding: 2px 5px;')>(status)</span>
 }
-</pre>
+
+%>
