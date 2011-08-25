@@ -20,8 +20,8 @@ else if (string.StartsWith(lang, "user:")) {
 var api = $0;
 var str = $0;
 
-var destNewType = lang + '/' + 'DOM/' + api;
-var destEng = 'en' + '/' + 'DOM/' + api;
+var destNewType = lang + '/' + 'DOM/DOM_event_reference/' + api;
+var destEng = 'en' + '/' + 'DOM/DOM_event_reference/' + api;
 var anch = '';
 
 if ($1) {
@@ -37,4 +37,5 @@ if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
 } else { /* the page doesn't exist */
   <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)</span> + anch<span>) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>(str)</<span class="end-tag">a></span></code>;
 }
-</pre>
+
+%>
