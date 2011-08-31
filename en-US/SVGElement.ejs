@@ -1,5 +1,4 @@
-
-<pre class="script">
+<%
 /* accepts as input one required parameter: SVG element to create a xref to */
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
@@ -17,4 +16,4 @@ if (wiki.pageExists(dest)) { /* the page exists */
 } else { /* the page doesn't exist */
     <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')><$0></a></code>
 }
-%>
+</pre>
