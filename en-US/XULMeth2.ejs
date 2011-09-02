@@ -1,6 +1,8 @@
+<%
 
-<pre class="script">
 /* parameters: first the method name, second the parameter list, third the display name for the method */
+/* should ONLY be used in the prototype line of reference pages, such as */
+/* https://developer.mozilla.org/en/XUL/Method/openPopup */
 /* get the page language */
 
 var u = uri.parts(Page.uri);
@@ -42,5 +44,4 @@ if (wiki.pageExists(destNewType)) {
 } else {
   <code><a rel=('internal') href=(wiki.uri(destNewType)) class=('new')>$0</a></code>;
 }
-
-%>
+</pre>
