@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* parameters: first the method name, second the parameter list, third the display name for the method */
 /* get the page language */
 
@@ -36,11 +36,10 @@ var destOldType = lang + '/XUL:' + methodName + ':' + $0;
 var destNewType = lang + '/XUL/' + methodName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
- <code><span id=(anch)>(web.link(wiki.uri(destNewType), dispApi))</span></code>
+ <code>(web.link(wiki.uri(destNewType), dispApi))</code>
 } else if (wiki.pageExists(destOldType)) {
-  <code><span id=(anch)>(web.link(wiki.uri(destOldType), dispApi))</span></code>
+  <code>(web.link(wiki.uri(destOldType), dispApi))</code>
 } else {
   <code><a rel=('internal') href=(wiki.uri(destNewType)) class=('new')>$0</a></code>;
 }
-
-%>
+</pre>
