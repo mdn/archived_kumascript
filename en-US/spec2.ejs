@@ -1,0 +1,43 @@
+<%
+
+/* parameters: */
+/* $0 = name of specification */
+
+var spec = $0;
+var status;
+
+switch(spec) {
+  case 'CSS1':
+    status = 'REC';
+    break;
+  case 'CSS2.1':
+    status = 'REC';
+    break;
+  case 'CSS3 Values':
+    status = 'WD';
+    break;
+  default:
+    status = 'Unknown'
+}
+
+switch (status) {
+  case 'REC':
+    web.text('Recommendation');
+    break;
+  case 'PR':
+    web.text('Proposed Recommendation');
+    break;
+  case 'CR':
+    web.text('Candidate Recommandation');
+    break;
+  case 'WD':
+    web.text('Working Draft');
+    break;
+  case 'ED':
+    web.text('Editor's Draft');
+    break
+  default
+    web.text('Unknown');
+}
+
+%>
