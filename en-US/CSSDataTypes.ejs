@@ -6,13 +6,13 @@
 var data_types = ['angle', 'color', 'frequency', 'identifier', 'integer', 'length', 'number', 'percentage', 'resolution', 'shape', 'string', 'time', 'uri'];
 var result="roh";
 
-function printDataTypes(element, index, array) { 
-    web.text("in ForEach");
+function printDataTypes(element, index, array) {
+    web.text("in ForEach");
     if (result) {
-      result += ", ";
+      result += ", ";
     } 
     result += "<" + element + ">"; 
-} 
+}
 
 web.text("start");
 data_types.forEach(printDataTypes);
