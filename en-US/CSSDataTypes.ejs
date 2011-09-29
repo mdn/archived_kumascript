@@ -20,6 +20,11 @@ foreach(var data_type in data_types) {
       web.text(', ');
     }
     notfirst = true;
-    <code>(web.link(wiki.uri(lang + '/CSS/' + data_type), '<' + data_type + '>'))</code>; 
+    if (data_type != 'color') {
+      <code>(web.link(wiki.uri(lang + '/CSS/' + data_type), '<' + data_type + '>'))</code>;
+    }
+    else {
+      <code>(web.link(wiki.uri(lang + '/CSS/color_value'), '<color>'))</code>;
+    }
 }
 </pre>
