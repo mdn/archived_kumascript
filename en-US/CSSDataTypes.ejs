@@ -3,14 +3,24 @@
 /* Warning: special case for color (hardcoded) */
 /* Non documented ones are not listed */
 
+/* Calculate lang *(
+var u = Uri.Parts(Page.uri);
+var lang = string.toLower(u.path[0]);
+if(string.Contains(lang, "project")) {
+  lang = string.Substr(lang, 8);
+} else if (string.StartsWith(lang, "user:")) {
+  lang = page.language;
+} 
+
 var data_types = ['angle', 'color', 'frequency', 'identifier', 'integer', 'length', 'number', 'percentage', 'resolution', 'shape', 'string', 'time', 'uri'];
-var result;
+var first = true;
 
 foreach(var data_type in data_types) {
-    if (result) {
-      result = result + ', ';
+    if (first) {
+      first = false;
+      web.text(', ');
     } 
-    result = result + '<' + data_type + '>'; 
+    <code>(web.text('<' + data_type + '>'<))/code>; 
 }
 
 
