@@ -17,9 +17,9 @@ var notfirst = false;
 
 foreach(var data_type in data_types) {
     if (notfirst) {
-      notfirst = true;
       web.text(', ');
     }
+    notfirst = true;
     <code>(web.link(wiki.uri(lang + '/CSS/' + data_type), '<' + data_type + '>'))</code>; 
 }
 </pre>
