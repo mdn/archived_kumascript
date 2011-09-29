@@ -13,13 +13,13 @@ if(string.Contains(lang, "project")) {
 } 
 
 var data_types = ['angle', 'color', 'frequency', 'identifier', 'integer', 'length', 'number', 'percentage', 'resolution', 'shape', 'string', 'time', 'uri'];
-var first = true;
+var notfirst = true;
 
 foreach(var data_type in data_types) {
-    if (first) {
-      first = false;
+    if (notfirst) {
+      notfirst = false;
       web.text(', ');
-    } 
-    /*<code>(web.text('<' + data_type + '>'<))</code>; */
+    }
+    <code>(web.text('<' + data_type + '>'))</code>; 
 }
 </pre>
