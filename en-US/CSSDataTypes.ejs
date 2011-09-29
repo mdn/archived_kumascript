@@ -4,18 +4,19 @@
 /* Non documented ones are not listed */
 
 var data_types = ['angle', 'color', 'frequency', 'identifier', 'integer', 'length', 'number', 'percentage', 'resolution', 'shape', 'string', 'time', 'uri'];
+var result;
 
-function printDataTypes(element, index, array) {
+web.text("start");
+
+data_types.forEach(function(element, index, array) {
 
     web.text('in ForEach');
     if (result) {
       result += ", ";
     } 
     result += "<" + element + ">"; 
-}
+});
 
-web.text("start");
-data_types.forEach(printDataTypes);
 
 web.text(result); 
 
