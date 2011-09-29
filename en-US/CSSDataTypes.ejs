@@ -8,14 +8,13 @@ var result;
 
 web.text("start");
 
-data_types.forEach(function(element, index, array) {
-
+for (var i = 0;i<data_types.length;i++)
     web.text('in ForEach');
     if (result) {
-      result += ", ";
+      result += ', ';
     } 
-    result += "<" + element + ">"; 
-});
+    result += '<' + data_types[i] + '>'; 
+;
 
 
 web.text(result); 
