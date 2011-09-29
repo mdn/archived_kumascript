@@ -1,5 +1,4 @@
 <%
-web.text("start");
 /* Lists all the CSS data types, seperated by a comma */
 /* Warning: special case for color (hardcoded) */
 /* Non documented ones are not listed
@@ -8,12 +7,14 @@ var data_types = ['angle', 'color', 'frequency', 'identifier', 'integer', 'lengt
 var result="roh";
 
 function printDataTypes(element, index, array) { 
-    if (result) {
+    web.text("in ForEach");
+    if result) {
       result += ", ";
     } 
     result += "<" + element + ">"; 
 } 
 
+web.text("start");
 data_types.forEach(printDataTypes);
 
 web.text(result); 
