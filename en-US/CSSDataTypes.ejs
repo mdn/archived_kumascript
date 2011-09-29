@@ -1,0 +1,20 @@
+<%
+/* Lists all the CSS data types, seperated by a comma */
+/* Warning: special case for color (hardcoded) */
+/* Non documented ones are not listed
+
+var data_types = ['angle', 'color', 'frequency', 'identifier', 'integer', 'length', 'number', 'percentage', 'resolution', 'shape', 'string', 'time', 'uri'];
+var result;
+
+function printDataTypes(element, index, array) { 
+    if (result) {
+      result += ", ";
+    } 
+    result += "<" + element + ">"; 
+} 
+
+data_types.forEach(printDataTypes);
+
+web.print(result); 
+
+</pre>
