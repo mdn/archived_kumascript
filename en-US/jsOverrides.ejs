@@ -1,5 +1,6 @@
-<div style="border: 1px solid rgb(204, 204, 204); margin: 10px 0px; padding: 0px 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%;"> <pre class="script">
 
+<div style="border: 1px solid rgb(204, 204, 204); margin: 10px 0px; padding: 0px 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%;">
+<pre class="script">
 /**
  * Replaces Template:JSInherits. Given an object and a list of properties or
  * methods implemented elsewhere, output a list of the properties or methods
@@ -303,12 +304,12 @@ var prefix;
 if(string.toLower(page.language) == 'en' || page.language == '') {
   prefix = '/en/JavaScript/Reference/Global_Objects/';
 }
-var captiontext = string.toUpperFirst(string.toLower($1)) + ' available on ';
+var captiontext = string.toUpperFirst(string.toLower($1)) + ' inherited from ';
 var pageuri = wiki.uri(prefix + $0);
 var htmlstring;
 htmlstring = '<span style="font-weight:bold;">' + captiontext +
                  ' <a href="' + pageuri + '"><code>' + $0 +
-                 '</code></a> instances</span>:<br />';
+                 '</code></a></span>:<br />';
 web.html(htmlstring);
 var desiredprototype = prototypes[$0][string.toLower($1)];
 foreach (var override in $2) {
