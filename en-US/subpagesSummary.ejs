@@ -1,5 +1,5 @@
-<%
 
+<pre class="script">
 /* get the page language */
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
@@ -21,13 +21,16 @@ switch(lang) {
     break;
 }
 
-<dl>
+<table class="standard-table">
+  <thead>
+    <tr><th scope="col">$0</th><th scope="col">"(description)"</th></tr>
+  </thead>;
 var type1 = "";
 if ($1)
   type1 = typeof $1;
 foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
-  <dt>
-    <a href=(i.value.uri) rel="internal" style="white-space: nowrap;">
+  <tr>
+    <td><a href=(i.value.uri) rel="internal" style="white-space: nowrap;">
       if ($1)
         switch (type1){
           case "bool":
@@ -43,11 +46,11 @@ foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
         }
       else
         <code>i.value.title</code>;
-    </a>
-  </dt>;
-  <dd>
-    var s2 = xml.text(wiki.page(i.value.path, summary), "//p", _, true);
-    web.html(string.substr(s2, 3, #s2 - 7));
-  </dd>;
-</dl>;
+    </a></td>
+    <td>
+      var s2 = xml.text(wiki.page(i.value.path, summary), "//p", _, true);
+      web.html(string.substr(s2, 3, #s2 - 7));
+    </td>
+  </tr>;
+</table>;
 </pre>
