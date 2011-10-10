@@ -44,7 +44,7 @@ foreach (var i in list.orderBy(map.keyValues(page.subpages), "key"))
       else
         <code>i.value.title</code>;
     </a>
-  </dt>
+  </dt>;
   <dd>
     var s2 = xml.text(wiki.page(i.value.path, summary), "//p", _, true);
     web.html(string.substr(s2, 3, #s2 - 7));
