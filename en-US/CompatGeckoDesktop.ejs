@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 var fxVer = '';
 var geckoVer = $0; 
 switch(geckoVer)
@@ -63,6 +63,11 @@ switch(geckoVer)
   case '9.0':
     fxVer = '9.0';
     break;
+  case '10':
+  case '10.0':
+    fxVer = '10.0';
+    break;
 }
 fxVer = fxVer + " (" + geckoVer + ")";
-fxVer;</pre>
+fxVer;
+</pre>
