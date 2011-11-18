@@ -35,11 +35,11 @@ var optionsText = "<p>Here are some things things you can do now:<p><ul>";
 
 optionsText = optionsText + "<li><a href=" + loginUrl + $0 + ">Log in</a> and create the page! We're always looking for help adding new material to our documentation.</li>";
 
-if ($2) {
+if ($2 && string.length($2)) {
   optionsText = optionsText + "<li>Read the related source or header file: " + Source($2) + "</li>";
 }
 
-if ($1) {
+if ($1 && string.length($1)) {
   optionsText = optionsText + "<li>" + LXRSearch("ident", "i", $1) + "</li>";
 }
 
