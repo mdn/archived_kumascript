@@ -40,7 +40,7 @@ if ($2) {
 }
 
 if ($1) {
-  optionsText = optionsText + "<li>" + LXRSearch($1) + "</li>";
+  optionsText = optionsText + "<li>" + LXRSearch("ident", "string", $1) + "</li>";
 }
 
 switch(lang) {
@@ -54,7 +54,7 @@ optionsText = optionsText + "</ul>";
 /* generate output */
 
 web.html("<h2>" + heading + "</h2>");
-web.html("<p>" + intro+ "</p>"; /* primary introductory text */
+web.html("<p>" + intro + "</p>"); /* primary introductory text */
 web.html("<h2>" + optionsHeading + "</h2>");
 web.html(optionsText);
 </pre>
