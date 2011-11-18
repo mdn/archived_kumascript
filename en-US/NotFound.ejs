@@ -1,0 +1,36 @@
+<%
+/* Presents a "target page not found" page. */
+/* Parameters: */
+/*   $0: target URL that wasn't found */
+/*   $1: URL of relevant file on mozilla-central (optional) */
+
+/* https://developer.mozilla.org/index.php?title=Special:Userlogin&returntotitle=<page path here> */
+
+/* get a page's language (Don't use page.language!) */
+var u = Uri.Parts(Page.uri);
+var lang = string.toLower(u.path[0]);
+if(string.Contains(lang, "project")) {
+ lang = string.Substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can <a href='https://developer.mozilla.org/index.php?title=Special:Userlogin&returntotitle=" + $0 + "'>log in</a> and create it.";
+
+if ($1) {
+  str = str + " Otherwise, you might find this source file useful: ";
+}
+
+switch(lang) {
+  case 'de':
+    str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
+    break;
+}
+
+web.html(str);
+if ($1) {
+  Source($1);
+}
+</pre>
