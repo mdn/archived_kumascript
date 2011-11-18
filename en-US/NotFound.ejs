@@ -2,9 +2,8 @@
 /* Presents a "target page not found" page. */
 /* Parameters: */
 /*   $0: target URL that wasn't found */
-/*   $1: URL of relevant file on mozilla-central (optional) */
-
-/* https://developer.mozilla.org/index.php?title=Special:Userlogin&returntotitle=<page path here> */
+/*   $1: search term (or empty string to not offer search of MXR) */
+/*   $2: URL of relevant file on mozilla-central (optional) */
 
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
@@ -19,19 +18,30 @@ else if (string.StartsWith(lang, "user:")) {
 
 var str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can <a href='https://developer.mozilla.org/index.php?title=Special:Userlogin&returntotitle=" + $0 + "'>log in</a> and create it.";
 
-if ($1) {
-  str = str + " Otherwise, you might find this source file useful: ";
-}
-
 switch(lang) {
   case 'de':
     str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
-    str = str + " Otherwise, you might find this source file useful: ";
-    break;
+    break;
 }
 
-web.html(str);
-if ($1) {
-  Source($1);
-}
+web.html(str); /* primary text */
+
+<script type="text/javascript"><![CDATA[
+        $(function() {
+            $('.htab').append($('#source-text'));
+            $('.htab').append($('#source-search'));
+            var $items = $('.htab>ul>li');
+            $items.click(function() {
+                $items.removeClass('selected');
+                $(this).addClass('selected');
+
+                var index = $items.index($(this));
+                $('.htab>div').hide().eq(index).show();
+            }).eq(0).click();
+        });
+    ]]></script>
 </pre>
+<div class="htab"> <pre class="script"> </pre> <a name="SearchTable" /> <pre class="script">	 </pre> <ul> <li class="selected"> <pre class="script">Source Text</pre> </li> <li>Source Search</li> </ul>
+</div>
+<div id="source-text">if ($2) { web.html("<a rel="freelink" href="http://mxr.mozilla.org/mozilla-central/source/" class=" external">http://mxr.mozilla.org/mozilla-central/source/</a>" + $2); } else { web.html("We don't have a source link to suggest; try the Source Search tab."); }</div>
+<div id="source-search">if ($1) { web.html("<a rel="freelink" href="http://mxr.mozilla.org/mozilla-central/ident?i=" class=" external">http://mxr.mozilla.org/mozilla-central/ident?i=</a>" + $1); } else { web.html("We have no search term to try a search for you."); }</div>
