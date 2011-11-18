@@ -16,19 +16,45 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you\'d like, you can <a href='https://developer.mozilla.org/index.php?title=Special:Userlogin&returntotitle=" + $0 + "'>log in</a> and create it.";
+/* root URLs for the options */
+
+var sourceUrl = "http://mxr.mozilla.org/mozilla-central/source/";
+var searchUrl = "http://mxr.mozilla.org/mozilla-central/ident?i=";
+var loginUrl = "https://developer.mozilla.org/index.php?title=Special:Userlogin&returntotitle=";
+
+/* Heading strings in English; localize in the switch below */
+
+var heading = "That page doesn't exist yet";
+var optionsHeading = "You have options";
+
+/* Section body texts; localize in the switch below */
+
+var intro = "The page you're trying to visit (" + $0 + ") doesn't exist yet. Either you came upon a bad link or you've discovered a link to an article that nobody has written yet."
+
+var optionsText = "<p>Here are some things things you can do now:<p><ul>"
+
+optionsText = optionsText + "<li><a href=" + loginUrl + $0 + ">Log in</a> and create the page! We're always looking for help adding new material to our documentation.</li>");
+
+if ($2) {
+  optionsText = optionsText + "<li>Read the related source or header file: " + Source($2) + "</li>";
+}
+
+if ($1) {
+  optionsText = optionsText + "<li>" + LXRSearch($1) + "</li>";
+}
 
 switch(lang) {
   case 'de':
-    str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
+    intro = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
     break;
 }
 
-web.html(str); /* primary text */
-web.html("<script type='text/javascript'>/*<![CDATA[*/$(function() {$('.htab').append($('#source-text'));$('.htab').append($('#source-search'));var $items = $('.htab>ul>li');$items.click(function() {$items.removeClass('selected');$(this).addClass('selected');var index = $items.index($(this));$('.htab>div').hide().eq(index).show();}).eq(0).click();});/*]]>*/</script><div class='htab'><a name='SearchTable'></a><ul><li class='selected'>Source Text</li><li>Source Search Results</li></ul></div>");
-<div id="source-text">
-if ($2) { web.html("http://mxr.mozilla.org/mozilla-central/source/" + $2); } else { web.html("We don't have a source link to suggest; try the Source Search tab."); }
-</div>
-<div id="source-search">if ($1) { web.html("http://mxr.mozilla.org/mozilla-central/ident?i=" + $1); } else { web.html("We have no search term to try a search for you."); }</div>
+optionsText = "</ul>";
 
-%>
+/* generate output */
+
+web.html("<h2>" + heading + "</h2>");
+web.html(intro); /* primary introductory text */
+web.html("<h2>" + optionsHeading + "</h2>");
+web.html(optionsText);
+</pre>
