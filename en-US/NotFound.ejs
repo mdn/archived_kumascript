@@ -26,9 +26,9 @@ switch(lang) {
 
 web.html(str); /* primary text */
 web.html("<script type='text/javascript'>/*<![CDATA[*/$(function() {$('.htab').append($('#source-text'));$('.htab').append($('#source-search'));var $items = $('.htab>ul>li');$items.click(function() {$items.removeClass('selected');$(this).addClass('selected');var index = $items.index($(this));$('.htab>div').hide().eq(index).show();}).eq(0).click();});/*]]>*/</script><div class='htab'><a name='AutoCompatibilityTable'></a><ul><li class='selected'>Source Text</li><li>Source Search Results</li></ul></div>");
-
-
-</pre>
-<div id="source-text"> <pre class="script">if ($2) { web.html("http://mxr.mozilla.org/mozilla-central/source/" + $2); } else { web.html("We don't have a source link to suggest; try the Source Search tab."); }</pre>
+<div id="source-text">
+	<pre class="script">if ($2) { web.html("http://mxr.mozilla.org/mozilla-central/source/" + $2); } else { web.html("We don't have a source link to suggest; try the Source Search tab."); }</pre>
 </div>
-<div id="source-search">if ($1) { web.html("<a rel="freelink" href="http://mxr.mozilla.org/mozilla-central/ident?i=" class=" external">http://mxr.mozilla.org/mozilla-central/ident?i=</a>" + $1); } else { web.html("We have no search term to try a search for you."); }</div>
+<div id="source-search">if ($1) { web.html("http://mxr.mozilla.org/mozilla-central/ident?i=" + $1); } else { web.html("We have no search term to try a search for you."); }</div>
+
+%>
