@@ -16,7 +16,7 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can <a href='https://developer.mozilla.org/index.php?title=Special:Userlogin&returntotitle=" + $0 + "'>log in</a> and create it.";
+var str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you\'d like, you can <a href='https://developer.mozilla.org/index.php?title=Special:Userlogin&returntotitle=" + $0 + "'>log in</a> and create it.";
 
 switch(lang) {
   case 'de':
@@ -40,8 +40,26 @@ web.html(str); /* primary text */
             }).eq(0).click();
         });
     ]]></script>
-</pre>
-<div class="htab"> <pre class="script"> </pre> <a name="SearchTable" /> <pre class="script">	 </pre> <ul> <li class="selected"> <pre class="script">Source Text</pre> </li> <li>Source Search</li> </ul>
+<div class="htab"><a name="SearchTable" />
+	<ul>
+		<li class="selected">Source Text</li>
+		<li>Source Search</li>
+	</ul>
 </div>
-<div id="source-text">if ($2) { web.html("<a rel="freelink" href="http://mxr.mozilla.org/mozilla-central/source/" class=" external">http://mxr.mozilla.org/mozilla-central/source/</a>" + $2); } else { web.html("We don't have a source link to suggest; try the Source Search tab."); }</div>
-<div id="source-search">if ($1) { web.html("<a rel="freelink" href="http://mxr.mozilla.org/mozilla-central/ident?i=" class=" external">http://mxr.mozilla.org/mozilla-central/ident?i=</a>" + $1); } else { web.html("We have no search term to try a search for you."); }</div>
+
+<div id="source-text">
+if ($2) {
+  web.html("http://mxr.mozilla.org/mozilla-central/source/" + $2);
+} else {
+  web.html("We don't have a source link to suggest; try the Source Search tab.");
+}
+</div>
+<div id="source-search">
+if ($1) {
+  web.html("http://mxr.mozilla.org/mozilla-central/ident?i=" + $1);
+} else {
+  web.html("We have no search term to try a search for you.");
+}
+</div>
+
+%>
