@@ -26,7 +26,8 @@ if ($1) {
 switch(lang) {
   case 'de':
     str = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
-    break;
+    str = str + " Otherwise, you might find this source file useful: ";
+    break;
 }
 
 web.html(str);
