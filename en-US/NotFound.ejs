@@ -5,11 +5,12 @@
 /*   $1: search term (or empty string to not offer search of MXR) */
 /*   $2: URL of relevant file on mozilla-central (optional) */
 
-/* get a page's language (Don't use page.language!) */
-var u = Uri.Parts(Page.uri);
-var lang = string.toLower(u.path[0]);
+/* get the target page's language (Don't use page.language!) */
+
+var parts = string.split(lang, "/", 1);
+var lang = string.toLower(parts[0]);
 if(string.Contains(lang, "project")) {
- lang = string.Substr(lang, 8);
+  lang = string.Substr(lang, 8);
 }
 /* fall back to page.language on a user page */
 else if (string.StartsWith(lang, "user:")) {
