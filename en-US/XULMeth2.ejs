@@ -5,10 +5,14 @@
 /* https://developer.mozilla.org/en/XUL/Method/openPopup */
 /* get the page language */
 
-var u = uri.parts(Page.uri);
-var lang = u.path[0];
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
+var u = Uri.Parts(Page.uri);
+var lang = string.toLower(u.path[0]);
+if(string.Contains(lang, "project")) {
+ lang = string.Substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
 }
 
 /* set up the page name based on language */
@@ -42,6 +46,7 @@ if (wiki.pageExists(destNewType)) {
 } else if (wiki.pageExists(destOldType)) {
   <code><span id=(anch)>(web.link(wiki.uri(destOldType), dispApi))</span></code>
 } else {
-  <code><a rel=('internal') href=(wiki.uri(destNewType)) class=('new')>$0</a></code>;
+  var targeturi = "https://developer.mozilla.org/Article_not_found?uri=" + destNewType;
+  <code><a rel=('internal') href=(targeturi) class=('new')>(dispApi)</a></code>;
 }
 </pre>
