@@ -5,7 +5,7 @@
 
 var u = uri.parts(Page.uri);
 var lang = string.toLower(u.path[0]);
-if (string.contains(lang, "project") {
+if (string.contains(lang, "project")) {
   lang = string.substr(lang, 8);
 }
 /* fall back to page.language on a user page */
