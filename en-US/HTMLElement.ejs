@@ -1,6 +1,7 @@
+<%
 
-<pre class="script">
-/* accepts as input one required parameter: HTML element to create a xref to */ var u = uri.parts(Page.uri);
+/* accepts as input one required parameter: HTML element to create a xref to */
+var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
   lang = string.substr(lang, 8);
@@ -28,6 +29,7 @@ if (wiki.pageExists(dest)) { /* the page exists */
      I'll write about this to mozilla.dev.mdc later */   
   <code>(web.link(wiki.uri(destEng), '<' + name + '>'))</code>;
 } else { /* the page doesn't exist */
-  <code><a rel=('internal') href=(wiki.uri(dest)) class=('new')>web.text('<' + name + '>')</a></code>
+  var targeturi = "https://developer.mozilla.org/Article_not_found?uri=" + dest;
+  <code><a rel=('internal') href=(dest) class=('new')>web.text('<' + name + '>')</a></code>
 }
-%>
+</pre>
