@@ -30,6 +30,6 @@ if (wiki.pageExists(dest)) { /* the page exists */
   <code>(web.link(wiki.uri(destEng), '<' + name + '>'))</code>;
 } else { /* the page doesn't exist */
   var targeturi = "https://developer.mozilla.org/Article_not_found?uri=" + dest;
-  <code><a rel=('internal') href=(dest) class=('new')>web.text('<' + name + '>')</a></code>
+  <code><a rel=('internal') href=(targeturi) class=('new')>web.text('<' + name + '>')</a></code>
 }
 </pre>
