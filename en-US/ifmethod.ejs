@@ -12,7 +12,7 @@ if(string.Contains(lang, "project")) {
 else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
-var destNewType = lang + '/XPCOM Interface Reference/' + $0;
+var destNewType = lang + '/XPCOM_Interface_Reference/' + $0;
 var destOldType = lang + '/' + $0;
 var apiString = $0 + '.' + $1 + '()';
 if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
