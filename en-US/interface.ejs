@@ -1,6 +1,7 @@
+<%
 
-<pre class="script">
 /* get a page's language (Don't use page.language!) */
+/* one parameter: Interface name */
 var u = Uri.Parts(Page.uri);
 var lang = string.toLower(u.path[0]);
 if(string.Contains(lang, "project")) {
@@ -25,6 +26,8 @@ if(wiki.pageExists(lang + str + $0)) {
 } else if(wiki.pageExists(lang + '/' + $0)) {
   <code>(web.link(wiki.uri(lang + '/' + $0), $0))</code>;
 } else {
-  <code><a rel=('internal') href=(wiki.uri(lang + str + $0)) class=('new')>$0</a></code>
+  var targeturi = "https://developer.mozilla.org/Article_not_found?uri=" + lang + str + $0 +
+        "&ident=" + $0;
+  <code><a rel=('internal') href=(targeturi) class=('new')>$0</a></code>
 }
 </pre>
