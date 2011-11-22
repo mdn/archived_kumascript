@@ -3,8 +3,8 @@
 /* parameters: first the attribute name, second the display name for the attribute */
 /* get the page language */
 
-var u = string.toLower(uri.parts(Page.uri));
-var lang = u.path[0];
+var u = uri.parts(Page.uri);
+var lang = string.toLower(u.path[0]);
 if (string.contains(lang, "project")) {
   lang = string.substr(lang, 8);
 }
