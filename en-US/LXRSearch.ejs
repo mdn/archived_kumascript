@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* get the page language */
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
@@ -19,5 +19,5 @@ switch(lang) {
     searchfor = ' で <code>' + $2 + '</code> を';
     break;
 }
-web.link('http://mxr.mozilla.org/mozilla-central/' + $0 + '?' + $1 + '=' + $2, (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('LXR ' + ($0 == 'ident' ? 'ID' : '') + searchfor)));
-%>
+web.link('http://mxr.mozilla.org/mozilla-central/' + $0 + '?' + $1 + '=' + $2, (string.trim(($3 || '')) !== '' ? web.html($3) : web.html('MXR ' + ($0 == 'ident' ? 'ID' : '') + searchfor)));
+</pre>
