@@ -22,6 +22,6 @@ if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
 } else { /* the page doesn't exist */
   var targeturi = "https://developer.mozilla.org/Article_not_found?uri=" + destNewType +
         "&ident=" + $0;
-    <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(destNewType<span>) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>(apiString)</<span class="end-tag">a></span></code>;
+    <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(targeturi<span>) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>(apiString)</<span class="end-tag">a></span></code>;
 }
 </pre>
