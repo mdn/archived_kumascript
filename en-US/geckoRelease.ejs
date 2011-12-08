@@ -75,6 +75,11 @@ switch(arg)
   case '9.0':
     geckoRelease = ['Firefox 9.0', 'Thunderbird 9.0', 'SeaMonkey 2.6'];
     break;
+  default:
+    if (arg >= 5) {
+      geckoRelease = ['Firefox ' + arg, 'Thunderbird ' + arg];
+    }
+    break;
 }
 if (geckoRelease != "") {
   if (plus) {
