@@ -1,5 +1,8 @@
 <%
 
+/* This template is for Japanese language pages. */
+/* This template source is dirty, if you would like to update it, please contact @potappo */
+/* (I will write a document about this template after+.) */
 /* parameters: Firefox version, Gecko version, target release date, channel name */
 /* get the page language */
 
@@ -18,16 +21,15 @@ var url = "";
 switch(string.tolower($3)) {
   case 'nightly':
   default:
-    url = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-central/";
+    url = "http://nightly.mozilla.org/";
     break;
   case 'aurora':
-    url = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/";
+    url = "http://mozilla.jp/firefox/preview/";
     break;
   case 'beta':
-    url = "http://www.mozilla.com/en-US/firefox/channel/";
+    url = "http://mozilla.jp/firefox/preview/";
     break;
 }
-
-web.html("<p>Firefox " + $0 + ", based on Gecko " + $1 + ", will ship in " + $2 + ". This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox " + $0 + " are " + web.link(url, "currently available") + " on the " + string.ToUpperFirst($3) + " channel.</p>");
+web.html("<p>Gecko " +  $1 + " を搭載したFirefox " + $0 + " は米国時間 " + $2 + " にリリースされます。このページでは、開発者に影響する Firefox " + $0 + " の変更点をまとめています。Firefox " + $0 + " は現在 " + web.link(url, string.ToUpperFirst($3)) + " として提供されています。</p>");
 </pre>
-<div class="note"><strong>Note:</strong> Items listed here are tentatively slated for Firefox <span class="script">$0</span>; however, they may be held for a future release if testing shows they're not ready by the time Firefox <span class="script">$0</span> is due to ship. Please keep an eye on this page to stay up to date on the plans for Firefox <span class="script">$0</span>.</div>
+<div class="note"><strong>注:</strong> ここに載っている変更点は今のところ Firefox <span class="script">$0</span> に含まれる予定ですが、テストの結果 Firefox <span class="script">$0</span> へ投入するには時期尚早と判断されたものは、以後のバージョンへ先送りされる可能性もあります。このページおよびその英語版ページを定期的にチェックして最新の情報を確認してください。</div>
