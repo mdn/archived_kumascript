@@ -1,0 +1,36 @@
+<%
+
+/* parameters: Firefox version, Gecko version, target release date, channel name */
+/* get the page language */
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+var url = "";
+
+switch(string.tolower($3)) {
+  case 'nightly':
+  default:
+    url = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-central/";
+    break;
+  case 'aurora':
+    url = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/";
+    break;
+  case 'beta':
+    url = "http://www.mozilla.com/en-US/firefox/channel/";
+    break;
+}
+
+web.html("
+</pre>
+<p>Firefox " + $0 + ", based on Gecko " + $1 + ", will ship in " + $2 + ". This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox " + $0 + " are " + web.link(url, "currently available") + " on the " + string.ToUpperFirst($3) + " channel.</p>
+<pre class="script">");
+</pre>
+<div class="note"><strong>Note:</strong> Items listed here are tentatively slated for Firefox <span class="script">$0</span>; however, they may be held for a future release if testing shows they're not ready by the time Firefox <span class="script">$0</span> is due to ship. Please keep an eye on this page to stay up to date on the plans for Firefox <span class="script">$0</span>.</div>
