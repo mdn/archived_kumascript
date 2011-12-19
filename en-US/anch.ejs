@@ -1,3 +1,7 @@
 <%
-web.link(page.uri + '#' + string.replace($0, " ", "_"), $0)
+if ($1) {
+  web.link(page.uri + '#' + string.replace($0, " ", "_"), $1)
+} else {
+  web.link(page.uri + '#' + string.replace($0, " ", "_"), $0)
+}
 </pre>
