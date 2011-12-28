@@ -1,7 +1,6 @@
-
-<pre style="font-size: 16px; clear: both;" class="script">
+<pre class="script" style="font-size: 16px; clear: both;">
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
-var bugPageXML = web.xml(bugPageURL);
+/*var bugPageXML = web.xml(bugPageURL);
 var s = "";
 if (#bugPageXML == 0)
   s = "Unable to access bug's page. Try reloading this page to see bug's status and summary in this tooltip.";
@@ -17,6 +16,6 @@ else{
   else if (string.contains(bugPageXML, "Access Denied"))
     s = "The access to the bug's page is restricted.";
 }
-
-<a rel="external" href=(bugPageURL) class="external" title=(s)>xml.text(localString({en: "bug ", ca: "errada ", cs: "chyba ", pl: "błąd "})) + $0</a>;
+*/
+<a rel="external" href=(bugPageURL) class="external">xml.text(localString({en: "bug ", ca: "errada ", cs: "chyba ", pl: "błąd "})) + $0</a>;
 </pre>
