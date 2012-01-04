@@ -1,13 +1,21 @@
+<%
 
-<pre class="script">
 switch(page.language){
   case 'zh-tw':
     <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
       <p style="margin: 4px 0px;">
         web.html("<strong>這是一個實驗中的功能</strong><br />此功能在某些瀏覽器尚在開發中，請參考<a href='#AutoCompatibilityTable'>兼容表格</a>以得到不同瀏覽器用的前輟。");
+      </p>
       </p>
     </div>
     break;
+  case 'fr':
+    <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
+      <p style="margin: 4px 0px;">
+        web.html("<strong>Cette fonction est expérimentale</strong><br />Puisque cette fonction est toujours en développement dans certains navigateurs, veuillez consulter le <a href='#AutoCompatibilityTable'>tableau de compatibilité</a> pour les préfixes à utiliser selon les navigateurs.");
+      </p>
+    </div>
+    break;
   default: /*en*/
     <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
       <p style="margin: 4px 0px;">
