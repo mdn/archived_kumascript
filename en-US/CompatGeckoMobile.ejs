@@ -29,6 +29,10 @@ if (string.startswith($0, "1.") || !string.compare($0, "1")) {
     case '9.0':
       fxVer = '9.0';
       break;
+    case '10':
+    case '10.0':
+      fxVer = '10.0';
+      break;
   case '11.0':
     fxVer = '11.0';
     break;
@@ -42,6 +46,7 @@ if (string.startswith($0, "1.") || !string.compare($0, "1")) {
     break;
 }
 fxVer = fxVer + " (" + $0 + ")";
+}
 fxVer;
 
 %>
