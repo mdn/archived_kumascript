@@ -35,7 +35,7 @@ if (string.endswith($0, '()')) {
   api = string.remove(api, string.length(api) - 2);
 }
 
-var destOldType = lang + '/' + 'DOM:' + api;
+var destOldType = lang + '/' + 'DOM/' + api; /* Warning temporary change */
 var destNewType = lang + '/' + 'DOM/' + api;
 var destEng = 'en' + '/' + 'DOM/' + api;
 var anch = '';
