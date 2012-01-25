@@ -47,7 +47,7 @@ if ($2) {
 if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
   <code>(web.link(wiki.uri(destNewType) + anch,str))</code>;
 } else if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
-  <code style="color:lightgreen;">(web.link(wiki.uri(destOldType) + anch,str))</code>;
+  <code style="text-decoration:blink">(web.link(wiki.uri(destOldType) + anch,str))</code>;
 } else if (lang == 'zh_tw' && wiki.pageExists(destEng)){  
   /* the MozTW community consider links to English pages better than red ones. 
      I'll write about this to mozilla.dev.mdc later */ 
