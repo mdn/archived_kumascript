@@ -35,7 +35,7 @@ if (string.endswith($0, '()')) {
   api = string.remove(api, string.length(api) - 2);
 }
 
-var destOldType = lang + '/' + 'DOM/' + api; /* Warning temporary change */
+var destOldType = lang + '/' + 'Document_Object_Model_(DOM)/' + api; /* Warning temporary change */
 var destNewType = lang + '/' + 'DOM/' + api;
 var destEng = 'en' + '/' + 'DOM/' + api;
 var anch = '';
@@ -47,7 +47,7 @@ if ($2) {
 if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
   <code>(web.link(wiki.uri(destNewType) + anch,str))</code>;
 } else if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
-  <code>(web.link(wiki.uri(destOldType) + anch,str))</code>;
+  <code style="color:lightgreen;">(web.link(wiki.uri(destOldType) + anch,str))</code>;
 } else if (lang == 'zh_tw' && wiki.pageExists(destEng)){  
   /* the MozTW community consider links to English pages better than red ones. 
      I'll write about this to mozilla.dev.mdc later */ 
