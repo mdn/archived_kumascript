@@ -8,7 +8,7 @@ if(string.Contains(lang, "project")) {
 } 
 var fragmentPos = string.IndexOf($0, "#");
 var nameWithoutFragment = $0;
-if (fragmentPos >= 0) {
+if (fragmentPos > 0) {
   nameWithoutFragment = string.SubStr($0, 0, string.Length($0)-fragmentPos);
 }
 if(wiki.pageExists(lang + '/CSS/' + nameWithoutFragment)) {
