@@ -11,6 +11,9 @@ var nameWithoutFragment = $0;
 if (fragmentPos >= 0) {
   nameWithoutFragment = string.SubStr($0, 0, string.Length($0)-fragmentPos);
 }
+else {
+  nameWithoutFragment = "toto";
+}
 if(wiki.pageExists(lang + '/CSS/' + nameWithoutFragment)) {
   <code>(web.link(wiki.uri(lang + '/CSS/' + $0), ($1 || $0)))</code>;
 } else if (lang == 'zh_tw' && wiki.pageExists('en/CSS/' + nameWithoutFragment)){
