@@ -1,4 +1,15 @@
-
-<p><span lang="en" class="lang lang-en"><span style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;" title="This method may only be called from C++; don't use it from JavaScript.">Non-standard</span>
+<%
+switch(page.language){
+   case 'ja':
+    <span style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;" title="このメソッドは C++ から実行されることだけを意図しています。ですので、このメソッドを JavaScript から使わないでください。 ">
+    web.html("非標準");
+    </span>
+    break;
+  default: /*en*/
+    <span style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;" title="This method may only be called from C++; don't use it from JavaScript.">
+    web.html("Non-standard");
+    </span>
+    break;
+}
+</pre>
 <h3><span class="script">web.html($0)</span>()</h3>
-</span></p>
