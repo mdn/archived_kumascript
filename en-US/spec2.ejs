@@ -88,6 +88,9 @@ switch(spec) {
   case 'CSS3 Text':
     status = 'WD';
     break;
+  case 'CSS3 Transforms':
+    status = 'WD';
+    break;
   case 'CSS3 Transitions':
     status = 'WD';
     break;
@@ -104,10 +107,10 @@ switch(spec) {
     status = 'WD';
     break;
   case 'CSS3 2D Transforms':
-    status = 'WD';
+    status = 'Old-Transforms';
     break;
   case 'CSS3 3D Transforms':
-    status = 'WD';
+    status = 'Old-Transforms';
     break;
   case 'DOM3 Events':
     status = 'WD';
@@ -140,6 +143,9 @@ switch (status) {
     break;
   case 'ED':
     web.text('Editor\'s Draft');
+    break;
+  case 'Old-Transforms'
+    web.text('This has been merged in another draft. Please update');
     break;
   default:
     web.text('Unknown');
