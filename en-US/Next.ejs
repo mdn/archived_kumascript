@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
 var lang = u.path[0];
@@ -29,11 +29,12 @@ if (!string.compare(lang, "de", true)) {
   nextStr = "Suivant »";
 } else if (!string.compare(lang, "zh-tw", true)) {
   nextStr = "次頁 »";
+} else if (!string.compare(lang, "zh-tw", true)) {
+  nextStr = "下一页 »";
 }
 
 <div class="prevnext">
 <p align="right">(web.link(wiki.uri(lang + '/' + $0), nextStr))</p>
 </div>
 <br />
-
-%>
+</pre>
