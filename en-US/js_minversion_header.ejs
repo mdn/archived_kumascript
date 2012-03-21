@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* one parameter: JavaScript version */
 
 /* get the page language */
@@ -53,10 +53,12 @@ switch(lang) {
   case 'zh-tw':
     str = "在 " + link + "引入";
     break;
+  case 'zh-cn':
+    str = "在 " + link + " 引入";
+    break;
 }
 
 <div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
 <p style="margin: 4px 0px 4px 0px;">(web.html(str))</p>
 </div>
-
-%>
+</pre>
