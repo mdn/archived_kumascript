@@ -1,6 +1,4 @@
-
-<div class="noinclude"><span class="script">template("Non-standard_header")</span><hr />
-</div>
+<div class="noinclude"><span class="script">template("Non-standard_header")</span> <hr /></div>
 <pre class="script">
 /* get the page language */
 
@@ -32,6 +30,9 @@ switch(lang) {
   case 'ru':
     str = "Не стандартно";
     break;
+  case 'zh-cn':
+    str = "未标准化";
+    break;
 }
 
 <div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
@@ -39,5 +40,4 @@ switch(lang) {
     str;
   </p>
 </div>
-
-%>
+</pre>
