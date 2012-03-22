@@ -21,6 +21,7 @@ var scriptableOutput = "Unknown";
 var scriptable = "Scriptable";
 var notscriptable = "Not scriptable";
 var scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
+var lastChanged = "Last changed in Gecko ";
 var outdated = "This page has not been updated recently; the content may be outdated.";
 
 switch(lang) {
@@ -44,6 +45,12 @@ switch(lang) {
     var notscriptable = "Not scriptable";
     var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
     break;
+  case "zh-cn":
+    var scriptable = "skryptowalny";
+    var notscriptable = "Not scriptable";
+    var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
+    var lastChanged = "最后修改于Gecko ";
+    break;
 }
 
 switch(string.tolower($2)) {
@@ -76,6 +83,6 @@ else
 {
 <span>&nbsp;</span>
 }
-<span style="text-align:right; float:right;">(web.html("Last changed in Gecko " + $3 + " " + template.geckoRelease($3)));</span></div>
+<span style="text-align:right; float:right;">(web.html(lastChanged + $3 + " " + template.geckoRelease($3)));</span></div>
 </div>
 </pre>
