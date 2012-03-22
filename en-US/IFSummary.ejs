@@ -22,6 +22,7 @@ var scriptable = "Scriptable";
 var notscriptable = "Not scriptable";
 var scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
 var lastChanged = "Last changed in Gecko ";
+var inheritsFrom = "Inherits from: ";
 var outdated = "This page has not been updated recently; the content may be outdated.";
 
 switch(lang) {
@@ -46,9 +47,10 @@ switch(lang) {
     var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
     break;
   case "zh-cn":
-    var scriptable = "skryptowalny";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
+    var scriptable = "脚本化";
+    var notscriptable = "不可脚本化";
+    var inheritsFrom = "继承于: ";
+    var scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
     var lastChanged = "最后修改于Gecko ";
     break;
 }
@@ -77,7 +79,7 @@ if ($5) {
 }
 <div style="background:#eeeeee; padding:2px;">
 if ($1 != "") {
-  (web.html("Inherits from: " + template.interface($1)));
+  (web.html(inheritsFrom  + template.interface($1)));
 }
 else
 {
