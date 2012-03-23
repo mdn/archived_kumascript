@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* first parameter: inline/header/method */
 /* second parameter: version of obsolescence (optional) */
 /*   prepend version with HTML, CSS, JS, or Gecko for those techs */
@@ -115,6 +115,12 @@ switch(lang) {
       str = str + " " + ver;
     }
     break;
+  case 'zh-cn':
+    str = "已过时";
+    if (string.length(ver)) {
+      str = str + " " + ver;
+    }
+    break;
   default:
     str = "Obsolete";
     if (string.length(ver)) {
@@ -145,5 +151,4 @@ switch($0) {
     </div>
     break;
 }
-
-%>
+</pre>
