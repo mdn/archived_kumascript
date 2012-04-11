@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* one parameter: HTML version */
 /* get the page language */
 
@@ -27,6 +27,13 @@ switch(lang) {
     break;
   case "es":
     msgStart = "Introducido en ";
+    msgEnd = "";
+    if ($0 == "5") {
+      link = "/es/HTML/HTML5";
+    }
+    break;
+  case "zh-cn":
+    msgStart = "引进于 ";
     msgEnd = "";
     if ($0 == "5") {
       link = "/es/HTML/HTML5";
