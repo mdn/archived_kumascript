@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* one parameter: Gecko version */
 /* get the page language */
 
@@ -21,6 +21,9 @@ switch(lang) {
     break;
   case 'ja':
     str = "Gecko " + $0 + " が必要";
+    break;
+  case 'zh-cn':
+    str = "Gecko " + $0 + " 以上可用";
     break;
   case 'pl':
     str = "Wymaga Gecko " + $0;
