@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* first parameter: inline/header/method */
 /* second parameter: version of obsolescence (optional) */
 /*   prepend version with HTML, CSS, JS, or Gecko for those techs */
@@ -86,7 +86,7 @@ switch(lang) {
   case 'fr':
     str = "Déprécié";
     if (string.length(ver)) {
-      str = str + " " + ver;
+      str = str + " depuis " + ver;
     }
     break;
   case 'it':
