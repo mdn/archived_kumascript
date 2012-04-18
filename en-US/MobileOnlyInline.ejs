@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* one parameter: Gecko version as of which should only be used in mobile */
 /* get the page language */
 
@@ -17,6 +17,10 @@ var str = "";
 var title = "";
 
 switch(lang) {
+  case 'zh-cn':
+    str = "只支持Gecko移动设备" + $0?("(Gecko" + $0 +"以上)"):"";
+    title = "只在内核为Gecko " + $0 + " " + template.geckoRelease($0)"以上版本的Firefox Mobile中可用";
+    break;
   default:
     str = "Mobile Only in Gecko " + $0;
     title = "Available only in Firefox Mobile as of Gecko " + $0 + " " + template.geckoRelease($0);
