@@ -19,7 +19,7 @@ var title = "";
 switch(lang) {
   case 'zh-cn':
     str = "只支持Gecko移动设备" + ($0?("(Gecko" + $0 +"以上)"):"");
-    title = "只在内核为Gecko " + $0 + " " + template.geckoRelease($0) + "以上版本的Firefox Mobile中可用";
+    title = "只在内核为Gecko " + ($0?($0 + " " + template.geckoRelease($0) + "以上版本"):"") + "的Firefox Mobile中可用";
     break;
   default:
     str = "Mobile Only in Gecko " + $0;
@@ -28,5 +28,4 @@ switch(lang) {
 }
 
 <span title=(title) style="border: 1px solid rgb(129, 129, 81); background-color: rgb(255, 225, 190); font-size: x-small; white-space: nowrap; padding: 0px 2px;">(web.text(str))</span>
-
-%>
+</pre>
