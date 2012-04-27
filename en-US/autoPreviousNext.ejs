@@ -1,6 +1,6 @@
-<div> <pre class="script" style="font-size: 16px; clear: both;">
+<%
 var prevStr = {
-  en: "Previous",
+  "en-US": "Previous",
   de: "zurück",
   es: "Anterior",
   fr: "Précédent",
@@ -8,12 +8,12 @@ var prevStr = {
   ko: "이전",
   pl: "Poprzedni",
   ru: "Предыдущая статья",
-  "zh-tw": "前頁",
-  "zh-cn": "上一页",
+  "zh-TW": "前頁",
+  "zh-CN": "上一页",
   cn: "上一页"
 };
 var nextStr = {
-  en: "Next",
+  "en-US": "Next",
   de: "weiter",
   es: "Siguiente",
   fr: "Suivant",
@@ -21,29 +21,39 @@ var nextStr = {
   ko: "다음",
   pl: "Następny",
   ru: "Следующая статья",
-  "zh-tw": "次頁",
-  "zh-cn": "下一页",
+  "zh-TW": "次頁",
+  "zh-CN": "下一页",
   cn: "下一页"
 };
-var chapterList = string.deserialize(wiki.template($0));
-var i = 0;
-if (!$1)
-  i = list.indexOf(chapterList, xml.text(getRelativeURL(page.uri)));
-else
-  i = list.indexOf(chapterList, xml.text(getRelativeURL($1)));
+var chapterList = string.deserialize(template($0));
+var i = typeof $1 === 'string' ?
+    chapterList.indexOf($1) :
+    chapterList.indexOf(env.path);
+%>
+DEBUG $1==<%=$1%> env.path==<%=env.path%>
+<%
 if (i != -1){
-  switch (i){
-    case 0:
-      <p style="text-align: right;">web.link(chapterList[1], localString(nextStr) + " »", wiki.getPage(chapterList[1]).title)</p>;
-      break;
-    case (#chapterList) - 1:
-      <p>web.link(chapterList[(#chapterList) - 2], "« " + localString(prevStr), wiki.getPage(chapterList[(#chapterList) - 2]).title)</p>;
-      break;
-    default:
+  var html;
+  switch (i){
+    case 0:
+      html = '<p style="text-align: right;">' +
+        web.link(chapterList[1], mdn.localString(nextStr) + " »", wiki.getPage(chapterList[1]).title) + 
+        '</p>';
+      break;
+    case chapterList.length - 1:
+      html = '<p>' +
+        web.link(chapterList[(chapterList.length) - 2], "« " + mdn.localString(prevStr), wiki.getPage(chapterList[(chapterList.length) - 2]).title) + 
+        '</p>';
+      break;
+    default:
       /* This should be done like <p>Previous<span style="float: right;">Next</span></p>
          but Internet Explorer 8 doesn't render it properly */
-      <p style="text-align: right;"><span style="float: left;">web.link(chapterList[i - 1], "« " + localString(prevStr), wiki.getPage(chapterList[i - 1]).title)</span>web.link(chapterList[i + 1], localString(nextStr) + " »", wiki.getPage(chapterList[i + 1]).title)</p>;
-  }
+      html = '<p style="text-align: right;"><span style="float: left;">'+
+        web.link(chapterList[i - 1], "« " + localString(prevStr), wiki.getPage(chapterList[i - 1]).title)+
+        '</span>'+
+        web.link(chapterList[i + 1], localString(nextStr) + " »", wiki.getPage(chapterList[i + 1]).title)+
+        '</p>';
+  }
 }
-</pre>
-</div>
+%>
+HI THERE <%- html %> HO THERE
