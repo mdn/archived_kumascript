@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* get the page language */
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
@@ -26,12 +26,14 @@ switch(lang) {
   case 'ko':
     linktext = "실제 예제 보기";
     break;
-  case 'pl':
-    linktext = "Zobacz przykład";
-    break;
+  case 'pl':
+    linktext = "Zobacz przykład";
+    break;
+  case 'zh-cn':
+    linktext = "查看在线示例";
+    break;
 }
 var link = 'http://developer.mozilla.org/samples/cssref/' + $0 + '.html';
 
 <a rel="custom" href=(link)>(linktext)</a>
-
-%>
+</pre>
