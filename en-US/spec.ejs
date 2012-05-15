@@ -1,5 +1,5 @@
+<%
 
-<pre class="script">
 /* parameters: */
 /* $0 = link to specification */
 /* $1 = link text (optional) */
@@ -31,6 +31,11 @@ switch(status) {
     bgcolor = "#cfd510";
     title = "Candidate Recommendation";
     break;
+  case 'zh-cn':
+    color = "#333";
+    bgcolor = "#cfd510";
+    title = "工作草案";
+    break;
   case 'PR':
     color = "#fff";
     bgcolor = "#72ac35";
@@ -48,5 +53,4 @@ web.link( $0, ($1 || $0) );
 if ($2) {
    <span title=(title) style=('color:' + color + '; background-color:' + bgcolor+ '; display: inline-block; font-size: x-small; margin-left: 6px; white-space: nowrap; padding: 2px 5px;')>(status)</span>
 }
-
-%>
+</pre>
