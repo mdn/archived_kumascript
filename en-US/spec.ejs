@@ -5,6 +5,16 @@
 /* $1 = link text (optional) */
 /* $2 = status of specification (optional). Possible values: ED, WD, LC, CR, PR, REC. */
 
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
 var status = $2;
 var title = "";
 var color = "";
@@ -31,11 +41,6 @@ switch(status) {
     bgcolor = "#cfd510";
     title = "Candidate Recommendation";
     break;
-  case 'ZH-CN':
-    color = "#333";
-    bgcolor = "#cfd510";
-    title = "工作草案";
-    break;
   case 'PR':
     color = "#fff";
     bgcolor = "#72ac35";
@@ -48,6 +53,40 @@ switch(status) {
     break;
 }
 
+if(lang == "zh-cn"){
+switch(status) {
+  case 'ED':
+    color = "#fff";
+    bgcolor = "#e61919";
+    title = "Editor's Draft (unofficial)";
+    break;
+  case 'WD':
+    color = "#fff";
+    bgcolor = "#e66e33";
+    title = "工作草案";
+    break;
+  case 'LC':
+    color = "#333";
+    bgcolor = "#e2a669";
+    title = "Last Call";
+    break;
+  case 'CR':
+    color = "#333";
+    bgcolor = "#cfd510";
+    title = "Candidate Recommendation";
+    break;
+  case 'PR':
+    color = "#fff";
+    bgcolor = "#72ac35";
+    title = "Proposed Recommendation";
+    break;
+  case 'REC':
+    color = "#fff";
+    bgcolor = "#309c40";
+    title = "Recommendation";
+    break;
+}
+}
 web.link( $0, ($1 || $0) );
 
 if ($2) {
