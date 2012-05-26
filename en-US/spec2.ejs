@@ -6,189 +6,189 @@ var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
 
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-    lang = string.substr(lang, 8);
-} /* fall back to page.language on a user page */
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
 else if (string.StartsWith(lang, "user:")) {
-    lang = page.language;
+ lang = page.language;
 }
 
 var spec = $0;
 var status;
 
-switch (spec) {
-case 'CSS1':
+switch(spec) {
+  case 'CSS1':
     status = 'REC';
     break;
-case 'CSS2.1':
+  case 'CSS2.1':
     status = 'REC';
     break;
-case 'CSS3 Animations':
+  case 'CSS3 Animations':
     status = 'WD';
     break;
-case 'CSS3 Backgrounds':
-    // Backgrounds & Borders
+  case 'CSS3 Backgrounds': // Backgrounds & Borders
     status = 'CR';
     break;
-case 'CSS3 Box':
+  case 'CSS3 Box':
     status = 'WD';
     break;
-case 'CSS3 Cascade':
+  case 'CSS3 Cascade':
     status = 'WD';
     break;
-case 'CSS3 Colors':
+  case 'CSS3 Colors':
     status = 'REC';
     break;
-case 'CSS3 Conditional':
+  case 'CSS3 Conditional':
     status = 'WD';
     break;
-case 'CSS3 Content':
+  case 'CSS3 Content':
     status = 'WD';
     break;
-case 'CSS3 Device':
+  case 'CSS3 Device':
     status = 'WD';
     break;
-case 'CSS3 Exclusions and Shapes':
+  case 'CSS3 Exclusions and Shapes':
     status = 'WD';
     break;
-case 'CSS3 Flexbox':
+  case 'CSS3 Flexbox':
     status = 'WD';
     break;
-case 'CSS3 Fonts':
+  case 'CSS3 Fonts':
     status = 'WD';
     break;
-case 'CSS3 Fragmentation':
+  case 'CSS3 Fragmentation':
     status = 'WD';
     break;
-case 'CSS3 GCPM':
+  case 'CSS3 GCPM':
     status = 'WD';
     break;
-case 'CSS3 Grid':
+  case 'CSS3 Grid':
     status = 'WD';
     break;
-case 'CSS3 Images':
+  case 'CSS3 Images':
     status = 'CR';
     break;
-case 'CSS3 Lists':
+  case 'CSS3 Lists':
     status = 'WD';
     break;
-case 'CSS3 Media Queries':
+  case 'CSS3 Media Queries':
     status = 'PR';
     break;
-case 'CSS3 Multicol':
+  case 'CSS3 Multicol':
     status = 'CR';
     break;
-case 'CSS3 Namespaces':
+  case 'CSS3 Namespaces':
     status = 'REC';
     break;
-case 'CSS3 Paged Media':
+  case 'CSS3 Paged Media':
     status = 'WD';
     break;
-case 'CSS3 Regions':
+  case 'CSS3 Regions':
     status = 'WD';
     break;
-case 'CSS3 Selectors':
+  case 'CSS3 Selectors':
     status = 'REC';
     break;
-case 'CSS3 Speech':
+  case 'CSS3 Speech':
     status = 'CR';
     break;
-case 'CSS3 Style':
+  case 'CSS3 Style':
     status = 'CR';
     break;
-case 'CSS3 Template':
+  case 'CSS3 Template':
     status = 'WD';
     break;
-case 'CSS3 Text':
+  case 'CSS3 Text':
     status = 'WD';
     break;
-case 'CSS3 Transforms':
+  case 'CSS3 Transforms':
     status = 'WD';
     break;
-case 'CSS3 Transitions':
+  case 'CSS3 Transitions':
     status = 'WD';
     break;
-case 'CSS3 UI':
+  case 'CSS3 UI':
     status = 'WD';
     break;
-case 'CSS3 Values':
+  case 'CSS3 Values':
     status = 'WD';
     break;
-case 'CSS3 Variables':
+  case 'CSS3 Variables':
     status = 'WD';
     break;
-case 'CSS3 Writing Modes':
+  case 'CSS3 Writing Modes':
     status = 'WD';
     break;
-case 'CSS3 2D Transforms':
+  case 'CSS3 2D Transforms':
     status = 'Old-Transforms';
     break;
-case 'CSS3 3D Transforms':
+  case 'CSS3 3D Transforms':
     status = 'Old-Transforms';
     break;
-case 'DOM3 Events':
+  case 'DOM3 Events':
     status = 'WD';
     break;
-case 'DOM Parsing':
+  case 'DOM Parsing':
     status = 'WD';
     break;
-case 'Fullscreen':
+  case 'Fullscreen':
     status = 'ED';
     break;
-case 'Page Visibility API':
+  case 'Page Visibility API':
     status = 'WD';
     break;
-default:
+  default:
     status = 'Unknown';
 }
 
-switch (lang) {
-case 'ja':
-    switch (status) {
-    case 'REC':
+switch(lang){
+  case 'ja':
+    switch(status) {
+      case 'REC':
         web.text('勧告');
         break;
-    case 'PR':
+      case 'PR':
         web.text('勧告案');
         break;
-    case 'CR':
+      case 'CR':
         web.text('勧告候補');
         break;
-    case 'WD':
+      case 'WD':
         web.text('草案');
         break;
-    case 'ED':
+      case 'ED':
         web.text('勧告改訂案');
         break;
-    case 'Old-Transforms':
+      case 'Old-Transforms':
         web.text('This has been merged in another draft. Please update');
         break;
-    default:
+      default:
         web.text('不明');
     };
     break;
-default:
+  default: 
     switch (status) {
-    case 'REC':
-        web.text('Recommendation');
-        break;
+      case 'REC':
+      web.text('Recommendation');
+      break;
     case 'PR':
-        web.text('Proposed Recommendation');
-        break;
+      web.text('Proposed Recommendation');
+      break;
     case 'CR':
-        web.text('Candidate Recommendation');
-        break;
+      web.text('Candidate Recommendation');
+      break;
     case 'WD':
-        web.text('Working Draft');
-        break;
+      web.text('Working Draft');
+      break;
     case 'ED':
-        web.text('Editor\'s Draft');
-        break;
+      web.text('Editor\'s Draft');
+      break;
     case 'Old-Transforms':
-        web.text('This has been merged in another draft. Please update');
-        break;
+      web.text('This has been merged in another draft. Please update');
+      break;
     default:
-        web.text('Unknown');
+      web.text('Unknown');
     }
-}​
+}
 
 %>
