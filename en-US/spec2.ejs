@@ -141,6 +141,57 @@ switch(spec) {
     status = 'Unknown';
 }
 
+switch(lang){
+  case 'ja':
+    switch(status) {
+      case 'REC':
+        web.text('勧告');
+        break;
+      case 'PR':
+        web.text('勧告案');
+        break;
+      case 'CR':
+        web.text('勧告候補');
+        break;
+      case 'WD':
+        web.text('草案');
+        break;
+      case 'ED':
+        web.text('勧告改訂案');
+        break;
+      case 'Old-Transforms':
+        web.text('This has been merged in another draft. Please update');
+        break;
+      default:
+        web.text('不明');
+    };
+    break;
+  default: 
+    switch (status) {
+      case 'REC':
+      web.text('Recommendation');
+      break;
+    case 'PR':
+      web.text('Proposed Recommendation');
+      break;
+    case 'CR':
+      web.text('Candidate Recommendation');
+      break;
+    case 'WD':
+      web.text('Working Draft');
+      break;
+    case 'ED':
+      web.text('Editor\'s Draft');
+      break;
+    case 'Old-Transforms':
+      web.text('This has been merged in another draft. Please update');
+      break;
+    default:
+      web.text('Unknown');
+    }
+}
+
+/*
 switch (status) {
   case 'REC':
     web.text('Recommendation');
@@ -163,7 +214,8 @@ switch (status) {
   default:
     web.text('Unknown');
 }
-
+*/
+/*
 if(lang == "ja"){
   switch(status) {
   case 'REC':
@@ -188,4 +240,5 @@ if(lang == "ja"){
     web.text('不明');
   }
 }
+*/
 </pre>
