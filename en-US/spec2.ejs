@@ -75,7 +75,7 @@ switch(spec) {
   case 'CSS3 Regions':
     status = 'WD';
     break;
-    case 'CSS3 Selectors':
+  case 'CSS3 Selectors':
     status = 'REC';
     break;
   case 'CSS3 Speech':
@@ -151,6 +151,31 @@ switch (status) {
     break;
   default:
     web.text('Unknown');
+}
+
+if(lang == "ja"){
+  switch(status) {
+  case 'REC':
+    web.text('Recommendation');
+    break;
+  case 'PR':
+    web.text('Proposed Recommendation');
+    break;
+  case 'CR':
+    web.text('勧告候補');
+    break;
+  case 'WD':
+    web.text('Working Draft');
+    break;
+  case 'ED':
+    web.text('Editor\'s Draft');
+    break;
+  case 'Old-Transforms':
+    web.text('This has been merged in another draft. Please update');
+    break;
+  default:
+    web.text('Unknown');
+  }
 }
 
 %>
