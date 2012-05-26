@@ -2,6 +2,17 @@
 /* parameters: */
 /* $0 = name of specification */
 
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
 var spec = $0;
 var status;
 
@@ -177,5 +188,4 @@ if(lang == "ja"){
     web.text('不明');
   }
 }
-
-%>
+</pre>
