@@ -156,7 +156,7 @@ switch (status) {
 if(lang == "ja"){
   switch(status) {
   case 'REC':
-    web.text('Recommendation');
+    web.text('勧告');
     break;
   case 'PR':
     web.text('Proposed Recommendation');
@@ -165,7 +165,7 @@ if(lang == "ja"){
     web.text('勧告候補');
     break;
   case 'WD':
-    web.text('Working Draft');
+    web.text('草案');
     break;
   case 'ED':
     web.text('Editor\'s Draft');
@@ -174,8 +174,7 @@ if(lang == "ja"){
     web.text('This has been merged in another draft. Please update');
     break;
   default:
-    web.text('Unknown');
+    web.text('不明');
   }
 }
-
-%>
+</pre>
