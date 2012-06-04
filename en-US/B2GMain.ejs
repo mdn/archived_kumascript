@@ -1,0 +1,42 @@
+<div class="prevnext"> <pre class="script">
+/* get a page's language (Don't use page.language!) */
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
+
+/* assume English */
+
+var prevStr = '« Back to Boot to Gecko';
+
+/* fix for other languages */
+
+if (!string.compare(lang, "de", true)) {
+  prevStr = "« zurück";
+} else if (!string.compare(lang, "es", true)) {
+  prevStr = "« Anterior";
+} else if (!string.compare(lang, "fr", true)) {
+  prevStr = "« Précédent";
+} else if (!string.compare(lang, "ja", true)) {
+  prevStr = "« 前";
+} else if (!string.compare(lang, "ko", true)) {
+  prevStr = "« 이전";
+} else if (!string.compare(lang, "pl", true)) {
+  prevStr = "« Poprzedni";
+} else if (!string.compare(lang, "ru", true)) {
+  prevStr = "« Предыдущая статья";
+} else if (!string.compare(lang, "zh-tw", true)) {
+  prevStr = "« 前頁";
+}
+
+<div class="prevnext">
+<p align="right"><span style="float: left;">(web.link(wiki.uri(lang + '/Mozilla/Boot_to_Gecko'), prevStr))</span></p>
+</div>
+<br />
+</pre>
+</div>
