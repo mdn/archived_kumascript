@@ -1,20 +1,11 @@
 <%
-
 /* first parameter: inline/header/method */
 /* second parameter: version of obsolescence (optional) */
 /*   prepend version with HTML, CSS, JS, or Gecko for those techs */
 /* third parameter: additional information required for the type specified by the first parameter */
 /*   method requires the method name */
 /* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var str = "";
 var ver = "";
@@ -29,7 +20,7 @@ if ($1) {
     n = string.trim(string.substr(t, 2));
     ver = "JavaScript ";
     if (string.length(n) > 0) {
-      if(wiki.pageExists('/' + lang + '/JavaScript/New_in_JavaScript/' + n)) {
+      if(wiki.pageExists(lang + '/JavaScript/New_in_JavaScript/' + n)) {
         link = '/' + lang + '/JavaScript/New_in_JavaScript/' + n;
       } else if(wiki.pageExists('/en/JavaScript/New_in_JavaScript/' + n)) {
         link = '/en/JavaScript/New_in_JavaScript/' + n;
@@ -86,7 +77,7 @@ switch(lang) {
   case 'fr':
     str = "Déprécié";
     if (string.length(ver)) {
-      str = str + " depuis " + ver;
+      str = str + " " + ver;
     }
     break;
   case 'it':
@@ -141,24 +132,24 @@ switch(lang) {
 
 switch($0) {
   case 'inline':
-    <span class="deprecatedInlineTemplate" style="border: 1px solid #5151FF; background-color: #B9B9FF; font-size: x-small; white-space: nowrap; padding: 2px;" title=(tip)>(web.html(str))</span>
+    %><span class="deprecatedInlineTemplate" style="border: 1px solid #5151FF; background-color: #B9B9FF; font-size: x-small; white-space: nowrap; padding: 2px;" title="<%=(tip)%>"><%=str%></span><%
     break;
   case 'header':
     if (string.length(tip)) {
       str = str + " " + tip;
     }
-    <div class="deprecatedHeaderTemplate" style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-      <p style="margin: 4px 0px 4px 0px;">(web.html(str))</p>
-    </div>
+    %><div class="deprecatedHeaderTemplate" style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
+      <p style="margin: 4px 0px 4px 0px;"><%=str%></p>
+    </div><%
     break;
   case 'method':
     if (string.length(tip)) {
       str = str + " " + tip;
     }
-    <div>
-      <span class="deprecatedMethodTemplate" style="border: 1px solid #5151FF;; background-color: #B9B9FF; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;">(web.html(str))</span>
-      <h3>(web.html($2) + '()')</h3>
-    </div>
+    %><div>
+      <span class="deprecatedMethodTemplate" style="border: 1px solid #5151FF;; background-color: #B9B9FF; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;"><%=str%></span>
+      <h3><%-($2)%>()</h3>
+    </div><%
     break;
 }
-</pre>
+%>
