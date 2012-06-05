@@ -1,16 +1,5 @@
 <%
-
-/* get a page's language (Don't use page.language!) */
-/* one parameter: Interface name */
-var u = Uri.Parts(Page.uri);
-var lang = string.toLower(u.path[0]);
-if(string.Contains(lang, "project")) {
- lang = string.Substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var str = "/XPCOM_Interface_Reference/";
 
@@ -22,12 +11,11 @@ switch(lang) {
 
 /* check $0 exists */
 if(wiki.pageExists(lang + str + $0)) {
-  <code>(web.link(wiki.uri(lang + str + $0), $0))</code>;
+  %><code><%- web.link(wiki.uri(lang + str + $0), $0) %></code><%
 } else if(wiki.pageExists(lang + '/' + $0)) {
-  <code>(web.link(wiki.uri(lang + '/' + $0), $0))</code>;
+  %><code><%- web.link(wiki.uri(lang + '/' + $0), $0) %></code><%
 } else {
-  var targeturi = "https://developer.mozilla.org/Article_not_found?uri=" + lang + str + $0 +
-        "&ident=" + $0;
-  <code><a rel=('internal') href=(targeturi) class=('new')>$0</a></code>
+  var targeturi = "/docs/new?slug=" + lang + str + $0 + "&title=" + $0;
+  %><code><a rel="internal" href="<%=targeturi%>" class="new"><%=$0%></a></code><%
 }
-</pre>
+%>
