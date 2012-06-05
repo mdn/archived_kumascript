@@ -1,4 +1,4 @@
-<pre class="script" style="font-size: 16px; clear: both;">
+<%
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 /*var bugPageXML = web.xml(bugPageURL);*/
 var s = "";
@@ -17,5 +17,7 @@ else{
     s = "The access to the bug's page is restricted.";
 }
 */
-<a rel="external" href=(bugPageURL) class="external" title=(s)>xml.text(localString({en: "bug ", ca: "errada ", cs: "chyba ", pl: "błąd "})) + $0</a>;
-</pre>
+var ts = {"en-US": "bug ", "ca": "errada ", "cs": "chyba ", "pl": "błąd "};
+var s_bug = ts[env.locale] || ts['en-US'];
+%>
+<a rel="external" href="<%=bugPageURL%>" class="external" title="<%=s%>"><%=s_bug%> <%=$0%></a>
