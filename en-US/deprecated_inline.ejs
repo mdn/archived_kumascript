@@ -1,9 +1,4 @@
-
-<pre class="script">
-/* one parameter: version of deprecation (optional) */
-/* prepend version with HTML, CSS, JS or Gecko for those techs */
-/* for backwards compatibility unprefixed is Gecko, please avoid this */
-
+<%
 var str = "";
 
 if ($0) {
@@ -14,6 +9,5 @@ if ($0) {
     str = $0
   }
 }
-
-template.deprecatedGeneric("inline",str);
-</pre>
+%>
+<%-template('deprecatedGeneric', ["inline",str])%>
