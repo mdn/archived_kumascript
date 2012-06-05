@@ -1,18 +1,12 @@
-
-<p><span lang="en" class="lang lang-en">
-
-« <a title="en/XUL_Reference" href="/en/XUL_Reference">XUL Reference home</a> </span> <span lang="es" class="lang lang-es">
-
-« <a title="es/XUL/Elementos" href="/es/XUL/Elementos">Referencia de XUL</a> </span> <span lang="*" class="lang lang-*">
-
-« <a title="en/XUL_Reference" href="/en/XUL_Reference">XUL Reference home</a> </span> <span lang="de" class="lang lang-de">
-
-« <a title="de/XUL_Referenz" href="/de/XUL_Referenz">XUL-Referenz Startseite</a> </span> <span lang="fr" class="lang lang-fr">
-
-« <a title="fr/Référence_XUL" href="/fr/R%C3%A9f%C3%A9rence_XUL">Accueil de la référence XUL</a> </span> <span lang="ja" class="lang lang-ja">
-
-« <a title="ja/XUL_Reference" href="/ja/XUL_Reference">XUL リファレンス home</a> </span> <span lang="ko" class="lang lang-ko">
-
-« <a title="ko/XUL_Reference" href="/ko/XUL_Reference">XUL Reference home</a> </span> <span lang="pl" class="lang lang-pl">
-
-« <a title="pl/Dokumentacja_XUL" href="/pl/Dokumentacja_XUL">Dokumentacja XUL</a> </span></p>
+<%
+var s = ["en/XUL_Reference", "en/XUL_Reference", "XUL Reference home"];
+switch (env.locale) {
+    case 'es': s = ["es/XUL/Elementos", "es/XUL/Elementos", "Referencia de XUL"]; break; 
+    case 'de': s = ["de/XUL_Referenz", "de/XUL_Referenz", "XUL-Referenz Startseite"]; break; 
+    case 'fr': s = ["fr/Référence_XUL", "fr/R%C3%A9f%C3%A9rence_XUL", "Accueil de la référence XUL"]; break; 
+    case 'ja': s = ["ja/XUL_Reference", "ja/XUL_Reference", "XUL リファレンス home"]; break; 
+    case 'ko': s = ["ko/XUL_Reference", "ko/XUL_Reference", "XUL Reference home"]; break; 
+    case 'pl': s = ["pl/Dokumentacja_XUL", "pl/Dokumentacja_XUL", "Dokumentacja XUL"]; break;
+}
+%>
+« <a title="<%=s[0]%>" href="/docs/<%=s[1]%>"><%=s[2]%></a>
