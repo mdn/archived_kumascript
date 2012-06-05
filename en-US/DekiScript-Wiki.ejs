@@ -1,0 +1,39 @@
+<% module.exports = buildAPI({
+    
+    // Check if the given wiki page exists.
+    // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.PageExists)
+    pageExists: function (path) {
+        return kuma.pageExists(path);    
+    },
+        
+    // Retrieve the content of a document for inclusion
+    // Doesn't (yet?) support all the parameters offered by DekiScript, but I don't think MDN pages use them all.
+    // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Page)
+    page: function (path) {
+        return kuma.include(path);
+    },
+ 
+    // Retrieve the full uri of a given wiki page.
+    // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Uri)
+    uri: function (path, query) {
+        var p = kuma.url.parse(env.url, true);
+        var base = p.protocol + '//' + p.host + '/docs/';            
+        var out = base + path;
+        if (query) { out += '?' + query; }
+        return out;
+    },
+ 
+    // A link to the wiki page that you will add, that will be in a different language.
+    // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Languages)
+    languages: function (langs) {
+        // TODO
+        var out = ['<ul>'];
+        _.each(langs, function (url, lang) {
+            out.push('<li><a href="', kuma.htmlEscape(url), '">',
+                     kuma.htmlEscape(lang), '</a></li>');
+        });
+        out.push('</ul>');
+        return out.join('');
+    }
+     
+}); %>
