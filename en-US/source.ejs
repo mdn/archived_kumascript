@@ -1,4 +1,5 @@
-
+<%
+/*
 <div class="noinclude">
 <p>See <a title="Project:en/Custom_Templates#Template:source" href="/Project:en/Custom_Templates#Template:source">MDC:Custom Templates#Template:source</a> for documentation.</p>
 <p>Consultez <a title="Project:fr/Modèles_personnalisés#Mod.C3.A8le:source" href="/Project:fr/Modèles_personnalisés#Mod.C3.A8le:source">MDC:Modèles personnalisés#Modèle:source</a> pour la documentation.</p>
@@ -6,9 +7,7 @@
 <p>Zobacz również <a title="Project:pl/Własne_szablony#Szablon:source" href="/Project:pl/Własne_szablony#Szablon:source">MDC:Własne szablony#Szablon:source</a>.</p>
 <hr />
 </div>
-<pre class="script">
+*/
 var link = 'http://mxr.mozilla.org/mozilla-central/source/' + $0;
-<a 
-rel="custom" href=(link)> $1 || <code>$0</code>
-</a>
 %>
+<a rel="custom" href="<%=link%>")"><% if ($1) { %><%= $1 %><% } else { %><code><%=$0%></code><% } %></a>
