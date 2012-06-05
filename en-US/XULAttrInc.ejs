@@ -1,11 +1,15 @@
-
-<p>
-<span lang="en" class="lang lang-en"><span id="{{'a-' + $0}}"><span class="script">wiki.page('en/XUL/Attribute/' + $0)</span></span></span>
-<span lang="*" class="lang lang-*"> <span id="{{'a-' + $0}}"><span class="script">wiki.page('en/XUL/Attribute/' + $0)</span></span></span>
-<span lang="de" class="lang lang-de"><span id="{{'a-' + $0}}"><span class="script">wiki.page('de/XUL/Attribute/' + $0)</span></span></span>
-<span lang="es" class="lang lang-es"><span id="{{'a-' + $0}}"><span class="script">wiki.page('es/XUL/Attribute/' + $0)</span></span></span>
-<span lang="fr" class="lang lang-fr"><span id="{{'a-' + $0}}"><span class="script">wiki.page('fr/XUL/Attributs/' + $0)</span></span></span>
-<span lang="ja" class="lang lang-ja"><span id="{{'a-' + $0}}"><span class="script">wiki.page('ja/XUL/Attribute/' + $0)</span></span></span>
-<span lang="ko" class="lang lang-ko"><span class="script">wiki.page('ko/XUL/Attribute/' + $0)</span></span>
-<span lang="pl" class="lang lang-pl"><span id="{{'a-' + $0}}"><span class="script">wiki.page('pl/XUL/Attrybut/' + $0)</span></span></span>
-<span lang="zh-cn" class="lang lang-zh-cn"><span id="{{'a-' + $0}}"><span class="script">wiki.page('zh-cn/XUL/Attribute/' + $0)</span></span></span></p>
+<%
+var path = 'en-US/XUL/Attribute';
+switch (env.locale) {
+    case 'de':    path = 'de/XUL/Attribute'; break;
+    case 'es':    path = 'es/XUL/Attribute'; break;
+    case 'fr':    path = 'fr/XUL/Attributs'; break;
+    case 'ja':    path = 'ja/XUL/Attribute'; break;
+    case 'ko':    path = 'ko/XUL/Attribute'; break;
+    case 'pl':    path = 'pl/XUL/Attrybut'; break;
+    case 'zh-CN': path = 'zh-CN/XUL/Attribute'; break;
+}
+%>
+<div id="<%='a-' + $0%>">
+<%- wiki.page(path + '/' + $0) %>
+</div>
