@@ -1,17 +1,7 @@
 <%
 
 /* Purpose: Important paragraphs, NOT endnotes or footnotes */
-
-/* get page language first */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 /* defaults to English */
 var note = "Note:";
