@@ -1,15 +1,6 @@
-
-<pre class="script">
+<%
 /* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var mailingList = " as a mailing list";
 var newsgroup = " as a newsgroup";
@@ -65,19 +56,17 @@ switch(lang) {
     googleGroup = " jako grupę Google";
     webFeed = " jako kanał";
     break;
-  case 'zh-cn':
+  case 'zh-CN':
     mailingList = " 邮件列表";
     newsgroup = " 新闻组";
     googleGroup = " Google Group（中文）";
     webFeed = " Web feed";
     break;
 }
-
-<ul>
-  <li>web.link('https://lists.mozilla.org/listinfo/' + $0, mailinglist)</li>
-  <li>web.link('news://news.mozilla.org/' + $1, newsgroup)</li>
-  <li>web.link('http://groups.google.com/group/' + $1, googleGroup)</li>
-  <li>web.link('http://groups.google.com/group/' + $1 + '/feeds', webFeed)</li>
-</ul>
-
 %>
+<ul>
+  <li><%- web.link('https://lists.mozilla.org/listinfo/' + $0, mailingList) %></li>
+  <li><%- web.link('news://news.mozilla.org/' + $1, newsgroup) %></li>
+  <li><%- web.link('http://groups.google.com/group/' + $1, googleGroup) %></li>
+  <li><%- web.link('http://groups.google.com/group/' + $1 + '/feeds', webFeed) %></li>
+</ul>
