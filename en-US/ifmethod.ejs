@@ -2,15 +2,7 @@
 /* creates a link to a method in an interface */
 /* parameters: interface name then method name */
 /* get a page's language (Don't use page.language!) */
-var u = Uri.Parts(Page.uri);
-var lang = string.toLower(u.path[0]);
-if(string.Contains(lang, "project")) {
- lang = string.Substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 var destNewType = lang + '/XPCOM_Interface_Reference/' + $0;
 var destOldType = lang + '/' + $0;
 var apiString = $0 + '.' + $1 + '()';
