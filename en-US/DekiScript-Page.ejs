@@ -1,0 +1,20 @@
+<% module.exports = buildAPI({
+    
+    initialize: function (options) {
+        BaseAPI.prototype.initialize.call(this, options);
+        
+        // Incomplete list of Page vars, but probably good enough.
+        // See also: <http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Page>
+        this.setVars({
+            date: new Date(env.modified),
+            id: env.id,
+            language: env.locale,
+            name: env.slug,
+            path: env.path,
+            tags: env.tags,
+            title: env.title,
+            uri: env.url
+        });
+    }
+ 
+}); %>
