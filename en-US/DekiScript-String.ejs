@@ -1,0 +1,48 @@
+<% module.exports = buildAPI({
+   
+    StartsWith: function (str, sub_str) {
+        return (''+str).indexOf(sub_str) === 0;
+    },
+ 
+    EndsWith: function (str, suffix) {
+        str = (''+str);
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    },
+ 
+    Contains: function (str, sub_str) {
+        return (''+str).indexOf(sub_str) !== -1;
+    },
+    
+    IsDigit: function (str) {
+        return (/^\D$/.test(''+str)==false);
+    },
+    
+    IsLetter: function (str) {
+        return (/^[\w]+$/.test(''+str));
+    },
+ 
+    toLower: function (str) {
+        return (''+str).toLowerCase();
+    },
+ 
+    Substr: function (str, start) {
+        return (''+str).substr(start);
+    },
+     
+    Trim: function (str) {
+        return (''+str).trim();
+    },
+     
+    Replace: function (str, from, to) {
+        return (''+str).replace(RegExp(from,'g'),to)
+    },
+     
+    Join: function (list, sep) {
+        return list.join(sep);
+    },
+    
+    Length: function (str) {
+        return (''+str).length;
+    }
+ 
+}); %>
