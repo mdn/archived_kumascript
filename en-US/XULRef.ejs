@@ -1,2 +1,9 @@
-
-<p><span lang="en" class="lang lang-en"><< <a title="en/XUL" href="/en/XUL">XUL Reference</a> <<</span> <span lang="*" class="lang lang-*"><< <a title="en/XUL" href="/en/XUL">XUL Reference</a> << </span> <span lang="es" class="lang lang-es"><< <a title="es/XUL" href="/es/XUL">Referencia de XUL</a> <<</span><span lang="de" class="lang lang-de"> << <a title="de/XUL" href="/de/XUL">XUL Referenz</a> <<</span> <span lang="ja" class="lang lang-ja"><< <a title="ja/XUL" href="/ja/XUL">XUL リファレンス</a> <<</span></p>
+<%
+var s = ["en-US/XUL", "en-US/XUL", "XUL Reference"];
+switch (env.locale) {
+    case 'es': s = ["en/XUL", "en/XUL", "Referencia de XUL"];  break;
+    case 'de': s = ["de/XUL", "de/XUL", "XUL Referenz"];  break;
+    case 'ja': s = ["ja/XUL", "ja/XUL", "XUL リファレンス"];  break;
+}
+%>
+« <a title="<%=s[0]%>" href="/docs/<%=s[1]%>"><%=s[2]%></a> «
