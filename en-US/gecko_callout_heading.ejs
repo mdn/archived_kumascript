@@ -1,18 +1,5 @@
 <%
-
-/* one parameter: Gecko version */
-/* get page language first */
-
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-
+var lang = env.locale;
 var str = "Gecko " + $0 + " note";
 
 switch(lang) {
@@ -22,10 +9,9 @@ switch(lang) {
   case 'zh_tw':
   case 'tw':
     str = "Gecko " + $0 + " 備註";
-  case 'zh-cn':
-  case 'cn':
-    str = "Gecko " + $0 + " 备注";
 }
-<div class="geckoVersionHeading">(web.text(str));
-<div style="font-size:9px; position:relative; top:-5px; font-style:italic;">template.geckoRelease($0)</div></div>
-</pre>
+%>
+<div class="geckoVersionHeading">
+<%=str%>
+<div style="font-size:9px; position:relative; top:-5px; font-style:italic;"><%=template('geckoRelease', [$0])%></div>
+</div>
