@@ -1,12 +1,21 @@
-<div class="noinclude">One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:<br /> <span class="script">Gecko_minversion_header(1.8)</span><br /> <br /> This template should be used when the whole page or section documents a new Gecko feature. For individual items in a list or a table use <a title="Template:gecko_minversion_inline" href="/Template:gecko_minversion_inline">Template:gecko minversion inline</a>. <hr /></div>
-<div class="lang lang-*" lang="*" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Introduced in Gecko <span class="script">web.html($0)</span></p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-en" lang="en" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Introduced in Gecko <span class="script">web.html($0)</span></p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-de" lang="de" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Eingeführt in Gecko <span class="script">web.html($0)</span></p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-es" lang="es" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Introducido en Gecko <span class="script">web.html($0)</span></p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-ja" lang="ja" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Gecko <span class="script">web.html($0)</span> で導入</p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-ko" lang="ko" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Introduced in Gecko <span class="script">web.html($0)</span></p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-pl" lang="pl" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Wprowadzono w Gecko <span class="script">web.html($0)</span></p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-pt" lang="pt" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Introduzido no Gecko <span class="script">web.html($0)</span></p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-fr" lang="fr" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">Nouveau dans Gecko <span class="script">web.html($0)</span></p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-zh-tw" lang="zh-tw" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">自 Gecko <span class="script">web.html($0)</span> 引入</p> <span class="script">geckoRelease($0)</span></div>
-<div class="lang lang-zh-cn" lang="zh-cn" style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> <p style="margin: 4px 0px;">适用于 Gecko<span class="script">web.html($0)</span> 以上</p> <span class="script">geckoRelease($0)</span></div>
+<%
+var ts = {
+    "*":     [ "Introduced in Gecko $0" ],
+    "en-US": [ "Introduced in Gecko $0" ],
+    "de":    [ "Eingeführt in Gecko $0" ],
+    "es":    [ "Introducido en Gecko $0" ],
+    "ja":    [ "Gecko $0 で導入" ],
+    "ko":    [ "Introduced in Gecko $0" ],
+    "pl":    [ "Wprowadzono w Gecko $0" ],
+    "pt":    [ "Introduzido no Gecko $0" ],
+    "fr":    [ "Nouveau dans Gecko $0" ],
+    "zh-TW": [ "自 Gecko $0 引入" ],
+    "zh-CN": [ "适用于 Gecko $0 以上" ]
+}
+var t = ts[env.locale] || ts['*'];
+var s_introduced_in = t[0];
+%>
+<div style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> 
+<p style="margin: 4px 0px;"><%- s_introduced_in.replace('$0', $0) %></p> 
+<%- template('geckoRelease', [$0]) %>
+</div>
