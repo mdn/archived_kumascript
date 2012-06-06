@@ -1,10 +1,10 @@
-
-<pre class="script">
+<%
 /* one parameter: name of sample's file in /samples/svg */
 /* get the page language */
 
 var u = uri.parts(Page.uri);
 var lang = string.tolower(u.path[0]);
+
 if (string.contains(lang, "project") || string.contains(lang, "Project")) {
   lang = string.substr(lang, 8);
 }
@@ -22,6 +22,9 @@ var target = "/samples/svg/" + $0;
 switch(lang) {
   case 'de':
     str = "View the live example";
+    break;
+  case 'ja':
+    str = "実際の表示を確認する";
     break;
 }
 
