@@ -1,5 +1,4 @@
 <%
-
 /* parameters: */
 /* $0 = link to specification */
 /* $1 = link text (optional) */
@@ -87,6 +86,42 @@ switch(status) {
     break;
 }
 }
+
+if(lang == "ja"){
+  switch(status) {
+    case 'ED':
+      color = "#fff";
+      bgcolor = "#e61919";
+      title = "草案（非公式）";
+      break;
+    case 'WD':
+      color = "#fff";
+      bgcolor = "#e66e33";
+      title = "草案";
+      break;
+    case 'LC':
+      color = "#333";
+      bgcolor = "#e2a669";
+      title = "最終草案";
+      break;
+    case 'CR':
+      color = "#333";
+      bgcolor = "#cfd510";
+      title = "勧告候補";
+      break;
+    case 'PR':
+      color = "#fff";
+      bgcolor = "#72ac35";
+      title = "勧告案";
+      break;
+    case 'REC':
+      color = "#fff";
+      bgcolor = "#309c40";
+      title = "W3C勧告";
+      break;
+  }
+}
+
 web.link( $0, ($1 || $0) );
 
 if ($2) {
