@@ -1,1 +1,55 @@
-<p><span class="lang lang-en" lang="en">« <a title="en/CSS" href="/en/CSS">CSS</a> « <a title="en/CSS_Reference" href="/en/CSS/CSS_Reference">CSS Reference</a> </span><span class="lang lang-*" lang="*">« <a title="en/CSS" href="/en/CSS">CSS</a> « <a title="en/CSS_Reference" href="/en/CSS/CSS_Reference">CSS Reference</a> </span><span class="lang lang-es" lang="es">« <a title="es/Guía_de_referencia_de_CSS" href="/es/Guía_de_referencia_de_CSS">Referencia CSS</a> </span><span class="lang lang-fr" lang="fr">« <a title="fr/CSS" href="/fr/CSS">CSS</a> « <a title="fr/Référence_CSS" href="/fr/CSS/Référence_CSS">Référence CSS</a> </span><span class="lang lang-ja" lang="ja">« <a title="ja/CSS" href="/ja/CSS">CSS</a> « <a title="ja/CSS_Reference" href="/ja/CSS/CSS_Reference">CSS リファレンス</a> </span><span class="lang lang-ko" lang="ko">« <a title="ko/CSS_Reference" href="/ko/CSS_Reference">CSS Reference</a> </span><span class="lang lang-pl" lang="pl">« <a title="pl/CSS" href="/pl/CSS">CSS</a> « <a title="pl/Dokumentacja_CSS" href="/pl/Dokumentacja_CSS">Dokumentacja CSS</a> </span><span class="lang lang-pt" lang="pt">« <a title="pt/Referência_CSS" href="/pt/Referência_CSS">Referência CSS</a> </span><span class="lang lang-zh-cn" lang="zh-cn">« <a title="zh-cn/CSS_Reference" href="/zh-cn/CSS_Reference">CSS 参考</a> </span> <span class="lang lang-de" lang="de">« <a title="de/CSS" href="/de/CSS">CSS</a> « <a title="de/CSS_Referenz" href="/de/CSS_Referenz">CSS Referenz</a> </span></p>
+<%
+var s_css_href = '/en-US/docs/CSS';
+var s_css_title = 'CSS';
+var s_css_ref_href = '/en-US/docs/CSS/CSS_Reference';
+var s_css_ref_title = 'CSS Reference';
+
+switch (env.locale) {
+    case 'es':
+        s_css_href = false;
+        s_css_ref_href = '/es/docs/Guía_de_referencia_de_CSS';
+        s_css_ref_title = 'Referencia CSS';
+        break;
+    case 'fr':
+        s_css_href = '/fr/docs/CSS';
+        s_css_title = 'CSS';
+        s_css_ref_href = '/fr/docs/CSS/Référence_CSS';
+        s_css_ref_title = 'Référence CSS';
+        break;
+    case 'ja':
+        s_css_href = '/ja/docs/CSS';
+        s_css_title = 'CSS';
+        s_css_ref_href = '/ja/docs/CSS/CSS_Reference';
+        s_css_ref_title = 'CSS リファレンス';
+        break;
+    case 'ko':
+        s_css_href = false;
+        s_css_title = 'CSS';
+        s_css_ref_href = '/ko/docs/CSS_Reference';
+        s_css_ref_title = 'CSS Reference';
+        break;
+    case 'pl':
+        s_css_href = '/pl/docs/CSS';
+        s_css_title = 'CSS';
+        s_css_ref_href = '/pl/docs/Dokumentacja_CSS';
+        s_css_ref_title = 'Dokumentacja CSS';
+        break;
+    case 'pt':
+        s_css_href = false;
+        s_css_ref_href = '/pt/docs/Referência_CSS';
+        s_css_ref_title = 'Referência CSS';
+        break;
+    case 'zh-CN':
+        s_css_href = false;
+        s_css_ref_href = '/zh-CN/docs/CSS_Reference';
+        s_css_ref_title = 'CSS 参考';
+        break;
+    case 'de':
+        s_css_href = '/de/docs/CSS';
+        s_css_title = 'CSS';
+        s_css_ref_href = 'de/docs/CSS_Referenz';
+        s_css_ref_title = 'CSS Referenz';
+        break;
+}
+%>
+<span><% if (s_css_href) { %>« <a href="<%=s_css_href%>"><%=s_css_title%></a> <% } %>« <a href="<%=s_css_ref_href%>"><%=s_css_ref_title%></a></span>
