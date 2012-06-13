@@ -29,7 +29,7 @@ if (wiki.pageExists(destNewType)) {
 } else if (wiki.pageExists(destOldType)) {
   %><code><span><%-(web.link(wiki.uri(destOldType), dispApi))%></span></code><%
 } else {
-  var targeturi = "/docs/new?slug=CSS/" + destNewType;
+  var targeturi = "/docs/new?slug=XUL/" + propName + "/" + $0;
   %><code><a rel="internal" href="<%=(targeturi)%>" class="new"><%=(dispApi)%></a></code><%
 }
 %>
