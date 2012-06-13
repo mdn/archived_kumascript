@@ -1,11 +1,6 @@
-
-<pre class="script">
+<%
 /* get a page's language (Don't use page.language!) */
-var u = Uri.Parts(Page.uri);
-var lang = u.path[0];
-if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
- lang = string.Substr(lang, 8);
-}
+var lang = env.locale;
 
 /* assume English */
 
@@ -42,8 +37,8 @@ if (!string.compare(lang, "de", true)) {
   prevStr = "« 上一页";
   nextStr = "下一页 »";
 }
-
+%>
 <div class="prevnext">
-<p align="right"><span style="float: left;">(web.link(wiki.uri(lang + '/' + $0), prevStr))</span>(web.link(wiki.uri(lang + '/' + $1), nextStr))</p>
+<p align="right"><span style="float: left;"><%-(web.link(wiki.uri(lang + '/' + $0), prevStr))%></span>
+<%-(web.link(wiki.uri(lang + '/' + $1), nextStr))%></p>
 </div>
-</pre>
