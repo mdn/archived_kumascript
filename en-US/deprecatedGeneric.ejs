@@ -132,14 +132,14 @@ switch(lang) {
 
 switch($0) {
   case 'inline':
-    %><span class="deprecatedInlineTemplate" style="border: 1px solid #5151FF; background-color: #B9B9FF; font-size: x-small; white-space: nowrap; padding: 2px;" title="<%=(tip)%>"><%=str%></span><%
+    %><span class="deprecatedInlineTemplate" style="border: 1px solid #5151FF; background-color: #B9B9FF; font-size: x-small; white-space: nowrap; padding: 2px;" title="<%=(tip)%>"><%-str%></span><%
     break;
   case 'header':
     if (string.length(tip)) {
       str = str + " " + tip;
     }
     %><div class="deprecatedHeaderTemplate" style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-      <p style="margin: 4px 0px 4px 0px;"><%=str%></p>
+      <p style="margin: 4px 0px 4px 0px;"><%-str%></p>
     </div><%
     break;
   case 'method':
@@ -147,7 +147,7 @@ switch($0) {
       str = str + " " + tip;
     }
     %><div>
-      <span class="deprecatedMethodTemplate" style="border: 1px solid #5151FF;; background-color: #B9B9FF; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;"><%=str%></span>
+      <span class="deprecatedMethodTemplate" style="border: 1px solid #5151FF;; background-color: #B9B9FF; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;"><%-str%></span>
       <h3><%-($2)%>()</h3>
     </div><%
     break;
