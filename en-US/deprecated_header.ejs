@@ -1,5 +1,4 @@
-
-<pre class="script">
+<%
 /* one parameter: version of deprecation (optional) */
 /* prepend version with HTML, CSS, JS or Gecko for those techs */
 /* for backwards compatibility unprefixed is Gecko, please avoid this */
@@ -14,7 +13,5 @@ if ($0) {
     str = $0
   }
 }
-
-template.deprecatedGeneric("header",str);
-
 %>
+<%- template("deprecatedGeneric", ["header", str]) %>
