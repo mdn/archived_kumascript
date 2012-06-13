@@ -1,15 +1,5 @@
-
-<pre class="script">
-/* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+<%
+var lang = env.locale;
 
 var version = $0;
 if (string.EndsWith(version, ".0")) {
@@ -41,20 +31,16 @@ switch(lang) {
     note = "Uwaga dotycząca Firefoksa " + $0;
     break;
 }
-
+%>
 <div style="overflow:hidden; margin: 10px 0px; padding: 2px 10px; background-color: rgb(254, 244, 156); text-align: center;">
   <p style="margin: 4px 0px; font-weight: bold;">
+   <%
    if ( wiki.pageexists(lang + '/' + articleUrl) ) {
-    web.link(wiki.uri(lang + '/'+ articleUrl), note); }
-   else { note; }
+        %><%-web.link(wiki.uri(lang + '/'+ articleUrl), note)%><%
+   } else {
+        %><%-note%><% 
+   }
+   %>
   </p>
-  <p style="margin: 4px 0px;">web.html($1)</p>
-</div>
-</pre>
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example: <span class="script">template.Fx_minversion_note(3, "The <code>foobar()</code> method works differently in Firefox 3.")</span></p>
-<p>This template should be used when you need to insert a Firefox version-specific note into an article. For individual items in a list or a table use <a title="Template:fx_minversion_inline" href="/Template:fx_minversion_inline">Template:fx minversion inline</a>, and to mark a whole page or section, use <a title="Template:fx_minversion_header" href="/Template:fx_minversion_header">Template:fx_minversion_header</a>.</p>
-</div>
-<div class="noinclude"><hr />
-<p><a title="Project:ja/Custom_Templates#Version_information_templates" href="/Project:ja/Custom_Templates#Version_information_templates">バージョン情報テンプレート</a> のうちの一つです。例えば: <span class="script">template.Fx_minversion_note(3, "Firefox 3 では、<code>foobar()</code> メソッドは、異なる動作をします。")</span> このテンプレートは、Firefox のバージョン固有の注記を記事に挿入したいときに使うべきです。リストやテーブルの項目には、<a title="Template:fx_minversion_inline" href="/Template:fx_minversion_inline">Template:fx minversion inline</a> を使い、ページまたはセクション全体には、<a title="Template:fx_minversion_header" href="/Template:fx_minversion_header">Template:fx_minversion_header</a> を使ってください。</p>
+  <p style="margin: 4px 0px;"><%-$1%></p>
 </div>
