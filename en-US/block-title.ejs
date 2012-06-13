@@ -1,2 +1,5 @@
-
-<p><span lang="*" class="lang lang-*"><span id="{{Uri.Encode(string.replace($0,' ', '_'))}}"><strong><span class="script">web.html($0)</span></strong></span></span><span lang="zh-tw" class="lang lang-zh-tw"><span class="script">template('Template:小標', args)</span></span></p>
+<% if (env.locale == "zh-TW") { %>
+<%- template('小標', arguments) %>
+<% } else { %>
+<span id="<%= uri.encode(string.replace($0,' ', '_')) %>"><strong><%= $0 %></strong></span>
+<% } %>
