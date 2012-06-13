@@ -21,6 +21,12 @@
         }
  
         return out;
+    },
+    
+    // Encode text as a URI component.
+    // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/Uri.Encode)
+    encode: function (str) {
+        return encodeURI(str);
     }
  
 }); %>
