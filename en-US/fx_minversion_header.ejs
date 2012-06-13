@@ -1,17 +1,5 @@
-
-<pre class="script">
-/* one parameter: Firefox version */
-/* get the page language */
-
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+<%
+var lang = env.locale;
 
 var articleName = "Firefox " + $0 + " for developers";
 var newIn = "This content covers features introduced in ";
@@ -46,11 +34,11 @@ switch(lang) {
     articleName = "Firefox " + $0 + " para desenvolvedores";
     newIn = "Este artigo cobre características introduzidas no ";
     break;
-  case 'zh-cn':
+  case 'zh-CN':
     newIn = "该条目记录了 ";
     newInEnd = " 引入的新特性";
     break;
-  case 'zh-tw':
+  case 'zh-TW':
     newIn = "本文描述 ";
     articleName = "Firefox " + $0 + " 技術文件";
     newInEnd = " 之後加入的功能。";
@@ -59,13 +47,11 @@ switch(lang) {
     articleName = "Firefox " + $0 + " для разработчиков";
     break;
 }
-
+%>
 <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;">
   <p style="margin: 4px 0px;">
-    newIn;
-    web.link(wiki.uri(lang + '/' + articleName), "Firefox " + $0);
-    newInEnd;
+    <%= newIn %>
+    <%- web.link(wiki.uri(lang + '/' + articleName), "Firefox " + $0) %>
+    <%= newInEnd %>
   </p>
 </div>
-
-%>
