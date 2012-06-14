@@ -1,10 +1,17 @@
-<span lang='en' class='lang lang-en'><a href="en/CSS/initial_value">Initial value</a>
-</span><span lang='*' class='lang lang-*'><a href="en/CSS/initial_value">Initial value</a>
-</span><span lang='es' class='lang lang-es'><a href="es/CSS/Valor_inicial">Valor inicial</a>
-</span><span lang='fr' class='lang lang-fr'><a href="fr/CSS/Valeur_initiale">Valeur initiale</a>
-</span><span lang='ja' class='lang lang-ja'><a href="ja/CSS/initial_value">初期値</a>
-</span><span lang='ko' class='lang lang-ko'><a href="ko/CSS/initial_value">초기값</a>
-</span><span lang='pl' class='lang lang-pl'><a href="pl/CSS/warto%c5%9b%c4%87_pocz%c4%85tkowa">Wartość początkowa</a>
-</span><span lang='zh-cn' class='lang lang-zh-cn'><a href="cn/CSS/initial_value">默认值</a>
-</span><span lang='zh-tw' class='lang lang-zh-tw'><a href="zh_tw/CSS/%e9%a0%90%e8%a8%ad%e5%80%bc">預設值</a>
-</span>
+<% if ("es" == env.locale) { %>
+<a href="/es/docs/CSS/Valor_inicial">Valor inicial</a>
+<% } else if ("fr" == env.locale) { %>
+<a href="/fr/docs/CSS/Valeur_initiale">Valeur initiale</a>
+<% } else if ("ja" == env.locale) { %>
+<a href="/ja/docs/CSS/initial_value">初期値</a>
+<% } else if ("ko" == env.locale) { %>
+<a href="/ko/docs/CSS/initial_value">초기값</a>
+<% } else if ("pl" == env.locale) { %>
+<a href="/pl/docs/CSS/warto%c5%9b%c4%87_pocz%c4%85tkowa">Wartość początkowa</a>
+<% } else if ("zh-CN" == env.locale) { %>
+<a href="/zn-CN/docs/CSS/initial_value">默认值</a>
+<% } else if ("zh-TW" == env.locale) { %>
+<a href="/zh-TW/docs/CSS/%e9%a0%90%e8%a8%ad%e5%80%bc">預設值</a>
+<% } else { %>
+<a href="/en-US/docs/CSS/initial_value">Initial value</a>
+<% } %>
