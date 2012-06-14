@@ -1,5 +1,4 @@
-
-<pre class="script">
+<%
 /* one parameter: version of obsolescence (optional) */
 /* prepend version with HTML, CSS, JS or Gecko for those techs */
 /* for backwards compatibility unprefixed is Gecko, please avoid this */
@@ -14,6 +13,5 @@ if ($0) {
     str = $0
   }
 }
-
-template.obsoleteGeneric("header",str);
-</pre>
+%>
+<%- template("obsoleteGeneric", ["header",str]) %>
