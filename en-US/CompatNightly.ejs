@@ -1,5 +1,4 @@
-
-<pre class="script">
+<%
 /* can eventually add code to link to nightlies for a specified browser */
 var str = 'Nightly build';
 var url = '';
@@ -24,5 +23,5 @@ var url = '';
 } if (string.length(url)) {
   str = web.link(url, str);
 }
-web.html('<em>' + str + '</em>');
 %>
+<em><%- str %></em>
