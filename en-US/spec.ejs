@@ -3,16 +3,7 @@
 /* $0 = link to specification */
 /* $1 = link text (optional) */
 /* $2 = status of specification (optional). Possible values: ED, WD, LC, CR, PR, REC. */
-
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var status = $2;
 var title = "";
@@ -121,10 +112,8 @@ if(lang == "ja"){
       break;
   }
 }
-
-web.link( $0, ($1 || $0) );
-
-if ($2) {
-   <span title=(title) style=('color:' + color + '; background-color:' + bgcolor+ '; display: inline-block; font-size: x-small; margin-left: 6px; white-space: nowrap; padding: 2px 5px;')>(status)</span>
-}
-</pre>
+%>
+<%- web.link( $0, ($1 || $0) ) %>
+<% if ($2) { %>
+   <span title="<%=title%>" style="color:<%=color%>; background-color:<%=bgcolor%>; display: inline-block; font-size: x-small; margin-left: 6px; white-space: nowrap; padding: 2px 5px;"><%- status %></span>
+<% } %>
