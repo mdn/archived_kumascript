@@ -1,23 +1,15 @@
 <%
-
 /* one parameter: HTML version */
-/* get the page language */
+var lang = env.locale;
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-
-var msgStart = "";
+var msgStart = "Introduced in ";
 var msgEnd = "";
 var link = "";
+if ($0 == "5") {
+  link = "/en/HTML/HTML5";
+}
 
-switch(lang) { 
+switch (lang) { 
   case "fr":
     msgStart = "Ajouté dans ";
     msgEnd = "";
@@ -46,18 +38,16 @@ switch(lang) {
       link = "/ja/HTML/HTML5";
     }
     break;
-  default:
-    msgStart = "Introduced in ";
-    msgEnd = "";
-    if ($0 == "5") {
-      link = "/en/HTML/HTML5";
-    }
-    break;
 }
-
+%>
 <div class="htmlVersionHeaderTemplate" style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(174, 218, 229); font-weight: bold; text-align: center;">
   <p style="margin: 4px 0px;">
-    msgStart;if (link != "") {web.link(link, "HTML " + $0);} else {web.text("HTML " + $0)}msgEnd;
+    <%= msgStart %>
+    <% if (link != "") { %>
+    <%- web.link(link, "HTML " + $0) %>
+    <% } else { %>
+    HTML <%= $0 %>
+    <% } %>
+    <%= msgEnd %>
   </p>
 </div>
-</pre>
