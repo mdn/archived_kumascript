@@ -1,0 +1,10 @@
+<% module.exports = {
+    
+    localString: function (strings, default) {
+        var lang = env.locale;
+        if (!(lang in strings)) { lang = 'en-US'; }
+        if (!(lang in strings)) { return default; }
+        return strings[lang];        
+    }
+    
+} %>
