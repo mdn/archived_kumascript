@@ -1,20 +1,8 @@
-
-<pre class="script">
+<%
 /* one parameter: attribute name */
-/* get the page language */
-
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var langName = "Attribute";
-
 switch(lang) {
   case 'fr':
     langName = "Attributs";
@@ -27,11 +15,11 @@ var destOldType = lang + '/SVG:' + langName + ':' + $0;
 var destNewType = lang + '/SVG/' + langName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
- <code>(web.link(wiki.uri(destNewType), $0))</code>
+  %><code><%-(web.link(wiki.uri(destNewType), $0))%></code><%
 } else if (wiki.pageExists(destOldType)) {
-  <code>(web.link(wiki.uri(destOldType), $0))</code>
+  %><code><%-(web.link(wiki.uri(destOldType), $0))%></code><%
 } else {
-  <code><<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span></code>;
+  var targeturi = "/docs/new?slug=" + destNewType;
+  %><code><a rel="internal" href="<%=targeturi%>" class="new"><%=$0%></a></code><%
 }
-
 %>
