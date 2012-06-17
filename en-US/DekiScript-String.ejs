@@ -12,7 +12,17 @@
     Contains: function (str, sub_str) {
         return (''+str).indexOf(sub_str) !== -1;
     },
-    
+     
+    Compare: function (first, second, ignorecase) {
+        if (ignorecase) {
+            first = first.toLowerCase();
+            second = second.toLowerCase();
+        }
+        if (first < second) { return -1; }
+        else if (first > second) { return 1; }
+        else { return 0; }
+    },
+     
     IsDigit: function (str) {
         return (/^\D$/.test(''+str)==false);
     },
