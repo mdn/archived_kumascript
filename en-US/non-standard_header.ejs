@@ -1,16 +1,6 @@
-<div class="noinclude"><span class="script">template("Non-standard_header")</span> <hr /></div>
-<pre class="script">
+<%
 /* get the page language */
-
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var str = "Non-standard";
 
@@ -34,10 +24,9 @@ switch(lang) {
     str = "未标准化";
     break;
 }
-
+%>
 <div style="overflow:hidden; border: 1px solid #FFB752; background-color: #FEE3BC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
   <p style="margin: 4px 0px 4px 0px;">
-    str;
+    <%= str %>
   </p>
 </div>
-</pre>
