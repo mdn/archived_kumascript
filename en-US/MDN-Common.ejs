@@ -1,10 +1,14 @@
 <% module.exports = {
     
-    localString: function (strings, default) {
+    /**
+     * Given a set of strings like this:
+     *     { "en-US": "Foo", "de": "Bar", "es": "Baz" }
+     * Return the one which matches the current locale.
+     */
+    localString: function (strings) {
         var lang = env.locale;
-        if (!(lang in strings)) { lang = 'en-US'; }
-        if (!(lang in strings)) { return default; }
-        return strings[lang];        
+        if (!(lang in strings)) lang = 'en-US';
+        return strings[lang];
     }
     
 } %>
