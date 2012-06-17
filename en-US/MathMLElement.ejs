@@ -1,21 +1,11 @@
 <%
-
-/* accepts as input one required parameter: MathML element to create a xref to */ 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
-  lang = page.language;
-}
+var lang = env.locale;
 var dest = lang + '/' + 'MathML/Element/' + $0;
 
 if (wiki.pageExists(dest)) { /* the page exists */
-  <code>(web.link(wiki.uri(dest), '<' + $0 + '>'))</code>;
+  %><code><%=(web.link(wiki.uri(dest), '<' + $0 + '>'))%></code><%
 } else { /* the page doesn't exist */
-  var targeturi = "https://developer.mozilla.org/Article_not_found?uri=" + dest;
-  <code><a rel=('internal') href=(targeturi) class=('new')>(web.text('<' + $0 + '>'))</a></code>
+  var targeturi = "/"+lang+"/docs/new?slug=" + $0;
+  %><code><a rel="internal" href="<%=targeturi%>" class="new"><%='<' + $0 + '>'%></a></code><%
 }
-</pre>
+%>
