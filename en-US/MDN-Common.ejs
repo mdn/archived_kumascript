@@ -1,6 +1,39 @@
 <% module.exports = {
     
     /**
+     * Attempt to build a link to an existing wiki document in the current 
+     * locale, trying the given optional prefixes (if any), and the given 
+     * destination path.  
+     */
+    link: function (/*[pre1, pre2, ..., preN], path, text */) {
+        if (arguments.length < 2) {
+            return 'ERROR'; // TODO: need better feedback here?
+        }
+        var lang = env.locale;
+        var link_text = arguments.pop();
+        var link_path = arguments.pop();
+        var prefixes  = arguments.length ? arguments || [''];
+        
+        // Try out each of the prefixes, looking for an existing page.
+        // If found, return a link to that page.
+        for (var i=0; i<prefixes.length; i++) {
+            var full_path = lang + prefixes[i] + path;
+            if (kuma.pageExists(full_path)) {
+                return '<a href="' + kuma.htmlEscape(full_path) + '">' +
+                    kuma.htmlEscape(text) + '</a>';
+            }
+        }
+        
+        // None of the attempts at finding an existing page worked, so 
+        // build a new-page link.
+        return '<a rel="internal" class="new" ' + 
+            'href="/' + lang + '/docs/new?slug=' +
+            kuma.htmlEscape(prefixes.pop() + path) + '">' +
+            kuma.htmlEscape(text) +
+            '</a>';
+    },
+    
+    /**
      * Given a set of strings like this:
      *     { "en-US": "Foo", "de": "Bar", "es": "Baz" }
      * Return the one which matches the current locale.
