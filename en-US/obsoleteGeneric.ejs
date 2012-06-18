@@ -6,15 +6,7 @@
 /* third parameter: additional information required for the type specified by the first parameter */
 /*   method requires the method name */
 
-/* get the page language */
 var lang = env.locale;
-if (string.contains(lang, "project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
 
 var str = "";
 var ver = "";
