@@ -1,8 +1,13 @@
-<span lang='en' class='lang lang-en'>« <a href="en/XPCOM_API_Reference">XPCOM API Reference</a>
-</span><span lang='*' class='lang lang-*'>« <a href="en/XPCOM_API_Reference">XPCOM API Reference</a>
-</span><span lang='fr' class='lang lang-fr'>« <a href="fr/R%c3%a9f%c3%a9rence_de_l'API_XPCOM">Référence de l'API XPCOM</a>
-</span><span lang='ja' class='lang lang-ja'>« <a href="ja/XPCOM_API_Reference">XPCOM API Reference</a>
-</span><span lang='ko' class='lang lang-ko'>« <a href="ko/XPCOM_API_Reference">XPCOM API Reference</a>
-</span><span lang='pl' class='lang lang-pl'>« <a href="pl/Dokumentacja_API_XPCOM">Dokumentacja API XPCOM</a>
-</span><span lang='ru' class='lang lang-ru'>« <a href="ru/%d0%a1%d0%bf%d1%80%d0%b0%d0%b2%d0%be%d1%87%d0%bd%d0%b8%d0%ba_XPCOM_API">Справочник XPCOM API</a>
-</span>
+<% if ('fr' == env.locale) { %>
+« <a href="fr/R%c3%a9f%c3%a9rence_de_l'API_XPCOM">Référence de l'API XPCOM</a>
+<% } else if ('ja' == env.locale) { %>
+« <a href="ja/XPCOM_API_Reference">XPCOM API Reference</a>
+<% } else if ('ko' == env.locale) { %>
+« <a href="ko/XPCOM_API_Reference">XPCOM API Reference</a>
+<% } else if ('pl' == env.locale) { %>
+« <a href="pl/Dokumentacja_API_XPCOM">Dokumentacja API XPCOM</a>
+<% } else if ('ru' == env.locale) { %>
+« <a href="ru/%d0%a1%d0%bf%d1%80%d0%b0%d0%b2%d0%be%d1%87%d0%bd%d0%b8%d0%ba_XPCOM_API">Справочник XPCOM API</a>
+<% } else { %>
+« <a href="en/XPCOM_API_Reference">XPCOM API Reference</a>
+<% } %>
