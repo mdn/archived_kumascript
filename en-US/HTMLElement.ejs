@@ -1,6 +1,16 @@
 <%
 var lang = env.locale;
 var name = $0;
+var sectionname = "Element";
+if ("es" == lang) {
+    sectionname = "Elemento";
+}
+%>
+<code><%- mdn.link('/HTML/' + sectionname + '/', $0, $0) %></code>
+
+<% if (false) {
+var lang = env.locale;
+var name = $0;
 
 var sectionname = "Element";
 
@@ -20,4 +30,4 @@ if (wiki.pageExists(dest)) { /* the page exists */
   var targeturi = "/docs/new?locale=" + lang + "&slug=" + 'HTML/' + sectionname + '/' + name;
   %><code><a rel="internal" href="<%=targeturi%>" class="new">&lt;<%=$0%>&gt;</a></code><%
 }
-%>
+} %>
