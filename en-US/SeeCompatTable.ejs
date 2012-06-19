@@ -1,31 +1,38 @@
-<% if ("zh-CN" == env.locale) { %>
-<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: left;">
+<%
+switch(page.language){
+  case 'zh-cn':<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: left;">
       <p style="margin: 4px 0px;">
-        <strong style='text-align: center;display:block'>这是一个实验中的功能</strong>此功能某些浏览器尚在开发中,请参考<a href='#AutoCompatibilityTable'>浏览器兼容性表格</a>以得到在不同浏览器中适合使用的前缀.由于该功能对应的标准文档可能被重新修订,所以在未来版本的浏览器中该功能的语法和行为可能随之改变.
+        web.html("<strong style='text-align: center;display:block'>这是一个实验中的功能</strong>此功能某些浏览器尚在开发中,请参考<a href='#AutoCompatibilityTable'>浏览器兼容性表格</a>以得到在不同浏览器中适合使用的前缀.由于该功能对应的标准文档可能被重新修订,所以在未来版本的浏览器中该功能的语法和行为可能随之改变.");
       </p>
     </div>
-<% } else if ("zh-TW" == env.locale) { %>
+    break;
+  case 'zh-tw':
     <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
       <p style="margin: 4px 0px;">
-        <strong>這是一個實驗中的功能</strong><br />此功能在某些瀏覽器尚在開發中，請參考<a href='#AutoCompatibilityTable'>兼容表格</a>以得到不同瀏覽器用的前輟。
+        web.html("<strong>這是一個實驗中的功能</strong><br />此功能在某些瀏覽器尚在開發中，請參考<a href='#AutoCompatibilityTable'>兼容表格</a>以得到不同瀏覽器用的前輟。");
       </p>
     </div>
-<% } else if ("fr" == env.locale) { %>
+    break;
+  case 'fr':
     <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
       <p style="margin: 4px 0px;">
-        <strong>Cette fonction est expérimentale</strong><br />Puisque cette fonction est toujours en développement dans certains navigateurs, veuillez consulter le <a href='#AutoCompatibilityTable'>tableau de compatibilité</a> pour les préfixes à utiliser selon les navigateurs.<br/>Il convient de noter qu'une fonctionnalité expérimentale peut voir sa syntaxe ou son comportement modifié dans le futur en fonction des évolutions de la spécification.
+        web.html("<strong>Cette fonction est expérimentale</strong><br />Puisque cette fonction est toujours en développement dans certains navigateurs, veuillez consulter le <a href='#AutoCompatibilityTable'>tableau de compatibilité</a> pour les préfixes à utiliser selon les navigateurs.<br/>Il convient de noter qu'une fonctionnalité expérimentale peut voir sa syntaxe ou son comportement modifié dans le futur en fonction des évolutions de la spécification.");
       </p>
     </div>
-<% } else if ("ja" == env.locale) { %>
+    break;
+   case 'ja':
     <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
       <p style="margin: 4px 0px;">
-        <strong>これは実験的機能です。</strong><br />この機能は複数のブラウザで開発中の状態にあります。そのため、様々なブラウザで用いるための適切な接頭辞は <a href='#AutoCompatibilityTable'>互換性テーブル</a> をチェックしてください。実験的機能の構文と挙動は、その仕様の変更に従って、各ブラウザの将来のバージョンで変更になる可能性があることに注意してください。 
+        web.html("<strong>これは実験的機能です。</strong><br />この機能は複数のブラウザで開発中の状態にあります。そのため、様々なブラウザで用いるための適切な接頭辞は <a href='#AutoCompatibilityTable'>互換性テーブル</a> をチェックしてください。実験的機能の構文と挙動は、その仕様の変更に従って、各ブラウザの将来のバージョンで変更になる可能性があることに注意してください。 ");
       </p>
     </div>
-<% } else { %>
+    break;
+  default: /*en*/
     <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
       <p style="margin: 4px 0px;">
-        <strong>This is an experimental feature</strong><br />Because this feature is still in development in some browsers, check the <a href='#AutoCompatibilityTable'>compatibility table</a> for the proper prefixes to use in various browsers. Also note that the syntax and behavior of an experimental feature is subject to change in future version of browsers as the spec changes.
+        web.html("<strong>This is an experimental technology</strong><br />Because this technology's specification has not stabilized, check the <a href='#AutoCompatibilityTable'>compatibility table</a> for the proper prefixes to use in various browsers. Also note that the syntax and behavior of an experimental technology is subject to change in future version of browsers as the spec changes.");
       </p>
     </div>
-<% } %>
+    break;
+}
+</pre>
