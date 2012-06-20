@@ -1,5 +1,4 @@
-
-<pre class="script">
+<%
 /* two parameters: topic page name, topic page title */
 /* get the page language */
 
@@ -20,6 +19,6 @@ switch(lang) {
     langName = $1 + " ページ";
     break;
 }
-var dest = 'https://developer.mozilla.org/' + lang + '/' + $0;
-web.link(dest, "« " + langName);
-</pre>
+var dest = 'https://developer.mozilla.org/' + lang + '/docs/' + $0;
+%>
+<a href="<%= dest %>">« <%= langName %></a>
