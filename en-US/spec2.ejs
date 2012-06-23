@@ -1,7 +1,17 @@
 <%
 /* parameters: */
 /* $0 = name of specification */
-var lang = env.locale;
+
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
 
 var spec = $0;
 var status;
@@ -62,7 +72,7 @@ switch(spec) {
     status = 'WD';
     break;
   case 'CSS3 Media Queries':
-    status = 'PR';
+    status = 'REC';
     break;
   case 'CSS3 Multicol':
     status = 'CR';
@@ -135,50 +145,49 @@ switch(lang){
   case 'ja':
     switch(status) {
       case 'REC':
-        %>勧告<%
+        web.text('勧告');
         break;
       case 'PR':
-        %>勧告案<%
+        web.text('勧告案');
         break;
       case 'CR':
-        %>勧告候補<%
+        web.text('勧告候補');
         break;
       case 'WD':
-        %>草案<%
+        web.text('草案');
         break;
       case 'ED':
-        %>勧告改訂案<%
+        web.text('勧告改訂案');
         break;
       case 'Old-Transforms':
-        %>この仕様は他のドラフトへ移動されました。アップデートしてください。<%
+        web.text('この仕様は他のドラフトへ移動されました。アップデートしてください。');
         break;
       default:
-        %>不明<%
+        web.text('不明');
     };
     break;
   default: 
     switch (status) {
       case 'REC':
-      %>Recommendation<%
+      web.text('Recommendation');
       break;
     case 'PR':
-      %>Proposed Recommendation<%
+      web.text('Proposed Recommendation');
       break;
     case 'CR':
-      %>Candidate Recommendation<%
+      web.text('Candidate Recommendation');
       break;
     case 'WD':
-      %>Working Draft<%
+      web.text('Working Draft');
       break;
     case 'ED':
-      %>Editor's Draft<%
+      web.text('Editor\'s Draft');
       break;
     case 'Old-Transforms':
-      %>This has been merged in another draft. Please update<%
+      web.text('This has been merged in another draft. Please update');
       break;
     default:
-      %>Unknown<%
+      web.text('Unknown');
     }
 }
-
-%>
+</pre>
