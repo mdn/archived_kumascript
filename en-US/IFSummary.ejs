@@ -1,11 +1,19 @@
 <%
-
 /* parameters: path of IDL, parent class, scriptable/not scriptable,
 /* last Gecko version changed in, summary (optional) */
 /* version introduced, version deprecated, version obsoleted */
 /* (all optional; timeline will draw if version introduced provided) */
+/* get page language first */
 
-var lang = env.locale;
+var u = uri.parts(Page.uri);
+var lang = string.tolower(u.path[0]);
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+ lang = page.language;
+}
 
 /* defaults to English */
 var scriptableOutput = "Unknown";
@@ -23,9 +31,11 @@ switch(lang) {
     var scriptableLink = "fr/Interfaces/À_propos_des_interfaces_scriptables";
     break;
   case "ja":
-    var scriptable = "Scriptable";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces";
+    var scriptable = "Scriptable",
+        notscriptable = "Not scriptable",
+        inheritsFrom = "継承元: ",
+        scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces",
+        lastChanged = "最終更新: Gecko ";
     break;
   case "ko":
     var scriptable = "스크립트에서 사용 가능";
@@ -37,7 +47,7 @@ switch(lang) {
     var notscriptable = "Not scriptable";
     var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
     break;
-  case "zh-CN":
+  case "zh-cn":
     var scriptable = "脚本化";
     var notscriptable = "不可脚本化";
     var inheritsFrom = "继承于: ";
@@ -55,31 +65,26 @@ switch(string.tolower($2)) {
     break;
 }
 
-/* TODO: Renable this, but with proper functionality. I can't imagine the
- * intended value is 833 years (ie. 10000 / 12)
 if (date.DiffMonths(date.now, Page.date) > 10000) {
   template.note(outdated);
 }
-*/
-%>
 <div style="border:solid #dddddd 2px; margin-right:262px; margin-bottom:12px;">
-<div style="background:#eeeeee; padding:2px;"><%- template("source", [$0]) %><span style="text-align:right; float:right;"><%- scriptableOutput %></span></div>
-<%
+<div style="background:#eeeeee; padding:2px;">(web.html(template.source($0)));<span style="text-align:right; float:right;">(web.html(scriptableOutput));</span></div>
 var summary = $4;
 if (!$4) {
-  summary = "<i>Please add a summary to this article.</i>";
+  summary = "<i>Please add a summary to this article.</i>";
 }
-%>
-<span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;"><%- summary %></span>
-<% if ($5) { %>
-  <%- template("VersionTimeline", [$5, $3, $7, $6]) %>
-<% } %>
-<div style="background:#eeeeee; padding:2px;">
-<% if ($1 != "") { %>
-  <%- inheritsFrom  + template("interface",[$1]) %>
-<% } else { %>
+<span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;">(web.html(summary));</span>
+if ($5) {
+  template.VersionTimeline($5, $3, $7, $6);
+}
+<div style="background:#eee; padding:2px;">
+if ($1 != "") {
+  (web.html(inheritsFrom  + template.interface($1)));
+} else {
 <span>&nbsp;</span>
-<% } %>
-<span style="text-align:right; float:right;"><%- lastChanged + $3 + " " + template("geckoRelease", [$3]) %></span>
+}
+<span style="text-align:right; float:right;">(web.html(lastChanged + $3 + " " + template.geckoRelease($3)));</span></div>
 </div>
-</div>
+
+%>
