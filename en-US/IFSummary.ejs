@@ -32,10 +32,12 @@ switch(lang) {
     break;
   case "ja":
     var scriptable = "Scriptable",
+        scriptableOutput = "Unknown",
+        scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces",
         notscriptable = "Not scriptable",
         inheritsFrom = "継承元: ",
-        scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces",
-        lastChanged = "最終更新: Gecko ";
+        lastChanged = "最終更新: Gecko ",
+        outdated = "このページには最近の更新はありません。古い版である可能性が有ります。";
     break;
   case "ko":
     var scriptable = "스크립트에서 사용 가능";
@@ -86,5 +88,4 @@ if ($1 != "") {
 }
 <span style="text-align:right; float:right;">(web.html(lastChanged + $3 + " " + template.geckoRelease($3)));</span></div>
 </div>
-
-%>
+</pre>
