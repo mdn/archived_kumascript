@@ -2,13 +2,17 @@
 
 /* parameters: version created, version last changed, version obsoleted (optional), version deprecated (optional) */
 /* specify 0 for obsoleted if it's deprecated but not yet obsolete */
-/* get page language first */
 
 var currentGecko = "15.0";  // Update this to current Gecko version
-var currentBlob = template.xverblob(currentGecko) - template.xverblob(1);
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-var unitBlob = template.xverblob(1);
+var unitBlob = template("xverblob", ["1"])
+var currentBlob = template("xverblob", [currentGecko]) - unitBlob;
+var u = uri.parts(env.url);
+var lang = u.path[0].toLowerCase();
+
+var start = 0;
+var end = 0;
+var v = 0;
+var st = "";
 
 // Variables defining positioning of items in the diagram
 
@@ -23,23 +27,18 @@ else if (string.StartsWith(lang, "user:")) {
  lang = page.language;
 }
 
-var availLength = currentBlob - template.xverblob($0);
-
+var availLength = currentBlob - template("xverblob", [$0]);
+%>
 <div style="height:42px; position:relative; padding:2px; width:auto;">
-
-var start = 0;
-var end = 0;
-var v = 0;
-var st = "";
 
 // Draw version legend
 
-<div style="top:22px; font-size:11px; position:absolute;">(web.html("1.0"));</div>
+<div style="top:22px; font-size:11px; position:absolute;">1.0</div>
 
 // Only draw the "current version" legend if nothing collides with it
-
-if (($2 != currentGecko) && ($0 != currentGecko) && ($3 != currentGecko)) {
-  <div style="top:22px; font-size:11px; position:absolute; text-align:right; width:100%;">(currentGecko)</div>
+<%
+if (($2 != currentGecko) && ($0 != currentGecko) && ($3 != currentGecko)) { %>
+  <div style="top:22px; font-size:11px; position:absolute; text-align:right; width:100%;"><%- currentGecko %></div><%
 }
 
 // Compute length of initial red block, if any. This will run from version 1.0 to $0
@@ -48,23 +47,26 @@ var startVer = $0;
 if (startVer < 1) {
   startVer = 1;    // deal with cases where the start version predates 1.0
 }
-v = template.xverblob(startVer) - unitBlob;
+v = template("xverblob", [startVer]) - unitBlob;
+
 if (v) {
   end = 100*(v/currentBlob);
   st = barTopHeight + "background:#dd0000; position:absolute; width:" + end + "%";
-  <div style=(st)></div>
+  %> <div style=(st)></div> <%
   if (startVer == currentGecko) {
     st = "top:0px; font-size:11px; position:absolute; text-align:right; width:" + end + "%;";
   } else {
     st = "top:0px; font-size:11px; position:absolute; left:" + end + "%;";    
-  }
-  <div style=(st)>(web.html("Introduced"));</div>
+  }%>
+  <div style=(st)>Introduced</div>
+  <%
   if (startVer == currentGecko) {
     st = underTextTop + "font-size:11px; position:absolute; text-align:right; width:" + end + "%;";
   } else {
     st = underTextTop + "font-size:11px; position:absolute; left:" + end + "%;";
   }
-  <div style=(st)>(web.html("Gecko " + $0));</div>
+  %>
+  <div style=(st)><%= "Gecko " + $0%></div>
 }
 start = end;
 
