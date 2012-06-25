@@ -6,7 +6,7 @@ var arg = string.trim($0);
 var plus = false;
 var extraMessage = '';
 if (string.EndsWith(arg, '+')) {
-  arg = string.SubStr(arg, 0, string.Length(arg) - 1);
+  arg = arg.substr(0, arg.length-1);
   plus = true;
 }
 switch(arg)
