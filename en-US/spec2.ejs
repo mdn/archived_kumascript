@@ -2,8 +2,6 @@
 /* parameters: */
 /* $0 = name of specification */
 
-var lang = env.locale;
-
 var spec = $0;
 var status;
 
@@ -132,53 +130,56 @@ switch(spec) {
     status = 'Unknown';
 }
 
-switch(lang){
+var status_text = 'Unknown';
+
+switch(env.locale){
   case 'ja':
     switch(status) {
       case 'REC':
-        web.text('勧告');
+        status_text = '勧告';
         break;
       case 'PR':
-        web.text('勧告案');
+        status_text = '勧告案';
         break;
       case 'CR':
-        web.text('勧告候補');
+        status_text = '勧告候補';
         break;
       case 'WD':
-        web.text('草案');
+        status_text = '草案';
         break;
       case 'ED':
-        web.text('勧告改訂案');
+        status_text = '勧告改訂案';
         break;
       case 'Old-Transforms':
-        web.text('この仕様は他のドラフトへ移動されました。アップデートしてください。');
+        status_text = 'この仕様は他のドラフトへ移動されました。アップデートしてください。';
         break;
       default:
-        web.text('不明');
+        status_text = '不明';
     };
     break;
   default: 
     switch (status) {
       case 'REC':
-      web.text('Recommendation');
+      status_text = 'Recommendation';
       break;
     case 'PR':
-      web.text('Proposed Recommendation');
+      status_text = 'Proposed Recommendation';
       break;
     case 'CR':
-      web.text('Candidate Recommendation');
+      status_text = 'Candidate Recommendation';
       break;
     case 'WD':
-      web.text('Working Draft');
+      status_text = 'Working Draft';
       break;
     case 'ED':
-      web.text('Editor\'s Draft');
+      status_text = 'Editor\'s Draft';
       break;
     case 'Old-Transforms':
-      web.text('This has been merged in another draft. Please update');
+      status_text = 'This has been merged in another draft. Please update';
       break;
     default:
-      web.text('Unknown');
+      status_text = 'Unknown';
     }
 }
 %>
+<%= status_text %>
