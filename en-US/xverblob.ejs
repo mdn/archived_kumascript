@@ -1,7 +1,6 @@
-
-<pre class="script">
-var ar = string.split($0, ".");
-var len = #ar;
+<%
+var ar = $0.split('.');
+var len = ar.length;
 var ar0 = ar[0];
 
 if (ar0 >= 5) {
@@ -19,6 +18,5 @@ if (len > 2) {
 if (len > 3) {
   b = b + ar[3];  // fourth component isn't multiplied
 }
-(b); 
-
 %>
+<%- b %>
