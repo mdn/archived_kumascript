@@ -15,12 +15,12 @@ var outdated = "This page has not been updated recently; the content may be outd
 
 switch(env.locale) {
   case "fr":
-    var scriptable = "Scriptable";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "fr/Interfaces/À_propos_des_interfaces_scriptables";
+    scriptable = "Scriptable";
+    notscriptable = "Not scriptable";
+    scriptableLink = "fr/Interfaces/À_propos_des_interfaces_scriptables";
     break;
   case "ja":
-    var scriptable = "Scriptable",
+    scriptable = "Scriptable",
         scriptableOutput = "Unknown",
         scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces",
         notscriptable = "Not scriptable",
@@ -29,25 +29,25 @@ switch(env.locale) {
         outdated = "このページには最近の更新はありません。古い版である可能性が有ります。";
     break;
   case "ko":
-    var scriptable = "스크립트에서 사용 가능";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "ko/Interfaces/About_Scriptable_Interfaces";
+    scriptable = "스크립트에서 사용 가능";
+    notscriptable = "Not scriptable";
+    scriptableLink = "ko/Interfaces/About_Scriptable_Interfaces";
     break;
   case "pl":
-    var scriptable = "skryptowalny";
-    var notscriptable = "Not scriptable";
-    var scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
+    scriptable = "skryptowalny";
+    notscriptable = "Not scriptable";
+    scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
     break;
-  case "zh-cn":
-    var scriptable = "脚本化";
-    var notscriptable = "不可脚本化";
-    var inheritsFrom = "继承于: ";
-    var scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
-    var lastChanged = "最后修改于Gecko ";
+  case "zh-CN":
+    scriptable = "脚本化";
+    notscriptable = "不可脚本化";
+    inheritsFrom = "继承于: ";
+    scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
+    lastChanged = "最后修改于Gecko ";
     break;
 }
 
-switch(string.tolower($2)) {
+switch($2.toLowerCase()) {
   case "scriptable":
     scriptableOutput = '<a style="color:#00cc00; font-weight:bold;" href="' + scriptableLink + '">' + scriptable + '</a>';
     break;
@@ -56,12 +56,12 @@ switch(string.tolower($2)) {
     break;
 }
 
-if (date.now - Page.date < 1000000*60*60*24*365) {
-  template("note", [outdated]);
-}
+if (date.now - env.modified < 1000000*60*60*24*365) { %>
+  <%- template("note", [outdated]) %>
+<% }
 %>
 <div style="border:solid #dddddd 2px; margin-right:262px; margin-bottom:12px;">
-<div style="background:#eeeeee; padding:2px;"><% template("source", [$0]) %><span style="text-align:right; float:right;"><%- scriptableOutput %></span></div>
+<div style="background:#eeeeee; padding:2px;"><%- template("source", [$0]) %><span style="text-align:right; float:right;"><%- scriptableOutput %></span></div>
 <%
 var summary = $4;
 if (!$4) {
@@ -77,10 +77,10 @@ if ($5) {
 <div style="background:#eee; padding:2px;">
 <%
 if ($1 != "") {
-  (web.html(inheritsFrom  + template("interface", [$1])));
+  %><%- inheritsFrom  + template("interface", [$1]) %><%
 } else {
-  (web.html("<span>&nbsp;</span");
+  %><span>&nbsp;</span><%
 }
 %>
-<span style="text-align:right; float:right;"><% web.html(lastChanged + $3 + " " + template("geckoRelease", [$3])))%></span></div>
+<span style="text-align:right; float:right;"><%- lastChanged + $3 + " " + template("geckoRelease", [$3]) %></span></div>
 </div>
