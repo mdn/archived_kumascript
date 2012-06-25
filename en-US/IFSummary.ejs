@@ -3,7 +3,6 @@
 /* last Gecko version changed in, summary (optional) */
 /* version introduced, version deprecated, version obsoleted */
 /* (all optional; timeline will draw if version introduced provided) */
-/* get page language first */
 
 /* defaults to English */
 var scriptableOutput = "Unknown";
@@ -69,7 +68,7 @@ if (!$4) {
   summary = "<i>Please add a summary to this article.</i>";
 }
 %>
-<span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;">(web.html(summary));</span>
+<span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;"><%= summary %></span>
 <%
 if ($5) {
   template("VersionTimeline", [$5, $3, $7, $6]);
