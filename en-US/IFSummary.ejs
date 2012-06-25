@@ -62,7 +62,7 @@ if (date.now - Page.date < 1000000*60*60*24*365) {
 }
 %>
 <div style="border:solid #dddddd 2px; margin-right:262px; margin-bottom:12px;">
-<div style="background:#eeeeee; padding:2px;">(web.html(template.source($0)));<span style="text-align:right; float:right;">(web.html(scriptableOutput));</span></div>
+<div style="background:#eeeeee; padding:2px;"><% template("source", $0) %>;<span style="text-align:right; float:right;"><%- scriptableOutput %></span></div>
 <%
 var summary = $4;
 if (!$4) {
@@ -80,8 +80,8 @@ if ($5) {
 if ($1 != "") {
   (web.html(inheritsFrom  + template("interface", [$1])));
 } else {
-  web.html("<span>&nbsp;</span");
+  (web.html("<span>&nbsp;</span");
 }
 %>
-<span style="text-align:right; float:right;">(web.html(lastChanged + $3 + " " + template.geckoRelease($3)));</span></div>
+<span style="text-align:right; float:right;">(web.html(lastChanged + $3 + " " + <% template("geckoRelease", [$3])));</span></div>
 </div>
