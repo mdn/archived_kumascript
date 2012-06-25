@@ -17,11 +17,11 @@ var str = "";
 var target = lang + "DOM/" + $1;
 
 switch(lang) {
-  case ja:
-    str = + template.interface($0) + "インターフェースには" + template.domxref($1) + "インファーフェースが実装されています。詳細については各ページを参照して下さい。";
-  break;
+case "ja":
+str = template.interface($0) + "インターフェースには" + template.domxref($1) + "インファーフェースが実装されています。詳細については各ページを参照して下さい。";
+break;
 
-  default:
+default:
     str = "The " + template.interface($0) + " interface implements the DOM " + template.domxref($1) + " interface. See that page for details.";
   break;
 }
