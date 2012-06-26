@@ -12,14 +12,7 @@
 
 /* get a page's language (Don't use page.language!) */
 var u = Uri.Parts(Page.uri);
-var lang = string.toLower(u.path[0]);
-if(string.Contains(lang, "project")) {
-  lang = string.Substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
-  lang = page.language;
-}
+var lang = env.locale;
 
 var api = $0;
 var str = $0;
@@ -41,12 +34,12 @@ if ($2) {
   anch = '#' + $2;
 }
 if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
-  <code>(web.link(wiki.uri(destNewType) + anch,str))</code>;
+  %><code><%-web.link(wiki.uri(destNewType) + anch,str)%></code><%
 } else if (lang == 'zh_tw' && wiki.pageExists(destEng)){  
   /* the MozTW community consider links to English pages better than red ones. 
      I'll write about this to mozilla.dev.mdc later */ 
-  <code>(web.link(wiki.uri(destEng) + anch,str))</code>;
+  %><code><%-web.link(wiki.uri(destEng) + anch,str)%></code><%
 } else { /* the page doesn't exist */
-  <code><span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(<span>destNewType</span>)</span> + anch<span>) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>(str)<span class="end-tag">a</span></code>;
+  %><code><a rel="internal" href="<%=wiki.uri(destNewType) + anch%>" class="new"><%=str%></a></code><%
 }
 %>
