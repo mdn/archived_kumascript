@@ -30,13 +30,10 @@ else if (string.StartsWith(lang, "user:")) {
 var availLength = currentBlob - template("xverblob", [$0]);
 %>
 <div style="height:42px; position:relative; padding:2px; width:auto;">
-
-// Draw version legend
-
 <div style="top:22px; font-size:11px; position:absolute;">1.0</div>
 
-// Only draw the "current version" legend if nothing collides with it
 <%
+// Only draw the "current version" legend if nothing collides with it
 if (($2 != currentGecko) && ($0 != currentGecko) && ($3 != currentGecko)) { %>
   <div style="top:22px; font-size:11px; position:absolute; text-align:right; width:100%;"><%- currentGecko %></div><%
 }
@@ -52,12 +49,15 @@ v = template("xverblob", [startVer]) - unitBlob;
 if (v) {
   end = 100*(v/currentBlob);
   st = barTopHeight + "background:#dd0000; position:absolute; width:" + end + "%";
-  %> <div style="<%=st%>"></div> <%
+  %>
+  <div style="<%=st%>"></div>
+  <%
   if (startVer == currentGecko) {
     st = "top:0px; font-size:11px; position:absolute; text-align:right; width:" + end + "%;";
   } else {
     st = "top:0px; font-size:11px; position:absolute; left:" + end + "%;";    
-  }%>
+  }
+  %>
   <div style="<%=st%>">Introduced</div>
   <%
   if (startVer == currentGecko) {
@@ -66,7 +66,7 @@ if (v) {
     st = underTextTop + "font-size:11px; position:absolute; left:" + end + "%;";
   }
   %>
-  <div style="<%=st%>">Gecko "<%=$0%></div>
+  <div style="<%=st%>">Gecko <%=$0%></div>
 <%
 }
 start = end;
@@ -78,8 +78,9 @@ introTitle = "Introduced in Gecko " + $0 + " " + template("geckoRelease", [$0]);
 if ($3.length) {
   v = template("xverblob", [$3]) - unitBlob;
   end = 100*(v/currentBlob);
-  st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%"; %>
-  <div style=<%=st%> title=<%=introTitle%>></div>
+  st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
+  %>
+  <div style="<%=st%>" title="<%=introTitle%>"></div>
   <%
   start = end;
 
@@ -91,17 +92,17 @@ if ($3.length) {
     end = 100;
     st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
     %>
-    <div style=<%=st%>>Deprecated</div>
+    <div style="<%=st%>">Deprecated</div>
     <%
     st = underTextTop +"font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
     %>
-    <div style=<%=st%>>Gecko <%-$3%></div>
+    <div style="<%=st%>">Gecko <%-$3%></div>
   <%
   }
   st = barTopHeight + "left:" + start + "%; background:#ff8000; position:absolute; width:" + end-start + "%";
   title = "Deprecated in Gecko " + $3 + " " + template("geckoRelease", [$3]);
   %>
-  <div style=<%=st%> title=<%=title%>></div>
+  <div style="<%=st%>" title="<%=title%>"></div>
   <%
   start = end;
 } else if ($2.length) {
