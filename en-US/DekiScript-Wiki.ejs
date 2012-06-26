@@ -17,7 +17,7 @@
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Uri)
     uri: function (path, query) {
         var p = kuma.url.parse(env.url, true);
-        var base = p.protocol + '//' + p.host + '/docs/';            
+        var base = p.protocol + '//' + p.host + '/';            
         var out = base + path;
         if (query) { out += '?' + query; }
         return out;
