@@ -1,5 +1,4 @@
-
-<pre class="script">
+<%
 /* one parameter: JavaScript version (optional) */
 /* please use obsolete header instead of this template */
 
@@ -8,7 +7,5 @@ var str = "";
 if ($0) {
   str = "js" + $0;
 }
-
-template.obsoleteGeneric("header",str);
-
 %>
+<%- template("obsoleteGeneric", ["header",str]) %>
