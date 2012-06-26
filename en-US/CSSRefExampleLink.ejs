@@ -1,39 +1,15 @@
 <%
-
-/* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-
-var linktext = "View Live Examples";
-
-switch(lang) {
-  case 'de':
-    linktext = "Beispiel ansehen";
-    break;
-  case 'es':
-    linktext = "Ver ejemplos en acción";
-    break;
-  case 'fr':
-    linktext = "Voir des exemples en ligne (en)";
-    break;
-  case 'ko':
-    linktext = "실제 예제 보기";
-    break;
-  case 'pl':
-    linktext = "Zobacz przykład";
-    break;
-  case 'zh-cn':
-    linktext = "查看在线演示";
-    break;
-}
+var linktext = mdn.localString({
+  "en-US": "View Live Examples",
+  'de':    "Beispiel ansehen",
+  'es':    "Ver ejemplos en acción",
+  'fr':    "Voir des exemples en ligne (en)",
+  'ko':    "실제 예제 보기",
+  'pl':    "Zobacz przykład",
+  'zh-cn': "查看在线演示"
+});
 var link = 'http://developer.mozilla.org/samples/cssref/' + $0 + '.html';
 
-<a rel="custom" href=(link)>(linktext)</a>
-</pre>
+var result = '<a rel="custom" href="' + link +'">' + linktext +'</a>';
+%>
+<%- result %>
