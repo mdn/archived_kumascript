@@ -1,5 +1,4 @@
-
-<pre class="script">
+<%
 /* one parameter: JavaScript version (optional) */
 /* please use obsolete inline instead of this template */
 
@@ -8,6 +7,5 @@ var str = "";
 if ($0) {
   str = "js" + $0;
 }
-
-template.obsoleteGeneric("inline",str);
 %>
+<%- template("obsoleteGeneric", ["inline",str]) %>
