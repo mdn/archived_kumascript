@@ -22,13 +22,15 @@
         else if (first > second) { return 1; }
         else { return 0; }
     },
-     
+    
+    /* Check if first character in string is a decimal digit. */
     IsDigit: function (str) {
-        return (/^\D$/.test(''+str)==false);
+        return (/^\d/.test(''+str));
     },
     
+    /* Check if first character in string is an alphabetic character. */
     IsLetter: function (str) {
-        return (/^[\w]+$/.test(''+str));
+        return (/^[a-zA-Z]/.test(''+str));
     },
  
     toLower: function (str) {
