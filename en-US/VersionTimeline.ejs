@@ -74,60 +74,60 @@ start = end;
 // or to the end if neither does
 
 introTitle = "Introduced in Gecko " + $0 + " " + template.GeckoRelease($0);
-if (string.length($3)) {
-  v = template.xverblob($3) - unitBlob;
+if ($3.length) {
+  v = template("xverblob", [$3]) - unitBlob;
   end = 100*(v/currentBlob);
-  st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
-  <div style=(st) title=(introTitle)></div>
+  st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%"; %>
+  <div style=<%=st%> title=<%=introTitle%>></div>
+  <%
   start = end;
 
   // now do the deprecated part
-  if (string.length($2)) {
-    v = template.xverblob($2) - unitBlob;
+  if ($2.length) {
+    v = template("xverblob", [$2]);
     end = 100*(v/currentBlob);
   } else {
     end = 100;
-    st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
-    <div style=(st)>(web.html("Deprecated"));</div>
+    st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";%>
+    <div style=<%=st%>>Deprecated</div>
     st = underTextTop +"font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
-    <div style=(st)>(web.html("Gecko " + $3));</div>
+    <div style=<%=st%>>Gecko <%-$3%></div>
    }
   st = barTopHeight + "left:" + start + "%; background:#ff8000; position:absolute; width:" + end-start + "%";
-  title = "Deprecated in Gecko " + $3 + " " + template.GeckoRelease($3);
-  <div style=(st) title=(title)></div>
+  title = "Deprecated in Gecko " + $3 + " " + template("geckoRelease", [$3]);
+  <div style=<%=st%> title=<%=title%>></div>
   start = end;
-} else if (string.length($2)) {
-  v = template.xverblob($2) - unitBlob;
+} else if ($2.length) {
+  v = template("xverblob", [$2]) - unitBlob;
   end = 100*(v/currentBlob);
   st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
-  <div style=(st) title=(introTitle)></div>
+  <div style=<%=st%> title=<%=introTitle%>></div>
   start = end;
 } else {
   end = 100;
   st = barTopHeight + "left:" + start + "%; background:#00dd00; position:absolute; width:" + end-start + "%";
-  <div style=(st) title=(introTitle)></div>
+  <div style=<%=st%> title=<%=introTitle%>></div>
   start = end;
 }
 
 // obsolete section
  
-if (string.length($2)) {
-  title = "Obsolete in Gecko " + $2 + " " + template.geckoRelease($2);
+if ($2.length) {
+  title = "Obsolete in Gecko " + $2 + " " + template("geckoRelease", [$2]);
   st = barTopHeight + "left:" + start + "%; background:#000000; position:absolute; width:" + 100-start + "%";
-  <div style=(st) title=(title)></div>
+  <div style=<%=st%> title=<%-title%>></div>
   st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
-  <div style=(st)>(web.html("Obsolete"));</div>
+  <div style=<%=st%>>Obsolete</div>
   st = underTextTop + "font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
-  <div style=(st)>(web.html("Gecko " + $2));</div>
+  <div style=<%=st%>>Gecko <%-$2%></div>
 }
 
 // draw an indicator for the last-changed version
 
-if (string.length($1)) {
-  start = (100 * ((template.xverblob($1) - unitBlob) / currentBlob)) - 0.5;
-  title = "Last changed in Gecko " + $1 + " " + template.geckoRelease($0);
+if ($1.length) {
+  start = (100 * ((template("xverblob", [$1]) - unitBlob) / currentBlob)) - 0.5;
+  title = "Last changed in Gecko " + $1 + " " + template("geckoRelease", [$0]);
   st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
-  <div style=(st) title=(title)></div>
+  <div style=<%=st%> title=<%-title%>></div>
 }
 </div>
-</pre>
