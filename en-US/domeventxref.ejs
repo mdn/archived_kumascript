@@ -10,8 +10,6 @@
 /* @param [optional] */
 /*   An anchor to link to on the page. Link text will display as $0.$2 or $1.$2 */
 
-/* get a page's language (Don't use page.language!) */
-var u = Uri.Parts(Page.uri);
 var lang = env.locale;
 
 var api = $0;
@@ -26,7 +24,7 @@ if (string.endswith($0, '()')) {
 }
 
 var destNewType = lang + '/' + 'DOM/DOM_event_reference/' + api;
-var destEng = 'en' + '/' + 'DOM/DOM_event_reference/' + api;
+var destEng = 'en-US/DOM/DOM_event_reference/' + api;
 var anch = '';
 
 if ($2) {
@@ -35,7 +33,7 @@ if ($2) {
 }
 if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
   %><code><%-web.link(wiki.uri(destNewType) + anch,str)%></code><%
-} else if (lang == 'zh_tw' && wiki.pageExists(destEng)){  
+} else if (lang == 'zh-TW' && wiki.pageExists(destEng)){  
   /* the MozTW community consider links to English pages better than red ones. 
      I'll write about this to mozilla.dev.mdc later */ 
   %><code><%-web.link(wiki.uri(destEng) + anch,str)%></code><%
