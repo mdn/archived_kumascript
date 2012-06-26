@@ -1,30 +1,30 @@
 <%
-/* Lists all the CSS data types, seperated by a comma */
-/* Warning: special case for color (hardcoded) */
-/* Non documented ones are not listed */
+// Lists all the CSS data types, seperated by a comma
+// Warning: special case for color (hardcoded)
+// Non documented ones are not listed
 
-/* Calculate lang */
-var u = Uri.Parts(Page.uri);
-var lang = string.toLower(u.path[0]);
-if(string.Contains(lang, "project")) {
-  lang = string.Substr(lang, 8);
-} else if (string.StartsWith(lang, "user:")) {
-  lang = page.language;
-} 
+var list_type = ""; // result
 
-var data_types = ['angle', 'color', 'frequency', 'gradient', 'identifier', 'image', 'integer', 'length', 'number', 'percentage', 'ratio', 'resolution', 'shape', 'string', 'time', 'timing-function', 'uri'];
-var notfirst = false;
+var not_first = false;
 
-foreach(var data_type in data_types) {
-    if (notfirst) {
-      web.text(', ');
+var locale = env.locale;
+
+function add_data_type(data_type) {
+    if (not_first) {
+        list_type += ', ';
     }
-    notfirst = true;
+    not_first = true;
+    list_type += '<code><a href="/' + locale + '/docs/CSS/';
     if (data_type != 'color') {
-      <code>(web.link(wiki.uri(lang + '/CSS/' + data_type), '<' + data_type + '>'))</code>;
+         list_type += data_type;
     }
     else {
-      <code>(web.link(wiki.uri(lang + '/CSS/color_value'), '<color>'))</code>;
+        list_type += 'color_value';
     }
+    list_type += '">&lt;' + data_type + '&gt;</a></code>';
 }
-</pre>
+
+['angle', 'color', 'frequency', 'gradient', 'identifier', 'image', 'integer', 'length', 'number', 'percentage', 'ratio', 
+ 'resolution', 'shape', 'string', 'time', 'timing-function', 'uri'].forEach( add_data_type );
+%>
+<%- list_type %>
