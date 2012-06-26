@@ -74,7 +74,7 @@ start = end;
 // Now do the green block representing "implemented"; this will go up to $3 if it exists, or $2 if that exists,
 // or to the end if neither does
 
-introTitle = "Introduced in Gecko " + $0 + " " + template.GeckoRelease($0);
+introTitle = "Introduced in Gecko " + $0 + " " + template("geckoRelease", [$0]);
 if ($3.length) {
   v = template("xverblob", [$3]) - unitBlob;
   end = 100*(v/currentBlob);
@@ -89,11 +89,15 @@ if ($3.length) {
     end = 100*(v/currentBlob);
   } else {
     end = 100;
-    st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";%>
+    st = "top:0px; font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
+    %>
     <div style=<%=st%>>Deprecated</div>
-    <%st = underTextTop +"font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";%>
+    <%
+    st = underTextTop +"font-size:11px; position:absolute; left:0px; text-align:right; float: right; width:" + start + "%;";
+    %>
     <div style=<%=st%>>Gecko <%-$3%></div>
-  <%}
+  <%
+  }
   st = barTopHeight + "left:" + start + "%; background:#ff8000; position:absolute; width:" + end-start + "%";
   title = "Deprecated in Gecko " + $3 + " " + template("geckoRelease", [$3]);%>
   <div style=<%=st%> title=<%=title%>></div>
