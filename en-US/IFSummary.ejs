@@ -56,9 +56,9 @@ switch($2.toLowerCase()) {
     break;
 }
 
-if (date.now - env.modified < 1000000*60*60*24*365) { %>
-  <%- template("note", [outdated]) %>
-<% }
+if (date.now - env.modified < 1000000*60*60*24*365) {
+  template("note", [outdated]);
+}
 %>
 <div style="border:solid #dddddd 2px; margin-right:262px; margin-bottom:12px;">
 <div style="background:#eeeeee; padding:2px;"><%- template("source", [$0]) %><span style="text-align:right; float:right;"><%- scriptableOutput %></span></div>
@@ -71,6 +71,7 @@ if (!$4) {
 <span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;"><%= summary %></span>
 <%
 if ($5) {
+  %> <!-- timeline: <%=$5%>, <%=$3%>, <%=$7%>, <%=$6%> --> <%
   template("VersionTimeline", [$5, $3, $7, $6]);
 }
 %>
