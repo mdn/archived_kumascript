@@ -71,6 +71,7 @@ if (!$4) {
 <span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;"><%= summary %></span>
 <%
 if ($5) {
+  %> <!-- timeline: <%=$5%>, <%=$3%>, <%=$7%>, <%=$6%> --> <%
   template("VersionTimeline", [$5, $3, $7, $6]);
 }
 %>
