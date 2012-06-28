@@ -1,4 +1,5 @@
 <%
+/* Please update this interface to use the IFSummary template. */
 var scriptable = "";
 
 switch(string.tolower($4)) {
@@ -13,4 +14,3 @@ switch(string.tolower($4)) {
 var gecko = string.replace(string.replace(string.replace(string.tolower($3), "gecko" , "") ,"mozilla", "") ," ", ""); 
 %>
 <%- template("IFSummary", [$1, "", scriptable, gecko, ""]) %>
-<!-- Please update this interface to use the IFSummary template. -->
