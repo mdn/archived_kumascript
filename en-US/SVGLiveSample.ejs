@@ -1,33 +1,13 @@
 <%
 /* one parameter: name of sample's file in /samples/svg */
-/* get the page language */
+var str = mdn.localString({
+  "en-US": "View the live example",
+  "ja": "実際の表示を確認する",
+});
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-
-var str = "View the live example";
 var target = "/samples/svg/" + $0;
 
-// Localizers: add a case to this switch statement
-// for your language
-
-switch(lang) {
-  case 'de':
-    str = "View the live example";
-    break;
-  case 'ja':
-    str = "実際の表示を確認する";
-    break;
-}
-
-<a href=(target)><span style="cursor:pointer; padding: 2px; border: solid 2px #333; color: black; -moz-box-shadow:2px 2px 2px #191919; -webkit-box-shadow:2px 2px 2px #191919; -o-box-shadow:2px 2px 2px #191919; box-shadow:2px 2px 2px #191919; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; background-color: #dce3ff; background-image:-moz-linear-gradient(76% 26% 142deg, #DCE3FF, #FFF 47%);">(web.text(str))</span></a>
-
+var result = '<a href="' + target + '"><span style="cursor:pointer; padding: 2px; border: solid 2px #333; color: black; -moz-box-shadow:2px 2px 2px #191919; -webkit-box-shadow:2px 2px 2px #191919; -o-box-shadow:2px 2px 2px #191919; box-shadow:2px 2px 2px #191919; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; background-color: #dce3ff; background-image:-moz-linear-gradient(76% 26% 142deg, #DCE3FF, #FFF 47%);">' + 
+             str + '</span></a>';
 %>
+<%- result %>
