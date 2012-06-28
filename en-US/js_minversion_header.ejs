@@ -1,19 +1,6 @@
 <%
-
 /* one parameter: JavaScript version */
-
-/* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project")) {
-  lang = string.substr(lang, 8);
-}
-
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-
+var lang = env.locale;
 var link = '';
 
 /* check if English 'New in JavaScript/$0' page exists for fallback */
@@ -50,15 +37,14 @@ switch(lang) {
     }
     str = "Wprowadzono w " + link;
     break;
-  case 'zh-tw':
+  case 'zh-TW':
     str = "在 " + link + "引入";
     break;
-  case 'zh-cn':
+  case 'zh-CN':
     str = "在 " + link + " 引入";
     break;
 }
-
+%>
 <div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
-<p style="margin: 4px 0px 4px 0px;">(web.html(str))</p>
+<p style="margin: 4px 0px 4px 0px;"><%- str %></p>
 </div>
-</pre>
