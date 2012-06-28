@@ -12,6 +12,31 @@
     page: function (path) {
         return kuma.include(path);
     },
+
+    // http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.GetPage
+    getPage: function (path) {
+        var key = 'kuma:get_page:' + md5(path.toLowerCase());
+        return cacheFn(key, 3600, function (next) {
+            var p = kuma.url.parse(env.url, true);
+            var base_url = p.protocol + '//' + p.host;
+            var opts = {
+                method: 'GET',
+                headers: { 'Cache-Control': env.cache_control },
+                url: base_url + path + "$json"
+            };
+            try {
+                request(opts, function (err, resp, body) {
+                    var result = {};
+                    if (resp && 200 == resp.statusCode) {
+                        result = JSON.parse(body);
+                    }
+                    next(result);
+                });
+            } catch (e) {
+                next({});
+            }
+        });
+    },
  
     // Retrieve the full uri of a given wiki page.
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Uri)
