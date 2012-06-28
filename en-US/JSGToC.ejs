@@ -1,0 +1,24 @@
+<%
+// Note: If you want to add chapters to this table of contents,
+// add their links to https://developer.mozilla.org/Template:JSGChapters
+var chapterList = string.deserialize(template("JSGChapters"));
+var expTOC = "";
+var link1 = "";
+%>
+<h2>Quick Table of Contents</h2>
+<ol>
+<% 
+for (var i=0; i<chapterList.length; i++) {
+    var path = chapterList[i];
+    var link1 = web.link(path, wiki.getPage(path).title);
+    %><li><%- link1 %></li><%
+    // TODO: bug 769516, need support for wiki.toc()
+    // expTOC += "<h3>" + link1 + "</h3>" + wiki.toc(path);
+}
+%>
+</ol>
+<% if (expTOC) { %>
+<% /* TODO: bug 769516, need support for wiki.toc() */ %>
+<h2>Expanded Table of Contents</h2>
+<%- expTOC %>
+<% } %>
