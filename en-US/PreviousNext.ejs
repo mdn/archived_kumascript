@@ -1,4 +1,7 @@
 <%
+/* first parameter: path of Previous page */
+/* second parameter: path of Next page */
+
 /* get a page's language (Don't use page.language!) */
 var lang = env.locale;
 
@@ -27,6 +30,9 @@ if (!string.compare(lang, "de", true)) {
 } else if (!string.compare(lang, "pl", true)) {
   prevStr = "« Poprzedni";
   nextStr = "Następny »";
+} else if (!string.compare(lang, "pt", true)) {
+  prevStr = "« Anterior";
+  nextStr = "Próxima »";
 } else if (!string.compare(lang, "ru", true)) {
   prevStr = "« Предыдущая статья";
   nextStr = "Следующая статья »";
