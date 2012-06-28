@@ -26,9 +26,7 @@ var nextStr = {
   cn: "下一页"
 };
 var chapterList = string.deserialize(template($0));
-var i = typeof $1 === 'string' ?
-    chapterList.indexOf($1) :
-    chapterList.indexOf(env.path);
+var i = $1 ? chapterList.indexOf($1) : chapterList.indexOf(env.path);
 if (i != -1){
   var html;
   switch (i){
