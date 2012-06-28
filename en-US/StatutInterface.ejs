@@ -1,5 +1,18 @@
-<span lang='fr' class='lang lang-fr'><span class="comment">- 1 - Nom de l'interface   - 2 - Emplacement de la source relativement à @topsrc@/mozilla/   - 3 - GELÉE/non gelée/EN_COURS_D'EXAMEN/EXPÉRIMENTALE   - 4 - Depuis {{mediawiki.external('date/milestone')}} (dans le cas d'une interface non gelée, dernier changement)   - 5 - Scriptable ? (oui/non)</span>
-<code>{{web.html($0)}}</code> est définie dans {{wiki.template('Source', mediawiki.args([$1]))}}, et {{wiki.template(mediawiki.path('StatutInterface:' + $2, "fr"), mediawiki.args([$3]))}}.  Cette interface est {{wiki.template(mediawiki.path('StatutInterface:Scriptable_' + $4, "fr"))}}.
-</span><span lang='*' class='lang lang-*'><span class="comment">- 1 - Nom de l'interface   - 2 - Emplacement de la source relativement à @topsrc@/mozilla/   - 3 - GELÉE/non gelée/EN_COURS_D'EXAMEN/EXPÉRIMENTALE   - 4 - Depuis {{mediawiki.external('date/milestone')}} (dans le cas d'une interface non gelée, dernier changement)   - 5 - Scriptable ? (oui/non)</span>
-<code>{{web.html($0)}}</code> est définie dans {{wiki.template('Source', mediawiki.args([$1]))}}, et {{wiki.template(mediawiki.path('StatutInterface:' + $2, "fr"), mediawiki.args([$3]))}}.  Cette interface est {{wiki.template(mediawiki.path('StatutInterface:Scriptable_' + $4, "fr"))}}.
-</span>
+<%
+/* Please update this interface to use the IFSummary template. */
+var scriptable = "";
+
+switch(string.tolower($4)) {
+  case ("yes"):
+  case ("oui"):
+    scriptable = "scriptable";
+    break;
+  case ("no"):
+  case ("non"):
+    scriptable = "non scriptable";
+    break;
+}
+
+var gecko = string.replace(string.replace(string.replace(string.tolower($3), "gecko" , "") ,"mozilla", "") ," ", ""); 
+%>
+<%- template("IFSummary", [$1, "", scriptable, gecko, ""]) %>
