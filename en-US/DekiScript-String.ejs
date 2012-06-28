@@ -22,6 +22,11 @@
         else if (first > second) { return 1; }
         else { return 0; }
     },
+
+    // http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/String.Deserialize
+    Deserialize: function (str) {
+        return JSON.parse(str);        
+    },
     
     /* Check if first character in string is a decimal digit. */
     IsDigit: function (str) {
@@ -33,12 +38,17 @@
         return (/^[a-zA-Z]/.test(''+str));
     },
  
-    toLower: function (str) {
-        return (''+str).toLowerCase();
+    // http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/String.Serialize
+    Serialize: function (val) {
+        return JSON.stringify(val);
     },
- 
+    
     Substr: function (str, start) {
         return (''+str).substr(start);
+    },
+ 
+    toLower: function (str) {
+        return (''+str).toLowerCase();
     },
      
     Trim: function (str) {
