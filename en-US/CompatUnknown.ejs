@@ -1,1 +1,13 @@
-<p><span title="Compatibility unknown; please update this." style="color: rgb(255, 153, 0);">?</span></p>
+<%
+    var style = "color: rgb(255, 153, 0);";
+    
+    // Localizers: add your language to the switch statement below!
+    
+    switch(env.locale) {
+        default:
+            title = "Compatibility unknown; please update this.";
+            str = "?";
+            break;
+    }
+%>
+<span title="<%-title%>" style="<%-style%>"><%-str%></span>
