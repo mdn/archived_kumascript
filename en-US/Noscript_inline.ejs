@@ -1,2 +1,12 @@
-
-<p><span lang="en" class="lang lang-en"><span style="border: 1px solid rgb(129, 129, 81); color: white; background-color: red; font-size: x-small; font-weight: bold; vertical-align: middle; white-space: nowrap; padding: 2px;" title="This method may only be called from C++; don't use it from JavaScript.">Native code only!</span></span></p>
+<%
+    var style = "border: 1px solid rgb(129, 129, 81); color: white; background-color: red; font-size: x-small; font-weight: bold; vertical-align: middle; white-space: nowrap; padding: 2px;";
+    // Localizers: Please add your language to the switch statement below!
+    
+    switch(env.locale) {
+        default:
+            title = "This method may only be called from C++; don't use it from JavaScript.";
+            str = "Native code only!";
+            break;
+    }
+%>
+<span style="<%-style%>" title="<%-title%>"><%=str%></span>
