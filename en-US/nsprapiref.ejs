@@ -1,16 +1,13 @@
-<span lang='en' class='lang lang-en'><span class="comment">temporary, until breadcrumbs work with breadcrumbs>path:to:article</breadcrumbs</span>
-
-< <a href="en/NSPR_API_Reference">NSPR API Reference</a> < {{mediawiki.internal('NSPR API Reference:' + $0 + '|' + $0, "en")}} <div class="includeonly"></div>
-</span><span lang='*' class='lang lang-*'><span class="comment">temporary, until breadcrumbs work with breadcrumbs>path:to:article</breadcrumbs</span>
-
-< <a href="en/NSPR_API_Reference">NSPR API Reference</a> < {{mediawiki.internal('NSPR API Reference:' + $0 + '|' + $0, "en")}} <div class="includeonly"></div>
-</span><span lang='ja' class='lang lang-ja'><span class="comment">temporary, until breadcrumbs work with breadcrumbs>path:to:article</breadcrumbs</span>
-
-< <a href="ja/NSPR_API_Reference">NSPR API リファレンス</a> < {{mediawiki.internal('NSPR API Reference:' + $0 + '|' + $0, "ja")}} <div class="includeonly"></div>
-<div class="noinclude">現在の MW 1.5 ではサポートされてなかった様子。。
-<p><span class="plain">
-< [[NSPR API Reference]] < [[NSPR API Reference:{{{1}}}|{{#if: {{{2|}}} | {{{2}}} | {{{1}}} }}]] <includeonly>[[Category:NSPR API]]</includeonly>
-</span>
-</p>
-</div>
-</span>
+<%
+/* first parameter: NSPR API Reference page */
+var lang = env.locale;
+ 
+/* assume English */
+  
+var str = "< " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference'), 'NSPR API Reference') + " < " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference/' + $0), $0);
+ 
+if (!string.compare(lang, "ja", true)) {
+  str = "< " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference'), 'NSPR API リファレンス') + " < " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference/' + $0), $0);
+}
+%>
+<%- str %>
