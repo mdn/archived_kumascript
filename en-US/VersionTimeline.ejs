@@ -50,7 +50,6 @@ if (v) {
   end = 100*(v/currentBlob);
   st = barTopHeight + "background:#dd0000; position:absolute; width:" + end + "%";
   %>
-  <!-- Unimplemented -->
   <div style="<%=st%>"></div>
   <%
   if (startVer == currentGecko) {
@@ -147,7 +146,6 @@ if ($1.length) {
   title = "Last changed in Gecko " + $1 + " " + template("geckoRelease", [$0]);
   st = barTopHeight + "left:" + start + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
   %>
-  <!--last-changed blob-->
   <div style="<%=st%>" title="<%-title%>"></div>
   <%
 }
