@@ -1,13 +1,52 @@
 <%
 /* one parameter: ID of sample on JSFiddle.net */
-var str = mdn.localString({
-  "en-US": "View on jsFiddle",
-  "de": "Sehe mit jsFiddle",
-  "zh-CN":"在jsFiddle中查看",
-  "zh-TW":"在jsFiddle中查看"
-});
+/* get the page language */
+var u = uri.parts(Page.uri),
+    lang = string.tolower(u.path[0]);
 
-var result = '<a href="http://jsFiddle.net/' + $0 + '"><span style="cursor:pointer; padding: 2px 6px; border: solid 2px #333; color: #000; -moz-box-shadow:2px 2px 2px #191919; -webkit-box-shadow:2px 2px 2px #191919; -o-box-shadow:2px 2px 2px #191919; box-shadow:2px 2px 2px #191919; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; background-color: #dce3ff; background-image: -moz-linear-gradient(76% 26% 142deg, #DCE3FF, #FFF 47%);">' +
-             str + '</span></a>';
+if (string.contains(lang, "project") || string.contains(lang, "Project")) {
+  lang = string.substr(lang, 8);
+}
+/* fall back to page.language on a user page */
+else if (string.StartsWith(lang, "user:")) {
+  lang = page.language;
+}
+
+var str = "View on jsFiddle",
+    target = "http://jsFiddle.net/" + $0;
+
+// Localizers: add a case to this switch statement for your language
+switch(lang) {
+  case 'de':
+    str = "Sicht auf jsFiddle";
+    break;
+  case 'fr':
+    str = "Vue sur jsFiddle";
+    break;
+  case 'it':
+    str = "Visualizza il jsFiddle";
+    break;
+  case 'ja':
+    str = "jsFiddle で確認する";
+    break;
+  case 'ko':
+    str = "jsFiddle에서보기";
+    break;
+  case 'pl':
+    str = "Zobacz na jsFiddle";
+    break;
+  case 'pt':
+    str = "Veja em jsFiddle";
+    break;
+  case 'zh-cn':
+    str = "在jsFiddle中查看";
+    break;
+  case 'zh-tw':
+    str = "在jsFiddle中查看";
+    break;
+}
+
+/* output */
+<a href=(target)><span style="cursor:pointer; padding: 2px 6px; border: solid 2px #333; color: #000; -moz-box-shadow:2px 2px 2px #191919; -webkit-box-shadow:2px 2px 2px #191919; -o-box-shadow:2px 2px 2px #191919; box-shadow:2px 2px 2px #191919; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; background-color: #dce3ff; background-image: -moz-linear-gradient(76% 26% 142deg, #DCE3FF, #FFF 47%);">(web.text(str))</span></a>
+
 %>
-<%- result %>
