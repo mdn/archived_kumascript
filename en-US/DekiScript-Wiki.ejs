@@ -1,21 +1,53 @@
-<% module.exports = buildAPI({
+<% var wiki = module.exports = buildAPI({
+
+    // Given a path, attempt to construct an absolute URL to the wiki.
+    // This is not a DekiScript function, but it's used by many of those below.
+    buildAbsoluteURL: function (path) {
+        var p = kuma.url.parse(env.url, true);
+        var base_url = p.protocol + '//' + p.host;
+        if (path.indexOf('/docs') == -1) {
+            // HACK: If this looks like a legacy wiki URL, throw /en-US/docs 
+            // in front of it. That will trigger the proper redirection logic 
+            // until/unless URLs are corrected in templates
+            base_url += '/en-US/docs';
+        }
+        if (path.charAt(0) != '/') {
+            base_url += '/';
+        }
+        return base_url + path;
+    },
     
     // Check if the given wiki page exists.
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.PageExists)
     pageExists: function (path) {
-        return kuma.pageExists(path);    
+        var key = 'kuma:page_exists:' + md5(path.toLowerCase());
+        return cacheFn(key, 3600, function (next) {
+            var opts = { method: 'HEAD', url: wiki.buildAbsoluteURL(path) };
+            try {
+                request(opts, function (err, resp, body) {
+                    var result = false;
+                    if (resp && 200 == resp.statusCode) {
+                        result = true;
+                    }
+                    next(result);
+                });
+            } catch (e) {
+                next(false);
+            }
+        });
     },
         
-    // Retrieve the content of a document for inclusion
-    // Doesn't (yet?) support all the parameters offered by DekiScript, but I don't think MDN pages use them all.
+    // Retrieve the content of a document for inclusion, optionally filtering 
+    // for a single section.
+    //
+    // Doesn't (yet?) support all the parameters offered by DekiScript, 
+    // but I don't think MDN pages use them all. Missing in particular: 
+    // revision, show, and heading
+    //
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Page)
     page: function (path, section) {
-        // return kuma.include(path);
         var key = 'kuma:include:' + md5(path.toLowerCase());
         return cacheFn(key, 3600, function (next) {
-            var p = kuma.url.parse(env.url, true);
-            var base_url = p.protocol + '//' + p.host;
-            var doc_url = base_url + path;
             var params = ['raw=1', 'macros=1', 'include=1'];
             if (section) {
                 params.push('section='+encodeURIComponent(section));
@@ -23,7 +55,7 @@
             var opts = {
                 method: 'GET',
                 headers: { 'Cache-Control': env.cache_control },
-                url: doc_url + '?' + params.join('&')
+                url: wiki.buildAbsoluteURL(path) + '?' + params.join('&')
             };
             try {
                 request(opts, function (err, resp, body) {
@@ -43,12 +75,10 @@
     getPage: function (path) {
         var key = 'kuma:get_page:' + md5(path.toLowerCase());
         return cacheFn(key, 3600, function (next) {
-            var p = kuma.url.parse(env.url, true);
-            var base_url = p.protocol + '//' + p.host;
             var opts = {
                 method: 'GET',
                 headers: { 'Cache-Control': env.cache_control },
-                url: base_url + path + "$json"
+                url: wiki.buildAbsoluteURL(path) + "$json"
             };
             try {
                 request(opts, function (err, resp, body) {
@@ -67,9 +97,7 @@
     // Retrieve the full uri of a given wiki page.
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Uri)
     uri: function (path, query) {
-        var p = kuma.url.parse(env.url, true);
-        var base = p.protocol + '//' + p.host + '/';            
-        var out = base + path;
+        var out = wiki.buildAbsoluteURL(path);
         if (query) { out += '?' + query; }
         return out;
     },
