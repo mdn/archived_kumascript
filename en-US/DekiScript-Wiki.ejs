@@ -29,7 +29,7 @@
                 request(opts, function (err, resp, body) {
                     var result = {};
                     if (resp && 200 == resp.statusCode) {
-                        result = opts['url']; // body;
+                        result = body;
                     }
                     next(result);
                 });
