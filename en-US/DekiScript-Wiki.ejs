@@ -9,8 +9,34 @@
     // Retrieve the content of a document for inclusion
     // Doesn't (yet?) support all the parameters offered by DekiScript, but I don't think MDN pages use them all.
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Page)
-    page: function (path) {
-        return kuma.include(path);
+    page: function (path, section) {
+        // return kuma.include(path);
+        var key = 'kuma:include:' + md5(path.toLowerCase());
+        return cacheFn(key, 3600, function (next) {
+            var p = kuma.url.parse(env.url, true);
+            var base_url = p.protocol + '//' + p.host;
+            var doc_url = base_url + path;
+            var params = ['raw=1', 'macros=1', 'include=1'];
+            if (section) {
+                params.push('section='+encodeURIComponent(section));
+            }
+            var opts = {
+                method: 'GET',
+                headers: { 'Cache-Control': env.cache_control },
+                url: doc_url + '?' + params.join('&')
+            };
+            try {
+                request(opts, function (err, resp, body) {
+                    var result = {};
+                    if (resp && 200 == resp.statusCode) {
+                        result = opts['url']; // body;
+                    }
+                    next(result);
+                });
+            } catch (e) {
+                next('');
+            }
+        });
     },
 
     // http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.GetPage
