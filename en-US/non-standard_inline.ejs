@@ -1,13 +1,10 @@
-<% if (env.locale == "de") { %>
-<span class="nonStandardInlineTemplate" style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); font-size: x-small; white-space: nowrap; padding: 2px;">Kein Standard</span>
-<% } else if (env.locale == "fr") { %>
-<span class="nonStandardInlineTemplate" style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); font-size: x-small; white-space: nowrap; padding: 2px;">Non standard</span>
-<% } else if (env.locale == "ja") { %>
-<span class="nonStandardInlineTemplate" style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); font-size: x-small; white-space: nowrap; padding: 2px;">非標準</span>
-<% } else if (env.locale == "zh-CN") { %>
-<span class="nonStandardInlineTemplate" style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); font-size: x-small; white-space: nowrap; padding: 2px;">非标准</span>
-<% } else if (env.locale == "pl") { %>
-<span class="nonStandardInlineTemplate" style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); font-size: x-small; white-space: nowrap; padding: 2px;">Niestandardowy</span>
-<% } else { %>
-<span class="nonStandardInlineTemplate" style="border: 1px solid rgb(255, 213, 153); background-color: rgb(255, 239, 217); font-size: x-small; white-space: nowrap; padding: 2px;">Non-standard</span>
-<% } %>
+<p><span class="nonStandardInlineTemplate lang lang-en" lang="en" style="border: 1px solid #FFD599; background: #FFEFD9;
+ font-size: x-small; white-space: nowrap; padding: 2px;">Non-standard</span> <span class="nonStandardInlineTemplate lang lang-*" lang="*" style="border: 1px solid #FFD599; background: #FFEFD9;
+ font-size: x-small; white-space: nowrap; padding: 2px;">Non-standard</span> <span class="nonStandardInlineTemplate lang lang-de" lang="de" style="border: 1px solid #FFD599; background: #FFEFD9;
+ font-size: x-small; white-space: nowrap; padding: 2px;">Kein Standard</span> <span class="nonStandardInlineTemplate lang lang-fr" lang="fr" style="border: 1px solid #FFD599; background: #FFEFD9;
+ font-size: x-small; white-space: nowrap; padding: 2px;">Non standard</span> <span class="nonStandardInlineTemplate lang lang-ja" lang="ja" style="border: 1px solid #FFD599; background: #FFEFD9;
+ font-size: x-small; white-space: nowrap; padding: 2px;">非標準</span> <span class="nonStandardInlineTemplate lang lang-zh-cn" lang="zh-cn" style="border: 1px solid #FFD599; background: #FFEFD9;
+ font-size: x-small; white-space: nowrap; padding: 2px;">非标准</span> <span class="nonStandardInlineTemplate lang lang-zh-tw" lang="zh-tw" style="border: 1px solid #FFD599; background: #FFEFD9;
+ font-size: x-small; white-space: nowrap; padding: 2px;">非標準</span> <span class="nonStandardInlineTemplate lang lang-pl" lang="pl" style="border: 1px solid #FFD599; background: #FFEFD9;
+ font-size: x-small; white-space: nowrap; padding: 2px;">Niestandardowy</span></p>
+<p class="noinclude"><span class="script">template("non-standard_inline")</span></p>
