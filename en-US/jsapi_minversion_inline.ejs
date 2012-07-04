@@ -1,18 +1,8 @@
-
-<pre class="script">
+<%
 /* one parameter: SpiderMonkey version */
 
 /* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project")) {
-  lang = string.substr(lang, 8);
-}
-
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var link = '';
 
@@ -32,7 +22,7 @@ switch(lang) {
     str = link + ' の新機能';
     break;
 }
-
-<span style="border: 1px solid rgb(129, 129, 81); background-color: rgb(255, 255, 225); font-size: 9px; vertical-align: text-top;">(web.html(str))</span>
-
 %>
+
+<span style="border: 1px solid rgb(129, 129, 81); background-color: rgb(255, 255, 225); 
+font-size: 9px; vertical-align: text-top;"><%- str %></span>
