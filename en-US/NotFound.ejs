@@ -1,21 +1,13 @@
 <%
 /* Presents a "target page not found" page. */
 /* Parameters: */
-/*   $0: target URL that wasn't found */
-/*   $1: search term (or empty string to not offer search of MXR) */
-/*   $2: URL of relevant file on mozilla-central (optional) */
+/*   $0: target URL that wasn't found */
+/*   $1: search term (or empty string to not offer search of MXR) */
+/*   $2: URL of relevant file on mozilla-central (optional) */
 
-/* get the target page's language (Don't use page.language!) */
+/* get the target page's language */
 
-var parts = string.split(lang, "/", 1);
-var lang = string.toLower(parts[0]);
-if(string.Contains(lang, "project")) {
-  lang = string.Substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 /* root URLs for the options */
 
@@ -36,26 +28,27 @@ var optionsText = "<p>Here are some things things you can do now:<p><ul>";
 
 optionsText = optionsText + "<li><a href=" + loginUrl + $0 + ">Log in</a> and <a href=" + $0 + ">create the page</a>! We're always looking for help adding new material to our documentation.</li>";
 
+/* commented out, breaks
 if ($2 && string.length($2)) {
-  optionsText = optionsText + "<li>Read the related source or header file: " + Source($2) + "</li>";
-}
+optionsText = optionsText + "<li>Read the related source or header file: " + Source($2) + "</li>";
+}*/
 
+/* commented out, breaks
 if ($1 && string.length($1)) {
-  optionsText = optionsText + "<li>" + LXRSearch("ident", "i", $1) + "</li>";
-}
+optionsText = optionsText + "<li>" + LXRSearch("ident", "i", $1) + "</li>";
+}*/
 
 switch(lang) {
-  case 'de':
-    intro = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
-    break;
+case 'de':
+intro = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
+break;
 }
 
 optionsText = optionsText + "</ul>";
+%>
 
-/* generate output */
 
-web.html("<h2>" + heading + "</h2>");
-web.html("<p>" + intro + "</p>"); /* primary introductory text */
-web.html("<h2>" + optionsHeading + "</h2>");
-web.html(optionsText);
-</pre>
+<h2><%- heading %></h2>
+<p><%- intro %></p> 
+<h2><%- optionsHeading %></h2>
+<%- optionsText %>
