@@ -13,7 +13,7 @@ var link = "";
 var tip = "";
 
 if ($1) {
-  var t = string.tolower($1);
+  var t = $1.toLowerCase();
   var n = "";
 
   if (string.startswith(t, "js")) {
@@ -58,13 +58,13 @@ if ($1) {
   }
 }
 
-if (string.length(link)) {
+if (link.length) {
   ver = web.link(link, ver);
 }
 switch(lang) {
   case 'de':
     str = "Unerwünscht";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
@@ -124,7 +124,7 @@ switch(lang) {
     break;
   default:
     str = "Deprecated";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " since " + ver;
     }
     break;
