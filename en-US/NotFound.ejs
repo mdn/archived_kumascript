@@ -29,8 +29,12 @@ var optionsText = "<p>Here are some things things you can do now:<p><ul>";
 optionsText = optionsText + "<li><a href=" + loginUrl + $0 + ">Log in</a> and <a href=" + $0 + ">create the page</a>! We're always looking for help adding new material to our documentation.</li>";
 
 if ($2 && string.length($2)) {
-optionsText = optionsText + "<li>Read the related source or header file: " + <%- template("Source", ["$2"]) %> + "</li>";
-}
+optionsText = optionsText + "<li>Read the related source or header file: +" %>
+
+<%- template("Source", [$2]) %>
+
+<% + "</li>";
+} 
 
 /* commented out, breaks
 if ($1 && string.length($1)) {
