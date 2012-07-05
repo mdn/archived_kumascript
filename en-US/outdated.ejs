@@ -1,4 +1,15 @@
-
-<div class="noinclude"><span class="script">template.outdated("+.")</span><hr />
-</div>
-<p><span lang="en" class="lang lang-en"><span class="script">wiki.template('Warning', mediawiki.args(['<b>The content of this article may be out of date.</b> ' + ($0 || '')]))</span></span> <span lang="*" class="lang lang-*"><span class="script">wiki.template('Warning', mediawiki.args(['<b>The content of this article may be out of date.</b> ' + ($0 || '')]))</span></span> <span lang="de" class="lang lang-de"><span class="script">wiki.template('Warning', mediawiki.args(['<b>Dieser Artikel ist möglicherweise veraltet.</b> ' + ($0 || '')]))</span></span> <span lang="ja" class="lang lang-ja"><span class="script">wiki.template('Warning', mediawiki.args(['<b>この記事の内容は古くなっている可能性があります。</b> ' + ($0 || '')]))</span> </span></p>
+<%
+/* first parameter(optional): Outdated message */
+var lang = env.locale;
+ 
+/* assume English */
+  
+var str = "<strong>The content of this article may be out of date.</strong> " + ($0 || '');
+ 
+if (!string.compare(lang, "de", true)) {
+  str = "<strong>Dieser Artikel ist möglicherweise veraltet.</strong> " + ($0 || '');
+} else if (!string.compare(lang, "ja", true)) {
+  str = "<strong>この記事の内容は古くなっている可能性があります。</strong> " + ($0 || '');
+}
+%>
+<%- template("warning", [str]) %>
