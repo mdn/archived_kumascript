@@ -1,12 +1,9 @@
+<%
+// Indicates that a method was deprecated in a given Gecko version
+//
+// Parameters:
+//  $0: Method name
+//  $1: Gecko version of deprecation
 
-<div class="noinclude"><span class="script">method_deprecated("MethodName","GeckoVersion")</span><hr />
-</div>
-<pre class="script">
-/* first parameter: method name */
-/* second parameter: version of obsolescence */
-
-var str = "gecko" + $1;
-
-template.deprecatedGeneric("method",str,$0);
-
+template("deprecatedGeneric", ["gecko"+$1, $0])
 %>
