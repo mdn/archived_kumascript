@@ -1,4 +1,7 @@
 <%
+// One parameter:
+//  $0 - Name of method
+
 switch(env.locale) {
   default:
     title = "Only us this method if you REALLY know what you are doing!";
@@ -7,3 +10,4 @@ switch(env.locale) {
 }
 %>
 <span style="border: 1px solid rgb(129, 129, 81); padding: 2px; color: white; background-color: orange; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;" title="<%=title%>"><%- str %></span>
+<h3><%= $0 %>()</h3>
