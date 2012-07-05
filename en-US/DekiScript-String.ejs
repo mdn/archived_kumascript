@@ -50,6 +50,11 @@
     toLower: function (str) {
         return (''+str).toLowerCase();
     },
+
+    // http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/String.ToUpperFirst
+    ToUpperFirst: function (str) {
+        return (''+str).charAt(0).toUpperCase() + (''+str).slice(1);
+    },
      
     Trim: function (str) {
         return (''+str).trim();
