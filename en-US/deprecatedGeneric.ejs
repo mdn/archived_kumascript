@@ -46,7 +46,7 @@ if ($1) {
   } else if (string.startswith(t, "gecko")) {
     n = string.trim(string.substr(t, 5));
     ver = "Gecko ";
-    tip = template.geckoRelease(n);
+    tip = template("geckoRelease", [n]);
   }
 
   n = string.trim(n);
