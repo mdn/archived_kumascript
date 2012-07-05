@@ -20,6 +20,6 @@ switch(string.tolower($3)) {
 }
 
 %>
-<p>Firefox <%= $0 %>, based on Gecko <%= $1 %>, will ship in <%= $2 %>. This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox <%= $0 %> are <%- web.link(url, "currently available")%>  on the <%= $3 %> channel.</p>
+<p>Firefox <%= $0 %>, based on Gecko <%= $1 %>, will ship in <%= $2 %>. This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox <%= $0 %> are <%- web.link(url, "currently available")%>  on the <%= string.ToUpperFirst($3) %> channel.</p>
 
 <div class="note"><strong>Note:</strong> Items listed here are tentatively slated for Firefox <%= $0 %>; however, they may be held for a future release if testing shows they're not ready by the time Firefox <%= $0 %> is due to ship. Please keep an eye on this page to stay up to date on the plans for Firefox <%= $0 %>.</div>
