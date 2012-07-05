@@ -44,7 +44,6 @@ if ($1) {
       }
     }
   } else if (string.startswith(t, "gecko")) {
-    alert("agh");
     n = string.trim(string.substr(t, 5));
     ver = "Gecko ";
     tip = template("geckoRelease", [n]);
@@ -71,55 +70,55 @@ switch(lang) {
     break;
   case 'es':
     str = "Desaprobado";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
   case 'fr':
     str = "Déprécié";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
   case 'it':
     str = "Deprecato";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
   case 'ja':
     str = "非推奨";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
   case 'ko':
     str = "Deprecated";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
   case 'pl':
     str = "Wycofywany";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
   case 'ru':
     str = "Не рекомендуется";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
   case 'zh-cn':
     str = "不推荐";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
   case 'zh-tw':
     str = "已正式宣告棄用";
-    if (string.length(ver)) {
+    if (ver.length) {
       str = str + " " + ver;
     }
     break;
@@ -136,7 +135,7 @@ switch($0) {
     %><span class="deprecatedInlineTemplate" style="border: 1px solid #5151FF; background-color: #B9B9FF; font-size: x-small; white-space: nowrap; padding: 2px;" title="<%=(tip)%>"><%-str%></span><%
     break;
   case 'header':
-    if (string.length(tip)) {
+    if (tip.length) {
       str = str + " " + tip;
     }
     %><div class="deprecatedHeaderTemplate" style="overflow:hidden; border: 1px solid #5151FF; background-color: #B9B9FF; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
@@ -144,11 +143,11 @@ switch($0) {
     </div><%
     break;
   case 'method':
-    if (string.length(tip)) {
+    if (tip.length) {
       str = str + " " + tip;
     }
     %><div>
-      <span class="deprecatedMethodTemplate" style="border: 1px solid #5151FF;; background-color: #B9B9FF; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;"><%-str%></span>
+      <span class="deprecatedMethodTemplate" style="border: 1px solid #5151FF; background-color: #B9B9FF; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;"><%-str%></span>
       <h3><%-($2)%>()</h3>
     </div><%
     break;
