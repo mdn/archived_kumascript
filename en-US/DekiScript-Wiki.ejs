@@ -59,7 +59,7 @@
             };
             try {
                 request(opts, function (err, resp, body) {
-                    var result = resp /* {} */;
+                    var result = '';
                     if (resp && 200 == resp.statusCode) {
                         result = body;
                     }
