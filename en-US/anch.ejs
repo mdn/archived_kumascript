@@ -1,1 +1,2 @@
-<%-web.link((page.uri||'') + '#' + string.replace($0, " ", "_"), $1||$0)%>
+<% s_result = '<a href="#' + string.replace($0, " ", "_") + '">' + $0 + '</a>'; %>
+<%- s_result %>
