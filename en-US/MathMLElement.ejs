@@ -1,11 +1,11 @@
 <%
 var lang = env.locale;
-var dest = lang + '/' + 'MathML/Element/' + $0;
+var dest = lang + '/docs/MathML/Element/' + $0;
 
 if (wiki.pageExists(dest)) { /* the page exists */
   %><code><%-(web.link(wiki.uri(dest), '<' + $0 + '>'))%></code><%
 } else { /* the page doesn't exist */
-  var targeturi = "/"+lang+"/docs/new?slug=" + $0;
+  var targeturi = "/docs/new?slug=MathML/Element/" + $0;
   %><code><a rel="internal" href="<%=targeturi%>" class="new"><%='<' + $0 + '>'%></a></code><%
 }
 %>
