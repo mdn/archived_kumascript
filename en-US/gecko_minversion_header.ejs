@@ -15,7 +15,7 @@ var ts = {
 var t = ts[env.locale] || ts['*'];
 var s_introduced_in = t[0];
 %>
-<div style="border:solid 1px maroon; overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"> 
+<div class="standardNote"> 
 <p style="margin: 4px 0px;"><%- s_introduced_in.replace('$0', $0) %></p> 
 <%- template('geckoRelease', [$0]) %>
 </div>
