@@ -4,7 +4,7 @@
 /*   prepend version with HTML, CSS, JS, or Gecko for those techs */
 /* third parameter: additional information required for the type specified by the first parameter */
 /*   method requires the method name */
-/* get the page language */
+
 var lang = env.locale;
 
 var str = "";
@@ -48,7 +48,7 @@ if ($1) {
     ver = "Gecko ";
     tip = template("geckoRelease", [n]);
   }
-
+  
   n = string.trim(n);
   if (string.length(n) > 0) {
     ver = ver + n;
@@ -58,9 +58,12 @@ if ($1) {
   }
 }
 
+// If there's a link, turn the version into a link to that URL
+
 if (link.length) {
   ver = web.link(link, ver);
 }
+
 switch(lang) {
   case 'de':
     str = "Unerwünscht";
