@@ -1,7 +1,5 @@
-<% /* <script> is currently filtered out of KumaScript output. TODO: Find another way to support a script like this.
-
-<script type="text/javascript"><![CDATA[
-        $(function() {
+<%
+$(function() {
             $('.htab').append($('#compat-desktop'));
             $('.htab').append($('#compat-mobile'));
             var $items = $('.htab>ul>li');
@@ -13,10 +11,7 @@
                 $('.htab>div').hide().eq(index).show();
             }).eq(0).click();
         });
-    ]]></script>
+%>
 <div class="htab"><a name="AutoCompatibilityTable" />
 <ul> <li class="selected">Desktop</li> <li>Mobile</li>
 </ul>
-</div>
-
-*/ %>
