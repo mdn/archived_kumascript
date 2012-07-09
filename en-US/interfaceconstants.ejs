@@ -1,27 +1,25 @@
-
-<pre class="script">
-/* get a page's language (Don't use page.language!) */
-var u = Uri.Parts(Page.uri);
-var lang = string.toLower(u.path[0]);
-if(string.Contains(lang, "project")) {
- lang = string.Substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+<%
+/* get the page's language */
+var lang = env.locale;
 
 /* if no $1 then link to constants */
 var constantsTable = 'Constants';
 if ($1) {
-    constantsTable = $1;
+constantsTable = $1;
 }
 
 /* check $0#$1 exists */
-if(wiki.pageExists(lang + '/XPCOM_Interface_Reference/' + $0)) {
-    <code>(web.link(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0) + '#' + string.replace(constantsTable, " ", "_"), $0 + '.' + constantsTable))</code>;
-} else if(wiki.pageExists(lang + '/' + $0)) {
-    <code>(web.link(wiki.uri(lang + '/' + $0) + '#' + string.replace(constantsTable, " ", "_"), $0 + '.' + constantsTable))</code>;
-} else {
-    <code><a rel=('internal') href=(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0) + '#' + string.replace(constantsTable, " ", "_")) class=('new')>$0 + '.' + constantsTable</a></code>;
-}</pre>
+
+if(wiki.pageExists(lang + '/XPCOM_Interface_Reference/' + $0)) { %>
+
+<code><%- (web.link(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0) + '#' + string.replace(constantsTable, " ", "_"), $0 + '.' + constantsTable)) %></code>
+
+<% } else if(wiki.pageExists(lang + '/' + $0)) { %>
+
+<code>(web.link(wiki.uri(lang + '/' + $0) + '#' + string.replace(constantsTable, " ", "_"), $0 + '.' + constantsTable))</code>
+
+<% } else { %>
+
+<code><a rel=('internal') href=(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0) + '#' + string.replace(constantsTable, " ", "_")) class=('new')>$0 + '.' + constantsTable</a></code>
+
+<% } %>
