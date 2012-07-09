@@ -1,3 +1,6 @@
-<span lang='en' class='lang lang-en'><code>{{mediawiki.internal($0 + '#' + $1 + '|' + $0 + '.' + $1, "en")}}</code>
-</span><span lang='*' class='lang lang-*'><code>{{mediawiki.internal($0 + '#' + $1 + '|' + $0 + '.' + $1, "en")}}</code>
-</span>
+<%
+/* creates a link to a attribute in an interface */
+/* parameters: interface name then attribute name */
+/* please use interfaceattribute instead of this template */
+%>
+<%- template("interfaceattribute", [$0, $1]) %>
