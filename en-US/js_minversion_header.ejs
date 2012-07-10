@@ -4,8 +4,8 @@ var lang = env.locale;
 var link = '';
 
 /* check if English 'New in JavaScript/$0' page exists for fallback */
-if(wiki.pageExists('en/JavaScript/New_in_JavaScript/' + $0)) {
-  link = web.link(wiki.uri('en/JavaScript/New_in_JavaScript/' + $0), 'JavaScript ' + $0);
+if(wiki.pageExists('/en-US/docs/JavaScript/New_in_JavaScript/' + $0)) {
+  link = web.link(wiki.uri('/en-US/docs/JavaScript/New_in_JavaScript/' + $0), 'JavaScript ' + $0);
 } else {
   link = 'JavaScript ' + $0;
 }
@@ -14,26 +14,26 @@ var str = "Introduced in " + link;
 
 switch(lang) {
   case 'fr':
-    if(wiki.pageExists(lang + '/JavaScript/Nouveautés_dans_JavaScript/' + $0)) {
-      link = web.link(wiki.uri(lang + '/JavaScript/Nouveautés_dans_JavaScript/' + $0), 'JavaScript ' + $0);
-    } else if(wiki.pageExists(lang + '/Nouveautés_dans_JavaScript_' + $0)) {
-      link = web.link(wiki.uri(lang + '/Nouveautés_dans_JavaScript_' + $0), 'JavaScript ' + $0);
+    if(wiki.pageExists('/fr/docs/JavaScript/Nouveautés_dans_JavaScript/' + $0)) {
+      link = web.link(wiki.uri('/fr/docs/JavaScript/Nouveautés_dans_JavaScript/' + $0), 'JavaScript ' + $0);
+    } else if(wiki.pageExists('/fr/docs/Nouveautés_dans_JavaScript_' + $0)) {
+      link = web.link(wiki.uri('/fr/docs/Nouveautés_dans_JavaScript_' + $0), 'JavaScript ' + $0);
     }
     str = "Introduit dans " + link;
     break;
   case 'ja':
-    if(wiki.pageExists(lang + '/JavaScript/New_in_JavaScript/' + $0)) {
-      link = web.link(wiki.uri(lang + '/JavaScript/New_in_JavaScript/' + $0), 'JavaScript ' + $0);
-    } else if(wiki.pageExists(lang + '/New_in_JavaScript_' + $0)) {
-      link = web.link(wiki.uri(lang + '/New_in_JavaScript_' + $0), 'JavaScript ' + $0);
+    if(wiki.pageExists(lang + '/ja/docs/JavaScript/New_in_JavaScript/' + $0)) {
+      link = web.link(wiki.uri('/ja/docs/JavaScript/New_in_JavaScript/' + $0), 'JavaScript ' + $0);
+    } else if(wiki.pageExists('/ja/docs/New_in_JavaScript_' + $0)) {
+      link = web.link(wiki.uri('/ja/docs/New_in_JavaScript_' + $0), 'JavaScript ' + $0);
     }
     str = link + " で導入";
     break;
   case 'pl':
-    if(wiki.pageExists(lang + '/JavaScript/Nowości_w_JavaScript/' + $0)) {
-      link = web.link(wiki.uri(lang + '/JavaScript/Nowości_w_JavaScript/' + $0), 'JavaScript ' + $0);
-    } else if(wiki.pageExists(lang + '/Nowości_w_JavaScript_' + $0)) {
-      link = web.link(wiki.uri(lang + '/Nowości_w_JavaScript_' + $0), 'JavaScript ' + $0);
+    if(wiki.pageExists('/pl/docs/JavaScript/Nowości_w_JavaScript/' + $0)) {
+      link = web.link(wiki.uri('/pl/docs/JavaScript/Nowości_w_JavaScript/' + $0), 'JavaScript ' + $0);
+    } else if(wiki.pageExists('/pl/docs/Nowości_w_JavaScript_' + $0)) {
+      link = web.link(wiki.uri('/pl/docs/Nowości_w_JavaScript_' + $0), 'JavaScript ' + $0);
     }
     str = "Wprowadzono w " + link;
     break;
@@ -45,6 +45,6 @@ switch(lang) {
     break;
 }
 %>
-<div style="border: 1px solid #818151; background-color: #FFFFE1; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;">
+<div class="standardNote">
 <p style="margin: 4px 0px 4px 0px;"><%- str %></p>
 </div>
