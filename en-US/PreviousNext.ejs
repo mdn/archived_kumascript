@@ -12,7 +12,10 @@ var nextStr = 'Next »';
 
 /* fix for other languages */
 
-if (!string.compare(lang, "de", true)) {
+if (!string.compare(lang, "cz", true)) {
+  prevStr = "« Předchozí";
+  nextStr = "Následující »";
+} else if (!string.compare(lang, "de", true)) {
   prevStr = "« zurück";
   nextStr = "weiter »";
 } else if (!string.compare(lang, "fr", true)) {
