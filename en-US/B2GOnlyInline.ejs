@@ -2,15 +2,7 @@
 /* one parameter: Gecko version as of which should only be used in B2G (optional) */
 /* get the page language */
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var str = "";
 var title = "";
@@ -19,13 +11,12 @@ switch(lang) {
   default:
     if ($0) {
       str = "Only available on Firefox OS";
-      title = "Available only on Firefox OS as of Gecko " + $0 + " " + template.geckoRelease($0);
+      title = "Available only on Firefox OS as of Gecko " + $0 + " " + template("geckoRelease", [$0]);
     } else {
       str = "Only available on Firefox OS";
       title = "This is a Firefox OS (Boot to Gecko) specific API.";
     }
     break;
 }
-
-<span title=(title) style="border: 1px solid rgb(129, 129, 81); background-color: rgb(255, 225, 190); font-size: x-small; white-space: nowrap; padding: 0px 2px;">(web.text(str))</span>
-</pre>
+%>
+<span title="<%=title%>" class="projectSpecificInline"><%=str%></span>
