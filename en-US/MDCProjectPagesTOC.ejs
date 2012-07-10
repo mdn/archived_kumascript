@@ -18,7 +18,7 @@
             zhcnText();
             break;
         case "zh-tw":
-            <%-template("Template:MDC專案頁目錄")->
+            zhtwText();
             break;
         case "de":
             germanText();
@@ -232,5 +232,9 @@
             </dl>
         </div>
         <%
+    }
+    
+    function zhtwText() {
+        %><%-template("Template:MDC專案頁目錄")-><%
     }
 %>
