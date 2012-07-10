@@ -1,24 +1,30 @@
+<%
+    var path = $1;
+    var title = $2 || path;
 
-<pre class="script">
-var prefix = string.ToLower($0 || $prefix || '');
-var path = $1 || $path;
-var title = $2 || $title || path;
-var u = Uri.Parts(Page.uri);
-var lang = string.ToLower(u.path[0]);
-if(string.Contains(lang, "project") || string.Contains(lang, "Project")) {
- lang = string.Substr(lang, 8);
-}
-if (lang === 'zh_tw' || lang === 'cn') {
-    lang = 'zh';
-}
-switch(prefix) {
-case 'wikipedia':
-    web.link('http://' + lang + '.wikipedia.org/wiki/' + path, title);
-    break;
-case 'wikimo':
-    <a class=(prefix) title=(title) href=('http://wiki.mozilla.org/' + path)>title</a>;
-    break;
-default:
-    'Unknown prefix: ' + prefix + '.';
-}
-</pre>
+    var lang = env.locale;
+    
+    if (lang === 'zh_tw' || lang === 'cn') {
+        lang = 'zh';
+    } else if (lang === 'en-US') {
+        lang = 'en';
+    }
+    
+    var prefix = $0;
+    
+    switch(prefix) {
+        case 'wikipedia':
+            %>
+            <a title="<%=title%>" href="<%-'http://' + lang + '.wikipedia.org/wiki/' + path%>"><%-title%></a>
+            <%
+            break;
+        case 'wikimo':
+            %>
+            <a class="wikimo" title="<%=title%>" href="<%-'http://wiki.mozilla.org/' + path%>"><%-title%></a>
+            <%
+            break;
+        default:
+            'Unknown prefix: ' + prefix + '.';
+            break;
+    }
+%>
