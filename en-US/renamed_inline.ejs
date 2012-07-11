@@ -1,3 +1,8 @@
-
-<p><span lang="en" class="lang lang-en"> <span title="{{geckoRelease($1)}}" style="border: 1px solid rgb(129, 129, 81); background-color: #d4f3ff; font-size: x-small; white-space: nowrap; padding: 2px;">Renamed from <code><span class="script">$0</span></code> in Gecko <span class="script">$1</span></span> </span> <span lang="*" class="lang lang-*"> <span title="{{geckoRelease($1)}}" style="border: 1px solid rgb(129, 129, 81); background-color: #d4f3ff; font-size: x-small; white-space: nowrap; padding: 2px;">Renamed from <code><span class="script">$0</span></code> in Gecko <span class="script">$1</span></span> </span></p>
-<p class="noinclude"><span class="script">renamed_inline("oldName", "1.9.1")</span></p>
+<%
+// Use this as an inline indicator that something was renamed in a given Gecko release.
+//
+// Parameters:
+//  $0 - API name
+//  $1 - Gecko release it was renamed in
+%>
+<span title="<%-template("geckoRelease", [$1])%>" class="renamedInline">Renamed from <code><%=$0%></code> in Gecko <%=$1%></span>
