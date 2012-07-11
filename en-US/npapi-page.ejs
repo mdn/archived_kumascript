@@ -30,6 +30,6 @@
     } else {
         url = destNewType;
     }
-    url = kuma.htmlEscape(url);
+    url = web.spacesToUnderscores(url);
 %>
 <a href="<%=url%>"><%=$0%></a>
