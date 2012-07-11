@@ -1,21 +1,17 @@
+<%
+/*
+<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" 
+href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>.
+For example: <span class="script">Sm_minversion_header("2")</span></p>
+<p>This template should be used when the content of the whole page or section applies to SeaMonkey
+version N or higher. For individual items in a list or a table use 
+<a title="Template:fx_minversion_inline" href="/Template:fx_minversion_inline">Template:sm minversion inline</a>.</p>
+*/
 
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example: <span class="script">Sm_minversion_header(2)</span></p>
-<p>This template should be used when the content of the whole page or section applies to SeaMonkey version N or higher. For individual items in a list or a table use <a title="Template:fx_minversion_inline" href="/Template:fx_minversion_inline">Template:sm minversion inline</a>.</p>
-</div>
-<pre class="script">
 /* one parameter:  SeaMonkey version */
-/* get the page language */
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+/* get the page language */
+var lang = env.locale;
 
 var articleName = "SeaMonkey " + $0 + " for developers";
 var text = "This article covers features introduced in " + web.link(wiki.uri(lang + '/' + articleName), "SeaMonkey " + $0);
@@ -58,11 +54,11 @@ switch(lang) {
     text = "本文描述 " + web.link(wiki.uri(lang + '/' + articleName), "SeaMonkey " + $0) + " 之後加入的功能。";
     break;
 }
+%>
 
-<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;">
+<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156);
+font-weight: bold; text-align: center;">
   <p style="margin: 4px 0px;">
-    web.html(text);
+    <%- text %>
   </p>
 </div>
-
-%>
