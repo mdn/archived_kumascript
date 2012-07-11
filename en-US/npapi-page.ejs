@@ -1,43 +1,35 @@
+<%
+// Creates a link to the NPAPI page with the given name
+//
+//  $0 - page name
 
-<pre class="script">
-/* one parameter: attribute name */
-/* get the page language */
+    var lang = env.locale;
+    
+    var langName = "Gecko Plugin API Reference";
+    
+    switch(lang) {
+        case 'pl':
+            langName = "Dokumentacja wtyczek Gecko";
+            break;
+        case 'de':
+            langName = "Gecko Plugin API Referenz";
+            break;
+        case 'fr':
+            langName = "Documentation API Greffons Gecko";
+            break;
+    }
 
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+    var destOldType = "/" + lang + '/docs/' + langName + ':' + $0;
+    var destNewType = "/" + lang + '/docs/' + langName + '/' + $0;
+    var url = "";
 
-var langName = "Gecko Plugin API Reference";
-
-switch(lang) {
-  case 'pl':
-    langName = "Dokumentacja wtyczek Gecko";
-    break;
-  case 'de':
-    langName = "Gecko Plugin API Referenz";
-    break;
-  case 'fr':
-    langName = "Documentation API Greffons Gecko";
-    break;
-}
-var destOldType = lang + '/' + langName + ':' + $0;
-var destNewType = lang + '/' + langName + '/' + $0;
-
-if (wiki.pageExists(destNewType)) {
- (web.link(wiki.uri(destNewType), $0))
-} else if (wiki.pageExists(destOldType)) {
-  (web.link(wiki.uri(destOldType), $0))
-} else {
-  <<span class="start-tag">a</span><span class="attribute-name"> rel</span>=(<span class="attribute-value">'internal') </span><span class="attribute-name">href</span><span>=</span>(<span>wiki.uri(</span>destNewType<span>)) </span><span class="attribute-name">class</span>=<span class="attribute-value">('new')></span>$0</<span class="end-tag">a></span>;
-}
-</pre>
-<div class="noinclude">
-<p>See <a title="Talk:en/Gecko_Plugin_API_Reference" href="/Talk:en/Gecko_Plugin_API_Reference">Talk:Gecko Plugin API Reference</a> for usage guidelines.</p>
-<p>Zobacz również <a title="Talk:pl/Dokumentacja_wtyczek_Gecko" href="/Talk:pl/Dokumentacja_wtyczek_Gecko">Dyskusja:Dokumentacja wtyczek Gecko</a>.</p>
-</div>
+    if (wiki.pageExists(destNewType)) {
+        url = destNewType;
+    } else if (wiki.pageExists(destOldType)) {
+        url = destOldType;
+    } else {
+        url = destNewType;
+    }
+    url = kuma.htmlEscape(url);
+%>
+<a href="<%=url%>"><%=$0%></a>
