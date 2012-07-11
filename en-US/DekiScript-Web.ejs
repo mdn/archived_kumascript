@@ -26,8 +26,10 @@
     // Given a URL, convert all spaces to underscores. This lets us fix a bunch of places where templates
     // assume this is done automatically by the API, like MindTouch did.
     spacesToUnderscores: function(str) {
-        str = str.replace(" ", "_", "gi");
-        return str.replace("%20", "_", "gi")
+        var re1 = / /gi;
+        var re2 = /%20/gi;
+        str = str.replace(re1, "_");
+        return str.replace(re2, "_");
     }
  
 }); %>
