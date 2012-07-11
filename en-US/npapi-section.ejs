@@ -1,37 +1,38 @@
+<%
+// Inserts a link to a section of a given NPAPI reference page
+//
+//  $0 - page name
+//  $1 - section name
 
-<pre class="script">
-/* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+    var lang = env.locale;
+    
+    var langName = "Gecko Plugin API Reference";
 
-var langName = "Gecko Plugin API Reference";
+    switch(lang) {
+        case 'pl':
+            langName = "Dokumentacja wtyczek Gecko";
+            break;
+        case 'de':
+            langName = "Gecko Plugin API Referenz";
+            break;
+        case 'fr':
+            langName = "Documentation API Greffons Gecko";
+            break;
+    }
+    
+    var destOldType = "/" + lang + '/docs/' + langName + ':' + $0;
+    var destNewType = "/" + lang + '/docs/' + langName + '/' + $0;
+    var url = "";
 
-switch(lang) {
-  case 'pl':
-    langName = "Dokumentacja wtyczek Gecko";
-    break;
-  case 'de':
-    langName = "Gecko Plugin API Referenz";
-    break;
-  case 'fr':
-    langName = "Documentation API Greffons Gecko";
-    break;
+    if (wiki.pageExists(destNewType)) {
+        url = destNewType;
+    } else if (wiki.pageExists(destOldType)) {
+        url = destOldType;
+    } else {
+        url = destNewType;
+    }
+    
+    url = web.spacesToUnderscores(url);
 }
-var destOldType = lang + '/' + langName + ':' + $0;
-var destNewType = lang + '/' + langName + '/' + $0;
-
-if (wiki.pageExists(destNewType)) {
-  <a href=(destNewType + '#' + $1)>($1)</a>
-} else if (wiki.pageExists(destOldType)) {
-  <a href=(destOldType + '#' + $1) >($1)</a>
-} else {
-<a href=(destNewType + '#' + $1) class="new">($1)</a>
-}
-</pre>
+%>
+<a href="<%=url%>#<%=$1%>"><%=$1%></a>
