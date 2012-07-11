@@ -1,9 +1,51 @@
+<%
 
-<p><span lang="en" class="lang lang-en">
+/* This template should work if you do two things: 
+
+1. change the invocation from a page to be a valid JSON object, 
+and add parens around it like this example:
+
+    {{ OrigDocInfo({ "author": "Ian Hickson", "date": "October 14, 2006",
+    "original": "<a class=\"external\" 
+    href=\"http://lxr.mozilla.org/mozilla/source/config/preprocessor.txt\">/mozilla/config/preprocessor.txt</a>" }) }}
+
+2. fix the code in here to access the passed-in JSON object in some way like this:
+
+    author = string.trim(($0.author || ''));
+    
+    and access it like maybe this:
+    
+    <span class="script"><li>Author(s): <%- author %></li></span>
+
+But maybe the Kuma team will fix all this so none of it has to be done.
+
+*/
+
+
+%>
+
+<p>
+<span lang="en" class="lang lang-en">
 <div class="includeonly">
 <div class="originaldocinfo">
 <h3>Original Document Information</h3>
-<ul> <span class="script">string.trim(($author || '')) !== '' ? web.html('<li>Author(s): ' + $author + '</li>') : ''</span> <span class="script">string.trim(($others || '')) !== '' ? web.html('<li>Other Contributors: ' + $others + '</li>') : ''</span> <span class="script">string.trim(($date || '')) !== '' ? web.html('<li>Last Updated Date: ' + $date + '</li>') : ''</span> <span class="script">string.trim(($copyright || '')) !== '' ? web.html('<li>Copyright Information: ' + $copyright + '</li>') : ''</span> <span class="script">string.trim(($original || '')) !== '' ? web.html('<li>Original Location: ' + $original + '</li>') : ''</span> <span class="script">string.trim(($note || '')) !== '' ? web.html('<li>Note: ' + $note + '</li>') : ''</span> </ul> </div> </div> <div class="noinclude"> <pre>
+<ul>
+<span class="script">string.trim(($author || '')) !== '' ? web.html('<li>Author(s): ' + $author + '</li>') : ''</span>
+<span class="script">string.trim(($others || '')) !== '' ? web.html('<li>Other Contributors: ' + $others + '</li>') : ''</span>
+<span class="script">string.trim(($date || '')) !== '' ? web.html('<li>Last Updated Date: ' + $date + '</li>') : ''</span>
+<span class="script">string.trim(($copyright || '')) !== '' ? web.html('<li>Copyright Information: ' + $copyright + '</li>') : ''</span>
+<span class="script">string.trim(($original || '')) !== '' ? web.html('<li>Original Location: ' + $original + '</li>') : ''</span>
+<span class="script">string.trim(($note || '')) !== '' ? web.html('<li>Note: ' + $note + '</li>') : ''</span> </ul> </div>
+</ul>
+</div>
+</div>
+</p>
+
+<% 
+/* Nothing but comments below
+
+<div class="noinclude">
+<pre>
 Copy & paste this empty template:
 (delete any unused fields, all fields are optional.)
 
@@ -101,3 +143,5 @@ Przykładowe zastosowanie:
   note : "końcowa uwaga."
 }}}
 </pre> <p>Przykładowe wyjście:</p> <span class="script">OrigDocInfo { author : " Larry, Moe i Curly", others : " The People of Shemp & Co. (polskie tłumaczenie)", date : " April 1st, 1959", copyright : " ©1959 Netscape Studios", original : " http://www.mozilla.org/somewhere/is/moe.html", note : "końcowa uwaga." }</span></div> </span></p>
+*/
+%>
