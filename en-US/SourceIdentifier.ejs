@@ -1,3 +1,8 @@
+<%
+// Insert a link to search for an identifier in the mozilla-central source repository.
+//
+//  $0 - Identifier to search for
 
-<p><span lang="*" class="lang lang-*"><span class="script">mediawiki.external('http://mxr.mozilla.org/mozilla-central/ident?i=' + $0 + ' <code>' + $0 + '</code>')</span> </span></p>
-<div class="noinclude">Links to a MXR search for the specified identifier.</div>
+var url = "http://mxr.mozilla.org/mozilla-central/ident?i=" + $0;
+%>
+<code><a href="<%=url%>"><%=$0%></a></code>
