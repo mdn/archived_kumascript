@@ -1,16 +1,5 @@
 <%
-/* two parameters: topic page name, topic page title */
-/* get the page language */
-
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+var lang = env.locale;
 
 var langName = $1 + " Page";
 
@@ -19,6 +8,6 @@ switch(lang) {
     langName = $1 + " ページ";
     break;
 }
-var dest = 'https://developer.mozilla.org/' + lang + '/docs/' + $0;
+var dest = '/' + lang + '/docs/' + $0;
 %>
-<a href="<%= dest %>">« <%= langName %></a>
+<a href="<%=dest%>">« <%=langName%></a>
