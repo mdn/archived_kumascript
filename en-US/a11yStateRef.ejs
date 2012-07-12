@@ -1,18 +1,6 @@
-
-<pre class="script">
+<%
 /* Used in: en/Accessibility/AT-APIs/Gecko/States */
-
-/* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-var href = 'https://developer.mozilla.org/' + lang + '/Accessibility/AT-APIs/Gecko/States#' + $0;
-
-<a href=(href)>$0</a>
+var lang = env.locale;
+var href = '/' + lang + '/docs/Accessibility/AT-APIs/Gecko/States#' + $0;
 %>
+<a href="<%=href%>"<%=0%></a>
