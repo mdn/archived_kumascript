@@ -1,70 +1,46 @@
+<%
+var lang = env.locale;
 
-<p><span lang="en" class="lang lang-en">
-<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;"><span class="script">wiki.pageexists(mediawiki.localurl("en", 'Thunderbird ' + $0 + ' for developers')) ? web.html(mediawiki.internal('Thunderbird ' + $0 + ' for developers|Thunderbird ' + $0 + ' note', "en")) : web.html('Thunderbird ' + $0 + ' note')</span></p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
+var version = $0;
+if (string.EndsWith(version, ".0")) {
+  version = string.substr(version, 0, string.length(version)-2);
+} 
+
+var articleUrl = "Thunderbird " + version + " for developers";
+var note = "Thunderbird " + $0 + " note";
+
+switch(lang) {
+  case 'de':
+    articleUrl = "Thunderbird " + version + " für Entwickler";
+    note = "Hinweis zu Thunderbird " + $0;
+    break;
+  case 'es':
+    articleUrl = "Thunderbird " + version + " para desarrolladores";
+    note = "Nota sobre Thunderbird " + $0;
+    break;
+  case 'fr':
+    articleUrl = "Thunderbird " + version + " pour les développeurs";
+    note = "Note concernant Thunderbird " + $0;
+    break;
+  case 'ja':
+    articleUrl = "Thunderbird " + version + " for developers";
+    note = "Thunderbird " + $0 + " における注記";
+    break;
+  case 'pl':
+    articleUrl = "Thunderbird " + version + " dla programistów";
+    note = "Uwaga dotycząca Firefoksa " + $0;
+    break;
+}
+%>
+<div class="standardNote">
+  <p style="margin: 4px 0px; font-weight: bold;">
+   <%
+   if ( wiki.pageexists(lang + '/' + articleUrl) ) {
+        %><%-web.link(wiki.uri(lang + '/'+ articleUrl), note)%><%
+   } else {
+        %><%-note%><% 
+   }
+   %>
+  </p>
+  <p style="margin: 4px 0px;"><%-$1%></p>
 </div>
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
-<p><span class="script">template.Tb_minversion_note(3, "The <code>foobar()</code> method works differently in Thunderbird 3.")</span></p>
-<p>This template should be used when you need to insert a Thunderbird version-specific note into an article. For individual items in a list or a table use <a title="Template:tb_minversion_inline" href="/Template:Tb_minversion_inline">Template:tb minversion inline</a>, and to mark a whole page or section, use <a title="Template:tb_minversion_header" href="/Template:Tb_minversion_header">Template:tb_minversion_header</a>.</p>
-</div>
-</span><span lang="*" class="lang lang-*">
-<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;"><span class="script">wiki.pageexists(mediawiki.localurl("en", 'Thunderbird ' + $0 + ' for developers')) ? web.html(mediawiki.internal('Thunderbird ' + $0 + ' for developers|Thunderbird ' + $0 + ' note', "en")) : web.html('Thunderbird ' + $0 + ' note')</span></p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
-</div>
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
-<p><span class="script">template.Tb_minversion_note(3, "The <code>foobar()</code> method works differently in Thunderbird 3.")</span></p>
-<p>This template should be used when you need to insert a Thunderbird version-specific note into an article. For individual items in a list or a table use <a title="Template:tb_minversion_inline" href="/Template:Tb_minversion_inline">Template:tb minversion inline</a>, and to mark a whole page or section, use <a title="Template:tb_minversion_header" href="/Template:Tb_minversion_header">Template:tb_minversion_header</a>.</p>
-</div>
-</span><span lang="es" class="lang lang-es">
-<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;"><span class="script">wiki.pageexists(mediawiki.localurl("es", 'Thunderbird ' + $0 + ' para desarrolladores')) ? web.html('Nota sobre ' + mediawiki.internal('Thunderbird ' + $0 + ' para desarrolladores|Thunderbird ' + $0, "es")) : web.html('Nota sobre Thunderbird ' + $0)</span></p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
-</div>
-<div class="noinclude"><hr />
-<p>For example: <span class="script">template.Tb_minversion_note(3, "The <code>foobar()</code> method works differently in Thunderbird 3.")</span></p>
-<p>This template should be used when you need to insert a Thunderbird version-specific note into an article. For individual items in a list or a table use <a title="Template:tb_minversion_inline" href="/Template:Tb_minversion_inline">Template:tb minversion inline</a>, and to mark a whole page or section, use <a title="Template:tb_minversion_header" href="/Template:Tb_minversion_header">Template:tb_minversion_header</a>.</p>
-</div>
-</span><span lang="fr" class="lang lang-fr">
-<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;"><span class="script">wiki.pageexists(mediawiki.localurl("fr", 'Thunderbird ' + $0 + ' pour les développeurs')) ? web.html(mediawiki.internal('Thunderbird ' + $0 + ' pour les développeurs|Note concernant Thunderbird ' + $0, "fr")) : web.html('Note concernant Thunderbird ' + $0)</span></p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
-</div>
-<div class="noinclude"><hr />
-<p>Un des <a title="Project:fr/Modèles_personnalisés#Version_information_templates" href="/Project:fr/Mod%C3%A8les_personnalis%C3%A9s#Version_information_templates">modèles d'informations de version</a>. Par exemple :</p>
-<p><span class="script">template.Tb_minversion_note(3, "La méthode <code>foobar()</code> fonctionne différemment das Thunderbird 3.")</span></p>
-<p>This template should be used when you need to insert a Thunderbird version-specific note into an article. For individual items in a list or a table use <a title="Template:tb_minversion_inline" href="/Template:Tb_minversion_inline">Template:tb minversion inline</a>, and to mark a whole page or section, use <a title="Template:tb_minversion_header" href="/Template:Tb_minversion_header">Template:tb_minversion_header</a>.</p>
-</div>
-</span><span lang="ja" class="lang lang-ja">
-<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;"><span class="script">wiki.pageexists(mediawiki.localurl("ja", 'Thunderbird ' + $0 + ' for developers')) ? web.html(mediawiki.internal('Thunderbird ' + $0 + ' for developers|Thunderbird ' + $0 + ' における注記', "ja")) : web.html('Thunderbird ' + $0 + ' における注記')</span></p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
-</div>
-<div class="noinclude"><hr />
-<p><a title="Project:ja/Custom_Templates#Version_information_templates" href="/Project:ja/Custom_Templates#Version_information_templates">バージョン情報テンプレート</a> のうちの一つです。例えば:</p>
-<p><span class="script">template.Tb_minversion_note(3, "Thunderbird 3 では、<code>foobar()</code> メソッドは、異なる動作をします。")</span> このテンプレートは、Thunderbird のバージョン固有の注記を記事に挿入したいときに使うべきです。リストやテーブルの項目には、<a title="Template:tb_minversion_inline" href="/Template:Tb_minversion_inline">Template:tb minversion inline</a> を使い、ページまたはセクション全体には、<a title="Template:tb_minversion_header" href="/Template:Tb_minversion_header">Template:tb_minversion_header</a> を使ってください。</p>
-</div>
-</span><span lang="ko" class="lang lang-ko">
-<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;"><span class="script">wiki.pageexists(mediawiki.localurl("ko", 'Thunderbird ' + $0 + ' for developers')) ? web.html(mediawiki.internal('Thunderbird ' + $0 + ' for developers|Thunderbird ' + $0 + ' note', "ko")) : web.html('Thunderbird ' + $0 + ' note')</span></p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
-</div>
-<div class="noinclude"><hr />
-<p>One of the <a title="Project:ko/Custom_Templates#Version_information_templates" href="/Project:ko/Custom_Templates#Version_information_templates">Version information templates</a>. For example:</p>
-<p><span class="script">template.Tb_minversion_note(3, "The <code>foobar()</code> method works differently in Thunderbird 3.")</span></p>
-<p>This template should be used when you need to insert a Thunderbird version-specific note into an article. For individual items in a list or a table use <a title="Template:tb_minversion_inline" href="/Template:Tb_minversion_inline">Template:tb minversion inline</a>, and to mark a whole page or section, use <a title="Template:tb_minversion_header" href="/Template:Tb_minversion_header">Template:tb_minversion_header</a>.</p>
-</div>
-</span><span lang="pl" class="lang lang-pl">
-<div style="border: 0px none ; margin: 10px 0px; padding: 0px 10px; background-color: rgb(254, 244, 156); text-align: center;">
-<p style="margin: 4px 0px; font-weight: bold;"><span class="script">wiki.pageexists(mediawiki.localurl("pl", 'Thunderbird ' + $0 + ' dla programistów')) ? web.html(mediawiki.internal('Thunderbird ' + $0 + ' dla programistów|Uwaga dotycząca Firefoksa ' + $0, "pl")) : web.html('Uwaga dotycząca Firefoksa ' + $0)</span></p>
-<p style="margin: 4px 0px;"><span class="script">web.html($1)</span></p>
-</div>
-<div class="noinclude"><hr />
-<p>Jeden z <a title="Project:pl/Własne_szablony#Szablony_informuj.C4.85ce_o_wersji" href="/Project:pl/W%C5%82asne_szablony#Szablony_informuj.C4.85ce_o_wersji">szablonów informujących o wersji</a>. Przykładowo:</p>
-<p><span class="script">template.Tb_minversion_note(3, "Metoda <code>foobar()</code> działa inaczej w Firefoksie 3.")</span></p>
-<p>Szablon ten powinien zostać użyty, gdy zachodzi potrzeba wstawienia do artykułu uwagi specyficznej dla danej wersji Firefoksa. Dla pojedynczych elementów listy lub tabelki należy użyć <a title="Template:tb_minversion_inline" href="/Template:Tb_minversion_inline">Szablon:tb minversion inline</a>, a do oznaczenia całej strony lub jej części, należy zastosować <a title="Template:tb_minversion_header" href="/Template:Tb_minversion_header">Szablon:tb_minversion_header</a>.</p>
-</div>
-</span></p>
