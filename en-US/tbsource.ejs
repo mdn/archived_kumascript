@@ -1,10 +1,16 @@
+<%
+// Insert a link to a file in the Thunderbird source repository.
+//
+//  $0 - File to link to
+//  $1 - (OPTIONAL) text for the link
+//
+// If $1 isn't provided, the link itself is the link text
 
-<p><span lang="en" class="lang lang-en"><span class="script">mediawiki.external('http://mxr.mozilla.org/comm-central/source/' + $0 + ' ' + ($1 || '<code>' + $0 + '</code>'))</span>
-<div class="noinclude"><hr />
-<p>See <a title="Project:en/Custom_Templates#Template:source" href="/Project:en/Custom_Templates#Template:source">MDC:Custom Templates#Template:source</a> for documentation.</p>
-</div>
-</span><span lang="*" class="lang lang-*"><span class="script">mediawiki.external('http://mxr.mozilla.org/comm-central/source/' + $0 + ' ' + ($1 || '<code>' + $0 + '</code>'))</span>
-<div class="noinclude"><hr />
-<p>See <a title="Project:en/Custom_Templates#Template:source" href="/Project:en/Custom_Templates#Template:source">MDC:Custom Templates#Template:source</a> for documentation.</p>
-</div>
-</span></p>
+var url = "http://mxr.mozilla.org/comm-central/source/" + $0;
+var text = url;
+
+if ($1) {
+    text = $1;
+}
+%>
+<a href="<%=url%>"><%=text%></a>
