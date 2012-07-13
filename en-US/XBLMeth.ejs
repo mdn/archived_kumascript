@@ -30,6 +30,6 @@ if (wiki.pageExists(destNewType)) {
     url = destNewType;
 }
 
-    url = url + "#" + $0;
+    url = web.spacesToUnderscores(url + "#" + $0);
 %>
 <code><a href="<%=url%>"><%=$0%>()</a></code>
