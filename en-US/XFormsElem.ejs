@@ -1,3 +1,4 @@
-<span lang='en' class='lang lang-en'>{{mediawiki.internal('XForms:User_Interface_Elements:' + string.toupperfirst($0) + '|' + $0, "en")}}
-</span><span lang='*' class='lang lang-*'>{{mediawiki.internal('XForms:User_Interface_Elements:' + string.toupperfirst($0) + '|' + $0, "en")}}
-</span>
+<%
+    var url = "/" + env.locale + "/docs/XForms/User_Interface_Elements/" + $0;
+%>
+<code><a href="<%=url%>"><%=$0.toLowerCase()%></a>
