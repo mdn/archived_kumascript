@@ -1,3 +1,6 @@
-<span lang='en' class='lang lang-en'>The <a href="en/JSAPI_User_Guide#Compiled_scripts">JSAPI User Guide</a> contains example code using compiled scripts.
-</span><span lang='*' class='lang lang-*'>The <a href="en/JSAPI_User_Guide#Compiled_scripts">JSAPI User Guide</a> contains example code using compiled scripts.
-</span>
+<%
+var lang = env.locale;
+
+var str = 'The <a href="/' + lang + '/docs/JSAPI_User_Guide#Compiled_scripts">JSAPI User Guide</a> contains example code using compiled scripts.';
+%>
+<%-str%>
