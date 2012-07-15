@@ -1,7 +1,7 @@
 <%
 /* accepts as input one required parameter: SVG element to create a xref to */
 var lang = env.locale;
-var dest = lang + '/' + 'SVG/Element/' + $0;
+var dest = lang + '/docs/SVG/Element/' + $0;
 
 if (wiki.pageExists(dest)) { /* the page exists */
   %><code><%-(web.link(wiki.uri(dest), '<' + $0 + '>'))%></code><%
