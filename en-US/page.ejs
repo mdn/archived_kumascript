@@ -1,1 +1,15 @@
-<%-wiki.page($0, $1)%>
+<%
+// Inserts the contents of a page into the document.
+//
+// Parameters:
+//
+//  $0 - URL of page to insert
+//  $1 - (optional) section name of a section to insert (rather than the whole page)
+
+var url = web.spacesToUnderscores($0);
+
+if ($1) {
+    $1 = web.spacesToUnderscores($1);
+}
+%>
+<%-wiki.page(url, $1, $2, $3, $4)%>
