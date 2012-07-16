@@ -51,33 +51,10 @@
             return html;
         }
         
-        // Strip the top heading from the text
+        // Rip out the first header we find
         
-        var c = html.substr(0, 4);  // get the <hN> element if present
-        html = "<p>top: " + c + "</p>" + html;
-        var re = /<h(\d)>/i;
-        var found = re.exec(c);
-        
-                
-        if (found) {
-            var level = found[1];   // the heading level of the first heading
-            html = html.slice(4);   // remove the heading
-            
-            // Now find and remove through the end of the end tag
-            
-            var endTag = "</h" + level + ">";
-            
-            var index = html.indexOf(endTag);
-            if (index > 0) {
-                html = slice(index + 4);
-            } else {
-                endTag = "</H" + level + ">";
-                index = html.indexOf(endTag);
-                if (index > 0) {
-                    html = slice(index + 4);
-                }
-            }
-        }
+        html = html.replace(/^<(H|h)\d[^>]*>[^<]*(<\/B\d>|<\/h\d>)/ig,"") + "";
+
         return html;
     },
         
@@ -106,11 +83,11 @@
                     var result = '';
                     if (resp && 200 == resp.statusCode) {
                         result = body;
+                        if (show == undefined) {
+                            show = 0;
+                        }
+                        result = wiki._adjustHeadings(result, show, heading);
                     }
-                    if (show == undefined) {
-                        show = 0;
-                    }
-                    result = wiki._adjustHeadings(result, show, heading);
                     next(result);
                 });
             } catch (e) {
