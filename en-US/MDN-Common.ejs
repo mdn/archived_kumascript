@@ -30,7 +30,7 @@
             var base_url = p.protocol + '//' + p.host;
 
             // Fix path - remove any locale, add /docs, replace space with underscore and do a htmlEscape
-            var path = '/docs/' + kuma.htmlEscape(in_path.replace(/^\/?(?:\w{2}(?:-\w{2})?)?\/(?:docs\/)?/i,'').replace(/\s/g,'_'));
+            var path = '/docs/' + kuma.htmlEscape(in_path.replace(/^\/?(?:\w{2}(?:-\w{2})?)?\/(?:docs\/)?/i,'').replace(/ /g,'_').replace(/%20/g,'_'));
 
             // Figure out locale
             var locale = env.locale;
