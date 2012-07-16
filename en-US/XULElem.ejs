@@ -1,15 +1,22 @@
 <%
+// Inserts a link to the XUL Reference page for the specified element.
+//
+// Parameters:
+//
+//  $0 - Element name
+
 var lang = env.locale;
 
-var destOldType = lang + '/XUL:' + $0;
-var destNewType = lang + '/XUL/' + $0;
+var destOldType = "/" + lang + '/XUL:' + $0;
+var destNewType = "/" + lang + '/XUL/' + $0;
+var url = "";
 
 if (wiki.pageExists(destNewType)) {
-  %><code><%-(web.link(wiki.uri(destNewType), $0))%></code><%
+    url = destNewType;
 } else if (wiki.pageExists(destOldType)) {
-  %><code><%-(web.link(wiki.uri(destOldType), $0))%></code><%
+    url = destOldType;
 } else {
-  var targeturi = "/docs/new?slug=" + destNewType;
-  %><code><a rel="internal" href="<%=targeturi%>" class="new"><%=$0%></a></code><%
+    url = destNewType;
 }
 %>
+<code><a href="<%=url%>" title="<%=$0%>"><%=$0%></a></code>
