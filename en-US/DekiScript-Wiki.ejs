@@ -36,6 +36,50 @@
             }
         });
     },
+    
+    // Adjusts the visibility and heading levels of the specified HTML.
+    //
+    // The show parameter indicates whether or not the top level heading/title
+    // should be displayed. The heading parameter sets the heading level of the
+    // top level of the text to the specified value and adjusts all subsequent
+    // headings accordingly. This adjustment happens regardless of the value of
+    // show.
+    //
+    // heading is not supported at this time
+    _adjustHeadings: function(html, show, heading) {
+        if (show) {
+            return html;
+        }
+        
+        // Strip the top heading from the text
+        
+        var c = html.substr(0, 4);  // get the <hN> element if present
+        html = "<p>top: " + c + "</p>" + html;
+        var re = /<h(\d)>/i;
+        var found = re.exec(c);
+        
+                
+        if (found) {
+            var level = found[1];   // the heading level of the first heading
+            html = html.slice(4);   // remove the heading
+            
+            // Now find and remove through the end of the end tag
+            
+            var endTag = "</h" + level + ">";
+            
+            var index = html.indexOf(endTag);
+            if (index > 0) {
+                html = slice(index + 4);
+            } else {
+                endTag = "</H" + level + ">";
+                index = html.indexOf(endTag);
+                if (index > 0) {
+                    html = slice(index + 4);
+                }
+            }
+        }
+        return html;
+    },
         
     // Retrieve the content of a document for inclusion, optionally filtering 
     // for a single section.
@@ -45,7 +89,7 @@
     // revision, show, and heading
     //
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Page)
-    page: function (path, section) {
+    page: function (path, section, revision, show, heading) {
         var key = 'kuma:include:' + md5(path.toLowerCase());
         return cacheFn(key, 3600, function (next) {
             var params = ['raw=1', 'macros=1', 'include=1'];
@@ -63,6 +107,10 @@
                     if (resp && 200 == resp.statusCode) {
                         result = body;
                     }
+                    if (show == undefined) {
+                        show = 0;
+                    }
+                    result = wiki._adjustHeadings(result, show, heading);
                     next(result);
                 });
             } catch (e) {
