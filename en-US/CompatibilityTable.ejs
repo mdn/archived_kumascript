@@ -13,7 +13,12 @@ $(function() {
             }).eq(0).click();
         });
 */
-%>
+/* Orig way:
 <div class="htab"><a name="AutoCompatibilityTable" />
 <ul> <li class="selected">Desktop</li> <li>Mobile</li>
 </ul>
+*/
+/* Testing alternative way */
+%>
+<div class="htab"><a name="AutoCompatibilityTable" />
+<input type="checkbox" name="Type" value="Desktop"/><input type="checkbox" name="Type" value="Mobile"/>
