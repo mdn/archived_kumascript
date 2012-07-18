@@ -44,6 +44,12 @@
             if (in_title) {
                 out += ' title="' + kuma.htmlEscape(in_title) + '"';
             }
+            
+            // Get the locale page
+            var pageLocale = wiki.getPage ('/' + locale + path);
+            if (!pageLocale.title) {
+                out += ' class="new"';
+            }
 
             // Get text of link (title of page), if no override
             var text = '';
@@ -54,7 +60,6 @@
                 // Use path as fallback
                 text = '/' + locale + path;
                 // If the locale version exists, get its title
-                var pageLocale = wiki.getPage ('/' + locale + path);
                 if (pageLocale.title) {
                     text = pageLocale.title;
                 }
