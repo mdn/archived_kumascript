@@ -1,26 +1,3 @@
-<%
-/* See: https://bugzilla.mozilla.org/show_bug.cgi?id=765629
-$(function() {
-            $('.htab').append($('#compat-desktop'));
-            $('.htab').append($('#compat-mobile'));
-            var $items = $('.htab>ul>li');
-            $items.click(function() {
-                $items.removeClass('selected');
-                $(this).addClass('selected');
-
-                var index = $items.index($(this));
-                $('.htab>div').hide().eq(index).show();
-            }).eq(0).click();
-        });
-*/
-/* Orig way:
-<div class="htab"><a name="AutoCompatibilityTable" />
+<div class="htab"><a name="AutoCompatibilityTable">
 <ul> <li class="selected">Desktop</li> <li>Mobile</li>
 </ul>
-*/
-/* Teoli: Testing alternative way / I need a PR to be accepted first
-<div class="htab"><a name="AutoCompatibilityTable" />
-<input type="radio" name="compat" id="desktop" checked>
-    <input type="radio" name="compat" id="mobile">
-	<label for="desktop">Desktop</label> <label for="mobile">Mobile</label>*/
-    %>
