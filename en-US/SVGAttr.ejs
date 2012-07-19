@@ -1,12 +1,18 @@
 <%
 /* one parameter: attribute name */
-
-var localStr = {
+var URL  = "/";
+var lang = env.locale;
+var localized = 'en-US';
+var slug = {
         'en-US': "Attribute",
         fr     : "Attributs",
         pl     : "Atrybut"
-    },
-    lang = env.locale in localStr ? env.locale :'en-US',
-    URL = "/" + lang + "/docs/SVG/" + localStr[lang] + "/" + $0;
+    };
+    
+if ( lang in slug ) {
+    localized = lang;
+}
+
+URL += lang + "/docs/SVG/" + slug[localized] + "/" + $0;
 %>
-<code><a href="<%- URL %>" title="<%= URL %>"<%- wiki.pageExists(URL) ? '' : ' class="new"' %>><%= $0 %></a></code>
+<code><a href="<%- URL %>" <%- wiki.pageExists(URL) ? '' : ' class="new"' %>><%= $0 %></a></code>
