@@ -1,4 +1,9 @@
 <tr>
+  <td><code>target</code></td>
+  <td>EventTarget (DOM element)</td>
+  <td>Focused element processing the key event, root element if no suitable input element focused.</td>
+</tr>
+<tr>
   <td><code>char</code></td>
   <td>long (int)</td>
   <td>The character value of the key pressed. Read Only</td>
@@ -14,12 +19,12 @@
   <td>The location of the key on the device. Read Only</td>
 </tr>
 <tr>
-  <td><code>repeat</code></td>
+  <td><code>repeat</code> (not implemented)</td>
   <td>boolean</td>
   <td><%= ( $0 || "<code>true</code> if a key has been depressed long enough to trigger key repetition, otherwise <code>false</code>" ) %>. Read Only.</td>
 </tr>
 <tr>
-  <td><code>locale</code></td>
+  <td><code>locale</code> (not implemented)</td>
   <td>string</td>
   <td>The language code for the key event, if available; otherwise, the empty string. Read Only.</td>
 </tr>
