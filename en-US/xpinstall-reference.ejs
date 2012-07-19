@@ -1,33 +1,19 @@
+<%
+var str = 'Parts of this page show the use of the ' + web.link(wiki.uri(env.locale + '/docs/XPInstall_API_Reference'), 'XPInstall API') + '. The majority of this API is now deprecated and as of Gecko 1.9 no longer available. ' + web.link(wiki.uri(env.locale + '/docs/Extensions'), 'Extension') + ', ' + web.link(wiki.uri(env.locale + '/docs/Themes'), 'Theme') + ', and ' + web.link(wiki.uri(env.locale + '/docs/Plugins'), 'plug-in') + ' developers must switch away from <code>install.js</code> based packages to the new ' + web.link(wiki.uri(env.locale + '/docs/Bundles'), 'packaging scheme') + ' with an <code>' + web.link(wiki.uri(env.locale + '/docs/Install_Manifests'), 'install.rdf') + '</code> manifest. In particular plugin developers should see ' + web.link(wiki.uri(env.locale + '/docs/Shipping_a_plugin_as_a_Toolkit_bundle'), 'how to package a plugin as an extension') + '.';
 
-<p><span lang="en" class="lang lang-en">
-<div class="warning">
-<p>Parts of this page show the use of the <a title="en/XPInstall_API_Reference" href="/en/XPInstall_API_Reference">XPInstall API</a>. The majority of this API is now deprecated and as of Gecko 1.9 no longer available. <a title="en/Extensions" href="/en/Extensions">Extension</a>, <a title="en/Themes" href="/en/Themes">theme</a>, and <a title="en/Plugins" href="/en/Plugins">plug-in</a> developers must switch away from <code>install.js</code> based packages to the new <a title="en/Bundles" href="/en/Bundles">packaging scheme</a> with an <code><a title="en/Install_Manifests" href="/en/Install_Manifests">install.rdf</a></code> manifest. In particular plugin developers should see <a title="en/Shipping_a_plugin_as_a_Toolkit_bundle" href="/en/Shipping_a_plugin_as_a_Toolkit_bundle">how to package a plugin as an extension</a>.</p>
-</div>
-
-</span><span lang="*" class="lang lang-*">
-<div class="warning">
-<p>Parts of this page show the use of the <a title="en/XPInstall_API_Reference" href="/en/XPInstall_API_Reference">XPInstall API</a>. The majority of this API is now deprecated and as of Gecko 1.9 no longer available. <a title="en/Extensions" href="/en/Extensions">Extension</a>, <a title="en/Themes" href="/en/Themes">theme</a>, and <a title="en/Plugins" href="/en/Plugins">plug-in</a> developers must switch away from <code>install.js</code> based packages to the new <a title="en/Bundles" href="/en/Bundles">packaging scheme</a> with an <code><a title="en/Install_Manifests" href="/en/Install_Manifests">install.rdf</a></code> manifest. In particular plugin developers should see <a title="en/Shipping_a_plugin_as_a_Toolkit_bundle" href="/en/Shipping_a_plugin_as_a_Toolkit_bundle">how to package a plugin as an extension</a>.</p>
-</div>
-
-</span><span lang="fr" class="lang lang-fr">
-<div class="note">
-<p>Cette page fait parti de la <a title="fr/Référence_de_l'API_XPInstall" href="/fr/Référence_de_l'API_XPInstall">Référence de l'API XPInstall</a>. Notez que si vous être un développeur d'<a title="fr/Extensions" href="/fr/Extensions">extension</a>, de <a title="fr/Thèmes" href="/fr/Thèmes">thème</a> ou de <a title="fr/Plugins" href="/fr/Plugins">plugin</a>, vous n'avez plus besoin d'une grande partie de cette API. Plus particulièrement, le script <code>install.js</code> utilisé pour l'installation et l'enregistrement du contenu des <code>XPI</code> est déprécié en faveur du nouveau manifeste déclaratif <code><a title="fr/Manifestes_d'installation" href="/fr/Manifestes_d'installation">install.rdf</a></code> et du nouveau <a title="fr/Bundles" href="/fr/Bundles">schéma de paquetage</a>.</p>
-</div>
-
-</span><span lang="ja" class="lang lang-ja">
-<div class="note">
-<p>このページは <a title="ja/XPInstall_API_Reference" href="/ja/XPInstall_API_Reference">XPInstall API Reference</a> の一部です。もしあなたが <a title="ja/Extensions" href="/ja/Extensions">拡張機能</a>や<a title="ja/Themes" href="/ja/Themes">テーマ</a>、<a title="ja/Plugins" href="/ja/Plugins">プラグイン</a>の開発者であるならば、この API のほとんどが必要ないことに注意してください。特に、XPI のコンテンツをインストールし、登録するために使用される <code>install.js</code> スクリプトは、新たに宣言される <code><a title="ja/Install_Manifests" href="/ja/Install_Manifests">install.rdf</a></code> マニフェストや新しい <a title="ja/Bundles" href="/ja/Bundles">パッケージング体系</a> のために非推奨です。</p>
-</div>
-
-</span><span lang="zh-cn" class="lang lang-zh-cn">
-<div class="warning">
-<p>Parts of this page show the use of the <a title="cn/XPInstall_API_Reference" href="/cn/XPInstall_API_Reference">XPInstall API</a>. The majority of this API is now deprecated and as of Gecko 1.9 no longer available. <a title="cn/Extensions" href="/cn/Extensions">Extension</a>, <a title="cn/Themes" href="/cn/Themes">theme</a>, and <a title="cn/Plugins" href="/cn/Plugins">plug-in</a> developers must switch away from <code>install.js</code> based packages to the new <a title="cn/Bundles" href="/cn/Bundles">packaging scheme</a> with an <code><a title="cn/Install_Manifests" href="/cn/Install_Manifests">install.rdf</a></code> manifest. In particular plugin developers should see <a title="cn/Shipping_a_plugin_as_an_extension" href="/cn/Shipping_a_plugin_as_an_extension">how to package a plugin as an extension</a>.<br />
-这一部分说明了<a title="cn/XPInstall_API_Reference" href="/cn/XPInstall_API_Reference">XPInstall API</a>的使用. 这些API现在已经过时并且到Gecko 1.9时将不再可用. <a title="cn/Extensions" href="/cn/Extensions">Extension</a>, <a title="cn/Themes" href="/cn/Themes">theme</a>和<a title="cn/Plugins" href="/cn/Plugins">plug-in</a>的开发者必须要将基于<code>install.js</code>脚本文件的安装包转换成使用新的基于<code><a title="cn/Install_Manifests" href="/cn/Install_Manifests">install.rdf</a></code>清单文件的安装包. 详细的情况plugin开发者可以参考<a title="cn/Shipping_a_plugin_as_an_extension" href="/cn/Shipping_a_plugin_as_an_extension">how to package a plugin as an extension</a>.</p>
-</div>
-
-</span></p>
-<p><span lang="de" class="lang lang-de">
-<div class="warning">
-<p>Teile dieser Seite zeigen die Verwendung der <a title="de/XPInstall_API_Referenz" href="/de/XPInstall_API_Referenz">XPInstall API</a>. Der Großteil dieser API ist missbilligt (<em>deprecated</em>) und seit Gecko 1.9 nicht länger verfügbar. <a title="de/Erweiterungen" href="/de/Erweiterungen">Erweiterungen</a>, <a title="de/Themes" href="/de/Themes">Theme</a>, und <a title="de/Plugins" href="/de/Plugins">Plug-in</a> Entwickler müssen von <code>install.js</code> basierenden Paketen zum neuem <a title="de/Bundles" href="/de/Bundles">Paketschema</a> mit einem <code><a title="de/Installationsmanifest" href="/de/Installationsmanifest">install.rdf</a></code> Manifest wechseln. Genaueres für Plugin-Entwickler findet man unter der Anleitung <a href="/de/Plugins_als_Toolkit_Paket_einsetzen">wie man ein Plugin als eine Erweiterung packt</a>.</p>
-</div>
-</span></p>
+switch(env.locale) {
+  case 'de':
+    str = 'Teile dieser Seite zeigen die Verwendung der ' + web.link(wiki.uri(env.locale + '/docs/XPInstall_API_Referenz'), 'XPInstall API') + '. Der Großteil dieser API ist missbilligt (<em>deprecated</em>) und seit Gecko 1.9 nicht länger verfügbar. ' + web.link(wiki.uri(env.locale + '/docs/Erweiterungen'), 'Erweiterungen') + ', ' + web.link(wiki.uri(env.locale + '/docs/Themes'), 'Theme') + ', und ' + web.link(wiki.uri(env.locale + '/docs/Plugins'), 'plug-in') + '  Entwickler müssen von <code>install.js</code> basierenden Paketen zum neuem ' + web.link(wiki.uri(env.locale + '/docs/Bundles'), 'Paketschema') + ' mit einem <code>' + web.link(wiki.uri(env.locale + '/docs/Installationsmanifest'), 'install.rdf') + '</code> Manifest wechseln. Genaueres für Plugin-Entwickler findet man unter der Anleitung ' + web.link(wiki.uri(env.locale + '/docs/Plugins_als_Toolkit_Paket_einsetzen'), 'wie man ein Plugin als eine Erweiterung packt') + '.';
+    break;
+  case 'fr':
+    str = "Cette page fait parti de la " + web.link(wiki.uri(env.locale + "/docs/Référence_de_l'API_XPInstall"), "Référence de l'API XPInstall") + ". Notez que si vous être un développeur d'" + web.link(wiki.uri(env.locale + "/docs/Extensions"), "extension") + ", de" + web.link(wiki.uri(env.locale + "/docs/Thèmes"), "thème") + ", ou de " + web.link(wiki.uri(env.locale + "/docs/Plugins"), "plug-in") + ", vous n'avez plus besoin d'une grande partie de cette API. Plus particulièrement, le script <code>install.js</code> utilisé pour l'installation et l'enregistrement du contenu des <code>XPI</code> est déprécié en faveur du nouveau manifeste déclaratif <code>" + web.link(wiki.uri(env.locale + "/docs/Manifestes_d'installation"), "install.rdf") + "</code> et du nouveau " + web.link(wiki.uri(env.locale + "/docs/Bundles"), "schéma de paquetage") + ".";
+    break;
+  case 'ja':
+    str = 'このページは ' + web.link(wiki.uri(env.locale + '/docs/XPInstall_API_Reference'), 'XPInstall API Reference') + ' の一部です。もしあなたが ' + web.link(wiki.uri(env.locale + '/docs/Extensions'), '拡張機能') + 'や' + web.link(wiki.uri(env.locale + '/docs/Themes'), 'テーマ') + '、' + web.link(wiki.uri(env.locale + '/docs/Plugins'), 'プラグイン') + 'の開発者であるならば、この API のほとんどが必要ないことに注意してください。特に、XPI のコンテンツをインストールし、登録するために使用される <code>install.js</code> スクリプトは、新たに宣言される <code>' + web.link(wiki.uri(env.locale + '/docs/Install_Manifests'), 'install.rdf') + '</code> マニフェストや新しい ' + web.link(wiki.uri(env.locale + '/docs/Bundles'), 'パッケージング体系') + ' のために非推奨です。';
+    break;
+  case 'zh-cn':
+    str = '这一部分说明了' + web.link(wiki.uri(env.locale + '/docs/XPInstall_API_Reference'), 'XPInstall API') + '的使用. 这些API现在已经过时并且到Gecko 1.9时将不再可用. ' + web.link(wiki.uri(env.locale + '/docs/Extensions'), 'Extension') + ', ' + web.link(wiki.uri(env.locale + '/docs/Themes'), 'Theme') + '和' + web.link(wiki.uri(env.locale + '/docs/Plugins'), 'plug-in') + '的开发者必须要将基于<code>install.js</code>脚本文件的安装包转换成使用新的基于<code>' + web.link(wiki.uri(env.locale + '/docs/Install_Manifests'), 'install.rdf') + '</code>清单文件的安装包. 详细的情况plugin开发者可以参考' + web.link(wiki.uri(env.locale + '/docs/Shipping_a_plugin_as_an_extension'), 'how to package a plugin as an extension') + '.';
+    break;
+}
+%>
+<div class="warning"><p><%- str %></p></div>
