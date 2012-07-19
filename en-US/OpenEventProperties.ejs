@@ -4,6 +4,13 @@
     <td class="header" width="100">Type</td>
     <td class="header">Description</td>
   </tr>
+ <% if ( $0 ) { %>
+ <tr>
+    <td><code>target</code></td>
+    <td>EventTarget (DOM element)</td>
+    <td><%= $0 %> Read Only.</td>
+ </tr>
+ <% } %>
   <tr>
     <td><code>type</code></td>
     <td>string</td>
