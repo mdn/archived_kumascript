@@ -74,6 +74,38 @@
             out += '>' + text + '</a>';
         }
         return out;
+    },
+    /**
+     * Accepts a relative URL or an attachment object
+     * Returns the content of a given file.
+     */
+    getFileContent: function(fileObjOrUrl) {
+        var url = fileObjOrUrl.url || fileObjOrUrl;
+        if(!url) return '';
+        
+        var result = '',
+            p = kuma.url.parse(env.url, true),
+            base_url = p.protocol + '//' + p.host;
+            
+        url = base_url + url;
+        return cacheFn('kuma:get_attachment_content:' + md5(url.toLowerCase()), 3600, function(next) {
+            try {
+                request({
+                    method: 'GET',
+                    headers: { 'Cache-Control': env.cache_control },
+                    url: url
+                }, function(err, resp, body) {
+                    if(resp && 200 == resp.statusCode) {
+                        next('[' + body + ']');
+                    }
+                    else {
+                        next("callback bad :(");
+                    }
+                });
+            } catch(e) {
+                next("error: " + e);
+            }
+        });
     }
 
 } %>
