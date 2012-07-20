@@ -7,14 +7,9 @@
  * /!\ FIXE ME : There is a CSRF risk with an unfiltered $1 parameter
  */
   var found = false;
-  var allFiles = env.files || [];
   
-  
-  allFiles.forEach(function(aFile) {
-    for(var key in aFile){
-%><%= key %> : <%= aFile[key] %><br><%
-    }
-    if ($0 === aFile.name) {
+  env.files.forEach(function(aFile) {
+    if ($0 === aFile.filename) {
       found = true;
 %>
 <pre class="brush: <%= $1 %>"><%= mdn.getFileContent(aFile) %></pre>
