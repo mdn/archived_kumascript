@@ -1,21 +1,26 @@
 <% 
+/* 
+ * 2 parameters expected
+ * $0 : the file name to embed
+ * $1 : the syntaxe color to apply
+ *
+ * /!\ FIXE ME : There is a CSRF risk with an unfiltered $1 parameter
+ */
   var found = false;
-  var allFiles = page.files || [];
+  var allFiles = env.files || [];
   
   
   allFiles.forEach(function(aFile) {
- //   if (string.compare(args[0], aFile.name, true) == 0) {
- //     found = true;
- //     if (#args > 1) {
- //       syntax[args[1]](web.text(aFile.uri));
- //     } else {
- //       web.text(aFile.uri);
- //     }
- //     break;
- //   }
+%><%= aFile.name %><br><%
+    if ($0 === aFile.name) {
+      found = true;
+%>
+<pre class="brush: <%= $1 %>"><%= mdn.getFileContent(aFile) %></pre>
+<%
+    }
   });
   
   if (!found) {
-    web.html("<p>Unable to find file '" + $0 + "'.</p>");
+%><p>Unable to find file <em><%= $0 %></em></p><%
   }
 %>
