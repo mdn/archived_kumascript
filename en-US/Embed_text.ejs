@@ -3,16 +3,20 @@
  * 2 parameters expected
  * $0 : the file name to embed
  * $1 : the syntaxe color to apply
- *
- * /!\ FIXE ME : There is a CSRF risk with an unfiltered $1 parameter
  */
   var found = false;
+  var brush = [bash, shell, css, java, js, jscript, javascript, php, py, python, sql, xml, xhtml, xslt, html, xhtml]
+  var syntaxe = "txt";
+  
+  if (brush.indexOf($1) > -1) {
+      syntaxe = $1;
+  }
   
   env.files.forEach(function(aFile) {
     if ($0 === aFile.filename) {
       found = true;
 %>
-<pre class="brush: <%= $1 %>"><%= mdn.getFileContent(aFile) %></pre>
+<pre class="brush: <%= syntaxe %>"><%= mdn.getFileContent(aFile) %></pre>
 <%
     }
   });
