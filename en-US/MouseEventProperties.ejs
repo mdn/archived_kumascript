@@ -1,50 +1,45 @@
 <tr>
-  <td><code>target</code></td>
-  <td>EventTarget (DOM element)</td>
-  <td>The event target (the topmost target in the DOM tree).</td>
-</tr>
-<tr>
   <td><code>currentTarget</code></td>
   <td>EventTarget (DOM element)</td>
-  <td>The node that had the event listener attached.</td>
+  <td>The node that had the event listener attached. Read only.</td>
 </tr>
 <tr>
   <td><code>relatedTarget</code></td>
   <td>EventTarget (DOM element)</td>
-  <td>For <code>mouseover</code>, <code>mouseout</code>, <code>mouseenter</code> and <code>mouseleave</code> events: the target of the complementary event (the <code>mouseleave</code> target in the case of a <code>mouseenter</code> event). <code>null</code> otherwise. <strong>Read only.</strong></td>
+  <td>For <code>mouseover</code>, <code>mouseout</code>, <code>mouseenter</code> and <code>mouseleave</code> events: the target of the complementary event (the <code>mouseleave</code> target in the case of a <code>mouseenter</code> event). <code>null</code> otherwise. Read only.</td>
 </tr>
 <tr>
   <td><code>screenX</code></td>
   <td>long (int)</td>
-  <td>The X coordinate of the mouse pointer in global (screen) coordinates. <strong>Read only.</strong></td>
+  <td>The X coordinate of the mouse pointer in global (screen) coordinates. Read only.</td>
 </tr>
 <tr>
   <td><code>screenY</code></td>
   <td>long (int)</td>
-  <td>The Y coordinate of the mouse pointer in global (screen) coordinates. <strong>Read only.</strong></td>
+  <td>The Y coordinate of the mouse pointer in global (screen) coordinates. Read only.</td>
 </tr>
 <tr>
   <td><code>clientX</code></td>
   <td>long (int)</td>
-  <td>The X coordinate of the mouse pointer in local (DOM content) coordinates. <strong>Read only.</strong></td>
+  <td>The X coordinate of the mouse pointer in local (DOM content) coordinates. Read only.</td>
 </tr>
 <tr>
   <td><code>clientY</code></td>
   <td>long (int)</td>
-  <td>The Y coordinate of the mouse pointer in local (DOM content) coordinates. <strong>Read only.</strong></td>
+  <td>The Y coordinate of the mouse pointer in local (DOM content) coordinates. Read only.</td>
 </tr>
 <tr>
   <td><code>button</code></td>
   <td>unsigned short (int)</td>
-  <td>The button number that was pressed when the mouse event was fired: Left button=0, middle button=1 (if present), right button=2. For mice configured for left handed use in which the button actions are reversed the values are instead read from right to left. <strong>Read only.</strong></td>
+  <td>The button number that was pressed when the mouse event was fired: Left button=0, middle button=1 (if present), right button=2. For mice configured for left handed use in which the button actions are reversed the values are instead read from right to left. Read only.</td>
 </tr>
 <tr>
   <td><code>buttons</code> <%-dom_level(3)%> <%-gecko_minversion_inline("15.0")%></td>
   <td>unsigned short (int)</td>
-  <td>The buttons being pressed when the mouse event was fired: Left button=1, Right button=2, Middle (wheel) button=4, 4th button (typically, "Browser Back" button)=8, 5th button (typically, "Browser Forward" button)=16. If two or more buttons are pressed, returns the logical sum of the values. E.g., if Left button and Right button are pressed, returns 3 (=1 | 2). <a title="en/DOM/MouseEvent" href="/en-US/docs/DOM/MouseEvent">More info</a>. <strong>Read only.</strong></td>
+  <td>The buttons being pressed when the mouse event was fired: Left button=1, Right button=2, Middle (wheel) button=4, 4th button (typically, "Browser Back" button)=8, 5th button (typically, "Browser Forward" button)=16. If two or more buttons are pressed, returns the logical sum of the values. E.g., if Left button and Right button are pressed, returns 3 (=1 | 2). <a title="en/DOM/MouseEvent" href="/en-US/docs/DOM/MouseEvent">More info</a>. Read only.</td>
 </tr>
 <tr>
   <td><code>mozPressure</code> <%-gecko_minversion_inline("2.0")%> <%-template("non-standard_inline")%></td>
   <td>float</td>
-  <td>The amount of pressure applied to a touch or tabdevice when generating the event; this value ranges between 0.0 (minimum pressure) and 1.0 (maximum pressure). <strong>Read only.</strong></td> 
+  <td>The amount of pressure applied to a touch or tabdevice when generating the event; this value ranges between 0.0 (minimum pressure) and 1.0 (maximum pressure). Read only.</td> 
 </tr>
