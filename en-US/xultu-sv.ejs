@@ -1,46 +1,14 @@
-
-<pre class="script">
-/* get the page language */
-
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
-
-var source = "Source";
-var view = " View";
-
-switch(lang) {
-  case 'de':
-    source = "Datei";
-    view = "Ansehen";
-    break;
-  case 'es':
-    source = "Código";
-    view = " Ver en funcionamiento";
-    break;
-  case 'fr':
-    source = "Source";
-    view = " Voir";
-    break;
-  case 'ja':
-    source = "ソース";
-    view = " 表示'";
-    break;
-  case 'pl':
-    source = "Źródła";
-    view = "Nowość w ";
-    break;
-  case 'ru':
-    source = "Исходный код";
-    view = " View";
-    break;
-}
-web.link('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.txt', source + ' ');
-web.link('http://developer.mozilla.org/samples/xultu/examples/' + $0, view);
+<%
+var localeString = mdn.localString({
+  "en-US": ["Source","View"],
+  "de": ["Datei","Ansehen"],
+  "es": ["Código","Ver en funcionamiento"],
+  "fr": ["Source","Voir"],
+  "ja": ["ソース","表示"],
+  "pl": ["Źródła","Nowość w"],
+  "ru": ["Исходный код","View"]
+});
+var p = kuma.url.parse(env.url, true);
+var base_link = p.protocol + '//' + p.host + '/samples/xultu/examples/';
 %>
+<%- web.link(base_link + $0 + '.txt', localeString[0]) %> <%- web.link(base_link + $0, localeString[1]) %>
