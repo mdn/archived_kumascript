@@ -1,17 +1,10 @@
 <%
 /* one parameter: SVG element name to create a xref to */
-var URL  = "/";
-var lang = env.locale;
-var localized = 'en-US';
 var slug = {
         'en-US': "Element"
     };
 
-if ( lang in slug ) {
-    localized = lang;
-}
-
-URL += lang + "/docs/SVG/" + slug[localized] + "/" + $0;
+var URL = "/" + env.locale + "/docs/SVG/" + mdn.localString(slug) + "/" + $0;
 
 %>
 <code><a href="<%- URL %>" <%- wiki.pageExists(URL) ? '' : ' class="new"' %>>&lt;<%= $0 %>&gt;</a></code>
