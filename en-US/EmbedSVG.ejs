@@ -1,10 +1,9 @@
 <%
 var found,
     width  = $1 > 0 ? $1 : 250,
-    height = $2 > 0 ? $2 : 250,
-    allFiles = env.files || [];
+    height = $2 > 0 ? $2 : 250;
 
-allFiles.forEach(function (aFile) {
+env.files.forEach(function (aFile) {
     if(!found && $0 === aFile.filename) {
         found = true;
 %>
