@@ -11,7 +11,9 @@
   
   
   allFiles.forEach(function(aFile) {
-%><%= aFile.name %><br><%
+    for(var key in aFile){
+%><%= key %> : <%= aFile[key] %><br><%
+    }
     if ($0 === aFile.name) {
       found = true;
 %>
