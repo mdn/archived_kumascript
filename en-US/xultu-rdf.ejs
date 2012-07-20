@@ -1,5 +1,4 @@
-<span lang='en' class='lang lang-en'>{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.txt Source')}} {{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.rdf RDF')}}
-</span><span lang='*' class='lang lang-*'>{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.txt Source')}} {{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.rdf RDF')}}
-</span><span lang='ja' class='lang lang-ja'>{{mediawiki.external('http://developer-test.mozilla.org/samples/xultu/examples/' + $0 + '.txt Source')}} {{mediawiki.external('http://developer-test.mozilla.org/samples/xultu/examples/' + $0 + '.rdf RDF')}}
-</span><span lang='pl' class='lang lang-pl'>{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.txt Źródło')}} {{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.rdf RDF')}}
-</span>
+<%
+var base_path = '/samples/xultu/examples/';
+%>
+<%- template("xultu-generic", [base_path + $0 + '.txt', '', '', base_path + $0 + '.rdf']) %>
