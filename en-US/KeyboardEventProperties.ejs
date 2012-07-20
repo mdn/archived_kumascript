@@ -69,7 +69,11 @@
 <tr>
   <td><code>repeat</code> {{notimplemented_inline()}}</td>
   <td>boolean</td>
-  <td><%= ( $0 || %><code>true</code> if a key has been depressed long enough to trigger key repetition, otherwise <code>false</code><% ) %>. Read Only.</td>
+  <td><% if ( $0 ) { %>
+    $0
+  <% } else { %>
+    <code>true</code> if a key has been depressed long enough to trigger key repetition, otherwise <code>false</code>.
+  <% } %> Read only.</td>
 </tr>
 <tr>
   <td><code>locale</code> {{notimplemented_inline()}}</td>
