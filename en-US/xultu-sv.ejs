@@ -1,14 +1,4 @@
 <%
-var localeString = mdn.localString({
-  "en-US": ["Source","View"],
-  "de": ["Datei","Ansehen"],
-  "es": ["Código","Ver en funcionamiento"],
-  "fr": ["Source","Voir"],
-  "ja": ["ソース","表示"],
-  "pl": ["Źródła","Nowość w"],
-  "ru": ["Исходный код","View"]
-});
-var p = kuma.url.parse(env.url, true);
-var base_link = p.protocol + '//' + p.host + '/samples/xultu/examples/';
+var base_path = '/samples/xultu/examples';
 %>
-<%- web.link(base_link + $0 + '.txt', localeString[0]) %> <%- web.link(base_link + $0, localeString[1]) %>
+<%- template("xultu-generic", [base_path + $0 + '.txt', base_path + $0]) %>
