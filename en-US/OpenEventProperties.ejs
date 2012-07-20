@@ -4,11 +4,11 @@
     <td class="header" width="100">Type</td>
     <td class="header">Description</td>
   </tr>
- <% if ( $0 ) { %>
+ <% if ( $0 != "false" ) { %>
  <tr>
     <td><code>target</code></td>
     <td>EventTarget (DOM element)</td>
-    <td><%= $0 %> Read Only.</td>
+    <td><%= ( $0 || "The event target (the topmost target in the DOM tree)." ) %> Read Only.</td>
  </tr>
  <% } %>
   <tr>
