@@ -2,13 +2,13 @@
 var found,
     width  = $1 > 0 ? $1 : 250,
     height = $2 > 0 ? $2 : 250,
-    allFiles = page.files || [];
+    allFiles = env.files || [];
 
 allFiles.forEach(function (aFile) {
-    if(!found && $0 === aFile.name) {
+    if(!found && $0 === aFile.filename) {
         found = true;
 %>
-<object type="image/svg+xml" data="<%- aFile.uri %>" width="<%- width %>" height="<%- height %>"></object>
+<object type="image/svg+xml" data="<%- aFile.url %>" width="<%- width %>" height="<%- height %>"></object>
 <%
     }
 });
