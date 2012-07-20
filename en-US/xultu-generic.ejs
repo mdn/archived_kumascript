@@ -1,0 +1,33 @@
+<%
+/* Generic xultu template
+ * All parameters are optional
+ * source file path
+ * view file path
+ * stylesheet file path
+*/
+
+var localeString = mdn.localString({
+  "en-US": ["Source","View","Stylesheet"],
+  "de": ["Datei","Ansehen","Stylesheet"],
+  "es": ["Código","Ver en funcionamiento","Stylesheet"],
+  "fr": ["Source","Voir","Stylesheet"],
+  "ja": ["ソース","表示","Stylesheet"],
+  "pl": ["Źródła","Podgląd","Arkusz stylów"],
+  "ru": ["Исходный код","View","Stylesheet"]
+});
+
+var p = kuma.url.parse(env.url, true);
+var base_url = p.protocol + '//' + p.host;
+
+var out = [];
+if ($0) {
+    out.push(web.link(base_url + $0, localeString[0]));
+}
+if ($1) {
+    out.push(web.link(base_url + $1, localeString[1]));
+}
+if ($2) {
+    out.push(web.link(base_url + $2, localeString[2]));
+}
+%>
+<%- out.join(' ') %>
