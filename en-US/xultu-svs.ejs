@@ -1,9 +1,14 @@
-<span lang='en' class='lang lang-en'>{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.xul.txt Source')}} {{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.xul View')}}
-{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.css Stylesheet')}}
-</span><span lang='*' class='lang lang-*'>{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.xul.txt Source')}} {{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.xul View')}}
-{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.css Stylesheet')}}
-</span><span lang='ja' class='lang lang-ja'>{{mediawiki.external('http://developer-test.mozilla.org/samples/xultu/examples/' + $0 + '.xul.txt Source')}} {{mediawiki.external('http://developer-test.mozilla.org/samples/xultu/examples/' + $0 + '.xul View')}}
-{{mediawiki.external('http://developer-test.mozilla.org/samples/xultu/examples/' + $0 + '.css Stylesheet')}}
-</span><span lang='pl' class='lang lang-pl'>{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.xul.txt Źródło')}} {{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.xul Podgląd')}}
-{{mediawiki.external('http://developer.mozilla.org/samples/xultu/examples/' + $0 + '.css Arkusz stylów')}}
-</span>
+<%
+var localeString = mdn.localString({
+  "en-US": ["Source","View","Stylesheet"],
+  "de": ["Datei","Ansehen","Stylesheet"],
+  "es": ["Código","Ver en funcionamiento","Stylesheet"],
+  "fr": ["Source","Voir","Stylesheet"],
+  "ja": ["ソース","表示","Stylesheet"],
+  "pl": ["Źródła","Podgląd","Arkusz stylów"],
+  "ru": ["Исходный код","View","Stylesheet"]
+});
+var p = kuma.url.parse(env.url, true);
+var base_link = p.protocol + '//' + p.host + '/samples/xultu/examples';
+%>
+<%- web.link(base_link + $0 + '.xul.txt', localeString[0]) %> <%- web.link(base_link + $0 + '.xul', localeString[1]) %> <%- web.link(base_link + $0 + '.css', localeString[2]) %>
