@@ -1,0 +1,184 @@
+<%
+/* parameters:                                                                          */
+/* $0 = name of specification                                                           */
+/* $1 = anchor related to the URL (if missing, no anchor is added)                      */
+/* $2 = property/entity name      (if no anchor a default title is used and $2 ignored) */
+
+var spec   = $0;
+var anchor = $1;
+var name;
+var url;
+var title;
+var result;
+
+switch(spec) {
+  case 'CSS1':
+    name = "CSS Level&nbsp;1";
+    url  = "http://www.w3.org/TR/CSS1/";
+    break;
+  case 'CSS2.1':
+    name = "CSS Level&nbsp;2 (Revision&nbsp;1)";
+    url  = "http://www.w3.org/TR/CSS2/";
+    break;
+  case 'CSS3 Animations':
+    name = "CSS&nbsp;Animations";
+    url  = "http://dev.w3.org/csswg/css3-animations/";
+    break;
+  case 'CSS3 Backgrounds': // Backgrounds & Borders
+    name = 'CSS&nbsp;Backgrounds and Borders&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-background/";
+    break;
+  case 'CSS3 Basic UI':
+  case 'CSS3 UI':
+    name = 'CSS&nbsp;Basic User Interface&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-ui/";
+    break;
+  case 'CSS3 Box':
+    name = 'CSS&nbsp;Basic Box&nbsp;Model';
+    url  = "http://dev.w3.org/csswg/css3-box/";
+    break;
+  case 'CSS3 Cascade':
+    name = 'CSS3&nbsp;module: Cascading and inheritance';
+    url  = "http://dev.w3.org/csswg/css3-cascade/";
+    break;
+  case 'CSS3 Colors':
+    name = 'CSS&nbsp;Color&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-color/";
+    break;
+  case 'CSS3 Conditional':
+    name = 'CSS&nbsp;Conditional Rules&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-conditional/";
+    break;
+  case 'CSS3 Content':
+    name = 'CSS&nbsp;Generated Content&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-content/";
+    break;
+  case 'CSS3 Device':
+    name = 'CSS&nbsp;Device Adaptation';
+    url  = "http://dev.w3.org/csswg/css-device-adapt/";
+    break;
+  case 'CSS3 Exclusions and Shapes':
+    name = 'CSS&nbsp;Exclusions and Shapes&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-exclusions/";
+    break;
+  case 'CSS3 Flexbox':
+    name = 'CSS&nbsp;Flexible Box Layout&nbsp;Module';
+    url  = "http://dev.w3.org/csswg/css3-flexbox/";
+    break;
+  case 'CSS3 Fonts':
+    name = 'CSS&nbsp;Fonts&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-fonts/";
+    break;
+  case 'CSS3 Fragmentation':
+    name = 'CSS&nbsp;Fragmentation&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-break/";
+    break;
+  case 'CSS3 GCPM':
+    name = 'CSS&nbsp;Generated Content for&nbsp;Paged Media&nbsp;Module';
+    url  = "http://dev.w3.org/csswg/css3-gcpm/";
+    break;
+  case 'CSS3 Grid': /* This is 'grid layout' and no more 'grid positioning' which has been abandoned */
+    name = 'CSS&nbsp;Grid Layout';
+    url  = "http://dev.w3.org/csswg/css3-grid-layout/";
+    break;
+  case 'CSS3 Images':
+    name = 'CSS&nbsp;Image Values and&nbsp;Replaced Content&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-images/";
+    break;
+  case 'CSS3 Lists':
+    name = 'CSS&nbsp;Lists and Counters&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-lists/";
+    break;
+  case 'CSS3 Media Queries':
+    name = 'Media Queries';
+    url  = "http://dev.w3.org/csswg/css3-mediaqueries/";
+    break;
+  case 'CSS3 Multicol':
+    name = 'CSS&nbsp;Multi-column Layout&nbsp;Module';
+    url  = "http://dev.w3.org/csswg/css3-multicol/";
+    break;
+  case 'CSS3 Namespaces':
+    name = 'CSS&nbsp;Namespaces&nbsp;Module';
+    url  = "http://dev.w3.org/csswg/css3-namespace/";
+    break;
+  case 'CSS3 Paged Media':
+    name = 'CSS&nbsp;Paged Media&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-page/";
+    break;
+  case 'CSS3 Regions':
+    name = 'CSS&nbsp;Regions&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-regions/";
+    break;
+  case 'CSS3 Selectors':
+    name = 'Selectors Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/selectors3/";
+    break;
+  case 'CSS3 Speech':
+    name = 'CSS&nbsp;Speech&nbsp;Module';
+    url  = "http://dev.w3.org/csswg/css3-speech/";
+    break;
+  case 'CSS3 Style':
+    name = 'CSS&nbsp;Style Attributes';
+    url  = "http://dev.w3.org/csswg/css-style-attr/";
+    break;
+  case 'CSS3 Template':
+    name = '??????';
+    url  = "about:unknown";
+    break;
+  case 'CSS3 Text':
+    name = 'CSS&nbsp;Text Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-text/";
+    break;
+  case 'CSS3 Transforms':
+  case 'CSS3 2D Transforms':
+  case 'CSS3 3D Transforms':
+    name = 'CSS&nbsp;Transforms';
+    url  = "http://dev.w3.org/csswg/css3-transforms/";
+    break;
+  case 'CSS3 Transitions':
+    name = 'CSS&nbsp;Transitions';
+    url  = "http://dev.w3.org/csswg/css3-transitions/";
+    break;
+  case 'CSS3 Values':
+    name = 'CSS&nbsp;Values and Units&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-values/";
+    break;
+  case 'CSS3 Variables':
+    name = 'CSS&nbsp;Variables&nbsp;Module Level&nbsp;1';
+    url  = "http://dev.w3.org/csswg/css-variables/";
+    break;
+  case 'CSS3 Writing Modes':
+    name = 'CSS&nbsp;Writing Modes&nbsp;Module Level&nbsp;3';
+    url  = "http://dev.w3.org/csswg/css3-writing-modes/";
+    break;
+  default:
+    name = 'Unknown';
+    url  = "about:unknown";
+}
+
+if ($2) {
+    title     = "The definition of '" + $2 + "' in that specification."; // Default value
+    switch(env.locale) {
+    case 'en-US':
+        title = "The definition of '" + $2 + "' in that specification.";
+        break;
+    case 'fr':
+        title = "La définition de '" + $2 + "' dans cette spécification.";
+        break;
+    }
+}
+else {
+    title = "The specification '" + name + "'";
+    switch(env.locale) {
+        case 'en-US':
+            title ="The '" + name + "' specification";
+            break;
+        case 'fr':
+            title = "La spécificaction '" + name + "'";
+            break;
+    }
+}
+
+result = '<a href="' + url + anchor + '" lang="en" class="external" title="' + title + '">' + name + "</a>";
+%>
+<%- result %>
