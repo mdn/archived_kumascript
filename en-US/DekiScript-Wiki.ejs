@@ -5,7 +5,7 @@
     */
     kumaPath: function(in_path) {
         // Get/fix/update/add language
-        var pathLang = (in_path.match(/^\/?(\w{2}(?:[-|_]\w{2})?)?\//)[1] || env.locale).replace(/^en$/i,'en-US').replace(/^(?:zh_)?cn$/i,'zh-CN').replace(/zh_tw/i,'zh-TW').replace(/^pt$/i,'pt-PT');
+        var pathLang = (in_path.match(/^\/?(\w{2}(?:[-|_]\w{2})?)?(?=\/)/)[1] || env.locale).replace(/^en$/i,'en-US').replace(/^(?:zh_)?cn$/i,'zh-CN').replace(/zh_tw/i,'zh-TW').replace(/^pt$/i,'pt-PT');
         // Add fixed language and make sure there is docs and convert spaces to underscore
         var path = '/' + pathLang + in_path.replace(/^(\/?\w{2}(?:[-|_]\w{2})?)?\/(?:docs\/)?/i,'/docs/').replace(/ /g,'_').replace(/%20/g,'_');
         return path;
