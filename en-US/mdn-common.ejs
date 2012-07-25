@@ -23,34 +23,32 @@
     linkInternal: function (in_path, in_text, in_title, in_locale) {
         var wiki = require("DekiScript:Wiki");
         var out = '(Missing path)';
-
+  
         // No use doing anything if there is no path
         if (in_path) {
             var p = kuma.url.parse(env.url, true);
             var base_url = p.protocol + '//' + p.host;
-
-            // Fix path - remove any locale, add /docs, replace space with underscore and do a htmlEscape
-            var path = '/docs/' + kuma.htmlEscape(in_path.replace(/^\/?(?:\w{2}(?:-\w{2})?)?\/(?:docs\/)?/i,'').replace(/ /g,'_').replace(/%20/g,'_'));
-
-            // Figure out locale
+  
+            var exists = false;
+            var text = '';
+ 
+            var path_clean = wiki.kumaPath(in_path);
+            var path_less_locale = path_clean.replace(/^\/?\w{2}(?:-\w{2})?/i,'');
+            var path_English = '/en-US' + path_less_locale;
+             
+            // Figure out locale to use (strip any / from in_locale)
             var locale = env.locale;
             if (in_locale) {
                 locale = kuma.htmlEscape(in_locale.replace(/\//g,''));
             }
-
-            out = '<a href="' + base_url + '/' + locale + path + '"';
-
-            // Link title
-            if (in_title) {
-                out += ' title="' + kuma.htmlEscape(in_title) + '"';
-            }
-            
+            var path_plus_locale = '/' + locale + path_less_locale;
+ 
             // Get the locale page
-            var pageLocale = wiki.getPage ('/' + locale + path);
-            if (!pageLocale.title) {
-                out += ' class="new"';
+            var pageLocale = wiki.getPage(path_plus_locale);
+            if (pageLocale.title) {
+                exists = true;
             }
-
+ 
             // Get text of link (title of page), if no override
             var text = '';
             if (in_text) {
@@ -58,18 +56,35 @@
             }
             else {
                 // Use path as fallback
-                text = '/' + locale + path;
+                text = path_plus_locale;
                 // If the locale version exists, get its title
                 if (pageLocale.title) {
                     text = pageLocale.title;
                 }
-                else if (locale.toLowerCase() != 'en-us') {
+                else {
+                    // Try the original path passed, maybe the locale switch did not work
+                    if (path_clean != path_plus_locale) {
+                        var pageOriginal = wiki.getPage (path_clean);
+                        if (pageOriginal.title) {
+                            text = pageOriginal.title;
+                        }
+                    }
                     // Try the English version
-                    var pageEnglish = wiki.getPage('/en-US' + path);
-                    if (pageEnglish.title)  {
-                        text = pageEnglish.title;
+                    else if (locale.toLowerCase() != 'en-us') {
+                        var pageEnglish = wiki.getPage(path_English);
+                        if (pageEnglish.title)  {
+                            text = pageEnglish.title;
+                        }
                     }
                 }
+            }
+            out = '<a href="' + base_url + path_plus_locale + '"';
+             // Link title
+            if (in_title) {
+                out += ' title="' + kuma.htmlEscape(in_title) + '"';
+            }
+            if (!exists) {
+                out += ' class="new"';
             }
             out += '>' + text + '</a>';
         }
