@@ -1,51 +1,36 @@
 <%
+/* The list of template's arguments is used to know which subpages title should not be marked as code */
+var notCodeElements = Array.prototype.slice.call(arguments);
 
-/* get the page language */
-var u = uri.parts(Page.uri);
-var lang = string.tolower(u.path[0]);
-if (string.contains(lang, "project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
+/* To include the subpage summary, we need to know which local slug/hash to use with wiki.page */
+var summary = mdn.localString({
+    "en-US": "Summary",
+    "fr": "Résumé"
+});
 
-var description = "Description";
-var summary = "Summary";
+var subPages = Page.subpages;
 
-switch(lang) {
-  case 'fr':
-    description = "Description";
-    summary = "Résumé";
-    break;
-}
-
+if (subPages && subPages.length > 0) {
+    subPages.sort(function (a, b) {
+        return a.value.title.localeCompare(b.value.title);
+    })
+%>
 <dl>
-var type1 = "";
-if ($1)
-  type1 = typeof $1;
-foreach (var i in list.orderBy(map.keyValues(page.subpages), "key")) {
-  <dt><a href=(i.value.uri) rel="internal" style="white-space: nowrap;">
-    if ($1)
-      switch (type1){
-        case "bool":
-          i.value.title;
-          break;
-        case "list":
-          var s = i.value.title;
-          if (!list.contains($1, s))
-            <code>s</code>;
-          else
-            s;
-          break;
-      }
-    else
-      <code>i.value.title</code>;
-  </a></dt>;
-  <dd>
-    web.html(wiki.text(i.value.path, "Summary"));
-  </dd>;
+<%
+    subPages.forEach(function (thePage) {
+%>
+    <dt><a href="<%- thePage.value.uri %>"><%
+        if(notCodeElements.indexOf(thePage.value.title) < 0) {
+            %><code><%= thePage.value.title %></code><%
+        } else {
+            %><%= thePage.value.title %><%
+        }
+    %></a></dt>
+    <dd><%- wiki.page(thePage.value.uri, summary) %></dd>
+<%
+    });
+%>
+</dl>
+<%
 }
-</dl>;
-</pre>
+%>
