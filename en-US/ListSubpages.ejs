@@ -1,14 +1,9 @@
-
-<pre class="script">
-var children = Page.subpages;
-if (# children) { 
-  <ul>
-  foreach(var p in children) {
-    <li><a href=(p.path)>p.title</a></li>
-  }
-  </ul>
-} else {
-  wiki.localize('System.API.page-generated-for-subpage');
+<%
+if (Page.subpages.length > 0) {
+    %><ul><%
+    Page.subpages.forEach(function (subPage) {
+        %><li><a href="<%- subPage.path %>"><%= subPage.title %></a></li><%
+    });
+    %></ul><%
 }
-
 %>
