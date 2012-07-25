@@ -31,10 +31,18 @@
     // Check if the given wiki page exists.
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.PageExists)
     pageExists: function (path) {
+        // Temporarily disabling this.
+        // See: https://bugzilla.mozilla.org/show_bug.cgi?id=775590#c4
+        return true;
+        
         var key = 'kuma:page_exists:' + md5(path.toLowerCase());
-        //return cacheFn(key, 3600, function (next) {
+        
+        // This is an experiment to exempt wiki.pageExists 
+        // from shift-refresh cache busting:
         var mdn = require('MDN:Common');
+        //return cacheFn(key, 3600, function (next) {
         return mdn.cacheFnIgnoreCacheControl(key, 3600, function (next) {
+            
             var opts = { method: 'HEAD', url: wiki.buildAbsoluteURL(path) };
             try {
                 request(opts, function (err, resp, body) {
