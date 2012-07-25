@@ -9,7 +9,7 @@ var s = mdn.localString({
 });
 %>
 <% if ('ja'==env.locale || 'ko'==env.locale) { %>
-<a href="/<%=env.locale%>/docs/<%=$0%>"><%=$1%></a>. <%=s[0]%>: <%-template('InterfaceStatus:' + $2 + ':DisplayName')%>.<br /> <%-template('Source', [$3])%><%=s[1]%>
+<a href="/<%=env.locale%>/docs/<%=$0%>"><%=$1%></a>. <%=s[0]%> <%-template('InterfaceStatus:' + $2 + ':DisplayName')%>.<br /> <%-template('Source', [$3])%><%=s[1]%>
 <% } else { %>
-<a href="/<%=env.locale%>/docs/<%=$0%>"><%=$1%></a>. <%=s[0]%>: <%-template('InterfaceStatus:' + $2 + ':DisplayName')%>.<br /> <%=s[1]%> <%-template('Source', [$3])%>
+<a href="/<%=env.locale%>/docs/<%=$0%>"><%=$1%></a>. <%=s[0]%> <%-template('InterfaceStatus:' + $2 + ':DisplayName')%>.<br /> <%=s[1]%> <%-template('Source', [$3])%>
 <% } %>
