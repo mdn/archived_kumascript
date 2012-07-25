@@ -129,6 +129,7 @@
      * Cache-Control we get from a shift-refresh.
      */
     cacheFnIgnoreCacheControl: function (key, tm_out, to_cache) {
+        kuma.debug("CACHEFNCC " + key + " " + tm_out + " " + to_cache);
         var result = null,
             err_result = null,
             f = new Future(),
