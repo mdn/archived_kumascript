@@ -32,7 +32,9 @@
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.PageExists)
     pageExists: function (path) {
         var key = 'kuma:page_exists:' + md5(path.toLowerCase());
-        return cacheFn(key, 3600, function (next) {
+        //return cacheFn(key, 3600, function (next) {
+        var mdn = require('MDN:Common');
+        return mdn.cacheFnIgnoreCacheControl(key, 3600, function (next) {
             var opts = { method: 'HEAD', url: wiki.buildAbsoluteURL(path) };
             try {
                 request(opts, function (err, resp, body) {
