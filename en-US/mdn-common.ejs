@@ -121,6 +121,40 @@
                 next("error: " + e);
             }
         });
+    },
+
+    /**
+     * #### cacheFnIgnoreCacheControl
+     * Cache a function, and use cached results no matter what 
+     * Cache-Control we get from a shift-refresh.
+     */
+    cacheFnIgnoreCacheControl: function (key, tm_out, to_cache) {
+        var result = null,
+            err_result = null,
+            f = new Future(),
+            mc = memcached;
+        mc.get(key, function (err, c_result) {
+            if (c_result) {
+                result = c_result;
+                f['return']();
+            } else {
+                try {
+                    to_cache(function (val) {
+                        mc.set(key, val, tm_out, function (err, c_result) {
+                            result = val;
+                            f['return']();
+                        });
+                    });
+                } catch (e) {
+                    err_result = e;
+                    result = '';
+                    f['return']();
+                }
+            }
+        });
+        f.wait();
+        if (err_result) { throw err_result; }
+        return result;
     }
 
 } %>
