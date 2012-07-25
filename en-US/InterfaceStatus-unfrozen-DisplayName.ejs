@@ -1,8 +1,13 @@
-<span lang='en' class='lang lang-en'><a href="en/Interfaces/About_Frozen_Interfaces">unfrozen</a>
-</span><span lang='*' class='lang lang-*'><a href="en/Interfaces/About_Frozen_Interfaces">unfrozen</a>
-</span><span lang='fr' class='lang lang-fr'><a href="fr/Interfaces/%c3%80_propos_des_interfaces_gel%c3%a9es">en développement</a>
-</span><span lang='ja' class='lang lang-ja'><a href="ja/Interfaces/About_Frozen_Interfaces">非凍結</a>
-</span><span lang='ko' class='lang lang-ko'><a href="ko/Interfaces/About_Frozen_Interfaces">unfrozen</a>
-</span><span lang='pl' class='lang lang-pl'><a href="pl/Interfejsy/O_zamro%c5%bconych_interfejsach">odmrożony</a>
-</span><span lang='ru' class='lang lang-ru'>{{mediawiki.interwiki('en', 'Interfaces:About_Frozen_Interfaces', 'unfrozen')}}
-</span>
+<% if ('fr' == env.locale) { %>
+<a href="/docs/fr/Interfaces/%c3%80_propos_des_interfaces_gel%c3%a9es">en développement</a>
+<% } else if ('ja' == env.locale) { %>
+<a href="/docs/ja/Interfaces/About_Frozen_Interfaces">非凍結</a>
+<% } else if ('ko' == env.locale) { %>
+<a href="/docs/ko/Interfaces/About_Frozen_Interfaces">unfrozen</a>
+<% } else if ('pl' == env.locale) { %>
+<a href="/docs/pl/Interfejsy/O_zamro%c5%bconych_interfejsach">odmrożony</a>
+<% } else if ('ru' == env.locale) { %>
+<a href="/docs/en-US/Interfaces/About_Frozen_Interfaces">unfrozen</a>
+<% } else { %>
+<a href="/docs/en-US/Interfaces/About_Frozen_Interfaces">unfrozen</a>
+<% } %>
