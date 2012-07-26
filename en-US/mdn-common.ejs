@@ -29,7 +29,6 @@
             var p = kuma.url.parse(env.url, true);
             var base_url = p.protocol + '//' + p.host;
   
-            var exists = false;
             var text = '';
  
             var path_clean = wiki.kumaPath(in_path);
@@ -43,12 +42,6 @@
             }
             var path_plus_locale = '/' + locale + path_less_locale;
  
-            // Get the locale page
-            var pageLocale = wiki.getPage(path_plus_locale);
-            if (pageLocale.title) {
-                exists = true;
-            }
- 
             // Get text of link (title of page), if no override
             var text = '';
             if (in_text) {
@@ -58,13 +51,14 @@
                 // Use path as fallback
                 text = path_plus_locale;
                 // If the locale version exists, get its title
+                var pageLocale = wiki.getPage(path_plus_locale);
                 if (pageLocale.title) {
                     text = pageLocale.title;
                 }
                 else {
                     // Try the original path passed, maybe the locale switch did not work
                     if (path_clean != path_plus_locale) {
-                        var pageOriginal = wiki.getPage (path_clean);
+                        var pageOriginal = wiki.getPage(path_clean);
                         if (pageOriginal.title) {
                             text = pageOriginal.title;
                         }
@@ -79,12 +73,9 @@
                 }
             }
             out = '<a href="' + base_url + path_plus_locale + '"';
-             // Link title
+            // Link title
             if (in_title) {
                 out += ' title="' + kuma.htmlEscape(in_title) + '"';
-            }
-            if (!exists) {
-                out += ' class="new"';
             }
             out += '>' + text + '</a>';
         }
