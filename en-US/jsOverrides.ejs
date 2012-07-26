@@ -1,5 +1,5 @@
 <div style="border: 1px solid rgb(204, 204, 204); margin: 10px 0px; padding: 0px 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%;">
-<pre class="script">
+<%
 /**
  * Replaces Template:JSInherits. Given an object and a list of properties or
  * methods implemented elsewhere, output a list of the properties or methods
@@ -15,7 +15,7 @@
  * @param a list of properties or methods overridden by this object
  */
 var prototypes = {
-  Array: {
+  "Array": {
     methods: [
       "pop",
       "push",
@@ -46,7 +46,7 @@ var prototypes = {
       "length"
     ]
   },
-  Boolean: {
+  "Boolean": {
     methods: [
       "toSource",
       "toString",
@@ -56,7 +56,7 @@ var prototypes = {
       "constructor"
     ]
   },
-  Date: {
+  "Date": {
     methods: [
       "getDate",
       "getDay",
@@ -109,7 +109,7 @@ var prototypes = {
       "constructor"
     ]
   },
-  Error: {
+  "Error": {
     methods: [
       "toSource",
       "toString"
@@ -125,7 +125,7 @@ var prototypes = {
       "stack"
     ]
   },
-  EvalError: {
+  "EvalError": {
     methods: [
       "toSource",
       "toString"
@@ -135,7 +135,7 @@ var prototypes = {
       "name"
     ]
   },
-  Function: {
+  "Function": {
     methods: [
       "apply",
       "call",
@@ -150,7 +150,7 @@ var prototypes = {
       "name"
     ]
   },
-  Number: {
+  "Number": {
     methods: [
       "toExponential",
       "toFixed",
@@ -164,7 +164,7 @@ var prototypes = {
       "constructor"
     ]
   },
-  Object: {
+  "Object": {
     methods: [
       "__defineGetter__",
       "__defineSetter__",
@@ -187,7 +187,7 @@ var prototypes = {
       "__proto__"
     ]
   },
-  RangeError: {
+  "RangeError": {
     methods: [
       "toSource",
       "toString"
@@ -197,7 +197,7 @@ var prototypes = {
       "name"
     ]
   },
-  ReferenceError: {
+  "ReferenceError": {
     methods: [
       "toSource",
       "toString"
@@ -207,7 +207,7 @@ var prototypes = {
       "name"
     ]
   },
-  RegExp: {
+  "RegExp": {
     methods: [
       "exec",
       "test",
@@ -223,7 +223,7 @@ var prototypes = {
       "source"
     ]
   },
-  String: {
+  "String": {
     methods: [
       "charAt",
       "charCodeAt",
@@ -268,7 +268,7 @@ var prototypes = {
       "length"
     ]
   },
-  SyntaxError: {
+  "SyntaxError": {
     methods: [
       "toSource",
       "toString"
@@ -278,7 +278,7 @@ var prototypes = {
       "name"
     ]
   },
-  TypeError: {
+  "TypeError": {
     methods: [
       "toSource",
       "toString"
@@ -288,7 +288,7 @@ var prototypes = {
       "name"
     ]
   },
-  URIError: {
+  "URIError": {
     methods: [
       "toSource",
       "toString"
@@ -300,37 +300,37 @@ var prototypes = {
   }
 };
 var prefix;
-if(string.toLower(page.language) == 'en' || page.language == '') {
-  prefix = '/en/JavaScript/Reference/Global_Objects/';
+if ('en-US' == env.locale) {
+  prefix = '/en-US/docs/JavaScript/Reference/Global_Objects/';
 }
-var captiontext = string.toUpperFirst(string.toLower($1)) + ' inherited from ';
+var captiontext = string.ToUpperFirst(string.toLower($1)) + ' inherited from ';
 var pageuri = wiki.uri(prefix + $0);
-var htmlstring;
-htmlstring = '<span style="font-weight:bold;">' + captiontext +
-                 ' <a href="' + pageuri + '"><code>' + $0 +
-                 '</code></a></span>:<br />';
-web.html(htmlstring);
+var htmlstring = '<span style="font-weight:bold;">' + captiontext +
+                 ' <a href="' + pageuri + '"><code>' + $0 +
+                 '</code></a></span>:<br />';
+%>
+<%- htmlstring %>
+<%
 var desiredprototype = prototypes[$0][string.toLower($1)];
-foreach (var override in $2) {
-  var index = list.indexOf(desiredprototype, override);
+var overrides = arguments.slice(2);
+for (var i=0; i<overrides.length; i++) {
+  var override = overrides[i];
+  var index = desiredprototype.indexOf(override);
   if (index != (-1)) {
-    desiredprototype = list.splice(desiredprototype, index, 1);
+    desiredprototype = desiredprototype.splice(index, 1);
   }
 }
 htmlstring = '<span style="font-size: smaller;">';
-var lastindex = #desiredprototype - 1;
+var lastindex = desiredprototype.length - 1;
 var i = 0;
-foreach (var p in desiredprototype) {
-  var pimproper = string.toUpperFirst(string.replace(p, '__', ''));
+var parts = [];
+for (var i=0; i<desiredprototype.length; i++) {
+  var p = desiredprototype[i];
+  var pimproper = string.ToUpperFirst(string.replace(p, '__', ''));
   pageuri = wiki.uri(prefix + $0 + '/' + pimproper);
-  htmlstring += '<a href="' + pageuri + '"><code>' + p +
-                     '</code></a>';
-  if (i != lastindex) {
-    htmlstring += ', ';
-  }
-  i = i + 1;
+  parts.push('<a href="' + pageuri + '"><code>' + p + '</code></a>');
 }
-htmlstring += '</span>';
-web.html(htmlstring);
-</pre>
+htmlstring += parts.join(', ') + '</span>';
+%>
+<%- htmlstring %>
 </div>
