@@ -1,33 +1,5 @@
 <%
-var lang = env.locale;
-
-/* assume English */
-
-var nextStr = 'Next »';
-
-/* fix for other languages */
-
-if (!string.compare(lang, "de", true)) {
-  nextStr = "weiter »";
-} else if (!string.compare(lang, "es", true)) {
-  nextStr = "Siguiente »";
-} else if (!string.compare(lang, "ja", true)) {
-  nextStr = "次 »";
-} else if (!string.compare(lang, "ko", true)) {
-  nextStr = "다음 »";
-} else if (!string.compare(lang, "pl", true)) {
-  nextStr = "Następny »";
-} else if (!string.compare(lang, "ru", true)) {
-  nextStr = "Следующая статья »";
-} else if (!string.compare(lang, "fr", true)) {
-  nextStr = "Suivant »";
-} else if (!string.compare(lang, "zh-tw", true)) {
-  nextStr = "次頁 »";
-} else if (!string.compare(lang, "zh-tw", true)) {
-  nextStr = "下一页 »";
-}
+/* one parameter: path of Next page */
+/* Calls PreviousNext to avoid duplication of translations */
 %>
-<div class="prevnext">
-<p align="right"><%- (web.link(wiki.uri(lang + '/' + $0), nextStr)) %></p>
-</div>
-<br />
+<%- template("PreviousNext", ["",$0]) %>
