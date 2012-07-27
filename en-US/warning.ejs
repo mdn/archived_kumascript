@@ -1,14 +1,11 @@
 <%
-var ts = {
-    "*":     [ "Warning:" ],
-    "en-US": [ "Warning:" ],
-    "de":    [ "Achtung:" ],
-    "es":    [ "Advertencia:" ],
-    "ja":    [ "警告:" ],
-    "zh-TW": [ "小心：" ]
-}
-var t = ts[env.locale] || ts['*'];
-var s_warning = t[0];
+var s_warning = mdn.localString({
+  "en-US": "Warning:",
+  "de": "Achtung:",
+  "es": "Advertencia:",
+  "ja": "警告:",
+  "zh-TW": "小心："
+});
 %>
 <div class="warning" style="overflow:hidden; padding: 0.7em; min-height: 103px;"><img src="http://developer.mozilla.org/@api/deki/files/283/=Nuvola_apps_important.png" style="float: left;" alt="" />
 <div style="margin-left: 130px; margin-top: 0.3em;"><strong><%=s_warning%></strong> <span class="script"><%- $0 %></span></div>
