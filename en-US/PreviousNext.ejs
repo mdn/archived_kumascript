@@ -1,53 +1,30 @@
 <%
 /* first parameter: path of Previous page */
 /* second parameter: path of Next page */
-
-/* get a page's language (Don't use page.language!) */
 var lang = env.locale;
-
-/* assume English */
-
-var prevStr = '« Previous';
-var nextStr = 'Next »';
-
-/* fix for other languages */
-
-if (!string.compare(lang, "cs", true)) {
-  prevStr = "« Předchozí";
-  nextStr = "Následující »";
-} else if (!string.compare(lang, "de", true)) {
-  prevStr = "« zurück";
-  nextStr = "weiter »";
-} else if (!string.compare(lang, "fr", true)) {
-  prevStr = "« Précédent";
-  nextStr = "Suivant »";
-} else if (!string.compare(lang, "es", true)) {
-  prevStr = "« Anterior";
-  nextStr = "Siguiente »";
-} else if (!string.compare(lang, "ja", true)) {
-  prevStr = "« 前";
-  nextStr = "次 »";
-} else if (!string.compare(lang, "ko", true)) {
-  prevStr = "« 이전";
-  nextStr = "다음 »";
-} else if (!string.compare(lang, "pl", true)) {
-  prevStr = "« Poprzedni";
-  nextStr = "Następny »";
-} else if (!string.compare(lang, "pt", true)) {
-  prevStr = "« Anterior";
-  nextStr = "Próxima »";
-} else if (!string.compare(lang, "ru", true)) {
-  prevStr = "« Предыдущая статья";
-  nextStr = "Следующая статья »";
-} else if (!string.compare(lang, "zh-tw", true)) {
-  prevStr = "« 前頁";
-  nextStr = "次頁 »";
-} else if (!string.compare(lang, "cn", true)) {
-  prevStr = "« 上一页";
-  nextStr = "下一页 »";
+var s_PreviousNext = mdn.localString({
+  "en-US": ["« Previous","Next »"],
+  "cs": ["« Předchozí","Následující »"],
+  "de": ["« zurück","weiter »"],
+  "es": ["« Anterior","Siguiente »"],
+  "fr": ["« Précédent","Suivant »"],
+  "ja": ["« 前","次 »"],
+  "ko": ["« 이전","다음 »"],
+  "pl": ["« Poprzedni","Następny »"],
+  "pt": ["« Anterior","Próxima »"],
+  "ru": ["« Предыдущая статья","Следующая статья »"],
+  "zh-CN": ["« 上一页","下一页 »"],
+  "zh-TW": ["« 前頁","次頁 »"]
+});
+var strPrevious = "";
+var strNext = "";
+if ($0) {
+  strPrevious = "<span style='float: left;'><a href='/" + lang + "/docs/" + $0 + "'>" + s_PreviousNext[0] + "</a></span>";
+}
+if ($1) {
+  strNext = "<a href='/" + lang + "/docs/" + $1 + "'>" + s_PreviousNext[1] + "</a>";
 }
 %>
 <div class="prevnext">
-<p align="right"><span style="float: left;"><%-'<a href="/' + lang + '/docs/' + $0 + '">' + prevStr +'</a>'%></span> 
-<%-'<a href="/' + lang + '/docs/' + $1 + '">' + nextStr +'</a>'%></p>
+<p align="right"><%- strPrevious %><%- strNext %></p>
 </div>
