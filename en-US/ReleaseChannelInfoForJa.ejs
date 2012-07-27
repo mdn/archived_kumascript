@@ -31,5 +31,5 @@ switch(string.tolower($3)) {
     break;
 }
 web.html("<p>Gecko " + $1 + " を搭載したFirefox " + $0 + " は米国時間 " + $2 + " にリリースされます。このページでは、開発者に影響する Firefox " + $0 + " の変更点をまとめています。Firefox " + $0 + " は現在 " + web.link(url, string.ToUpperFirst($3)) + " として提供されています。</p>");
-</pre>
+%>
 <div class="note"><strong>注:</strong> ここに載っている変更点は今のところ Firefox <span class="script">$0</span> に含まれる予定ですが、テストの結果 Firefox <span class="script">$0</span> へ投入するには時期尚早と判断されたものは、以後のバージョンへ先送りされる可能性もあります。このページおよびその英語版ページを定期的にチェックして最新の情報を確認してください。</div>
