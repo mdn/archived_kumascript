@@ -1,11 +1,11 @@
 <%
 /* one parameter: attribute name */
-var slug = {
-        'en-US': "Attribute",
-        fr     : "Attributs",
-        pl     : "Atrybut"
-    };
+var slug = mdn.localString({
+    "en-US": "Attribute",
+    "fr"   : "Attributs",
+    "pl"   : "Atrybut"
+});
 
-var URL = "/" + env.locale + "/docs/SVG/" + mdn.localString(slug) + "/" + $0;
+var URL = "/" + env.locale + "/docs/SVG/" + slug + "/" + $0;
 %>
-<code><a href="<%- URL %>" <%- wiki.pageExists(URL) ? '' : ' class="new"' %>><%= $0 %></a></code>
+<code><a href="<%- URL %>"><%= $0 %></a></code>
