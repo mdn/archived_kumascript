@@ -130,6 +130,9 @@ switch(spec) {
   case 'HTML5 W3C':
     status = 'WD';
     break;
+  case 'HTML WHATWG':
+    status = 'Living';
+    break;
   default:
     status = 'Unknown';
 }
@@ -157,6 +160,9 @@ switch(env.locale){
       case 'Old-Transforms':
         status_text = 'この仕様は他のドラフトへ移動されました。アップデートしてください。';
         break;
+      case 'Living':
+        status_text = 'Living standard';
+        break;
       default:
         status_text = '不明';
     };
@@ -180,6 +186,9 @@ switch(env.locale){
       break;
     case 'Old-Transforms':
       status_text = 'This has been merged in another draft. Please update';
+      break;
+    case 'Living':
+      status_text = 'Living standard';
       break;
     default:
       status_text = 'Unknown';
