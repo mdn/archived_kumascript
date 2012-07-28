@@ -1,28 +1,20 @@
 <%
-switch(page.language){
+var mes = "This document is in progress to be translated. That's why it still contains text in another language.<br /> Feel free to register and to help translate MDN!";
+switch(env.locale){
   case 'fr':
-     <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background: rgb(156, 244, 156); text-align: center;">
-      <p style="margin: 4px 0px;">
-        web.html("Ce document est en cours de traduction vers le français. C'est la raison pour laquelle il est en partie dans une autre langue.<br /> N'hésitez pas à vous inscrire et à nous aider à traduire le MDN!");
-      </p>
-    </div>
+        mes = "Ce document est en cours de traduction vers le français. C'est la raison pour laquelle il est en partie dans une autre langue.<br /> N'hésitez pas à vous inscrire et à nous aider à traduire le MDN!";
     break;
 
   case 'ja':
-    <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background: rgb(156, 244, 156); text-align: center;">
-      <p style="margin: 4px 0px;">
-        web.html("この文書は翻訳中です。他国語のままの部分などがあるのはその為です。<br /> 是非お気軽に MDN に登録して翻訳に参加し、私たちの手助けをして下さい！");
-      </p>
-    </div>
+        mes = "この文書は翻訳中です。他国語のままの部分などがあるのはその為です。<br /> 是非お気軽に MDN に登録して翻訳に参加し、私たちの手助けをして下さい！";
     break;
 
   default: /*en*/
-    <div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background: rgb(156, 244, 156); text-align: center;">
-      <p style="margin: 4px 0px;">
-        web.html("This document is in progress to be translated. That's why it still contains text in another language.<br /> Feel free to register and to help translate MDN!");
-      </p>
-    </div>
     break;
 }
-
 %>
+<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background: rgb(156, 244, 156); text-align: center;">
+    <p style="margin: 4px 0px;">
+       <%- web.html(mes); %>
+    </p>
+</div>
