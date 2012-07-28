@@ -26,22 +26,20 @@
   
         // No use doing anything if there is no path
         if (in_path) {
-            var p = kuma.url.parse(env.url, true);
-            var base_url = p.protocol + '//' + p.host;
-  
             var text = '';
- 
-            var path_clean = wiki.kumaPath(in_path);
+            var path_kuma = wiki.kumaPath(in_path);
+            var path_clean = path_kuma.replace(/[\?|#].*/,'');
+            var queryElement = (path_kuma.match(/[\?|#].*/) || '');
             var path_less_locale = path_clean.replace(/^\/?\w{2}(?:-\w{2})?/i,'');
             var path_English = '/en-US' + path_less_locale;
-             
+
             // Figure out locale to use (strip any / from in_locale)
             var locale = env.locale;
             if (in_locale) {
                 locale = kuma.htmlEscape(in_locale.replace(/\//g,''));
             }
             var path_plus_locale = '/' + locale + path_less_locale;
- 
+
             // Get text of link (title of page), if no override
             var text = '';
             if (in_text) {
@@ -72,7 +70,7 @@
                     }
                 }
             }
-            out = '<a href="' + base_url + path_plus_locale + '"';
+            out = '<a href="' + path_plus_locale + queryElement + '"';
             // Link title
             if (in_title) {
                 out += ' title="' + kuma.htmlEscape(in_title) + '"';
