@@ -28,6 +28,11 @@
         return JSON.parse(str);        
     },
     
+    // http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/String.IndexOf
+    IndexOf: function (first, second) {
+        return first.indexOf(second);        
+    },
+    
     /* Check if first character in string is a decimal digit. */
     IsDigit: function (str) {
         return (/^\d/.test(''+str));
