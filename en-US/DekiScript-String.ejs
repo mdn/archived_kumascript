@@ -42,9 +42,14 @@
     Serialize: function (val) {
         return JSON.stringify(val);
     },
-    
-    Substr: function (str, start) {
-        return (''+str).substr(start);
+
+    // http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/String.Substr
+    Substr: function (str, start, length) {
+        if (length) {
+            return (''+str).substr(start, length);
+        } else {
+            return (''+str).substr(start);
+        }
     },
  
     toLower: function (str) {
@@ -59,9 +64,18 @@
     Trim: function (str) {
         return (''+str).trim();
     },
-     
+
+    // http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/String.Remove
+    Remove: function (text, index, count) {
+        var out = ''+text.substring(0, Number(index));
+        if (count) {
+            out += ''+text.substring(Number(index) + Number(count));
+        }
+        return out;
+    },
+
     Replace: function (str, from, to) {
-        return (''+str).replace(RegExp(from,'g'),to)
+        return (''+str).replace(RegExp(from,'g'),to);
     },
      
     Join: function (list, sep) {
