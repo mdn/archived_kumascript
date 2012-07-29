@@ -3,11 +3,11 @@
 /* Appending a "+" to the version number you specify means that version and all later versions. */
 var geckoRelease = '';
 var arg = string.trim($0);
-var plus = false;
+var plus = '';
 var extraMessage = '';
 if (string.EndsWith(arg, '+')) {
   arg = arg.substr(0, arg.length-1);
-  plus = true;
+  plus = '+';
 }
 switch(arg)
 {
@@ -77,16 +77,12 @@ switch(arg)
     break;
   default:
     if (arg >= 5) {
-      geckoRelease = ['Firefox ' + arg, 'Thunderbird ' + arg];
+      geckoRelease = ['Firefox ' + arg, 'Thunderbird ' + arg, 'SeaMonkey 2.' + (Number(arg)-3).toString()];
     }
     break;
 }
 if (geckoRelease != "") {
-  if (plus) {
-    geckoRelease = string.Join(geckoRelease, '+ / ') + '+';
-  } else {
-    geckoRelease = string.Join(geckoRelease, ' / ');
-  }
+  geckoRelease = string.Join(geckoRelease, plus + ' / ') + plus;
   geckoRelease = '(' + geckoRelease + ')' + extraMessage;
 }
 %>
