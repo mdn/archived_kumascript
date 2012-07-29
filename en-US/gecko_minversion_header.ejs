@@ -1,19 +1,16 @@
 <%
-var ts = {
-    "*":     [ "Introduced in Gecko $0" ],
-    "en-US": [ "Introduced in Gecko $0" ],
-    "de":    [ "Eingeführt in Gecko $0" ],
-    "es":    [ "Introducido en Gecko $0" ],
-    "ja":    [ "Gecko $0 で導入" ],
-    "ko":    [ "Introduced in Gecko $0" ],
-    "pl":    [ "Wprowadzono w Gecko $0" ],
-    "pt":    [ "Introduzido no Gecko $0" ],
-    "fr":    [ "Nouveau dans Gecko $0" ],
-    "zh-TW": [ "自 Gecko $0 引入" ],
-    "zh-CN": [ "适用于 Gecko $0 以上" ]
-}
-var t = ts[env.locale] || ts['*'];
-var s_introduced_in = t[0];
+var s_introduced_in = mdn.localString({
+    "en-US": "Introduced in Gecko $0",
+    "de":    "Eingeführt in Gecko $0",
+    "es":    "Introducido en Gecko $0",
+    "ja":    "Gecko $0 で導入",
+    "ko":    "Introduced in Gecko $0",
+    "pl":    "Wprowadzono w Gecko $0",
+    "pt":    "Introduzido no Gecko $0",
+    "fr":    "Nouveau dans Gecko $0",
+    "zh-TW": "自 Gecko $0 引入",
+    "zh-CN": "适用于 Gecko $0 以上"
+});
 %>
 <div class="standardNote"> 
 <p style="margin: 4px 0px;"><%- s_introduced_in.replace('$0', $0) %></p> 
