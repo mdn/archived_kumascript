@@ -7,10 +7,6 @@
 // If $1 isn't provided, the link itself is the link text
 
 var url = "http://mxr.mozilla.org/mozilla/source/" + $0;
-var text = url;
-
-if ($1) {
-    text = $1;
-}
+var text = ($1 || url);
 %>
 <a rel="custom" href="<%=url%>"><%=text%></a>
