@@ -1,25 +1,24 @@
 <%
 /* parameters: Firefox version, Gecko version, target release date, channel name */
-/* get the page language */
-
-var lang = env.locale;
 
 var url = "";
-
 switch(string.tolower($3)) {
-  case 'nightly':
+  case "nightly":
   default:
     url = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-central/";
     break;
-  case 'aurora':
+  case "aurora":
     url = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/";
     break;
-  case 'beta':
+  case "beta":
     url = "http://www.mozilla.com/en-US/firefox/channel/";
     break;
-}
-
+};
+var str = "<p>Firefox " + $0 + ", based on Gecko " + $1 + ", will ship in " + $2 + ". This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox " + $0 + " are " + web.link(url, 'currently available') + " on the " + string.ToUpperFirst($3) + " channel.</p><div class='note'><strong>Note:</strong> Items listed here are tentatively slated for Firefox " + $0 + "; however, they may be held for a future release if testing shows they're not ready by the time Firefox " + $0 + " is due to ship. Please keep an eye on this page to stay up to date on the plans for Firefox " + $0 + ".</div>";
+switch (env.locale) {
+  case "ja":
+    str = "<p>Gecko " + $1 + " を搭載した Firefox " + $0 + " は米国時間 " + $2 + " にリリースされます。このページでは、開発者に影響する  Firefox " + $0 + " の変更点をまとめています。 Firefox " + $0 + " は現在 " + string.ToUpperFirst($3) + " として提供されています。</p><div class='note'><strong>注:</strong> ここに載っている変更点は今のところ Firefox " + $0 + " に含まれる予定ですが、テストの結果 Firefox " + $0 + " へ投入するには時期尚早と判断されたものは、以後のバージョンへ先送りされる可能性もあります。このページおよびその英語版ページを定期的にチェックして最新の情報を確認してください。</div>";
+    break;
+};
 %>
-<p>Firefox <%= $0 %>, based on Gecko <%= $1 %>, will ship in <%= $2 %>. This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox <%= $0 %> are <%- web.link(url, "currently available")%>  on the <%= string.ToUpperFirst($3) %> channel.</p>
-
-<div class="note"><strong>Note:</strong> Items listed here are tentatively slated for Firefox <%= $0 %>; however, they may be held for a future release if testing shows they're not ready by the time Firefox <%= $0 %> is due to ship. Please keep an eye on this page to stay up to date on the plans for Firefox <%= $0 %>.</div>
+<%- str %>
