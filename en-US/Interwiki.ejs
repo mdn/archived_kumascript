@@ -2,16 +2,9 @@
     var path = $1;
     var title = $2 || path;
 
-    var lang = env.locale;
-    
-    if (lang === 'zh_tw' || lang === 'cn') {
-        lang = 'zh';
-    } else if (lang === 'en-US') {
-        lang = 'en';
-    }
-    
+    var lang = env.locale.substr(0, 2);
     var prefix = $0;
-    
+
     switch(prefix) {
         case 'wikipedia':
             %>
