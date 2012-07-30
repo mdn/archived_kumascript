@@ -1,15 +1,12 @@
 <%
-var lang = env.locale;
 var name = $0;
-var result;
 
-var sectionname = "Element";
-
-if ("es" == string.tolower(lang)) {
-  sectionname = "Elemento";
-}
+var sectionname = mdn.localString({
+  "en-US": "Element",
+  "es": "Elemento"
+});
 
 var dest = "/" + lang + '/docs/HTML/' + sectionname + '/' + name;
-result = '<code><a href="' + dest +'" title="<' + name + '>">&lt;' + name + '&gt;</a></code>';
+var result = '<code><a href="' + dest +'" title="<' + name + '>">&lt;' + name + '&gt;</a></code>';
 %>
- <%- result %>
+<%- result %>
