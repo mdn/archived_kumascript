@@ -1,48 +1,13 @@
 <%
-
 /* one parameter: HTML version */
-var lang = env.locale;
 
-var link = "";
-var versionText = "HTML";
-if ($0 != "5") {
-  versionText = versionText + " ";
-}
-versionText = versionText + $0;
-
-switch(lang) {
-  case "de":
-    switch($0) {
-      case "4":
-        link = "/de/HTML";
-        break;
-      case "5":
-        link = "/de/HTML/HTML5";
-        break;
-    }
-    break;
-  case "fr":
-    switch($0) {
-      case "4":
-        link = "/fr/HTML";
-        break;
-      case "5":
-        link = "/fr/HTML/HTML5";
-        break;
-    }
-    break;
-  default:
-    switch($0) {
-      case "4":
-        link = "/en/HTML";
-        break;
-      case "5":
-        link = "/en/HTML/HTML5";
-        break;
-    }
-    break;
+var link = "HTML " + $0;
+if ($0 == "4") {
+  link = web.link("/" + env.locale + "/docs/HTML", "HTML 4");
+} else if ($0 == "5") {
+  link = web.link("/" + env.locale + "/docs/HTML/HTML5", "HTML5");
 }
 %>
 <span style="border: 1px solid rgb(129, 129, 250); background-color: rgb(174, 218, 229); font-size: x-small; white-space: nowrap; padding: 2px;">
-<% if (link != "") { %><%- web.link(link, versionText) %><% } else { %><%= versionText %><%}%>
+<%- link %>
 </span>
