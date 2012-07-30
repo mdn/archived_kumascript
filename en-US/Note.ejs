@@ -1,33 +1,15 @@
 <%
-
 /* Purpose: Important paragraphs, NOT endnotes or footnotes */
-var lang = env.locale;
 
-/* defaults to English */
-var note = "Note:";
-
-switch(lang) {
-  case "de":
-    var note = "Hinweis:";
-    break;
-  case "es":
-    var note = "Nota:";
-    break;
-  case "fr":
-    var note = "Note:";
-    break;
-  case "ja":
-    var note = "註:";
-    break;
-  case "ko":
-    var note = "주의:";
-    break;
-  case "pl":
-    var note = "Uwaga:";
-    break;
-  case "zh-tw":
-    var note = "註：";
-    break;
-}
+var note = mdn.localString({
+  "en-US": "Note:",
+  "de": "Hinweis:",
+  "es": "Nota:",
+  "fr": "Note:",
+  "ja": "註:",
+  "ko": "주의:",
+  "pl": "Uwaga:",
+  "zh-TW": "註："
+});
 %>
-<div class="note"><strong><%-note%></strong><%-"&nbsp;" + $0%></div>
+<div class="note"><strong><%-note%></strong>&nbsp;<%-$0%></div>
