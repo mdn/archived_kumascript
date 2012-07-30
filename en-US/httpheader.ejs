@@ -1,9 +1,1 @@
-<%
-var lang = env.locale;
-
-if(wiki.pageExists(lang + '/HTTP/Headers')) {
-    %><code><%- web.link(wiki.uri('HTTP/Headers') + '#' + $0, $0 +':') %></code><%
-} else {
-    %><code><a rel=('internal') href="<%- wiki.uri(lang + '/HTTP/Headers' ) + '#' + $0 %>" class="new"><%= $0 +':' %></a></code><%
-}
-%>
+<%- web.link('/' + env.locale + '/docs/HTTP/Headers#' + $0, $0 +':') %>
