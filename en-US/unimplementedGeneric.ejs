@@ -1,0 +1,64 @@
+<%
+/*
+ * first parameter: inline/header/method
+ * second parameter: (optional) bug number
+ * third parameter: additional information required for the type specified by the first parameter
+ *   method requires the method name
+ * fourth parameter: (optional) Product bug eg. Mozilla(default), WebKit
+*/
+ 
+var str = "Unimplemented";
+var see = "see";
+var product = ($4 || "Mozilla");
+
+switch(env.locale) {
+  case 'de':
+    str = "Nicht implementiert";
+    see = "siehe";
+    break;
+  case 'es':
+    str = "No implementado";
+    see = "mira";
+    break;
+  case "fr":
+    str = "Non implémenté";
+    see = "see";
+    break;
+  case 'ja':
+    str = "未実装";
+    see = "参照";
+    break;
+  case 'zh-CN':
+    str = "未实现";
+    see = "查看";
+    break;
+}
+
+if ($1) {
+  switch(product.toLowerCase()) {
+    case 'mozilla':
+      str += " (" + see + " " + template("bug", [$1]) + ")";
+    break;
+    case 'webkit':
+      str += " (" + see + " " + template("WebkitBug", [$1]) + ")";
+    break;
+  }
+}
+
+switch($0) {
+  case 'inline':
+    %><span class="unimplementedInlineTemplate" style="border: 1px solid #FF0000; background-color: #FEBCBC; font-size: x-small; white-space: nowrap; padding: 2px;"><%-str%></span><%
+    break;
+  case 'header':
+    %><div class="unimplementedHeader" style="overflow:hidden; border: 1px solid #FF0000; background-color: #FEBCBC; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px;>
+      <p style="margin: 4px 0px 4px 0px;"><%-str%></p>
+      </div><%
+    break;
+  case 'method':
+    %><div>
+      <span style="border: 1px solid #FF0000; background-color: #FEBCBC; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;"><%- str %></span>
+      <h3><%= $2 %>()</h3>
+      </div><%
+    break;
+}
+%>
