@@ -1,0 +1,28 @@
+<%
+/*
+ * first parameter: inline/header
+*/
+
+var str = mdn.localString({
+  "en-US": "Non-standard",
+  "de":    "Kein Standard",
+  "es":    "No estándar",
+  "fr":    "Non standard",
+  "ja":    "非標準",
+  "pl":    "Niestandardowy",
+  "ru":    "Не стандартно",
+  "zh-CN": "非标准",
+  "zh-TW": "非標準"
+});
+
+switch($0) {
+  case 'inline':
+    %><span class="nonStandardInline"><%-str%></span><%
+    break;
+  case 'header':
+    %><div style="border: 1px solid #900; background-color: #ff8400; font-weight: bold; text-align: center; padding: 0px 10px 0px 10px; margin: 10px 0px 10px 0px; color: #fff;">
+      <p style="margin: 4px 0px 4px 0px;"><%-str%></p>
+      </div><%
+    break;
+}
+%>
