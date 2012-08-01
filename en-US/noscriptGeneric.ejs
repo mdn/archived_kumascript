@@ -1,0 +1,22 @@
+<%
+/*
+ * first parameter: inline/method
+ * second parameter: additional information required for the type specified by the first parameter
+*/
+ 
+var s_str = mdn.localString({
+  "en-US": ["Native code only!","This method may only be called from C++; don't use it from JavaScript."]
+});
+ 
+switch($0) {
+  case 'inline':
+    %><span title="<%- s_str[1] %>" style="border: 1px solid rgb(129, 129, 81); color: white; background-color: red; font-size: x-small; font-weight: bold; vertical-align: middle; white-space: nowrap; padding: 2px;"><%- s_str[0] %></span><%
+    break;
+  case 'method':
+    %><div>
+      <span title="<%- s_str[1] %>" class="megaWarningInline"><%- s_str[0] %></span>
+      <h3><%= $1 %>()</h3>
+      </div><%
+    break;
+}
+%>
