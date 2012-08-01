@@ -26,16 +26,16 @@ if (string.endswith($0, '()')) {
   api = api.substr(0, api.length-2);
 }
 
-var destOldType = lang + '/' + 'DOM:' + api;
-var destNewType = lang + '/' + 'DOM/' + api;
-var destEng = 'en' + '/' + 'DOM/' + api;
+var destOldType = "/" + lang + '/docs/' + 'DOM:' + api;
+var destNewType = "/" + lang + '/docs/' + 'DOM/' + api;
+var destEng = '/en' + '/docs/DOM/' + api;
 var anch = '';
 
 if ($2) {
   str = str + '.' + $2;
   anch = '#' + $2;
 }
-if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
+if (wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
   %><code><%-(web.link(wiki.uri(destNewType) + anch,str))%></code><%
 } else if (wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
   %><code><%-(web.link(wiki.uri(destOldType) + anch,str))%></code><%
