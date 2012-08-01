@@ -1,0 +1,34 @@
+<%
+/*
+ * first parameter: inline/method
+ * second parameter: version became optional (optional)
+ * third parameter: additional information required for the type specified by the first parameter
+*/
+
+var str = "Optional" + ($1 ? ' from Gecko ' + $1 : '');
+switch(env.locale){
+  case 'zh-CN':
+    str = "可选" + ($1 ? '试用于Gecko ' + $1 : '');
+    break;
+  case 'zh-TW':
+    str = ($1 ? '自 Gecko ' + $1 + '開始變為' : '') + "選擇性";
+    break;
+}
+
+var attr = "";
+if ($1){
+  attr = template("geckoRelease", [$1]);
+}
+
+switch($0) {
+  case 'inline':
+    %><span title="<%=attr%>" style="border: 1px solid #9ED2A4; background-color: #C0FFC7; font-size: x-small; white-space: nowrap; padding: 2px;"><%- str %></span><%
+    break;
+  case 'method':
+    %><div>
+      <span title="<%=attr%>" style="border: 1px solid #9ED2A4; padding: 1px; background-color: #C0FFC7; font-size: small; font-weight: bold; float: right; text-align: right; vertical-align: middle; white-space: nowrap;"><%- str %></span>
+      <h3><%= $2 %>()</h3>
+      </div><%
+    break;
+}
+%>
