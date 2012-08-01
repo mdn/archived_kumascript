@@ -8,39 +8,25 @@
 */
  
 var str = "Unimplemented";
-var see = "see";
 var product = ($3 || "Mozilla");
 
-switch(env.locale) {
-  case 'de':
-    str = "Nicht implementiert";
-    see = "siehe";
-    break;
-  case 'es':
-    str = "No implementado";
-    see = "mira";
-    break;
-  case "fr":
-    str = "Non implémenté";
-    see = "see";
-    break;
-  case 'ja':
-    str = "未実装";
-    see = "参照";
-    break;
-  case 'zh-CN':
-    str = "未实现";
-    see = "查看";
-    break;
-}
+var s_str = mdn.localString({
+  "en-US": ["Unimplemented","see"],
+  "de":    ["Nicht implementiert","siehe"],
+  "es":    ["No implementado","mira"],
+  "fr":    ["Non implémenté","see"],
+  "ja":    ["未実装","参照"],
+  "zh-CN": ["未实现","查看"]
+});
+var str = s_str[0];
 
 if ($1 && $0 != 'method') {
   switch(product.toLowerCase()) {
     case 'mozilla':
-      str += " (" + see + " " + template("bug", [$1]) + ")";
+      str += " (" + s_str[1] + " " + template("bug", [$1]) + ")";
     break;
     case 'webkit':
-      str += " (" + see + " " + template("WebkitBug", [$1]) + ")";
+      str += " (" + s_str[1] + " " + template("WebkitBug", [$1]) + ")";
     break;
   }
 }
