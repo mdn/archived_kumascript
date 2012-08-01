@@ -1,10 +1,1 @@
-<%
-var style = "border: 1px solid rgb(129, 129, 81); color: white; background-color: orange; font-size: x-small; font-weight: bold; vertical-align: middle; white-space: nowrap; padding: 2px;"
-switch(env.locale) {
-    default:
-        label = "Violates the xpcom interface guidelines!"
-        title = "Only use this method if you REALLY know what you are doing!"
-        break;
-}
-%>
-<span style="<%-style%>" title="<%=title%>"><%=label%></span>
+<%- template("notxpcomGeneric", ["inline"]) %>
