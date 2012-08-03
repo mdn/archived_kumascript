@@ -10,16 +10,16 @@ constantsTable = $1;
 
 /* check $0#$1 exists */
 
-if(wiki.pageExists(lang + '/XPCOM_Interface_Reference/' + $0)) { %>
+if (wiki.pageExists(lang + '/docs/XPCOM_Interface_Reference/' + $0)) { %>
 
-<code><%- (web.link(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0) + '#' + string.replace(constantsTable, " ", "_"), $0 + '.' + constantsTable)) %></code>
+<code><%- (web.link(wiki.uri('/' + lang + '/docs/XPCOM_Interface_Reference/' + $0) + '#' + string.replace(constantsTable, " ", "_"), $0 + '.' + constantsTable)) %></code>
 
-<% } else if(wiki.pageExists(lang + '/' + $0)) { %>
+<% } else if (wiki.pageExists(lang + '/docs/' + $0)) { %>
 
-<code>(web.link(wiki.uri(lang + '/' + $0) + '#' + string.replace(constantsTable, " ", "_"), $0 + '.' + constantsTable))</code>
+<code>(web.link(wiki.uri('/' + lang + '/docs/' + $0) + '#' + string.replace(constantsTable, " ", "_"), $0 + '.' + constantsTable))</code>
 
 <% } else { %>
 
-<code><a rel=('internal') href=(wiki.uri(lang + '/XPCOM_Interface_Reference/' + $0) + '#' + string.replace(constantsTable, " ", "_")) class=('new')>$0 + '.' + constantsTable</a></code>
+<code><a rel=('internal') href=(wiki.uri(lang + '/docs/XPCOM_Interface_Reference/' + $0) + '#' + string.replace(constantsTable, " ", "_")) class=('new')>$0 + '.' + constantsTable</a></code>
 
 <% } %>
