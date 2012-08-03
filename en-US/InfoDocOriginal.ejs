@@ -1,17 +1,10 @@
-<span lang='pt' class='lang lang-pt'><div class="originaldocinfo">
-<h3 name="Informa.C3.A7.C3.B5es_Sobre_o_Documento_Original"> Informações Sobre o Documento Original </h3>
-<ul><li> Autor(es): {{web.html($0)}}
-</li><li> Outros Contribuidores: {{web.html($1)}}
-</li><li> Última Atualização: {{web.html($2)}}
-</li><li> Informações sobre Copyright: {{web.html($3)}}
-</li></ul>
-</div>
-</span><span lang='*' class='lang lang-*'><div class="originaldocinfo">
-<h3 name="Informa.C3.A7.C3.B5es_Sobre_o_Documento_Original"> Informações Sobre o Documento Original </h3>
-<ul><li> Autor(es): {{web.html($0)}}
-</li><li> Outros Contribuidores: {{web.html($1)}}
-</li><li> Última Atualização: {{web.html($2)}}
-</li><li> Informações sobre Copyright: {{web.html($3)}}
-</li></ul>
-</div>
-</span>
+<%
+var out = [];
+if ($0) {out.push('"author":"' + $0 + '"');}
+if ($1) {out.push('"others":"' + $1 + '"');}
+if ($2) {out.push('"date":"' + $2 + '"');}
+if ($3) {out.push('"copyright":"' + $3 + '"');}
+if ($4) {out.push('"original":"' + $4 + '"');}
+var str = '{' + out.join(',') + '}';
+%>
+<%- template("OrigDocInfo", [str]) %>
