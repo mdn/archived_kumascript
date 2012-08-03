@@ -1,7 +1,7 @@
 <%
 /*
  * This template should work if you change the invocation from a page to be a valid JSON object, and add parens around it like this example:
- * {{OrigDocInfo('{"author": "Ian Hickson", "date": "October 14, 2006", "original": "http://lxr.mozilla.org/mozilla/source/config/preprocessor.txt"}')}}
+ * {{OrigDocInfo({"author": "Ian Hickson", "date": "October 14, 2006", "original": "http://lxr.mozilla.org/mozilla/source/config/preprocessor.txt"})}}
 */
 var s_title = "Original Document Information";
 var s_author = "Author(s): ";
@@ -58,14 +58,13 @@ switch (env.locale) {
     // s_note = " ";
     break;
 };
-var info = JSON.parse($0);
 var out = [];
-if (info.author) {out.push('<li>' + s_author + info.author + '</li>');}
-if (info.others) {out.push('<li>' + s_others + info.others + '</li>');}
-if (info.date) {out.push('<li>' + s_date + info.date + '</li>');}
-if (info.copyright) {out.push('<li>' + s_copyright + info.copyright + '</li>');}
-if (info.original) {out.push('<li>' + s_original + web.link(info.original) + '</li>');}
-if (info.note) {out.push('<li>' + s_note + info.note + '</li>');}
+if ($0.author) {out.push('<li>' + s_author + $0.author + '</li>');}
+if ($0.others) {out.push('<li>' + s_others + $0.others + '</li>');}
+if ($0.date) {out.push('<li>' + s_date + $0.date + '</li>');}
+if ($0.copyright) {out.push('<li>' + s_copyright + $0.copyright + '</li>');}
+if ($0.original) {out.push('<li>' + s_original + web.link($0.original) + '</li>');}
+if ($0.note) {out.push('<li>' + s_note + $0.note + '</li>');}
 var str = out.join('\n');
 %>
 <div class="originaldocinfo">
