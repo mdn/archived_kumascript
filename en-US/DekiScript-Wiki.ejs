@@ -24,6 +24,10 @@
             // until/unless URLs are corrected in templates
             base_url += '/en-US/docs';
         }
+        var re1 = / /gi;
+        var re2 = /%20/gi;
+        path = path.replace(re1, "_");
+        path = path.replace(re2, "_");
         if (path.charAt(0) != '/') {
             base_url += '/';
         }
