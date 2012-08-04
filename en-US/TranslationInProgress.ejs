@@ -9,12 +9,11 @@ switch(env.locale){
         mes = "この文書は翻訳中です。他国語のままの部分などがあるのはその為です。<br /> 是非お気軽に MDN に登録して翻訳に参加し、私たちの手助けをして下さい！";
     break;
 
-  default: /*en*/
+  default: /* en-US */
     break;
 }
 %>
-<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background: rgb(156, 244, 156); text-align: center;">
-    <p style="margin: 4px 0px;">
-       <%- web.html(mes) %>
-    </p>
+
+<div style="overflow:hidden; margin: 10px 0; padding: 0 10px; background: rgb(156, 244, 156); text-align: center;">
+    <p style="margin: 4px 0;"><%- web.html(mes) %></p>
 </div>
