@@ -10,11 +10,11 @@ var s_str = mdn.localString({
   
 switch($0) {
   case 'inline':
-    %><span title="<%- s_str[1] %>" style="border: 1px solid rgb(129, 129, 81); color: white; background-color: orange; font-size: x-small; font-weight: bold; vertical-align: middle; white-space: nowrap; padding: 2px;"><%- s_str[0] %></span><%
+    %><span title="<%- s_str[1] %>" class="notXPCOMInline"><%- s_str[0] %></span><%
     break;
   case 'method':
     %><div>
-      <span title="<%- s_str[1] %>" class="notXPCOMInline"><%- s_str[0] %></span>
+      <span title="<%- s_str[1] %>" class="notXPCOMMethod"><%- s_str[0] %></span>
       <h3><%= $1 %>()</h3>
       </div><%
     break;
