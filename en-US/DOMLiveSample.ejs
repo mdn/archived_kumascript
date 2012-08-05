@@ -16,11 +16,11 @@ switch(lang) {
     str = "View the live example";
     break;
   case 'ja':
-    str = "実際の表示を確認する";
+    str = "実際の表示を確認";
     break;
   case 'zh-CN':
     str = "查看示例";
     break;
 }
 
-%><a href="<%=target%>"><span class="liveSampleButton"><%-str%></span></a>
+%><a class="button liveSample" href="<%=target%>"><%-str%></a>
