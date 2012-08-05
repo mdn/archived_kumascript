@@ -11,7 +11,7 @@ var s_PreviousNext = mdn.localString({
   "ja": ["« 前","次 »"],
   "ko": ["« 이전","다음 »"],
   "pl": ["« Poprzedni","Następny »"],
-  "pt": ["« Anterior","Próxima »"],
+  "pt-PT": ["« Anterior","Próxima »"],
   "ru": ["« Предыдущая статья","Следующая статья »"],
   "zh-CN": ["« 上一页","下一页 »"],
   "zh-TW": ["« 前頁","次頁 »"]
@@ -19,7 +19,7 @@ var s_PreviousNext = mdn.localString({
 var strPrevious = "";
 var strNext = "";
 if ($0) {
-  strPrevious = "<span style='float: left;'><a href='/" + lang + "/docs/" + $0 + "'>" + s_PreviousNext[0] + "</a></span>";
+  strPrevious = "<a style='float: left;' href='/" + lang + "/docs/" + $0 + "'>" + s_PreviousNext[0] + "</a>";
 }
 if ($1) {
   strNext = "<a href='/" + lang + "/docs/" + $1 + "'>" + s_PreviousNext[1] + "</a>";
