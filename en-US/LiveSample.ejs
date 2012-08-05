@@ -16,6 +16,9 @@ switch(env.locale) {
     case "de":
         str = "Live-Beispiel ansehen";
         break;
+    case "ja":
+        str = "実際の表示を確認";
+        break;
     default:
         str = "View the live example";
         break;
@@ -27,4 +30,5 @@ if ($0.charAt(0) == "/") {
     target = $0;
 }
 %>
+
 <a class="button liveSample href="<%=target%>"><%=str%></a>
