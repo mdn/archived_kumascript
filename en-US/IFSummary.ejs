@@ -8,7 +8,7 @@
 var scriptableOutput = "Unknown";
 var scriptable = "Scriptable";
 var notscriptable = "Not scriptable";
-var scriptableLink = "en-US/Interfaces/About_Scriptable_Interfaces";
+var scriptableLink = "en-US/docs/Interfaces/About_Scriptable_Interfaces";
 var lastChanged = "Last changed in Gecko ";
 var inheritsFrom = "Inherits from: ";
 var outdated = "This page has not been updated recently; the content may be outdated.";
@@ -17,58 +17,57 @@ switch(env.locale) {
   case "fr":
     scriptable = "Scriptable";
     notscriptable = "Not scriptable";
-    scriptableLink = "fr/Interfaces/À_propos_des_interfaces_scriptables";
+    scriptableLink = "fr/docs/Interfaces/À_propos_des_interfaces_scriptables";
     break;
   case "ja":
     scriptable = "Scriptable",
-        scriptableOutput = "Unknown",
-        scriptableLink = "ja/Interfaces/About_Scriptable_Interfaces",
-        notscriptable = "Not scriptable",
-        inheritsFrom = "継承元: ",
-        lastChanged = "最終更新: Gecko ",
-        outdated = "このページには最近の更新はありません。古い版である可能性が有ります。";
+    scriptableOutput = "Unknown",
+    scriptableLink = "ja/docs/Interfaces/About_Scriptable_Interfaces",
+    notscriptable = "Not scriptable",
+    inheritsFrom = "継承元: ",
+    lastChanged = "最終更新: Gecko ",
+    outdated = "このページには最近の更新はありません。古い版である可能性が有ります。";
     break;
   case "ko":
     scriptable = "스크립트에서 사용 가능";
     notscriptable = "Not scriptable";
-    scriptableLink = "ko/Interfaces/About_Scriptable_Interfaces";
+    scriptableLink = "ko/docs/Interfaces/About_Scriptable_Interfaces";
     break;
   case "pl":
     scriptable = "skryptowalny";
     notscriptable = "Not scriptable";
-    scriptableLink = "pl/Interfejsy/O_interfejsach_skryptowalnych";
+    scriptableLink = "pl/docs/Interfejsy/O_interfejsach_skryptowalnych";
     break;
   case "zh-CN":
     scriptable = "脚本化";
     notscriptable = "不可脚本化";
     inheritsFrom = "继承于: ";
-    scriptableLink = "en/Interfaces/About_Scriptable_Interfaces";
+    scriptableLink = "zh-CN/docs/Interfaces/About_Scriptable_Interfaces";
     lastChanged = "最后修改于Gecko ";
     break;
 }
 
 switch($2.toLowerCase()) {
   case "scriptable":
-    scriptableOutput = '<a style="color:#00cc00; font-weight:bold;" href="' + scriptableLink + '">' + scriptable + '</a>';
+    scriptableOutput = '<a style="color:#00cc00; font-weight:700;" href="' + scriptableLink + '">' + scriptable + '</a>';
     break;
   case "not scriptable":
-    scriptableOutput = '<span style="color:#cc0000; font-weight:bold;">' + notscriptable + '</span>';
+    scriptableOutput = '<span style="color:#cc0000; font-weight:700;">' + notscriptable + '</span>';
     break;
 }
 
-if (date.now - env.modified < 1000000*60*60*24*365) {
-  template("note", [outdated]);
-}
+/* 1000000 * 60 * 60 * 24 * 365 === 31536000000000 */
+if (date.now - env.modified < 31536000000000) template("note", [outdated]);
 %>
-<div style="border:solid #dddddd 2px; margin-right:262px; margin-bottom:12px;">
-<div style="background:#eeeeee; padding:2px;"><%- template("source", [$0]) %><span style="text-align:right; float:right;"><%- scriptableOutput %></span></div>
+<div style="border:solid #ddd 2px; margin-right:262px; margin-bottom:12px;">
+<div style="background:#eee; padding:2px;"><%- template("source", [$0]) %><span style="text-align:right; float:right;"><%- scriptableOutput %></span></div>
 <%
 var summary = $4;
 if (!$4) {
   summary = "<i>Please add a summary to this article.</i>";
 }
 %>
-<span style="padding-left:2px; padding-right:2px; padding-top:4px; padding-bottom:4px;"><%-summary%></span>
+<span style="padding: 4px 2px;"><%-summary%></span>
 <% if ($5) { %>
   <%- template("VersionTimeline", [$5, $3, $7, $6]) %>
 <% } %>
