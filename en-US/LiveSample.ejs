@@ -1,34 +1,27 @@
 <%
 // Creates a button offering a link to a live sample.
 //
-// Input parameters:
-//      Path of sample's file under developer.mozilla.org/
-//
-// See also: CSSLiveSample, DOMLiveSample, SVGLiveSample
-
-// var style = "cursor:pointer; padding: 5px; border: solid 1px #333; color: black; -moz-box-shadow:1px 1px 0 #ccc; -webkit-box-shadow:1px 1px 0 #ccc; -o-box-shadow:1px 1px 0 #ccc; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; background:-moz-linear-gradient(90deg, #FEF49C, #FFFFFF);";
-// cursor, color
-// var style = "padding: 5px; border: solid 1px #333; "
-
+// Input parameters: Path of sample's file under developer.mozilla.org/
 // Localizers: Add your language to the switch statement below
+// See also : HTMLLiveSample, CSSLiveSample, DOMLiveSample, SVGLiveSample
+
+var str,
+    target;
 
 switch(env.locale) {
-    case "de":
-        str = "Live-Beispiel ansehen";
-        break;
+    case 'de':
+        str = "Live-Beispiel ansehen"; break;
+    case 'fr':
+        str = "Voir l'exemple sur une page"; break;
     case "ja":
-        str = "実際の表示を確認";
-        break;
+        str = "実際の表示を確認"; break;
+    case 'zh-CN':
+        str = "查看示例"; break;
+    case 'zh-TW':
+        str = "查看示例"; break;
     default:
-        str = "View the live example";
-        break;
+        str = "View the live example"; break;
 }
 
-var target = "/" + $0;
-
-if ($0.charAt(0) == "/") {
-    target = $0;
-}
-%>
-
-<a class="button liveSample href="<%=target%>"><%=str%></a>
+target = ($0.charAt(0) == "/") ? $0 : "/" + $0;
+%><a class="button liveSample href="<%=target%>"><%=str%></a>
