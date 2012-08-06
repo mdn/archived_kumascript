@@ -10,30 +10,31 @@ var articleUrl = "Firefox " + version + " for developers";
 var note = "Firefox " + $0 + " note";
 
 switch(lang) {
-  case 'de':
-    articleUrl = "Firefox " + version + " für Entwickler";
-    note = "Hinweis zu Firefox " + $0;
-    break;
-  case 'es':
-    articleUrl = "Firefox " + version + " para desarrolladores";
-    note = "Nota sobre Firefox " + $0;
-    break;
-  case 'fr':
-    articleUrl = "Firefox " + version + " pour les développeurs";
-    note = "Note concernant Firefox " + $0;
-    break;
-  case 'ja':
-    articleUrl = "Firefox " + version + " for developers";
-    note = "Firefox " + $0 + " における注記";
-    break;
-  case 'pl':
-    articleUrl = "Firefox " + version + " dla programistów";
-    note = "Uwaga dotycząca Firefoksa " + $0;
-    break;
+    case 'de':
+        articleUrl = "Firefox " + version + " für Entwickler";
+        note = "Hinweis zu Firefox " + $0;
+        break;
+    case 'es':
+        articleUrl = "Firefox " + version + " para desarrolladores";
+        note = "Nota sobre Firefox " + $0;
+        break;
+    case 'fr':
+        articleUrl = "Firefox " + version + " pour les développeurs";
+        note = "Note concernant Firefox " + $0;
+        break;
+    case 'ja':
+        articleUrl = "Firefox " + version + " for developers";
+        note = "Firefox " + $0 + " における注記";
+        break;
+    case 'pl':
+        articleUrl = "Firefox " + version + " dla programistów";
+        note = "Uwaga dotycząca Firefoksa " + $0;
+        break;
+    default : break;
 }
 %>
 <div class="standardNote">
-  <p style="margin: 4px 0px; font-weight: bold;">
+  <p style="margin: 4px 0; font-weight: 700;">
    <%
    if ( wiki.pageexists(lang + '/' + articleUrl) ) {
         %><%-web.link(wiki.uri(lang + '/'+ articleUrl), note)%><%
@@ -42,5 +43,5 @@ switch(lang) {
    }
    %>
   </p>
-  <p style="margin: 4px 0px;"><%-$1%></p>
+  <p style="margin: 4px 0;"><%-$1%></p>
 </div>
