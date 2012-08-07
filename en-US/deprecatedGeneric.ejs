@@ -3,7 +3,7 @@
 /* second parameter: version of obsolescence (optional) */
 /*     prepend version with HTML, CSS, JS, or Gecko for those techs */
 /* third parameter: additional information required for the type specified by the first parameter */
-/*	 method requires the method name */
+/*     method requires the method name */
 
 var lang = env.locale;
 
@@ -13,14 +13,14 @@ var link = "";
 var tip = "";
 
 if ($1) {
-	var t = $1.toLowerCase();
-	var n = "";
+    var t = $1.toLowerCase();
+    var n = "";
 
 	if (string.startswith(t, "js")) {
 		n = string.trim(string.substr(t, 2));
 		ver = "JavaScript ";
 		if (string.length(n) > 0) {
-		  if(wiki.pageExists(lang + '/docs/JavaScript/New_in_JavaScript/' + n)) {
+		    if(wiki.pageExists(lang + '/docs/JavaScript/New_in_JavaScript/' + n)) {
 				link = '/' + lang + '/docs/JavaScript/New_in_JavaScript/' + n;
 			} else if(wiki.pageExists('/en-US/docs/JavaScript/New_in_JavaScript/' + n)) {
 				link = '/en-US/docs/JavaScript/New_in_JavaScript/' + n;
@@ -33,7 +33,7 @@ if ($1) {
 		n = string.trim(string.substr(t, 4));
 		ver = "HTML";
 		if (string.length(n) > 0) {
-		  if(wiki.pageExists('/' + lang + '/docs/HTML/HTML' + n)) {
+		    if(wiki.pageExists('/' + lang + '/docs/HTML/HTML' + n)) {
 				link = '/' + lang + 'docs//HTML/HTML' + n;
 			} else if(wiki.pageExists('/en-US/docs/HTML/HTML' + n)) {
 				link = '/en/HTML/HTML' + n;
@@ -50,12 +50,7 @@ if ($1) {
 	}
 	
 	n = string.trim(n);
-	if (string.length(n) > 0) {
-		ver = ver + n;
-	}
-	else {
-		ver = "";
-	}
+	ver = (string.length(n) > 0) ? ver + n : "";
 }
 
 // If there's a link, turn the version into a link to that URL
