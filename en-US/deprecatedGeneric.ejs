@@ -1,9 +1,9 @@
 <%
 /* first parameter: inline/header/method */
 /* second parameter: version of obsolescence (optional) */
-/*   prepend version with HTML, CSS, JS, or Gecko for those techs */
+/*     prepend version with HTML, CSS, JS, or Gecko for those techs */
 /* third parameter: additional information required for the type specified by the first parameter */
-/*   method requires the method name */
+/*	 method requires the method name */
 
 var lang = env.locale;
 
@@ -13,146 +13,146 @@ var link = "";
 var tip = "";
 
 if ($1) {
-  var t = $1.toLowerCase();
-  var n = "";
+	var t = $1.toLowerCase();
+	var n = "";
 
-  if (string.startswith(t, "js")) {
-    n = string.trim(string.substr(t, 2));
-    ver = "JavaScript ";
-    if (string.length(n) > 0) {
-      if(wiki.pageExists(lang + '/JavaScript/New_in_JavaScript/' + n)) {
-        link = '/' + lang + '/JavaScript/New_in_JavaScript/' + n;
-      } else if(wiki.pageExists('/en/JavaScript/New_in_JavaScript/' + n)) {
-        link = '/en/JavaScript/New_in_JavaScript/' + n;
-      }
-    }
-  } else if (string.startswith(t, "css")) {
-    n = string.trim(string.substr(t, 3));
-    ver = "CSS ";
-  } else if (string.startswith(t, "html")) {
-    n = string.trim(string.substr(t, 4));
-    ver = "HTML";
-    if (string.length(n) > 0) {
-      if(wiki.pageExists('/' + lang + '/HTML/HTML' + n)) {
-        link = '/' + lang + '/HTML/HTML' + n;
-      } else if(wiki.pageExists('/en/HTML/HTML' + n)) {
-        link = '/en/HTML/HTML' + n;
-      } else if(wiki.pageExists('/' + lang + '/HTML')) {
-        link = '/' + lang + '/HTML';
-      } else {
-        link = '/en/HTML';
-      }
-    }
-  } else if (string.startswith(t, "gecko")) {
-    n = string.trim(string.substr(t, 5));
-    ver = "Gecko ";
-    tip = template("geckoRelease", [n]);
-  }
-  
-  n = string.trim(n);
-  if (string.length(n) > 0) {
-    ver = ver + n;
-  }
-  else {
-    ver = "";
-  }
+	if (string.startswith(t, "js")) {
+		n = string.trim(string.substr(t, 2));
+		ver = "JavaScript ";
+		if (string.length(n) > 0) {
+		  if(wiki.pageExists(lang + '/docs/JavaScript/New_in_JavaScript/' + n)) {
+				link = '/' + lang + '/docs/JavaScript/New_in_JavaScript/' + n;
+			} else if(wiki.pageExists('/en-US/docs/JavaScript/New_in_JavaScript/' + n)) {
+				link = '/en-US/docs/JavaScript/New_in_JavaScript/' + n;
+			}
+		}
+	} else if (string.startswith(t, "css")) {
+		n = string.trim(string.substr(t, 3));
+		ver = "CSS ";
+	} else if (string.startswith(t, "html")) {
+		n = string.trim(string.substr(t, 4));
+		ver = "HTML";
+		if (string.length(n) > 0) {
+		  if(wiki.pageExists('/' + lang + '/docs/HTML/HTML' + n)) {
+				link = '/' + lang + 'docs//HTML/HTML' + n;
+			} else if(wiki.pageExists('/en-US/docs/HTML/HTML' + n)) {
+				link = '/en/HTML/HTML' + n;
+			} else if(wiki.pageExists('/' + lang + '/docs/HTML')) {
+				link = '/' + lang + '/docs/HTML';
+			} else {
+				link = '/en-US/docs/HTML';
+			}
+		}
+	} else if (string.startswith(t, "gecko")) {
+		n = string.trim(string.substr(t, 5));
+		ver = "Gecko ";
+		tip = template("geckoRelease", [n]);
+	}
+	
+	n = string.trim(n);
+	if (string.length(n) > 0) {
+		ver = ver + n;
+	}
+	else {
+		ver = "";
+	}
 }
 
 // If there's a link, turn the version into a link to that URL
 
 if (link.length) {
-  ver = web.link(link, ver);
+	ver = web.link(link, ver);
 }
 
 switch(lang) {
-  case 'de':
-    str = "Unerwünscht";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'es':
-    str = "Desaprobado";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'fr':
-    str = "Déprécié";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'it':
-    str = "Deprecato";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'ja':
-    str = "非推奨";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'ko':
-    str = "Deprecated";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'pl':
-    str = "Wycofywany";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'ru':
-    str = "Не рекомендуется";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'zh-cn':
-    str = "不推荐";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  case 'zh-tw':
-    str = "已正式宣告棄用";
-    if (ver.length) {
-      str = str + " " + ver;
-    }
-    break;
-  default:
-    str = "Deprecated";
-    if (ver.length) {
-      str = str + " since " + ver;
-    }
-    break;
+	case 'de':
+		str = "Unerwünscht";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	case 'es':
+		str = "Desaprobado";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	case 'fr':
+		str = "Déprécié";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	case 'it':
+		str = "Deprecato";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	case 'ja':
+		str = "非推奨";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	case 'ko':
+		str = "Deprecated";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	case 'pl':
+		str = "Wycofywany";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	case 'ru':
+		str = "Не рекомендуется";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	case 'zh-cn':
+		str = "不推荐";
+	if (ver.length) {
+		str = str + " " + ver;
+		}
+	break;
+	case 'zh-tw':
+		str = "已正式宣告棄用";
+		if (ver.length) {
+			str = str + " " + ver;
+		}
+	break;
+	default:
+		str = "Deprecated";
+		if (ver.length) {
+			str = str + " since " + ver;
+		}
+	break;
 }
 
 switch($0) {
-  case 'inline':
-    %><span class="deprecatedInline" title="<%=(tip)%>"><%-str%></span><%
-    break;
-  case 'header':
-    if (tip.length) {
-      str = str + " " + tip;
-    }
-    %><div class="deprecatedHeader">
-      <p style="margin: 4px 0px 4px 0px;"><%-str%></p>
-    </div><%
-    break;
-  case 'method':
-    if (tip.length) {
-      str = str + " " + tip;
-    }
-    %><div>
-      <span class="deprecatedMethod"><%-str%></span>
-      <h3><%-($2)%>()</h3>
-    </div><%
-    break;
+	case 'inline':
+		%><span class="inlineIndicator deprecated deprecatedInline" title="<%=(tip)%>"><%-str%></span><%
+		break;
+	case 'header':
+		if (tip.length) {
+			str = str + " " + tip;
+		}
+		%><div class="overheadIndicator deprecated deprecatedHeader">
+			<p style="margin: 4px 0;"><%-str%></p>
+		</div><%
+		break;
+	case 'method':
+		if (tip.length) {
+			str = str + " " + tip;
+		}
+		%><div>
+			<span class="deprecatedMethod"><%-str%></span>
+			<h3><%-($2)%>()</h3>
+		</div><%
+		break;
 }
 %>
