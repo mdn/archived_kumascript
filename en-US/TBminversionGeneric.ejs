@@ -77,13 +77,13 @@ switch($0) {
 	break;
 	case 'header':
 	%><div class="overheadIndicator tbMinVer standardNote">
-	  <p style="margin: 4px 0;"><%-text%></p>
+	  <p><%-text%></p>
 	  </div><%
 	break;
 	case 'note':
 	%><div class="overheadIndicator tbMinVer standardNote">
-	  <p style="margin: 4px 0; font-weight: 700;"><%- web.link(wiki.uri(lang + '/' + articleName), note) %></p>
-	  <p style="margin: 4px 0;"><%-$2%></p>
+	  <p><%- web.link(wiki.uri(lang + '/' + articleName), note) %></p>
+	  <p><%-$2%></p>
 	  </div><%
 	break;
 }
