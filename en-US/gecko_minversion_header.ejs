@@ -12,7 +12,7 @@ var s_introduced_in = mdn.localString({
     "zh-CN": "适用于 Gecko $0 以上"
 });
 %>
-<div class="standardNote"> 
+<div class="blockIndicator geckoMinVer standardNote"> 
 <p style="margin: 4px 0px;"><%- s_introduced_in.replace('$0', $0) %></p> 
 <%- template('geckoRelease', [$0]) %>
 </div>
