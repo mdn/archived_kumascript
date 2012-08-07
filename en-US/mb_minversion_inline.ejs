@@ -8,42 +8,42 @@ switch (env.locale) {
         s_title = 'Mobile $0 para desarrolladores';
         s_name = 'Mobile $0';
         s_text = 'Neu in $name';
-        break;
+    break;
     case 'es':
         s_title = 'Mobile $0 for developers';
         s_name = 'Mobile $0';
         s_text = 'Nuevo en $name';
-        break;
+    break;
     case 'fr':
         s_title = 'Mobile $0 pour les développeurs';
         s_name = 'Mobile $0';
         s_text = 'Nouveau dans $name';
-        break;
+    break;
     case 'ja':
         s_title = 'Mobile $0 for developers';
         s_name = 'Mobile $0';
         s_text = '$name の新機能';
-        break;
+    break;
     case 'ko':
         s_title = 'Mobile $0 for developers';
         s_name = 'Mobile $0';
         s_text = 'New in $name';
-        break;
+    break;
     case 'pl':
         s_title = 'Mobile $0 dla programistów';
         s_name = 'Firefoksie $0';
         s_text = 'Nowość w $name';
-        break;
+    break;
     case 'pt':
         s_title = 'Mobile $0 para desenvolvedores';
         s_name = 'Mobile $0';
         s_text = 'Novidade no $name';
-        break;
+    break;
     case 'zh-CN':
         s_title = 'Mobile $0 for developers';
         s_name = 'Mobile $0';
         s_text = 'New in $name';
-        break;
+    break;
 }
 
 var title = s_title.replace('$0', $0);
@@ -55,7 +55,7 @@ if (path && wiki.pageExists(path)) {
     text = s_text.replace('$name', name);
 }
 %>
-<span style="border: 1px solid rgb(129, 129, 81); padding: 2px; background-color: rgb(255, 255, 225); font-size: x-small; white-space: nowrap;"><%- text %></span>
+<span class="inlineIndicator mbMinVer" style="border: 1px solid rgb(129, 129, 81); padding: 2px; background-color: rgb(255, 255, 225); font-size: x-small; white-space: nowrap;"><%- text %></span>
 <% /*
 <div class="noinclude"><hr />
 <p>One of the <a title="Project:en/Custom_Templates#Version_information_templates" href="/Project:en/Custom_Templates#Version_information_templates">Version information templates</a>.<br />
