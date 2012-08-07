@@ -2,12 +2,13 @@
 /* one parameter: HTML version */
 
 var link = "HTML " + $0;
+var envLocale = env.locale;
+
 if ($0 == "4") {
-  link = web.link("/" + env.locale + "/docs/HTML", "HTML 4");
+    link = web.link("/" + envLocale + "/docs/HTML", "HTML 4");
 } else if ($0 == "5") {
-  link = web.link("/" + env.locale + "/docs/HTML/HTML5", "HTML5");
-}
-%>
-<span style="border: 1px solid rgb(129, 129, 250); background-color: rgb(174, 218, 229); font-size: x-small; white-space: nowrap; padding: 2px;">
+    link = web.link("/" + envLocale + "/docs/HTML/HTML5", "HTML5");
+}%>
+<span class="inlineIndicator htmlVer" style="border: 1px solid rgb(129, 129, 250); background: rgb(174, 218, 229); font-size: x-small; white-space: nowrap; padding: 2px;">
 <%- link %>
 </span>
