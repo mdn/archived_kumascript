@@ -1,6 +1,6 @@
 <%
 // Default strings (en-US)
-var s_top_url         = "en-US/XUL_Reference";
+var s_top_url         = "/XUL_Reference";
 var s_top_title       = "XUL Reference home";
 var s_examples_href   = "Examples";
 var s_examples        = "Examples";
@@ -15,7 +15,7 @@ var s_related         = "Related";
 
 switch (env.locale) {
     case 'de':
-        s_top_url         = "de/XUL_Referenz";
+        s_top_url         = "/XUL_Referenz";
         s_top_title       = "XUL Referenz Startseite";
         s_examples_href   = "Beispiele";
         s_examples        = "Beispiele";
@@ -29,7 +29,7 @@ switch (env.locale) {
         s_related         = "Verwandte Themen";
         break;
     case 'es':
-        s_top_url         = "es/XUL/Elementos";
+        s_top_url         = "/XUL/Elementos";
         s_top_title       = "Referencia de XUL";
         s_examples        = "Ejemplos";
         s_attributes      = "Atributos";
@@ -38,7 +38,7 @@ switch (env.locale) {
         s_related         = "Métodos";
         break;
     case 'fr':
-        s_top_url         = "fr/Référence_XUL";
+        s_top_url         = "/Référence_XUL";
         s_top_title       = "Accueil de la référence XUL";
         s_examples_href   = "Exemples";
         s_examples        = "Exemples";
@@ -52,7 +52,7 @@ switch (env.locale) {
         s_related         = "Sujets liés";
         break;
     case 'ja':
-        s_top_url         = "ja/XUL_Reference";
+        s_top_url         = "/XUL_Reference";
         s_top_title       = "XUL リファレンス HOME";
         s_examples        = "例";
         s_attributes      = "属性";
@@ -61,7 +61,7 @@ switch (env.locale) {
         s_related         = "関連項目";
         break;
     case 'ko':
-        s_top_url         = "ko/XUL_Reference";
+        s_top_url         = "/XUL_Reference";
         s_examples        = "예제";
         s_attributes      = "Attributes";
         s_properties      = "Properties";
@@ -69,7 +69,7 @@ switch (env.locale) {
         s_related         = "관련 항목";
         break;
     case 'pl':
-        s_top_url         = "pl/Dokumentacja_XUL";
+        s_top_url         = "/Dokumentacja_XUL";
         s_top_title       = "Dokumentacja XUL";
         s_examples_href   = "Przyk.C5.82ady";
         s_examples        = "Przykłady";
@@ -83,7 +83,7 @@ switch (env.locale) {
         s_related         = "Podobne";
         break;
     case 'ru':
-        s_top_url         = "ru/XUL/Справочник";
+        s_top_url         = "/XUL/Справочник";
         s_top_title       = "Справочник по XUL";
         s_examples        = "Примеры";
         s_attributes      = "Атрибуты";
@@ -92,7 +92,7 @@ switch (env.locale) {
         s_related         = "См. также";
         break;
     case 'zh-CN':
-        s_top_url         = "zh-CN/XUL_Reference";
+        s_top_url         = "/XUL_Reference";
         s_examples        = "示例";
         s_attributes      = "属性";
         s_properties      = "特性";
@@ -101,7 +101,7 @@ switch (env.locale) {
         break;
 }
 %>
- « <a href="/docs/<%=s_top_url%>"><%=s_top_title%></a>    [ 
+ « <a href="/<%= env.locale %>/docs<%=s_top_url%>"><%=s_top_title%></a>    [ 
  <a href="#<%=s_examples_href%>"><%=s_examples%></a> | 
  <a href="#<%=s_attributes_href%>"><%=s_attributes%></a> | 
  <a href="#<%=s_properties_href%>"><%=s_properties%></a> | 
