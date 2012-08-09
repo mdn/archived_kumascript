@@ -1,30 +1,25 @@
 <%
 var lang = env.locale;
-var attrName = "Attribute";
 var anch = "a-" + $0;
 var dispApi = $0;
 if ($1) {
   dispApi = $1;
 }
 
-switch(lang) {
-  case 'fr':
-    attrName = "Attributs";
-    break;
-  case 'pl':
-    attrName = "Atrybut";
-    break;
-}
+var attrName = mdn.localString({
+  "en-US": "Attribute",
+  "fr": "Attributs",
+  "pl": "Atrybut"
+});
 
-var destOldType = lang + '/XUL:' + attrName + ':' + $0;
-var destNewType = lang + '/XUL/' + attrName + '/' + $0;
+var destOldType = lang + '/docs/XUL:' + attrName + ':' + $0;
+var destNewType = lang + '/docs/XUL/' + attrName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
   %><code><span id="<%= anch %>"><%-(web.link(wiki.uri(destNewType), dispApi))%></span></code><%
 } else if (wiki.pageExists(destOldType)) {
   %><code><span id="<%= anch %>"><%-(web.link(wiki.uri(destOldType), dispApi))%></span></code><%
 } else {
-  var targeturi = "/docs/new?slug=" + destNewType;
-  %><code><a rel="internal" href="<%=targeturi%>" class="new"><%=dispApi%></a></code><%
+  %><code><span id="<%= anch %>"><%-(web.link(wiki.uri(destNewType), dispApi))%></span></code><%
 }
 %>
