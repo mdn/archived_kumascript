@@ -2,17 +2,17 @@
 var found,
     width  = $1 > 0 ? $1 : 250,
     height = $2 > 0 ? $2 : 250;
-
+ 
 env.files.forEach(function (aFile) {
     if(!found && $0 === aFile.filename) {
         found = true;
 %>
-<object type="image/svg+xml" data="<%- aFile.url %>" width="<%- width %>" height="<%- height %>"></object>
+<iframe src="<%- aFile.url %>" width="<%- width %>" height="<%- height %>" frameborder="0" sandbox="allow-scripts"></iframe>
 <%
     }
 });
-
-if (!found) {
+ 
+if (!found) {
 %><p>Unable to find file <em><%= $0 %></em></p><%
 }
 %>
