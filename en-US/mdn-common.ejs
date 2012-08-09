@@ -100,10 +100,7 @@
                     url: url
                 }, function(err, resp, body) {
                     if(resp && 200 == resp.statusCode) {
-                        next('[' + body + ']');
-                    }
-                    else {
-                        next("callback bad :(");
+                        next(body);
                     }
                 });
             } catch(e) {
