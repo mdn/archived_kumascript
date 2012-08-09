@@ -4,32 +4,22 @@ var lang = env.locale;
 
 var propName = "Property";
 var anch = "p-" + $0;
-var dispApi = $0;
-if ($1) {
-  dispApi = $1;
-}
+var dispApi = ($1 || $0);
 
-switch(lang) {
-  case 'de':
-    propName = "Eigenschaften";
-    break;
-  case 'fr':
-    propName = "Propriétés";
-    break;
-  case 'pl':
-    propName = "Wlasnosc";
-    break;
-}
+var propName = mdn.localString({
+  "en-US": "Property",
+  "de": "Eigenschaften",
+  "pl": "Wlasnosc"
+});
 
-var destOldType = lang + '/XUL:' + propName + ':' + $0;
-var destNewType = lang + '/XUL/' + propName + '/' + $0;
+var destOldType = lang + '/docs/XUL:' + propName + ':' + $0;
+var destNewType = lang + '/docs/XUL/' + propName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
   %><code><span><%-(web.link(wiki.uri(destNewType), dispApi))%></span></code><%
 } else if (wiki.pageExists(destOldType)) {
   %><code><span><%-(web.link(wiki.uri(destOldType), dispApi))%></span></code><%
 } else {
-  var targeturi = "/docs/new?slug=XUL/" + propName + "/" + $0;
-  %><code><a rel="internal" href="<%=(targeturi)%>" class="new"><%=(dispApi)%></a></code><%
+  %><code><span><%-(web.link(wiki.uri(destNewType), dispApi))%></span></code><%
 }
 %>
