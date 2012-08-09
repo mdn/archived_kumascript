@@ -9,14 +9,12 @@ var lang = env.locale;
 var str = "Gecko " + $0 + " note";
 
 switch(lang) {
-  case 'de':
-    str = "Hinweis zu Gecko " + $0;
-    break;
-  case 'zh_tw':
-  case 'tw':
-    str = "Gecko " + $0 + " 備註";
+    case 'de': str = "Hinweis zu Gecko " + $0; break;
+    case 'zh-TW': str = "Gecko " + $0 + " 備註"; break;
+    default: break;
 }
 %>
+
 <div class="geckoVersionHeading">
 <%=str%>
 <div style="font-size:9px; position:relative; top:-5px; font-style:italic;"><%=template('geckoRelease', [$0])%></div>
