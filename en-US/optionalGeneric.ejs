@@ -1,34 +1,37 @@
-<%
-/*
- * first parameter: inline/method
- * second parameter: version became optional (optional)
- * third parameter: additional information required for the type specified by the first parameter
+<% /*
+ * parameter 0: "inline" or "method"
+ * parameter 1: string of indicator
+ * parameter 2: string of heading
 */
 
+
 var str = "Optional" + ($1 ? ' from Gecko ' + $1 : '');
-switch(env.locale){
-  case 'zh-CN':
-    str = "可选" + ($1 ? '试用于Gecko ' + $1 : '');
-    break;
-  case 'zh-TW':
-    str = ($1 ? '自 Gecko ' + $1 + '開始變為' : '') + "選擇性";
-    break;
+
+switch(env.locale) {
+    case 'zh-CN':
+        str = "可选" + ($1 ? '试用于Gecko ' + $1 : '');
+        break;
+    case 'zh-TW':
+        str = ($1 ? '自 Gecko ' + $1 + '開始變為' : '') + "選擇性";
+        break;
+    default: break;
 }
 
 var attr = "";
-if ($1){
-  attr = template("geckoRelease", [$1]);
-}
+
+if ($1) attr = template("geckoRelease", [$1]);
 
 switch($0) {
-  case 'inline':
-    %><span title="<%=attr%>" class="optionalInline"><%- str %></span><%
-    break;
-  case 'method':
-    %><div>
-      <span title="<%=attr%>" class="optionalMethod"><%- str %></span>
-      <h3><%= $2 %>()</h3>
-      </div><%
-    break;
-}
-%>
+    case 'inline':
+        %><span title="<%=attr%>" class="optionalInline"><%- str %></span><%
+        break;
+    case 'method':
+        %><div>
+            <span title="<%=attr%>" class="optionalMethod"><%- str %></span>
+            <h3><%= $2 %></h3>
+        </div><%
+        break;
+    default :
+        %><span title="<%=attr%>" class="optionalInline"><%- str %></span><%
+        break;
+}%>
