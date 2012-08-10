@@ -5,18 +5,15 @@
 */
  
 var s_str = mdn.localString({
-  "en-US": ["Native code only!","This method may only be called from C++; don't use it from JavaScript."]
+    "en-US": ["Native code only!","This method may only be called from C++; don't use it from JavaScript."]
 });
  
 switch($0) {
-  case 'inline':
-    %><span title="<%- s_str[1] %>" class="noscriptInline"><%- s_str[0] %></span><%
-    break;
-  case 'method':
-    %><div>
-      <span title="<%- s_str[1] %>" class="noscriptMethod"><%- s_str[0] %></span>
-      <h3><%= $1 %>()</h3>
-      </div><%
-    break;
+    case 'inline':
+        %><span title="<%- s_str[1] %>" class="noscriptInline"><%- s_str[0] %></span><%
+        break;
+    case 'method':
+        %><div><span title="<%- s_str[1] %>" class="noscriptMethod"><%- s_str[0] %></span><h3><%= $1 %></h3></div><%
+        break;
 }
 %>
