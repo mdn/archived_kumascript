@@ -1,9 +1,10 @@
-<%
-/* first parameter: inline/header/method */
-/* second parameter: version of obsolescence (optional) */
-/*     prepend version with HTML, CSS, JS, or Gecko for those techs */
-/* third parameter: additional information required for the type specified by the first parameter */
-/*     method requires the method name */
+<% /*
+$0: inline/header/method
+$1: version of obsolescence (optional)
+     prepend version with HTML, CSS, JS, or Gecko for those techs
+$2: additional information required for the type specified by the first parameter
+     method requires the method name
+*/
 
 var lang = env.locale;
 
@@ -16,11 +17,11 @@ if ($1) {
     var t = $1.toLowerCase();
     var n = "";
 
-	if (string.startswith(t, "js")) {
+    if (string.startswith(t, "js")) {
 		n = string.trim(string.substr(t, 2));
 		ver = "JavaScript ";
 		if (string.length(n) > 0) {
-		    if(wiki.pageExists(lang + '/docs/JavaScript/New_in_JavaScript/' + n)) {
+    		if(wiki.pageExists(lang + '/docs/JavaScript/New_in_JavaScript/' + n)) {
 				link = '/' + lang + '/docs/JavaScript/New_in_JavaScript/' + n;
 			} else if(wiki.pageExists('/en-US/docs/JavaScript/New_in_JavaScript/' + n)) {
 				link = '/en-US/docs/JavaScript/New_in_JavaScript/' + n;
@@ -55,77 +56,53 @@ if ($1) {
 
 // If there's a link, turn the version into a link to that URL
 
-if (link.length) {
-	ver = web.link(link, ver);
-}
+if (link.length) { ver = web.link(link, ver); }
 
 switch(lang) {
 	case 'de':
 		str = "Unerwünscht";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " " + ver; }
+	    break;
 	case 'es':
 		str = "Desaprobado";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " " + ver; }
+	    break;
 	case 'fr':
 		str = "Déprécié";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " " + ver; }
+	    break;
 	case 'it':
 		str = "Deprecato";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " " + ver; }
+	    break;
 	case 'ja':
 		str = "非推奨";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " " + ver; }
+    	break;
 	case 'ko':
 		str = "Deprecated";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " " + ver; }
+	    break;
 	case 'pl':
 		str = "Wycofywany";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " " + ver; }
+    	break;
 	case 'ru':
 		str = "Не рекомендуется";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
-	case 'zh-cn':
+		if (ver.length) { str = str + " " + ver; }
+	    break;
+	case 'zh-CN':
 		str = "不推荐";
-	if (ver.length) {
-		str = str + " " + ver;
-		}
-	break;
-	case 'zh-tw':
+	    if (ver.length) { str = str + " " + ver; }
+	    break;
+	case 'zh-TW':
 		str = "已正式宣告棄用";
-		if (ver.length) {
-			str = str + " " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " " + ver; }
+	    break;
 	default:
 		str = "Deprecated";
-		if (ver.length) {
-			str = str + " since " + ver;
-		}
-	break;
+		if (ver.length) { str = str + " since " + ver; }
+	    break;
 }
 
 switch($0) {
@@ -133,21 +110,17 @@ switch($0) {
 		%><span class="inlineIndicator deprecated deprecatedInline" title="<%=(tip)%>"><%-str%></span><%
 		break;
 	case 'header':
-		if (tip.length) {
-			str = str + " " + tip;
-		}
+		if (tip.length) { str = str + " " + tip; }
 		%><div class="overheadIndicator deprecated deprecatedHeader">
-			<p style="margin: 4px 0;"><%-str%></p>
+			<p><%-str%></p>
 		</div><%
 		break;
 	case 'method':
-		if (tip.length) {
-			str = str + " " + tip;
-		}
+		if (tip.length) { str = str + " " + tip; }
 		%><div>
 			<span class="deprecatedMethod"><%-str%></span>
-			<h3><%-($2)%>()</h3>
+			<h3><%-($2)%></h3>
 		</div><%
 		break;
-}
-%>
+    default: break;
+}%>
