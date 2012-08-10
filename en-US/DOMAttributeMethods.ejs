@@ -6,41 +6,44 @@ var tableHead3 = 'DOM Level 1 methods for dealing with <code>Attr</code> nodes d
 var tableHead4 = 'DOM Level 2 namespace-aware methods for dealing with <code>Attr</code> nodes directly (seldom used)';
 
 switch(env.locale) {
-  case 'es':
-    var tableTitle = 'Métodos DOM que tratan con atributos de elementos:';
-    break;
-  case 'fr':
-    var tableTitle = 'Méthodes DOM traitant des attributs sur les éléments :';
-    var tableHead1 = 'DOM Level 1 (le plus courant)';
-    var tableHead2 = 'DOM Level 2';
-    var tableHead3 = 'DOM Level 1 traitant directement les nœuds <code>Attr</code>';
-    var tableHead4 = 'DOM Level 2 traitant directement les nœuds <code>Attr</code>';
-    break;
-  case 'ja':
-    var tableTitle = 'DOMメソッドは要素の属性を取り扱います。';
-    var tableHead1 = '名前空間に無関係、最も一般的に使用されるメソッド';
-    var tableHead2 = '名前空間に限定される変数 (DOM Level 2)';
-    var tableHead3 = '<code>Attr</code> ノードを直接扱うためのDOMレベル1のメソッド (ほとんど使用されない)';
-    var tableHead4 = '<code>Attr</code> ノードを直接扱うための DOMレベル2 名前空間に限定されるメソッド(ほとんど使用されない)';
-    break;
-  case 'pl':
-    var tableTitle = 'Metody DOM do obsługi atrybutów to:';
-    var tableHead1 = 'DOM Level 1 <small>(brak obsługi przestrzeni nazw, najczęściej używane)</small>';
-    var tableHead2 = 'DOM Level 2 <small>(obsługa przestrzeni nazw)</small>';
-    var tableHead3 = 'DOM Level 1 <small>- praca bezpośrednio z węzłami <code>Attr</code> (rzadko używane)';
-    var tableHead4 = 'DOM Level 2 <small>- praca bezpośrednio z węzłami <code>Attr</code>, z obsługą przestrzeni nazw (rzadko używane)</small>';
-    break;
+    case 'es':
+        tableTitle = 'Métodos DOM que tratan con atributos de elementos:';
+        break;
+    case 'fr':
+        tableTitle = 'Méthodes DOM traitant des attributs sur les éléments :';
+        tableHead1 = 'DOM Level 1 (le plus courant)';
+        tableHead2 = 'DOM Level 2';
+        tableHead3 = 'DOM Level 1 traitant directement les nœuds <code>Attr</code>';
+        tableHead4 = 'DOM Level 2 traitant directement les nœuds <code>Attr</code>';
+        break;
+    case 'ja':
+        tableTitle = 'DOMメソッドは要素の属性を取り扱います。';
+        tableHead1 = '名前空間に無関係、最も一般的に使用されるメソッド';
+        tableHead2 = '名前空間に限定される変数 (DOM Level 2)';
+        tableHead3 = '<code>Attr</code> ノードを直接扱うための DOM レベル 1 のメソッド (ほとんど使用されない)';
+        tableHead4 = '<code>Attr</code> ノードを直接扱うための DOM レベル 2 名前空間に限定されるメソッド(ほとんど使用されない)';
+        break;
+    case 'pl':
+        tableTitle = 'Metody DOM do obsługi atrybutów to:';
+        tableHead1 = 'DOM Level 1 <small>(brak obsługi przestrzeni nazw, najczęściej używane)</small>';
+        tableHead2 = 'DOM Level 2 <small>(obsługa przestrzeni nazw)</small>';
+        tableHead3 = 'DOM Level 1 <small>- praca bezpośrednio z węzłami <code>Attr</code> (rzadko używane)';
+        tableHead4 = 'DOM Level 2 <small>- praca bezpośrednio z węzłami <code>Attr</code>, z obsługą przestrzeni nazw (rzadko używane)</small>';
+        break;
+    default: break;
 }
 %>
 <%- tableTitle %>
 <table class="fullwidth-table">
-<tbody>
+<thead>
 <tr>
 <th><%- tableHead1 %></th>
 <th><%- tableHead2 %></th>
 <th><%- tableHead3 %></th>
 <th><%- tableHead4 %></th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><%- template("domxref",["element.setAttribute","setAttribute"]) %> (DOM 1)</td>
 <td><%- template("domxref",["element.setAttributeNS","setAttributeNS"]) %></td>
