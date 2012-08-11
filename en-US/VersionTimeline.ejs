@@ -3,7 +3,7 @@
 /* parameters: version created, version last changed, version obsoleted (optional), version deprecated (optional) */
 /* specify 0 for obsoleted if it's deprecated but not yet obsolete */
 
-var currentGecko = "15.0";  // Update this to current Gecko version
+var currentGecko = "17.0";  // Update this to current Gecko version
 var unitBlob = template("xverblob", ["1"]);
 var currentBlob = template("xverblob", [currentGecko]) - unitBlob;
 var u = uri.parts(env.url);
