@@ -17,11 +17,11 @@ var str = mdn.localString({
 
 switch($0) {
   case 'inline':
-    %><span class="nonStandardInline"><%-str%></span><%
+    %><span class="inlineIndicator nonStandard nonStandardInline"><%-str%></span><%
     break;
   case 'header':
-    %><div class="nonStandardHeader">
-      <p style="margin: 4px 0px 4px 0px;"><%-str%></p>
+    %><div class="overheadIndicator nonStandard nonStandardHeader">
+      <p><%-str%></p>
       </div><%
     break;
 }
