@@ -1,1 +1,9 @@
-<%- optionalGeneric("inline",$0) %>
+<% 
+var result;
+if ($0) {
+    result = template("optionalGeneric", ["inline",$0]);
+} else {
+    result = template("optionalGeneric", ["inline"]);
+}
+%>
+<%- result %>
