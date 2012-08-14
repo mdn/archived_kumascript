@@ -31,13 +31,13 @@ switch (env.locale) {
         s_draft = '編撰中';
         s_not_complete = '本頁仍未完成';
         break;
-    case 'pt':
+    case 'pt-PT':
         s_draft = 'ESBOÇO';
         s_not_complete = 'Esta página está incompleta.';
         break;
 }
 %>
-<div style="margin: 1em 0px; padding: 1em; background-color: rgb(255, 255, 204); text-align: center;">
+<div class="overheadIndicator" style="padding: 1em; background: #ffc;">
 <strong><%=s_draft%></strong>
-<div style="font-size: x-small;"><%=s_not_complete%></div>
+<div style="font-size:small;"><%=s_not_complete%></div>
 </div>
