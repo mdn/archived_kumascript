@@ -4,7 +4,7 @@
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/Web.Link)
     link: function (uri, text, title, target) {
         var out = [
-            '<a href="' + kuma.htmlEscape(uri) + '"'
+            '<a href="' + this.spacesToUnderscores(kuma.htmlEscape(uri)) + '"'
         ];
         if (title) {
             out.push(' title="' + kuma.htmlEscape(title) + '"');
