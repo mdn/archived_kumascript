@@ -19,10 +19,10 @@ var s_PreviousNext = mdn.localString({
 var strPrevious = "";
 var strNext = "";
 if ($0) {
-  strPrevious = "<a style='float: left;' href='/" + lang + "/docs/" + $0 + "'>" + s_PreviousNext[0] + "</a>";
+  strPrevious = "<a style='float: left;' href='/" + lang + "/docs/" + string.replace($0, ' ', '_') + "'>" + s_PreviousNext[0] + "</a>";
 }
 if ($1) {
-  strNext = "<a href='/" + lang + "/docs/" + $1 + "'>" + s_PreviousNext[1] + "</a>";
+  strNext = "<a href='/" + lang + "/docs/" + string.replace($1, ' ', '_') + "'>" + s_PreviousNext[1] + "</a>";
 }
 %>
 <div class="prevnext">
