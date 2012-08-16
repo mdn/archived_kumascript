@@ -99,5 +99,11 @@
                 next(null);
             }            
         });
+    },
+    
+    /* Returns the appropriate string (usually a comma+space) for usage in a enumeration list for the current locale */
+    listSeparator: function() {
+        var listSeparators = { "en-US": ", ", "ar": "،", "fa": "،", "ja": "、", "ko": "·", "mn": "᠂", "ur": "،", "zh−TW": "、" };
+        return mdn.localString(listSeparators);
     }
 } %>
