@@ -1,3 +1,8 @@
-
-<p><span class="script"> var s = xml.text(getRelativeURL($0));<br />
-Note("The content of this page has been merged into " + web.link(s, wiki.getPage(string.remove(s, string.IndexOf(s, "#"))).title) + ".")</span></p>
+<%
+var p = kuma.url.parse(wiki.kumaPath($0), true);
+var pageNewTite = (wiki.getPage(p.path).title || p.path);
+var str = template("NoteStart");
+str += "The content of this page has been merged into " + web.link(p.href, pageNewTite) + ".";
+str += template("NoteEnd");
+%>
+<%- str %>
