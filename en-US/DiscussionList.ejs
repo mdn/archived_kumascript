@@ -1,84 +1,97 @@
 <%
-/* get the page language */
-var lang = env.locale;
+var lang = env.locale /* get the page language */ ; 
+var mailingList, newsgroup, googleGroup, webFeed;
 
-var mailingList = " as a mailing list";
-var newsgroup = " as a newsgroup";
-var googleGroup = " as a Google Group";
-var webFeed = " as a Web feed";
 
+
+/* Translation Targets
+    * " mailingList"
+	* " newsgroup"
+	* " googleGroup"
+	* " webFeed"
+*/
 switch(lang) {
-  case 'ca':
-    mailingList = " com una llista de correu";
-    newsgroup = " com un grup de discussió";
-    googleGroup = " com un grup de Google";
-    webFeed = " com un canal web";
-    break;
-  case 'cs':
-    mailingList = " e-mailovou konferenci";
-    newsgroup = " diskuzní skupinu";
-    googleGroup = " Google Group";
-    webFeed = " RSS kanál";
-    break;
-  case 'de':
-    mailingList = " als Mailing-Liste";
-    newsgroup = " als Newsgroup";
-    googleGroup = " als Google Group";
-    webFeed = " als Web Feed";
-    break;
-  case 'es':
-    mailingList = " como lista de correo";
-    newsgroup = " como grupo de noticias";
-    googleGroup = " como grupo de Google";
-    webFeed = " como RSS";
-    break;
-  case 'fi':
-    mailingList = " sähköposti listana";
-    newsgroup = " uutisryhmänä";
-    googleGroup = " Google Rymänä";
-    webFeed = " RSS kanál";
-    break;
-  case 'fr':
-    mailingList = " Liste de diffusion";
-    newsgroup = " Newsgroup";
-    googleGroup = " Groupe Google";
-    webFeed = " Flux de syndication";
-    break;
-  case 'it':
-    mailingList = " come mailing list";
-    newsgroup = " come newsgroup";
-    googleGroup = " come Gruppo su Google";
-    webFeed = " come Web feed";
-    break;
-  case 'ja':
-    mailingList = " メーリングリストとして";
-    newsgroup = " ニュースグループとして";
-    googleGroup = " Google Group として";
-    webFeed = " フィードとして";
-    break;
-  case 'ko':
-    mailingList = " 메일링 리스트";
-    newsgroup = " 뉴스그룹";
-    googleGroup = " Google 그룹";
-    webFeed = " 웹 Feed";
-    break;
-  case 'pl':
-    mailingList = " jako listę dyskusyjna";
-    newsgroup = " jako newsgroup";
-    googleGroup = " jako grupę Google";
-    webFeed = " jako kanał";
-    break;
-  case 'zh-CN':
-    mailingList = " 邮件列表";
-    newsgroup = " 新闻组";
-    googleGroup = " Google Group（中文）";
-    webFeed = " Web feed";
-    break;
-}
-%>
-<ul>
-  <li><%- web.link('https://lists.mozilla.org/listinfo/' + $0, mailingList) %></li>
-  <li><%- web.link('news://news.mozilla.org/' + $1, newsgroup) %></li>
-  <li><%- web.link('http://groups.google.com/group/' + $1, googleGroup) %></li>
-  <li><%- web.link('http://groups.google.com/group/' + $1 + '/feeds', webFeed) %></li>
+	case 'ca':
+		mailingList = " com una llista de correu";
+		newsgroup = " com un grup de discussió";
+		googleGroup = " com un grup de Google";
+		webFeed = " com un canal web";
+		break;
+	case 'cs':
+		mailingList = " e-mailovou konferenci";
+		newsgroup = " diskuzní skupinu";
+		googleGroup = " Google Group";
+		webFeed = " RSS kanál";
+		break;
+	case 'de':
+		mailingList = " als Mailing-Liste";
+		newsgroup = " als 		newsgroup";
+		googleGroup = " als Google Group";
+		webFeed = " als Web Feed";
+		break;
+	case 'es':
+		mailingList = " como lista de correo";
+		newsgroup = " como grupo de noticias";
+		googleGroup = " como grupo de Google";
+		webFeed = " como RSS";
+		break;
+	case 'fi':
+		mailingList = " sähköposti listana";
+		newsgroup = " uutisryhmänä";
+		googleGroup = " Google Rymänä";
+		webFeed = " RSS kanál";
+		break;
+	case 'fr':
+		mailingList = " Liste de diffusion";
+		newsgroup = " 		newsgroup";
+		googleGroup = " Groupe Google";
+		webFeed = " Flux de syndication";
+		break;
+	case 'it':
+		mailingList = " come mailing list";
+		newsgroup = " come 		newsgroup";
+		googleGroup = " come Gruppo su Google";
+		webFeed = " come Web feed";
+		break;
+	case 'ja':
+		mailingList = " メーリングリストとして";
+		newsgroup = " ニュースグループとして";
+		googleGroup = " Google Group として";
+		webFeed = " フィードとして";
+		break;
+	case 'ko':
+		mailingList = " 메일링 리스트";
+		newsgroup = " 뉴스그룹";
+		googleGroup = " Google 그룹";
+		webFeed = " 웹 Feed";
+		break;
+	case 'pl':
+		mailingList = " jako listę dyskusyjna";
+		newsgroup = " jako 		newsgroup";
+		googleGroup = " jako grupę Google";
+		webFeed = " jako kanał";
+		break;
+	case 'zh-CN':
+		mailingList = " 邮件列表";
+		newsgroup = " 新闻组";
+		googleGroup = " Google Group（中文）";
+		webFeed = " Web feed";
+		break;
+	case 'zh-TW':
+		mailingList = " 郵件討論";
+		newsgroup = " 新聞群組";
+		googleGroup = " Google 群組";
+		webFeed = " feed 消息來源";
+		break;
+	default:
+		mailingList = " as a mailing list";
+		newsgroup = " as a 		newsgroup";
+		googleGroup = " as a Google Group";
+		webFeed = " as a Web feed";
+		break;
+}%><ul>
+  <li><%- web.link('https://lists.mozilla.org/listinfo/' + $0, 		mailingList) %></li>
+  <li><%- web.link('news://news.mozilla.org/' + $1, 		newsgroup) %></li>
+  <li><%- web.link('http://groups.google.com/group/' + $1, 		googleGroup) %></li>
+  <li><%- web.link('http://groups.google.com/group/' + $1 + '/feeds', 		webFeed) %></li>
 </ul>
