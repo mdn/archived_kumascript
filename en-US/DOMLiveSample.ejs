@@ -2,20 +2,19 @@
 /* one parameter: name of sample's file in /samples/domref */
 /* get the page language */
 
-var lang = env.locale;
-var str = "View the live example";
 var target = "/samples/domref/" + $0;
 
-// Localizers: add a case to this switch statement
-// for your language
-
-switch(lang) {
-  case 'de': str = "Live-Beispiel ansehen"; break;
-  case 'fr': str = "Voir l'exemple sur une page"; break;
-  case 'ja': str = "実際の表示を確認"; break;
-  case 'zh-CN': str = "查看示例"; break;
-  case 'zh-TW': str = "查看示例"; break;
-  default : break;
-}
+// Localizers: add a case to hear for your language
+var str = mdn.localString({
+    "en-US": "View Live Examples",
+	"es":    "Ver El Ejemplo Vivo",
+	"de":    "Live-Beispiel ansehen",
+	"fr":    "Voir l'exemple sur une page",
+	"ja":    "実際の表示を確認",
+	"ko":    "실제 예제 보기",
+	"pl":    "Zobacz przykład",
+	"zh-CN": "查看在线演示",
+	"zh-TW": "查看示例"
+});
 
 %><a class="button liveSample" href="<%=target%>"><%-str%></a>
