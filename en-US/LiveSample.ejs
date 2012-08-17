@@ -2,12 +2,10 @@
 // Creates a button offering a link to a live sample.
 //
 // Input parameters: Path of sample's file under developer.mozilla.org/
-// Localizers: Add your language to the switch statement below
+// Localizers: Add your language to the object.
 // See also : HTMLLiveSample, CSSLiveSample, DOMLiveSample, SVGLiveSample
 
-var str, target;
-
-str = mdn.localString({
+var str = mdn.localString({
     "en-US": "View Live Examples",
 	"es":    "Ver El Ejemplo Vivo",
 	"de":    "Live-Beispiel ansehen",
@@ -19,5 +17,5 @@ str = mdn.localString({
 	"zh-TW": "查看示例"
 });
 
-target = ($0.charAt(0) == "/") ? $0 : "/" + $0;
+var target = ($0.charAt(0) == "/") ? $0 : "/" + $0;
 %><a class="button liveSample" href="<%=target%>"><%=str%></a>
