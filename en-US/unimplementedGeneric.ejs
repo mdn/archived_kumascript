@@ -32,16 +32,16 @@ if ($1 && $0 != 'method') {
 
 switch($0) {
   case 'inline':
-    %><span class="unimplementedInline"><%-str%></span><%
+    %><span class="inlineIndicator unimplemented unimplementedInline"><%-str%></span><%
     break;
   case 'header':
-    %><div class="unimplementedHeader">
-      <p style="margin: 4px 0px 4px 0px;"><%-str%></p>
+    %><div class="overheadIndicator unimplemented unimplementedHeader">
+      <p><%-str%></p>
       </div><%
     break;
   case 'method':
     %><div>
-      <span class="unimplementedMethod" style="border: 1px solid #FF0000; background-color: #FEBCBC; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;"><%- str %></span>
+      <span class="unimplemented unimplementedMethod" style="border: 1px solid #FF0000; background-color: #FEBCBC; padding: 2px; font-size: small; font-weight: bold; float: right; vertical-align: middle; white-space: nowrap;"><%- str %></span>
       <h3><%= $2 %>()</h3>
       </div><%
     break;
