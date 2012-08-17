@@ -77,12 +77,12 @@ switch($0) {
       </span><%
     break;
   case 'header':
-    %><div class="overheadIndicator standardNote standardNoteHeader">
+    %><div class="overheadIndicator standardNote standardNoteBlock">
       <p><%-text%></p>
       </div><%
     break;
   case 'note':
-    %><div class="blockIndicator standardNote standardNote">
+    %><div class="blockIndicator standardNote standardNoteBlock">
       <p><%- web.link(wiki.uri(lang + '/docs/' + articleName), note) %></p>
       <p style="font-weight:400;"><%-$3%></p>
       </div><%
