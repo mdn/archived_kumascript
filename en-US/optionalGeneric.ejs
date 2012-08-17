@@ -23,7 +23,7 @@ if ($1) attr = template("geckoRelease", [$1]);
 
 switch($0) {
     case 'inline':
-        %><span class="optionalInline optionalNote"><%- str %></span><%
+        %><span class="inlineIndicator optionalInline optionalNote"><%- str %></span><%
         break;
     case 'method':
         %><div>
@@ -32,6 +32,6 @@ switch($0) {
         </div><%
         break;
     default :
-        %><span class="optionalInline optionalNote"><%- str %></span><%
+        %><span class="inlineIndicator optionalInline optionalNote"><%- str %></span><%
         break;
 }%>
