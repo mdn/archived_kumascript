@@ -5,25 +5,19 @@
 // Localizers: Add your language to the switch statement below
 // See also : HTMLLiveSample, CSSLiveSample, DOMLiveSample, SVGLiveSample
 
-var str,
-    target;
+var str, target;
 
-switch(env.locale) {
-    case 'es':
-        str = "Ver El Ejemplo Vivo"; break;
-    case 'de':
-        str = "Live-Beispiel ansehen"; break;
-    case 'fr':
-        str = "Voir l'exemple sur une page"; break;
-    case "ja":
-        str = "実際の表示を確認"; break;
-    case 'zh-CN':
-        str = "查看示例"; break;
-    case 'zh-TW':
-        str = "查看示例"; break;
-    default:
-        str = "View the live example"; break;
-}
+str = mdn.localString({
+    "en-US": "View Live Examples",
+	"es":    "Ver El Ejemplo Vivo",
+	"de":    "Live-Beispiel ansehen",
+	"fr":    "Voir l'exemple sur une page",
+	"ja":    "実際の表示を確認",
+	"ko":    "실제 예제 보기",
+	"pl":    "Zobacz przykład",
+	"zh-CN": "查看在线演示",
+	"zh-TW": "查看示例"
+});
 
 target = ($0.charAt(0) == "/") ? $0 : "/" + $0;
 %><a class="button liveSample" href="<%=target%>"><%=str%></a>
