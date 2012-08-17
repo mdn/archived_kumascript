@@ -1,15 +1,16 @@
 <%
 var linktext = mdn.localString({
-  "en-US": "View Live Examples",
-  'de':    "Beispiel ansehen",
-  'es':    "Ver ejemplos en acción",
-  'fr':    "Voir des exemples en ligne (en)",
-  'ko':    "실제 예제 보기",
-  'pl':    "Zobacz przykład",
-  'zh-cn': "查看在线演示"
+    "en-US": "View Live Examples",
+    'de':    "Beispiel ansehen",
+    'es':    "Ver ejemplos en acción",
+    'fr':    "Voir des exemples en ligne (en)",
+    'ja':    "実際の表示を確認",
+    'ko':    "실제 예제 보기",
+    'pl':    "Zobacz przykład",
+    'zh-cn': "查看在线演示"
 });
-var link = '/samples/cssref/' + $0 + '.html';
 
-var result = '<a rel="custom" href="' + link +'">' + linktext +'</a>';
-%>
-<%- result %>
+var link = '/samples/cssref/' + $0 + '.html';
+var result = '<a class="button liveSample" rel="custom" href="' + link +'">' + linktext +'</a>';
+
+%><%- result %>
