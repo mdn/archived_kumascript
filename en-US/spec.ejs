@@ -1,119 +1,77 @@
-<%
-/* parameters: */
-/* $0 = link to specification */
-/* $1 = link text (optional) */
-/* $2 = status of specification (optional). Possible values: ED, WD, LC, CR, PR, REC. */
-var lang = env.locale;
+<%/*
+Inserts a link to W3C specification. (OPTION: Insert states Indicator.)
+    https://developer.mozilla.org/en-US/docs/Project:Custom_Templates#Template.3Aspec
 
-var status = $2;
-var title = "";
-var color = "";
-var bgcolor = "";
+parameters: 
+    $0 = link to specification 
+	$1 = link text (optional) 
+	$2 = status of specification (optional). Possible values: ED, WD, LC, CR, PR, REC. ( Lowercase O.K ! )
+*/
+
+var lang = env.locale,
+     status = ($2).toUpperCase();
+     title = "",
+     color = "#fff",
+     bgcolor = "",
+     titles = [],
+     bgc = ["#e61919", "#e66e33", "#e2a669", "#cfd510", "#72ac35", "#309c40", "#000"];
+
+function setting(i) { bgcolor = bgc[i]; title = titles[i]; }
+
+
+
+/*	=	=	=	=	=	Localize	=	=	=	=	=	=	*/
+switch(lang){	
+    case "de":
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+    case "es":
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+    case "fr":
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+	case "he":
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+    case "it":
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+	case "ja":
+		titles = [ "草案（非公式）", "草案", "最終草案", "勧告候補", "勧告案", "W3C 勧告" ];
+		break;
+    case "pl":
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+    case "pt-PT":
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+	case "zh-CN":
+		titles = [ "编辑草案(非官方)", "工作草案", "Last Call", "候选标准", "推荐标准", "正式标准" ];
+		break;
+    case "zh-TW":
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+    default:
+		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+}/*	=	=	=	=	=	=	=	=	=	=	=	=	=	=	*/
+
+
 
 switch(status) {
-  case 'ED':
-    color = "#fff";
-    bgcolor = "#e61919";
-    title = "Editor's Draft (unofficial)";
-    break;
-  case 'WD':
-    color = "#fff";
-    bgcolor = "#e66e33";
-    title = "Working Draft";
-    break;
-  case 'LC':
-    color = "#333";
-    bgcolor = "#e2a669";
-    title = "Last Call";
-    break;
-  case 'CR':
-    color = "#333";
-    bgcolor = "#cfd510";
-    title = "Candidate Recommendation";
-    break;
-  case 'PR':
-    color = "#fff";
-    bgcolor = "#72ac35";
-    title = "Proposed Recommendation";
-    break;
-  case 'REC':
-    color = "#fff";
-    bgcolor = "#309c40";
-    title = "Recommendation";
-    break;
-}
-
-if(lang == "zh-cn"){
-switch(status) {
-  case 'ED':
-    color = "#fff";
-    bgcolor = "#e61919";
-    title = "编辑草案(非官方)";
-    break;
-  case 'WD':
-    color = "#fff";
-    bgcolor = "#e66e33";
-    title = "工作草案";
-    break;
-  case 'LC':
-    color = "#333";
-    bgcolor = "#e2a669";
-    title = "Last Call";
-    break;
-  case 'CR':
-    color = "#333";
-    bgcolor = "#cfd510";
-    title = "候选标准";
-    break;
-  case 'PR':
-    color = "#fff";
-    bgcolor = "#72ac35";
-    title = "推荐标准";
-    break;
-  case 'REC':
-    color = "#fff";
-    bgcolor = "#309c40";
-    title = "正式标准";
-    break;
-}
-}
-
-if(lang == "ja"){
-  switch(status) {
-    case 'ED':
-      color = "#fff";
-      bgcolor = "#e61919";
-      title = "草案（非公式）";
-      break;
-    case 'WD':
-      color = "#fff";
-      bgcolor = "#e66e33";
-      title = "草案";
-      break;
-    case 'LC':
-      color = "#333";
-      bgcolor = "#e2a669";
-      title = "最終草案";
-      break;
-    case 'CR':
-      color = "#333";
-      bgcolor = "#cfd510";
-      title = "勧告候補";
-      break;
-    case 'PR':
-      color = "#fff";
-      bgcolor = "#72ac35";
-      title = "勧告案";
-      break;
-    case 'REC':
-      color = "#fff";
-      bgcolor = "#309c40";
-      title = "W3C 勧告";
-      break;
-  }
-}
-%>
-<%- web.link( $0, ($1 || $0) ) %>
-<% if ($2) { %>
-   <span title="<%=title%>" style="color:<%=color%>; background-color:<%=bgcolor%>; display: inline-block; font-size: x-small; margin-left: 6px; white-space: nowrap; padding: 2px 5px;"><%- status %></span>
-<% } %>
+    case 'ED':	setting(0); break;
+    case 'WD':	setting(1); break;
+    case 'LC':	setting(2); break;
+    case 'CR':	setting(3); break;
+    case 'PR':	setting(4); break;
+    case 'REC':	setting(5); break;
+	default:	setting(6); break;
+}%><%- web.link( $0, ($1 || $0) ) %><%
+if ($2) {
+	%><span <%
+		%>title="<%=title%>" <%
+		%>style="color:<%=color%>;<%
+		%>background:<%=bgcolor%>;<%
+		%>display:inline-block; font-size:x-small; margin-left:6px; white-space:nowrap; padding:2px 5px;"><%- status %></span><%
+} %>
