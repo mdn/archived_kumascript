@@ -10,10 +10,10 @@ var s_str = mdn.localString({
  
 switch($0) {
     case 'inline':
-        %><span title="<%- s_str[1] %>" class="noscriptInline"><%- s_str[0] %></span><%
+        %><span title="<%- s_str[1] %>" class="inlineIndicator noscript noscriptInline"><%- s_str[0] %></span><%
         break;
     case 'method':
-        %><div><span title="<%- s_str[1] %>" class="noscriptMethod"><%- s_str[0] %></span><h3><%= $1 %></h3></div><%
+        %><div><span title="<%- s_str[1] %>" class="noscript noscriptMethod"><%- s_str[0] %></span><h3><%= $1 %></h3></div><%
         break;
 }
 %>
