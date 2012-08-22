@@ -35,9 +35,9 @@ if ($1) {
 		ver = "HTML";
 		if (string.length(n) > 0) {
 		    if(wiki.pageExists('/' + lang + '/docs/HTML/HTML' + n)) {
-				link = '/' + lang + 'docs//HTML/HTML' + n;
+				link = '/' + lang + '/docs/HTML/HTML' + n;
 			} else if(wiki.pageExists('/en-US/docs/HTML/HTML' + n)) {
-				link = '/en/HTML/HTML' + n;
+				link = '/en-US/docs/HTML/HTML' + n;
 			} else if(wiki.pageExists('/' + lang + '/docs/HTML')) {
 				link = '/' + lang + '/docs/HTML';
 			} else {
@@ -118,7 +118,7 @@ switch($0) {
 	case 'method':
 		if (tip.length) { str = str + " " + tip; }
 		%><div>
-			<span class="deprecated deprecatedMethod"><%-str%></span>
+			<span class="indicatorInHeadline deprecated deprecatedMethod"><%-str%></span>
 			<h3><%-($2)%></h3>
 		</div><%
 		break;
