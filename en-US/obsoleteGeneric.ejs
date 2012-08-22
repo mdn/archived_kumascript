@@ -107,7 +107,7 @@ switch($0) {
     case 'method':
         if (string.length(tip)) { str = str + " " + tip; }
         %><div>
-        <span class="obsolete obsoleteMethod"><%- str %></span>
+        <span class="indicatorInHeadline obsolete obsoleteMethod"><%- str %></span>
         <h3><%- web.html($2) %>()</h3>
         </div><%
         break;
