@@ -67,7 +67,6 @@ switch(lang) {
         articleName = product + version + " 技術文件";
         text = "本文描述 " + web.link(wiki.uri(lang + '/docs/' + articleName), product + version) + " 之後加入的功能。";
         break;
-    default: break;
 }
  
 switch($0) {
@@ -75,15 +74,14 @@ switch($0) {
         %><span class="inlineIndicator standardNote standardNoteInline"><%=newIn%><%- web.link(wiki.uri(lang + '/docs/' + articleName), product + version)</span><%
         break;
     case 'header':
-        %><div class="overheadIndicator standardNote standardNoteBlock"><%
-        %>  <p><%-text%></p><%
-        %></div><%
+        %><div class="overheadIndicator standardNote standardNoteBlock">
+<p><%-text%></p>
+</div><%
         break;
     case 'note':
-        %><div class="blockIndicator standardNote standardNoteBlock"><%
-        %>  <p><%- web.link(wiki.uri(lang + '/docs/' + articleName), note) %></p><%
-        %>  <p style="font-weight:400;"><%-$3%></p><%
-        %></div><%
+        %><div class="blockIndicator standardNote standardNoteBlock">
+<p><%- web.link(wiki.uri(lang + '/docs/' + articleName), note) %></p>
+<p style="font-weight:400;"><%-$3%></p>
+</div><%
         break;
-    default: break;
 } %>
