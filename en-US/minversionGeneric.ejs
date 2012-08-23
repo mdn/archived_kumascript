@@ -71,7 +71,7 @@ switch(lang) {
  
 switch($0) {
     case 'inline':
-        %><span class="inlineIndicator standardNote standardNoteInline"><%=newIn%><%- web.link(wiki.uri(lang + '/docs/' + articleName), product + version)</span><%
+        %><span class="inlineIndicator standardNote standardNoteInline"><%=newIn%><%- web.link(wiki.uri(lang + '/docs/' + articleName), product + version) %></span><%
         break;
     case 'header':
         %><div class="overheadIndicator standardNote standardNoteBlock">
