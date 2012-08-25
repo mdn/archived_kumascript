@@ -17,8 +17,8 @@ if ($1) {
     var t = $1.toLowerCase();
     var n = "";
 
-    if (string.startswith(t, "js")) {
-		n = string.trim(string.substr(t, 2));
+    if ( string.startswith(t, "js") ) {
+    	n = string.trim( string.substr(t, 2) );
 		ver = "JavaScript ";
 		if (string.length(n) > 0) {
     		if(wiki.pageExists(lang + '/docs/JavaScript/New_in_JavaScript/' + n)) {
@@ -32,20 +32,26 @@ if ($1) {
 		ver = "CSS ";
 	} else if (string.startswith(t, "html")) {
 		n = string.trim(string.substr(t, 4));
+		
+		var N = (n[0] === "4") ? "" : n; 
+		
 		ver = "HTML";
-		if (string.length(n) > 0) {
-		    if(wiki.pageExists('/' + lang + '/docs/HTML/HTML' + n)) {
-				link = '/' + lang + '/docs/HTML/HTML' + n;
-			} else if(wiki.pageExists('/en-US/docs/HTML/HTML' + n)) {
-				link = '/en-US/docs/HTML/HTML' + n;
+		
+		if (string.length(N) > 0) {
+		    if(wiki.pageExists('/' + lang + '/docs/HTML/HTML' + N)) {
+				link = '/' + lang + '/docs/HTML/HTML' + N;
+			} else if(wiki.pageExists('/en-US/docs/HTML/HTML' + N)) {
+				link = '/en-US/docs/HTML/HTML' + N;
 			} else if(wiki.pageExists('/' + lang + '/docs/HTML')) {
 				link = '/' + lang + '/docs/HTML';
 			} else {
 				link = '/en-US/docs/HTML';
 			}
+		} else {
+			link = '/' + lang + '/docs/HTML';
 		}
 	} else if (string.startswith(t, "gecko")) {
-		n = string.trim(string.substr(t, 5));
+		n = string.trim( string.substr(t, 5) );
 		ver = "Gecko ";
 		tip = template("geckoRelease", [n]);
 	}
