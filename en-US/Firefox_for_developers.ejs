@@ -1,0 +1,24 @@
+<%
+/*
+ * $0 max version to list
+*/
+ 
+var maxVersion = $0;
+var minVersion = maxVersion - 30;
+if (minVersion < 4) {
+  minVersion = 4
+}
+var str = '<ul style="-moz-column-width: 15em">';
+for (var i = maxVersion; i >= minVersion; i--) {
+  str += '<li><a href="/en-US/docs/Firefox_' + i + '_for_developers" title="/en-US/docs/Firefox_' + i + '_for_developers">Firefox ' + i + ' for developers</a></li>';
+}
+if (minVersion == 4) {
+  str += '<li><a href="/en-US/docs/Firefox_3.6_for_developers" title="/en-US/docs/Firefox_3.6_for_developers">Firefox 3.6 for developers </a></li>';
+  str += '<li><a href="/en-US/docs/Firefox_3.5_for_developers" title="/en-US/docs/Firefox_3.5_for_developers">Firefox 3.5 for developers</a></li>';
+  str += '<li><a href="/en-US/docs/Firefox_3_for_developers" title="/en-US/docs/Firefox_3_for_developers">Firefox 3 for developers</a></li>';
+  str += '<li><a href="/en-US/docs/Firefox_2_for_developers" title="/en-US/docs/Firefox_2_for_developers">Firefox 2 for developers</a></li>';
+  str += '<li><a href="/en-US/docs/Firefox_1.5_for_developers" title="/en-US/docs/Firefox_1.5_for_developers">Firefox 1.5 for developers</a></li>';
+}
+str += '</ul>';
+%>
+<%- str %>
