@@ -3,8 +3,8 @@
 /* parameters: interface name then method name */
 /* get a page's language (Don't use page.language!) */
 var lang = env.locale;
-var destNewType = lang + '/XPCOM_Interface_Reference/' + $0;
-var destOldType = lang + '/' + $0;
+var destNewType = lang + '/docs/XPCOM_Interface_Reference/' + $0;
+var destOldType = lang + '/docs/' + $0;
 var apiString = $0 + '.' + $1 + '()';
 if(wiki.pageExists(destNewType)) { /* the page exists from the dekiwiki age */
     %><code><%-(web.link(wiki.uri(destNewType) + '#' + $1 + '()', apiString))%></code><%
