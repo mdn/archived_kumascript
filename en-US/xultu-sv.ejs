@@ -1,4 +1,10 @@
 <%
 var base_path = '/samples/xultu/examples';
+var fileName = '';
+if (!String.StartsWith($0, '/')) {
+    fileName = '/' + $0;
+} else {
+    fileName = $0;
+}
 %>
-<%- template("xultu-generic", [base_path + $0 + '.txt', base_path + $0]) %>
+<%- template("xultu-generic", [base_path + fileName + '.txt', base_path + fileName]) %>
