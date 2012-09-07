@@ -36,8 +36,7 @@ switch (env.locale) {
         s_not_complete = 'Esta página está incompleta.';
         break;
 }
-%>
-<div class="overheadIndicator" style="padding: 1em; background: #ffc;">
-<strong><%=s_draft%></strong>
-<div style="font-size:small;"><%=s_not_complete%></div>
+%><div class="overheadIndicator draft draftHeader">
+    <strong><%=s_draft%></strong>
+    <div><%=s_not_complete%></div>
 </div>
