@@ -23,8 +23,8 @@ switch(lang) {
     break;
 }
 
-var destOldType = lang + '/XUL:' + methodName + ':' + $0;
-var destNewType = lang + '/XUL/' + methodName + '/' + $0;
+var destOldType = lang + '/docs/XUL:' + methodName + ':' + $0;
+var destNewType = lang + '/docs/XUL/' + methodName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
   %><code><span id="<%=(anch)%>"><%-(web.link(wiki.uri(destNewType), dispApi))%></span></code><%
