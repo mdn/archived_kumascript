@@ -1,18 +1,19 @@
 <%
-var s_introduced_in = mdn.localString({
-    "en-US": "Introduced in Gecko $0",
+var str_introduced_in = "Introduced in Gecko $0";
+
+var str_introduced_in = mdn.localString({
     "de":    "Eingeführt in Gecko $0",
     "es":    "Introducido en Gecko $0",
+    "fr":    "Nouveau dans Gecko $0",
     "ja":    "Gecko $0 で導入",
     "ko":    "Introduced in Gecko $0",
     "pl":    "Wprowadzono w Gecko $0",
-    "pt":    "Introduzido no Gecko $0",
-    "fr":    "Nouveau dans Gecko $0",
+    "pt-PT":    "Introduzido no Gecko $0",
     "zh-TW": "自 Gecko $0 引入",
     "zh-CN": "适用于 Gecko $0 以上"
 });
-%>
-<div class="blockIndicator geckoMinVer standardNote standardNoteBlock"> 
-<p><%- s_introduced_in.replace('$0', $0) %></p> 
-<%- template('geckoRelease', [$0]) %>
+
+%><div class="blockIndicator geckoMinVer standardNote standardNoteBlock"> 
+    <p><%- str_introduced_in.replace('$0', $0) %></p> 
+    <%- template('geckoRelease', [$0]) %>
 </div>
