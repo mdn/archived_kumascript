@@ -3,13 +3,12 @@
 var lang = env.locale;
  
 /* assume English */
-  
-var str = "<strong>The content of this article may be out of date.</strong> " + ($0 || '');
- 
+var optionStr = $0 || '';
+var str = "<strong>The content of this article may be out of date.</strong> " + optionStr;
+
 if (!string.compare(lang, "de", true)) {
-  str = "<strong>Dieser Artikel ist möglicherweise veraltet.</strong> " + ($0 || '');
+  str = "<strong>Dieser Artikel ist möglicherweise veraltet.</strong> " + optionStr;
 } else if (!string.compare(lang, "ja", true)) {
-  str = "<strong>この記事の内容は古くなっている可能性があります。</strong> " + ($0 || '');
+  str = "<strong>この記事の内容は古くなっている可能性があります。</strong> " + optionStr;
 }
-%>
-<%- template("warning", [str]) %>
+%><%- template("warning", [str]) %>
