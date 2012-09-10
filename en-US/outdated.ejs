@@ -1,14 +1,25 @@
-<%
-/* first parameter(optional): Outdated message */
-var lang = env.locale;
- 
-/* assume English */
-var optionStr = $0 || '';
-var str = "<strong>The content of this article may be out of date.</strong> " + optionStr;
+<%/*
+    $0(optional): Outdated message
+*/
 
-if (!string.compare(lang, "de", true)) {
-  str = "<strong>Dieser Artikel ist möglicherweise veraltet.</strong> " + optionStr;
-} else if (!string.compare(lang, "ja", true)) {
-  str = "<strong>この記事の内容は古くなっている可能性があります。</strong> " + optionStr;
-}
+var optionStr = $0 || '',
+    str = "<strong>The content of this article may be out of date.</strong> " + optionStr; // Default (English)
+
+
+str = mdn.localString({
+    "de": "<strong>Dieser Artikel ist möglicherweise veraltet.</strong> "      + optionStr,
+    "es": "<strong>The content of this article may be out of date.</strong> "  + optionStr,
+    "fr": "<strong>The content of this article may be out of date.</strong> "  + optionStr,
+    "he": "<strong>The content of this article may be out of date.</strong> "  + optionStr,
+    "it": "<strong>The content of this article may be out of date.</strong> "  + optionStr,
+    "ja": "<strong>この記事の内容は古くなっている可能性があります。</strong> "       + optionStr,
+    "pl": "<strong>The content of this article may be out of date.</strong> "  + optionStr,
+    "ru": "<strong>The content of this article may be out of date.</strong> "  + optionStr,
+    "pt-PT": "<strong>The content of this article may be out of date.</strong> " + optionStr,
+    "zh-CN": "<strong>The content of this article may be out of date.</strong> " + optionStr,
+    "zh-TW": "<strong>The content of this article may be out of date.</strong> " + optionStr
+});
+
+
+
 %><%- template("warning", [str]) %>
