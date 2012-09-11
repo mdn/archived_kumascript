@@ -1,32 +1,18 @@
 <%
-var LOCALE = env.locale;
-var PATH  = "/" + LOCALE + "/docs/";
-var HTML5Documentation = "HTML5 Documentation";
-var LINKS = {};
+var LOCALE = env.locale,
+    PATH  = "/" + LOCALE + "/docs/",
+    HTML5Documentation = "HTML5 Documentation",
+    LINKS = {};
 
-
-
-
-/* Translation *//*
-    Table Title
-*/
-var HTML5Documentation = mdn.localString({
-    "ja":    "HTML5 関連文書",
-    "zh-TW": "HTML5 文件"
-});
-
-
-
-
-/* Translation *//*
-
+/* Translation */ /* -------------------------------
     1, Copy this code.
     2, Paste it into switch statement.
     3, Change case string to your locale.
-	4, Translate array in object.  Format: ["Link Text", "Title attribute", "Path under /docs/ "]
-	5, Check output.
+    4, Translate array in object.  Format: ["Link Text", "Title attribute", "Path under /docs/ "]
+    5, Check output.
 
 	case "LOCALE STRING":
+		HTML5Documentation = "HTML5 Documentation";
 		LINKS = {
 			HTML: ["HTML", "HTML5 Documentation", "HTML/HTML5/HTML5_Thematic_Classification#HTML"],
 	
@@ -57,16 +43,15 @@ var HTML5Documentation = mdn.localString({
 			Visual: ["Visual", "HTML5 Thematic Classification #Visual", "HTML/HTML5/HTML5_Thematic_Classification#Visual"],
 			Effects: ["Effects", "HTML5 Thematic Classification #Effects", "HTML/HTML5/HTML5_Thematic_Classification#Effects"]
 		};
-	break;​
+		break;
 
-*/
-
-
-
+---------------------------------------------------- */
 
 switch (LOCALE) {
 
+
 	case "ja":
+		HTML5Documentation = "HTML5 関連文書";
 		LINKS = {
 			HTML: ["HTML", "HTML5 Documentation", "HTML/HTML5/HTML5_Thematic_Classification#HTML"],
 			
@@ -101,6 +86,7 @@ switch (LOCALE) {
 	
 	
 	case "zh-TW":
+		HTML5Documentatio = "HTML5 文件";
 		LINKS = {
 			HTML: ["HTML", "HTML5 Documentation", "HTML/HTML5/HTML5_Thematic_Classification#HTML"],
 			
@@ -167,11 +153,13 @@ switch (LOCALE) {
 		};
 		break;
 
+}
 
-}%><table class="fullwidth-table html5ArticleToc">
+
+%><table class="fullwidth-table html5ArticleToc">
 	<thead>
 		<tr>
-			<th colspan="2"><%= HTML5Documentation %></th>
+			<th colspan="2"><%=HTML5Documentation%></th>
 		</tr>
 	</thead>
 	<tbody>
