@@ -1,6 +1,5 @@
 <%
 var s = mdn.localString({
-  "en-US": ["/docs/XUL_Reference", "/docs/XUL_Reference", "XUL Reference home"],
   "de": ["/docs/XUL_Referenz", "/docs/XUL_Referenz", "XUL-Referenz Startseite"],
   "es": ["/docs/XUL/Elementos", "/docs/XUL/Elementos", "Referencia de XUL"],
   "fr": ["/docs/Référence_XUL", "/docs/R%C3%A9f%C3%A9rence_XUL", "Accueil de la référence XUL"],
@@ -8,7 +7,11 @@ var s = mdn.localString({
   "ko": ["/docs/XUL_Reference", "/docs/XUL_Reference", "XUL Reference home"],
   "pl": ["/docs/Dokumentacja_XUL", "/docs/Dokumentacja_XUL", "Dokumentacja XUL"]
 });
+
+s = s || ["/docs/XUL_Reference", "/docs/XUL_Reference", "XUL Reference home"]; // This is for default (en-US)
+
 var s_title = env.locale + s[0];
 var s_href = '/' + env.locale + s[1];
-%>
-« <a title="<%= s_title %>" href="<%= s_href %>"><%= s[2] %></a>
+
+
+%><span class="breadcrumbs XULRefProp_breadcrumbs">« <a title="<%= s_title %>" href="<%= s_href %>"><%= s[2] %></a></span>
