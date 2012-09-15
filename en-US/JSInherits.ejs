@@ -6,40 +6,50 @@
  * inheritType - Properties or Methods. Make sure you capitalize it and use the plural.
  * inherited - the name of the property or method being inherited.
 */
-var str = '';
 
-if ($2) {
-    str = '<div style="border: solid #ccc 1px; background: #eee; padding: 0 10px; margin: 10px 0;"><b>';
 
-    var links = [];
+if(!$2) return;
 
-    switch(env.locale) {
-      case 'fr':
-        str += $1 + ' héritées de ' + web.link(wiki.uri(env.locale + '/docs/JavaScript/Référence_JavaScript/Objets_globaux/' + $0 + '/prototype'), $0 + '.prototype');
-        for (var i = 2; i < arguments.length; i++) {
-            links.push(web.link(wiki.uri(env.locale + '/docs/JavaScript/Référence_JavaScript/Objets_globaux/' + $0 + '/' + arguments[i]), arguments[i]));
-        }
-        break;
-      case 'ja':
-        str += web.link(wiki.uri(env.locale + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/prototype'), $0 + '.prototype') + ' から継承される' + $1;
-        for (var i = 2; i < arguments.length; i++) {
-            links.push(web.link(wiki.uri(env.locale + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/' + arguments[i]), arguments[i]));
-        }
-        break;
-      case 'pl':
-        str += $1 + ' dziedziczone z ' + web.link(wiki.uri(env.locale + '/docs/Dokumentacja_języka_JavaScript_1.5/Obiekty/' + $0 + '/prototype'), $0 + '.prototype');
-        for (var i = 2; i < arguments.length; i++) {
-            links.push(web.link(wiki.uri(env.locale + '/docs/Dokumentacja_języka_JavaScript_1.5/Obiekty/' + $0 + '/' + arguments[i]), arguments[i]));
-        }
-        break;
-      default:
-        str += $1 + ' inherited from ' + web.link(wiki.uri(env.locale + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/prototype'), $0 + '.prototype');
-        for (var i = 2; i < arguments.length; i++) {
-            links.push(web.link(wiki.uri(env.locale + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/' + arguments[i]), arguments[i]));
-        }
-        break;
-    }
-    str += '</b><br /><small>' + links.join(', ') + '</small></div>';
+
+var s1 = '';
+var s2 = '';
+var LOCALE = env.locale;
+var aLen = arguments.length;
+var i = 2;
+var links = [];
+
+
+switch(LOCALE) {
+    case 'fr':
+    	s1 += $1 + ' héritées de ' + web.link(wiki.uri(env.locale + '/docs/JavaScript/Référence_JavaScript/Objets_globaux/' + $0 + '/prototype'), $0 + '.prototype');
+		for (; i < aLen; ++i) {
+			links.push(web.link(wiki.uri(LOCALE + '/docs/JavaScript/Référence_JavaScript/Objets_globaux/' + $0 + '/' + arguments[i]), arguments[i]));
+		}
+		break;
+	case 'ja':
+		s1 += web.link(wiki.uri(env.locale + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/prototype'), $0 + '.prototype') + ' から継承される' + $1;
+		for (; i < aLen; ++i) {
+			links.push(web.link(wiki.uri(LOCALE + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/' + arguments[i]), arguments[i]));
+		}
+		break;
+	case 'pl':
+		s1 += $1 + ' dziedziczone z ' + web.link(wiki.uri(env.locale + '/docs/Dokumentacja_języka_JavaScript_1.5/Obiekty/' + $0 + '/prototype'), $0 + '.prototype');
+		for (; i < aLen; ++i) {
+			links.push(web.link(wiki.uri(LOCALE + '/docs/Dokumentacja_języka_JavaScript_1.5/Obiekty/' + $0 + '/' + arguments[i]), arguments[i]));
+		}
+		break;
+	default:
+		s1 += $1 + ' inherited from ' + web.link(wiki.uri(env.locale + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/prototype'), $0 + '.prototype');
+		for (; i < aLen; ++i) {
+			links.push(web.link(wiki.uri(LOCALE + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/' + arguments[i]), arguments[i]));
+		}
+		break;
 }
-%>
-<%- str %>
+
+s2 = links.join(', ');
+
+
+%><div class="template-jsInherits" style="border:5px solid #D1D1FF; background:#f5f5ff; padding:2px 10px; margin:10px;overflow:hidden">
+	<div><b><%-s1%></b></div>
+	<div><small><%-s2%></small></div>
+</div>
