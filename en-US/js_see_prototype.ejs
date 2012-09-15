@@ -15,7 +15,8 @@ switch(env.locale) {
     str = 'Pour les ' + $1.toLowerCase() + ' héritées par les instances de <code>' + env.title + '</code> consultez ' + web.link(env.url + '#' + encodeURI($1) + '_2', string.toupperfirst($1.toLowerCase()) + ' des instances de ' + env.title) + '.';
     break;
   case 'ja':
-    str = '<code>' + env.title + '</code> インスタンスから継承されている' + $1.toLowerCase() + 'については、' + web.link(env.url + '#' + encodeURI($1) + '_2', env.title + ' インスタンスの' + string.toupperfirst($1.toLowerCase()) + ' of ' + env.title + ' instances') + 'を参照してください。';
+    // $1 is Japanese like "メソッド"
+    str = '<code>' + env.title + '</code> インスタンスから継承されている' + $1 + 'については、' + web.link(env.url + '#' + encodeURI($1) + '_2', env.title + ' インスタンスの' + $1 + 'を参照してください。';
     break;
 }
 %>
