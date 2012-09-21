@@ -5,9 +5,7 @@
 // Parameters:
 //
 //  $0 - Path of IDL file
-//  $1 - The interface's parent class
-//  $2 - "scriptable" or "not scriptable"
-//  $3 - The last Gecko version the interface changed in
+//  $1 - "scriptable" or "not scriptable" (was $2)
 
 /* defaults to English */
 var scriptableOutput = "Unknown";
@@ -52,7 +50,7 @@ switch(env.locale) {
     break;
 }
 
-switch($2.toLowerCase()) {
+switch($1.toLowerCase()) {
   case "scriptable":
     scriptableOutput = '<a style="color:#00cc00; font-weight:700;" href="' + scriptableLink + '">' + scriptable + '</a>';
     break;
