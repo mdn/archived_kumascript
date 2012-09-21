@@ -1,0 +1,71 @@
+<%
+// Closes an interface summary box; you should use this after the note
+// after using IFSummaryStart.
+//
+// Parameters:
+//
+//  $0 - The interface's parent class
+//  $1 - The last Gecko version the interface changed in
+//  $2 - The Gecko version the interface was introduced in (optional)
+//  $3 - The Gecko version the interface was deprecated in (optional)
+//  $4 - The Gecko version the interface was removed in (optional)
+//
+
+/* defaults to English */
+var scriptableOutput = "Unknown";
+var scriptable = "Scriptable";
+var notscriptable = "Not scriptable";
+var scriptableLink = "en-US/docs/Interfaces/About_Scriptable_Interfaces";
+var lastChanged = "Last changed in Gecko ";
+var inheritsFrom = "Inherits from: ";
+var outdated = "This page has not been updated recently; the content may be outdated.";
+
+switch(env.locale) {
+  case "fr":
+    scriptable = "Scriptable";
+    notscriptable = "Not scriptable";
+    scriptableLink = "fr/docs/Interfaces/À_propos_des_interfaces_scriptables";
+    break;
+  case "ja":
+    scriptable = "Scriptable",
+    scriptableOutput = "Unknown",
+    scriptableLink = "ja/docs/Interfaces/About_Scriptable_Interfaces",
+    notscriptable = "Not scriptable",
+    inheritsFrom = "継承元: ",
+    lastChanged = "最終更新: Gecko ",
+    outdated = "このページには最近の更新はありません。古い版である可能性が有ります。";
+    break;
+  case "ko":
+    scriptable = "스크립트에서 사용 가능";
+    notscriptable = "Not scriptable";
+    scriptableLink = "ko/docs/Interfaces/About_Scriptable_Interfaces";
+    break;
+  case "pl":
+    scriptable = "skryptowalny";
+    notscriptable = "Not scriptable";
+    scriptableLink = "pl/docs/Interfejsy/O_interfejsach_skryptowalnych";
+    break;
+  case "zh-CN":
+    scriptable = "脚本化";
+    notscriptable = "不可脚本化";
+    inheritsFrom = "继承于: ";
+    scriptableLink = "zh-CN/docs/Interfaces/About_Scriptable_Interfaces";
+    lastChanged = "最后修改于Gecko ";
+    break;
+}
+%>
+
+</span>
+<% if ($2) { %>
+  <%- template("VersionTimeline", [$2, $1, $4, $3]) %>
+<% } %>
+<div style="background:#eee; padding:2px;">
+<%
+if ($0 != "") {
+  %><%- inheritsFrom  + template("interface", [$0]) %><%
+} else {
+  %><span>&nbsp;</span><%
+}
+%>
+<span style="text-align:right; float:right;"><%- lastChanged + $1 + " " + template("geckoRelease", [$1]) %></span></div>
+</div>
