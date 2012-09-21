@@ -15,11 +15,12 @@
 //
 %>
 
-<%-template("IFSummaryStart", [$0, $2]);%>
+<%-template("IFSummaryStart", [$0, $2])%>
+<%
 var summary = $4;
 if (!$4) {
   summary = "<i>Please add a summary to this article.</i>";
 }
 %>
 <%-summary%>
-<%-template("IFSummaryEnd", [$1, $3, $5, $6, $7]);%>
+<%-template("IFSummaryEnd", [$1, $3, $5, $6, $7])%>
