@@ -8,15 +8,15 @@
 
 $1 += '';
 
-var str = 'For ' + $1.toLowerCase() + ' available on <code>' + env.title + '</code> instances, see ' + web.link(env.url + '#' + encodeURI($1) + '_2', string.toupperfirst($1.toLowerCase()) + ' of ' + env.title + ' instances') + '.';
+var str = 'For ' + $1.toLowerCase() + ' available on <code>' + env.title + '</code> instances, see ' + web.link(env.url + '/prototype#' + encodeURI($1), string.toupperfirst($1.toLowerCase()) + ' of ' + env.title + ' instances') + '.';
 
 switch(env.locale) {
   case 'fr':
-    str = 'Pour les ' + $1.toLowerCase() + ' héritées par les instances de <code>' + env.title + '</code> consultez ' + web.link(env.url + '#' + encodeURI($1) + '_2', string.toupperfirst($1.toLowerCase()) + ' des instances de ' + env.title) + '.';
+    str = 'Pour les ' + $1.toLowerCase() + ' héritées par les instances de <code>' + env.title + '</code> consultez ' + web.link(env.url + '/prototype#' + encodeURI($1) , string.toupperfirst($1.toLowerCase()) + ' des instances de ' + env.title) + '.';
     break;
   case 'ja':
     // $1 is Japanese like "メソッド"
-    str = '<code>' + env.title + '</code> インスタンスから継承されている' + $1 + 'については、' + web.link(env.url + '#' + encodeURI($1) + '_2', env.title + ' インスタンスの' + $1) + 'を参照してください。';
+    str = '<code>' + env.title + '</code> インスタンスから継承されている' + $1 + 'については、' + web.link(env.url + '/prototype#' + encodeURI($1) , env.title + ' インスタンスの' + $1) + 'を参照してください。';
     break;
 }
 %>
