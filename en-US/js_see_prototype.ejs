@@ -8,16 +8,23 @@
 
 $1 += '';
 
-var str = 'For ' + $1.toLowerCase() + ' available on <code>' + env.title + '</code> instances, see ' + web.link(env.url + '/prototype#' + encodeURI($1), string.toupperfirst($1.toLowerCase()) + ' of ' + env.title + ' instances') + '.';
+var s1 = $1.toLowerCase();
+var eTitle = env.title;
+var eURL = env.url;
+var encURL = encodeURI($1);
+
+var str = 'For ' + s1 + ' available on <code>' + eTitle + '</code> instances, see ' + web.link(eURL + '/prototype#' + encURL, string.toupperfirst(s1) + ' of ' + eTitle + ' instances') + '.';
 
 switch(env.locale) {
-  case 'fr':
-    str = 'Pour les ' + $1.toLowerCase() + ' héritées par les instances de <code>' + env.title + '</code> consultez ' + web.link(env.url + '/prototype#' + encodeURI($1) , string.toupperfirst($1.toLowerCase()) + ' des instances de ' + env.title) + '.';
-    break;
-  case 'ja':
-    // $1 is Japanese like "メソッド"
-    str = '<code>' + env.title + '</code> インスタンスから継承されている' + $1 + 'については、' + web.link(env.url + '/prototype#' + encodeURI($1) , env.title + ' インスタンスの' + $1) + 'を参照してください。';
-    break;
+    case 'fr':
+        str = 'Pour les ' + s1 + ' héritées par les instances de <code>' + eTitle + '</code> consultez ' + web.link(eURL + '/prototype#' + encURL , string.toupperfirst(s1) + ' des instances de ' + eTitle) + '.';
+        break;
+    case 'ja':
+        // $1 is Japanese like "メソッド"
+        str = '<code>' + eTitle + '</code> インスタンスから継承されている' + $1 + 'については、' + web.link(eURL + '/prototype#' + encURL , eTitle + ' インスタンスの' + $1) + 'を参照してください。';
+        break;
+    default:
+        break;
 }
-%>
-<small style="margin-left: 1em;"><em><%- str %></em></small>
+
+%><small style="margin-left: 1em;"><em><%- str %></em></small>
