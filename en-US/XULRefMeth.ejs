@@ -1,11 +1,11 @@
 <%
-var s = ["en/XUL_Reference", "en/XUL_Reference", "XUL Reference home"];
+var s = ["/en-US/docs/XUL_Reference", "/en-US/docs/XUL_Reference", "XUL Reference home"];
 switch (env.locale) {
-    case 'es': s = ["es/XUL/Elementos", "es/XUL/Elementos", "Referencia de XUL"]; break;
-    case 'de': s = ["de/XUL_Referenz", "de/XUL_Referenz", "XUL-Referenz Startseite"]; break;
-    case 'fr': s = ["fr/Référence_XUL", "fr/R%C3%A9f%C3%A9rence_XUL", "Accueil de la référence XUL"]; break;
-    case 'ja': s = ["ja/XUL_Reference", "ja/XUL_Reference", "XUL リファレンス HOME"]; break;
-    case 'pl': s = ["pl/Dokumentacja_XUL", "pl/Dokumentacja_XUL", "Dokumentacja XUL"]; break;
+    case 'es': s = ["/es/docs/XUL/Elementos", "/es/docs/XUL/Elementos", "Referencia de XUL"]; break;
+    case 'de': s = ["/de/docs/XUL_Referenz", "/de/docs/XUL_Referenz", "XUL-Referenz Startseite"]; break;
+    case 'fr': s = ["/fr/docs/Référence_XUL", "/fr/docs/R%C3%A9f%C3%A9rence_XUL", "Accueil de la référence XUL"]; break;
+    case 'ja': s = ["/ja/docs/XUL_Reference", "/ja/docs/XUL_Reference", "XUL リファレンス HOME"]; break;
+    case 'pl': s = ["/pl/docs/Dokumentacja_XUL", "/pl/docs/Dokumentacja_XUL", "Dokumentacja XUL"]; break;
 }
 %>
-<span class="breadcrumbs XULRefMeth_breadcrumbs">« <a title="<%=s[0]%>" href="/docs/<%=s[1]%>"><%=s[2]%></a></span>
+<span class="breadcrumbs XULRefMeth_breadcrumbs">« <a title="<%=s[0]%>" href="<%=s[1]%>"><%=s[2]%></a></span>
