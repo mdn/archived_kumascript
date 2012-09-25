@@ -1,37 +1,4 @@
 <%
-var lang = env.locale;
-/* set up the page name based on language */
-
-var methodName = "Method";
-var anch = "m-" + $0;
-var dispApi = $0;
-if ($2) {
-  dispApi = $2;
-}
-
-dispApi = dispApi + $1;
-
-switch(lang) {
-  case 'de':
-    methodName = "Methoden";
-    break;
-  case 'fr':
-    methodName = "Méthodes";
-    break;
-  case 'pl':
-    methodName = "Metoda";
-    break;
-}
-
-var destOldType = lang + '/docs/XUL:' + methodName + ':' + $0;
-var destNewType = lang + '/docs/XUL/' + methodName + '/' + $0;
-
-if (wiki.pageExists(destNewType)) {
-  %><code><span id="<%=(anch)%>"><%-(web.link(wiki.uri(destNewType), dispApi))%></span></code><%
-} else if (wiki.pageExists(destOldType)) {
-  %><code><span id="<%=(anch)%>"><%-(web.link(wiki.uri(destOldType), dispApi))%></span></code><%
-} else {
-  var targeturi = "/docs/new?slug=" + destNewType;
-  %><code><a rel="internal" href="<%=targeturi%>" class="new"><%=(dispApi)%></a></code><%
-}
+/* Calls XULMeth as they now both do the same thing */
 %>
+<%- template("XULMeth", [$0,$1,$2]) %>
