@@ -2,11 +2,9 @@
     $0(optional): Outdated message
 */
 
-var optionStr = $0 || '',
-    str = "<strong>The content of this article may be out of date.</strong> " + optionStr; // Default (English)
 
-
-str = mdn.localString({
+var optionStr = $0 || '';
+var str = mdn.localString({
     "de": "<strong>Dieser Artikel ist möglicherweise veraltet.</strong> "      + optionStr,
     "es": "<strong>The content of this article may be out of date.</strong> "  + optionStr,
     "fr": "<strong>The content of this article may be out of date.</strong> "  + optionStr,
@@ -19,6 +17,7 @@ str = mdn.localString({
     "zh-CN": "<strong>The content of this article may be out of date.</strong> " + optionStr,
     "zh-TW": "<strong>The content of this article may be out of date.</strong> " + optionStr
 });
+str = str || "<strong>The content of this article may be out of date.</strong> " + optionStr; // Default (English)
 
 
 
