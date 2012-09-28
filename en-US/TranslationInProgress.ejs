@@ -1,11 +1,20 @@
 <%
+
 var mes = mdn.localString({
-    "en-US": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
-	"fr": "Ce document est en cours de traduction vers le français. C'est la raison pour laquelle il est en partie dans une autre langue.<br />N'hésitez pas à vous inscrire et à nous aider à traduire le MDN!",
-	"it": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
-	"ja": "この文書は翻訳中です。他国語のままの部分などがあるのはその為です。<br />是非お気軽に MDN に登録して翻訳に参加し、私たちの手助けをして下さい！"
+    "es": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
+    "fr": "Ce document est en cours de traduction vers le français. C'est la raison pour laquelle il est en partie dans une autre langue.<br />N'hésitez pas à vous inscrire et à nous aider à traduire le MDN!",
+    "it": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
+	"ja": "この文書は翻訳中です。他国語のままの部分などがあるのはその為です。<br />是非お気軽に MDN に登録して翻訳に参加し、私たちの手助けをして下さい！",
+	"pl": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
+	"ru": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
+	"pt-PT": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
+	"zh-CN": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
+	"zh-TW": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!"
 });
-%>
-<div class="overheadIndicator translationInProgress translationInProgressHeader">
+
+mes = mes || "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!" ;
+
+
+%><div class="overheadIndicator translationInProgress translationInProgressHeader">
     <p><%- web.html(mes) %></p>
 </div>
