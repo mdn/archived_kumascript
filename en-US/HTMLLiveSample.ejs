@@ -13,6 +13,8 @@ var str = mdn.localString({
     "zh-TW": "查看示例"
 });
 
+str = str || "View Live Examples";
+
 var target = "/samples/html/" + $0;
 
 %><a class="button liveSample" href="<%=target%>"><%=str%></a>
