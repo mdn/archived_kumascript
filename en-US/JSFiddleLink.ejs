@@ -21,6 +21,8 @@ var s_text = mdn.localString({
     "zh-TW": "在jsFiddle中查看"
 });
 
+s_text = s_text || "View on jsFiddle"; // Default for all locale. Not only for English. 
+
 var s_result = '<a class="button liveSample" href="http://jsfiddle.net/' + $0 +'">' + s_text + '</a>';
 
 %><%- s_result %>
