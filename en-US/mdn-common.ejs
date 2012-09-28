@@ -101,6 +101,31 @@
         });
     },
     
+    // #### fetchHTTPResource
+    // Fetch an HTTP resource, return the response body.
+    fetchHTTPResource: function (url, cache_tmout) {
+        if (!cache_tmout) cache_tmout = 3600;
+        var key = 'kuma:http_resource:' + md5(url.toLowerCase());
+        return cacheFn(key, 600, function (next) {
+            var opts = {
+                method: 'GET',
+                headers: { 'Cache-Control': env.cache_control },
+                url: url
+            };
+            try {
+                request(opts, function (err, resp, body) {
+                    var result = null;
+                    if (resp && 200 == resp.statusCode) {
+                        result = body;
+                    }
+                    next(result);
+                });
+            } catch (e) {
+                next(null);
+            }            
+        });
+    },
+    
     /* Returns the appropriate string (usually a comma+space) for usage in a enumeration list for the current locale */
     listSeparator: function() {
         var listSeparators = { "en-US": ", ", "ar": "،", "fa": "،", "ja": "、", "ko": "·", "mn": "᠂", "ur": "،", "zh−TW": "、" };
