@@ -1,8 +1,6 @@
 <%
-var mes = "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!" ;
 
-
-mes = mdn.localString({
+var mes = mdn.localString({
     "es": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
 	"fr": "Ce document est en cours de traduction vers le français. C'est la raison pour laquelle il est en partie dans une autre langue.<br />N'hésitez pas à vous inscrire et à nous aider à traduire le MDN!",
 	"it": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
@@ -13,6 +11,8 @@ mes = mdn.localString({
 	"zh-CN": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!",
 	"zh-TW": "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!"
 });
+
+mes = mes || "This document is in progress to be translated. That's why it still contains text in another language.<br />Feel free to register and to help translate MDN!" ;
 
 
 %><div class="overheadIndicator translationInProgress translationInProgressHeader">
