@@ -17,6 +17,15 @@ if(wiki.pageExists(lang + '/SpiderMonkey/' + $0)) {
 
 var str = 'Added in ' + link;
 
+/* New JSAPI versions  */
+if ($0) {
+    var t = string.tolower($0);
+    if (string.startswith(t, "jsapi")) {
+        t = string.trim(string.substr(t, 5));
+        str = "Added in JSAPI " + t;
+    }
+}
+
 switch(lang) {
   case 'ja':
     str = link + ' の新機能';
