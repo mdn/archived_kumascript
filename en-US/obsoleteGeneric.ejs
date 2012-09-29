@@ -1,7 +1,7 @@
 <%/*
 $0 : inline / header / method"
 $1 : version of obsolescence (optional)
-    prepend version with HTML, CSS, JS, or Gecko for those techs
+    prepend version with HTML, CSS, JS, JSAPI, or Gecko for those techs
 $3 : additional information required for the type specified by the first parameter
     method requires the method name
 */
@@ -16,11 +16,13 @@ var tip = "";
 if ($1) {
     var t = string.tolower($1);
     var n = "";
-
-    if (string.startswith(t, "js")) {
+    
+    if (string.startswith(t, "jsapi")) {
+        n = string.trim(string.substr(t, 5));
+        ver = "JSAPI ";
+    } else if (string.startswith(t, "js")) {
         n = string.trim(string.substr(t, 2));
         ver = "JavaScript ";
-        
         if (string.length(n) > 0) {
             if(wiki.pageExists('/' + lang + '/docs/JavaScript/New_in_JavaScript/' + n)) {
                 link = '/' + lang + '/docs/JavaScript/New_in_JavaScript/' + n;
