@@ -1,1 +1,7 @@
-<span style="color: rgb(255, 0, 0);" title="Not supported.">--</span>
+<% var text = "Not supported";
+
+switch(env.locale) {
+    case 'fr': text = "Pas de support"; break;
+}
+%>
+<span style="color: rgb(255, 0, 0);" title=<%- '"'+text+'"' %> > <%- text %> </span>
