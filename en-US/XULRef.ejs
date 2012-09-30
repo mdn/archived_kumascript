@@ -1,9 +1,9 @@
 <%
-var s = ["en-US/XUL", "en-US/XUL", "XUL Reference"];
+var s = ["en-US/XUL", "/en-US/docs/XUL", "XUL Reference"];
 switch (env.locale) {
-    case 'es': s = ["en/XUL", "en/XUL", "Referencia de XUL"];  break;
-    case 'de': s = ["de/XUL", "de/XUL", "XUL Referenz"];  break;
-    case 'ja': s = ["ja/XUL", "ja/XUL", "XUL リファレンス"];  break;
+    case 'es': s = ["es/XUL", "/es/docs/XUL", "Referencia de XUL"];  break;
+    case 'de': s = ["de/XUL", "/de/docs/XUL", "XUL Referenz"];  break;
+    case 'ja': s = ["ja/XUL", "/ja/docs/XUL", "XUL リファレンス"];  break;
 }
 %>
-« <a title="<%=s[0]%>" href="/docs/<%=s[1]%>"><%=s[2]%></a> «
+« <a title="<%=s[0]%>" href="<%=s[1]%>"><%=s[2]%></a> «
