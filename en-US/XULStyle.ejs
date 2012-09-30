@@ -1,18 +1,12 @@
 <%
 var lang = env.locale;
+var propName = mdn.localString({
+  "en-US": "Style",
+  "pl": "Styl"
+});
 
-/* set up the page name based on language */
-
-var propName = "Style";
-
-switch(lang) {
-  case 'pl':
-    propName = "Styl";
-    break;
-}
-
-var destOldType = lang + '/XUL:' + propName + ':' + $0;
-var destNewType = lang + '/XUL/' + propName + '/' + $0;
+var destOldType = '/' + lang + '/docs/XUL:' + propName + ':' + $0;
+var destNewType = '/' + lang + '/docs/XUL/' + propName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
   %><code><%-(web.link(wiki.uri(destNewType), $0))%></code><%
