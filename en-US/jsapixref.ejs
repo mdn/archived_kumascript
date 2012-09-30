@@ -6,12 +6,12 @@ if (string.endswith($0, '()')) {
     api = string.remove(api, string.length(api) - 2);
 }
 
-var dest = lang + '/' + 'SpiderMonkey/JSAPI_Reference/' + api;
+var dest = 'SpiderMonkey/JSAPI_Reference/' + api;
 
 if (wiki.pageExists(dest)) { /* the page exists */
     %><code><%- (web.link(wiki.uri(dest), $0)) %></code><%
 } else { /* the page doesn't exist */
-    var targeturi = "/" + lang + "/docs/new?slug=SpiderMonkey/JSAPI_Reference/" + $0;
+    var targeturi = "/" + lang + "/docs/new?slug=" + dest;
     %><code><a rel="internal" href="<%=targeturi%>" class="new"><%-$0%></a></code><%
 }
 %>
