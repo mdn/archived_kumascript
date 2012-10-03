@@ -3,6 +3,12 @@
     var page = wiki.page("en-US/docs/CSS/CSS_values_syntax"); 
     
     var re = new RegExp("<\\s*span\\s+id\\s*=\\s*"+'"syntax-'+$0+'"'+"[^>]*>(.*)<\\s*/\\s*span\\s*\\>","igm");
-    var result = re.exec(page)[1];
+    var result = re.exec(page);
+    if (!result) {
+        result= "Syntax not found in DB";
+    }
+    else {
+        result = result[1];
+    }
 %>
 <%- result %>
