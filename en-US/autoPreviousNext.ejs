@@ -1,32 +1,32 @@
 <%
 var prevStr = {
-  "en-US": "Previous",
-  de: "zurück",
-  es: "Anterior",
-  fr: "Précédent",
-  ja: "前",
-  ko: "이전",
-  pl: "Poprzedni",
-  ru: "Предыдущая статья",
-  "zh-TW": "前頁",
-  "zh-CN": "上一页",
-  cn: "上一页"
+    "en-US": "Previous",
+    "de": "zurück",
+    "es": "Anterior",
+    "fr": "Précédent",
+    "ja": "前",
+    "ko": "이전",
+    "pl": "Poprzedni",
+    "ru": "Предыдущая статья",
+    "zh-TW": "前頁",
+    "zh-CN": "上一页"
 };
 var nextStr = {
-  "en-US": "Next",
-  de: "weiter",
-  es: "Siguiente",
-  fr: "Suivant",
-  ja: "次",
-  ko: "다음",
-  pl: "Następny",
-  ru: "Следующая статья",
-  "zh-TW": "次頁",
-  "zh-CN": "下一页",
-  cn: "下一页"
+    "en-US": "Next",
+    "de": "weiter",
+    "es": "Siguiente",
+    "fr": "Suivant",
+    "ja": "次",
+    "ko": "다음",
+    "pl": "Następny",
+    "ru": "Следующая статья",
+    "zh-TW": "次頁",
+    "zh-CN": "下一页"
 };
+
 var chapterList = string.deserialize(template($0));
 var i = $1 ? chapterList.indexOf($1) : chapterList.indexOf(env.path);
+
 if (i != -1){
   var html;
   switch (i){
@@ -50,5 +50,6 @@ if (i != -1){
         '</p>';
   }
 }
-%>
-<%- html %>
+
+
+%><%- html %>
