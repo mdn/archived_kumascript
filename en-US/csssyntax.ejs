@@ -1,6 +1,8 @@
 <% 
     // Load the whole page (wiki.page does cache the original page
-    var page = wiki.page("en-US/docs/CSS/CSS_values_syntax"); 
+    var page = wiki.page(mdn.localString({"en-US": "en-US/docs/CSS/CSS_values_syntax",
+                                          "fr"   : "fr/docs/CSS/Syntaxe_des_valeurs_CSS"
+                                         })); 
     
     var re = new RegExp("<\\s*span\\s+id\\s*=\\s*"+'"syntax-'+$0+'"'+"[^>]*>(.*)<\\s*/\\s*span\\s*\\>","igm");
     var result = re.exec(page);
