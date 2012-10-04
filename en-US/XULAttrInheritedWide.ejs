@@ -1,5 +1,6 @@
 <%
 var s_inherited = "Inherited from XUL element";
+
 switch (env.locale) {
     case "de":
         s_inherited = "Geerbt von XUL-Element"; break;
@@ -14,8 +15,13 @@ switch (env.locale) {
     case "ru":
         s_inherited = "Наследуемые от XUL element"; break;
 }
-%>
-<table style="border: 1px solid rgb(204, 204, 204); margin: 0px 0px 10px 10px; padding: 0px 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"> <tbody> <tr> <td> <p><strong><%=s_inherited%></strong><br /> <small> 
+
+
+
+%><table style="border: 1px solid rgb(204, 204, 204); margin: 0 0 10px 10px; padding: 0 10px; background: rgb(238, 238, 238);">
+<tbody>
+<tr>
+<td><p><strong><%=s_inherited%></strong><br /> <small> 
 <%- template("XULAttr", ["align"]) %>, 
 <%- template("XULAttr", ["allowevents"]) %>, 
 <%- template("XULAttr", ["allownegativeassertions"]) %>, 
@@ -66,5 +72,8 @@ switch (env.locale) {
 <%- template("XULAttr", ["top"]) %>, 
 <%- template("XULAttr", ["uri"]) %>, 
 <%- template("XULAttr", ["wait-cursor"]) %>, 
-<%- template("XULAttr", ["width"]) %> </small></p> </td> </tr> </tbody>
+<%- template("XULAttr", ["width"]) %> </small></p>
+</td>
+</tr>
+</tbody>
 </table>
