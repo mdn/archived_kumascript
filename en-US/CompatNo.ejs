@@ -1,7 +1,7 @@
-<% var text = "Not supported";
+<% var text = "Not&nbsp;supported";
 
 switch(env.locale) {
-    case 'fr': text = "Pas de support"; break;
+    case 'fr': text = "Pas&nbsp;de&nbsp;support"; break;
 }
 
 %><span style="color:#f00;" title=<%- '"'+text+'"' %> > <%- text %> </span>
