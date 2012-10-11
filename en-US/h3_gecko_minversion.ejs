@@ -1,5 +1,18 @@
-<div><% if ("en-US" == env.locale) { %>
-<span class="inlineIndicator" style="border-color:#818151; background:#FFFFE1; font-weight:700; float:right; vertical-align:middle;">Requires Gecko <%- $1 %> <%- template("geckoRelease", [$1]) %></span><%
-} %>
-<h3><%- $0 %></h3>
+<% /*
+    $0 = [String] Gecko version
+    $1 = [String] headline content
+    $2 = [String / Optional] name/id attribute
+*/
+ 
+var str = "Requires Gecko " + $1;
+var idAttr = $2 ? ' name="' + $2 + '" id="' + $2 + '"' : "";
+ 
+str = mdn.localString({
+    ja : "Gecko " + $1 + " が必要"
+});
+ 
+ 
+%><div>
+    <span class="indicatorInHeadline minVer geckoMinVerMethod"><%- str %><%- template("geckoRelease", [$1]) %></span>
+    <h3<%- idAttr %>><%= $0 %></h3>
 </div>
