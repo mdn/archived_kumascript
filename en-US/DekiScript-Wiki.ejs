@@ -79,9 +79,10 @@
         }
         
         // Rip out the first header we find
+        if (html) {
+            html = html.replace(/^<(H|h)\d[^>]*>[^<]*(<\/B\d>|<\/h\d>)/ig,"") + "";
+        }
         
-        html = html.replace(/^<(H|h)\d[^>]*>[^<]*(<\/B\d>|<\/h\d>)/ig,"") + "";
-
         return html;
     },
         
