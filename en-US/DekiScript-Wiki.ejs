@@ -110,7 +110,7 @@
                 request(opts, function (err, resp, body) {
                     var result = '';
                     if (resp && 200 == resp.statusCode) {
-                        result = body;
+                        result = body || '';
                         if (show == undefined) {
                             show = 0;
                         }
