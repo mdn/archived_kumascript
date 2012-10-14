@@ -1,4 +1,5 @@
-<ul style="-moz-column-width: 15em">
+<div class="cols-2">
+<ul>
 <%
 /*
  * $0 max version to list
@@ -8,30 +9,46 @@
 var maxVersion = $0;
 var minVersion = maxVersion - 30;
 if (minVersion < 4) { minVersion = 4 }
- 
+
+// for attr
+var a1 = "Firefox_";
+var a2 = "_for_developers";
+
+// for content
+var s1 = "Firefox ",  s2 = " for developers";
+
+// old versions
+var ov = ["3.6", "3.5", "3", "2", "1.5"],  ovlen = ov.length;
+
+var i;
+
 var loc = mdn.localString({
-    "ja": "ja"
+    "ja": "ja",
+    "zh-CN": "zh-CN"
 });
- 
-if(!loc) { loc = "en-US"; }
- 
+
+if (!loc) { loc = "en-US"; }
+
+// for newer version
 for (var i = maxVersion; i >= minVersion; i--) { %>
-    <li><a href="/<%-loc%>/docs/Firefox_<%- i %>_for_developers" title="/<%-loc%>/docs/Firefox_<%-i%>_for_developers">Firefox <%- i %> for developers</a></li><%
+  <li><a href="/<%-loc%>/docs/<%-a1%><%- i %><%-a2%>" title="/<%-loc%>/docs/<%-a1%><%- i %><%-a2%>"><%-s1%><%- i %><%-s2%></a></li><%
 }
- 
-if (minVersion == 4) { %>
-  <li><a href="/<%-loc%>/docs/Firefox_3.6_for_developers" title="/<%-loc%>/docs/Firefox_3.6_for_developers">Firefox 3.6 for developers </a></li>
-  <li><a href="/<%-loc%>/docs/Firefox_3.5_for_developers" title="/<%-loc%>/docs/Firefox_3.5_for_developers">Firefox 3.5 for developers</a></li>
-  <li><a href="/<%-loc%>/docs/Firefox_3_for_developers" title="/<%-loc%>/docs/Firefox_3_for_developers">Firefox 3 for developers</a></li>
-  <li><a href="/<%-loc%>/docs/Firefox_2_for_developers" title="/<%-loc%>/docs/Firefox_2_for_developers">Firefox 2 for developers</a></li>
-  <li><a href="/<%-loc%>/docs/Firefox_1.5_for_developers" title="/<%-loc%>/docs/Firefox_1.5_for_developers">Firefox 1.5 for developers</a></li>
-<% }
+
+// for older version
+if (minVersion == 4) {
+for(i = 0; i < ovlen; i++) {%>
+  <li><a href="/<%-loc%>/docs/<%-a1%><%-ov[i]%><%-a2%>" title="/<%-loc%>/docs/<%-a1%><%-ov[i]%><%-a2%>"><%-s1%><%-ov[i]%><%-s2%></a></li>
+<%}
+}
  
 /*
     This template is difficult. Because, old "fr" page have other rule...
     If the URL of your country's page is the same as the English pages,
     You just have to add your country into the object in argument of mdn.localString.
+    
+    And, some old pages have this link: "https://developer.mozilla.org/en-US/docs/Updating_web_applications_for_Firefox_3"
 */
  
  
 %></ul>
+</div>
