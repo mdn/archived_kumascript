@@ -50,7 +50,7 @@ switch(lang) {
         note = "Uwaga dotycząca Firefoksa " + version;
         newIn = "Nowość w ";
         break;
-    case 'pt':
+    case 'pt-PT':
         articleName = product + version + " para desenvolvedores";
         text = "Este artigo cobre características introduzidas no " + web.link(wiki.uri(lang + '/docs/' + articleName), product + version);
         newIn = "Novidade no ";
@@ -67,6 +67,7 @@ switch(lang) {
         articleName = product + version + " 技術文件";
         text = "本文描述 " + web.link(wiki.uri(lang + '/docs/' + articleName), product + version) + " 之後加入的功能。";
         break;
+    default: break;
 }
  
 switch($0) {
@@ -80,8 +81,8 @@ switch($0) {
         break;
     case 'note':
         %><div class="blockIndicator standardNote standardNoteBlock">
-<p><%- web.link(wiki.uri(lang + '/docs/' + articleName), note) %></p>
-<p style="font-weight:400;"><%-$3%></p>
+    <p><%- web.link(wiki.uri(lang + '/docs/' + articleName), note) %></p>
+    <p style="font-weight:400;"><%-$3%></p>
 </div><%
         break;
 } %>
