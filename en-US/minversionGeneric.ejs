@@ -9,7 +9,7 @@
 var lang = env.locale;
 
 var product = $1.trim() + ' ';
-var version = $2.replace(/\.0/,'');
+var version = $2.split('.',2).join('.').replace(/\.0/,'');
 
 var articleName = product + version + " for developers";
 var text = "This content covers features introduced in " + web.link(wiki.uri(lang + '/docs/' + articleName), product + version);
