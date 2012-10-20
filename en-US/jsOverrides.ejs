@@ -1,4 +1,4 @@
-<div style="border: 1px solid rgb(204, 204, 204); margin: 10px 0px; padding: 0px 10px; background: rgb(238, 238, 238) none repeat scroll 0% 0%;">
+<div style="border: 1px solid #ccc; margin: 10px 0; padding: 0 10px; background: #eee;">
 <%
 /**
  * Replaces Template:JSInherits. Given an object and a list of properties or
@@ -14,323 +14,113 @@
  * @param "properties" or "methods"
  * @param a list of properties or methods overridden by this object
  */
+ 
 var prototypes = {
   "Array": {
     methods: [
-      "pop",
-      "push",
-      "reverse",
-      "shift",
-      "sort",
-      "splice",
-      "unshift",
-      "concat",
-      "join",
-      "slice",
-      "toSource",
-      "toString",
-      "indexOf",
-      "lastIndexOf",
-      "filter",
-      "forEach",
-      "every",
-      "map",
-      "some",
-      "reduce",
-      "reduceRight"
+      "pop", "push", "reverse", "shift", "sort", "splice", "unshift", "concat",
+      "join", "slice", "toSource", "toString", "indexOf", "lastIndexOf",
+      "filter", "forEach", "every", "map", "some", "reduce", "reduceRight"
     ],
-    properties: [
-      "constructor",
-      "index",
-      "input",
-      "length"
-    ]
+    properties: ["constructor", "index", "input", "length"]
   },
-  "Boolean": {
-    methods: [
-      "toSource",
-      "toString",
-      "valueOf"
-    ],
-    properties: [
-      "constructor"
-    ]
-  },
+  "Boolean": { methods: ["toSource", "toString", "valueOf"], properties: ["constructor"] },
   "Date": {
     methods: [
-      "getDate",
-      "getDay",
-      "getFullYear",
-      "getHours",
-      "getMilliseconds",
-      "getMinutes",
-      "getMonth",
-      "getSeconds",
-      "getTime",
-      "getTimezoneOffset",
-      "getUTCDate",
-      "getUTCDay",
-      "getUTCFullYear",
-      "getUTCHours",
-      "getUTCMilliseconds",
-      "getUTCMinutes",
-      "getUTCMonth",
-      "getUTCSeconds",
-      "getYear",
-      "setDate",
-      "setFullYear",
-      "setHours",
-      "setMilliseconds",
-      "setMinutes",
-      "setMonth",
-      "setSeconds",
-      "setTime",
-      "setUTCDate",
-      "setUTCFullYear",
-      "setUTCHours",
-      "setUTCMilliseconds",
-      "setUTCMinutes",
-      "setUTCMonth",
-      "setUTCSeconds",
-      "setYear",
-      "toDateString",
-      "toGMTString",
-      "toLocaleDateString",
-      "toLocaleFormat",
-      "toLocaleString",
-      "toLocaleTimeString",
-      "toSource",
-      "toString",
-      "toTimeString",
-      "toUTCString",
-      "valueOf"
+      "getDate", "getDay", "getFullYear", "getHours", "getMilliseconds",
+      "getMinutes", "getMonth", "getSeconds", "getTime", "getTimezoneOffset",
+      "getUTCDate", "getUTCDay", "getUTCFullYear", "getUTCHours",
+      "getUTCMilliseconds", "getUTCMinutes", "getUTCMonth", "getUTCSeconds",
+      "getYear", "setDate", "setFullYear", "setHours", "setMilliseconds",
+      "setMinutes", "setMonth", "setSeconds", "setTime", "setUTCDate",
+      "setUTCFullYear", "setUTCHours", "setUTCMilliseconds", "setUTCMinutes",
+      "setUTCMonth", "setUTCSeconds", "setYear", "toDateString", "toGMTString",
+      "toLocaleDateString", "toLocaleFormat", "toLocaleString",
+      "toLocaleTimeString", "toSource", "toString", "toTimeString",
+      "toUTCString", "valueOf"
     ],
-    properties: [
-      "constructor"
-    ]
+    properties: ["constructor"]
   },
-  "Error": {
-    methods: [
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "constructor",
-      "message",
-      "name",
-      "description",
-      "number",
-      "fileName",
-      "lineNumber",
-      "stack"
-    ]
-  },
-  "EvalError": {
-    methods: [
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "constructor",
-      "name"
-    ]
-  },
-  "Function": {
-    methods: [
-      "apply",
-      "call",
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "arity",
-      "caller",
-      "constructor",
-      "length",
-      "name"
-    ]
-  },
+  "Error": { methods: ["toSource", "toString"], properties: ["constructor", "message", "name", "description", "number", "fileName", "lineNumber", "stack"] },
+  "EvalError": { methods: ["toSource", "toString"], properties: ["constructor", "name"] },
+  "Function": { methods: ["apply", "call", "toSource", "toString"], properties: ["arity", "caller", "constructor", "length", "name"] },
   "Number": {
-    methods: [
-      "toExponential",
-      "toFixed",
-      "toLocaleString",
-      "toPrecision",
-      "toSource",
-      "toString",
-      "valueOf"
-    ],
-    properties: [
-      "constructor"
-    ]
+    methods: ["toExponential", "toFixed", "toLocaleString", "toPrecision", "toSource", "toString", "valueOf"],
+    properties: ["constructor"]
   },
   "Object": {
     methods: [
-      "__defineGetter__",
-      "__defineSetter__",
-      "hasOwnProperty",
-      "isPrototypeOf",
-      "__lookupGetter__",
-      "__lookupSetter__",
-      "__noSuchMethod__",
-      "propertyIsEnumerable",
-      "toSource",
-      "toLocaleString",
-      "toString",
-      "unwatch",
-      "valueOf",
-      "watch"
+      "__defineGetter__", "__defineSetter__", "hasOwnProperty",
+      "isPrototypeOf", "__lookupGetter__", "__lookupSetter__",
+      "__noSuchMethod__", "propertyIsEnumerable", "toSource",
+      "toLocaleString", "toString", "unwatch",
+      "valueOf", "watch"
     ],
-    properties: [
-      "constructor",
-      "__parent__",
-      "__proto__"
-    ]
+    properties: ["constructor", "__parent__", "__proto__"]
   },
-  "RangeError": {
-    methods: [
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "constructor",
-      "name"
-    ]
-  },
-  "ReferenceError": {
-    methods: [
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "constructor",
-      "name"
-    ]
-  },
-  "RegExp": {
-    methods: [
-      "exec",
-      "test",
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "constructor",
-      "global",
-      "ignoreCase",
-      "lastIndex",
-      "multiline",
-      "source"
-    ]
-  },
+  "RangeError": { methods: ["toSource", "toString" ], properties: ["constructor", "name"] },
+  "ReferenceError": { methods: ["toSource", "toString"], properties: ["constructor", "name"] },
+  "RegExp": { methods: ["exec", "test", "toSource", "toString" ], properties: ["constructor", "global", "ignoreCase", "lastIndex", "multiline", "source"] },
   "String": {
     methods: [
-      "charAt",
-      "charCodeAt",
-      "concat",
-      "indexOf",
-      "lastIndexOf",
-      "localeCompare",
-      "match",
-      "quote",
-      "replace",
-      "search",
-      "slice",
-      "split",
-      "substr",
-      "substring",
-      "toLocaleLowerCase",
-      "toLocaleUpperCase",
-      "toLowerCase",
-      "toSource",
-      "toString",
-      "toUpperCase",
-      "trim",
-      "trimLeft",
-      "trimRight",
-      "valueOf",
-      "anchor",
-      "big",
-      "blink",
-      "bold",
-      "fixed",
-      "fontcolor",
-      "fontsize",
-      "italics",
-      "link",
-      "small",
-      "strike",
-      "sub",
-      "sup"
+      "charAt", "charCodeAt", "concat", "indexOf", "lastIndexOf",
+      "localeCompare", "match", "quote", "replace", "search", "slice", "split",
+      "substr", "substring", "toLocaleLowerCase", "toLocaleUpperCase",
+      "toLowerCase", "toSource", "toString", "toUpperCase", "trim", "trimLeft",
+      "trimRight", "valueOf", "anchor", "big", "blink", "bold", "fixed",
+      "fontcolor", "fontsize", "italics", "link", "small", "strike", "sub", "sup"
     ],
-    properties: [
-      "constructor",
-      "length"
-    ]
+    properties: ["constructor", "length"]
   },
-  "SyntaxError": {
-    methods: [
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "constructor",
-      "name"
-    ]
-  },
-  "TypeError": {
-    methods: [
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "constructor",
-      "name"
-    ]
-  },
-  "URIError": {
-    methods: [
-      "toSource",
-      "toString"
-    ],
-    properties: [
-      "constructor",
-      "name"
-    ]
-  }
+  "SyntaxError": { methods: ["toSource", "toString"], properties: ["constructor", "name"] },
+  "TypeError": { methods: [ "toSource", "toString"], properties: ["constructor", "name"] },
+  "URIError": { methods: ["toSource", "toString"], properties: ["constructor", "name"] }
 };
+
 var prefix;
-if ('en-US' == env.locale) {
-  prefix = '/en-US/docs/JavaScript/Reference/Global_Objects/';
+
+if(env.locale === "ja") {
+    prefix = '/ja/docs/JavaScript/Reference/Global_Objects/';
+} else if (env.locale === 'en-US') {
+    prefix = '/en-US/docs/JavaScript/Reference/Global_Objects/';
 }
-var captiontext = string.ToUpperFirst(string.toLower($1)) + ' inherited from ';
+
 var pageuri = wiki.uri(prefix + $0);
-var htmlstring = '<span style="font-weight:bold;">' + captiontext +
-                 ' <a href="' + pageuri + '"><code>' + $0 +
-                 '</code></a></span>:<br />';
-%>
-<%- htmlstring %>
-<%
+var captiontext = string.ToUpperFirst(string.toLower($1));
+var titleString = captiontext  + ' inherited from  <a href="' + pageuri + '"><code>' + $0 + '</code></a>';
+
+
+
+
+
 var desiredprototype = prototypes[$0][string.toLower($1)];
 var overrides = arguments.slice(2);
-for (var i=0; i<overrides.length; i++) {
-  var override = overrides[i];
-  var index = desiredprototype.indexOf(override);
-  if (index != (-1)) {
-    desiredprototype = desiredprototype.splice(index, 1);
-  }
+
+for (var i = 0; i < overrides.length; i++) {
+    var override = overrides[i];
+    var index = desiredprototype.indexOf(override);
+
+	if (index != (-1)) {
+		desiredprototype = desiredprototype.splice(index, 1);
+	}
 }
-htmlstring = '<span style="font-size: smaller;">';
-var lastindex = desiredprototype.length - 1;
-var i = 0;
+
+var htmlstring = '';
+
+var lastindex = desiredprototype.length - 1; /* ? */
 var parts = [];
-for (var i=0; i<desiredprototype.length; i++) {
-  var p = desiredprototype[i];
-  var pimproper = string.ToUpperFirst(string.replace(p, '__', ''));
-  pageuri = wiki.uri(prefix + $0 + '/' + pimproper);
-  parts.push('<a href="' + pageuri + '"><code>' + p + '</code></a>');
+
+for (var i = 0; i < desiredprototype.length; i++) {
+	var p = desiredprototype[i];
+	var pimproper = string.ToUpperFirst(string.replace(p, '__', ''));
+
+	pageuri = wiki.uri(prefix + $0 + '/' + pimproper);
+	parts.push('<a href="' + pageuri + '"><code>' + p + '</code></a>');
 }
-htmlstring += parts.join(', ') + '</span>';
-%>
+
+htmlstring += parts.join(', ');
+
+
+%><span style="font-weight:700;"><%- titleString %></span>:<br />
 <%- htmlstring %>
 </div>
