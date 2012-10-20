@@ -18,6 +18,7 @@
     buildAbsoluteURL: function (path) {
         var p = kuma.url.parse(env.url, true);
         var base_url = p.protocol + '//' + p.host;
+
         if (path.indexOf('/docs') == -1) {
             // HACK: If this looks like a legacy wiki URL, throw /en-US/docs 
             // in front of it. That will trigger the proper redirection logic 
@@ -26,11 +27,12 @@
         }
         var re1 = / /gi;
         var re2 = /%20/gi;
+
         path = path.replace(re1, "_");
         path = path.replace(re2, "_");
-        if (path.charAt(0) != '/') {
-            base_url += '/';
-        }
+
+        if (path.charAt(0) != '/') { base_url += '/'; }
+
         return base_url + path;
     },
     
@@ -46,10 +48,11 @@
         // This is an experiment to exempt wiki.pageExists 
         // from shift-refresh cache busting:
         var mdn = require('MDN:Common');
+
         //return cacheFn(key, 3600, function (next) {
-        return mdn.cacheFnIgnoreCacheControl(key, 3600, function (next) {
-            
+        return mdn.cacheFnIgnoreCacheControl(key, 3600, function (next) {            
             var opts = { method: 'HEAD', url: wiki.buildAbsoluteURL(path) };
+
             try {
                 request(opts, function (err, resp, body) {
                     var result = false;
@@ -74,14 +77,10 @@
     //
     // heading is not supported at this time
     _adjustHeadings: function(html, show, heading) {
-        if (show) {
-            return html;
-        }
+        if (show) { return html; }
         
         // Rip out the first header we find
-        if (html) {
-            html = html.replace(/^<(H|h)\d[^>]*>[^<]*(<\/B\d>|<\/h\d>)/ig,"") + "";
-        }
+        if (html) { html = html.replace(/^<(H|h)\d[^>]*>[^<]*(<\/B\d>|<\/h\d>)/ig,"") + ""; }
         
         return html;
     },
@@ -96,16 +95,18 @@
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Page)
     page: function (path, section, revision, show, heading) {
         var key = 'kuma:include:' + md5(path.toLowerCase());
+
         return cacheFn(key, 3600, function (next) {
             var params = ['raw=1', 'macros=1', 'include=1'];
-            if (section) {
-                params.push('section='+encodeURIComponent(section));
-            }
+
+            if (section) { params.push('section='+encodeURIComponent(section)); }
+
             var opts = {
                 method: 'GET',
                 headers: { 'Cache-Control': env.cache_control },
                 url: wiki.buildAbsoluteURL(path) + '?' + params.join('&')
             };
+
             try {
                 request(opts, function (err, resp, body) {
                     var result = '';
@@ -151,7 +152,9 @@
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Uri)
     uri: function (path, query) {
         var out = wiki.buildAbsoluteURL(path);
+
         if (query) { out += '?' + query; }
+
         return out;
     },
  
@@ -159,13 +162,12 @@
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Languages)
     languages: function (langs) {
         // TODO
-        var out = ['<ul>'];
+        var out = [];
         _.each(langs, function (url, lang) {
             out.push('<li><a href="', kuma.htmlEscape(url), '">',
                      kuma.htmlEscape(lang), '</a></li>');
         });
-        out.push('</ul>');
-        return out.join('');
+        return "<ul>" + out.join('') + "<\/ul>";
     }
      
 }); %>
