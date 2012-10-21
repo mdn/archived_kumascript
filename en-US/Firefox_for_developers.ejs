@@ -23,11 +23,10 @@ var ov = ["3.6", "3.5", "3", "2", "1.5"],  ovlen = ov.length;
 var i;
 
 var loc = mdn.localString({
+    "en-US" : "en-US",
     "ja": "ja",
     "zh-CN": "zh-CN"
 });
-
-if (!loc) { loc = "en-US"; }
 
 // for newer version
 for (var i = maxVersion; i >= minVersion; i--) { %>
