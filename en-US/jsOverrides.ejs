@@ -97,7 +97,7 @@ switch(env.locale) {
         titleString = '<a class="internal" href="' + pageuri + '"><code>' + $0 + '</code></a> から継承される' + captionText;
         break;
     default:
-        titleString = captionText  + ' inherited from  <a href="' + pageuri + '"><code>' + $0 + '</code></a>';
+        titleString = captionText  + ' inherited from  <a href="' + pageuri + '"><code>' + $0 + '</code></a>:';
         break;
 }
 
@@ -131,6 +131,6 @@ for (var i = 0; i < desiredprototype.length; i++) {
 htmlstring += parts.join(', ');
 
 
-%><div><span style="font-weight:700;"><%- titleString %></span>:</div>
-<%- htmlstring %>
+%><div><span style="font-weight:700;"><%- titleString %></span></div>
+<div><%- htmlstring %></div>
 </div>
