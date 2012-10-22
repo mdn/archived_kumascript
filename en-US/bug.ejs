@@ -18,7 +18,11 @@ if (#bugPageXML == 0) {
     s = "The access to the bug's page is restricted.";
 }
 */
-var ts = {"en-US": "bug ", "ca": "errada ", "cs": "chyba ", "pl": "błąd "};
-var s_bug = ts[env.locale] || ts['en-US'];
+var s_bug = mdn.localString({
+    "en-US": "bug", 
+    "ca"   : "errada", 
+    "cs"   : "chyba", 
+    "pl"   : "błąd"
+});
 %>
-<a rel="external" href="<%=bugPageURL%>" class="external" title="<%=s%>"><%=s_bug%> <%=$0%></a>
+<a rel="external" href="<%=bugPageURL%>" rel="external" title="<%=s%>"><%=s_bug%>&nbsp;<%=$0%></a>
