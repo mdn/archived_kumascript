@@ -1,6 +1,7 @@
 <%
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var s = "";
+
 /*TODO: Enable after Bug 765642 is fixed.
 var bugPageXML = web.xml(bugPageURL);
 if (#bugPageXML == 0) {
@@ -18,11 +19,13 @@ if (#bugPageXML == 0) {
     s = "The access to the bug's page is restricted.";
 }
 */
+
 var s_bug = mdn.localString({
-    "en-US": "bug", 
-    "ca"   : "errada", 
-    "cs"   : "chyba", 
+    "en-US": "bug",
+    "ca"   : "errada",
+    "cs"   : "chyba",
+    "ja"   : "バグ",
     "pl"   : "błąd"
 });
-%>
-<a rel="external" href="<%=bugPageURL%>" rel="external" title="<%=s%>"><%=s_bug%>&nbsp;<%=$0%></a>
+
+%><a rel="external" href="<%=bugPageURL%>" title="<%=s%>"><%=s_bug%>&nbsp;<%=$0%></a>
