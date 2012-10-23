@@ -1,23 +1,18 @@
 <%
-    var path = $1;
-    var title = $2 || path;
+var path = $1;
+var title = $2 || path;
 
-    var lang = env.locale.substr(0, 2);
-    var prefix = $0;
+var lang = env.locale.substr(0, 2);
+var prefix = $0;
 
-    switch(prefix) {
-        case 'wikipedia':
-            %>
-            <a title="<%=title%>" href="<%-'http://' + lang + '.wikipedia.org/wiki/' + path%>"><%-title%></a>
-            <%
-            break;
-        case 'wikimo':
-            %>
-            <a class="wikimo" title="<%=title%>" href="<%-'http://wiki.mozilla.org/' + path%>"><%-title%></a>
-            <%
-            break;
-        default:
-            'Unknown prefix: ' + prefix + '.';
-            break;
-    }
-%>
+switch(prefix) {
+    case 'wikipedia':
+        %><a title="<%=title%>" href="<%-'http://' + lang + '.wikipedia.org/wiki/' + path%>"><%-title%></a><%
+        break;
+    case 'wikimo':
+        %><a class="wikimo" title="<%=title%>" href="<%-'http://wiki.mozilla.org/' + path%>"><%-title%></a><%
+        break;
+    default:
+        %>Unknown prefix: <%- prefix %>.<%
+        break;
+}%>
