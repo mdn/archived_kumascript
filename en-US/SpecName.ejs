@@ -14,237 +14,227 @@ var result;
 // REMINDER: When possible, always refer to the Editor Draft of a spec. THe TR spec are always outdated
 
 switch(spec) {
-  case 'AmbientLight':
-    name = "Ambient Light Events";
-    url = "http://dvcs.w3.org/hg/dap/raw-file/tip/light/Overview.html";
-    break;
-  case 'CSS1':
-    name = "CSS Level&nbsp;1";
-    url  = "http://www.w3.org/TR/CSS1/";
-    break;
-  case 'CSS2.1':
-    name = "CSS Level&nbsp;2 (Revision&nbsp;1)";
-    url  = "http://www.w3.org/TR/CSS2/";
-    break;
-  case 'CSS3 Animations':
-    name = "CSS&nbsp;Animations";
-    url  = "http://dev.w3.org/csswg/css3-animations/";
-    break;
-  case 'CSS3 Backgrounds': // Backgrounds & Borders
-    name = 'CSS&nbsp;Backgrounds and Borders&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-background/";
-    break;
-  case 'CSS3 Basic UI':
-  case 'CSS3 UI':
-    name = 'CSS&nbsp;Basic User Interface&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-ui/";
-    break;
-  case 'CSS3 Box':
-    name = 'CSS&nbsp;Basic Box&nbsp;Model';
-    url  = "http://dev.w3.org/csswg/css3-box/";
-    break;
-  case 'CSS3 Cascade':
-    name = 'CSS3&nbsp;module: Cascading and inheritance';
-    url  = "http://dev.w3.org/csswg/css3-cascade/";
-    break;
-  case 'CSS3 Colors':
-    name = 'CSS&nbsp;Color&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-color/";
-    break;
-  case 'CSS3 Conditional':
-    name = 'CSS&nbsp;Conditional Rules&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-conditional/";
-    break;
-  case 'CSS3 Content':
-    name = 'CSS&nbsp;Generated Content&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-content/";
-    break;
-  case 'CSS3 Counter Styles':
-    name = "CSS&nbsp;Counter Styles Level&nbsp;3";
-    url  = "http://dev.w3.org/csswg/css-counter-styles-3/";
-    break;
-  case 'CSS3 Device':
-    name = 'CSS&nbsp;Device Adaptation';
-    url  = "http://dev.w3.org/csswg/css-device-adapt/";
-    break;
-  case 'CSS3 Exclusions and Shapes':
-    name = 'CSS&nbsp;Exclusions and Shapes&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-exclusions/";
-    break;
-  case 'CSS3 Flexbox':
-    name = 'CSS&nbsp;Flexible Box Layout&nbsp;Module';
-    url  = "http://dev.w3.org/csswg/css3-flexbox/";
-    break;
-  case 'CSS3 Fonts':
-    name = 'CSS&nbsp;Fonts&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-fonts/";
-    break;
-  case 'CSS3 Fragmentation':
-    name = 'CSS&nbsp;Fragmentation&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-break/";
-    break;
-  case 'CSS3 GCPM':
-    name = 'CSS&nbsp;Generated Content for&nbsp;Paged Media&nbsp;Module';
-    url  = "http://dev.w3.org/csswg/css3-gcpm/";
-    break;
-  case 'CSS3 Grid': /* This is 'grid layout' and no more 'grid positioning' which has been abandoned */
-    name = 'CSS&nbsp;Grid Layout';
-    url  = "http://dev.w3.org/csswg/css3-grid-layout/";
-    break;
-  case 'CSS3 Images':
-    name = 'CSS&nbsp;Image Values and&nbsp;Replaced Content&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-images/";
-    break;
-  case 'CSS3 Lists':
-    name = 'CSS&nbsp;Lists and Counters&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-lists/";
-    break;
-  case 'CSS3 Media Queries':
-    name = 'Media Queries';
-    url  = "http://dev.w3.org/csswg/css3-mediaqueries/";
-    break;
-  case 'CSS3 Multicol':
-    name = 'CSS&nbsp;Multi-column Layout&nbsp;Module';
-    url  = "http://dev.w3.org/csswg/css3-multicol/";
-    break;
-  case 'CSS3 Namespaces':
-    name = 'CSS&nbsp;Namespaces&nbsp;Module';
-    url  = "http://dev.w3.org/csswg/css3-namespace/";
-    break;
-  case 'CSS3 Paged Media':
-    name = 'CSS&nbsp;Paged Media&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-page/";
-    break;
-  case 'CSS3 Regions':
-    name = 'CSS&nbsp;Regions&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-regions/";
-    break;
-  case 'CSS3 Selectors':
-    name = 'Selectors Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/selectors3/";
-    break;
-  case 'CSS3 Sizing':
-    name = 'CSS&nbsp;Intrinsic&nbsp;&amp; Extrinsic&nbsp;Sizing&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-sizing/";
-    break;
-  case 'CSS3 Speech':
-    name = 'CSS&nbsp;Speech&nbsp;Module';
-    url  = "http://dev.w3.org/csswg/css3-speech/";
-    break;
-  case 'CSS3 Style':
-    name = 'CSS&nbsp;Style Attributes';
-    url  = "http://dev.w3.org/csswg/css-style-attr/";
-    break;
-  case 'CSS3 Template':
-    name = '??????';
-    url  = "about:unknown";
-    break;
-  case 'CSS3 Text':
-    name = 'CSS&nbsp;Text Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-text/";
-    break;
-  case 'CSS3 Transforms':
-  case 'CSS3 2D Transforms':
-  case 'CSS3 3D Transforms':
-    name = 'CSS&nbsp;Transforms';
-    url  = "http://dev.w3.org/csswg/css3-transforms/";
-    break;
-  case 'CSS3 Transitions':
-    name = 'CSS&nbsp;Transitions';
-    url  = "http://dev.w3.org/csswg/css3-transitions/";
-    break;
-  case 'CSS3 Values':
-    name = 'CSS&nbsp;Values and Units&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-values/";
-    break;
-  case 'CSS3 Variables':
-    name = 'CSS&nbsp;Variables&nbsp;Module Level&nbsp;1';
-    url  = "http://dev.w3.org/csswg/css-variables/";
-    break;
-  case 'CSS3 Writing Modes':
-    name = 'CSS&nbsp;Writing Modes&nbsp;Module Level&nbsp;3';
-    url  = "http://dev.w3.org/csswg/css3-writing-modes/";
-    break;
-  case 'CSS4 Images':
-    name = 'CSS&nbsp;Image Values and&nbsp;Replaced Content&nbsp;Module Level&nbsp;4';
-    url  = "http://dev.w3.org/csswg/css4-images/";
-    break;
-  case 'CSS4 Selectors':
-    name = 'Selectors Level&nbsp;4';
-    url  = "http://dev.w3.org/csswg/selectors4/";
-    break;
-  case 'CSS4 Text':
-    name = 'CSS&nbsp;Text Level&nbsp;4';
-    url  = "http://dev.w3.org/csswg/css4-text/";
-    break;
-  case 'CSSOM':
-    name = 'CSS Object Model (CSSOM)';
-    url  = 'http://dev.w3.org/csswg/cssom/';
-    break;
-  case 'DOM2 Style':
-    name = 'Document Object Model (DOM) Level 2 Style Specification';
-    url  = 'http://www.w3.org/TR/DOM-Level-2-Style/'; 
-    break;
-  case 'Filters 1.0':
-    name = "Filter Effects 1.0";
-    url  = "http://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html";
-    break;
-  case 'HTML5 W3C':
-    name = 'HTML5';
-    url  = 'http://dev.w3.org/html5/spec/single-page.html';
-    break;
-  case 'HTML WHATWG':
-    name = 'HTML';
-    url  = 'http://www.whatwg.org/specs/web-apps/current-work/';
-    break;
-  case 'MathML2':
-    name = 'MathML 2.0';
-    url = 'http://www.w3.org/TR/MathML2/';
-    break;
-  case 'MathML3':
-    name = 'MathML 3.0';
-    url = 'http://www.w3.org/TR/MathML3/';
-    break;
-  case 'ProximityEvents':
-    name = 'Proximity Events';
-    urls = 'http://dvcs.w3.org/hg/dap/raw-file/tip/proximity/Overview.html';
-    break;
-  case 'SVG1.1':
-    name = 'Scalable Vector Graphics (SVG) 1.1 (Second Edition)';
-    url  = 'http://www.w3.org/TR/SVG11/';
-    break;
-  case 'WOFF1.0':
-    name = 'WOFF File Format 1.0';
-    url  = 'http://www.w3.org/TR/WOFF/';
-    break;
-  default:
-    name = 'Unknown';
-    url  = "about:unknown";
+    case 'AmbientLight':
+    	name = "Ambient Light Events";
+		url = "http://dvcs.w3.org/hg/dap/raw-file/tip/light/Overview.html";
+		break;
+	case 'CSS1':
+		name = "CSS Level 1";
+		url  = "http://www.w3.org/TR/CSS1/";
+		break;
+	case 'CSS2.1':
+		name = "CSS Level 2 (Revision 1)";
+		url  = "http://www.w3.org/TR/CSS2/";
+		break;
+	case 'CSS3 Animations':
+			name = "CSS Animations";
+		url  = "http://dev.w3.org/csswg/css3-animations/";
+		break;
+	case 'CSS3 Backgrounds': // Backgrounds & Borders
+		name = 'CSS Backgrounds and Borders Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-background/";
+		break;
+	case 'CSS3 Basic UI':
+	case 'CSS3 UI':
+		name = 'CSS Basic User Interface Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-ui/";
+		break;
+	case 'CSS3 Box':
+		name = 'CSS Basic Box Model';
+		url  = "http://dev.w3.org/csswg/css3-box/";
+		break;
+	case 'CSS3 Cascade':
+		name = 'CSS3 module: Cascading and inheritance';
+		url  = "http://dev.w3.org/csswg/css3-cascade/";
+		break;
+	case 'CSS3 Colors':
+		name = 'CSS Color Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-color/";
+		break;
+	case 'CSS3 Conditional':
+		name = 'CSS Conditional Rules Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-conditional/";
+		break;
+	case 'CSS3 Content':
+		name = 'CSS Generated Content Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-content/";
+		break;
+	case 'CSS3 Counter Styles':
+		name = "CSS Counter Styles Level 3";
+		url  = "http://dev.w3.org/csswg/css-counter-styles-3/";
+		break;
+	case 'CSS3 Device':
+		name = 'CSS Device Adaptation';
+		url  = "http://dev.w3.org/csswg/css-device-adapt/";
+		break;
+	case 'CSS3 Exclusions and Shapes':
+		name = 'CSS Exclusions and Shapes Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-exclusions/";
+		break;
+	case 'CSS3 Flexbox':
+		name = 'CSS Flexible Box Layout Module';
+		url  = "http://dev.w3.org/csswg/css3-flexbox/";
+		break;
+	case 'CSS3 Fonts':
+		name = 'CSS Fonts Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-fonts/";
+		break;
+	case 'CSS3 Fragmentation':
+		name = 'CSS Fragmentation Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-break/";
+		break;
+	case 'CSS3 GCPM':
+		name = 'CSS Generated Content for Paged Media Module';
+		url  = "http://dev.w3.org/csswg/css3-gcpm/";
+		break;
+	case 'CSS3 Grid': /* This is 'grid layout' and no more 'grid positioning' which has been abandoned */
+		name = 'CSS Grid Layout';
+		url  = "http://dev.w3.org/csswg/css3-grid-layout/";
+		break;
+	case 'CSS3 Images':
+		name = 'CSS Image Values and Replaced Content Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-images/";
+		break;
+	case 'CSS3 Lists':
+		name = 'CSS Lists and Counters Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-lists/";
+		break;
+	case 'CSS3 Media Queries':
+		name = 'Media Queries';
+		url  = "http://dev.w3.org/csswg/css3-mediaqueries/";
+		break;
+	case 'CSS3 Multicol':
+		name = 'CSS Multi-column Layout Module';
+		url  = "http://dev.w3.org/csswg/css3-multicol/";
+		break;
+	case 'CSS3 Namespaces':
+		name = 'CSS Namespaces Module';
+		url  = "http://dev.w3.org/csswg/css3-namespace/";
+		break;
+	case 'CSS3 Paged Media':
+		name = 'CSS Paged Media Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-page/";
+		break;
+	case 'CSS3 Regions':
+		name = 'CSS Regions Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-regions/";
+		break;
+	case 'CSS3 Selectors':
+		name = 'Selectors Level 3';
+		url  = "http://dev.w3.org/csswg/selectors3/";
+		break;
+	case 'CSS3 Sizing':
+		name = 'CSS Intrinsic &amp; Extrinsic Sizing Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-sizing/";
+		break;
+	case 'CSS3 Speech':
+		name = 'CSS Speech Module';
+		url  = "http://dev.w3.org/csswg/css3-speech/";
+		break;
+	case 'CSS3 Style':
+		name = 'CSS Style Attributes';
+		url  = "http://dev.w3.org/csswg/css-style-attr/";
+		break;
+	case 'CSS3 Template':
+		name = '??????';
+		url  = "about:unknown";
+		break;
+	case 'CSS3 Text':
+		name = 'CSS Text Level 3';
+		url  = "http://dev.w3.org/csswg/css3-text/";
+		break;
+	case 'CSS3 Transforms':
+	case 'CSS3 2D Transforms':
+	case 'CSS3 3D Transforms':
+		name = 'CSS Transforms';
+		url  = "http://dev.w3.org/csswg/css3-transforms/";
+		break;
+	case 'CSS3 Transitions':
+		name = 'CSS Transitions';
+		url  = "http://dev.w3.org/csswg/css3-transitions/";
+		break;
+	case 'CSS3 Values':
+		name = 'CSS Values and Units Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-values/";
+		break;
+	case 'CSS3 Variables':
+		name = 'CSS Variables Module Level 1';
+		url  = "http://dev.w3.org/csswg/css-variables/";
+		break;
+	case 'CSS3 Writing Modes':
+		name = 'CSS Writing Modes Module Level 3';
+		url  = "http://dev.w3.org/csswg/css3-writing-modes/";
+		break;
+	case 'CSS4 Images':
+		name = 'CSS Image Values and Replaced Content Module Level 4';
+		url  = "http://dev.w3.org/csswg/css4-images/";
+		break;
+	case 'CSS4 Selectors':
+		name = 'Selectors Level 4';
+		url  = "http://dev.w3.org/csswg/selectors4/";
+		break;
+	case 'CSS4 Text':
+		name = 'CSS Text Level 4';
+		url  = "http://dev.w3.org/csswg/css4-text/";
+		break;
+	case 'CSSOM':
+		name = 'CSS Object Model (CSSOM)';
+		url  = 'http://dev.w3.org/csswg/cssom/';
+		break;
+	case 'DOM2 Style':
+		name = 'Document Object Model (DOM) Level 2 Style Specification';
+		url  = 'http://www.w3.org/TR/DOM-Level-2-Style/'; 
+		break;
+	case 'Filters 1.0':
+		name = "Filter Effects 1.0";
+		url  = "http://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html";
+		break;
+	case 'HTML5 W3C':
+		name = 'HTML5';
+		url  = 'http://dev.w3.org/html5/spec/single-page.html';
+		break;
+	case 'HTML WHATWG':
+		name = 'HTML';
+		url  = 'http://www.whatwg.org/specs/web-apps/current-work/';
+		break;
+	case 'MathML2':
+		name = 'MathML 2.0';
+		url = 'http://www.w3.org/TR/MathML2/';
+		break;
+	case 'MathML3':
+		name = 'MathML 3.0';
+		url = 'http://www.w3.org/TR/MathML3/';
+		break;
+	case 'ProximityEvents':
+		name = 'Proximity Events';
+		urls = 'http://dvcs.w3.org/hg/dap/raw-file/tip/proximity/Overview.html';
+		break;
+	case 'SVG1.1':
+		name = 'Scalable Vector Graphics (SVG) 1.1 (Second Edition)';
+		url  = 'http://www.w3.org/TR/SVG11/';
+		break;
+	case 'WOFF1.0':
+		name = 'WOFF File Format 1.0';
+		url  = 'http://www.w3.org/TR/WOFF/';
+		break;
+	default:
+		name = 'Unknown';
+		url  = "about:unknown";
 }
 
 if ($2) {
-    title     = "The definition of '" + $2 + "' in that specification."; // Default value
-    switch(env.locale) {
-    case 'en-US':
-        title = "The definition of '" + $2 + "' in that specification.";
-        break;
-    case 'fr':
-        title = "La définition de '" + $2 + "' dans cette spécification.";
-        break;
-    }
-}
-else {
-    title = "The specification '" + name + "'";
-    switch(env.locale) {
-        case 'en-US':
-            title ="The '" + name + "' specification";
-            break;
-        case 'fr':
-            title = "La spécificaction '" + name + "'";
-            break;
-    }
+	title = mdn.localString({
+		"en-US": "The definition of '" + $2 + "' in that specification.",
+		"fr": "La définition de '" + $2 + "' dans cette spécification."
+	});	
+} else {
+	title = mdn.localString({
+		"en-US": "The '" + name + "' specification",
+		"fr": "La spécificaction '" + name + "'"
+	});	
 }
 
 result = '<a href="' + url + anchor + '" lang="en" class="external" title="' + title + '">' + name + "</a>";
-%>
-<%- result %>
+
+
+%><%- result %>
