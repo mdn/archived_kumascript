@@ -1,23 +1,18 @@
 <% /*
- * parameter 0: "inline" or "method"
- * parameter 1: string of indicator
- * parameter 2: string of heading
+parameters:
+    $0: "inline" or "method"
+    $1: string of indicator
+    $2: string of heading
+    $3: heading level  ( optional / default = 3 )
 */
 
-
-var str = "Optional" + ($1 ? ' from Gecko ' + $1 : '');
-
-switch(env.locale) {
-    case 'zh-CN':
-        str = "可选" + ($1 ? '试用于Gecko ' + $1 : '');
-        break;
-    case 'zh-TW':
-        str = ($1 ? '自 Gecko ' + $1 + '開始變為' : '') + "選擇性";
-        break;
-    default: break;
-}
-
+var hLevel = $3 || 3;
 var attr = "";
+var str = mdn.localString({
+    "en-US": "Optional" + ($1 ? ' from Gecko ' + $1 : ''),
+    "zh-CN": "可选" + ($1 ? '试用于Gecko ' + $1 : ''),
+    "zh-TW": ($1 ? '自 Gecko ' + $1 + '開始變為' : '') + "選擇性"
+});
 
 if ($1) attr = template("geckoRelease", [$1]);
 
@@ -28,7 +23,7 @@ switch($0) {
     case 'method':
         %><div>
             <span class="indicatorInHeadline optional optionalMethod"><%- str %></span>
-            <h3><%= $2 %></h3>
+            <h<%-hLevel%>><%= $2 %></h<%-hLevel%>>
         </div><%
         break;
     default :
