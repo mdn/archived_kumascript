@@ -4,8 +4,8 @@ var len = ar.length;
 var ar0 = ar[0];
 
 if (ar0 >= 5) {
-  ar0 = ar0 - 2;
-} // fix for Gecko skipping from 2.0 to 5.0
+  ar0 = (ar0 - 4)/10 + 2;
+} // fix for Gecko skipping from 2.0 to 5.0 and proportions for rapid release cycle
 
 var b = 100000 * ar0;	// First component is always *100000
 
