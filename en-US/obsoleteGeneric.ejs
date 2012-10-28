@@ -36,15 +36,17 @@ if ($1) {
     } else if (string.startswith(t, "html")) {
         n = string.trim(string.substr(t, 4));
         ver = "HTML";
-        if (string.length(n) > 0) {
-            if(wiki.pageExists('/' + lang + '/docs/HTML/HTML' + n)) {
-                link = '/' + lang + '/docs/HTML/HTML' + n;
-            } else if(wiki.pageExists('/en-US/docs/HTML/HTML' + n)) {
-                link = '/en-US/docs/HTML/HTML' + n;
-            } else if(wiki.pageExists('/' + lang + '/docs/HTML')) {
-                link = '/' + lang + 'docs//HTML';
+        if (n < 5) {
+            if(wiki.pageExists('/' + lang + '/docs/HTML')) {
+                link = '/' + lang + '/docs/HTML';
             } else {
                 link = '/en-US/docs/HTML';
+            }
+        } else {
+            if(wiki.pageExists('/' + lang + '/docs/HTML/HTML' + n)) {
+                link = '/' + lang + '/docs/HTML/HTML' + n;
+            } else {
+                link = '/en-US/docs/HTML/HTML' + n;
             }
         }
     } else if (string.startswith(t, "gecko")) {
