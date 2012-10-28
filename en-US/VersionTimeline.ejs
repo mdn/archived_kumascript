@@ -1,13 +1,10 @@
 <%
-
 /* parameters: version created, version last changed, version obsoleted (optional), version deprecated (optional) */
 /* specify 0 for obsoleted if it's deprecated but not yet obsolete */
 
 var currentGecko = "18.0";  // Update this to current Gecko version
 var unitBlob = template("xverblob", ["1"]);
 var currentBlob = template("xverblob", [currentGecko]) - unitBlob;
-var u = uri.parts(env.url);
-var lang = u.path[0].toLowerCase();
 
 var start = 0;
 var end = 0;
@@ -15,17 +12,8 @@ var v = 0;
 var st = "";
 
 // Variables defining positioning of items in the diagram
-
 var barTopHeight = "height:8px; top:16px;";
 var underTextTop = "top:22px;";
-
-if (string.contains(lang, "project") || string.contains(lang, "Project")) {
-  lang = string.substr(lang, 8);
-}
-/* fall back to page.language on a user page */
-else if (string.StartsWith(lang, "user:")) {
- lang = page.language;
-}
 
 var availLength = currentBlob - template("xverblob", [$0]);
 %>
