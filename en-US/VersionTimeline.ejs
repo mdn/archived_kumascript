@@ -94,7 +94,7 @@ if (depStart > 0) {
     var depTitle = "Deprecated in Gecko " + $3 + " " + template("geckoRelease", [$3]);
     st = barTopHeight + "left:" + depStart + "%; background:#ff8000; position:absolute; width:" + depWidth + "%";
     %>
-    <div style="<%-st%>" title="<%=title%>"></div>
+    <div style="<%-st%>" title="<%=depTitle%>"></div>
     <%
   }
   if (impWidth > depWidth) {
