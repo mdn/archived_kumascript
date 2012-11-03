@@ -77,7 +77,7 @@ st = barTopHeight + "left:" + impStart + "%; background:#00dd00; position:absolu
 %>
 <div style="<%-st%>" title="<%=impTitle%>"></div>
 <%
-if (startVer == currentGecko) {
+if (impStart > impWidth && impStart > 10) {
   stOver = "top:0px; font-size:11px; position:absolute; text-align:right; width:" + impStart + "%;";
   stUnder = underTextTop + "font-size:11px; position:absolute; text-align:right; width:" + impStart + "%;";
 } else {
@@ -128,13 +128,15 @@ if (obsStart > 0) {
   <%
 }
 // Draw an indicator for the last-changed version
-if (parseFloat($1) > 0) {
+if (parseFloat($1) > 1) {
   var chaStart = (100 * ((template("xverblob", [$1]) - unitBlob) / currentBlob)) - 0.5;
-  chaTitle = "Last changed in Gecko " + $1 + " " + template("geckoRelease", [$1]);
-  st = barTopHeight + "left:" + chaStart + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
-  %>
-  <div style="<%-st%>" title="<%-chaTitle%>"></div>
-  <%
+  if (chaStart > impStart ) {
+    chaTitle = "Last changed in Gecko " + $1 + " " + template("geckoRelease", [$1]);
+    st = barTopHeight + "left:" + chaStart + "%; background:#eeee00; position:absolute; width:1%; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px;";
+    %>
+    <div style="<%-st%>" title="<%-chaTitle%>"></div>
+    <%
+  }    
 }
 %>
 </div>
