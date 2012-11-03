@@ -66,9 +66,10 @@ if ($0.copyright) {out.push('<li>' + s_copyright + $0.copyright + '</li>');}
 if ($0.original) {out.push('<li>' + s_original + web.link($0.original) + '</li>');}
 if ($0.note) {out.push('<li>' + s_note + $0.note + '</li>');}
 var str = out.join('\n');
-%>
-<div class="originaldocinfo">
-<h3><%- s_title %></h3>
+
+
+%><div class="originaldocinfo">
+<h2><%- s_title %></h2>
 <ul>
 <%- str %>
 </ul>
