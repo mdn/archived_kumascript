@@ -3,11 +3,10 @@
 var lang = env.locale;
  
 /* assume English */
-  
-var str = "< " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference'), 'NSPR API Reference') + " < " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference/' + $0), $0);
+var str = "&laquo; " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference'), 'NSPR API Reference') + " &laquo; " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference/' + $0), $0);
  
 if (!string.compare(lang, "ja", true)) {
-  str = "< " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference'), 'NSPR API リファレンス') + " < " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference/' + $0), $0);
+  str = "&laquo; " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference'), 'NSPR API リファレンス') + " &laquo; " + web.link(wiki.uri(lang + '/docs/NSPR_API_Reference/' + $0), $0);
 }
-%>
-<%- str %>
+
+%><%- str %>
