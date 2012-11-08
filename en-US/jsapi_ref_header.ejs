@@ -1,23 +1,15 @@
-
-<p><span lang="*" class="lang lang-*">
-<div class="includeonly">
-<div class="breadcrumbs"><a title="en" href="/en">Main Page</a> > <a title="en/SpiderMonkey" href="/en/SpiderMonkey">SpiderMonkey</a> > <a title="en/JSAPI_Reference" href="/en/SpiderMonkey/JSAPI_Reference">JSAPI Reference</a> > <code><span class="script">web.html($0)</span></code></div>
+<%
+switch (env.locale) {
+    case "ja":
+%><div class="includeonly">
+<div class="breadcrumbs"><a title="ja" href="/ja">メインページ</a> &raquo; <a title="SpiderMonkey" href="/ja/docs/SpiderMonkey">SpiderMonkey</a> &raquo; <a title="JSAPI_Reference" href="/ja/docs/JSAPI_Reference">JSAPI リファレンス</a> &raquo; <code><span class="script">web.html($0)</span></code></div>
 </div>
-<div class="noinclude">
-<p>This template is obsolete. Do not use it.</p>
+<p class="noinclude">このテンプレートは廃止されています。使用しないで下さい。</p><%
+		break;
+	default:
+%><div class="includeonly">
+<div class="breadcrumbs"><a title="en" href="/en">Main Page</a> &raquo; <a title="SpiderMonkey" href="/en-US/docs/SpiderMonkey">SpiderMonkey</a> &raquo; <a title="JSAPI_Reference" href="/en-US/docs/SpiderMonkey/JSAPI_Reference">JSAPI Reference</a> &raquo; <code><span class="script">web.html($0)</span></code></div>
 </div>
-</span><span lang="ja" class="lang lang-ja">
-<div class="includeonly">
-<div class="breadcrumbs"><a title="ja" href="/ja">メインページ</a> > <a title="ja/SpiderMonkey" href="/ja/SpiderMonkey">SpiderMonkey</a> > <a title="ja/JSAPI_Reference" href="/ja/JSAPI_Reference">JSAPI リファレンス</a> > <code><span class="script">web.html($0)</span></code></div>
-</div>
-<div class="noinclude">
-<p>JSAPI 機能の各ドキュメントの冒頭にこのテンプレートを使用してください。最初の引数は breadcrumbs に表示されるページ名です。(スペースの代わりに下線が付きます。)</p>
-<p>このテンプレートは、ページ名を HTML の <code><code></code> タグで表示します。</p>
-<p>使用方法:</p>
-<pre class="eval"><span class="nowiki">{{jsapi ref header|JS_DoStuffWithThing}}</span>
-</pre>
-<p>これは、このようになります:</p>
-<div style="border: 1px solid rgb(221, 221, 221); padding: 1em;"><span class="script">template.Jsapi_ref_header("JS_DoStuffWithThing")</span></div>
-<p>注: このテンプレートは <code><breadcrumbs></code> 機能ではなく、div タグで "breadcrumbs" を実現しています。理由の一つは、<code><breadcrumbs></code> に <a title="ja/JSAPI_Reference" href="/ja/JSAPI_Reference">JSAPI リファレンス</a> へのリンクが含まれないことです。</p>
-</div>
-</span></p>
+<p class="noinclude">This template is obsolete. Do not use it.</div><%
+		break;
+} %>
