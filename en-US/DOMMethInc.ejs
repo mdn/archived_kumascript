@@ -3,15 +3,6 @@
 //
 //  $0 - Method name
 
-var lang = env.locale;
+var url = "/" + env.locale + "/docs/DOM/" + $0;
 
-var url = "/en-US/docs/DOM/" + $0;
-
-switch(lang) {
-    case "de":
-    case "es":
-        url = "/" + lang + "/docs/DOM/" + $0;
-        break;
-}
-%>
-<span id='m-<%-$0%>'><%-wiki.page(url)%></span>
+%><span id='m-<%-$0%>'><%-wiki.page(url)%></span>
