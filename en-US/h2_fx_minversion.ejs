@@ -1,3 +1,16 @@
-<div><% if ('en-US' == env.locale) { %><span style="border: 1px solid rgb(129, 129, 81); padding: 1px; background-color: rgb(255, 255, 225); font-size: small; font-weight: bold; float: right; text-align: right; vertical-align: middle; white-space: nowrap;">Requires Firefox <%= $1 %></span><% } %>
-<h2><span class="script"><%=$0%></span></h2>
+<%
+var loc = env.locale;
+var s = "Requires Firefox ";
+var s2 = "";
+
+switch(lo) {
+    case "ja":
+        s = "要 Firefox ";
+}
+
+
+%><div>
+    <span style="border:1px solid rgb(129,129,81);padding:1px;background:rgb(255,255,225);font-size:small;font-weight:700;float:right;text-align:right;vertical-align:middle;white-space:nowrap;"><%
+    %><%=s%><%= $1 %><%=s2%></span>
+    <h2><span class="script"><%=$0%></span></h2>
 </div>
