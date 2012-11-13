@@ -8,10 +8,9 @@ var str = "";
 if ($0) {
   if (string.IsDigit($0)) {
     str = "gecko" + $0;
-  }
-  else {
+  } else {
     str = $0
   }
 }
-%>
-<%- template('obsoleteGeneric', ["inline",str]) %>
+
+%><%- template('obsoleteGeneric', ["inline",str]) %>
