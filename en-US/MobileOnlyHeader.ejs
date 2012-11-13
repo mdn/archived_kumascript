@@ -8,5 +8,8 @@ switch(env.locale) {
     title = "Available only in Firefox Mobile as of Gecko " + $0 + " " + template("geckoRelease", [$0]);
     break;
 }
-%>
-<div class="overheadIndicator geckoMinVer geckoMinVerHeader" style="border-color:maroon; background-color: rgb(255, 225, 190);"><p style="margin: 4px 0;"><%=str%></p> <p style="margin: 4px 0;"><%=title%></p></div>
+
+%><div class="overheadIndicator geckoMinVer geckoMinVerHeader" style="border-color:maroon; background: rgb(255, 225, 190);">
+    <p style="margin: 4px 0;"><%=str%></p>
+    <p style="margin: 4px 0;"><%=title%></p>
+</div>
