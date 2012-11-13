@@ -1,1 +1,14 @@
-<iframe src="<%= template('LiveSampleURL', [$0]) %>"></iframe>
+<%
+// Embeds a live sample given the ID of its header block.
+//
+// Parameters:
+//  $0 - The ID of the header block containing the sample
+//  $1 - The width of the iframe (optional)
+//  $2 - The height of the iframe (optional)
+
+var widthHeight = "";
+if ($1 && $2) {
+    widthHeight = "width='" + $1 + "' height='" + $2 + "' ";
+}
+%>
+<iframe <%=widthHeight%>src="<%= template('LiveSampleURL', [$0]) %>"></iframe>
