@@ -1,6 +1,5 @@
 <%
 var lang = env.locale;
-
 var str = "";
 
 switch(lang) {
@@ -11,5 +10,6 @@ switch(lang) {
         str = 'Requires request. <em>In a <code><a href="/en-US/docs/JS_THREADSAFE#Requests">JS_THREADSAFE</a></code> build, the caller must be in a request on this <code>JSContext</code>.</em>';
         break;
 }
-%>
-<%-str%>
+
+
+%><%-str%>
