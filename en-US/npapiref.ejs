@@ -1,21 +1,9 @@
-<% if ("en" == env.locale) { %>
-    <span lang="en" class="lang lang-en">
+<% if ("en-US" == env.locale) { %>
       <div class="includeonly"> </div>
-    </span>
-
 <% } else if ("ja" == env.locale) { %>
-    <span lang="ja" class="lang lang-ja">
       <div class="includeonly"> </div>
-    </span>
-
 <% } else if ("pl" == env.locale) { %>
-    <span lang="pl" class="lang lang-pl">
       <div class="includeonly"> </div>
-    </span>
-
 <% } else { %>
-    <span lang="*" class="lang lang-*">
       <div class="includeonly"> </div>
-    </span>
-
 <% } %>
