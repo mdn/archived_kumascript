@@ -11,4 +11,4 @@ if ($1 && $2) {
     widthHeight = "width='" + $1 + "' height='" + $2 + "' ";
 }
 %>
-<iframe <%=widthHeight%>src="<%= template('LiveSampleURL', [$0]) %>"></iframe>
+<iframe  frameborder="0" <%=widthHeight%>src="<%= template('LiveSampleURL', [$0]) %>"></iframe>
