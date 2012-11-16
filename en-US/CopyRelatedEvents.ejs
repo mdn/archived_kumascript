@@ -1,9 +1,15 @@
 <%
 
-var loc = env.locale;
+var l = "en-US";
+var p = "Mozilla_event_reference";
+
+if(env.locale === "ja") {
+    l = "ja";    
+}
+
 
 %><ul>
-<li><a href="/<%-loc %>/Mozilla_event_reference/copy"><code>copy</code></a></li>
-<li><a href="/<%-loc %>/Mozilla_event_reference/cut"><code>cut</code></a></li>
-<li><a href="/<%-loc %>/Mozilla_event_reference/paste"><code>paste</code></a></li>
+<li><a href="/<%-l %>/<%-p%>/copy"><code>copy</code></a></li>
+<li><a href="/<%-l %>/<%-p%>/cut"><code>cut</code></a></li>
+<li><a href="/<%-l %>/<%-p%>/paste"><code>paste</code></a></li>
 </ul>
