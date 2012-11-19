@@ -1,0 +1,27 @@
+<%
+/* Used for generating cross-references within the event documentation. */
+/* This will first link to Mozilla_Event_Reference/$0  */
+/* @param */
+/*   The path of the page to link to, relative to the DOM documentation path. */
+/* @param [optional] */
+/*   The text to use for the link.  If omitted, the value of the first */
+/*   parameter will be used */
+/* @param [optional] */
+/*   An anchor to link to on the page. Link text will display as $0.$2 or $1.$2 */
+ 
+/* get a page's language (Don't use page.language!) */
+var lang = env.locale;
+ 
+var api = $0;
+var str = $1 || $0;
+ 
+var URL = "/" + lang + '/docs/Mozilla_Event_Reference/' + api;
+ 
+var anch = '';
+ 
+if ($2) {
+  str = str + '.' + $2;
+  anch = '#' + $2;
+}
+%>
+<code><a href="<%- URL+anch %>" title="<%- URL+anch %>"><%= str %></a></code>
