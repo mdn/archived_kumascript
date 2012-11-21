@@ -1,4 +1,13 @@
-<span lang='ja' class='lang lang-ja'><div class="includeonly">
+<%
+
+/*
+このテンプレートは http://developer.mozilla.org/devnews/ の翻訳 (/ja/docs/DevNews)に使われています。
+このテンプレートを使うには以下の内容を記事の先頭に追加してください。
+{{DevNewsPreviousNext|前の記事のページ名|次の記事のページ名}}
+*/
+
+
+%><div class="includeonly">
 <div class="prevnext">
 <p>{{string.trim(($0 || '')) !== '' ? web.html('<span style=\"float:left;\">« ' + mediawiki.internal('DevNews:' + $0 + '|' + $0, "ja") + '</span>') : ''}}
 {{string.trim(($1 || '')) !== '' ? web.html('<span style=\"float:right;\">' + mediawiki.internal('DevNews:' + $1 + '|' + $1, "ja") + ' »</span>') : ''}}
@@ -7,25 +16,3 @@
 <p><span class="comment">Comment here to ensure newlines get recognized</span>
 </p>
 </div>
-<div class="noinclude">
-<p>このテンプレートは <a class="external" href="http://developer.mozilla.org/devnews/">DevNews</a> の翻訳 (<a href="ja/DevNews">DevNews</a>)に使われています。
-</p><p>このテンプレートを使うには以下の内容を記事の先頭に追加してください。
-</p>
-<pre>{{DevNewsPreviousNext|前の記事のページ名|次の記事のページ名}}</pre>
-</div>
-</span><span lang='*' class='lang lang-*'><div class="includeonly">
-<div class="prevnext">
-<p>{{string.trim(($0 || '')) !== '' ? web.html('<span style=\"float:left;\">« ' + mediawiki.internal('DevNews:' + $0 + '|' + $0, "ja") + '</span>') : ''}}
-{{string.trim(($1 || '')) !== '' ? web.html('<span style=\"float:right;\">' + mediawiki.internal('DevNews:' + $1 + '|' + $1, "ja") + ' »</span>') : ''}}
-</p>
-</div>
-<p><span class="comment">Comment here to ensure newlines get recognized</span>
-</p>
-</div>
-<div class="noinclude">
-<p>このテンプレートは <a class="external" href="http://developer.mozilla.org/devnews/">DevNews</a> の翻訳 (<a href="ja/DevNews">DevNews</a>)に使われています。
-</p><p>このテンプレートを使うには以下の内容を記事の先頭に追加してください。
-</p>
-<pre>{{DevNewsPreviousNext|前の記事のページ名|次の記事のページ名}}</pre>
-</div>
-</span>
