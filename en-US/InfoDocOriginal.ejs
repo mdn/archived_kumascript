@@ -6,5 +6,5 @@ if ($2) {out.push('"date":"' + $2 + '"');}
 if ($3) {out.push('"copyright":"' + $3 + '"');}
 if ($4) {out.push('"original":"' + $4 + '"');}
 var str = JSON.parse('{' + out.join(',') + '}');
-%>
-<%- template("OrigDocInfo", [str]) %>
+
+%><%- template("OrigDocInfo", [str]) %>
