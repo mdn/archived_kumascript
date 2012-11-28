@@ -1,36 +1,29 @@
 <%
 /* The list of template's arguments is used to know which subpages title should not be marked as code */
-var notCodeElements = Array.prototype.slice.call(arguments);
-
+var notCodeElements = arguments;
+  
 /* To include the subpage summary, we need to know which local slug/hash to use with wiki.page */
 var summary = mdn.localString({
     "en-US": "Summary",
     "fr": "Résumé"
 });
-
-var subPages = Page.subpages;
-
-if (subPages && subPages.length > 0) {
-    subPages.sort(function (a, b) {
-        return a.value.title.localeCompare(b.value.title);
-    })
-%>
-<dl>
-<%
-    subPages.forEach(function (thePage) {
-%>
-    <dt><a href="<%- thePage.value.uri %>"><%
-        if(notCodeElements.indexOf(thePage.value.title) < 0) {
-            %><code><%= thePage.value.title %></code><%
+  
+var pageSubPages = page.subpages('',1);
+var str = '';
+if (pageSubPages) {
+    var subPages = pageSubPages.subpages;
+    str += '<dl>';
+    for (var page in subPages) {
+        str += '<dt><a href="' + subPages[page].url + '">';
+        if(notCodeElements.indexOf(subPages[page].title) < 0) {
+            str += '<code>' + subPages[page].title + '</code>';
         } else {
-            %><%= thePage.value.title %><%
+            str += subPages[page].title;
         }
-    %></a></dt>
-    <dd><%- wiki.page(thePage.value.uri, summary) %></dd>
-<%
-    });
-%>
-</dl>
-<%
+        str += '</a></dt>';
+        str += '<dd>' + wiki.page(subPages[page].url, summary) + '</dd>';
+    }
+    str += '</dl>';
 }
 %>
+<%- str %>
