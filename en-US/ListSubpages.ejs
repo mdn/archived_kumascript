@@ -1,7 +1,9 @@
 <%
-if (Page.subpages.length > 0) {
+var subpages = JSON.parse(page.subpages());
+
+if (subpages.length > 0) {
     %><ul><%
-    Page.subpages.forEach(function (subPage) {
+    subpages.forEach(function (subPage) {
         %><li><a href="<%- subPage.path %>"><%= subPage.title %></a></li><%
     });
     %></ul><%
