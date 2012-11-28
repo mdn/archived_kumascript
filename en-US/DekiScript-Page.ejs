@@ -18,12 +18,11 @@
     },
     
     subpages: function (locale, slug) {
-        //var p = kuma.url.parse(env.url, true);
-        //var url = p.protocol + '//' + p.host + '/' + locale + '/docs/' + encodeURIComponent(slug) + '$children';
-        //log.debug(url);
-        //var subpages = mdn.fetchJSONResource(url);
-        //return subpages;
-        return "blah";
+        var p = kuma.url.parse(env.url, true);
+        var url = p.protocol + '//' + p.host + '/' + locale + '/docs/' + encodeURIComponent(slug) + '$children';
+        var mdn = require('MDN:Common');
+        var subpages = mdn.fetchJSONResource(url);
+        return subpages;
     }
     
 }); %>
