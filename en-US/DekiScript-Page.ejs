@@ -19,13 +19,16 @@
 
     // http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Page.Subpages
     // Optional path, defaults to current page
-    subpages: function (in_path) {
+    subpages: function (in_path, depth) {
         var url = '';
         if (in_path) {
             var p = kuma.url.parse(env.url, true);
             url = p.protocol + '//' + p.host + in_path + '$children';
         } else {
             url = env.url + '$children';
+        }
+        if(depth != undefined) {
+            url += '?depth=' + depth;
         }
         var mdn = require('MDN:Common');
         var subpages = mdn.fetchJSONResource(url);
