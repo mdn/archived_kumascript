@@ -16,10 +16,17 @@
             uri: env.url
         });
     },
-    
-    subpages: function (locale, slug) {
-        var p = kuma.url.parse(env.url, true);
-        var url = p.protocol + '//' + p.host + '/' + locale + '/docs/' + encodeURIComponent(slug) + '$children';
+
+    // http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Page.Subpages
+    // Optional path, defaults to current page
+    subpages: function (in_path) {
+        var url = '';
+        if (in_path) {
+            var p = kuma.url.parse(env.url, true);
+            url = p.protocol + '//' + p.host + encodeURIComponent(in_path) + '$children';
+        } else {
+            url = env.url + '$children';
+        }
         var mdn = require('MDN:Common');
         var subpages = mdn.fetchJSONResource(url);
         return subpages;
