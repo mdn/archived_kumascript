@@ -1,11 +1,13 @@
 <%
-var subpages = JSON.parse(page.subpages());
-
-if (subpages.length > 0) {
-    %><ul><%
-    subpages.forEach(function (subPage) {
-        %><li><a href="<%- subPage.path %>"><%= subPage.title %></a></li><%
-    });
-    %></ul><%
+var pageSubPages = page.subpages($0, 1);
+var str = '';
+if (pageSubPages) {
+    var subPages = pageSubPages.subpages;
+    str = '<ul>';
+    for (var page in subPages) {
+        str += '<li><a href="' + subPages[page].url + '">' + subPages[page].title + '</a></li>';
+    }
+    str += '</ul>';
 }
 %>
+<%- str %>
