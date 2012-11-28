@@ -23,7 +23,7 @@
         var url = '';
         if (in_path) {
             var p = kuma.url.parse(env.url, true);
-            url = p.protocol + '//' + p.host + encodeURIComponent(in_path) + '$children';
+            url = p.protocol + '//' + p.host + in_path + '$children';
         } else {
             url = env.url + '$children';
         }
