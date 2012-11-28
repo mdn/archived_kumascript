@@ -172,20 +172,20 @@
     
     tree: function(path, depth) {
         var page = require('DekiScript:Page');
-        var pages = page.subpages(path, depth);
+        var pages = [page.subpages(path, depth)];
         
         return process_array(pages);
         
         function process_array(arr) {
             var result = '';
             if(arr.length) {
-                result += '<ol>';
-                _.each(arr, function(item) {
+                result += '<ul>';
+                arr.forEach(function(item) {
                     result += '<li><a href="' + item.url + '">' + item.title + '</a>' +
                               process_array(item.subpages || []) + '</li>';
                     
                 });
-                result += '</ol>';
+                result += '</ul>';
             }
             return result;
         }   
