@@ -7,21 +7,25 @@ var cLen = chapterList.length;
 var expTOC = "";
 var link1 = "";
 var i;
-%>
-<h2>Quick Table of Contents</h2>
+var s_TOC = mdn.localString({
+    "en-US": "Quick Table of Contents",
+    "zh-CN": "目录",
+    "ja": "目次"
+});
+
+%><h2><%- s_TOC %></h2>
 <ol>
 <%
 
 switch (env.locale) {
     case "ja":
-        for (i = 0; i < cLen; ++i) {
-            chapterList[i] = chapterList[i].replace(/en-US/, "ja");
-        }
+        for (i = 0; i < cLen; ++i) { chapterList[i] = chapterList[i].replace(/en-US/, "ja"); }
         break;
     case "de":
-        for (i = 0; i < cLen; ++i) {
-            chapterList[i] = chapterList[i].replace(/en-US/, "de");
-        }
+        for (i = 0; i < cLen; ++i) { chapterList[i] = chapterList[i].replace(/en-US/, "de"); }
+        break;
+    case "de":
+        for (i = 0; i < cLen; ++i) { chapterList[i] = chapterList[i].replace(/en-US/, "zh-CN"); }
         break;
     default: break;
 }
