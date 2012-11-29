@@ -1,13 +1,1 @@
-<%
-var pageSubPages = page.subpages($0, 1);
-var str = '';
-if (pageSubPages) {
-    var subPages = pageSubPages.subpages;
-    str = '<ul>';
-    for (var page in subPages) {
-        str += '<li><a href="' + subPages[page].url + '">' + subPages[page].title + '</a></li>';
-    }
-    str += '</ul>';
-}
-%>
-<%- str %>
+<%- wiki.tree($0,'1') %>
