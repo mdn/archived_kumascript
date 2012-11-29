@@ -169,7 +169,9 @@
         });
         return "<ul>" + out.join('') + "<\/ul>";
     },
-    
+
+    // Inserts a pages sub tree
+    // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Tree)
     tree: function(path, depth) {
         var page = require('DekiScript:Page');
         var pages = [page.subpages(path, depth)];
@@ -181,7 +183,7 @@
             if(arr.length) {
                 result += '<ul>';
                 arr.forEach(function(item) {
-                    result += '<li><a href="' + item.url + '">' + item.title + '</a>' +
+                    result += '<li><a href="' + item.url + '">' + kuma.htmlEscape(item.title) + '</a>' +
                               process_array(item.subpages || []) + '</li>';
                     
                 });
