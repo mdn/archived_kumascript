@@ -174,7 +174,8 @@
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Tree)
     tree: function(path, depth) {
         var page = require('DekiScript:Page');
-        var pages = [page.subpages(path, depth)];
+        //var pages = [page.subpages(path, depth)];
+        var pages = page.subpages(path, depth).subpages || [];
         
         return process_array(pages);
         
