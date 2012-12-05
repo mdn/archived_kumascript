@@ -13,6 +13,11 @@ var s_TOC = mdn.localString({
     "ja": "目次"
 });
 
+var s_Expanded_TOC = mdn.localString({
+    "en-US": "Expanded Table of Contents",
+    "ja": "追加コンテンツの目次"
+});
+
 %><h2><%- s_TOC %></h2>
 <ol>
 <%
@@ -42,6 +47,6 @@ for (i = 0; i < cLen; ++i) {
 </ol>
 <% if (expTOC) { %>
 <% /* TODO: bug 769516, need support for wiki.toc() */ %>
-<h2>Expanded Table of Contents</h2>
+<h2><%- s_Expanded_TOC %></h2>
 <%- expTOC %>
 <% } %>
