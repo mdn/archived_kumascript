@@ -10,25 +10,6 @@ var summary = mdn.localString({
 });
   
 var pageSubPages = page.subpages('',1);
-// Old version using string concatenation
-/*
-var str = '';
-if (pageSubPages) {
-    var subPages = pageSubPages.subpages;
-    str += '<dl>';
-    for (var page in subPages) {
-        str += '<dt><a href="' + subPages[page].url + '">';
-        if(notCodeElements.indexOf(subPages[page].title) < 0) {
-            str += '<code>' + subPages[page].title + '</code>';
-        } else {
-            str += subPages[page].title;
-        }
-        str += '</a></dt>';
-        str += '<dd>' + wiki.page(subPages[page].url, summary) + '</dd>';
-    }
-    str += '</dl>';
-}
-*/
 var list = [];
 if (pageSubPages) {
     var subPages = pageSubPages.subpages;
