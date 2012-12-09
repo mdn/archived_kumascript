@@ -160,6 +160,9 @@ switch(spec) {
   case 'Proximity Events':
     status = 'WD';
     break;
+  case 'Harmony':
+    status = 'Draft';
+    break;
   case 'HTML4.01':
     status = 'REC';
     break;
@@ -211,6 +214,9 @@ switch(env.locale){
       case 'Living':
         status_text = 'Living standard';
         break;
+      case 'Draft':
+        status_text = 'Draft';
+        break;
       default:
         status_text = '不明';
     };
@@ -237,6 +243,9 @@ switch(env.locale){
       break;
     case 'Living':
       status_text = 'Living standard';
+      break;
+    case 'Draft':
+      status_text = 'Draft';
       break;
     default:
       status_text = 'Unknown';
