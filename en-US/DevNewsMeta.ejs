@@ -1,17 +1,17 @@
-<div style="border: 1px solid #777; margin: 0 0 15px 15px; padding: 0 15px 5px; float: right; background: #eee; font-size: .85em;">
+<div style="background: #eee; font-size: .85em;">
 
 <div><a href="/ja/docs/DevNews">一覧</a></div>
 
 <p>この記事について</p>
 
 <dl>
-<dt>web.link($1,'原文')</dt>
+<dt><%- web.link($1,'原文（閉鎖のためリンク切れ）') %></dt>
 <dt>公開</dt>
-<dd>web.html($2)</dd>
+<dd><%- web.html($2) %></dd>
 <dt>著者</dt>
-<dd>web.html($3)</dd>
+<dd><%- web.html($3) %></dd>
 <dt>カテゴリ</dt>
-<dd>web.html($4)</dd>
+<dd><%- web.html($4) %></dd>
 </dl>
 
 </div>
