@@ -1,17 +1,22 @@
-<div style="background: #eee; font-size: .85em;">
+<div class="breadcrumbs"><a href="/ja/docs/DevNews">&laquo; DevNews 一覧</a></div>
 
-<div><a href="/ja/docs/DevNews">一覧</a></div>
-
-<p>この記事について</p>
-
-<dl>
-<dt><%- web.link($1,'原文（閉鎖のためリンク切れ）') %></dt>
-<dt>公開</dt>
-<dd><%- web.html($2) %></dd>
-<dt>著者</dt>
-<dd><%- web.html($3) %></dd>
-<dt>カテゴリ</dt>
-<dd><%- web.html($4) %></dd>
-</dl>
-
-</div>
+<table class="standard-table">
+<tbody>
+<tr>
+<th>原文</th>
+<td><%- web.link($1,'原文（閉鎖のためリンク切れ）') %></td>
+</tr>
+<tr>
+<th>公開日時</th>
+<td><%- web.html($2) %></td>
+</tr>
+<tr>
+<th>著者</th>
+<td><%- web.html($3) %></td>
+</tr>
+<tr>
+<th>カテゴリ</th>
+<td><%- web.html($4) %></td>
+</tr>
+</tbody>
+</table>
