@@ -34,9 +34,11 @@
         }
         var mdn = require('MDN:Common');
         var subpages = mdn.fetchJSONResource(url);
-        var result = subpages;
+        var result = [];
         if (!self) {
-            //result = subpages.subpages;
+            result = subpages.subpages;
+        } else {
+            result = [subpages];
         }
         return result;
     }
