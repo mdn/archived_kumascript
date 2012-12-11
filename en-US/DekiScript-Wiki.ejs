@@ -172,10 +172,9 @@
 
     // Inserts a pages sub tree
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Tree)
-    tree: function(path, depth) {
+    tree: function(path, depth, self) {
         var page = require('DekiScript:Page');
-        //var pages = [page.subpages(path, depth)];
-        var pages = page.subpages(path, depth).subpages || [];
+        var pages = page.subpages(path, depth, self);
         
         return process_array(pages);
         
