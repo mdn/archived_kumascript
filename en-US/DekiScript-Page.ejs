@@ -29,8 +29,9 @@
         } else {
             url = env.url + '$children';
         }
-        if(depth != '') {
-            url += '?depth=' + depth;
+        var depth_check = parseInt(depth);
+        if(depth_check  >= 0) {
+            url += '?depth=' + depth_check;
         }
         var mdn = require('MDN:Common');
         var subpages = mdn.fetchJSONResource(url);
