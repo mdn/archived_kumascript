@@ -36,7 +36,7 @@
         var subpages = mdn.fetchJSONResource(url);
         var result = [];
         if (!self) {
-            result = subpages.subpages;
+            result = subpages.subpages || [];
         } else {
             result = [subpages];
         }
