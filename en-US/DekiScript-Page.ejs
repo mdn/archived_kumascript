@@ -35,10 +35,12 @@
         var mdn = require('MDN:Common');
         var subpages = mdn.fetchJSONResource(url);
         var result = [];
-        if (!self) {
-            result = subpages.subpages || [];
-        } else {
-            result = [subpages];
+        if (subpages != null) {
+            if (!self) {
+                result = subpages.subpages || [];
+            } else {
+                result = [subpages];
+            }
         }
         return result;
     }
