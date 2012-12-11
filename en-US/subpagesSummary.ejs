@@ -9,10 +9,9 @@ var summary = mdn.localString({
     "ja": "概要"
 });
   
-var pageSubPages = page.subpages('',1);
+var subPages = page.subpages('',1);
 var list = [];
-if (pageSubPages) {
-    var subPages = pageSubPages.subpages;
+if (subPages) {
     list.push('<dl>');
     for (var page in subPages) {
         list.push('<dt><a href="');
