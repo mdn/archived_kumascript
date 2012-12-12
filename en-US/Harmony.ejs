@@ -1,17 +1,19 @@
 <%
-var compat_text; // result
+var s; // result
+
 switch (env.locale) {
-    
     case 'fr':
-        compat_text = "<strong>Cette fonction, proposition pour EcmaScript 6 (Harmony), est expérimentale</strong><br />Puisque cette fonction est toujours en développement dans certains navigateurs, veuillez consulter le <a href='#Browser_Compatibility'>tableau de compatibilité</a> pour les préfixes à utiliser selon les navigateurs.<br/>Il convient de noter qu'une fonctionnalité expérimentale peut voir sa syntaxe ou son comportement modifié dans le futur en fonction des évolutions de la spécification.";
+        s = "<strong>Cette fonction, proposition pour EcmaScript 6 (Harmony), est expérimentale</strong><br />Puisque cette fonction est toujours en développement dans certains navigateurs, veuillez consulter le <a href='#Browser_Compatibility'>tableau de compatibilité</a> pour les préfixes à utiliser selon les navigateurs.<br/>Il convient de noter qu'une fonctionnalité expérimentale peut voir sa syntaxe ou son comportement modifié dans le futur en fonction des évolutions de la spécification.";
+        break;
+    case "ja":
+        s = "<strong>これは Harmony(ECMAScript 6) 提案の一部であり、実験段階の技術です。</strong><br />この技術の仕様は安定していません。<a href='#Browser_compatibility'>ブラウザ互換性の一覧表</a>を確認してください。またこれらの構文や動作は、仕様変更などにより、新しいバージョンのブラウザでは変更される可能性があるという点に注意してください。";
         break;
     default: /*en*/
-        compat_text = "<strong>This is an experimental technology, part of the Harmony (EcmaScript 6) proposal.</strong><br />Because this technology's specification has not stabilized, check the <a href='#Browser_compatibility'>compatibility table</a> for usage in various browsers. Also note that the syntax and behavior of an experimental technology is subject to change in future version of browsers as the spec changes.";
+        s = "<strong>This is an experimental technology, part of the Harmony (EcmaScript 6) proposal.</strong><br />Because this technology's specification has not stabilized, check the <a href='#Browser_compatibility'>compatibility table</a> for usage in various browsers. Also note that the syntax and behavior of an experimental technology is subject to change in future version of browsers as the spec changes.";
         break;
 }
-%>
-<div style="overflow:hidden; margin: 10px 0px; padding: 0px 10px; background-color: rgb(156, 244, 156); text-align: center;">
-    <p style="margin: 4px 0px;">
-        <%- compat_text %>
-    </p>
+
+
+%><div style="overflow:hidden;margin:10px 0;padding:0 10px;background:#9CF49C;text-align:center;">
+    <p style="margin:4px 0;"><%- s %></p>
 </div>
