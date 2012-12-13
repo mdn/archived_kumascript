@@ -16,9 +16,9 @@ if (pages.length) {
     pages.forEach(function(item) {
         str += '<dt><a href="' + item.url + '">';
         if(notCodeElements.indexOf(item.title) < 0) {
-            str += '<code>' + item.title + '</code>';
+            str += '<code>' + kuma.htmlEscape(item.title) + '</code>';
         } else {
-            str += item.title;
+            str += kuma.htmlEscape(item.title);
         }
         str += '</a></dt>';
         str += '<dd>' + wiki.page(item.url, summary) + '</dd>';
