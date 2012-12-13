@@ -1,35 +1,29 @@
 <%
 /* The list of template's arguments is used to know which subpages title should not be marked as code */
 var notCodeElements = arguments;
-  
+   
 /* To include the subpage summary, we need to know which local slug/hash to use with wiki.page */
 var summary = mdn.localString({
     "en-US": "Summary",
     "fr": "Résumé",
     "ja": "概要"
 });
-  
-var subPages = page.subpages('',1);
-var list = [];
-if (subPages) {
-    list.push('<dl>');
-    for (var page in subPages) {
-        list.push('<dt><a href="');
-        list.push(subPages[page].url)
-        list.push('">');
-        if (notCodeElements.indexOf(subPages[page].title) < 0) {
-            list.push('<code>');
-            list.push(subPages[page].title);
-            list.push('</code>');
+   
+var pages = page.subpages('','1');
+var str = '';
+if (pages.length) {
+    str += '<dl>';
+    pages.forEach(function(item) {
+        str += '<dt><a href="' + item.url + '">';
+        if(notCodeElements.indexOf(item.title) < 0) {
+            str += '<code>' + item.title + '</code>';
         } else {
-            list.push(subPages[page].title);
+            str += item.title;
         }
-        list.push('</a></dt>');
-        list.push('<dd>');
-        list.push(wiki.page(subPages[page].url, summary));
-        list.push('</dd>');
-    }
-    list.push('</dl>');
+        str += '</a></dt>';
+        str += '<dd>' + wiki.page(item.url, summary) + '</dd>';
+    });
+    str += '</dl>';
 }
 %>
-<%- list.join('') %>
+<%- str %>
