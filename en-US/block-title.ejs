@@ -1,5 +1,6 @@
 <% if (env.locale == "zh-TW") { %>
 <%- template('小標', arguments) %>
 <% } else { %>
-<span id="<%= uri.encode(string.replace($0,' ', '_')) %>"><strong><%= $0 %></strong></span>
+<% var blockId = uri.encode(string.replace($0,' ', '_')); %>
+<span id="<%=blockId%>"><a id=<%=blockId%>><strong><%=$0%></strong></span>
 <% } %>
