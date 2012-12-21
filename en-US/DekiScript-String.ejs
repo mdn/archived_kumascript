@@ -71,10 +71,10 @@
     },
 
     // http://developer.mindtouch.com/en/docs/DekiScript/Reference/DekiScript_Functions_and_Variables/String.Remove
-    Remove: function (text, index, count) {
-        var out = ''+text.substring(0, Number(index));
+    Remove: function (str, index, count) {
+        var out = ''+str.substring(0, Number(index));
         if (count) {
-            out += ''+text.substring(Number(index) + Number(count));
+            out += ''+str.substring(Number(index) + Number(count));
         }
         return out;
     },
