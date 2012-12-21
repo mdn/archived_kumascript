@@ -1,15 +1,13 @@
 <%
-var str = "";
-var title = "";
+var str = "Read only ";
+var title = "This value may not be changed.";
 
 switch(env.locale) {
     case "ja":
         str = "読取専用 ";
         break;
     default:
-        str = "Read only ";
-        title = "This value may not be changed.";
         break;
 }
 
-%><span title=<%= title %> class="inlineIndicator readOnly readOnlyInline"><%= str %></span>
+%><span title="<%= title %>" class="inlineIndicator readOnly readOnlyInline"><%= str %></span>
