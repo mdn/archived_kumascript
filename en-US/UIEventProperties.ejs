@@ -1,10 +1,27 @@
-<tr>
+<%
+var el = env.locale;
+
+var s1 = "AbstractView (<code>window</code>)";
+var s2 = "(the <code>window</code> of the document). Read only.";
+var s3 = "long (float)";
+var s4 = "Read only.";
+
+switch(el) {
+    case "ja":
+        s2 = "（document の <code>window</code>）";
+        s4 = "読取専用";
+        break;
+    default:
+        break;
+}
+
+%><tr>
   <td><code>view</code></td>
-  <td>AbstractView (<code>window</code>)</td>
-  <td><a title="document.defaultView" href="/en-US/docs/DOM/document.defaultView"><code>document.defaultView</code></a> (the <code>window</code> of the document). Read only.</td>
+  <td><%-s1%></td>
+  <td><a title="document.defaultView" href="/<%-el%>/docs/DOM/document.defaultView"><code>document.defaultView</code></a> <%-s2%></td>
 </tr>
 <tr>
   <td><code>detail</code></td>
-  <td>long (float)</td>
-  <td><%= ( $0 || "0." ) %> Read only.</td>
+  <td><%-s3%></td>
+  <td><%= ( $0 || "0." ) %> <%-s4%></td>
 </tr>
