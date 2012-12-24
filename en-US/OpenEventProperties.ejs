@@ -7,13 +7,13 @@
  <% if ( $0 != "false" ) { %>
  <tr>
     <td><code>target</code><%- template("readonlyInline", [])%></td>
-    <td><%- template("domxref", ["EventTarget"]) %> (DOM element)</td>
+    <td><%- template("domxref", ["EventTarget"]) %></td>
     <td><%= ( $0 || "The event target (the topmost target in the DOM tree)." ) %></td>
  </tr>
  <% } %>
   <tr>
     <td><code>type</code><%- template("readonlyInline", [])%></td>
-    <td><%- template("domxref", ["DOMString"]) %> string</td>
+    <td><%- template("domxref", ["DOMString"]) %></td>
     <td>The type of event.</td>
   </tr>
   <tr>
