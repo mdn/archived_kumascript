@@ -5,12 +5,27 @@
 //  $0 - The ID of the header block containing the sample
 //  $1 - The width of the iframe (optional)
 //  $2 - The height of the iframe (optional)
+//  $3 - The url of a screenshot of the sample working as intended (optional)
 //
 // See also : LiveSampleLink
-
+ 
+var str = "";
+ 
 var widthHeight = "";
 if ($1 && $2) {
     widthHeight = "width='" + $1 + "' height='" + $2 + "' ";
 }
+var liveSample = '<iframe  frameborder="0" ' + widthHeight + 'src="' + template('LiveSampleURL', [$0]) + '"></iframe>';
+if ($3) {
+    str += '<table><thead><tr>';
+    str += '<th scope="col" style="text-align: center;">Screenshot</th>';
+    str += '<th scope="col" style="text-align: center;">Live sample</th>';
+    str += '</tr></thead><tbody><tr>';
+    str += '<td><img alt="" class="internal" src="' + $3 + '" /></td>';
+    str += '<td>' + liveSample + '</td>';
+    str += '</tr></tbody></table>';
+} else {
+    str += liveSample;
+}
 %>
-<iframe  frameborder="0" <%=widthHeight%>src="<%= template('LiveSampleURL', [$0]) %>"></iframe>
+<%- str %>
