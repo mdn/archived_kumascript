@@ -32,6 +32,6 @@
         url = destNewType;
     }
     
-    url = web.spacesToUnderscores(url);
+    url = web.spacesToUnderscores(url + '#' + $1);
 %>
-<a href="<%=url%>#<%=$1%>"><%=$1%></a>
+<a href="<%=url%>"><%=$1%></a>
