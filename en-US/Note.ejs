@@ -1,16 +1,3 @@
 <%
 /* Purpose: Important paragraphs, NOT endnotes or footnotes */
-
-var note = mdn.localString({
-  "en-US": "Note:",
-  "de": "Hinweis:",
-  "es": "Nota:",
-  "fr": "Note:",
-  "ja": "註:",
-  "ko": "주의:",
-  "pl": "Uwaga:",
-  "zh-TW": "註："
-});
-
-
-%><div class="note"><strong><%-note%></strong>&nbsp;<%-$0%></div>
+%><%- template('NoteStart') %><%-$0%><%- template('NoteEnd') %>
