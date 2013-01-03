@@ -4,24 +4,32 @@
  * $0 : the file name to embed
  * $1 : the syntaxe color to apply
  */
-  var found = false;
-  var brush = ['bash', 'shell', 'css', 'java', 'js', 'jscript', 'javascript', 'php', 'py', 'python', 'sql', 'xml', 'xhtml', 'xslt', 'html', 'xhtml']
-  var syntaxe = "txt";
+
+var found = false;
+var brush = ['bash', 'shell', 'css', 'java', 'js', 'jscript', 'javascript', 'php', 'py', 'python', 'sql', 'xml', 'xhtml', 'xslt', 'html', 'xhtml']
+var syntaxe = "txt";
+
+var m1 = mdn.localString({
+    "en-US" : "Unable to find file ",
+    "ja" : "ファイル「 "
+});
+
+var m2 = mdn.localString({
+    "en-US" : "",
+    "ja" : " 」が見つかりません。"
+});
+
+if (brush.indexOf($1) > -1) {
+    syntaxe = $1;
+}
   
-  if (brush.indexOf($1) > -1) {
-      syntaxe = $1;
-  }
+env.files.forEach(function(aFile) {
+    if ($0 === aFile.filename) {
+        found = true;
+%><pre class="brush: <%= syntaxe %>"><%= mdn.getFileContent(aFile) %></pre><%
+    }
+});
   
-  env.files.forEach(function(aFile) {
-    if ($0 === aFile.filename) {
-      found = true;
-%>
-<pre class="brush: <%= syntaxe %>"><%= mdn.getFileContent(aFile) %></pre>
-<%
-    }
-  });
-  
-  if (!found) {
-%><p>Unable to find file <em><%= $0 %></em></p><%
-  }
-%>
+if (!found) {
+    %><p><%-m1%><em><%= $0 %></em><%-m2%></p><%
+}%>
