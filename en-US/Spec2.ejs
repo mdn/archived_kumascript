@@ -197,65 +197,67 @@ switch(spec) {
 var status_text = 'Unknown';
 
 switch(env.locale){
-  case 'ja':
-    switch(status) {
-      case 'REC':
-        status_text = '勧告';
+    case 'ja':
+        switch(status) {
+            case 'REC':
+                status_text = '勧告';
+                break;
+            case 'PR':
+                status_text = '勧告案';
+                break;
+            case 'CR':
+                status_text = '勧告候補';
+                break;
+            case 'WD':
+                status_text = '草案';
+                break;
+            case 'ED':
+                status_text = '勧告改訂案';
+                break;
+            case 'Old-Transforms':
+                status_text = 'この仕様は他のドラフトへ移動されました。アップデートしてください。';
+                break;
+            case 'Living':
+                status_text = 'Living standard';
+                break;
+            case 'Draft':
+                status_text = 'ドラフト';
+                break;
+            default:
+                status_text = '不明';
+                break;
+        };
         break;
-      case 'PR':
-        status_text = '勧告案';
-        break;
-      case 'CR':
-        status_text = '勧告候補';
-        break;
-      case 'WD':
-        status_text = '草案';
-        break;
-      case 'ED':
-        status_text = '勧告改訂案';
-        break;
-      case 'Old-Transforms':
-        status_text = 'この仕様は他のドラフトへ移動されました。アップデートしてください。';
-        break;
-      case 'Living':
-        status_text = '現行の標準仕様';
-        break;
-      case 'Draft':
-        status_text = 'ドラフト';
-        break;
-      default:
-        status_text = '不明';
-    };
-    break;
-  default: 
-    switch (status) {
-      case 'REC':
-      status_text = 'Recommendation';
-      break;
-    case 'PR':
-      status_text = 'Proposed Recommendation';
-      break;
-    case 'CR':
-      status_text = 'Candidate Recommendation';
-      break;
-    case 'WD':
-      status_text = 'Working Draft';
-      break;
-    case 'ED':
-      status_text = 'Editor\'s Draft';
-      break;
-    case 'Old-Transforms':
-      status_text = 'This has been merged in another draft. Please update';
-      break;
-    case 'Living':
-      status_text = 'Living standard';
-      break;
-    case 'Draft':
-      status_text = 'Draft';
-      break;
-    default:
-      status_text = 'Unknown';
-    }
+    default: 
+        switch (status) {
+            case 'REC':
+                status_text = 'Recommendation';
+                break;
+            case 'PR':
+                status_text = 'Proposed Recommendation';
+                break;
+            case 'CR':
+                status_text = 'Candidate Recommendation';
+                break;
+            case 'WD':
+                status_text = 'Working Draft';
+                break;
+            case 'ED':
+                status_text = 'Editor\'s Draft';
+                break;
+            case 'Old-Transforms':
+                status_text = 'This has been merged in another draft. Please update';
+                break;
+            case 'Living':
+                status_text = 'Living standard';
+                break;
+            case 'Draft':
+                status_text = 'Draft';
+                break;
+            default:
+                status_text = 'Unknown';
+        }
 }
-%>
-<%= status_text %>
+
+
+%><%= status_text %>
