@@ -34,6 +34,9 @@
                     if(resp && 200 == resp.statusCode) {
                         next(body);
                     }
+                    else if(err) {
+                        next(null);
+                    }
                 });
             } catch(e) {
                 next("error: " + e);
