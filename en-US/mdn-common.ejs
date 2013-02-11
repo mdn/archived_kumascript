@@ -20,9 +20,14 @@
         if(!url) return '';
         
         var result = '',
-            p = kuma.url.parse(env.url, true),
-            base_url = p.protocol + '//' + p.host;
-            
+            base_url = '';
+        
+        // New file urls include attachment host, so we don't need to prepend it
+        var fUrl = kuma.url.parse(url);
+        if (!fUrl.host) {
+            var p = kuma.url.parse(env.url, true),
+                base_url = p.protocol + '//' + p.host;
+        }
         url = base_url + url;
         return cacheFn('kuma:get_attachment_content:' + md5(url.toLowerCase()), 3600, function(next) {
             try {
