@@ -1,1 +1,14 @@
-<%- wiki.tree($0,'1') %>
+<%
+// Inserts a tree of subpages of the specified page.
+//
+// Parameters:
+//  $0 - The path of the page whose subpages should be listed
+//  $1 - The depth of the tree to build; if not specified, only one level is listed
+
+var depth = $1;
+
+if (depth === '') {
+    depth = 1;
+}
+%>
+<%- wiki.tree($0, depth) %>
