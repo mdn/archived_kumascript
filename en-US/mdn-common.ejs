@@ -89,7 +89,7 @@
     fetchJSONResource: function (url, cache_tmout) {
         if (!cache_tmout) cache_tmout = 3600;
         var key = 'kuma:json_resource:' + md5(url.toLowerCase());
-        return cacheFn(key, 600, function (next) {
+        return cacheFn(key, cache_tmout, function (next) {
             var opts = {
                 method: 'GET',
                 headers: { 'Cache-Control': env.cache_control },
@@ -114,7 +114,7 @@
     fetchHTTPResource: function (url, cache_tmout) {
         if (!cache_tmout) cache_tmout = 3600;
         var key = 'kuma:http_resource:' + md5(url.toLowerCase());
-        return cacheFn(key, 600, function (next) {
+        return cacheFn(key, cache_tmout, function (next) {
             var opts = {
                 method: 'GET',
                 headers: { 'Cache-Control': env.cache_control },
