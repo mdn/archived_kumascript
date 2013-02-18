@@ -1,8 +1,20 @@
-<table class="standard-table"><tbody>
+<%
+var el = env.locale;
+var s_th = ["Property", "Type", "Description"];
+ 
+switch(el) {
+    case "ja":
+        s_th = ["プロパティ", "型", "説明"];
+        break;
+    default: break;
+}
+ 
+ 
+%><table class="standard-table"><tbody>
   <tr>
-    <td class="header" width="150">Property</td>
-    <td class="header" width="100">Type</td>
-    <td class="header">Description</td>
+    <th class="header" width="150"><%-s_th[0]%></th>
+    <th class="header" width="100"><%-s_th[1]%></th>
+    <th class="header"><%-s_th[2]%></th>
   </tr>
  <% if ( $0 != "false" ) { %>
  <tr>
