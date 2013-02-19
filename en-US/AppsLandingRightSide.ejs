@@ -1,15 +1,50 @@
-<h2 class="Documentation" id="Documentation" name="Documentation">Technology reference documentation</h2>
+<%
+var el = env.locale;
+switch(el) {
+    case "ja":
+%><h2 class="Documentation" id="Documentation" name="Documentation">関連文書</h2>
     <div class="twocolumns">
       <ul>
-        <li><a href="https://developer.mozilla.org/en-US/docs/CSS" title="https://developer.mozilla.org/en-US/docs/CSS">CSS</a></li>
+        <li><a href="/ja/docs/CSS" title="CSS">CSS</a></li>
+        <li><a href="/ja/docs/DOM" title="DOM">DOM</a></li>
+        <li><a href="/ja/docs/HTML" title="HTML">HTML</a></li>
+        <li><a href="/ja/docs/JavaScript" title="JavaScript">JavaScript</a></li>
+        <li><a href="/ja/docs/WebAPI" title="WebAPI">WebAPI</a></li>
+        <li><a href="/ja/docs/WebGL" title="WebGL">WebGL</a></li>
+        <li><a href="/ja/docs/SVG" title="SVG">SVG</a></li>
+        <li><a href="https://apps.mozillalabs.com/">Open Web Apps overview site</a></li>
+        <li><a href="https://wiki.mozilla.org/Apps">Apps project wiki page</a></li>
+      </ul>
+    </div>
+    <h2 class="Community" id="Community" name="Community">コミュニティ</h2>
+    <p>If you still aren't sure how to do what you're trying to get done, feel free to join the conversation!</p>
+    <ul>
+      <li>Consult the webapps forum: <%- template("DiscussionList", ["dev-webapps", "mozilla.dev.webapps"]) %>
+        <ul>
+          <li>Ask your question on the Open Web Apps IRC channel: <a class="link-irc" href="irc://irc.mozilla.org/openwebapps">#openwebapps</a></li>
+        </ul></li>
+    </ul>
+    <h2 class="Tools" id="Tools" name="Tools">ツール</h2>
+    <ul>
+      <li><a href="/ja/docs/Mozilla/Firefox_OS/Using_Firefox_OS_Simulator">Firefox OS シミュレータ</a></li>
+      <li><a href="/ja/docs/Apps/App_developer_tools">アプリ開発者向けツール</a></li>
+    </ul>
+    <p><span class="alllinks"><a href="http://www.catb.org/~esr/faqs/smart-questions.html" title="http://www.catb.org/~esr/faqs/smart-questions.html"><em>ネチケット</em>をお忘れなく...</a></span></p>
+<%
+    break;
+    default:
+%><h2 class="Documentation" id="Documentation" name="Documentation">Technology reference documentation</h2>
+    <div class="twocolumns">
+      <ul>
+        <li><a href="/en-US/docs/CSS" title="/en-US/docs/CSS">CSS</a></li>
         <li><a href="/en-US/docs/DOM" title="/en-US/docs/DOM">DOM</a></li>
         <li><a href="/en-US/docs/HTML" title="/en-US/docs/HTML">HTML</a></li>
         <li><a href="/en-US/docs/JavaScript" title="/en-US/docs/JavaScript">JavaScript</a></li>
         <li><a href="/en-US/docs/WebAPI" title="/en-US/docs/WebAPI">WebAPI</a></li>
         <li><a href="/en-US/docs/WebGL" title="/en-US/docs/WebGL">WebGL</a></li>
         <li><a href="/en-US/docs/SVG" title="/en-US/docs/SVG">SVG</a></li>
-              <li><a href="https://apps.mozillalabs.com/">Open Web Apps overview site</a></li>
-      <li><a href="https://wiki.mozilla.org/Apps">Apps project wiki page</a></li>
+        <li><a href="https://apps.mozillalabs.com/">Open Web Apps overview site</a></li>
+        <li><a href="https://wiki.mozilla.org/Apps">Apps project wiki page</a></li>
       </ul>
     </div>
     <h2 class="Community" id="Community" name="Community">Getting help from the community</h2>
@@ -27,3 +62,6 @@
       <li><a href="/en-US/docs/Apps/App_developer_tools">App developer tools</a></li>
     </ul>
     <p><span class="alllinks"><a class="external" href="http://www.catb.org/~esr/faqs/smart-questions.html" title="http://www.catb.org/~esr/faqs/smart-questions.html">Don't forget about the <em>netiquette</em>...</a></span></p>
+<%
+    break;
+}%>
