@@ -1,1 +1,14 @@
-<div class="note"><strong>Note:</strong> The Firefox Marketplace does not currently support paid apps or in-app payments. We hope to enable this feature for testing late in the first quarter of 2013.</div>
+<div class="note"><%
+
+var el = env.locale;
+
+switch(el) {
+    case "ja":
+%><strong>注:</strong> Firefox OS Marketplace は今のところ有料アプリとアプリ内課金に対応していません。2013 年第 1 四半期の後半にはこの機能が試験的に有効化される見込みです。<%
+    break;
+    default:
+%><strong>Note:</strong> The Firefox Marketplace does not currently support paid apps or in-app payments. We hope to enable this feature for testing late in the first quarter of 2013.<%
+    break;
+}
+
+%></div>
