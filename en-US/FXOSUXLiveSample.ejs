@@ -1,0 +1,41 @@
+<%
+// Embeds a live example of the Firefox OS UX, with some pre-styling of the look of the content.
+//
+// Parameters:
+//  $0 - The ID of the header block containing the sample
+//  $1 - The URL of the CSS for the UX being demonstrated (optional)
+//
+%>
+
+<div class="hidden">
+<pre class="brush: css">
+
+<%
+var cssStr = "";
+if ($1) {
+    cssStr = "@import url(" + $1 + ");";
+}
+%>
+<%- cssStr %>
+
+@import url(https://developer.mozilla.org/media/fonts.css);
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  background-color: #000;
+  background-image: url(https://mdn.mozillademos.org/files/4655/fx_logo_white_backdrop.jpg);
+}
+
+body {
+  background: none;
+}
+</pre>
+</div>
+
+<%
+var widthHeight = "width='320' height='480'";
+var liveSample = '<iframe  frameborder="0" ' + widthHeight + 'src="' + template('LiveSampleURL', [$0]) + '"></iframe>';
+%>
+<%- liveSample %>
