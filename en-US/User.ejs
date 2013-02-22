@@ -1,5 +1,16 @@
+<%
+/* Display link to user page.
 
-<pre class="script">
-var u = wiki.getuser($0);
-web.link(site.homepage.uri + "User:" + u.name, u.name);
-</pre>
+Parameter
+  $0 : User ID
+  $1 : Display Name (Optional / Overwrite "User:XXX" Syntax)
+*/
+
+var str_User = mdn.localString({
+    "en-US": "User:"
+});
+
+var displayName = $1 ? $1 : str_User + $0;
+
+
+%><a href="/profiles/<%-$0%>"><%-displayName%></a>
