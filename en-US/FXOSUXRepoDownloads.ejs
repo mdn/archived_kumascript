@@ -1,0 +1,22 @@
+<%
+// Inserts download links for the CSS and media resources for a standard Gaia UX component.
+//
+// Parameters:
+//  $0 - The URL of the CSS file
+//  $1 - The URL of the ui resources folder
+//
+
+// Localize strings here
+
+var heading = "Download resources";
+var downloadCSS = "CSS (Style)";
+var downloadMedia = "Media Files";
+%>
+
+<div class="standardSidebar">
+  <p style="font-weight:bold; text-align:center;"><%-heading%></p>
+  <div style="text-align: center;">
+  <a href='<%-$0%>'><%-downloadCSS%></a><br/>
+  <a href='<%-$1%>'><%-downloadMedia%></a>
+  </div>
+</div>
