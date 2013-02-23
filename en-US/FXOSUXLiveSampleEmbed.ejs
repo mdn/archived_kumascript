@@ -1,0 +1,15 @@
+<%
+// Embeds a live example of the Firefox OS UX; you should use this only after a
+// previous use of FXOSUXLiveSampleSetup. You can also use FXOSUXLiveSample() to
+// do both, assuming there is no in-page CSS in your sample.
+//
+// Parameters:
+//  $0 - The ID of the header block containing the sample
+//
+%>
+
+<%
+var widthHeight = "width='320' height='480'";
+var liveSample = '<iframe  frameborder="1" ' + widthHeight + 'src="' + template('LiveSampleURL', [$0]) + '"></iframe>';
+%>
+<%- liveSample %>
