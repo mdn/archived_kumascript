@@ -1,23 +1,25 @@
 <%
 /* first parameter: path of Previous page */
 /* second parameter: path of Next page */
+
 var lang = env.locale;
-var s_PreviousNext = mdn.localString({
-  "en-US": ["« Previous","Next »"],
-  "cs": ["« Předchozí","Následující »"],
-  "de": ["« zurück","weiter »"],
-  "es": ["« Anterior","Siguiente »"],
-  "fr": ["« Précédent","Suivant »"],
-  "ja": ["« 前","次 »"],
-  "ko": ["« 이전","다음 »"],
-  "pl": ["« Poprzedni","Następny »"],
-  "pt-PT": ["« Anterior","Próxima »"],
-  "ru": ["« Предыдущая статья","Следующая статья »"],
-  "zh-CN": ["« 上一页","下一页 »"],
-  "zh-TW": ["« 前頁","次頁 »"]
-});
 var strPrevious = "";
 var strNext = "<br>";
+
+var s_PreviousNext = mdn.localString({
+  "en-US": ["« Previous", "Next »"],
+  "cs": ["« Předchozí", "Následující »"],
+  "de": ["« zurück", "weiter »"],
+  "es": ["« Anterior", "Siguiente »"],
+  "fr": ["« Précédent", "Suivant »"],
+  "ja": ["« 前のページ", "次のページ »"],
+  "ko": ["« 이전", "다음 »"],
+  "pl": ["« Poprzedni", "Następny »"],
+  "pt-PT": ["« Anterior", "Próxima »"],
+  "ru": ["« Предыдущая статья", "Следующая статья »"],
+  "zh-CN": ["« 上一页", "下一页 »"],
+  "zh-TW": ["« 前頁", "次頁 »"]
+});
 
 if ($0) {
   strPrevious = "<a style='float: left;' href='/" + lang + "/docs/" + string.replace($0, ' ', '_') + "'>" + s_PreviousNext[0] + "</a>";
