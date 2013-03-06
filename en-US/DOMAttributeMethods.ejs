@@ -17,11 +17,11 @@ switch(env.locale) {
         tableHead4 = 'DOM Level 2 traitant directement les nœuds <code>Attr</code>';
         break;
     case 'ja':
-        tableTitle = 'DOMメソッドは要素の属性を取り扱います。';
-        tableHead1 = '名前空間に無関係、最も一般的に使用されるメソッド';
-        tableHead2 = '名前空間に限定される変数 (DOM Level 2)';
-        tableHead3 = '<code>Attr</code> ノードを直接扱うための DOM レベル 1 のメソッド (ほとんど使用されない)';
-        tableHead4 = '<code>Attr</code> ノードを直接扱うための DOM レベル 2 名前空間に限定されるメソッド(ほとんど使用されない)';
+        tableTitle = 'DOM メソッドは要素の属性を取り扱います。';
+        tableHead1 = '名前空間に無関係、<br />最も一般的に使用されるメソッド';
+        tableHead2 = '名前空間に限定される変数<br />(DOM Level 2)';
+        tableHead3 = '<code>Attr</code> ノードを直接扱う DOM レベル 1 のメソッド<br />(ほとんど使用されない)';
+        tableHead4 = '<code>Attr</code> ノードを直接扱う DOM レベル 2 名前空間に限定されるメソッド<br />(ほとんど使用されない)';
         break;
     case 'pl':
         tableTitle = 'Metody DOM do obsługi atrybutów to:';
@@ -33,8 +33,8 @@ switch(env.locale) {
     default: break;
 }
 %>
-<%- tableTitle %>
-<table class="fullwidth-table">
+<p><%- tableTitle %></p>
+<table class="standard-table">
 <thead>
 <tr>
 <th><%- tableHead1 %></th>
