@@ -13,11 +13,9 @@
 
 <%
 var cssStr = "";
-if ($0) {
-    cssStr = "@import url(" + $0 + ");";
-}
-if ($1) {
-    cssStr += "@import url(" + $1 + ");";
+
+for (var i=0; i<arguments.length; i++) {
+    cssStr += "@import url(" + arguments[i] + ");";
 }
 %>
 <%- cssStr %>
