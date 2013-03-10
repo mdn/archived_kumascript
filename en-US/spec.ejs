@@ -9,19 +9,19 @@ parameters:
 */
 
 var lang = env.locale,
-     status = ($2).toUpperCase();
-     title = "",
-     color = "#fff",
-     bgcolor = "",
-     titles = [],
-     bgc = ["#e61919", "#e66e33", "#e2a669", "#cfd510", "#72ac35", "#309c40", "#000"];
+    status = ($2).toUpperCase(),
+    title = "",
+    color = "#fff",
+    bgcolor = "",
+    titles = [],
+    bgc = ["#e61919", "#e66e33", "#e2a669", "#cfd510", "#72ac35", "#309c40", "#000"];
 
 function setting(i) { bgcolor = bgc[i]; title = titles[i]; }
 
 
 
 /*	=	=	=	=	=	Localize	=	=	=	=	=	=	*/
-switch(lang){	
+switch(lang) {	
     case "de":
 		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
 		break;
@@ -40,11 +40,20 @@ switch(lang){
 	case "ja":
 		titles = [ "草案（非公式）", "草案", "最終草案", "勧告候補", "勧告案", "W3C 勧告" ];
 		break;
+    case "ko":
+    	titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
     case "pl":
 		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
 		break;
+    case "pt-BR":
+    	titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
     case "pt-PT":
 		titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
+		break;
+    case "ru":
+    	titles = [ "Editor's Draft (unofficial)", "Working Draft", "Last Call", "Candidate Recommendation", "Proposed Recommendation", "Recommendation" ];
 		break;
 	case "zh-CN":
 		titles = [ "编辑草案(非官方)", "工作草案", "Last Call", "候选标准", "推荐标准", "正式标准" ];
@@ -71,7 +80,7 @@ switch(status) {
 if ($2) {
 	%><span <%
 		%>title="<%=title%>" <%
-		%>style="color:<%=color%>;<%
-		%>background:<%=bgcolor%>;<%
+		%>style="color:<%-color%>;<%
+		%>background:<%-bgcolor%>;<%
 		%>display:inline-block; font-size:x-small; margin-left:6px; white-space:nowrap; padding:2px 5px;"><%- status %></span><%
 } %>
