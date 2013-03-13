@@ -1,4 +1,13 @@
-<h2 class="Tools" id="Tools" name="Tools">Tools for app developers</h2>
+<%
+/*
+ * for https://developer.mozilla.org/en-US/docs/Apps
+ * Parameter: none
+ */
+
+
+switch(env.locale) {
+case "en-US":
+%><h2 class="Tools" id="Tools" name="Tools">Tools for app developers</h2>
 <ul>
     <li><a href="https://marketplace.firefox.com/developers/">Visit Firefox Marketplace Developer Hub</a></li>
     <li><a href="/en-US/docs/Mozilla/Firefox_OS/Using_Firefox_OS_Simulator">Firefox OS Simulator</a></li>
@@ -14,7 +23,7 @@
         <li><a href="/en-US/docs/WebAPI" title="WebAPI">WebAPI</a></li>
         <li><a href="/en-US/docs/WebGL" title="WebGL">WebGL</a></li>
         <li><a href="/en-US/docs/SVG" title="SVG">SVG</a></li>
-        <li><a href="https://apps.mozillalabs.com/">Open Web Apps overview site</a></li>
+        <li><a href="https://www.mozilla.org/en-US/apps/">Open Web Apps overview site</a></li>
         <li><a href="https://wiki.mozilla.org/Apps">Apps project wiki page</a></li>
     </ul>
 </div>
@@ -28,3 +37,40 @@
     </li>
 </ul>
 <p><span class="alllinks"><a rel="external" href="http://www.catb.org/~esr/faqs/smart-questions.html">Don't forget about the <em>netiquette</em>...</a></span></p>
+<%
+
+break;
+case "ja":
+
+%><h2 class="Tools" id="Tools" name="Tools">ツール</h2>
+<ul>
+    <li><a href="https://marketplace.firefox.com/developers/">Firefox Marketplace Developer Hub</a></li>
+    <li><a href="/ja/docs/Mozilla/Firefox_OS/Using_Firefox_OS_Simulator">Firefox OS シミュレータ</a></li>
+    <li><a href="/ja/docs/Apps/App_developer_tools">App 開発者ツール</a></li>
+</ul>
+<h2 class="Documentation" id="Documentation" name="Documentation">関連技術文書</h2>
+<div class="twocolumns">
+    <ul>
+        <li><a href="/ja/docs/CSS">CSS</a></li>
+        <li><a href="/ja/docs/DOM">DOM</a></li>
+        <li><a href="/ja/docs/HTML">HTML</a></li>
+        <li><a href="/ja/docs/JavaScript">JavaScript</a></li>
+        <li><a href="/ja/docs/WebAPI">WebAPI</a></li>
+        <li><a href="/ja/docs/WebGL">WebGL</a></li>
+        <li><a href="/ja/docs/SVG">SVG</a></li>
+        <li><a href="https://www.mozilla.org/ja/apps/">Open Web Apps overview site</a></li>
+        <li><a href="https://wiki.mozilla.org/Apps">Apps project wiki page</a></li>
+    </ul>
+</div>
+<h2 class="Community" id="Community" name="Community">コミュニティ</h2>
+<p>貢献したいが何をするべきか分からないという方は、是非コミュニティに参加して下さい。</p>
+<ul>
+    <li>webapps フォーラム: <%- template("DiscussionList", ["dev-webapps", "mozilla.dev.webapps"]) %>
+        <ul>
+            <li>IRC の Open Web Apps チャンネルで質問: <a class="link-irc" href="irc://irc.mozilla.org/openwebapps">#openwebapps</a></li>
+        </ul>
+    </li>
+</ul>
+<p><span class="alllinks"><a rel="external" href="http://www.catb.org/~esr/faqs/smart-questions.html"><em>ネチケット</em>をお忘れなく...</a></span></p>
+<% break;
+} %>
