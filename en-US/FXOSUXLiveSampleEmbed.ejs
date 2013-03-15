@@ -6,10 +6,21 @@
 // Parameters:
 //  $0 - The ID of the header block containing the sample
 //
+
+var lang = env.locale;
+var compatStr = "";
+var nightlyUrl = "http://nightly.mozilla.org/";
+
+switch(lang) {
+    default:     // english by default
+        compatStr = "Firefox OS live demos generally require a Gecko-based browser, and work best in <a href='" + nightlyUrl + "'>recent builds</a> of Firefox.";
+        break;
+}
 %>
 
 <%
 var widthHeight = "width='320' height='480'";
-var liveSample = '<iframe  frameborder="1" ' + widthHeight + 'src="' + template('LiveSampleURL', [$0]) + '"></iframe>';
+var liveSample = '<div class="fxosLiveSampleWrapper"><iframe  frameborder="1" ' + widthHeight + 'src="' + template('LiveSampleURL', [$0]) +
+                        '"></iframe><br/>' + compatStr + '</div>';
 %>
 <%- liveSample %>
