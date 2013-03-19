@@ -8,19 +8,24 @@
 //
 
 var lang = env.locale;
-var compatStr = "";
 var nightlyUrl = "http://nightly.mozilla.org/";
+var widthHeight = "width='320' height='480'";
+
+/* default (English) */
+var compatStr = 'Firefox OS live demos generally require a Gecko-based browser, and work best in <a href="' + nightlyUrl + '">recent builds</a> of Firefox.';
 
 switch(lang) {
-    default:     // english by default
-        compatStr = "Firefox OS live demos generally require a Gecko-based browser, and work best in <a href='" + nightlyUrl + "'>recent builds</a> of Firefox.";
+    case "ja":
+        compatStr = 'Firefox OS ライブデモの閲覧には Gecko エンジンを搭載したブラウザが必要です。' +
+                    '<a href="' + nightlyUrl + '">最新バージョンの Firefox</a>での閲覧がベストです。';
+        break;
+    default:
         break;
 }
-%>
 
-<%
-var widthHeight = "width='320' height='480'";
-var liveSample = '<div class="fxosLiveSampleWrapper"><iframe  frameborder="1" ' + widthHeight + 'src="' + template('LiveSampleURL', [$0]) +
-                        '"></iframe><br/>' + compatStr + '</div>';
-%>
-<%- liveSample %>
+
+
+%><div class="fxosLiveSampleWrapper">
+  <iframe frameborder="1" <%- widthHeight %> src="<%- template('LiveSampleURL',[$0]) %>"></iframe>
+  <div><small>compatStr</small></div>
+</div>
