@@ -2,38 +2,28 @@
 /* one parameter: Level of security allow to the API: "web", "privileged" or "certified" */
 
 var lang = env.locale;
+
 var secString = {
     web : mdn.localString({
-        "en-US": ['This API is available on Firefox or <a href="/', lang, 
-                  '/docs/Mozilla/Firefox_OS" title="/', lang, 
-                  '/docs/Mozilla/Firefox_OS">Firefox OS</a> for <a href="/', lang, 
-                  '/docs/Mozilla/Firefox_OS/Security/Application_security" title="/', lang, 
-                  '/docs/Mozilla/Firefox_OS/Security/Application_security">',
-                  'web content or higher privileged applications','</a>.'].join('')
+        "en-US": 'This API is available on Firefox or <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
+                 '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">web content or higher privileged applications</a>.'
     }),
     privileged: mdn.localString({
-        "en-US": ['This API is available on <a href="/', lang, 
-                  '/docs/Mozilla/Firefox_OS" title="/', lang, 
-                  '/docs/Mozilla/Firefox_OS">Firefox OS</a> for <a href="/', lang, 
-                  '/docs/Mozilla/Firefox_OS/Security/Application_security" title="/', lang, 
-                  '/docs/Mozilla/Firefox_OS/Security/Application_security">',
-                  'privileged or certified applications','</a> only.'].join('')
+        "en-US": 'This API is available on <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
+                 '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">privileged or certified applications</a> only.'
     }),
     certified : mdn.localString({
-        "en-US": ['This API is available on <a href="/', lang, 
-                  '/docs/Mozilla/Firefox_OS" title="/', lang, 
-                  '/docs/Mozilla/Firefox_OS">Firefox OS</a> for <a href="/', lang, 
-                  '/docs/Mozilla/Firefox_OS/Security/Application_security" title="/', lang, 
-                  '/docs/Mozilla/Firefox_OS/Security/Application_security">',
-                  'certified applications','</a> only.'].join('')
+        "ja":    'この API は <a href="/ja/docs/Mozilla/Firefox_OS/Security/Application_security">認定済みアプリ</a>のみ、 <a href="/ja/docs/Mozilla/Firefox_OS">Firefox OS</a> で有効になります。',
+        "en-US": 'This API is available on <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
+                 '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">certified applications</a> only.'
     })
 };
+
 var secLevel = $0 && $0.toLowerCase() || 'certified';
 
 if (!(secLevel in secString)) { secLevel = 'certified'; }
 
 
-%>
-<div class="warning">
+%><div class="warning">
     <p style="text-align:center"><%-secString[secLevel]%></p>
 </div>
