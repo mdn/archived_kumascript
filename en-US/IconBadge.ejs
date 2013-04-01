@@ -9,12 +9,9 @@
 //  $3 - Class name for text area of badge
 //  $4 - Tooltip text (optional)
 //
-// See: http://jsfiddle.net/qbdbC/5/
-
-// Sheppy is working on this template and will finish it on Monday, based on that fiddle.
 %>
 
-<div class="iconBadge <%=$3%>">
-    <div class="iconBadgeIcon <%=$2%>" title="<%=$4%>"><img src="<%=$1%>" width="25" height="25"></div>
-    <p class="iconBadgeText" title="<%=$4%>"><%=$0%></p>
+<div class="iconBadge <%=$3%>" title="<%-$4%>">
+    <div class="iconBadgeIcon <%=$2%>"><img src="<%=$1%>" width="25" height="25"></div>
+    <p class="iconBadgeText"><%=$0%></p>
 </div>
