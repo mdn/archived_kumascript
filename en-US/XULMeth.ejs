@@ -15,10 +15,10 @@ var destOldType = lang + '/docs/XUL:' + methodName + ':' + $0;
 var destNewType = lang + '/docs/XUL/' + methodName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
-  %><code><span id="<%=(anch)%>"><%-(web.link(wiki.uri(destNewType), dispApi))%></span></code><%
+  %><span id="<%=(anch)%>"><code><%-(web.link(wiki.uri(destNewType), dispApi))%></code></span><%
 } else if (wiki.pageExists(destOldType)) {
-  %><code><span id="<%=(anch)%>"><%-(web.link(wiki.uri(destOldType), dispApi))%></span></code><%
+  %><span id="<%=(anch)%>"><code><%-(web.link(wiki.uri(destOldType), dispApi))%></code></span><%
 } else {
-  %><code><span id="<%=(anch)%>"><%-(web.link(wiki.uri(destNewType), dispApi))%></span></code><%
+  %><span id="<%=(anch)%>"><code><%-(web.link(wiki.uri(destNewType), dispApi))%></code></span><%
 }
 %>
