@@ -2,265 +2,111 @@
 /* parameters: */
 /* $0 = name of specification */
 
-var spec = $0;
-var status;
-
-switch(spec) {
-  case 'AmbientLight':
-    status = 'WD';
-    break;
-  case 'Battery API':
-    status = 'CR';
-    break;
-  case 'CSS1':
-    status = 'REC';
-    break;
-  case 'CSS2.1':
-    status = 'REC';
-    break;
-  case 'CSS3 Animations':
-    status = 'WD';
-    break;
-  case 'CSS3 Backgrounds': // Backgrounds & Borders
-    status = 'CR';
-    break;
-  case 'CSS3 Basic UI':
-  case 'CSS3 UI':
-    status = "WD"; // Formerly in CR, now in LC, Call for comments closed in February 2012
-    break;
-  case 'CSS3 Box':
-    status = 'WD';
-    break;
-  case 'CSS3 Cascade':
-    status = 'WD';
-    break;
-  case 'CSS3 Colors':
-    status = 'REC';
-    break;
-  case 'CSS3 Conditional':
-    status = 'WD';
-    break;
-  case 'CSS3 Content':
-    status = 'WD';
-    break;
-  case 'CSS3 Counter Styles':
-    status = "WD";
-    break;
-  case 'CSS3 Device':
-    status = 'WD';
-    break;
-  case 'CSS3 Exclusions and Shapes':
-    status = 'WD';
-    break;
-  case 'CSS3 Flexbox':
-    status = 'CR';
-    break;
-  case 'CSS3 Fonts':
-    status = 'WD';
-    break;
-  case 'CSS3 Fragmentation':
-    status = 'WD';
-    break;
-  case 'CSS3 GCPM':
-    status = 'WD';
-    break;
-  case 'CSS3 Grid':
-    status = 'WD';
-    break;
-  case 'CSS3 Images':
-    status = 'CR';
-    break;
-  case 'CSS3 Lists':
-    status = 'WD';
-    break;
-  case 'CSS3 Media Queries':
-    status = 'REC';
-    break;
-  case 'CSS3 Multicol':
-    status = 'CR';
-    break;
-  case 'CSS3 Namespaces':
-    status = 'REC';
-    break;
-  case 'CSS3 Paged Media':
-    status = 'WD';
-    break;
-  case 'CSS3 Regions':
-    status = 'WD';
-    break;
-  case 'CSS3 Selectors':
-    status = 'REC';
-    break;
-  case 'CSS3 Sizing':
-    status = 'WD';
-    break;
-  case 'CSS3 Speech':
-    status = 'CR';
-    break;
-  case 'CSS3 Style':
-    status = 'CR';
-    break;
-  case 'CSS3 Template':
-    status = 'WD';
-    break;
-  case 'CSS3 Text':
-    status = 'WD';
-    break;
-  case 'CSS4 Text':
-    status = 'ED';
-    break;
-  case 'CSS3 Text-decoration':
-    status = 'WD';
-    break;
-  case 'CSS3 Transforms':
-    status = 'WD';
-    break;
-  case 'CSS3 Transitions':
-    status = 'WD';
-    break;
-  case 'CSS3 Values':
-    status = 'CR';
-    break;
-  case 'CSS3 Variables':
-    status = 'WD';
-    break;
-  case 'CSS3 Writing Modes':
-    status = 'WD';
-    break;
-  case 'CSS3 2D Transforms':
-    status = 'Old-Transforms';
-    break;
-  case 'CSS3 3D Transforms':
-    status = 'Old-Transforms';
-    break;
-  case 'CSS4 Images':
-    status = 'WD';
-    break;
-  case 'CSS4 Selectors':
-    status = 'WD';
-    break;
-  case 'CSSOM':
-    status = 'WD';
-    break;
-  case 'CSSOM View':
-    status = 'ED';
-    break;
-  case 'DOM2 Style':
-    status = 'REC';
-    break;
-  case 'DOM3 Events':
-    status = 'WD';
-    break;
-  case 'DOM Parsing':
-    status = 'WD';
-    break;
-  case 'Filters 1.0':
-    status = 'WD';
-    break;
-  case 'Fullscreen':
-    status = 'ED';
-    break;
-  case 'Page Visibility API':
-    status = 'CR';
-    break;
-  case 'Proximity Events':
-    status = 'WD';
-    break;
-  case 'Harmony':
-    status = 'Draft';
-    break;
-  case 'HTML4.01':
-    status = 'REC';
-    break;
-  case 'HTML5 W3C':
-    status = 'CR';
-    break;
-  case 'HTML5.1':
-    status = 'WD';
-    break;
-  case 'HTML WHATWG':
-    status = 'Living';
-    break;
-  case 'MathML2':
-    status = 'REC';
-    break;
-  case 'MathML3':
-    status = 'REC';
-    break;
-  case 'SVG1.1':
-    status = 'REC';
-    break;
-  case 'WOFF1.0':
-    status = 'REC';
-    break;
-  default:
-    status = 'Unknown';
+var status = {
+  'AmbientLight'               : 'WD',
+  'Battery API'                : 'CR',
+  'Alarm API'                  : 'WD',
+  'CSS1'                       : 'REC',
+  'CSS2.1'                     : 'REC',
+  'CSS3 Animations'            : 'WD',
+  'CSS3 Backgrounds'           : 'CR',
+  'CSS3 Basic UI'              : 'WD',
+  'CSS3 Cascade'               : 'WD',
+  'CSS3 Colors'                : 'REC',
+  'CSS3 Conditional'           : 'WD',
+  'CSS3 Content'               : 'WD',
+  'CSS3 Counter Styles'        : "WD",
+  'CSS3 Device'                : 'WD',
+  'CSS3 Exclusions and Shapes' : 'WD',
+  'CSS3 Flexbox'               : 'CR',
+  'CSS3 Fonts'                 : 'WD',
+  'CSS3 Fragmentation'         : 'WD',
+  'CSS3 GCPM'                  : 'WD',
+  'CSS3 Grid'                  : 'WD',
+  'CSS3 Images'                : 'CR',
+  'CSS3 Lists'                 : 'WD',
+  'CSS3 Media Queries'         : 'REC',
+  'CSS3 Multicol'              : 'CR',
+  'CSS3 Namespaces'            : 'REC',
+  'CSS3 Paged Media'           : 'WD',
+  'CSS3 Regions'               : 'WD',
+  'CSS3 Selectors'             : 'REC',
+  'CSS3 Sizing'                : 'WD',
+  'CSS3 Speech'                : 'CR',
+  'CSS3 Style'                 : 'CR',
+  'CSS3 Template'              : 'WD',
+  'CSS3 Text'                  : 'WD',
+  'CSS4 Text'                  : 'ED',
+  'CSS3 Text-decoration'       : 'WD',
+  'CSS3 Transforms'            : 'WD',
+  'CSS3 Transitions'           : 'WD',
+  'CSS3 Values'                : 'CR',
+  'CSS3 Variables'             : 'WD',
+  'CSS3 Writing Modes'         : 'WD',
+  'CSS3 2D Transforms'         : 'Old-Transforms',
+  'CSS3 3D Transforms'         : 'Old-Transforms',
+  'CSS4 Images'                : 'WD',
+  'CSS4 Selectors'             : 'WD',
+  'CSSOM'                      : 'WD',
+  'CSSOM View'                 : 'ED',
+  'DOM2 Style'                 : 'REC',
+  'DOM3 Events'                : 'WD',
+  'DOM Parsing'                : 'WD',
+  'Filters 1.0'                : 'WD',
+  'Fullscreen'                 : 'ED',
+  'Page Visibility API'        : 'CR',
+  'Proximity Events'           : 'WD',
+  'Harmony'                    : 'Draft',
+  'HTML4.01'                   : 'REC',
+  'HTML5 W3C'                  : 'CR',
+  'HTML5.1'                    : 'WD',
+  'HTML WHATWG'                : 'Living',
+  'MathML2'                    : 'REC',
+  'MathML3'                    : 'REC',
+  'SVG1.1'                     : 'REC',
+  'WOFF1.0'                    : 'REC'
 }
 
-var status_text = 'Unknown';
-
-switch(env.locale){
-    case 'ja':
-        switch(status) {
-            case 'REC':
-                status_text = '勧告';
-                break;
-            case 'PR':
-                status_text = '勧告案';
-                break;
-            case 'CR':
-                status_text = '勧告候補';
-                break;
-            case 'WD':
-                status_text = '草案';
-                break;
-            case 'ED':
-                status_text = '勧告改訂案';
-                break;
-            case 'Old-Transforms':
-                status_text = 'この仕様は他のドラフトへ移動されました。アップデートしてください。';
-                break;
-            case 'Living':
-                status_text = 'Living standard';
-                break;
-            case 'Draft':
-                status_text = 'ドラフト';
-                break;
-            default:
-                status_text = '不明';
-                break;
-        };
-        break;
-    default: 
-        switch (status) {
-            case 'REC':
-                status_text = 'Recommendation';
-                break;
-            case 'PR':
-                status_text = 'Proposed Recommendation';
-                break;
-            case 'CR':
-                status_text = 'Candidate Recommendation';
-                break;
-            case 'WD':
-                status_text = 'Working Draft';
-                break;
-            case 'ED':
-                status_text = 'Editor\'s Draft';
-                break;
-            case 'Old-Transforms':
-                status_text = 'This has been merged in another draft. Please update';
-                break;
-            case 'Living':
-                status_text = 'Living standard';
-                break;
-            case 'Draft':
-                status_text = 'Draft';
-                break;
-            default:
-                status_text = 'Unknown';
-        }
+var label = {
+  'REC': mdn.localString({
+    'en-US' : 'Recommendation',
+    'ja'    : '勧告'
+  }),
+  'PR' : mdn.localString({
+    'en-US' : 'Proposed Recommendation',
+    'ja'    : '勧告案'
+  }),
+  'CR' : mdn.localString({
+    'en-US' : 'Candidate Recommendation',
+    'ja'    : '勧告候補'
+  }),
+  'WD' : mdn.localString({
+    'en-US' : 'Working Draft',
+    'ja'    : '草案'
+  }),
+  'ED' : mdn.localString({
+    'en-US' : 'Editor\'s Draft',
+    'ja'    : '勧告改訂案'
+  }),
+  'Old-Transforms' : mdn.localString({
+    'en-US' : 'This has been merged in another draft. Please update',
+    'ja'    : 'この仕様は他のドラフトへ移動されました。アップデートしてください。'
+  }),
+  'Living' : mdn.localString({
+    'en-US' : 'Living standard'
+  }),
+  'Draft'  : mdn.localString({
+    'en-US' : 'Draft',
+    'ja'    : 'ドラフト'
+  })
 }
 
+var unknown_label = mdn.localString({
+    'en-US' : 'Unknown',
+    'ja' : '不明'
+});
 
-%><%= status_text %>
+
+
+
+%><%= (status[$0] && label[status[$0]]) || unknown_label %>
