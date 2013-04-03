@@ -13,242 +13,246 @@ var result;
 
 // REMINDER: When possible, always refer to the Editor Draft of a spec. THe TR spec are always outdated
 
-switch(spec) {
-    case 'AmbientLight':
-    	name = "Ambient Light Events";
-		url  = "http://dvcs.w3.org/hg/dap/raw-file/tip/light/Overview.html";
-		break;
-    case 'Battery API':
-        name = "Battery Status API";
-        url  = "http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html";
-        break;
-	case 'CSS1':
-		name = "CSS Level 1";
-		url  = "http://www.w3.org/TR/CSS1/";
-		break;
-	case 'CSS2.1':
-		name = "CSS Level 2 (Revision 1)";
-		url  = "http://www.w3.org/TR/CSS2/";
-		break;
-	case 'CSS3 Animations':
-		name = "CSS Animations";
-		url  = "http://dev.w3.org/csswg/css3-animations/";
-		break;
-	case 'CSS3 Backgrounds': // Backgrounds & Borders
-		name = 'CSS Backgrounds and Borders Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-background/";
-		break;
-	case 'CSS3 Basic UI':
-	case 'CSS3 UI':
-		name = 'CSS Basic User Interface Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-ui/";
-		break;
-	case 'CSS3 Box':
-		name = 'CSS Basic Box Model';
-		url  = "http://dev.w3.org/csswg/css3-box/";
-		break;
-	case 'CSS3 Cascade':
-		name = 'CSS3 module: Cascading and inheritance';
-		url  = "http://dev.w3.org/csswg/css3-cascade/";
-		break;
-	case 'CSS3 Colors':
-		name = 'CSS Color Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-color/";
-		break;
-	case 'CSS3 Conditional':
-		name = 'CSS Conditional Rules Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-conditional/";
-		break;
-	case 'CSS3 Content':
-		name = 'CSS Generated Content Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-content/";
-		break;
-	case 'CSS3 Counter Styles':
-		name = "CSS Counter Styles Level 3";
-		url  = "http://dev.w3.org/csswg/css-counter-styles-3/";
-		break;
-	case 'CSS3 Device':
-		name = 'CSS Device Adaptation';
-		url  = "http://dev.w3.org/csswg/css-device-adapt/";
-		break;
-	case 'CSS3 Exclusions and Shapes':
-		name = 'CSS Exclusions and Shapes Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-exclusions/";
-		break;
-	case 'CSS3 Flexbox':
-		name = 'CSS Flexible Box Layout Module';
-		url  = "http://dev.w3.org/csswg/css3-flexbox/";
-		break;
-	case 'CSS3 Fonts':
-		name = 'CSS Fonts Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-fonts/";
-		break;
-	case 'CSS3 Fragmentation':
-		name = 'CSS Fragmentation Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-break/";
-		break;
-	case 'CSS3 GCPM':
-		name = 'CSS Generated Content for Paged Media Module';
-		url  = "http://dev.w3.org/csswg/css3-gcpm/";
-		break;
-	case 'CSS3 Grid': /* This is 'grid layout' and no more 'grid positioning' which has been abandoned */
-		name = 'CSS Grid Layout';
-		url  = "http://dev.w3.org/csswg/css3-grid-layout/";
-		break;
-	case 'CSS3 Images':
-		name = 'CSS Image Values and Replaced Content Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-images/";
-		break;
-	case 'CSS3 Lists':
-		name = 'CSS Lists and Counters Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-lists/";
-		break;
-	case 'CSS3 Media Queries':
-		name = 'Media Queries';
-		url  = "http://dev.w3.org/csswg/css3-mediaqueries/";
-		break;
-	case 'CSS3 Multicol':
-		name = 'CSS Multi-column Layout Module';
-		url  = "http://dev.w3.org/csswg/css3-multicol/";
-		break;
-	case 'CSS3 Namespaces':
-		name = 'CSS Namespaces Module';
-		url  = "http://dev.w3.org/csswg/css3-namespace/";
-		break;
-	case 'CSS3 Paged Media':
-		name = 'CSS Paged Media Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-page/";
-		break;
-	case 'CSS3 Regions':
-		name = 'CSS Regions Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-regions/";
-		break;
-	case 'CSS3 Selectors':
-		name = 'Selectors Level 3';
-		url  = "http://dev.w3.org/csswg/selectors3/";
-		break;
-	case 'CSS3 Sizing':
-		name = 'CSS Intrinsic &amp; Extrinsic Sizing Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-sizing/";
-		break;
-	case 'CSS3 Speech':
-		name = 'CSS Speech Module';
-		url  = "http://dev.w3.org/csswg/css3-speech/";
-		break;
-	case 'CSS3 Style':
-		name = 'CSS Style Attributes';
-		url  = "http://dev.w3.org/csswg/css-style-attr/";
-		break;
-	case 'CSS3 Template':
-		name = '??????';
-		url  = "about:unknown";
-		break;
-	case 'CSS3 Text':
-		name = 'CSS Text Level 3';
-		url  = "http://dev.w3.org/csswg/css3-text/";
-		break;
-    case 'CSS3 Text-decoration':
-		name = 'CSS Text-decoration Level 3';
-		url  = "http://dev.w3.org/csswg/css-text-decor-3/";
-		break;
-	case 'CSS3 Transforms':
-	case 'CSS3 2D Transforms':
-	case 'CSS3 3D Transforms':
-		name = 'CSS Transforms';
-		url  = "http://dev.w3.org/csswg/css3-transforms/";
-		break;
-	case 'CSS3 Transitions':
-		name = 'CSS Transitions';
-		url  = "http://dev.w3.org/csswg/css3-transitions/";
-		break;
-	case 'CSS3 Values':
-		name = 'CSS Values and Units Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-values/";
-		break;
-	case 'CSS3 Variables':
-		name = 'CSS Variables Module Level 1';
-		url  = "http://dev.w3.org/csswg/css-variables/";
-		break;
-	case 'CSS3 Writing Modes':
-		name = 'CSS Writing Modes Module Level 3';
-		url  = "http://dev.w3.org/csswg/css3-writing-modes/";
-		break;
-	case 'CSS4 Images':
-		name = 'CSS Image Values and Replaced Content Module Level 4';
-		url  = "http://dev.w3.org/csswg/css4-images/";
-		break;
-	case 'CSS4 Selectors':
-		name = 'Selectors Level 4';
-		url  = "http://dev.w3.org/csswg/selectors4/";
-		break;
-	case 'CSS4 Text':
-		name = 'CSS Text Level 4';
-		url  = "http://dev.w3.org/csswg/css4-text/";
-		break;
-	case 'CSSOM':
-		name = 'CSS Object Model (CSSOM)';
-		url  = 'http://dev.w3.org/csswg/cssom/';
-		break;
-    case 'CSSOM View':
-		name = 'CSS Object Model (CSSOM) View Module';
-		url  = 'http://dev.w3.org/csswg/cssom-view/';
-		break;
-	case 'DOM2 Style':
-		name = 'Document Object Model (DOM) Level 2 Style Specification';
-		url  = 'http://www.w3.org/TR/DOM-Level-2-Style/'; 
-		break;
-	case 'Filters 1.0':
-		name = "Filter Effects 1.0";
-		url  = "http://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html";
-		break;
-    case 'Harmony':
-        name ="EcmaScript Language Specification Draft 6th Edition";
-        url = "http://wiki.ecmascript.org/lib/exe/fetch.php?id=harmony%3Aspecification_drafts&cache=cache&media=harmony:working_draft_ecma-262_edition_6_11-22-12-nomarkup.pdf";
-        break;
-    case 'HTML4.01':
-        name = 'HTML 4.01 Specification';
-        url  = 'http://www.w3.org/TR/html401/';
-        break;
-	case 'HTML5 W3C':
-		name = 'HTML5';
-		url  = 'http://www.w3.org/TR/html5/';
-		break;
-    case 'HTML5.1':
-        name = 'HTML5.1 (draft)';
-        url  = 'http://www.w3.org/html/wg/drafts/html/master/';
-        break;
-	case 'HTML WHATWG':
-		name = 'WHATWG HTML Living Standard';
-		url  = 'http://www.whatwg.org/specs/web-apps/current-work/multipage/';
-		break;
-	case 'MathML2':
-		name = 'MathML 2.0';
-		url = 'http://www.w3.org/TR/MathML2/';
-		break;
-	case 'MathML3':
-		name = 'MathML 3.0';
-		url = 'http://www.w3.org/TR/MathML3/';
-		break;
-    case 'Page Visibility API':
-        name = 'Page Visibility API';
-        url  = 'http://www.w3.org/TR/page-visibility/';
-        break;
-	case 'ProximityEvents':
-		name = 'Proximity Events';
-		url  = 'http://dvcs.w3.org/hg/dap/raw-file/tip/proximity/Overview.html';
-		break;
-	case 'SVG1.1':
-		name = 'Scalable Vector Graphics (SVG) 1.1 (Second Edition)';
-		url  = 'http://www.w3.org/TR/SVG11/';
-		break;
-	case 'WOFF1.0':
-		name = 'WOFF File Format 1.0';
-		url  = 'http://www.w3.org/TR/WOFF/';
-		break;
-	default:
-		name = 'Unknown';
-		url  = "about:unknown";
+var specList = {
+    'AmbientLight':{
+        name : "Ambient Light Events",
+        url  : "http://dvcs.w3.org/hg/dap/raw-file/tip/light/Overview.html"
+    },
+    'Battery API':{
+        name : "Battery Status API",
+        url  : "http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html"
+    },
+    'Alarm API': {
+        name : 'Web Alarms API',
+        url  : 'http://sysapps.github.com/sysapps/proposals/alarm/Overview.html',
+    },
+    'CSS1':{
+        name : "CSS Level 1",
+        url  : "http://www.w3.org/TR/CSS1/"
+    },
+    'CSS2.1':{
+        name : "CSS Level 2 (Revision 1)",
+        url  : "http://www.w3.org/TR/CSS2/"
+    },
+    'CSS3 Animations':{
+        name : "CSS Animations",
+        url  : "http://dev.w3.org/csswg/css3-animations/"
+    },
+    'CSS3 Backgrounds':{ // Backgrounds & Borders
+        name : 'CSS Backgrounds and Borders Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-background/"
+    },
+    'CSS3 Basic UI':{
+        name : 'CSS Basic User Interface Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-ui/"
+    },
+    'CSS3 Box':{
+        name : 'CSS Basic Box Model',
+        url  : "http://dev.w3.org/csswg/css3-box/"
+    },
+    'CSS3 Cascade':{
+        name : 'CSS3 module: Cascading and inheritance',
+        url  : "http://dev.w3.org/csswg/css3-cascade/"
+    },
+    'CSS3 Colors':{
+        name : 'CSS Color Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-color/"
+    },
+    'CSS3 Conditional':{
+        name : 'CSS Conditional Rules Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-conditional/"
+    },
+    'CSS3 Content':{
+        name : 'CSS Generated Content Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-content/",
+    },
+    'CSS3 Counter Styles':{
+        name : "CSS Counter Styles Level 3",
+        url  : "http://dev.w3.org/csswg/css-counter-styles-3/",
+    },
+    'CSS3 Device':{
+        name : 'CSS Device Adaptation',
+        url  : "http://dev.w3.org/csswg/css-device-adapt/",
+    },
+    'CSS3 Exclusions and Shapes':{
+        name : 'CSS Exclusions and Shapes Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-exclusions/"
+    },
+    'CSS3 Flexbox':{
+        name : 'CSS Flexible Box Layout Module';
+        url  : "http://dev.w3.org/csswg/css3-flexbox/",
+    },
+    'CSS3 Fonts':{
+        name : 'CSS Fonts Module Level 3';
+        url  : "http://dev.w3.org/csswg/css3-fonts/",
+    },
+    'CSS3 Fragmentation':{
+        name : 'CSS Fragmentation Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-break/"
+    },
+    'CSS3 GCPM':{
+        name : 'CSS Generated Content for Paged Media Module',
+        url  : "http://dev.w3.org/csswg/css3-gcpm/"
+    },
+    'CSS3 Grid':{ /* This is 'grid layout' and no more 'grid positioning' which has been abandoned */
+        name : 'CSS Grid Layout',
+        url  : "http://dev.w3.org/csswg/css3-grid-layout/"
+    },
+    'CSS3 Images':{
+        name : 'CSS Image Values and Replaced Content Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-images/"
+    },
+    'CSS3 Lists':{
+        name : 'CSS Lists and Counters Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-lists/"
+    },
+    'CSS3 Media Queries':{
+        name : 'Media Queries',
+        url  : "http://dev.w3.org/csswg/css3-mediaqueries/"
+    },
+    'CSS3 Multicol':{
+        name : 'CSS Multi-column Layout Module',
+        url  : "http://dev.w3.org/csswg/css3-multicol/"
+    },
+    'CSS3 Namespaces':{
+        name : 'CSS Namespaces Module',
+        url  : "http://dev.w3.org/csswg/css3-namespace/"
+    },
+    'CSS3 Paged Media':{
+        name : 'CSS Paged Media Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-page/"
+    },
+    'CSS3 Regions':{
+        name : 'CSS Regions Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-regions/"
+    },
+    'CSS3 Selectors':{
+        name : 'Selectors Level 3',
+        url  : "http://dev.w3.org/csswg/selectors3/"
+    },
+    'CSS3 Sizing':{
+        name : 'CSS Intrinsic &amp; Extrinsic Sizing Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-sizing/"
+    },
+    'CSS3 Speech':{
+        name : 'CSS Speech Module',
+        url  : "http://dev.w3.org/csswg/css3-speech/"
+    },
+    'CSS3 Style':{
+        name : 'CSS Style Attributes',
+        url  : "http://dev.w3.org/csswg/css-style-attr/"
+    },
+    'CSS3 Template':{
+        name : '??????',
+        url  : "about:unknown"
+    },
+    'CSS3 Text':{
+        name : 'CSS Text Level 3',
+        url  : "http://dev.w3.org/csswg/css3-text/"
+    },
+    'CSS3 Text-decoration':{
+        name : 'CSS Text-decoration Level 3',
+        url  : "http://dev.w3.org/csswg/css-text-decor-3/"
+    },
+    'CSS3 Transforms':{
+        name : 'CSS Transforms',
+        url  : "http://dev.w3.org/csswg/css3-transforms/"
+    },
+    'CSS3 Transitions':{
+        name : 'CSS Transitions',
+        url  : "http://dev.w3.org/csswg/css3-transitions/"
+    },
+    'CSS3 Values':{
+        name : 'CSS Values and Units Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-values/"
+    },
+    'CSS3 Variables':{
+        name : 'CSS Variables Module Level 1',
+        url  : "http://dev.w3.org/csswg/css-variables/"
+    },
+    'CSS3 Writing Modes':{
+        name : 'CSS Writing Modes Module Level 3',
+        url  : "http://dev.w3.org/csswg/css3-writing-modes/"
+    },
+    'CSS4 Images':{
+        name : 'CSS Image Values and Replaced Content Module Level 4',
+        url  : "http://dev.w3.org/csswg/css4-images/"
+    },
+    'CSS4 Selectors':{
+        name : 'Selectors Level 4',
+        url  : "http://dev.w3.org/csswg/selectors4/"
+    },
+    'CSS4 Text':{
+        name : 'CSS Text Level 4',
+        url  : "http://dev.w3.org/csswg/css4-text/"
+    },
+    'CSSOM':{
+        name : 'CSS Object Model (CSSOM)',
+        url  : 'http://dev.w3.org/csswg/cssom/'
+    },
+    'CSSOM View':{
+        name : 'CSS Object Model (CSSOM) View Module',
+        url  : 'http://dev.w3.org/csswg/cssom-view/'
+    },
+    'DOM2 Style':{
+        name : 'Document Object Model (DOM) Level 2 Style Specification',
+        url  : 'http://www.w3.org/TR/DOM-Level-2-Style/'
+    },
+    'Filters 1.0':{
+        name : "Filter Effects 1.0",
+        url  : "http://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html"
+    },
+    'Harmony':{
+        name :"EcmaScript Language Specification Draft 6th Edition",
+        url : "http://wiki.ecmascript.org/lib/exe/fetch.php?id:harmony%3Aspecification_drafts&cache:cache&media:harmony:working_draft_ecma-262_edition_6_11-22-12-nomarkup.pdf"
+    },
+    'HTML4.01':{
+        name : 'HTML 4.01 Specification',
+        url  : 'http://www.w3.org/TR/html401/'
+    },
+    'HTML5 W3C':{
+        name : 'HTML5',
+        url  : 'http://www.w3.org/TR/html5/'
+    },
+    'HTML5.1':{
+        name : 'HTML5.1 (draft)',
+        url  : 'http://www.w3.org/html/wg/drafts/html/master/'
+    },
+    'HTML WHATWG':{
+        name : 'WHATWG HTML Living Standard',
+        url  : 'http://www.whatwg.org/specs/web-apps/current-work/multipage/'
+    },
+    'MathML2':{
+        name : 'MathML 2.0',
+        url : 'http://www.w3.org/TR/MathML2/'
+    },
+    'MathML3':{
+        name : 'MathML 3.0',
+        url : 'http://www.w3.org/TR/MathML3/'
+    },
+    'Page Visibility API':{
+        name : 'Page Visibility API',
+        url  : 'http://www.w3.org/TR/page-visibility/'
+    },
+    'ProximityEvents':{
+        name : 'Proximity Events',
+        url  : 'http://dvcs.w3.org/hg/dap/raw-file/tip/proximity/Overview.html'
+    },
+    'SVG1.1':{
+        name : 'Scalable Vector Graphics (SVG) 1.1 (Second Edition)',
+        url  : 'http://www.w3.org/TR/SVG11/'
+    },
+    'WOFF1.0':{
+        name : 'WOFF File Format 1.0',
+        url  : 'http://www.w3.org/TR/WOFF/'
+    }
 }
+
+specList['CSS3 2D Transforms'] = specList['CSS3 3D Transforms'] = specList['CSS3 Transforms'];
+specList['CSS3 UI'] = specList['CSS3 Basic UI'];
+
+name = specList[spec] && specList[spec].name || 'Unknown';
+url  = specList[spec] && specList[spec].url  || 'about:unknown';
 
 if ($2) {
 	title = mdn.localString({
