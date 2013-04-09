@@ -1,8 +1,12 @@
 <%
-/* Display link to user page. Unlike the User template, this one doesn't have any
-   prefix text.
+/* Display link to user page. Unlike Template:User,
+   this one have no prefix text.
 
 Parameter
   $0 : User ID
+  $1 : Display Name (Optional)
 */
-%><a href="/profiles/<%-$0%>"><%-$0%></a>
+
+var displayName = $1 || $0;
+
+%><a href="/profiles/<%- $0 %>"><%- displayName %></a>
