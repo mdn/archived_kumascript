@@ -3,9 +3,9 @@
 /* $0 = name of specification */
 
 var status = {
+  'Alarm API'                  : 'WD',
   'AmbientLight'               : 'WD',
   'Battery API'                : 'CR',
-  'Alarm API'                  : 'WD',
   'CSS1'                       : 'REC',
   'CSS2.1'                     : 'REC',
   'CSS3 Animations'            : 'WD',
@@ -54,6 +54,7 @@ var status = {
   'DOM Parsing'                : 'WD',
   'Filters 1.0'                : 'WD',
   'Fullscreen'                 : 'ED',
+  'Geolocation'                : 'PR',
   'Page Visibility API'        : 'CR',
   'Proximity Events'           : 'WD',
   'Harmony'                    : 'Draft',
@@ -106,8 +107,5 @@ var unknown_label = mdn.localString({
     'en-US' : 'Unknown',
     'ja' : '不明'
 });
-
-
-
 
 %><span class="spec-<%- status[$0] || ''  %>"><%= (status[$0] && label[status[$0]]) || unknown_label %></span>
