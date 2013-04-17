@@ -1,40 +1,40 @@
 <%
 var el = env.locale;
-var s_th = ["Property", "Type", "Description"];
- 
-switch(el) {
-    case "ja":
-        s_th = ["プロパティ", "型", "説明"];
-        break;
-    default: break;
-}
+var s_th = mdn.localString({
+      'en-US': ["Property"  , "Type", "Description"],
+      'fr'   : ["Propriété" , "Type", "Description"],
+      'ja'   : ["プロパティ", "型"  , "説明"       ]
+    });
  
  
-%><table class="standard-table"><tbody>
-  <tr>
-    <th class="header" width="150"><%-s_th[0]%></th>
-    <th class="header" width="100"><%-s_th[1]%></th>
-    <th class="header"><%-s_th[2]%></th>
-  </tr>
+%><table class="standard-table">
+  <thead>
+    <tr>
+      <th scope="col" width="150"><%-s_th[0]%></th>
+      <th scope="col" width="100"><%-s_th[1]%></th>
+      <th scope="col"><%-s_th[2]%></th>
+    </tr>
+  </thead>
+  <tbody>
  <% if ( $0 != "false" ) { %>
  <tr>
-    <td><code>target</code><%- template("readonlyInline", [])%></td>
+    <td><code>target</code> <%- template("readonlyInline", [])%></td>
     <td><%- template("domxref", ["EventTarget"]) %></td>
     <td><%= ( $0 || "The event target (the topmost target in the DOM tree)." ) %></td>
  </tr>
  <% } %>
   <tr>
-    <td><code>type</code><%- template("readonlyInline", [])%></td>
+    <td><code>type</code> <%- template("readonlyInline", [])%></td>
     <td><%- template("domxref", ["DOMString"]) %></td>
     <td>The type of event.</td>
   </tr>
   <tr>
-    <td><code>canBubble</code><%- template("readonlyInline", [])%></td>
+    <td><code>canBubble</code> <%- template("readonlyInline", [])%></td>
     <td>boolean</td>
     <td>Does the event normally bubble?</td>
   </tr>
   <tr>
-    <td><code>cancelable</code><%- template("readonlyInline", [])%></td>
+    <td><code>cancelable</code> <%- template("readonlyInline", [])%></td>
     <td>boolean</td>
     <td>Is it possible to cancel the event?</td>
   </tr>
