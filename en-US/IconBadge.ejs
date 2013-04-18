@@ -4,15 +4,7 @@
 // Parameters:
 //
 //  $0 - Text to display in the badge
-//  $1 - Class name for icon area of badge
-//  $2 - Class name for text area of badge
-//  $3 - Tooltip text (optional)
+//  $1 - Class name for custom style
+//  $2 - Tooltip text (optional)
 //
-%>
-
-<div class="iconBadgeWrap">
-    <div class="iconBadge <%=$2%>" title="<%-$3%>">
-        <div class="iconBadgeIcon <%=$1%>"></div>
-        <p class="iconBadgeText"><%=$0%></p>
-    </div>
-</div>
+%><%-template("SimpleBadge", [$0, "icon " + $1, $2])%>
