@@ -4,11 +4,9 @@
 // Parameters:
 //
 //  $0 - Text to display in the badge
-//  $1 - Class name for text area of badge
+//  $1 - Class name for custom style
 //  $2 - Tooltip text (optional)
 //
 %>
 
-<div class="simpleBadge <%=$1%>" title="<%=$2%>">
-    <p class="simpleBadgeText"><%=$0%></p>
-</div>
+<span class="badge <%=$1%>" title="<%=$2%>"><%=$0%></span>
