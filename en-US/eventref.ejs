@@ -1,1 +1,8 @@
-<span class="breadcrumbs"> « <a href="/en-US/docs/Gecko_DOM_Reference">DOM Reference</a> « <%-template("domxref", [$0])%></span>
+<%
+var str = mdn.localeString({
+  "en-US" : ["Gecko_DOM_Reference", "DOM Reference", "&laquo;"],
+  "ja":     ["Gecko_DOM_Reference", "DOM リファレンス", "&laquo;"]
+});
+
+
+%><span class="breadcrumbs"> <%- 2 %> <a href="/<%- env.locale %>/docs/<%- 0 %>"><%- 1 %></a> <%- 2 %> <%-template("domxref", [$0])%></span>
