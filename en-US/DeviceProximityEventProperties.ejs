@@ -1,5 +1,13 @@
-<tr>
+<%
+
+var nearIs = mdn.localString({
+  "ja" : "ユーザの現在の近接状態",
+  "en-US" : "The current user proximity state."
+});
+
+
+%><tr>
   <td><code>near</code> <%- template("readonlyInline", [])%></td>
   <td>boolean</td>
-  <td>The current user proximity state.</td>
+  <td><%- nearIs %></td>
 </tr>
