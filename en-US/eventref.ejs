@@ -5,4 +5,4 @@ var str = mdn.localeString({
 });
 
 
-%><span class="breadcrumbs"> <%- 2 %> <a href="/<%- env.locale %>/docs/<%- 0 %>"><%- 1 %></a> <%- 2 %> <%-template("domxref", [$0])%></span>
+%><span class="breadcrumbs"> <%- str[2] %> <a href="/<%- env.locale %>/docs/<%- str[0] %>"><%- str[1] %></a> <%- str[2] %> <%-template("domxref", [$0])%></span>
