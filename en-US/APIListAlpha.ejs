@@ -6,7 +6,7 @@
 //  $0 - If 0, terms are listed unadorned; if 1, "()" is appended.
 
 function pageSorter(a, b) {
-    return a.localeCompare(b);
+    return a.title.localeCompare(b.title);
 }
 
 var termList = page.subpages();
