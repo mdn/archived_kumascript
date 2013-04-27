@@ -1,0 +1,52 @@
+<%
+// Creates a list of API terms from each top-level subpage of the page
+// on which this template is used.
+//
+// Parameters:
+//  $0 - If 0, terms are listed unadorned; if 1, "()" is appended.
+
+function pageSorter(a, b) {
+    return a.localeCompare(b);
+}
+
+var termList = page.subpages();
+var lang = env.locale;
+var letters = "";
+var html = "";
+var extra = "";
+
+termList.sort(pageSorter);
+
+switch(lang) {
+    default:    // en-US
+        letters ="abcdefghijklmnopqrstuvwxyz";
+        break;
+}
+
+var numLetters = letters.length;
+var termIndex = 0;
+var numTerms = termList.length;
+
+if ($0) {
+    extra = "()"
+}
+
+for (var i=0; i<numLetters; i++) {
+    var curLetter = letters[i];
+    html += "<span>" + letter.charAt(i) + "</span><ul>";
+    do {
+        var term = termList[termIndex];
+        termIndex++;
+        
+        if (term.title.startsWith(curLetter)) {
+            html += "<li>" + term.title + extra + "</li>";
+        } else {
+            break;
+        }
+    } while (termIndex < numTerms);
+    html += "</ul>";
+}
+
+<div class="index">
+<%-html%>
+</div>
