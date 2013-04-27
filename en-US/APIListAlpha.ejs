@@ -4,9 +4,25 @@
 //
 // Parameters:
 //  $0 - If 0, terms are listed unadorned; if 1, "()" is appended.
+//  $1 - If 0, all subpages are included; if 1, pages with "." in their
+//       titles are left out.
+
+var addParens = $0 || 0;
+var skipMembers = $1 || 0;
 
 function pageSorter(a, b) {
     return a.title.localeCompare(b.title);
+}
+
+function allowTerm(a) {
+    var len = a.length;
+    
+    for (var i=0; i<len; i++) {
+        if (a[i] == '.') {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 var termList = page.subpages();
@@ -26,10 +42,9 @@ switch(lang) {
 var numLetters = letters.length;
 var termIndex = 0;
 var numTerms = termList.length;
-var baseUrl = env.url;
 
-if ($0) {
-    extra = "()"
+if (addParens != 0) {
+    extra = "()";
 }
 
 for (var i=0; i<numLetters; i++) {
@@ -38,10 +53,19 @@ for (var i=0; i<numLetters; i++) {
     if (termIndex < numTerms) {
         do {
             var term = termList[termIndex];
-            var url = baseUrl + "/" + term.title;
+            var title = term.title;
+            
+            // Leave out functions and properties if desired
+            
+            if (skipMembers && !allowTerm(title)) {
+                termIndex++;
+                break;
+            }
+            
+            var url = term.url;
         
-            if (term.title[0].toUpperCase() == curLetter) {
-                html += "<li><code><a href='" + url + "'>" + term.title + extra + "</a></code></li>";
+            if (title[0].toUpperCase() == curLetter) {
+                html += "<li><code><a href='" + url + "'>" + title + extra + "</a></code></li>";
                 termIndex++;
             } else {
                 break;
