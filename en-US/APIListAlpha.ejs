@@ -33,12 +33,12 @@ if ($0) {
 
 for (var i=0; i<numLetters; i++) {
     var curLetter = letters[i];
-    html += "<span>" + letter.charAt(i) + "</span><ul>";
+    html += "<span>" + curLetter + "</span><ul>";
     do {
         var term = termList[termIndex];
         termIndex++;
         
-        if (term.title.startsWith(curLetter)) {
+        if (term.title[0] == curLetter) {
             html += "<li>" + term.title + extra + "</li>";
         } else {
             break;
@@ -46,7 +46,7 @@ for (var i=0; i<numLetters; i++) {
     } while (termIndex < numTerms);
     html += "</ul>";
 }
-
+%>
 <div class="index">
 <%-html%>
 </div>
