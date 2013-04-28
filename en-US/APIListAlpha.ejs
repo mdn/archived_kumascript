@@ -38,6 +38,8 @@ function escapeQuotes(a) {
         }
         b += c;
     }
+    var regex = /(<([^>]+)>)/ig;
+    b = b.replace(regex, "");
     return b;
 }
 
@@ -84,7 +86,7 @@ for (var i=0; i<numLetters; i++) {
                     html += "<span>" + curLetter + "</span><ul>";
                     insertedHeading = true;
                 }
-                html += "<li><code><a href='" + url + "' title='" + escapeQuotes(term.summary) + "'>" + insertBefore + title + insertAfter + "</a></code></li>";
+                html += "<li><code><a href='" + url + "' title=\"" + escapeQuotes(term.summary) + "\">" + insertBefore + title + insertAfter + "</a></code></li>";
                 termIndex++;
             } else {
                 break;
