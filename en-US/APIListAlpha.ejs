@@ -27,6 +27,20 @@ function allowTerm(a) {
     return 1;
 }
 
+function escapeQuotes(a) {
+    var b = "";
+    var len = a.length;
+    
+    for (var i=0; i<len; i++) {
+        var c = a[i];
+        if (c=="\"") {
+            c="&quot;";
+        }
+        b += c;
+    }
+    return b;
+}
+
 var termList = page.subpages();
 var lang = env.slug;
 var letters = "";
@@ -47,7 +61,10 @@ var numTerms = termList.length;
 
 for (var i=0; i<numLetters; i++) {
     var curLetter = letters[i];
-    html += "<span>" + curLetter + "</span><ul>";
+    var insertedHeading;
+    
+    insertedHeading = false;            // Haven't done this letter's heading yet
+    
     if (termIndex < numTerms) {
         do {
             var term = termList[termIndex];
@@ -63,7 +80,11 @@ for (var i=0; i<numLetters; i++) {
             var url = term.url;
         
             if (title[0].toUpperCase() == curLetter) {
-                html += "<li><code><a href='" + url + "'>" + insertBefore + title + insertAfter + "</a></code></li>";
+                if (!insertedHeading) {
+                    html += "<span>" + curLetter + "</span><ul>";
+                    insertedHeading = true;
+                }
+                html += "<li><code><a href='" + url + "' title='" + escapeQuotes(term.summary) + "'>" + insertBefore + title + insertAfter + "</a></code></li>";
                 termIndex++;
             } else {
                 break;
