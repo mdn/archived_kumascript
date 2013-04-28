@@ -3,11 +3,13 @@
 // on which this template is used.
 //
 // Parameters:
-//  $0 - If 0, terms are listed unadorned; if 1, "()" is appended.
-//  $1 - If 0, all subpages are included; if 1, pages with "." in their
+//  $0 - If 0, all subpages are included; if 1, pages with "." in their
 //       titles are left out.
+//  $1 - Text to insert before the term's name
+//  $2 - Text to insert after the term's name
 
-var addParens = $0 || 0;
+var insertBefore = $1 || "";
+var insertAfter = $2 || "";
 var skipMembers = $1 || 0;
 
 function pageSorter(a, b) {
@@ -65,7 +67,7 @@ for (var i=0; i<numLetters; i++) {
             var url = term.url;
         
             if (title[0].toUpperCase() == curLetter) {
-                html += "<li><code><a href='" + url + "'>" + title + extra + "</a></code></li>";
+                html += "<li><code><a href='" + url + "'>" + insertBefore + title + insertAfter + "</a></code></li>";
                 termIndex++;
             } else {
                 break;
