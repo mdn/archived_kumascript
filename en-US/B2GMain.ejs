@@ -1,38 +1,21 @@
-<% if (false) { %>
-<div class="prevnext">
-<%
-var prevStr = '« Back to Boot to Gecko';
+<% if (false) {
+%><div class="prevnext"><%
 
-switch(env.locale) {
-    case "de":
-        prevStr = "« zurück";
-        break;
-    case "es":
-        prevStr = "« Anterior";
-        break;
-    case "fr":
-        prevStr = "« Précédent";
-        break;
-    case "ja":
-        prevStr = "« 前";
-        break;
-    case "ko":
-       prevStr = "« 이전";
-       break;
-    case "pl":
-        prevStr = "« Poprzedni";
-        break;
-    case "ru":
-        prevStr = "« Предыдущая статья";
-        break;
-    case "zh-tw":
-        prevStr = "« 前頁";
-        break;
-}
-%>
-<div class="prevnext">
-<p align="right"><span style="float: left;"><%-web.link(wiki.uri(env.locale + '/docs/Mozilla/Boot_to_Gecko'), prevStr)%></span></p>
-</div>
-<br />
+var prevStr = mdn.localString({
+    "en-US": "« Back to Boot to Gecko",
+    "de": "« zurück",
+    "es": "« Anterior",
+    "fr": "« Précédent",
+    "ja": "« 前",
+    "ko": "« 이전",
+    "pl": "« Poprzedni",
+    "ru": "« Предыдущая статья",
+    "zh-TW": "« 前頁"
+});
+
+/* RTL problem */
+%>  <div class="prevnext">
+        <p align="right"><span style="float: left;"><%-web.link(wiki.uri(env.locale + '/docs/Mozilla/Boot_to_Gecko'), prevStr)%></span></p>
+    </div>
 </div>
 <% } %>
