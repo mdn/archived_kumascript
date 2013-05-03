@@ -1,0 +1,16 @@
+<%
+// Creates and embeds a table of contents for the specified page.
+//
+// Parameters:
+//
+//  $0  Path of the page for which to insert a TOC
+
+var list = wiki.getHeadings($0);
+var numHeadings = list.length;
+
+for (var i=0; i<numHeadings; i++) {
+    var level = list[i*2];
+    var title = list[(i*2)+1];%>
+    <%-level + ". " + title + "<br>"%><%
+}
+%>
