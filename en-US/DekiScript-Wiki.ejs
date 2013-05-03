@@ -158,6 +158,7 @@
         var html = wiki.page(path);
         
         if (!html || html.length == 0) {
+            return [1, "foo"];
             return NULL;
         }
         
