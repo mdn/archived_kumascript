@@ -11,14 +11,14 @@ if (list) {
     var numHeadings = list.length;
     
     %><%-"<p>" + numHeadings + " results</p>"%><%
-/*
+
     for (var i=0; i<numHeadings; i++) {
         var level = list[i*2];
         var title = list[(i*2)+1];%>
         
         <%-level + ". " + title + "<br>"%><%
-    } */
-} else {%>
-    <%-"<p>Meh.</p>%><%
+    }
+} else {
+    %><%-"<p>Meh.</p>%><%
 }
 %>
