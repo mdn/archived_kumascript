@@ -152,16 +152,16 @@
     // Returns a list of the headings for the specified page.
     // Each item in the returned list is an object with these fields:
     //
-    //  level:  the heading level (1-6, although shouldn't ever be 1)
+    //  level:  the heading level (1-6)
     //  title:  the heading's text title, as displayed to the user
     getHeadings: function(path) {
         var html = wiki.page(path);
-        
+                
         if (!html || html.length == 0) {
             return NULL;
         }
-        
-        var re = /\<h([1-6])\s+\>(.+)\<\/h[1-6]\>/i;
+
+        var re = /\<h([1-6])/gi; // \s*\>(.+)\<\/h[1-6]\>
         var list = html.match(re);
         return list;
     },
