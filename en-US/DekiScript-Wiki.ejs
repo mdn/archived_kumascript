@@ -162,8 +162,15 @@
         }
 
         var re = /\<h([1-6])/gi; // \s*\>(.+)\<\/h[1-6]\>
-        var list = re.exec(html);
-        //var list = html.match(re);
+        var result;
+        var list;
+        
+        while ((result = re.exec(html))) {
+            var obj;
+            obj.level = result[1];
+            //obj.title = result[2];
+            list.append(obj);
+        }
         return list;
     },
 
