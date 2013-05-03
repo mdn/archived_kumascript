@@ -15,7 +15,7 @@ if (list) {
     for (var i=1; i<=numHeadings; i++) {
         //var level = list[i*2];
         //var title = list[(i*2)+1];
-        %><li><%=list[i]%></li><%
+        %><li><%=list[i].level%></li><%
         //%><%-level + ". " + title + "<br>"%><%
     }
 } else {
