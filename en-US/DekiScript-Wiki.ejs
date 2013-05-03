@@ -154,11 +154,21 @@
     //
     //  level:  the heading level (1-6)
     //  title:  the heading's text title, as displayed to the user
-    getHeadings: function(path) {
+    //
+    // Parameters:
+    //
+    //  path    The path of the page whose headings should be returned
+    //  depth   The maximum header level to return
+    
+    getHeadings: function(path, depth) {
         var html = wiki.page(path);
                 
         if (!html || html.length == 0) {
             return NULL;
+        }
+        
+        if (!depth) {
+            depth = 3;
         }
 
         var re = /\<h([1-6]).*?\>(.+)\<\/h[1-6]\>/gi;
@@ -166,8 +176,13 @@
         var list = [];
         
         while ((result = re.exec(html))) {
-            var obj = {level: result[1], title: result[2] };
-            list.push(obj);
+            var theLevel = result[1];
+            var theTitle = result[2];
+            
+            if (theLevel <= depth) {
+                var obj = {level: theLevel, title: theTitle };
+                list.push(obj);
+            }
         }
         return list;
     },
