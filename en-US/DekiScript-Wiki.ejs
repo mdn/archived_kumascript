@@ -125,6 +125,7 @@
         });
     },
 
+    // Returns the page object for the specified page.
     // http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.GetPage
     getPage: function (path) {
         var key = 'kuma:get_page:' + md5(path.toLowerCase());
@@ -146,6 +147,22 @@
                 next({});
             }
         });
+    },
+    
+    // Returns a list of the headings for the specified page.
+    // Each item in the returned list is an object with these fields:
+    //
+    //  level:  the heading level (1-6, although shouldn't ever be 1)
+    //  title:  the heading's text title, as displayed to the user
+    getHeadings: function(path) {
+        var html = wiki.getPage(path);
+        
+        if (!html || html.length == 0) {
+            return NULL;
+        }
+        
+        var re = /\<h([1-6])\>(.+)\</h[1-6]\>/i;
+        var list = html.match(re);
     },
  
     // Retrieve the full uri of a given wiki page.
