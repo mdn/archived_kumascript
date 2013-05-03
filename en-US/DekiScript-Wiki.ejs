@@ -163,13 +163,13 @@
 
         var re = /\<h([1-6])/gi; // \s*\>(.+)\<\/h[1-6]\>
         var result;
-        var list;
+        var list = [];
         
         while ((result = re.exec(html))) {
-            var obj;
-            obj.level = result[1];
+            var obj = {level: result[1] /*, title: result[2]*/ };
+            //obj.level = result[1];
             //obj.title = result[2];
-            list.append(obj);
+            list.push(obj);
         }
         return list;
     },
