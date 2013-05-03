@@ -8,18 +8,16 @@
 var list = wiki.getHeadings($0);
 
 if (list) {
-    var numHeadings = list.length ;// / 2;
+    var numHeadings = list.length;
     
     %><%-"<p>" + numHeadings + " results</p>"%><%
 
     for (var i=0; i<numHeadings; i++) {
         var item = list[i];
-        //var title = item.title;
+        var title = item.title;
         var level = item.level;
         
-        //var level = list[i*2];
-        //var title = list[(i*2)+1];
-        %><li><%=level%></li><%
+        %><li><%=level%>. <%=title%><br></li><%
         //%><%-level + ". " + title + "<br>"%><%
     }
 } else {
