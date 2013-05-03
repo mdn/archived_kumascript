@@ -162,7 +162,8 @@
         }
 
         var re = /\<h([1-6])/gi; // \s*\>(.+)\<\/h[1-6]\>
-        var list = html.match(re);
+        var list = re.exec(html);
+        //var list = html.match(re);
         return list;
     },
 
