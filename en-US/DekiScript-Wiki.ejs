@@ -161,14 +161,12 @@
             return NULL;
         }
 
-        var re = /\<h([1-6])/gi; // \s*\>(.+)\<\/h[1-6]\>
+        var re = /\<h([1-6]).*?\>(.+)\<\/h[1-6]\>/gi;
         var result;
         var list = [];
         
         while ((result = re.exec(html))) {
-            var obj = {level: result[1] /*, title: result[2]*/ };
-            //obj.level = result[1];
-            //obj.title = result[2];
+            var obj = {level: result[1], title: result[2] };
             list.push(obj);
         }
         return list;
