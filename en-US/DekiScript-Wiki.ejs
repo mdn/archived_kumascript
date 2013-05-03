@@ -161,7 +161,7 @@
             return NULL;
         }
         
-        var re = /\<h([1-6])\>(.+)\</h[1-6]\>/i;
+        var re = /\<h([1-6])\s+(.+)\</h[1-6]\>/i;
         var list = html.match(re);
     },
  
