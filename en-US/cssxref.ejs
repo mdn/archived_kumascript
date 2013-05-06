@@ -7,5 +7,8 @@
 //  $0 - API name
 //  $1 - anchor (optional)
 
-var lang = env.locale;
-%><code><a href=<%-'"/' + lang + '/docs/CSS/' + $0 + $2 +'">' + ($1 || $0)%></a></code>
+var l = env.locale;
+var str = $1 || $0;
+
+
+%><a href="/<%- l %>/docs/CSS/<%-$0 %><%- $1 %>"><code><%- str %></code></a>
