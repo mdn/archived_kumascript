@@ -1,0 +1,49 @@
+<%
+// Inserts a definition list of the subpages of the current page, with each
+// page's title as the <dt> term and its SEO summary as the <dd> term.
+//
+// Parameters:
+//  None
+
+function pageSorter(a, b) {
+    return a.title.localeCompare(b.title);
+}
+
+function escapeQuotes(a) {
+    var b = "";
+    var len = a.length;
+    
+    for (var i=0; i<len; i++) {
+        var c = a[i];
+        if (c=="\"") {
+            c="&quot;";
+        }
+        b += c;
+    }
+    var regex = /(<([^>]+)>)/ig;
+    b = b.replace(regex, "");
+    return b;
+}
+
+var termList = page.subpages();
+var html = "<dl>";
+
+termList.sort(pageSorter);
+
+var termIndex = 0;
+var numTerms = termList.length;
+
+for (var i=0; i<numTerms; i++) {
+    var page = termList[i];
+    var title = page.title;
+    var summary = page.summary;
+    var url = page.url;
+    
+    html += "<dt><a href='" + url + "'>" + title + "</a></dt><dd>" + summary + "</dd>"
+}
+
+html += "</dl>";
+%>
+<div class="landingPageArticleList">
+<%-html%>
+</div>
