@@ -1,1 +1,9 @@
-<span style="color: #888" title="Please update this with the earliest version of support.">(Yes)</span>
+<% 
+var title = "Please update this with the earliest version of support.";
+var text = "Yes";
+ 
+switch(env.locale) {
+    case 'fr': title = "Veuillez mettre à jour avec la version minimale du support"; text = "Oui"; break;
+}
+%>
+<span style="color: #888" title=<%- '"' + title +'"'%>>(<%- text %>)</span>
