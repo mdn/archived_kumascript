@@ -1,7 +1,8 @@
-<% var text = "Not&nbsp;supported";
-
-switch(env.locale) {
-    case 'fr': text = "Pas&nbsp;de&nbsp;support"; break;
-}
+<%
+var text = mdn.localString({
+    "en-US": "Not&nbsp;supported",
+    "fr"   : "Pas&nbsp;de&nbsp;support",
+    "ja"   : "未サポート"
+});
 
 %><span style="color:#f00;" title=<%- '"'+text+'"' %> > <%- text %> </span>
