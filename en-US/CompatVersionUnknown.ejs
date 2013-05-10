@@ -7,8 +7,12 @@ var str = mdn.localString({
    "fr": {
        'title': "Veuillez mettre à jour avec la version minimale du support",
        'text':  "Oui"
+   },
+   "ja": {
+       'title': "これを最近のバージョンの対応状況に更新してください。",
+       'text':  "有り"
    }
 });
 
 %>
-<span style="color: #888" title="<%- str['title'] %>">(<%- str['text'] %>)</span>
+<span style="color: #888" title=<%- '"'+str['title']+'"' %> >(<%- str['text'] %>)</span>
