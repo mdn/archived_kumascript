@@ -188,14 +188,18 @@ switch (LOCALE) {
 
 }
 
+var rowStyle = 'border-left:none; border-right: none; border-top:none; border-bottom:dotted 2px rgba(224,244,244,200);';
+var col1Style = 'style="width:150px;' + rowStyle + '"';
+var col2Style = 'style="' + rowStyle + '"';
+var lastRowStyle = 'style="border:none;"';
 %>
 <div class="horizFlexboxContainer">
   <div class="smallTextMultiColumnBoxHeading"><%= HTML5Documentation %></div><div class="smallTextMultiColumnBoxList">
 <table class="html5ArticleToc">
 	<tbody>
 		<tr>
-			<td width="120px"><a href="<%= PATH %><%= LINKS.HTML[2] %>" title="<%= LINKS.HTML[1] %>"><%= LINKS.HTML[0] %></a></td>
-			<td>
+			<td <%-col1Style%>><a href="<%= PATH %><%= LINKS.HTML[2] %>" title="<%= LINKS.HTML[1] %>"><%= LINKS.HTML[0] %></a></td>
+			<td <%-col2Style%>>
 				<ul>
 					<li><a href="<%= PATH %><%= LINKS.AudioAndVideo[2] %>" title="<%= LINKS.AudioAndVideo[1] %>"><%= LINKS.AudioAndVideo[0] %></a></li>
 					<li><a href="<%= PATH %><%= LINKS.Canvas[2] %>" title="<%= LINKS.Canvas[1] %>"><%= LINKS.Canvas[0] %></a></li>
@@ -210,8 +214,8 @@ switch (LOCALE) {
 			</td>
 		</tr>
 		<tr>
-			<td width="120px"><a href="<%= PATH %><%= LINKS.JavaScript[2] %>" title="<%= LINKS.JavaScript[1] %>"><%= LINKS.JavaScript[0] %></a></td>
-			<td>
+			<td <%-col1Style%>><a href="<%= PATH %><%= LINKS.JavaScript[2] %>" title="<%= LINKS.JavaScript[1] %>"><%= LINKS.JavaScript[0] %></a></td>
+			<td <%-col2Style%>>
 				<ul>
 					<li><a href="<%= PATH %><%= LINKS.Storage[2] %>" title="<%= LINKS.Storage[1] %>"><%= LINKS.Storage[0] %></a></li>
 					<li><a href="<%= PATH %><%= LINKS.IndexedDB[2] %>" title="<%= LINKS.IndexedDB[1] %>"><%= LINKS.IndexedDB[0] %></a></li>
@@ -226,8 +230,8 @@ switch (LOCALE) {
 			</td>
 		</tr>
 		<tr>
-			<td width="120px"><a href="<%= PATH %><%= LINKS.CSS[2] %>" title="<%= LINKS.CSS[1] %>"><%= LINKS.CSS[0] %></a></td>
-			<td>
+			<td <%-lastRowStyle%>><a href="<%= PATH %><%= LINKS.CSS[2] %>" title="<%= LINKS.CSS[1] %>"><%= LINKS.CSS[0] %></a></td>
+			<td <%-lastRowStyle%>>
 				<ul>
 					<li><a href="<%= PATH %><%= LINKS.NewSelectors[2] %>" title="<%= LINKS.NewSelectors[1] %>"><%= LINKS.NewSelectors[0] %></a></li>
 					<li><a href="<%= PATH %><%= LINKS.Typography[2] %>" title="<%= LINKS.Typography[1] %>"><%= LINKS.Typography[0] %></a></li>
