@@ -1,8 +1,14 @@
-<table class="HTMLElmNav">
+<%
+
+    // Parameter : none
+    // Live (Bottom of page) : https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+%><table class="HTMLElmNav">
     <thead>
 		<tr>
 			<th><%
 var loc = env.locale,
+    base = "/" + loc + "/docs/",
     ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("") /* this is Array ! */ ,
     ABC_len = ABC.length,
     words = [],
@@ -45,19 +51,21 @@ switch(loc) {
 /*	=	=	=	=	=	=	=	=	=	=	=	=	=	=	=	=	=	*/
 
 
+var newSlug = ( loc === "en-US" || loc === "ja" ) ?  "Web/" : "";
 
-%><a href="/<%= loc %>/docs/HTML<%= lastPathToHTMLElementPage %>"><%= words[0] %></a></th>
+
+%><a href="<%- base %><%- newSlug %>HTML<%= lastPathToHTMLElementPage %>"><%= words[0] %></a></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td><%
 	for(var i = 0; i < ABC_len; ++i) {
-		%><a href="/<%= loc %>/docs/HTML<%= lastPathToHTMLElementPage %>#<%= ABC[i] %>"><%= ABC[i] %></a>&nbsp;<%
+		%><a href="<%- base %><%- newSlug %>HTML<%= lastPathToHTMLElementPage %>#<%= ABC[i] %>"><%= ABC[i] %></a>&nbsp;<%
 	} %></td>
 			</tr>
 			<tr>
-				<td>(<%= words[1] %> <a href="/<%= loc %>/docs/tag/HTML"><%= words[2] %></a>)</td>
+				<td>(<%= words[1] %> <a href="<%- base %>tag/HTML"><%= words[2] %></a>)</td>
 			</tr>
 	</tbody>
 </table>
