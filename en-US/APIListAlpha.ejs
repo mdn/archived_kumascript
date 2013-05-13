@@ -10,10 +10,12 @@
 
 var insertBefore = $1 || "";
 var insertAfter = $2 || "";
-var skipMembers = $1 || 0;
+var skipMembers = $0 || 0;
 
 function pageSorter(a, b) {
-    return a.title.localeCompare(b.title);
+    var al = a.title.toLowerCase();
+    var bl = b.title.toLowerCase();
+    return al.localeCompare(bl);
 }
 
 function allowTerm(a) {
@@ -76,7 +78,7 @@ for (var i=0; i<numLetters; i++) {
             
             if (skipMembers && !allowTerm(title)) {
                 termIndex++;
-                break;
+                continue;
             }
             
             var url = term.url;
