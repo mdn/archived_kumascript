@@ -1,6 +1,11 @@
 <%
 function tree(kuma, page, path, depth, self) {
         var pages = page.subpages(path, depth, self);
+        var numPages = 0;
+        
+        var html = process_array(kuma, pages);
+        
+        html = "<p><strong>" + numPages + " pages</strong></p>" + html;
          
         return process_array(kuma, pages);
  
@@ -39,8 +44,10 @@ function tree(kuma, page, path, depth, self) {
             if(arr.length) {
                 result += '<ul>';
                 arr.forEach(function(item) {
+                    numPages++;
                     if (!item) { return; }
-                    result += '<li><a href="' + item.url + '$move">' + kuma.htmlEscape(item.title) + '</a>' +
+                    result += '<li><a href="' + item.url + '">' + kuma.htmlEscape(item.title) + '</a>' +
+                              '<a href="' + item.url + '$move"> [MOVE]</a>' + 
                               process_array(kuma, item.subpages || []) + '</li>';
                      
                 });
