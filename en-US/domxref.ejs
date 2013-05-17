@@ -22,6 +22,7 @@ if (api.substr(-2) === '()') {
   api = api.substr(0, api.length - 2);
 }
 
+var URLnew = "/" + lang + '/docs/Web/API/' + api;
 var URL = "/" + lang + '/docs/DOM/' + api;
 
 var anch = '';
@@ -29,6 +30,10 @@ var anch = '';
 if ($2) {
   str = str + '.' + $2;
   anch = '#' + $2;
+}
+
+if(wiki.pageExists(URLnew)) {
+  URL = URLnew;   
 }
 
 
