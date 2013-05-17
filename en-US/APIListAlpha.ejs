@@ -103,6 +103,14 @@ for (var i = 0; i < numLetters; i++) {
             if (containsTag(tags, "Non-standard")) {
                 badge = " " + template("NonStandardBadge", []);
             }
+            
+            if (containsTag(tags, "Experimental")) {
+                badge += " " + template("ExperimentalBadge", []);
+            }
+            
+            if (tags && tags != undefined) {
+                badge += " " + tags.length;
+            }
         
             if (title[0].toUpperCase() == curLetter) {
                 if (!insertedHeading) {
