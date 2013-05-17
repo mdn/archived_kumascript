@@ -45,6 +45,19 @@ function escapeQuotes(a) {
     return b;
 }
 
+function containsTag(tagList, tag) {
+    if (!tagList || tagList == undefined) {
+        return 0;
+    }
+    tag = tag.toLowerCase();
+    for (var i=0; i<tagList.length; i++) {
+        if (tagList[i].toLowerCase() == tag) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 var termList = page.subpages();
 var lang = env.slug;
 var letters = "";
@@ -73,6 +86,7 @@ for (var i = 0; i < numLetters; i++) {
         do {
             var term = termList[termIndex];
             var title = term.title;
+            var tags = term.tags;
             
             // Leave out functions and properties if desired
             
@@ -82,13 +96,20 @@ for (var i = 0; i < numLetters; i++) {
             }
             
             var url = term.url;
+            var badge = "";
+            
+            // Build any badge text that may be needed */
+            
+            if (containsTag(tags, "Non-standard")) {
+                badge = " " + template("NonStandardBadge", []);
+            }
         
             if (title[0].toUpperCase() == curLetter) {
                 if (!insertedHeading) {
                     html += "<span>" + curLetter + "</span><ul>";
                     insertedHeading = true;
                 }
-                html += '<li><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code></li>';
+                html += '<li><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + badge + '</li>';
                 termIndex++;
             } else {
                 break;
