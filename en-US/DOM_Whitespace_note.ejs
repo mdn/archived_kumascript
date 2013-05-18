@@ -28,7 +28,7 @@ function showKorean() {
     그러므로 예를 들어 <%-linkFirstChild%>나 <%-linkPrevSib%>을 통해서 얻은 노드는 작성자가 얻으려 한 실제 요소와는 
     달리 공백 텍스트 노드를 참조할 지도 모릅니다. </p>
     
-    <p>더 많은 정보는 <a href="ko/Whitespace_in_the_DOM">Whitespace in the DOM</a>과
+    <p>더 많은 정보는 <a href="/ko/docs/Whitespace_in_the_DOM">Whitespace in the DOM</a>과
     <a class="external" href="http://www.w3.org/DOM/faq.html#emptytext">W3C DOM 3 FAQ: Why are some Text nodes empty?</a>를 보세요.</p>
 <%
 }
@@ -39,7 +39,7 @@ function showZHcn() {
     <%-linkFirstChild%> 和 <%-linkPrevSib%> 之类的方法可能会引用到一个空白符文本节点,
     而不是使用者所预期得到的节点.</p>
     
-    <p>详情请参见 <a href="/zh-cn/Whitespace_in_the_DOM">DOM 中的空白符</a>
+    <p>详情请参见 <a href="/zh-CN/docs/Whitespace_in_the_DOM">DOM 中的空白符</a>
     和<a class="external" href="http://www.w3.org/DOM/faq.html#emptytext">W3C DOM 3 FAQ: 为什么一些文本节点是空的</a>.</p>
 <%
 }
@@ -51,7 +51,7 @@ function showFrench() {
     <%-linkPrevSib%> peut faire référence à un nœud texte contenant des espaces plutôt qu'au véritable élément
     que l'auteur comptait obtenir.</p>
     
-    <p>Consultez <a href="fr/Gestion_des_espaces_dans_le_DOM">Gestion des espaces dans le DOM</a>
+    <p>Consultez <a href="/fr/docs/Gestion_des_espaces_dans_le_DOM">Gestion des espaces dans le DOM</a>
     et <a class="external" href="http://www.w3.org/DOM/faq.html#emptytext"><i>Why are some Text nodes empty?</i>
     dans la FAQ DOM 3 du W3C</a> pour plus d'informations.</p>
 <%
@@ -63,16 +63,14 @@ function showJapanese() {
     しかし、<%-linkFirstChild%> や <%-linkPrevSib%> のような例で得られるノードには、作者が取得しようとした実際の要素ではなく、
     空白のテキストノードが参照されます。</p>
     
-    <p>より多くの情報を得る為には <a href="ja/Whitespace_in_the_DOM">Whitespace in the DOM</a> と 
+    <p>より多くの情報を得る為には <a href="/ja/docs/Web/Guide/DOM/Whitespace_in_the_DOM">Whitespace in the DOM</a> と 
     <a class="external" href="http://www.w3.org/DOM/faq.html#emptytext">W3C DOM 3 FAQ: Why are some Text nodes empty?</a> 
     を参照してください。</p>
 <%
 }
 
+
 switch(lang) {
-    default:
-        showEnglish();
-        break;
     case 'zh-CN':
         showZHcn();
         break;
@@ -85,5 +83,7 @@ switch(lang) {
     case 'ja':
         showJapanese();
         break;
-}
-%>
+    default:
+        showEnglish();
+        break;
+}%>
