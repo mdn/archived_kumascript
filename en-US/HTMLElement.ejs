@@ -1,22 +1,25 @@
 <%
 var name = ($0.toString()).toLowerCase();
 var lang = env.locale;
-var sectionname = "";
+var basePath = "/" + lang + "/docs/";
+var sectionname = "Element";
 
 switch(lang) {
+    case 'ja':
     case 'en-US':
-        sectionname = "Element";
-        dest = '/' + env.locale + '/docs/Web/HTML/' + sectionname + '/' + name;
+        dest = basePath + 'Web/HTML/' + sectionname + '/' + name;
         break;
     case 'es':
         sectionname = "Elemento";
-        dest = '/' + env.locale + '/docs/HTML/' + sectionname + '/' + name;
+        dest = basePath + 'HTML/' + sectionname + '/' + name;
+        break;
     default:        // Using the old path for now
         sectionname = "Element";
-        dest = '/' + env.locale + '/docs/HTML/' + sectionname + '/' + name;
+        dest = basePath + 'HTML/' + sectionname + '/' + name;
         break;
 }
 
-var result = '<code><a href="' + dest +'" title="<' + name + '>">&lt;' + name + '&gt;</a></code>';
-%>
-<%- result %>
+var result = '<a href="' + dest + '" title="<' + name + '>"><code>&lt;' + name + '&gt;</code></a>';
+
+
+%><%- result %>
