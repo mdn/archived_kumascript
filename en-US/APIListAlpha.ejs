@@ -106,11 +106,17 @@ for (var i = 0; i < numLetters; i++) {
             }
             
             if (containsTag(tags, "Deprecated")) {
-                badge = " " + template("deprecated_inline", []);
+                badge = " " + template("DeprecatedBadge", []);
             }
             
             if (containsTag(tags, "Experimental")) {
                 badge += " " + template("ExperimentalBadge", []);
+            }
+            
+            /* Wrap the badges in another span */
+            
+            if (badge.length) {
+                badge = '<span class="indexListBadges">' + badge + "</span>"
             }
                     
             if (title[0].toUpperCase() == curLetter) {
@@ -118,7 +124,7 @@ for (var i = 0; i < numLetters; i++) {
                     html += "<span>" + curLetter + "</span><ul>";
                     insertedHeading = true;
                 }
-                html += '<li><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + badge + '</li>';
+                html += '<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code></span>' + badge + '</span></li>';
                 termIndex++;
             } else {
                 break;
