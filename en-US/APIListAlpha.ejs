@@ -104,6 +104,10 @@ for (var i = 0; i < numLetters; i++) {
                 badge = " " + template("NonStandardBadge", []);
             }
             
+            if (containsTag(tags, "Deprecated")) {
+                badge = " " + template("deprecated_inline", []);
+            }
+            
             if (containsTag(tags, "Experimental")) {
                 badge += " " + template("ExperimentalBadge", []);
             }
