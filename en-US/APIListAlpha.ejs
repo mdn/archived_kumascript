@@ -105,8 +105,10 @@ for (var i = 0; i < numLetters; i++) {
                 badge = " " + template("NonStandardBadge", []);
             }
             
-            if (containsTag(tags, "Deprecated")) {
-                badge = " " + template("DeprecatedBadge", []);
+            if (containsTag(tags, "Obsolete")) {
+                badge += " " + template("ObsoleteBadge", []);
+            } else if (containsTag(tags, "Deprecated")) {
+                badge += " " + template("DeprecatedBadge", []);
             }
             
             if (containsTag(tags, "Experimental")) {
