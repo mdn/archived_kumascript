@@ -3,19 +3,18 @@ var name = ($0.toString()).toLowerCase();
 var lang = env.locale;
 var basePath = "/" + lang + "/docs/";
 var sectionname = "Element";
+var dest = basePath + 'Web/HTML/' + sectionname + '/' + name;
+
 
 switch(lang) {
-    case 'ja':
-    case 'en-US':
-        dest = basePath + 'Web/HTML/' + sectionname + '/' + name;
+    case "ja":
+    case "en-US":
         break;
     case 'es':
-        sectionname = "Elemento";
-        dest = basePath + 'HTML/' + sectionname + '/' + name;
+        dest = basePath + 'HTML/Elemento/' + name;
         break;
     default:        // Using the old path for now
-        sectionname = "Element";
-        dest = basePath + 'HTML/' + sectionname + '/' + name;
+        dest = basePath + 'HTML/Element/' + name;
         break;
 }
 
