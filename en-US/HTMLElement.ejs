@@ -1,15 +1,20 @@
 <%
 var name = ($0.toString()).toLowerCase();
+var lang = env.locale;
+var sectionname = "";
 
-var sectionname = mdn.localString({
-  "en-US": "Element",
-  "es": "Elemento"
-});
-
-var dest = '/' + env.locale + '/docs/Web/HTML/' + sectionname + '/' + name;
-
-if (!wiki.pageExists(dest)) {
-    dest = '/' + env.locale + '/docs/HTML/' + sectionname + '/' + name;
+switch(lang) {
+    case 'en-US':
+        sectionname = "Element";
+        dest = '/' + env.locale + '/docs/Web/HTML/' + sectionname + '/' + name;
+        break;
+    case 'es':
+        sectionname = "Elemento";
+        dest = '/' + env.locale + '/docs/HTML/' + sectionname + '/' + name;
+    default:        // Using the old path for now
+        sectionname = "Element";
+        dest = '/' + env.locale + '/docs/HTML/' + sectionname + '/' + name;
+        break;
 }
 
 var result = '<code><a href="' + dest +'" title="<' + name + '>">&lt;' + name + '&gt;</a></code>';
