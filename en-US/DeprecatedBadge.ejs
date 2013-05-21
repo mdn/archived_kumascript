@@ -39,7 +39,9 @@ var titleAttrValue = mdn.localString({
     "en-US": "This deprecated API should no longer be used, but will probably still work."
 });
 
-
+if ($0) {
+    %><div class="deprecatedBadge" title="<%=titleAttrValue%>"></div><%
+} else {
 var str = mdn.localString({
     "ca": "Deprecated",
     "cs": "Deprecated",
@@ -77,4 +79,6 @@ var str = mdn.localString({
 });
 
 
-%><%-template("SimpleBadge", [str, "deprecatedBadge", titleAttrValue])%>
+%><%-template("SimpleBadge", [str, "deprecatedBadge", titleAttrValue])%><%
+}
+%>
