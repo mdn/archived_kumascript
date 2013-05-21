@@ -7,10 +7,16 @@
 //       titles are left out.
 //  $1 - Text to insert before the term's name
 //  $2 - Text to insert after the term's name
+//  $3 - Language whose pages are used if not present in the current locale.
+//       (optional)
+//
+// If $3 is specified, any pages from that language (usually "en-US")
+// are included in this list if they don't exist in the current locale.
 
 var insertBefore = $1 || "";
 var insertAfter = $2 || "";
 var skipMembers = $0 || 0;
+var backupLocale = $3 || null;
 
 function pageSorter(a, b) {
     var al = a.title.toLowerCase();
@@ -58,11 +64,55 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
+// Given a list and a title, find the index
+// to the page with that title. Returns -1
+// if not found.
+function indexOfTitle(title, list) {
+    var length = list.length;
+    title = title.toLowerCase();
+    
+    for (var i=0; i<length; i++) {
+        if (list[i].title.toLowerCase() == title) {
+            return i;
+        }
+    }
+    return -1;  // not found
+}
+
+var otherList = null;
+var otherSlug = null;
 var termList = page.subpages();
 var lang = env.slug;
 var letters = "";
 var html = "";
 var extra = "";
+
+// Get the other list if we need it
+
+if (backupLocale) {
+    otherSlug = "/" + backupLocale + "/docs/" + env.slug;
+    otherList = page.subpages(otherSlug);
+}
+
+// If we have otherList, replace duplicate entries
+// with those from termList.
+
+if (otherList) {
+    for (i=0; i<termList.length; i++) {
+        var idx = indexOfTitle(termList[i].title, otherList);
+        
+        // If it's in the local language, copy it in to replace
+        // the backup language's version
+        
+        if (idx >= 0) {
+            otherList[idx] = termList[i];
+        }
+    }
+    
+    // Finally, we need to use otherList as termList
+    
+    termList = otherList;
+}
 
 termList.sort(pageSorter);
 
