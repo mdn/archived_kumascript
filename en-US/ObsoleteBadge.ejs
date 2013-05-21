@@ -1,7 +1,8 @@
 <%
-/*
-    Parameters : none
-*/
+// Inserts a badge marking an API or term as being obsolete.
+//
+// Parameters:
+//  $0  If specified, the badge is "small"
 
 var titleAttrValue = mdn.localString({
     "ca": "This is an obsolete API and is no longer guaranteed to work.",
@@ -39,8 +40,12 @@ var titleAttrValue = mdn.localString({
     "en-US": "This is an obsolete API and is no longer guaranteed to work."
 });
 
+var str = "";
 
-var str = mdn.localString({
+if ($0) {
+    str = "❌";
+} else {
+str = mdn.localString({
     "ca": "Obsolete",
     "cs": "Obsolete",
     "de": "Obsolete",
@@ -75,6 +80,6 @@ var str = mdn.localString({
     "zh-TW": "Obsolete",
     "en-US": "Obsolete"
 });
-
+}
 
 %><%-template("SimpleBadge", [str, "obsoleteBadge", titleAttrValue])%>
