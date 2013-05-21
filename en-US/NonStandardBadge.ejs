@@ -1,7 +1,8 @@
 <%
-/*
-    Parameters : none
-*/
+// Inserts a badge indicating a term or API is non-standard.
+//
+// Parameters:
+//  $0  If specified and non-zero, a small badge is displayed.
 
 var titleAttrValue = mdn.localString({
     "ca": "This API has not been standardized.",
@@ -39,8 +40,12 @@ var titleAttrValue = mdn.localString({
     "en-US": "This API has not been standardized."
 });
 
+var str = "";
 
-var str = mdn.localString({
+if ($0) {
+    str = "⚠";
+} else {
+str = mdn.localString({
     "ca": "Non-standard",
     "cs": "Non-standard",
     "de": "Non-standard",
@@ -75,6 +80,6 @@ var str = mdn.localString({
     "zh-TW": "Non-standard",
     "en-US": "Non-standard"
 });
-
+}
 
 %><%-template("SimpleBadge", [str, "nonstandardBadge", titleAttrValue])%>
