@@ -44,4 +44,43 @@ var titleAttrValue = mdn.localString({
 var str = "";
 
 if ($0) {
-    str = "
+    str = "&#x1F528;";
+} else {
+str = mdn.localString({
+    "ca": "Experimental",
+    "cs": "Experimental",
+    "de": "Experimental",
+    "el": "Experimental",
+    "es": "Experimental",
+    "fa": "Experimental",
+    "fi": "Experimental",
+    "fr": "Experimental",
+    "he": "Experimental",
+    "hr": "Experimental",
+    "hu": "Experimental",
+    "id": "Experimental",
+    "it": "Experimental",
+    "ja": "Experimental",
+    "ka": "Experimental",
+    "ko": "Experimental",
+    "ms": "Experimental",
+    "nl": "Experimental",
+    "pl": "Experimental",
+    "ro": "Experimental",
+    "ru": "Experimental",
+    "sq": "Experimental",
+    "th": "Experimental",
+    "tr": "Experimental",
+    "vi": "Experimental",
+    "bn-BD": "Experimental",
+    "fy-NL": "Experimental",
+    "ga-IE": "Experimental",
+    "pt-BR": "Experimental",
+    "pt-PT": "Experimental",
+    "zh-CN": "Experimental",
+    "zh-TW": "Experimental",
+    "en-US": "Experimental"
+});
+}
+
+%><%-template("SimpleBadge", [str, "experimentalBadge", titleAttrValue])%>
