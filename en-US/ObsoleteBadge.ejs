@@ -18,7 +18,7 @@ var titleAttrValue = mdn.localString({
     "hu": "This is an obsolete API and is no longer guaranteed to work.",
     "id": "This is an obsolete API and is no longer guaranteed to work.",
     "it": "This is an obsolete API and is no longer guaranteed to work.",
-    "ja": "This is an obsolete API and is no longer guaranteed to work.",
+    "ja": "これは廃止されたAPIであり、今後の動作は保障されていません。ご注意下さい。",
     "ka": "This is an obsolete API and is no longer guaranteed to work.",
     "ko": "This is an obsolete API and is no longer guaranteed to work.",
     "ms": "This is an obsolete API and is no longer guaranteed to work.",
@@ -43,7 +43,7 @@ var titleAttrValue = mdn.localString({
 var str = "";
 
 if ($0) {
-    %><div class="obsoleteBadge" title="<%-titleAttrValue%>></div><%
+    %><div class="obsoleteBadge" title="<%=titleAttrValue%>"></div><%
 } else {
 str = mdn.localString({
     "ca": "Obsolete",
@@ -59,7 +59,7 @@ str = mdn.localString({
     "hu": "Obsolete",
     "id": "Obsolete",
     "it": "Obsolete",
-    "ja": "Obsolete",
+    "ja": "廃止",
     "ka": "Obsolete",
     "ko": "Obsolete",
     "ms": "Obsolete",
