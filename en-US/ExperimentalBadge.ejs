@@ -44,7 +44,7 @@ var titleAttrValue = mdn.localString({
 var str = "";
 
 if ($0) {
-    str = "❗";
+    %><div class='experimentalIcon'></div>";<%
 } else {
 str = mdn.localString({
     "ca": "Experimental",
@@ -81,6 +81,6 @@ str = mdn.localString({
     "zh-TW": "Experimental",
     "en-US": "Experimental"
 });
+%><%-template("SimpleBadge", [str, "experimentalBadge", titleAttrValue])%><%
 }
-
-%><%-template("SimpleBadge", [str, "experimentalBadge", titleAttrValue])%>
+%>
