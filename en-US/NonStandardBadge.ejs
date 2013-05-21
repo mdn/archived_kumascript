@@ -43,7 +43,7 @@ var titleAttrValue = mdn.localString({
 var str = "";
 
 if ($0) {
-    str = "⛔";
+    %><div class="nonstandardIcon"></div><%
 } else {
 str = mdn.localString({
     "ca": "Non-standard",
@@ -80,6 +80,6 @@ str = mdn.localString({
     "zh-TW": "Non-standard",
     "en-US": "Non-standard"
 });
-}
-
 %><%-template("SimpleBadge", [str, "nonstandardBadge", titleAttrValue])%>
+}
+%>
