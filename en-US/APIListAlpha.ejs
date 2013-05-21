@@ -112,7 +112,7 @@ for (var i = 0; i < numLetters; i++) {
             }
             
             if (containsTag(tags, "Experimental")) {
-                badge += " " + template("ExperimentalBadge");
+                badge += " " + template("ExperimentalBadge", ["1"]);
             }
             
             /* Wrap the badges in another span */
