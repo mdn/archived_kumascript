@@ -1,13 +1,10 @@
-<% if ("fr" == env.locale) {
-    %><p>DOM Level 0. Ne fait partie d'aucune spécification.</p><%
-} else if ("ja" == env.locale) {
-    %><p>DOM Level 0。どの標準にも属しません。 </p><%
-} else if ("pl" == env.locale) {
-    %><p>DOM Level 0. Nie jest częścią żadnego standardu.</p><%
-} else if ("es" == env.locale) {
-    %><p>DOM Nivel 0. No es parte de ninguna norma.</p><%
-} else if ("zh-CN" == env.locale) {
-    %><p>DOM Level 0 不属于任何标准.</p><%
-} else {
-    %><p>DOM Level 0. Not part of any standard.</p><%
-} %>
+<p><%
+var s_str = mdn.localString({
+    "en-US": "DOM Level 0. Not part of any standard.",
+    "es":    "DOM Nivel 0. No es parte de ninguna norma.",
+    "fr":    "DOM Level 0. Ne fait partie d'aucune spécification.",
+    "ja":    "DOM Level 0。どの標準にも属しません。",
+    "pl":    "DOM Level 0. Nie jest częścią żadnego standardu.",
+    "zh-CN": "DOM Level 0 不属于任何标准."
+});
+%><%- s_str %></p>
