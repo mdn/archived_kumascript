@@ -1,7 +1,14 @@
-<div class="htab">
+<%
+var s_header = mdn.localString({
+    "en-US": [ "Desktop", "Mobile" ],
+    "cs":    [ "Plocha", "Mobile" ],
+    "ja":    [ "デスクトップ", "モバイル" ],
+    "pl":    [ "Pulpit", "Mobile" ],
+});
+%><div class="htab">
     <a name="AutoCompatibilityTable"></a>
     <ul>
-        <li class="selected"><a href="javascript:;">Desktop</a></li>
-        <li><a href="javascript:;">Mobile</a></li>
+        <li class="selected"><a href="javascript:;"><%- s_header[0] %></a></li>
+        <li><a href="javascript:;"><%- s_header[1] %></a></li>
     </ul>
 </div>
