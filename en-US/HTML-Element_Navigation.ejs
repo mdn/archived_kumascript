@@ -28,7 +28,7 @@ switch(loc) {
 		lastPathToHTMLElementPage = "/Elemento";
 		break;
 	case "fr" :
-		words = [ "Éléments HTML", "Liens rapides:", "Catégorie HTML" ];
+		words = [ "Éléments HTML", "Liens rapides :", "Catégorie HTML" ];
 		break;
 	case "pl" :
 		words = [ "Element HTML", "Zobacz także:", "Kategoria HTML" ];
@@ -51,7 +51,7 @@ switch(loc) {
 /*	=	=	=	=	=	=	=	=	=	=	=	=	=	=	=	=	=	*/
 
 
-var newSlug = ( loc === "en-US" || loc === "ja" ) ?  "Web/" : "";
+var newSlug = ( loc === "en-US" || loc === "ja" || loc === "fr") ?  "Web/" : "";
 
 
 %><a href="<%- base %><%- newSlug %>HTML<%= lastPathToHTMLElementPage %>"><%= words[0] %></a></th>
