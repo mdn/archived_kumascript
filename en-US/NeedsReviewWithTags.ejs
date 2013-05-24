@@ -1,0 +1,22 @@
+<%
+// Outputs a list of links to articles that are in need of the specified type of
+// review that ALSO have all of the specified tags.
+//
+// Parameters:
+//  $0  -   The type of review: "editorial", "technical", or "kumascript", or
+//          omitted (or "" for "all review types")
+//  $1  -   (Optional) Array of tags that must also be present on the articles
+
+var reviewUrl = 'https://developer.mozilla.org/en-US/docs/feeds/json/needs-review';
+
+if ($0) {
+    reviewUrl = reviewUrl + "/" + $0.toString().toLowerCase();
+}
+
+var articleList = mdn.fetchJSONResource(reviewUrl);
+
+for (var i=0; i<articleList.length; i++) {
+    var title = articleList[i].title;
+    %><li><%=title%></li><%
+}
+%>
