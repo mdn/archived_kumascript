@@ -1,2 +1,12 @@
-<% s_result = '<a href="#' + string.replace($0, " ", "_") + '">' + $0 + '</a>'; %>
-<%- s_result %>
+<%/*
+
+Parameter
+    $0 : anchor string
+    $1 : text (optional / default:$0)
+*/
+
+var text = $1 || $0;
+
+var result = '<a href="#' + string.replace($0, " ", "_") + '">' + text + '</a>';
+
+%><%- result %>
