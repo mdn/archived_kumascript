@@ -1,3 +1,10 @@
-<span lang='fr' class='lang lang-fr'><code>{{mediawiki.internal('Référence de l\'API XPInstall:Objet ' + $0 + ':Méthodes:' + $1 + '|' + $1, "fr")}}</code>
-</span><span lang='*' class='lang lang-*'><code>{{mediawiki.internal('Référence de l\'API XPInstall:Objet ' + $0 + ':Méthodes:' + $1 + '|' + $1, "fr")}}</code>
-</span>
+<% for only French
+
+    $0 : slug (name of object)
+    $1 : slug & text (name of method)
+
+%><code><%-
+
+template("mediawiki.internal", ['Référence_de_l\'API XPInstall/Objet_' + $0 + '/Méthodes/' + $1 + '|' + $1, "fr"])
+
+%></code>
