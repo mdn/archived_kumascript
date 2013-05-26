@@ -9,10 +9,11 @@
   // loop on the properties
   while ( ++i < length ) {
     prop = $0[i];
-%>
-<tr>
-  <td><code><%= $prop.name; %></code></td>
+
+%><tr>
+  <td><code><%= $prop.name; %></code> <%- template("readOnlyInline") %></td>
   <td><%= $prop.type; %></td>
-  <td><%= $prop.description; %> Read only.</td>
-</tr>
-<% } %>
+  <td><%= $prop.description; %></td>
+</tr><%
+
+} %>
