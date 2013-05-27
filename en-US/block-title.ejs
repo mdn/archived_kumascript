@@ -5,5 +5,5 @@ var el = env.locale;
     %><%- template('小標', arguments) %><%
 } else {
     var blockId = uri.encode(string.replace($0,' ', '_'));
-    %><span id="<%=blockId%>"><a id=<%=blockId%>><strong><%- $0 %></strong></span><%
+    %><span id="<%=blockId%>"><a id="<%=blockId%>"><strong><%- $0 %></strong></span><%
 } %>
