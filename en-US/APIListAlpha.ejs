@@ -106,6 +106,7 @@ if (otherList) {
         
         if (idx >= 0) {
             otherList[idx] = termList[i];
+            otherList[idx].isLocalized = true;      // note that it's the localized version
         }
     }
     
@@ -138,12 +139,17 @@ for (var i = 0; i < numLetters; i++) {
             var fullPage = wiki.getPage(term.slug);
             var title = term.title;
             var tags = fullPage.tags;
+            var locale = "";                // Will be set if the page is in the backup locale
             
             // Leave out functions and properties if desired
             
             if (skipMembers && !allowTerm(title)) {
                 termIndex++;
                 continue;
+            }
+            
+            if (!term.isLocalized) {
+                locale = "&nbsp;(" + backupLocale + ")";
             }
             
             var url = term.url;
@@ -176,7 +182,7 @@ for (var i = 0; i < numLetters; i++) {
                     html += "<span>" + curLetter + "</span><ul>";
                     insertedHeading = true;
                 }
-                html += '<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code></span>' + badge + '</span></li>';
+                html += '<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + locale + '</span>' + badge + '</span></li>';
                 termIndex++;
             } else {
                 break;
