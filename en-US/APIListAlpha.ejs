@@ -148,8 +148,10 @@ for (var i = 0; i < numLetters; i++) {
                 continue;
             }
             
-            if (!term.isLocalized) {
+            if (!term.isLocalized && backupLocale) {
                 locale = "&nbsp;(" + backupLocale + ")";
+            } else {
+                locale = " ";
             }
             
             var url = term.url;
