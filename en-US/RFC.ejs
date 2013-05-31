@@ -1,1 +1,12 @@
-<p><span class="script">web.link("http://tools.ietf.org/html/" + $0, "RFC " + $0)</span></p>
+<%
+//
+// Inserts a link to the specified RFC.
+//
+// Parameters:
+//
+// $0   RFC number to which to link.
+//
+
+var link = "http://tools.ietf.org/html/" + $0;
+%>
+<a href="<%-link%>">RFC <%=$0%></a>
