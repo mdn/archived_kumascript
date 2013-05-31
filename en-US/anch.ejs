@@ -6,7 +6,7 @@ Parameter
 */
 
 var text = $1 || $0;
+var anchor = '#' + string.replace($0, " ", "_");
 
-var result = '<a href="#' + string.replace($0, " ", "_") + '">' + text + '</a>';
 
-%><%- result %>
+%><a href="<%- anchor %>"><%- text %></a>
