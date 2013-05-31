@@ -1,4 +1,9 @@
-<div class="multiColumnList">
+<div class="multiColumn" style="
+column-width: 250px;
+-moz-column-width: 250px;
+-webkit-column-width: 250px;
+-o-column-width: 250px;
+-ms-column-width: 250px;">
 <ul>
 <%
 /*
@@ -7,9 +12,6 @@
  */
   
 var maxVersion = $0;
-    minVersion = maxVersion - 30;
-
-if (minVersion < 4) { minVersion = 4 }
 
 // for href attr
 var slug = mdn.localString({
@@ -33,17 +35,15 @@ var loc = mdn.localString({
 });
 
 // for newer version
-for (var i = maxVersion; i >= minVersion; i--) {
+for (var i = maxVersion; i > 3; --i) {
     %><li><a href="/<%-loc%>/docs/Mozilla/Firefox/<%- slug %>/<%- i %>"><%- str[0] %><%- i %><%- str[1] %></a></li><%
 }
 
 // for older version
-if (minVersion == 4) {
-  for(var i = 0; i < ovlen; i++) {
-      %><li><a href="/<%-loc%>/docs/Mozilla/Firefox/<%- slug %>/<%- ov[i] %>"><%- str[0] %><%-ov[i]%><%- str[1] %></a></li><%
-  }
+for(var i = 0; i < ovlen; ++i) {
+    %><li><a href="/<%-loc%>/docs/Mozilla/Firefox/<%- slug %>/<%- ov[i] %>"><%- str[0] %><%-ov[i]%><%- str[1] %></a></li><%
 }
- 
+
 /*
     This template is difficult. Because, old "fr" page have other rule...
     If the URL of your country's page is the same as the English pages,
