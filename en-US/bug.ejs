@@ -1,4 +1,16 @@
 <%
+//
+// Inserts a link to a bug in Mozilla's Bugzilla database.
+//
+// Ideally, this will style the bug based on whether or not it's been fixed, but there
+// are complications that currently prevent that from performing adequately, so that
+// capability has been disabled for now.
+//
+// Parameters:
+//
+// $0   The bug number to link to.
+//
+
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
 var s = "";
 
