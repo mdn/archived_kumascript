@@ -14,13 +14,10 @@
 
 /* get a page's language (Don't use page.language!) */
 var lang = env.locale;
-
 var api = $0;
 var str = $1 || $0;
 
-if (api.substr(-2) === '()') {
-  api = api.substr(0, api.length - 2);
-}
+if (api.substr(-2) === '()') api = api.substr(0, api.length - 2);
 
 var URLnew = "/" + lang + '/docs/Web/API/' + api;
 var URL = "/" + lang + '/docs/DOM/' + api;
@@ -34,11 +31,9 @@ if ($2) {
 
 // Allow only the following local to go to the new URL
 // as other locals haven't move the pages yet.
-var filter = ['en-US','jp']
+var filter = ['en-US', 'ja'];
 
-if(filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) {
-  URL = URLnew;   
-}
+if(filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) URL = URLnew;
 
 
 %><a href="<%- URL+anch %>" title="<%- URL+anch %>"><code><%= str %></code></a>
