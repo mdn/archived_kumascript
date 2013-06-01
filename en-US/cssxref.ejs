@@ -7,8 +7,19 @@
 //  $0 - API name
 //  $1 - anchor (optional)
 
-var l = env.locale;
+var lang = env.locale;
 var str = $1 || $0;
 
+// New CSS location
+var URL = "/" + lang + "/docs/Web/CSS/" + $0; 
 
-%><a href="/<%- l %>/docs/Web/CSS/<%-$0 %>"><code><%- str %></code></a>
+// Locals that use the new location
+// Add your local when you have moved your pages
+var filter = ['en-US'];
+
+if (filter.indexOf(lang) === -1) {
+    URL = "/" + lang + "/docs/CSS/" + $0;
+}
+
+
+%><a href="<%- URL %>"><code><%- str %></code></a>
