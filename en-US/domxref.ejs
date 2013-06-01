@@ -34,7 +34,7 @@ if ($2) {
 
 // Allow only the following local to go to the new URL
 // as other locals haven't move the pages yet.
-var filter = ['en-US']
+var filter = ['en-US','jp']
 
 if(filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) {
   URL = URLnew;   
