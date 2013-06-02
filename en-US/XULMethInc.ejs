@@ -1,33 +1,36 @@
 <%
-var lang = env.locale
-/* set up the page name based on language */
+var lang = env.locale;
 
+
+/* set up the page name based on language */
 var methodName = "Method";
 
 switch(lang) {
-  case 'de':
-    methodName = "Methoden";
-    break;
-  case 'fr':
-    methodName = "Méthodes";
-    break;
-  case 'pl':
-    methodName = "Metoda";
-    break;
-  }
+    case 'de':
+        methodName = "Methoden";
+        break;
+    case 'fr':
+        methodName = "Méthodes";
+        break;
+    case 'pl':
+        methodName = "Metoda";
+        break;
+    default:
+        break;
+}
+
 
 /* get the method name */
-
 var api = $0;
-var destOldType = lang + '/' + 'XUL:' + methodName + ':' + api;
-var destNewType = lang + '/' + 'XUL/' + methodName + '/' + api;
+var destOldType = lang + '/docs/' + 'XUL:' + methodName + ':' + api;
+var destNewType = lang + '/docs/' + 'XUL/' + methodName + '/' + api;
 
 if (wiki.pageExists(destNewType)) { /* the page exists from the deki age */
-  %><%-wiki.page(destNewType)%><%
+    %><%-wiki.page(destNewType)%><%
 } else if(wiki.pageExists(destOldType)) { /* the page exists from the mediawiki age */
-  %><%-wiki.page(destOldType)%><%
+    %><%-wiki.page(destOldType)%><%
 } else { /* the page doesn't exist */
-  var targeturi = "/docs/new?slug=XUL/" + methodName + "/" + api;
-  %><code><a rel="internal" href="<%=targeturi%>" class="new"><%=(api)%></a></code><%
+    var targeturi = "/docs/new?slug=XUL/" + methodName + "/" + api;
+    %><code><a href="<%=targeturi%>" class="new"><%=(api)%></a></code><%
 }
 %>
