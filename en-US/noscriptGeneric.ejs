@@ -2,19 +2,19 @@
 /*
  * first parameter: inline/method
  * second parameter: additional information required for the type specified by the first parameter
-*/
+ */
  
-var s_str = mdn.localString({
+var s = mdn.localString({
     "en-US": ["Native code only!","This method may only be called from C++; don't use it from JavaScript."],
-    "ja": ["Native code only!", "このメソッドは C++ で内部的に使用されるものです。JavaScript のコード内で使用しないよう、ご注意ください。"]
+    "ja":    ["Native code only!", "このメソッドは C++ で内部的に使用されるものです。JavaScript のコード内で使用しないよう、ご注意ください。"]
 });
  
 switch($0) {
     case 'inline':
-        %><span title="<%- s_str[1] %>" class="inlineIndicator noscript noscriptInline"><%- s_str[0] %></span><%
+        %><span title="<%- s[1] %>" class="inlineIndicator noscript noscriptInline"><%- s[0] %></span><%
         break;
     case 'method':
-        %><div><span title="<%- s_str[1] %>" class="indicatorInHeadline noscript noscriptMethod"><%- s_str[0] %></span><h3><%= $1 %></h3></div><%
+        %><div><span title="<%- s[1] %>" class="indicatorInHeadline noscript noscriptMethod"><%- s[0] %></span><h3><%= $1 %></h3></div><%
         break;
 }
 %>
