@@ -3,7 +3,7 @@ var s; // result
 
 switch (env.locale) {
     case 'fr':
-        s = "<strong>Cette fonction, proposition pour EcmaScript 6 (Harmony), est expérimentale</strong><br />Puisque cette fonction est toujours en développement dans certains navigateurs, veuillez consulter le <a href='#Browser_Compatibility'>tableau de compatibilité</a> pour les préfixes à utiliser selon les navigateurs.<br/>Il convient de noter qu'une fonctionnalité expérimentale peut voir sa syntaxe ou son comportement modifié dans le futur en fonction des évolutions de la spécification.";
+        s = "<strong>Cette fonction, proposition pour EcmaScript 6 (Harmony), est expérimentale</strong><br />Puisque cette fonction est toujours en développement dans certains navigateurs, veuillez consulter le <a href='#Browser_compatibility'>tableau de compatibilité</a> pour les préfixes à utiliser selon les navigateurs.<br/>Il convient de noter qu'une fonctionnalité expérimentale peut voir sa syntaxe ou son comportement modifié dans le futur en fonction des évolutions de la spécification.";
         break;
     case "ja":
         s = "<strong>これは Harmony(ECMAScript 6) 提案の一部であり、実験段階の技術です。</strong><br />この技術の仕様は安定していません。<a href='#Browser_compatibility'>ブラウザ互換性の一覧表</a>を確認してください。またこれらの構文や動作は、仕様変更などにより、新しいバージョンのブラウザでは変更される可能性があるという点に注意してください。";
@@ -14,6 +14,6 @@ switch (env.locale) {
 }
 
 
-%><div style="overflow:hidden;margin:10px 0;padding:0 10px;background:#9CF49C;text-align:center;">
-    <p style="margin:4px 0;"><%- s %></p>
+%><div class="overheadIndicator" style="background:#9CF49C;">
+    <p><%- s %></p>
 </div>
