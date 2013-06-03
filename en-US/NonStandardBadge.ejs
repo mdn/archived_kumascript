@@ -1,8 +1,9 @@
-<%
-// Inserts a badge indicating a term or API is non-standard.
-//
-// Parameters:
-//  $0  If specified and non-zero, a small badge is displayed.
+<% /* Inserts a badge indicating a term or API is non-standard.
+
+    Parameters:
+        $0  If specified and non-zero, a small badge is displayed.
+
+*/
 
 var titleAttrValue = mdn.localString({
     "ca": "This API has not been standardized.",
@@ -45,41 +46,40 @@ var str = "";
 if ($0) {
     %><div class="nonstandardIcon" title='<%=titleAttrValue%>'></div><%
 } else {
-str = mdn.localString({
-    "ca": "Non-standard",
-    "cs": "Non-standard",
-    "de": "Non-standard",
-    "el": "Non-standard",
-    "es": "Non-standard",
-    "fa": "Non-standard",
-    "fi": "Non-standard",
-    "fr": "Non-standard",
-    "he": "לא סטנדרטי",
-    "hr": "Non-standard",
-    "hu": "Non-standard",
-    "id": "Non-standard",
-    "it": "Non-standard",
-    "ja": "非標準",
-    "ka": "Non-standard",
-    "ko": "Non-standard",
-    "ms": "Non-standard",
-    "nl": "Non-standard",
-    "pl": "Non-standard",
-    "ro": "Non-standard",
-    "ru": "Non-standard",
-    "sq": "Non-standard",
-    "th": "Non-standard",
-    "tr": "Non-standard",
-    "vi": "Non-standard",
-    "bn-BD": "Non-standard",
-    "fy-NL": "Non-standard",
-    "ga-IE": "Non-standard",
-    "pt-BR": "Non-standard",
-    "pt-PT": "Non-standard",
-    "zh-CN": "非标准",
-    "zh-TW": "非標準",
-    "en-US": "Non-standard"
-});
-%><%-template("SimpleBadge", [str, "nonstandardBadge", titleAttrValue])%><%
-}
-%>
+    str = mdn.localString({
+        "ca": "Non-standard",
+        "cs": "Non-standard",
+        "de": "Non-standard",
+        "el": "Non-standard",
+        "es": "Non-standard",
+        "fa": "Non-standard",
+        "fi": "Non-standard",
+        "fr": "Non-standard",
+        "he": "לא סטנדרטי",
+        "hr": "Non-standard",
+        "hu": "Non-standard",
+        "id": "Non-standard",
+        "it": "Non-standard",
+        "ja": "非標準",
+        "ka": "Non-standard",
+        "ko": "Non-standard",
+        "ms": "Non-standard",
+        "nl": "Non-standard",
+        "pl": "Non-standard",
+        "ro": "Non-standard",
+        "ru": "Non-standard",
+        "sq": "Non-standard",
+        "th": "Non-standard",
+        "tr": "Non-standard",
+        "vi": "Non-standard",
+        "bn-BD": "Non-standard",
+        "fy-NL": "Non-standard",
+        "ga-IE": "Non-standard",
+        "pt-BR": "Non-standard",
+        "pt-PT": "Non-standard",
+        "zh-CN": "非标准",
+        "zh-TW": "非標準",
+        "en-US": "Non-standard"
+    });
+    %><%-template("SimpleBadge", [str, "nonstandardBadge", titleAttrValue])%><%
+}%>
