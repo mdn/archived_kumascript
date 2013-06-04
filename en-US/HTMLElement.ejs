@@ -5,7 +5,6 @@ var basePath = "/" + lang + "/docs/";
 var sectionname = "Element";
 var dest = basePath + 'Web/HTML/' + sectionname + '/' + name;
 
-
 switch(lang) {
     case "ja":
     case "en-US":
@@ -18,8 +17,6 @@ switch(lang) {
         dest = basePath + 'HTML/Element/' + name;
         break;
 }
-
-
 
 
 %><a href="<%- dest %>"><code>&lt;<%- name %>&gt;</code></a>
