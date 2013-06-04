@@ -1,17 +1,16 @@
 <%
 var s = mdn.localString({
-  "de": ["/docs/XUL_Referenz", "/docs/XUL_Referenz", "XUL-Referenz Startseite"],
-  "es": ["/docs/XUL/Elementos", "/docs/XUL/Elementos", "Referencia de XUL"],
-  "fr": ["/docs/Référence_XUL", "/docs/R%C3%A9f%C3%A9rence_XUL", "Accueil de la référence XUL"],
-  "ja": ["/docs/XUL_Reference", "/docs/XUL_Reference", "XUL リファレンス home"],
-  "ko": ["/docs/XUL_Reference", "/docs/XUL_Reference", "XUL Reference home"],
-  "pl": ["/docs/Dokumentacja_XUL", "/docs/Dokumentacja_XUL", "Dokumentacja XUL"]
+    "en-US" : ["XUL_Reference",    "XUL_Reference",           "XUL Reference"],
+    "de":     ["XUL_Referenz",     "XUL_Referenz",            "XUL-Referenz Startseite"],
+    "es":     ["XUL/Elementos",    "XUL/Elementos",           "Referencia de XUL"],
+    "fr":     ["Référence_XUL",    "R%C3%A9f%C3%A9rence_XUL", "Accueil de la référence XUL"],
+    "ja":     ["XUL_Reference",    "XUL_Reference",           "XUL リファレンス"],
+    "ko":     ["XUL_Reference",    "XUL_Reference",           "XUL Reference"],
+    "pl":     ["Dokumentacja_XUL", "Dokumentacja_XUL",        "Dokumentacja XUL"],
+    "ru":     ["XUL/Справочник",   "XUL/Справочник",          "XUL Справочник"]
 });
 
-s = s || ["/docs/XUL_Reference", "/docs/XUL_Reference", "XUL Reference home"]; // This is for default (en-US)
-
-var s_title = env.locale + s[0];
-var s_href = '/' + env.locale + s[1];
+var s_href = '/' + env.locale + "/docs/" + s[1];
 
 
-%><span class="breadcrumbs XULRefProp_breadcrumbs">« <a title="<%= s_title %>" href="<%= s_href %>"><%= s[2] %></a></span>
+%><span class="breadcrumbs XULRefProp_breadcrumbs">« <a title="<%= s[0] %>" href="<%= s_href %>"><%= s[2] %></a></span>
