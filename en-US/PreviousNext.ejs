@@ -1,6 +1,14 @@
-<%
-/* first parameter: path of Previous page */
-/* second parameter: path of Next page */
+<%/*
+
+Parameter
+    $0 (first parameter):  path of Previous page
+    $1 (second parameter): path of Next page
+
+Issue
+    1: Broken output in LTR page
+    2: Problem of Apostrophe (https://developer.mozilla.org/fr/docs/JavaScript_Guide/Op%C3%A9rateurs/Op%C3%A9rateurs_sp%C3%A9ciaux)
+
+*/
 
 var lang = env.locale;
 var strPrevious = "";
@@ -8,15 +16,15 @@ var strNext = "<br>";
 
 var s_PreviousNext = mdn.localString({
   "en-US": ["« Previous", "Next »"],
-  "cs": ["« Předchozí", "Následující »"],
-  "de": ["« zurück", "weiter »"],
-  "es": ["« Anterior", "Siguiente »"],
-  "fr": ["« Précédent", "Suivant »"],
-  "ja": ["« 前のページ", "次のページ »"],
-  "ko": ["« 이전", "다음 »"],
-  "pl": ["« Poprzedni", "Następny »"],
+  "cs":    ["« Předchozí", "Následující »"],
+  "de":    ["« zurück", "weiter »"],
+  "es":    ["« Anterior", "Siguiente »"],
+  "fr":    ["« Précédent", "Suivant »"],
+  "ja":    ["« 前のページ", "次のページ »"],
+  "ko":    ["« 이전", "다음 »"],
+  "pl":    ["« Poprzedni", "Następny »"],
   "pt-PT": ["« Anterior", "Próxima »"],
-  "ru": ["« Предыдущая статья", "Следующая статья »"],
+  "ru":    ["« Предыдущая статья", "Следующая статья »"],
   "zh-CN": ["« 上一页", "下一页 »"],
   "zh-TW": ["« 前頁", "次頁 »"]
 });
