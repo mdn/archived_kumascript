@@ -1,373 +1,66 @@
-<table style="border: 1px solid rgb(204, 204, 204); margin: 0 0 10px 10px; padding: 0 10px; background: rgb(238, 238, 238);">
-<tbody>
-<tr>
-<td><%
+<div style="border: 5px solid #CCC; margin: 1em 0; padding: 10px; background: #F9F9F9; overflow: hidden;">
 
-var STRING_Inherited_Methods = "Inherited Methods";
+<%
 
-
-
-
-
-%>
+var s_Inherited_Methods = mdn.localString({
+    "en-US" : "Inherited Methods",
+    "de" : "Geerbte Methoden",
+    "es" : "Métodos Heredados",
+    "ja" : "継承メソッド"
+});
 
 
 
+%><div><strong><%- s_Inherited_Methods %></strong></div>
 
-<span lang="*" class="lang lang-*">
-<strong>Inherited Methods</strong><br />
-<small><span class="script">DOMMeth("addEventListener")</span>,
-<span class="script">DOMMeth("appendChild")</span>,
-<span class="script">XULMeth("blur")</span>,
-<span class="script">XULMeth("click")</span>,
-<span class="script">DOMMeth("cloneNode")</span>,
-<a title="En/DOM/Node.compareDocumentPosition" href="/En/DOM/Node.compareDocumentPosition">compareDocumentPosition</a>, <span class="script">DOMMeth("dispatchEvent")</span>,
-<span class="script">XULMeth("doCommand")</span>,
-<span class="script">XULMeth("focus")</span>,
-<span class="script">DOMMeth("getAttribute")</span>,
-<span class="script">DOMMeth("getAttributeNode")</span>,
-<span class="script">DOMMeth("getAttributeNodeNS")</span>,
-<span class="script">DOMMeth("getAttributeNS")</span>,
-<span class="script">DOMMeth("getBoundingClientRect")</span>,
-<span class="script">DOMMeth("getClientRects")</span>,
-<span class="script">XULMeth("getElementsByAttribute")</span>,
-<span class="script">XULMeth("getElementsByAttributeNS")</span>,
-<span class="script">DOMMeth("getElementsByClassName")</span>,
-<span class="script">DOMMeth("getElementsByTagName")</span>,
-<span class="script">DOMMeth("getElementsByTagNameNS")</span>,
-<a title="En/DOM/Node.getFeature" href="/En/DOM/Node.getFeature">getFeature</a>, <a title="En/DOM/Node.getUserData" href="/En/DOM/Node.getUserData">getUserData</a>, <span class="script">DOMMeth("hasAttribute")</span>,
-<span class="script">DOMMeth("hasAttributeNS")</span>,
-<span class="script">DOMMeth("hasAttributes")</span>,
-<span class="script">DOMMeth("hasChildNodes")</span>,
-<span class="script">DOMMeth("insertBefore")</span>,
-<span class="script">DOMMeth("isDefaultNamespace")</span>,
-<a title="En/DOM/Node.isEqualNode" href="/En/DOM/Node.isEqualNode">isEqualNode</a>, <a title="En/DOM/Node.isSameNode" href="/En/DOM/Node.isSameNode">isSameNode</a>, <span class="script">DOMMeth("isSupported")</span>,
-<a title="En/DOM/Node.lookupNamespaceURI" href="/En/DOM/Node.lookupNamespaceURI">lookupNamespaceURI</a>, <a title="En/DOM/Node.lookupPrefix" href="/En/DOM/Node.lookupPrefix">lookupPrefix</a>, <span class="script">DOMMeth("normalize")</span>,
-<span class="script">DOMMeth("querySelector")</span>,
-<span class="script">DOMMeth("querySelectorAll")</span>,
-<span class="script">DOMMeth("removeAttribute")</span>,
-<span class="script">DOMMeth("removeAttributeNode")</span>,
-<span class="script">DOMMeth("removeAttributeNS")</span>,
-<span class="script">DOMMeth("removeChild")</span>,
-<span class="script">DOMMeth("removeEventListener")</span>,
-<span class="script">DOMMeth("replaceChild")</span>,
-<span class="script">DOMMeth("setAttribute")</span>,
-<span class="script">DOMMeth("setAttributeNode")</span>,
-<span class="script">DOMMeth("setAttributeNodeNS")</span>,
-<span class="script">DOMMeth("setAttributeNS")</span>,
-<a title="En/DOM/Node.setUserData" href="/En/DOM/Node.setUserData">setUserData</a></small>
-</span>
+<div style="font-size:small">
+<%- template("DOMXREF",        ["EventTarget.addEventListener", "addEventListener()"]) %>,
+<%- template("DOMXREF",        ["Node.appendChild", "appendChild()"]) %>,
+<%- template("xulmeth", ["blur"]) %>,
+<%- template("xulmeth", ["click"]) %>,
+<%- template("DOMXREF",        ["Node.cloneNode", "cloneNode()"]) %>,
+<%- template("DOMXREF",        ["Node.compareDocumentPosition", "compareDocumentPosition"]) %>,
+<%- template("dommeth", ["dispatchEvent"]) %>,
+<%- template("xulmeth", ["doCommand"]) %>,
+<%- template("xulmeth", ["focus"]) %>,
+<%- template("DOMXREF",        ["element.getAttribute", "getAttribute()"]) %>,
+<%- template("DOMXREF",        ["element.getAttributeNode", "getAttributeNode()"]) %>,
+<%- template("DOMXREF",        ["element.getAttributeNodeNS", "getAttributeNodeNS()"]) %>,
+<%- template("DOMXREF",        ["element.getAttributeNS", "getAttributeNS()"]) %>,
+<%- template("DOMXREF",        ["element.getBoundingClientRect", "getBoundingClientRect()"]) %>,
+<%- template("DOMXREF",        ["element.getClientRects", "getClientRects()"]) %>,
+<%- template("xulmeth", ["getElementsByAttribute"]) %>,
+<%- template("xulmeth", ["getElementsByAttributeNS"]) %>,
+<%- template("DOMXREF",        ["Element.getElementsByClassName", "getElementsByClassName()"]) %>,
+<%- template("DOMXREF",        ["Element.getElementsByTagName", "getElementsByTagName()"]) %>,
+<%- template("DOMXREF",        ["Element.getElementsByTagNameNS", "getElementsByTagNameNS()"]) %>,
+<%- template("DOMXREF",        ["Node.getFeature", "getFeature"]) %>,
+<%- template("DOMXREF",        ["Node.getUserData", "getUserData"]) %>,
+<%- template("DOMXREF",        ["element.hasAttribute", "hasAttribute()"]) %>,
+<%- template("dommeth", ["hasAttributeNS"]) %>,
+<%- template("dommeth", ["hasAttributes"]) %>,
+<%- template("dommeth", ["hasChildNodes"]) %>,
+<%- template("dommeth", ["insertBefore"]) %>,
+<%- template("domxref",        ["Node.isDefaultNamespace", "isDefaultNamespace()"]) %>,
+<%- template("DOMXREF",        ["Node.isEqualNode", "isEqualNode"]) %>
+<%- template("DOMXREF",        ["Node.isSameNode", "isSameNode"]) %>
+<%- template("dommeth", ["isSupported"]) %>,
+<%- template("DOMXREF",        ["Node.lookupNamespaceURI", "lookupNamespaceURI"]) %>,
+<%- template("DOMXREF",        ["Node.lookupPrefix", "lookupPrefix"]) %>,
+<%- template("dommeth", ["normalize"]) %>,
+<%- template("dommeth", ["querySelector"]) %>,
+<%- template("dommeth", ["querySelectorAll"]) %>,
+<%- template("dommeth", ["removeAttribute"]) %>,
+<%- template("dommeth", ["removeAttributeNode"]) %>,
+<%- template("dommeth", ["removeAttributeNS"]) %>,
+<%- template("dommeth", ["removeChild"]) %>,
+<%- template("dommeth", ["removeEventListener"]) %>,
+<%- template("dommeth", ["replaceChild"]) %>,
+<%- template("dommeth", ["setAttribute"]) %>,
+<%- template("dommeth", ["setAttributeNode"]) %>,
+<%- template("dommeth", ["setAttributeNodeNS"]) %>,
+<%- template("dommeth", ["setAttributeNS"]) %>,
+<%- template("DOMXREF",        ["Node.setUserData", "setUserData"]) %></a>
+</div>
 
-
-
-
-
-
-<span lang="es" class="lang lang-es">
-<strong>Métodos Heredados</strong><br />
-<small><span class="script">DOMMeth("addEventListener")</span>,
-<span class="script">DOMMeth("appendChild")</span>,
-<span class="script">XULMeth("blur")</span>,
-<span class="script">XULMeth("click")</span>,
-<span class="script">DOMMeth("cloneNode")</span>,
-<a title="es/DOM/Node.compareDocumentPosition" href="/es/DOM/Node.compareDocumentPosition">compareDocumentPosition</a>, <span class="script">DOMMeth("dispatchEvent")</span>,
-<span class="script">XULMeth("doCommand")</span>,
-<span class="script">XULMeth("focus")</span>,
-<span class="script">DOMMeth("getAttribute")</span>,
-<span class="script">DOMMeth("getAttributeNode")</span>,
-<span class="script">DOMMeth("getAttributeNodeNS")</span>,
-<span class="script">DOMMeth("getAttributeNS")</span>,
-<span class="script">DOMMeth("getBoundingClientRect")</span>,
-<span class="script">DOMMeth("getClientRects")</span>,
-<span class="script">XULMeth("getElementsByAttribute")</span>,
-<span class="script">XULMeth("getElementsByAttributeNS")</span>,
-<span class="script">DOMMeth("getElementsByClassName")</span>,
-<span class="script">DOMMeth("getElementsByTagName")</span>,
-<span class="script">DOMMeth("getElementsByTagNameNS")</span>,
-<a title="es/DOM/Node.getFeature" href="/es/DOM/Node.getFeature">getFeature</a>, <a title="es/DOM/Node.getUserData" href="/es/DOM/Node.getUserData">getUserData</a>, <span class="script">DOMMeth("hasAttribute")</span>,
-<span class="script">DOMMeth("hasAttributeNS")</span>,
-<span class="script">DOMMeth("hasAttributes")</span>,
-<span class="script">DOMMeth("hasChildNodes")</span>,
-<span class="script">DOMMeth("insertBefore")</span>,
-<span class="script">DOMMeth("isDefaultNamespace")</span>,
-<a title="es/DOM/Node.isEqualNode" href="/es/DOM/Node.isEqualNode">isEqualNode</a>, <a title="es/DOM/Node.isSameNode" href="/es/DOM/Node.isSameNode">isSameNode</a>, <span class="script">DOMMeth("isSupported")</span>,
-<a title="es/DOM/Node.lookupNamespaceURI" href="/es/DOM/Node.lookupNamespaceURI">lookupNamespaceURI</a>, <a title="es/DOM/Node.lookupPrefix" href="/es/DOM/Node.lookupPrefix">lookupPrefix</a>, <span class="script">DOMMeth("normalize")</span>,
-<span class="script">DOMMeth("querySelector")</span>,
-<span class="script">DOMMeth("querySelectorAll")</span>,
-<span class="script">DOMMeth("removeAttribute")</span>,
-<span class="script">DOMMeth("removeAttributeNode")</span>,
-<span class="script">DOMMeth("removeAttributeNS")</span>,
-<span class="script">DOMMeth("removeChild")</span>,
-<span class="script">DOMMeth("removeEventListener")</span>,
-<span class="script">DOMMeth("replaceChild")</span>,
-<span class="script">DOMMeth("setAttribute")</span>,
-<span class="script">DOMMeth("setAttributeNode")</span>,
-<span class="script">DOMMeth("setAttributeNodeNS")</span>,
-<span class="script">DOMMeth("setAttributeNS")</span>,
-<a title="es/DOM/Node.setUserData" href="/es/DOM/Node.setUserData">setUserData</a></small>
-</span>
-
-
-
-
-
-
-
-
-<span lang="de" class="lang lang-de">
-<strong>Geerbte Methoden</strong><br />
-<small><span class="script">DOMMeth("element.addEventListener")</span>,
-<span class="script">DOMMeth("node.appendChild")</span>,
-<span class="script">XULMeth("blur")</span>,
-<span class="script">XULMeth("click")</span>,
-<span class="script">DOMMeth("node.cloneNode")</span>,
-<span class="script">DOMMeth("node.compareDocumentPosition")</span>,
-<span class="script">DOMMeth("element.dispatchEvent")</span>,
-<span class="script">XULMeth("doCommand")</span>,
-<span class="script">XULMeth("focus")</span>,
-<span class="script">DOMMeth("element.getAttribute")</span>,
-<span class="script">DOMMeth("element.getAttributeNode")</span>,
-<span class="script">DOMMeth("element.getAttributeNodeNS")</span>,
-<span class="script">DOMMeth("element.getAttributeNS")</span>,
-<span class="script">DOMMeth("element.getBoundingClientRect")</span>,
-<span class="script">DOMMeth("element.getClientRects")</span>,
-<span class="script">XULMeth("getElementsByAttribute")</span>,
-<span class="script">XULMeth("getElementsByAttributeNS")</span>,
-<span class="script">DOMMeth("element.getElementsByClassName")</span>,
-<span class="script">DOMMeth("element.getElementsByTagName")</span>,
-<span class="script">DOMMeth("element.getElementsByTagNameNS")</span>,
-<span class="script">DOMMeth("node.getFeature")</span>,
-<span class="script">DOMMeth("node.getUserData")</span>,
-<span class="script">DOMMeth("element.hasAttribute")</span>,
-<span class="script">DOMMeth("element.hasAttributeNS")</span>,
-<span class="script">DOMMeth("nodes.hasAttributes")</span>,
-<span class="script">DOMMeth("nodes.hasChildNodes")</span>,
-<span class="script">DOMMeth("node.insertBefore")</span>,
-<span class="script">DOMMeth("node.isDefaultNamespace")</span>,
-<span class="script">DOMMeth("node.isEqualNode")</span>,
-<span class="script">DOMMeth("node.isSameNode")</span>,
-<span class="script">DOMMeth("node.isSupported")</span>,
-<span class="script">DOMMeth("node.lookupNamespaceURI")</span>,
-<span class="script">DOMMeth("node.lookupPrefix")</span>,
-<span class="script">DOMMeth("node.normalize")</span>,
-<span class="script">DOMMeth("element.querySelector")</span>,
-<span class="script">DOMMeth("element.querySelectorAll")</span>,
-<span class="script">DOMMeth("element.removeAttribute")</span>,
-<span class="script">DOMMeth("element.removeAttributeNode")</span>,
-<span class="script">DOMMeth("element.removeAttributeNS")</span>,
-<span class="script">DOMMeth("node.removeChild")</span>,
-<span class="script">DOMMeth("element.removeEventListener")</span>,
-<span class="script">DOMMeth("node.replaceChild")</span>,
-<span class="script">DOMMeth("element.setAttribute")</span>,
-<span class="script">DOMMeth("element.setAttributeNode")</span>,
-<span class="script">DOMMeth("element.setAttributeNodeNS")</span>,
-<span class="script">DOMMeth("element.setAttributeNS")</span>,
-<span class="script">DOMMeth("node.setUserData")</span></small>
-</span>
-
-
-
-
-
-<span lang="fr" class="lang lang-fr">
-<strong>Héritées de XUL element</strong><br />
-<small> <span class="script">XULMeth("blur")</span>,
-<span class="script">XULMeth("click")</span>,
-<span class="script">XULMeth("doCommand")</span>,
-<span class="script">XULMeth("focus")</span>,
-<span class="script">XULMeth("getElementsByAttribute")</span></small><br />
-<strong>Héritées de DOM element</strong><br />
-<small> <span class="script">DOMMeth("addEventListener")</span>,
-<span class="script">DOMMeth("appendChild")</span>,
-<span class="script">DOMMeth("dispatchEvent")</span>,
-<span class="script">DOMMeth("getAttribute")</span>,
-<span class="script">DOMMeth("getAttributeNode")</span>,
-<span class="script">DOMMeth("getAttributeNodeNS")</span>,
-<span class="script">DOMMeth("getAttributeNS")</span>,
-<span class="script">DOMMeth("getElementsByTagName")</span>,
-<span class="script">DOMMeth("getElementsByTagNameNS")</span>,
-<span class="script">DOMMeth("hasAttribute")</span>,
-<span class="script">DOMMeth("hasAttributeNS")</span>,
-<span class="script">DOMMeth("hasAttributes")</span>,
-<span class="script">DOMMeth("hasChildNodes")</span>,
-<span class="script">DOMMeth("insertBefore")</span>,
-<span class="script">DOMMeth("isSupported")</span>,
-<span class="script">DOMMeth("normalize")</span>,
-<span class="script">DOMMeth("removeAttribute")</span>,
-<span class="script">DOMMeth("removeAttributeNode")</span>,
-<span class="script">DOMMeth("removeAttributeNS")</span>,
-<span class="script">DOMMeth("removeChild")</span>,
-<span class="script">DOMMeth("removeEventListener")</span>,
-<span class="script">DOMMeth("replaceChild")</span>,
-<span class="script">DOMMeth("setAttribute")</span>,
-<span class="script">DOMMeth("setAttributeNode")</span>,
-<span class="script">DOMMeth("setAttributeNodeNS")</span>,
-<span class="script">DOMMeth("setAttributeNS")</span></small>
-</span>
-
-
-
-<span lang="ja" class="lang lang-ja">
-<strong>XUL 要素からの継承</strong><br />
-<small> <span class="script">XULMeth("blur")</span>,
-<span class="script">XULMeth("click")</span>,
-<span class="script">XULMeth("doCommand")</span>,
-<span class="script">XULMeth("focus")</span>,
-<span class="script">XULMeth("getElementsByAttribute")</span>,
-<span class="script">XULMeth("getElementsByAttributeNS")</span></small><br />
-
-<strong>DOM 要素からの継承</strong><br />
-<small> <span class="script">DOMMeth("addEventListener")</span>,
-<span class="script">DOMMeth("appendChild")</span>,
-<a title="ja/DOM/Node.compareDocumentPosition" href="/ja/DOM/Node.compareDocumentPosition">compareDocumentPosition</a>, <span class="script">DOMMeth("dispatchEvent")</span>,
-<span class="script">DOMMeth("getAttribute")</span>,
-<span class="script">DOMMeth("getAttributeNode")</span>,
-<span class="script">DOMMeth("getAttributeNodeNS")</span>,
-<span class="script">DOMMeth("getAttributeNS")</span>,
-<span class="script">DOMMeth("getElementsByTagName")</span>,
-<span class="script">DOMMeth("getElementsByTagNameNS")</span>,
-<a title="ja/DOM/Node.getFeature" href="/ja/DOM/Node.getFeature">getFeature</a>, <a title="ja/DOM/Node.getUserData" href="/ja/DOM/Node.getUserData">getUserData</a>, <span class="script">DOMMeth("hasAttribute")</span>,
-<span class="script">DOMMeth("hasAttributeNS")</span>,
-<span class="script">DOMMeth("hasAttributes")</span>,
-<span class="script">DOMMeth("hasChildNodes")</span>,
-<span class="script">DOMMeth("insertBefore")</span>,
-<a title="ja/DOM/Node.isEqualNode" href="/ja/DOM/Node.isEqualNode">isEqualNode</a>, <a title="ja/DOM/Node.isSameNode" href="/ja/DOM/Node.isSameNode">isSameNode</a>, <span class="script">DOMMeth("isSupported")</span>,
-<a title="ja/DOM/Node.lookupNamespaceURI" href="/ja/DOM/Node.lookupNamespaceURI">lookupNamespaceURI</a>, <a title="ja/DOM/Node.lookupPrefix" href="/ja/DOM/Node.lookupPrefix">lookupPrefix</a>, <span class="script">DOMMeth("normalize")</span>,
-<span class="script">DOMMeth("removeAttribute")</span>,
-<span class="script">DOMMeth("removeAttributeNode")</span>,
-<span class="script">DOMMeth("removeAttributeNS")</span>,
-<span class="script">DOMMeth("removeChild")</span>,
-<span class="script">DOMMeth("removeEventListener")</span>,
-<span class="script">DOMMeth("replaceChild")</span>,
-<span class="script">DOMMeth("setAttribute")</span>,
-<span class="script">DOMMeth("setAttributeNode")</span>,
-<span class="script">DOMMeth("setAttributeNodeNS")</span>,
-<span class="script">DOMMeth("setAttributeNS")</span>,
-<a title="ja/DOM/Node.setUserData" href="/ja/DOM/Node.setUserData">setUserData</a></small>
-</span>
-
-
-
-<span lang="ko" class="lang lang-ko">
-<strong>XUL 요소에서 상속됨</strong><br />
-<small> <span class="script">XULMeth("blur")</span>,
-<span class="script">XULMeth("click")</span>,
-<span class="script">XULMeth("doCommand")</span>,
-<span class="script">XULMeth("focus")</span>,
-<span class="script">XULMeth("getElementsByAttribute")</span></small><br />
-
-<strong>DOM 요소에서 상속됨</strong><br />
-<small> <span class="script">DOMMeth("addEventListener")</span>,
-<span class="script">DOMMeth("appendChild")</span>,
-<span class="script">DOMMeth("dispatchEvent")</span>,
-<span class="script">DOMMeth("getAttribute")</span>,
-<span class="script">DOMMeth("getAttributeNode")</span>,
-<span class="script">DOMMeth("getAttributeNodeNS")</span>,
-<span class="script">DOMMeth("getAttributeNS")</span>,
-<span class="script">DOMMeth("getElementsByTagName")</span>,
-<span class="script">DOMMeth("getElementsByTagNameNS")</span>,
-<span class="script">DOMMeth("hasAttribute")</span>,
-<span class="script">DOMMeth("hasAttributeNS")</span>,
-<span class="script">DOMMeth("hasAttributes")</span>,
-<span class="script">DOMMeth("hasChildNodes")</span>,
-<span class="script">DOMMeth("insertBefore")</span>,
-<span class="script">DOMMeth("isSupported")</span>,
-<span class="script">DOMMeth("normalize")</span>,
-<span class="script">DOMMeth("removeAttribute")</span>,
-<span class="script">DOMMeth("removeAttributeNode")</span>,
-<span class="script">DOMMeth("removeAttributeNS")</span>,
-<span class="script">DOMMeth("removeChild")</span>,
-<span class="script">DOMMeth("removeEventListener")</span>,
-<span class="script">DOMMeth("replaceChild")</span>,
-<span class="script">DOMMeth("setAttribute")</span>,
-<span class="script">DOMMeth("setAttributeNode")</span>,
-<span class="script">DOMMeth("setAttributeNodeNS")</span>,
-<span class="script">DOMMeth("setAttributeNS")</span></small>
-</span>
-
-
-<span lang="pl" class="lang lang-pl">
-<strong>Dziedziczy z elementu XUL</strong><br />
-<small> <span class="script">XULMeth("blur")</span>,
-<span class="script">XULMeth("click")</span>,
-<span class="script">XULMeth("doCommand")</span>,
-<span class="script">XULMeth("focus")</span>,
-<span class="script">XULMeth("getElementsByAttribute")</span></small><br />
-
-<strong>Dziedziczy z elementu DOM</strong><br />
-<small> <span class="script">DOMMeth("addEventListener")</span>,
-<span class="script">DOMMeth("appendChild")</span>,
-<span class="script">DOMMeth("dispatchEvent")</span>,
-<span class="script">DOMMeth("getAttribute")</span>,
-<span class="script">DOMMeth("getAttributeNode")</span>,
-<span class="script">DOMMeth("getAttributeNodeNS")</span>,
-<span class="script">DOMMeth("getAttributeNS")</span>,
-<span class="script">DOMMeth("getElementsByTagName")</span>,
-<span class="script">DOMMeth("getElementsByTagNameNS")</span>,
-<span class="script">DOMMeth("hasAttribute")</span>,
-<span class="script">DOMMeth("hasAttributeNS")</span>,
-<span class="script">DOMMeth("hasAttributes")</span>,
-<span class="script">DOMMeth("hasChildNodes")</span>,
-<span class="script">DOMMeth("insertBefore")</span>,
-<span class="script">DOMMeth("isSupported")</span>,
-<span class="script">DOMMeth("normalize")</span>,
-<span class="script">DOMMeth("removeAttribute")</span>,
-<span class="script">DOMMeth("removeAttributeNode")</span>,
-<span class="script">DOMMeth("removeAttributeNS")</span>,
-<span class="script">DOMMeth("removeChild")</span>,
-<span class="script">DOMMeth("removeEventListener")</span>,
-<span class="script">DOMMeth("replaceChild")</span>,
-<span class="script">DOMMeth("setAttribute")</span>,
-<span class="script">DOMMeth("setAttributeNode")</span>,
-<span class="script">DOMMeth("setAttributeNodeNS")</span>,
-<span class="script">DOMMeth("setAttributeNS")</span></small>
-</span>
-
-
-<span lang="zh-cn" class="lang lang-zh-cn">
-<strong>Inherited from XUL element</strong><br />
-<small> <span class="script">XULMeth("blur")</span>,
-<span class="script">XULMeth("click")</span>,
-<span class="script">XULMeth("doCommand")</span>,
-<span class="script">XULMeth("focus")</span>,
-<span class="script">XULMeth("getElementsByAttribute")</span></small><br />
-
-<strong>Inherited from DOM element</strong><br />
-<small> <span class="script">DOMMeth("addEventListener")</span>,
-<span class="script">DOMMeth("appendChild")</span>,
-<span class="script">DOMMeth("dispatchEvent")</span>,
-<span class="script">DOMMeth("getAttribute")</span>,
-<span class="script">DOMMeth("getAttributeNode")</span>,
-<span class="script">DOMMeth("getAttributeNodeNS")</span>,
-<span class="script">DOMMeth("getAttributeNS")</span>,
-<span class="script">DOMMeth("getElementsByTagName")</span>,
-<span class="script">DOMMeth("getElementsByTagNameNS")</span>,
-<span class="script">DOMMeth("hasAttribute")</span>,
-<span class="script">DOMMeth("hasAttributeNS")</span>,
-<span class="script">DOMMeth("hasAttributes")</span>,
-<span class="script">DOMMeth("hasChildNodes")</span>,
-<span class="script">DOMMeth("insertBefore")</span>,
-<span class="script">DOMMeth("isSupported")</span>,
-<span class="script">DOMMeth("normalize")</span>,
-<span class="script">DOMMeth("removeAttribute")</span>,
-<span class="script">DOMMeth("removeAttributeNode")</span>,
-<span class="script">DOMMeth("removeAttributeNS")</span>,
-<span class="script">DOMMeth("removeChild")</span>,
-<span class="script">DOMMeth("removeEventListener")</span>,
-<span class="script">DOMMeth("replaceChild")</span>,
-<span class="script">DOMMeth("setAttribute")</span>,
-<span class="script">DOMMeth("setAttributeNode")</span>,
-<span class="script">DOMMeth("setAttributeNodeNS")</span>,
-<span class="script">DOMMeth("setAttributeNS")</span></small>
-</span>
-
-
-
-
-
-
-
-</td>
-</tr>
-</tbody>
-</table>
+</div>
