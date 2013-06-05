@@ -184,7 +184,7 @@ for (var i = 0; i < numLetters; i++) {
                     html += "<span>" + curLetter + "</span><ul>";
                     insertedHeading = true;
                 }
-                html += '<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + locale + '</span>' + badge + '</span></li>';
+                html += '<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + escapeQuotes(fullPage.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + locale + '</span>' + badge + '</span></li>';
                 termIndex++;
             } else {
                 break;
