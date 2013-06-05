@@ -14,8 +14,8 @@
 // are included in this list if they don't exist in the current locale.
 
 var insertBefore = $1 || "";
-var insertAfter =  $2 || "";
-var skipMembers =  $0 || 0;
+var insertAfter = $2 || "";
+var skipMembers = $0 || 0;
 var backupLocale = $3 || null;
 
 function pageSorter(a, b) {
@@ -25,15 +25,21 @@ function pageSorter(a, b) {
 }
 
 function allowTerm(a) {
-    for (var i = 0, len = a.length; i < len; i++) {
-        if (a[i] == '.') return 0;
+    var len = a.length;
+    
+    for (var i = 0; i < len; i++) {
+        if (a[i] == '.') {
+            return 0;
+        }
     }
     return 1;
 }
 
 function escapeQuotes(a) {
     var b = "";
-    for (var i = 0, len = a.length; i < len; i++) {
+    var len = a.length;
+    
+    for (var i = 0; i < len; i++) {
         var c = a[i];
         if (c=="\"") {
             c = "&quot;";
@@ -46,10 +52,10 @@ function escapeQuotes(a) {
 }
 
 function containsTag(tagList, tag) {
-    if (!tagList || tagList == undefined) return 0;
-
+    if (!tagList || tagList == undefined) {
+        return 0;
+    }
     tag = tag.toLowerCase();
-
     for (var i = 0, len = tagList.length; i < len; i++) {
         if (tagList[i].toLowerCase() == tag) {
             return 1;
@@ -62,9 +68,10 @@ function containsTag(tagList, tag) {
 // to the page with that title. Returns -1
 // if not found.
 function indexOfTitle(title, list) {
+    var length = list.length;
     title = title.toLowerCase();
     
-    for (var i = 0, len = list.length; i < len; i++) {
+    for (var i = 0; i < length; i++) {
         if (list[i].title.toLowerCase() == title) {
             return i;
         }
@@ -94,14 +101,15 @@ if (otherList) {
     for (var i = 0, len = termList.length; i < len; i++) {
         var idx = indexOfTitle(termList[i].title, otherList);
         
-        // If it's in the local language, copy it in to replace the backup language's version
-
+        // If it's in the local language, copy it in to replace
+        // the backup language's version
+        
         if (idx >= 0) {
             otherList[idx] = termList[i];
             otherList[idx].isLocalized = true;      // note that it's the localized version
         }
     }
-
+    
     // Finally, we need to use otherList as termList
     termList = otherList;
 }
