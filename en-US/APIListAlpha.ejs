@@ -27,7 +27,7 @@ function pageSorter(a, b) {
 function allowTerm(a) {
     var len = a.length;
     
-    for (var i = 0; i < len; i++) {
+    for (var i=0; i<len; i++) {
         if (a[i] == '.') {
             return 0;
         }
@@ -39,10 +39,10 @@ function escapeQuotes(a) {
     var b = "";
     var len = a.length;
     
-    for (var i = 0; i < len; i++) {
+    for (var i=0; i<len; i++) {
         var c = a[i];
         if (c=="\"") {
-            c = "&quot;";
+            c="&quot;";
         }
         b += c;
     }
@@ -56,7 +56,7 @@ function containsTag(tagList, tag) {
         return 0;
     }
     tag = tag.toLowerCase();
-    for (var i = 0, len = tagList.length; i < len; i++) {
+    for (var i=0; i<tagList.length; i++) {
         if (tagList[i].toLowerCase() == tag) {
             return 1;
         }
@@ -71,7 +71,7 @@ function indexOfTitle(title, list) {
     var length = list.length;
     title = title.toLowerCase();
     
-    for (var i = 0; i < length; i++) {
+    for (var i=0; i<length; i++) {
         if (list[i].title.toLowerCase() == title) {
             return i;
         }
@@ -98,7 +98,7 @@ if (backupLocale) {
 // with those from termList.
 
 if (otherList) {
-    for (var i = 0, len = termList.length; i < len; i++) {
+    for (i=0; i<termList.length; i++) {
         var idx = indexOfTitle(termList[i].title, otherList);
         
         // If it's in the local language, copy it in to replace
@@ -111,6 +111,7 @@ if (otherList) {
     }
     
     // Finally, we need to use otherList as termList
+    
     termList = otherList;
 }
 
@@ -195,5 +196,5 @@ for (var i = 0; i < numLetters; i++) {
 
 
 %><div class="index">
-<%- html %>
+<%-html%>
 </div>
