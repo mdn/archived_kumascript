@@ -16,6 +16,8 @@ if ($1 && $1.length) {
     base = env.url;
 }
 
+%><p>Base: <%-base%></p><%
+
 base = base.replace('developer.mozilla.org', 'mdn.mozillademos.org');
 // HACK: This may be the result of server misconfiguration. 
 base = base.replace('http://', 'https://'); 
