@@ -14,52 +14,35 @@
 // are included in this list if they don't exist in the current locale.
 
 var insertBefore = $1 || "";
-var insertAfter = $2 || "";
-var skipMembers = $0 || 0;
+var insertAfter =  $2 || "";
+var skipMembers =  $0 || 0;
 var backupLocale = $3 || null;
+var testFlg =      $4;
 
 function pageSorter(a, b) {
-    var al = a.title.toLowerCase();
-    var bl = b.title.toLowerCase();
-    return al.localeCompare(bl);
+    return a.title.toLowerCase().localeCompare( b.title.toLowerCase() );
 }
 
 function allowTerm(a) {
-    var len = a.length;
-    
-    for (var i=0; i<len; i++) {
-        if (a[i] == '.') {
-            return 0;
-        }
-    }
+    for (var i = 0, len = a.length; i < len; ++i) { if (a[i] === '.') return 0; }
     return 1;
 }
 
 function escapeQuotes(a) {
     var b = "";
-    var len = a.length;
-    
-    for (var i=0; i<len; i++) {
+    for (var i = 0, len = a.length; i < len; i++) {
         var c = a[i];
-        if (c=="\"") {
-            c="&quot;";
-        }
+        if (c=="\"") c = "&quot;";
         b += c;
     }
-    var regex = /(<([^>]+)>)/ig;
-    b = b.replace(regex, "");
-    return b;
+    return b.replace(/(<([^>]+)>)/ig, "");
 }
 
 function containsTag(tagList, tag) {
-    if (!tagList || tagList == undefined) {
-        return 0;
-    }
+    if (!tagList || tagList == undefined) return 0;
     tag = tag.toLowerCase();
-    for (var i=0; i<tagList.length; i++) {
-        if (tagList[i].toLowerCase() == tag) {
-            return 1;
-        }
+    for (var i = 0, len = tagList.length; i < len; i++) {
+        if (tagList[i].toLowerCase() == tag) return 1;
     }
     return 0;
 }
@@ -71,10 +54,8 @@ function indexOfTitle(title, list) {
     var length = list.length;
     title = title.toLowerCase();
     
-    for (var i=0; i<length; i++) {
-        if (list[i].title.toLowerCase() == title) {
-            return i;
-        }
+    for (var i = 0; i < length; i++) {
+        if (list[i].title.toLowerCase() == title) return i;
     }
     return -1;  // not found
 }
@@ -88,7 +69,6 @@ var html = "";
 var extra = "";
 
 // Get the other list if we need it
-
 if (backupLocale) {
     otherSlug = "/" + backupLocale + "/docs/" + env.slug;
     otherList = page.subpages(otherSlug);
@@ -96,14 +76,12 @@ if (backupLocale) {
 
 // If we have otherList, replace duplicate entries
 // with those from termList.
-
 if (otherList) {
-    for (i=0; i<termList.length; i++) {
+    for (var i = 0, len = termList.length; i < len; i++) {
         var idx = indexOfTitle(termList[i].title, otherList);
         
         // If it's in the local language, copy it in to replace
         // the backup language's version
-        
         if (idx >= 0) {
             otherList[idx] = termList[i];
             otherList[idx].isLocalized = true;      // note that it's the localized version
@@ -111,7 +89,6 @@ if (otherList) {
     }
     
     // Finally, we need to use otherList as termList
-    
     termList = otherList;
 }
 
@@ -159,9 +136,7 @@ for (var i = 0; i < numLetters; i++) {
             
             // Build any badge text that may be needed */
             
-            if (containsTag(tags, "Non-standard")) {
-                badge = " " + template("NonStandardBadge", ["1"]);
-            }
+            if (containsTag(tags, "Non-standard")) badge = " " + template("NonStandardBadge", ["1"]);
             
             if (containsTag(tags, "Obsolete")) {
                 badge += " " + template("ObsoleteBadge", [1]);
@@ -169,15 +144,11 @@ for (var i = 0; i < numLetters; i++) {
                 badge += " " + template("DeprecatedBadge", [1]);
             }
             
-            if (containsTag(tags, "Experimental")) {
-                badge += " " + template("ExperimentalBadge", ["1"]);
-            }
+            if (containsTag(tags, "Experimental")) badge += " " + template("ExperimentalBadge", ["1"]);
             
             /* Wrap the badges in another span */
             
-            if (badge.length) {
-                badge = '<span class="indexListBadges">' + badge + "</span>"
-            }
+            if (badge.length) badge = '<span class="indexListBadges">' + badge + "</span>";
                     
             if (title[0].toUpperCase() == curLetter) {
                 if (!insertedHeading) {
@@ -194,6 +165,10 @@ for (var i = 0; i < numLetters; i++) {
     html += "</ul>";
 }
 
+var el = env.locale;
+if(testFlg) {
+    html = html.replace(/\(en-US\)/gmi, "").replace(/en-US/gmi, el);
+}
 
 %><div class="index">
 <%-html%>
