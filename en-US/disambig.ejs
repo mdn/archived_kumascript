@@ -16,5 +16,6 @@ if (!string.compare(lang, "fr", true)) {
 } else if (!string.compare(lang, "pt-PT", true)) {
   str = "Esta é uma página de " + web.link(wiki.uri(lang + '/docs/Project:Desambigua%c3%a7%c3%a3o'), 'desambiguação') + " — uma ajuda navegacional que lista as páginas que puderam de alguma maneira compartilhar o mesmo título. Se um <b>link de artigo</b> trouxe você aqui, você pode querer voltar e repará-lo para apontar para a página desejada.";
 }
-%>
-<div class="disambig" id="disambig"><i><%- str %></i></div>
+
+
+%><div class="disambig" id="disambig"><p><i><%- str %></i></p></div>
