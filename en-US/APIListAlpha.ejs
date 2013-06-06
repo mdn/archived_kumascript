@@ -76,23 +76,28 @@ if (backupLocale) {
 
 // If we have otherList, replace duplicate entries
 // with those from termList.
-if (otherList) {
-    for (var i = 0, len = termList.length; i < len; i++) {
-        var idx = indexOfTitle(termList[i].title, otherList);
-        
-        // If it's in the local language, copy it in to replace
-        // the backup language's version
-        if (idx >= 0) {
-            otherList[idx] = termList[i];
-            otherList[idx].isLocalized = true;      // note that it's the localized version
+if (termList && termList.length) {
+    if (otherList) {
+        for (var i = 0, len = termList.length; i < len; i++) {
+            var idx = indexOfTitle(termList[i].title, otherList);
+            
+            // If it's in the local language, copy it in to replace
+            // the backup language's version
+            if (idx >= 0) {
+                otherList[idx] = termList[i];
+                otherList[idx].isLocalized = true;      // note that it's the localized version
+            }
         }
     }
-    
-    // Finally, we need to use otherList as termList
-    termList = otherList;
 }
+        
+// Finally, we need to use otherList as termList. If we've merged
+// the translated and backup page lists, this gives us the merged list.
+// If there are no translated pages, this gives us the backup list.
 
-termList.sort(pageSorter);
+termList = otherList;
+        
+//termList.sort(pageSorter);
 
 switch(lang) {
     default:    // en-US
