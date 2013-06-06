@@ -71,7 +71,7 @@ var extra = "";
 // Get the other list if we need it
 if (backupLocale) {
     otherSlug = "/" + backupLocale + "/docs/" + env.slug;
-    otherList = page.subpages(otherSlug);
+    otherList = page.subpagesExpand(otherSlug);
 }
 
 // If we have otherList, replace duplicate entries
@@ -88,16 +88,16 @@ if (termList && termList.length) {
                 otherList[idx].isLocalized = true;      // note that it's the localized version
             }
         }
+        
+        // Finally, we need to use otherList as termList. If we've merged
+        // the translated and backup page lists, this gives us the merged list.
+        // If there are no translated pages, this gives us the backup list.
+        
+        termList = otherList;
     }
 }
-        
-// Finally, we need to use otherList as termList. If we've merged
-// the translated and backup page lists, this gives us the merged list.
-// If there are no translated pages, this gives us the backup list.
-
-termList = otherList;
-        
-//termList.sort(pageSorter);
+                
+termList.sort(pageSorter);
 
 switch(lang) {
     default:    // en-US
@@ -122,6 +122,13 @@ for (var i = 0; i < numLetters; i++) {
             var tags = term.tags;
             var locale = "";                // Will be set if the page is in the backup locale
             
+            // If the page has no tags, skip it
+            
+            if (!tags || !tags.length) {
+                termIndex++;
+                continue;
+            }
+            
             // Leave out functions and properties if desired
             
             if (skipMembers && !allowTerm(title)) {
@@ -138,7 +145,7 @@ for (var i = 0; i < numLetters; i++) {
             var url = term.url;
             var badge = "";
             
-            // Build any badge text that may be needed */
+            // Build any badge text that may be needed
             
             if (containsTag(tags, "Non-standard")) badge = " " + template("NonStandardBadge", ["1"]);
             
@@ -150,7 +157,7 @@ for (var i = 0; i < numLetters; i++) {
             
             if (containsTag(tags, "Experimental")) badge += " " + template("ExperimentalBadge", ["1"]);
             
-            /* Wrap the badges in another span */
+            // Wrap the badges in another span
             
             if (badge.length) badge = '<span class="indexListBadges">' + badge + "</span>";
                     
