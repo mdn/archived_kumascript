@@ -1,17 +1,21 @@
 <%
 
 var fxVer = '';
-var geckoVer = $0; 
+var geckoVer = $0;
+
+var loca = mdn.localString({
+    'en-US' : '1.7 or earlier',
+    'fr'    : '1.7 ou moins'
+});
+
 switch(geckoVer)
 {
   case '1':
   case '1.0':
-    fxVer = '1.0';
-    geckoVer = '1.7 or earlier'; 
-    break;
   case '1.7 or earlier':
   case '1.7':
     fxVer = '1.0';
+    geckoVer = loca;
     break;
   case '1.8':
     fxVer = '1.5';
