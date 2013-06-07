@@ -17,7 +17,6 @@ var insertBefore = $1 || "";
 var insertAfter =  $2 || "";
 var skipMembers =  $0 || 0;
 var backupLocale = $3 || null;
-var testFlg =      $4;
 
 function pageSorter(a, b) {
     return a.title.toLowerCase().localeCompare( b.title.toLowerCase() );
@@ -95,6 +94,8 @@ if (termList && termList.length) {
         
         termList = otherList;
     }
+} else {        // Fall back to the other list since we have no subpages
+    termList = otherList;
 }
                 
 termList.sort(pageSorter);
@@ -174,11 +175,6 @@ for (var i = 0; i < numLetters; i++) {
         } while (termIndex < numTerms);
     }
     html += "</ul>";
-}
-
-var el = env.locale;
-if(testFlg) {
-    html = html.replace(/\(en-US\)/gmi, "").replace(/en-US/gmi, el);
 }
 
 %><div class="index">
