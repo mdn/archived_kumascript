@@ -10,15 +10,13 @@
 
 <div class="hidden">
 <pre class="brush: css">
-
 <%
 var cssStr = "";
 
-for (var i=0; i<arguments.length; i++) {
+for (var i = 0; i < arguments.length; i++) {
     cssStr += "@import url(" + arguments[i] + ");";
 }
-%>
-<%- cssStr %>
+%><%- cssStr %>
 
 @import url(https://developer.mozilla.org/media/fonts.css);
 
@@ -28,13 +26,9 @@ html, body {
   font-size: 10px;
   height: 100%;
   overflow-x: hidden;
-  background-color: #000;
-  background-image: url(https://mdn.mozillademos.org/files/4655/fx_logo_white_backdrop.jpg);
-  background-attachment: fixed;
+  background: #000 url(https://mdn.mozillademos.org/files/4655/fx_logo_white_backdrop.jpg) fixed;
 }
 
-body {
-  background: none;
-}
+body { background: none; }
 </pre>
 </div>
