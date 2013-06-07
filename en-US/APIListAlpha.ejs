@@ -177,6 +177,10 @@ for (var i = 0; i < numLetters; i++) {
     html += "</ul>";
 }
 
+var el = env.locale;
+if(el === "ja") html = html.replace(/en\-US/gmi, "ja").replace(/\(ja\)/gmi, "");
+
+
 %><div class="index">
 <%-html%>
 </div>
