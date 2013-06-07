@@ -1,24 +1,39 @@
-<%
-// Inserts download links for the CSS and media resources for a standard Gaia UX component.
-//
-// Parameters:
-//  $0 - The URL of the CSS file
-//  $1 - The URL of the ui resources folder
-//
+<% /*
+Inserts download links for the CSS and media resources for a standard Gaia UX component.
 
-// Localize strings here
+    Parameters:
+        $0 - The URL of the CSS file
+        $1 - The URL of the ui resources folder
+*/
 
-var heading = "Download resources";
-var downloadCSS = "CSS (Style)";
-var downloadMedia = "Media Files";
-var downloadFonts = "Fonts";
-%>
+// Localize strings
 
-<div class="standardSidebar">
-  <p style="font-weight:bold; text-align:center;"><%-heading%></p>
-  <div style="text-align: center;">
-  <a href='<%-$0%>'><%-downloadCSS%></a><br/>
-  <a href='<%-$1%>'><%-downloadMedia%></a><br/>
-  <a href='https://github.com/mozilla-b2g/moztt/tree/master/MozTT'><%-downloadFonts%></a>
-  </div>
+var heading = mdn.localString({
+    "en-US" : "Download resources",
+    "ja"    : "ファイルのダウンロード"
+});
+
+var downloadCSS = mdn.localString({
+    "en-US" : "CSS (Style)",
+    "ja"    : "CSS"
+});
+
+var downloadMedia = mdn.localString({
+    "en-US" : "Media Files",
+    "ja"    : "メディアファイル"
+});
+
+var downloadFonts = mdn.localString({
+    "en-US" : "Fonts",
+    "ja"    : "フォント"
+});
+
+
+%><div class="standardSidebar" style="padding:10px 10px 0">
+  <div><%- heading %></div>
+  <ul>
+  <li><a href='<%- $0 %>'><%- downloadCSS %></a></li>
+  <li><a href='<%- $1 %>'><%- downloadMedia %></a></li>
+  <li><a href='https://github.com/mozilla-b2g/moztt/tree/master/MozTT'><%- downloadFonts %></a></li>
+  </ul>
 </div>
