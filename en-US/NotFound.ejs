@@ -17,7 +17,11 @@ var loginUrl = "https://developer.mozilla.org/index.php?title=Special:Userlogin&
 
 /* Heading strings in English; localize in the switch below */
 
-var heading = "That page doesn't exist yet";
+var heading = mdn.localString({
+    "en-US" : "That page doesn't exist yet",
+    "ja"    : "この URL のページはまだ存在しません。"
+});
+
 var optionsHeading = "You have options";
 
 /* Section body texts; localize in the switch below */
@@ -37,12 +41,15 @@ if ($1 && string.length($1)) {
 }
 
 switch(lang) {
-case 'de':
-intro = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
-break;
+    case 'de':
+        intro = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
+        break;
+    default:
+        break;
 }
 
 optionsText = optionsText + "</ul>";
+
 %>
 
 
