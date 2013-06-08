@@ -8,12 +8,10 @@
 // $1   The URL from which to pull the sample; if not provided,
 //      the current page is assumed.
 
-var base;
+var base = env.url;
 
-if ($1 && $1.length) {
+if ($1 && $1.length > 0) {
     base = $1;
-} else {
-    base = env.url;
 }
 
 base = base.replace('developer.mozilla.org', 'mdn.mozillademos.org');
