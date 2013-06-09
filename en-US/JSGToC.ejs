@@ -1,6 +1,6 @@
 <%
 // Note: If you want to add chapters to this table of contents,
-// add their links to https://developer.mozilla.org/Template:JSGChapters
+// add their links to https://developer.mozilla.org/en-US/docs/Template:JSGChapters
 
 var chapterList = string.deserialize(template("JSGChapters"));
 var cLen = chapterList.length;
@@ -9,28 +9,26 @@ var link1 = "";
 var i;
 var s_TOC = mdn.localString({
     "en-US": "Quick Table of Contents",
-    "zh-CN": "目录",
-    "ja": "目次"
+       "ja": "目次",
+    "zh-CN": "目录"
 });
 
 var s_Expanded_TOC = mdn.localString({
     "en-US": "Expanded Table of Contents",
-    "ja": "追加コンテンツの目次"
+       "ja": "追加コンテンツの目次"
 });
 
 %><h2><%- s_TOC %></h2>
 <ol>
 <%
 
+var el = env.locale;
+
 switch (env.locale) {
-    case "ja":
-        for (i = 0; i < cLen; ++i) { chapterList[i] = chapterList[i].replace(/en-US/, "ja"); }
-        break;
-    case "de":
-        for (i = 0; i < cLen; ++i) { chapterList[i] = chapterList[i].replace(/en-US/, "de"); }
-        break;
+    case    "ja":
+    case    "de":
     case "zh-CN":
-        for (i = 0; i < cLen; ++i) { chapterList[i] = chapterList[i].replace(/en-US/, "zh-CN"); }
+        for (i = 0; i < cLen; ++i) { chapterList[i] = chapterList[i].replace(/en-US/, el); }
         break;
     default: break;
 }
