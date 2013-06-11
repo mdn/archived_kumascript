@@ -25,7 +25,7 @@ function escapeQuotes(a) {
     return b;
 }
 
-var termList = page.subpages();
+var termList = page.subpagesExpand();
 var html = "<dl>";
 
 termList.sort(pageSorter);
