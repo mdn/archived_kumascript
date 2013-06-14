@@ -44,7 +44,7 @@ var titleAttrValue = mdn.localString({
 var str = "";
 
 if ($0) {
-    %><div class='experimentalIcon' title='<%=titleAttrValue%>'></div><%
+    %><span title="<%=titleAttrValue%>" style="cursor:default;color:yellow;"><i class="icon-beaker"></i></span><%
 } else {
 str = mdn.localString({
     "ca": "Experimental",
