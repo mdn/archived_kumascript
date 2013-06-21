@@ -1,0 +1,15 @@
+<%
+// $0 : type
+// $1 : Description
+
+var type = $0 || 'any';
+var desc = $1 || mdn.localString({
+    "en-US": "The data passed when initializing the event.",
+    "fr": "Les données spécifiées lors de la création de l'évènement."
+});
+
+%> <tr>
+    <td><code>detail</code> <%- template("readonlyInline", [])%></td>
+    <td><code><%= type %></code></td>
+    <td><%= desc %></td>
+ </tr>
