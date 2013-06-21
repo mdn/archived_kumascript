@@ -15,28 +15,30 @@ var strPrevious = "";
 var strNext = "<br>";
 
 var s_PreviousNext = mdn.localString({
-  "en-US": ["« Previous", "Next »"],
-  "cs":    ["« Předchozí", "Následující »"],
-  "de":    ["« zurück", "weiter »"],
-  "es":    ["« Anterior", "Siguiente »"],
-  "fr":    ["« Précédent", "Suivant »"],
-  "ja":    ["« 前のページ", "次のページ »"],
-  "ko":    ["« 이전", "다음 »"],
-  "pl":    ["« Poprzedni", "Następny »"],
-  "pt-PT": ["« Anterior", "Próxima »"],
-  "ru":    ["« Предыдущая статья", "Следующая статья »"],
-  "zh-CN": ["« 上一页", "下一页 »"],
-  "zh-TW": ["« 前頁", "次頁 »"]
+    "en-US": ["« Previous", "Next »"],
+    "cs"   : ["« Předchozí", "Následující »"],
+    "de"   : ["« zurück", "weiter »"],
+    "es"   : ["« Anterior", "Siguiente »"],
+    "fr"   : ["« Précédent", "Suivant »"],
+    "ja"   : ["« 前のページ", "次のページ »"],
+    "ko"   : ["« 이전", "다음 »"],
+    "pl"   : ["« Poprzedni", "Następny »"],
+    "pt-PT": ["« Anterior", "Próxima »"],
+    "ru"   : ["« Предыдущая статья", "Следующая статья »"],
+    "zh-CN": ["« 上一页", "下一页 »"],
+    "zh-TW": ["« 前頁", "次頁 »"]
 });
 
 
-// for RTL
+// for LTR
 var textAlign = "right";
 var floatValue = "left";
 
+// for RTL
 switch(lang) {
-    case "he":
     case "ar":
+    case "fa":
+    case "he":
         textAlign = "left";
         floatValue = "right";
         break;
