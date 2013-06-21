@@ -39,11 +39,23 @@ for (var i=0; i<numTerms; i++) {
     var summary = page.summary;
     var url = page.url;
     
-    html += "<dt><a href='" + url + "'>" + title + "</a></dt><dd>" + summary + "</dd>"
+    html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>"
 }
 
 html += "</dl>";
+
+// Now we have the entire list in HTML. Let's go through it and try to split it into two columns by force.
+
+var len = html.length;
+var pt = len/2;
+var col2 = html.substr(pt);
+var ofs = col2.search("<dt ");
+pt += ofs;
+col2 = html.substr(pt);
+var col1 = html.substr(0, pt);
+
 %>
-<div class="landingPageArticleList">
-<%-html%>
+<div class="row topicpage-table">
+<div class="section"><%-col1%></div>
+<div class="section"><%-col2%></div>
 </div>
