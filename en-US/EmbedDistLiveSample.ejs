@@ -15,8 +15,8 @@ if(url.indexOf(domain) !== 0) {
 
 var widthHeight = "";
 if ($1 && $2) {
-    widthHeight = "width='" + $1 + "' height='" + $2 + "' ";
+    widthHeight = 'width="' + $1 + '" height="' + $2 + '"';
 }
 
 
-%><iframe class="livesample" frameborder="0" <%=widthHeight%>src="<%= url %>"></iframe>
+%><iframe class="livesample" frameborder="0" <%=widthHeight%> src="<%= url %>"></iframe>
