@@ -10,7 +10,7 @@
  * $0 max version to list
  *
  */
-  
+ 
 var maxVersion = $0 || 23;
 
 // for href attr
@@ -18,40 +18,41 @@ var slug = mdn.localString({
     "en-US" : "Releases"
 });
 
-// for content
-var str = mdn.localString({
-    "fr" : ["Firefox ", " pour les développeurs"],
-    "en-US": ["Firefox ", " for developers"]
-});
-
 // old versions
-var ov = ["3.6", "3.5", "3", "2", "1.5"],
-    ovlen = ov.length;
+var ov = ["3.6", "3.5", "3", "2", "1.5"];
 
-var loc = mdn.localString({
-    "en-US" : "en-US",
-    "ja": "ja",
-    "zh-CN": "zh-CN"
+var i;
+var loc = env.locale;
+// Use %0 to indicate where the Firefox version number should be
+var pageTitle = mdn.localString({
+    "en-US" : "Firefox %0 for developers",
+    "ca" : "Firefox %0 per a desenvolupadors",
+    "de" : "Firefox %0 für Entwickler",
+    "es" : "Firefox %0 para Desarrolladores",
+    "fr" : "Firefox %0 pour les développeurs",
+    "it" : "Firefox %0 per Sviluppatori",
+    "ja": "Firefox %0 for developers",
+    "ko": "Firefox %0 for developers",
+    "nl" : "Firefox %0 voor ontwikkelaars",
+    "pl" : "Firefox %0 dla programistów",
+    "pt-PT" : "Firefox %0 para Desenvolvedores",
+    "ru" : "Firefox %0 для разработчика",
+    "zh-CN" : "Firefox %0 for developers",
+    "zh-TW" : "Firefox %0 技術文件"
 });
 
 // for newer version
-for (var i = maxVersion; i > 3; --i) {
-    %><li><a href="/<%-loc%>/docs/Mozilla/Firefox/<%- slug %>/<%- i %>"><%- str[0] %><%- i %><%- str[1] %></a></li><%
+for (var i = maxVersion; i >= minVersion; i--) {
+    listItem(i);
 }
 
 // for older version
-for(var i = 0; i < ovlen; ++i) {
-    %><li><a href="/<%-loc%>/docs/Mozilla/Firefox/<%- slug %>/<%- ov[i] %>"><%- str[0] %><%-ov[i]%><%- str[1] %></a></li><%
+for(i = 0; i < ov.length; i++) {
+    listItem(ov[i]);
 }
 
-/*
-    This template is difficult. Because, old "fr" page have other rule...
-    If the URL of your country's page is the same as the English pages,
-    You just have to add your country into the object in argument of mdn.localString.
-    
-    And, some old pages have this link: "https://developer.mozilla.org/en-US/docs/Updating_web_applications_for_Firefox_3"
-*/
- 
- 
+function listItem(ver) { %>
+    <li><a href="/<%-loc%>/docs/Mozilla/Firefox/<%- slug %>/<%-ver%>" title="/<%-loc%>/docs/Mozilla/Firefox/<%- slug %>/<%-ver%>"><%-pageTitle.replace("%0", ver)%></a></li>
+<%}
 %></ul>
 </div>
