@@ -1,40 +1,46 @@
-<%
-/* one parameter: Level of security allow to the API: "web", "privileged" or "certified" */
+<%/*
+
+one parameter:
+    Level of security allow to the API:
+        [ "web" || "web+" || "privileged" || "installed" || "certified" ]
+
+*/
+
 
 var lang = env.locale;
 
 var secString = {
     'web+' : mdn.localString({
-        "en-US": 'This API is available on Firefox or <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
-                 '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">web content or higher privileged applications</a>.'
-        "fr": 'Cette API est disponible sur Firefox ou <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
-                 '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">du contenu web ou des applications disposant de privilèges plus élevés</a>.'
+        "en-US" : 'This API is available on Firefox or <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
+                  '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">web content or higher privileged applications</a>.',
+        "fr"    : 'Cette API est disponible sur Firefox ou <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
+                  '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">du contenu web ou des applications disposant de privilèges plus élevés</a>.'
     }),
     web : mdn.localString({
-        "en-US": 'This API is available on <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
-                 '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">web content or higher privileged applications</a>.'
-        "fr": 'Cette API est disponible sur <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
-                 '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">du contenu web ou des applications disposant de privilèges plus élevés</a>.'
+        "en-US" : 'This API is available on <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
+                  '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">web content or higher privileged applications</a>.',
+        "fr"    : 'Cette API est disponible sur <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
+                  '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">du contenu web ou des applications disposant de privilèges plus élevés</a>.'
     }),
     installed : mdn.localString({
-        "en-US": 'This API is available on Firefox or <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
-                 '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">installed or higher privileged applications</a>.'
-        "fr": 'Cette API est disponible sur Firefox ou <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
-                 '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">des applications installées ou disposant de privilèges plus élevés</a>.'
+        "en-US" : 'This API is available on Firefox or <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
+                  '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">installed or higher privileged applications</a>.',
+        "fr"    : 'Cette API est disponible sur Firefox ou <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
+                  '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">des applications installées ou disposant de privilèges plus élevés</a>.'
     }),
     privileged: mdn.localString({
-        "en-US": 'This API is available on <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
-                 '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">privileged or certified applications</a> only.'
-        "fr": 'Cette API est disponible sur <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
-                 '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">des applications privilégiées ou certifiées</a> seulement.'
+        "en-US" : 'This API is available on <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
+                  '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">privileged or certified applications</a> only.',
+        "fr"    : 'Cette API est disponible sur <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
+                  '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">des applications privilégiées ou certifiées</a> seulement.'
     }),
     certified : mdn.localString({
-        "ja":    'この API は <a href="/ja/docs/Mozilla/Firefox_OS/Security/Application_security">認定済みアプリ</a>のみ、' +
-                 ' <a href="/ja/docs/Mozilla/Firefox_OS">Firefox OS</a> で有効になります。',
-        "en-US": 'This API is available on <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
-                 '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">certified applications</a> only.'
-        "fr": 'Cette API est disponible sur <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
-                 '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">des applications certifiées</a> seulement.'
+        "en-US" : 'This API is available on <a href="/en-US/docs/Mozilla/Firefox_OS">Firefox OS</a> for ' +
+                  '<a href="/en-US/docs/Mozilla/Firefox_OS/Security/Application_security">certified applications</a> only.',
+        "fr"    : 'Cette API est disponible sur <a href="/fr/docs/Mozilla/Firefox_OS">Firefox OS</a> pour ' +
+                  '<a href="/fr/docs/Mozilla/Firefox_OS/Security/Application_security">des applications certifiées</a> seulement.',
+        "ja"    : 'この API は <a href="/ja/docs/Mozilla/Firefox_OS/Security/Application_security">認定済みアプリ</a>のみ、' +
+                  ' <a href="/ja/docs/Mozilla/Firefox_OS">Firefox OS</a> で有効になります。'
     })
 };
 
