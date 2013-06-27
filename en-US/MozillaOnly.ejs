@@ -1,0 +1,29 @@
+<%
+// Presents a banner marking a page as covering a topic specific to Mozilla. Intended
+// for use on API pages in particular, where the API is intentionally designed for
+// Mozilla products.
+//
+// Parameters:
+//
+//  $0  Explanatory text (optional)
+//  $1  Mozilla product (Optional)
+//
+// The "product" (parameter $1) is one of:
+//
+//  "firefox", "firefoxos", "gecko", "thunderbird"...
+//
+// The "product" may be used to customize the appearance of the banner in some way.
+
+var mozillaOnlyStr;
+var lang = env.locale;
+var message = $0 || NULL;
+var product = $1 || NULL;
+
+switch(lang) {
+    default:
+        mozillaOnlyStr = "Mozilla-specific";
+        break;
+}
+
+
+%>
