@@ -27,7 +27,7 @@
 //          Returns ONLY the wordmark, with no logo.
 //
 // When the requested kind of logo isn't available, the best substitute will
-// be returned.
+// be returned. Be ready for cases like "mozilla", which only has a wordmark.
 
 var product = $0;
 var wordmark = $1 || "none";
