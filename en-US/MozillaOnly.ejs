@@ -19,6 +19,14 @@ var lang = env.locale;
 var message = $0 || NULL;
 var product = $1 || NULL;
 
+// No Gecko logo, so...
+
+if (product == "gecko") {
+    product = "firefox";
+}
+
+var iconUrl = template("Logo", [product, "none"]);
+
 switch(lang) {
     default:
         mozillaOnlyStr = "Mozilla-specific";
@@ -27,3 +35,4 @@ switch(lang) {
 
 
 %>
+<img src="<%-iconUrl%>">
