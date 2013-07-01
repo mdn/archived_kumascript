@@ -17,7 +17,7 @@ var URL = "/" + lang + "/docs/Web/CSS/" + $0;
 // Add your local when you have moved your pages
 var filter = ['en-US', 'ja'];
 
-if (filter.indexOf(lang) === -1) URL = "/" + lang + "/docs/CSS/" + $0;
+if (filter.indexOf(lang) === -1) { URL = "/" + lang + "/docs/CSS/" + $0; }
 
 
 %><a href="<%- URL %>"><code><%- str %></code></a>
