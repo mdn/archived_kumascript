@@ -8,6 +8,10 @@
 //       Can be a section title like "Quick Start", can also be an id attribute
 //       like this: <div id="grabme">
 //       Example: {{Page("/en-US/docs/MyPage", "grabme")}}
+//  $2 - (optional) revision number to pull from. UNSUPPORTED.
+//  $3 - (optional) whether or not to show the first heading. Defaults to false.
+//  $4 - (optional) the heading level to use as the top heading level; others
+//       are adjusted to match.
 
 var url = web.spacesToUnderscores($0);
 
