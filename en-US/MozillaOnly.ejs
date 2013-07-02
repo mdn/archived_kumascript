@@ -6,33 +6,27 @@
 // Parameters:
 //
 //  $0  Explanatory text (optional)
-//  $1  Mozilla product (Optional)
+//  $1  Product name (optional)
 //
-// The "product" (parameter $1) is one of:
-//
-//  "firefox", "firefoxos", "gecko", "thunderbird"...
-//
-// The "product" may be used to customize the appearance of the banner in some way.
 
-var mozillaOnlyStr;
+var mozillaOnly;
+var message;
+var product = $1 || "Mozilla";
+
 var lang = env.locale;
-var message = $0 || NULL;
-var product = $1 || NULL;
-
-// No Gecko logo, so...
-
-if (product == "gecko") {
-    product = "firefox";
-}
-
-var iconUrl = template("Logo", [product, "none"]);
 
 switch(lang) {
     default:
-        mozillaOnlyStr = "Mozilla-specific";
+        mozillaOnly = product + "-specific API";
+        message = $0 || "This API is only available in Gecko-based software, including Firefox and Firefox OS.";
         break;
 }
-
-
 %>
-<img src="<%-iconUrl%>">
+<div class="bannerWrapper">
+<div class="mozOnlyBanner">
+    <dl>
+        <dt><%-mozillaOnly%></dt>
+        <dd><%-message%></dd>
+    </dl>
+</div>
+</div>
