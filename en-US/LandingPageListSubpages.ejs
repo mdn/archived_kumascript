@@ -36,7 +36,7 @@ var numTerms = termList.length;
 for (var i=0; i<numTerms; i++) {
     var page = termList[i];
     var title = page.title;
-    var summary = page.summary;
+    var summary = page.summary.replace(/<img[^>]*>/g," ");
     var url = page.url;
     
     html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>"
