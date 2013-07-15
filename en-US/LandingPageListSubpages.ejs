@@ -25,6 +25,15 @@ function escapeQuotes(a) {
     return b;
 }
 
+function containsTag(tagList, tag) {
+    if (!tagList || tagList == undefined) return 0;
+    tag = tag.toLowerCase();
+    for (var i = 0, len = tagList.length; i < len; i++) {
+        if (tagList[i].toLowerCase() == tag) return 1;
+    }
+    return 0;
+}
+
 var termList = page.subpagesExpand();
 var html = "<dl>";
 
@@ -35,11 +44,14 @@ var numTerms = termList.length;
 
 for (var i=0; i<numTerms; i++) {
     var page = termList[i];
-    var title = page.title;
-    var summary = page.summary.replace(/<img[^>]*>/g," ");
-    var url = page.url;
     
-    html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>"
+    if (!containsTag(page.tags, "junk")) {
+        var title = page.title;
+        var summary = page.summary.replace(/<img[^>]*>/g," ");
+        var url = page.url;
+    
+        html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>";
+    }
 }
 
 html += "</dl>";
