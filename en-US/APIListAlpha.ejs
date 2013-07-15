@@ -148,7 +148,9 @@ for (var i = 0; i < numLetters; i++) {
             
             // Build any badge text that may be needed
             
-            if (containsTag(tags, "Non-standard")) badge = " " + template("NonStandardBadge", ["1"]);
+            if (containsTag(tags, "Non-standard")) {
+                badge = " " + template("NonStandardBadge", ["1"]);
+            }
             
             if (containsTag(tags, "Obsolete")) {
                 badge += " " + template("ObsoleteBadge", [1]);
@@ -156,18 +158,22 @@ for (var i = 0; i < numLetters; i++) {
                 badge += " " + template("DeprecatedBadge", [1]);
             }
             
-            if (containsTag(tags, "Experimental")) badge += " " + template("ExperimentalBadge", ["1"]);
+            if (containsTag(tags, "Experimental")) {
+                badge += " " + template("ExperimentalBadge", ["1"]);
+            }
             
             // Wrap the badges in another span
             
             if (badge.length) badge = '<span class="indexListBadges">' + badge + "</span>";
                     
             if (title[0].toUpperCase() == curLetter) {
-                if (!insertedHeading) {
-                    html += "<span>" + curLetter + "</span><ul>";
-                    insertedHeading = true;
+                if (!containsTag(tags, "junk")) {
+                    if (!insertedHeading) {
+                        html += "<span>" + curLetter + "</span><ul>";
+                        insertedHeading = true;
+                    }
+                    html += '<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + locale + '</span>' + badge + '</span></li>';
                 }
-                html += '<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + locale + '</span>' + badge + '</span></li>';
                 termIndex++;
             } else {
                 break;
