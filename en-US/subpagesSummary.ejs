@@ -2,14 +2,7 @@
 /* The list of template's arguments is used to know which subpages title should not be marked as code */
 var notCodeElements = arguments;
    
-/* To include the subpage summary, we need to know which local slug/hash to use with wiki.page */
-var summary = mdn.localString({
-    "en-US": "Summary",
-    "fr": "Résumé",
-    "ja": "概要"
-});
-   
-var pages = page.subpages('','1');
+var pages = page.subpagesExpand('','1');
 var str = '';
 if (pages.length) {
     str += '<dl>';
@@ -21,7 +14,7 @@ if (pages.length) {
             str += kuma.htmlEscape(item.title);
         }
         str += '</a></dt>';
-        str += '<dd>' + wiki.page(item.url, summary) + '</dd>';
+        str += '<dd>' + item.summary + '</dd>';
     });
     str += '</dl>';
 }
