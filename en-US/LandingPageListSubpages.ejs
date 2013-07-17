@@ -35,39 +35,50 @@ function containsTag(tagList, tag) {
 }
 
 var termList = page.subpagesExpand();
-var html = "<dl>";
-
-termList.sort(pageSorter);
-
-var termIndex = 0;
 var numTerms = termList.length;
+var html = "";
 
-for (var i=0; i<numTerms; i++) {
-    var page = termList[i];
+if (numTerms) {
+    var html = "<dl>";
     
-    if (!containsTag(page.tags, "junk")) {
-        var title = page.title;
-        var summary = page.summary.replace(/<img[^>]*>/g," ");
-        var url = page.url;
+    termList.sort(pageSorter);
     
-        html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>";
+    var termIndex = 0;
+    var numTerms = termList.length;
+    
+    for (var i=0; i<numTerms; i++) {
+        var page = termList[i];
+        
+        if (!containsTag(page.tags, "junk")) {
+            var title = page.title;
+            var summary = page.summary.replace(/<img[^>]*>/g," ");
+            var url = page.url;
+        
+            html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>";
+        }
     }
+    
+    html += "</dl>";
 }
-
-html += "</dl>";
 
 // Now we have the entire list in HTML. Let's go through it and try to split it into two columns by force.
 
 var len = html.length;
-var pt = len/2;
-var col2 = html.substr(pt);
-var ofs = col2.search("<dt ");
-pt += ofs;
-col2 = html.substr(pt);
-var col1 = html.substr(0, pt);
-
+if (len) {
+    var pt = len/2;
+    var col2 = html.substr(pt);
+    var ofs = col2.search("<dt ");
+    pt += ofs;
+    col2 = html.substr(pt);
+    var col1 = html.substr(0, pt);
+    
+    %>
+    <div class="row topicpage-table">
+    <div class="section"><%-col1%></div>
+    <div class="section"><%-col2%></div>
+    </div>
+    <%
+} else {
+    %><p><strong>There are no subpages at this time.</strong></p><%
+}
 %>
-<div class="row topicpage-table">
-<div class="section"><%-col1%></div>
-<div class="section"><%-col2%></div>
-</div>
