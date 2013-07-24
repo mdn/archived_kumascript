@@ -1,8 +1,110 @@
 <%
-// test page creation
-var url = "https://marketplace.firefox.com/api/v1/webpay/prices/";
+// price point table using data pulled from the Firefox Marketplace REST API
 
+var url = "https://marketplace.firefox.com/api/v1/webpay/prices/";
 var data = mdn.fetchJSONResource(url);
 %>
-<p><%- data %></p>
-<p>wt</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Price point</th>
+      <th>US dollar $ - base price</th>
+      <th>Available for credit card purchase</th>
+      <th>Brazil real $ (R$)</th>
+      <th>Colombia peso $ (COP$)</th>
+      <th>Poland zloty zł (PLN)</th>
+      <th>
+        <p>Spain euro €(EUR)</p>
+      </th>
+      <th>Venezuela US dollar (US$) credit card only</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>VAT/Tax included in price</b></td>
+      <td>No</td>
+      <td>n/a</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><b>VAT % in price</b></td>
+      <td>--</td>
+      <td>n/a</td>
+      <td>n/a</td>
+      <td>16%</td>
+      <td>23%</td>
+      <td>21%</td>
+      <td>n/a</td>
+    </tr>
+
+<% // create price point rows
+for (var i = 0; i < data.meta.total_count; i++) { %>
+
+    <tr>
+      <td><b><%= data.objects[i].name %></b></td>
+      <td>$<%= data.objects[i].localized.price %></td>
+      <td><% // Available for credit card. Some tiers are not applicable.
+               if ( data.objects[i].name == "Tier 0" ) { %>
+            No
+          <% } else if ( data.objects[i].name == "Tier 1" ) { %>
+            No
+          <% } else if ( data.objects[i].name == "Tier 5" ) { %>
+            No
+          <% } else if ( data.objects[i].name == "Tier 7" ) { %>
+            No
+          <% } else { %>
+            Yes
+          <% } %>
+      </td>
+      <td><!-- Brazil real -->
+        n/a
+      </td>
+      <td><% // Colombia peso. COP is missing from some JSON objects, this handles it.
+             var copExists = 0;
+             for (var j = 0; j < data.objects[i].prices.length; j++) { %>
+              <% if (data.objects[i].prices[j].currency == "COP") { %>
+                $<%= data.objects[i].prices[j].price %>
+              <% copExists = 1 } 
+             } 
+             if (copExists == 0) { %>
+               n/a
+             <% } %>
+      </td>
+      <td><% // Poland zloty 
+               for (var j = 0; j < data.objects[i].prices.length; j++) { %>
+            <% if (data.objects[i].prices[j].currency == "PLN") { %>
+              <%= data.objects[i].prices[j].price %> zł
+            <% } %>
+          <% } %>
+      </td>
+      <td><% // Spain euro
+               for (var j = 0; j < data.objects[i].prices.length; j++) { %>
+            <% if (data.objects[i].prices[j].currency == "EUR") { %>
+              €<%= data.objects[i].prices[j].price %>
+            <% } %>
+          <% } %>
+      </td>
+      <td><% // Venezuela credit card. Some tiers are not applicable.
+               if ( data.objects[i].name == "Tier 0" ) { %>
+            n/a
+          <% } else if ( data.objects[i].name == "Tier 1" ) { %>
+            n/a
+          <% } else if ( data.objects[i].name == "Tier 5" ) { %>
+            n/a
+          <% } else if ( data.objects[i].name == "Tier 7" ) { %>
+            n/a
+          <% } else { %>
+            $<%= data.objects[i].localized.price %>
+          <% } %>
+      </td>
+    </tr>
+
+<% } %>
+
+  </tbody>
+</table>
