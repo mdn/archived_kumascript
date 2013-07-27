@@ -5,19 +5,20 @@
 // Parameters:
 //
 //  $0 - API name
-//  $1 - anchor (optional)
+//  $1 - name to display (optional)
+//  $2 - anchor (#xyz) (optional)
 
 var lang = env.locale;
 var str = $1 || $0;
 
 // New CSS location
-var URL = "/" + lang + "/docs/Web/CSS/" + $0; 
+var URL = "/" + lang + "/docs/Web/CSS/" + $0 + $2; 
 
 // Locals that use the new location
 // Add your local when you have moved your pages
 var filter = ['en-US', 'ja'];
 
-if (filter.indexOf(lang) === -1) { URL = "/" + lang + "/docs/CSS/" + $0; }
+if (filter.indexOf(lang) === -1) { URL = "/" + lang + "/docs/CSS/" + $0 + $2; }
 
 
 %><a href="<%- URL %>"><code><%- str %></code></a>
