@@ -11,6 +11,8 @@
 /*   parameter will be used */
 /* @param [optional] */
 /*   An anchor to link to on the page. Link text will display as $0.$2 or $1.$2 */
+/* @param [optional] "/
+/*   If set, do not put the domxref text in code */
 
 /* get a page's language (Don't use page.language!) */
 var lang = env.locale;
@@ -36,5 +38,8 @@ var filter = ['en-US', 'ja', 'fr'];
 
 if(filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) URL = URLnew;
 
+var code = '';
+var endcode = '';
+if (!$3) { code = '<code>'; endcode = '</code>' }
 
-%><a href="<%- URL+anch %>" title="<%- URL+anch %>"><code><%= str %></code></a>
+%><a href="<%- URL+anch %>" title="<%- URL+anch %>"><%- code %><%= str %><%- endcode %></a>
