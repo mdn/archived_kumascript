@@ -65,12 +65,19 @@ if (numTerms) {
 
 var len = html.length;
 if (len) {
-    var pt = len/2;
-    var col2 = html.substr(pt);
-    var ofs = col2.search("<dt ");
-    pt += ofs;
-    col2 = html.substr(pt);
-    var col1 = html.substr(0, pt);
+    var col1 = "";
+    var col2 = "";
+    
+    if (numTerms > 1) {
+        var pt = len/2;
+        col2 = html.substr(pt);
+        ofs = col2.search("<dt ");
+        pt += ofs;
+        col2 = html.substr(pt);
+        col1 = html.substr(0, pt);
+    } else
+        col1 = html;
+    }
     
     %>
     <div class="row topicpage-table">
