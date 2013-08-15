@@ -1,8 +1,53 @@
-<%
-var str = mdn.localString({
-  "en-US" : ["Gecko_DOM_Reference", "DOM Reference", "&laquo;"],
-  "ja":     ["Gecko_DOM_Reference", "DOM リファレンス", "&laquo;"]
+<span class="breadcrumbs domRef_breadcrumbs"><%
+/* $0 optional, a second crumb to be put in a domxref template */
+/*
+he : &raquo;
+zh-CN :参
+zh-TW :參
+
+So many locales haven't yet moved under "/docs/DOM".
+*/
+
+// s_str[ "url_slug", "link_text" ]
+var s_str = mdn.localString({
+    "en-US": [ "DOM/DOM_Reference", "DOM Reference" ],
+    "cs":    [ "Gecko_DOM_Reference", "Gecko DOM Reference" ],
+    "de":    [ "Gecko-DOM-Referenz", "DOM Referenz"],
+    "es":    [ "Referencia_DOM_de_Gecko", "Referencia DOM"],
+    "fr":    [ "Référence_du_DOM_Gecko", "Référence du DOM"],
+    "he":    [ "Gecko_DOM_Reference", "DOM"],
+    "it":    [ "Reference_del_DOM_di_Gecko", "Reference del DOM"],
+    "ja":    [ "DOM/DOM_Reference", "DOM リファレンス"],
+    "ko":    [ "Gecko_DOM_Reference", "DOM Reference" ],
+    "pl":    [ "Dokumentacja_Gecko_DOM", "Dokumentacja DOM" ],
+    "pt-BR": [ "DOM/Referencia_do_DOM", "Referência do DOM" ],
+    "pt-PT": [ "Referência_do_DOM_Gecko", "Referência do DOM" ],
+    "ru":    [ "Справочная_информация_по_Gecko_DOM", "Справочная информация по DOM" ],
+    "zh-CN": [ "Gecko_DOM_Reference", "DOM 参考" ],
+    "zh-TW": [ "Gecko_DOM_參考", "DOM 參考" ]
 });
 
+var aquo = "&laquo;";   // "»"
 
-%><span class="breadcrumbs"> <%- str[2] %> <a href="/<%- env.locale %>/docs/<%- str[0] %>"><%- str[1] %></a> <%- str[2] %> <%-template("domxref", [$0])%></span>
+/*
+ For RTL locales (ar, he, ...)
+*/
+switch(env.locale) {
+    case "ar":
+    case "he":
+        aquo = "&raquo;";   // "«"
+        break;
+    default:
+}
+
+var result = aquo + '&nbsp;<a href="/' + env.locale + '/docs/' + s_str[0] + '">' + s_str[1] + '</a>';
+if ($0)
+{
+    result += '&nbsp;' + aquo + '&nbsp;' + template("domxref", [$0, '', '', 'nocode']);   
+}
+if ($1)
+{
+    result += '&nbsp;' + aquo + '&nbsp;' + template("domxref", [$1, '', '', 'nocode']);   
+}
+
+%><%- result %></span>
