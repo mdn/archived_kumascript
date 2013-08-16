@@ -22,7 +22,9 @@ var summary = "";
 if (!$2) {
     var page = wiki.getPage(URL);
     if (page && page.summary) {
-        mdn.escapeQuotes(page.summary);
+        summary = mdn.escapeQuotes(page.summary);
+    } else {
+        summary = "This article hasn't been written yet. Please consider contributing!";
     }
 }
 
