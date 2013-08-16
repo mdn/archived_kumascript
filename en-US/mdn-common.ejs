@@ -10,6 +10,20 @@
         if (!(lang in strings)) lang = 'en-US';
         return strings[lang];
     },
+    
+    /**
+     * Given a string, escapes all quotes within it.
+     */
+    escapeQuotes: function(string) {
+        function escapeQuotes(a) {
+        var b = "";
+        for (var i = 0, len = a.length; i < len; i++) {
+            var c = a[i];
+            if (c=="\"") c = "&quot;";
+            b += c;
+        }
+        return b.replace(/(<([^>]+)>)/ig, "");
+    },
 
     /**
      * Accepts a relative URL or an attachment object
