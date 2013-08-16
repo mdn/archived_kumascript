@@ -45,8 +45,12 @@ if (filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) {
 var page = wiki.getPage(URL);
 var summary = "";
 
-if (page && page.summary) {
-    var summary = mdn.escapeQuotes(page.summary);
+if (!$2) {
+    if (page && page.summary) {
+        var summary = mdn.escapeQuotes(page.summary);
+    } else {
+        summary = "The documentation about this has not yet been written; please consider contributing!";
+    }
 }
 
 var code = '';
