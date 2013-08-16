@@ -43,7 +43,11 @@ if (filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) {
 // Now that we have the URL, let's gather the page summary for our tooltip
 
 var page = wiki.getPage(URL);
-var summary = mdn.escapeQuotes(page.summary);
+var summary = "";
+
+if (page && page.summary) {
+    var summary = mdn.escapeQuotes(page.summary);
+}
 
 var code = '';
 var endcode = '';
