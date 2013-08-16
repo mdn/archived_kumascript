@@ -5,7 +5,17 @@ var basePath = "/" + lang + "/docs/";
 var sectionname = "Element";
 var dest = basePath + 'Web/HTML/' + sectionname + '/' + name;
 var page = wiki.getPage(dest);
-var summary = mdn.escapeQuotes(page.summary);
+var summary = "";
+
+if (page && page.summary) {
+    summary = mdn.escapeQuotes(page.summary);
+} else {
+    switch(lang) {
+        default:
+            summary = "This article hasn't been written yet. Please consider contributing!";
+            break;
+    }
+}
 
 switch(lang) {
     case "ja":
