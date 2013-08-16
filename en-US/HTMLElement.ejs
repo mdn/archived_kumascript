@@ -1,21 +1,11 @@
 <%
-function escapeQuotes(a) {
-    var b = "";
-    for (var i = 0, len = a.length; i < len; i++) {
-        var c = a[i];
-        if (c=="\"") c = "&quot;";
-        b += c;
-    }
-    return b.replace(/(<([^>]+)>)/ig, "");
-}
-
 var name = ($0.toString()).toLowerCase();
 var lang = env.locale;
 var basePath = "/" + lang + "/docs/";
 var sectionname = "Element";
 var dest = basePath + 'Web/HTML/' + sectionname + '/' + name;
 var page = wiki.getPage(dest);
-var summary = escapeQuotes(page.summary);
+var summary = mdn.escapeQuotes(page.summary);
 
 switch(lang) {
     case "ja":
