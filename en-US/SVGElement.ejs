@@ -17,6 +17,12 @@ var page = wiki.getPage(URL);
 var summary = "";
 if (page && page.summary) {
     summary = mdn.escapeQuotes(page.summary);
+} else {
+    switch(env.locale) {
+        default:
+            summary = "This page hasn't been written yet. Please consider contributing to MDN by writing it!";
+            break;
+    }
 }
 
 %>
