@@ -1,7 +1,7 @@
 <%
 /* Used for generating cross-references within the DOM documentation. */
 /* This will first try to link to DOM/$0, then DOM:$0 if that doesn't exist */
-/* if you specify the API name with parens (ie, "foo()"), the link is to */
+/* if you specify the API name with parens (ie, "foo()"), the link is to */
 /* lang/DOM/foo but the title is displayed as "foo()" to make it clear it's */
 /* a function */
 /* @param */
@@ -14,7 +14,7 @@
 /* @param [optional] "/
 /*   If set, do not put the domxref text in code */
 
-/* get a page's language (Don't use page.language!) */
+/* get a page's language (Don't use page.language!) */
 var lang = env.locale;
 var api = $0;
 var str = $1 || $0;
@@ -26,8 +26,8 @@ var URL = "/" + lang + '/docs/DOM/' + api;
 
 var anch = '';
 
-if ($2) {
-  str = str + '.' + $2;
+if ($2) {
+  str = str + '.' + $2;
   anch = '#' + $2;
 }
 
@@ -36,10 +36,17 @@ if ($2) {
 // fr is on its way to move, even if it's not complete it's easier that way
 var filter = ['en-US', 'ja', 'fr'];
 
-if(filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) URL = URLnew;
+if (filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) {
+    URL = URLnew;
+}
+
+// Now that we have the URL, let's gather the page summary for our tooltip
+
+var page = wiki.getPage(URL);
+var summary = mdn.escapeQuotes(page.summary);
 
 var code = '';
 var endcode = '';
 if (!$3) { code = '<code>'; endcode = '</code>' }
 
-%><a href="<%- URL+anch %>" title="<%- URL+anch %>"><%- code %><%= str %><%- endcode %></a>
+%><a href="<%- URL+anch %>" title="<%-summary%>"><%- code %><%= str %><%- endcode %></a>
