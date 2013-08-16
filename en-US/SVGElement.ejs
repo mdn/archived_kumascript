@@ -1,10 +1,23 @@
 <%
-/* one parameter: SVG element name to create a xref to */
+//    Outputs a link to an SVG element's reference page.
+//    
+//    Parameters:
+//        $0  SVG element name
+
 var slug = {
     'en-US': "Element"
 };
 
 var URL = "/" + env.locale + "/docs/Web/SVG/" + mdn.localString(slug) + "/" + $0;
 
+// Gather the page summary
 
-%><a href="<%- URL %>" <%- wiki.pageExists(URL) ? '' : ' class="new"' %>><code>&lt;<%= $0 %>&gt;</code></a>
+var term = $0.toLowerCase();
+var page = wiki.getPage(URL);
+var summary = "";
+if (page && page.summary) {
+    summary = mdn.escapeQuotes(page.summary);
+}
+
+%>
+<a href="<%- URL %>" <%- wiki.pageExists(URL) ? '' : ' class="new"' %> title="<%-summary%>"><code>&lt;<%= term %>&gt;</code></a>
