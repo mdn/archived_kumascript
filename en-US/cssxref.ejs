@@ -24,7 +24,10 @@ if (!$2) {
     if (page && page.summary) {
         summary = mdn.escapeQuotes(page.summary);
     } else {
-        summary = "This article hasn't been written yet. Please consider contributing!";
+        switch(lang) {
+            default:
+            summary = "This article hasn't been written yet. Please consider contributing!";
+        }
     }
 }
 
