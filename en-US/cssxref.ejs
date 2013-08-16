@@ -10,6 +10,7 @@
 
 var lang = env.locale;
 var str = $1 || $0;
+str = str.toLowerCase();
 
 // New CSS location
 var URL = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
@@ -17,7 +18,10 @@ var URL = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
 // Gather some information about the destination
 
 var page = wiki.getPage(URL);
-var summary = mdn.escapeQuotes(page.summary);
+var summary = "";
+if (page && page.summary) {
+    mdn.escapeQuotes(page.summary);
+}
 
 // Locals that use the new location
 // Add your local when you have moved your pages
