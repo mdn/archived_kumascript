@@ -17,10 +17,13 @@ var URL = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
 
 // Gather some information about the destination
 
-var page = wiki.getPage(URL);
 var summary = "";
-if (page && page.summary) {
-    mdn.escapeQuotes(page.summary);
+
+if (!$2) {
+    var page = wiki.getPage(URL);
+    if (page && page.summary) {
+        mdn.escapeQuotes(page.summary);
+    }
 }
 
 // Locals that use the new location
