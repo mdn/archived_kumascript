@@ -15,27 +15,11 @@ str = str.toLowerCase();
 // New CSS location
 var URL = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
 
-// Gather some information about the destination
-
-var summary = "";
-
-if (!$2) {
-    var page = wiki.getPage(URL);
-    if (page && page.summary) {
-        summary = mdn.escapeQuotes(page.summary);
-    } else {
-        switch(lang) {
-            default:
-            summary = "This article hasn't been written yet. Please consider contributing!";
-        }
-    }
-}
-
 // Locals that use the new location
 // Add your local when you have moved your pages
 var filter = ['en-US', 'ja'];
 
 if (filter.indexOf(lang) === -1) { URL = "/" + lang + "/docs/CSS/" + $0 + $2; }
 
-
-%><a href="<%- URL %>" title="<%-summary%>"><code><%- str %></code></a>
+%>
+<%- template("xref", [URL, str]) %>
