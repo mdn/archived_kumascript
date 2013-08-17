@@ -2,7 +2,12 @@
 // Inserts a link to an API located at the top level of the site;
 // these should really move to where they actually belong, but there you go.
 //
-//  $0 - Name of API
+// Parameters:
+//
+//  $0 - API name
 
+var lang = env.locale;
 
-%><code><a href="<%-wiki.uri("/" + env.locale + "/docs/" + $0)%>"><%-$0%></a></code>
+var URL = "/" + lang + "/docs/" + $0;
+%>
+<%- template("xref", [URL, $0]) %>
