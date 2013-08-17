@@ -2,6 +2,12 @@
 // Inserts a link to a function located at the top level of the site;
 // these should really move to where they actually belong, but there you go.
 //
-//  $0 - Name of function
+// Parameters:
+//
+//  $0 - Function name
+
+var lang = env.locale;
+
+var URL = "/" + lang + "/docs/" + $0;
 %>
-<code><a href="<%-wiki.uri("/" + env.locale + "/" + $0)%>"><%-$0%>()</a></code>
+<%- template("xref", [URL, $0]) %>
