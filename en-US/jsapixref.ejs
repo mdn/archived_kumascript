@@ -1,4 +1,11 @@
 <%
+// Inserts a link to a JS API's documentation in the JSAPI Reference.
+// Appropriate styling is applied.
+//
+// Parameters:
+//
+//  $0 - API name
+
 var lang = env.locale;
 var api = $0;
 
@@ -6,12 +13,6 @@ if (string.endswith($0, '()')) {
     api = string.remove(api, string.length(api) - 2);
 }
 
-var dest = 'SpiderMonkey/JSAPI_Reference/' + api;
-
-if (wiki.pageExists(dest)) { /* the page exists */
-    %><code><%- (web.link(wiki.uri(dest), $0)) %></code><%
-} else { /* the page doesn't exist */
-    var targeturi = "/" + lang + "/docs/new?slug=" + dest;
-    %><code><a rel="internal" href="<%=targeturi%>" class="new"><%-$0%></a></code><%
-}
+var URL = "/" + lang + "/docs/SpiderMonkey/JSAPI_Reference/" + api;
 %>
+<%- template("xref", [URL, $0]) %>
