@@ -1,21 +1,19 @@
 <%
+// Inserts a link to a XPCOM Interface
+// Appropriate styling is applied.
+//
+// Parameters:
+//
+//  $0 - Interace name
+
 var lang = env.locale;
 
-var str = "/docs/XPCOM_Interface_Reference/";
+var URL = "/" + lang + "/docs/XPCOM_Interface_Reference/" + $0;
 
 switch(lang) {
   case 'de':
-    str = "/docs/XPCOM_Interface_Referenz/";
+    URL = "/de/docs/XPCOM_Interface_Referenz/" + $0;
     break;
 }
-
-/* check $0 exists */
-if(wiki.pageExists(lang + str + $0)) {
-  %><code><%- web.link(wiki.uri(lang + str + $0), $0) %></code><%
-} else if(wiki.pageExists(lang + '/' + $0)) {
-  %><code><%- web.link(wiki.uri(lang + '/' + $0), $0) %></code><%
-} else {
-  var targeturi = "/docs/new?slug=" + lang + str + $0 + "&title=" + $0;
-  %><code><a rel="internal" href="<%=targeturi%>" class="new"><%=$0%></a></code><%
-}
 %>
+<%- template("xref", [URL, $0, false]) %>
