@@ -55,34 +55,14 @@ switch(arg)
   case '2.1':
     geckoRelease = ['Firefox 4 Mobile'];
     break;
-  case '5':
-  case '5.0':
-    geckoRelease = ['Firefox 5.0', 'Thunderbird 5.0', 'SeaMonkey 2.2'];
-    break;
-  case '6':
-  case '6.0':
-    geckoRelease = ['Firefox 6.0', 'Thunderbird 6.0', 'SeaMonkey 2.3'];
-    break;
-  case '7':
-  case '7.0':
-    geckoRelease = ['Firefox 7.0', 'Thunderbird 7.0', 'SeaMonkey 2.4'];
-    break;
-  case '8':
-  case '8.0':
-    geckoRelease = ['Firefox 8.0', 'Thunderbird 8.0', 'SeaMonkey 2.5'];
-    break;
-  case '9':
-  case '9.0':
-    geckoRelease = ['Firefox 9.0', 'Thunderbird 9.0', 'SeaMonkey 2.6'];
-    break;
-  default:
-    if (arg >= 5) {
-      geckoRelease = ['Firefox ' + arg, 'Thunderbird ' + arg, 'SeaMonkey 2.' + (Number(arg)-3).toString()];
+  default:
+    if (arg >= 5) {
+      geckoRelease = ['Firefox ' + arg, 'Thunderbird ' + arg, 'SeaMonkey 2.' + (Number(arg)-3).toString()];
       if (arg == 18) {
         geckoRelease.push("Firefox OS 1.0.1");
       }
-    }
-    break;
+    }
+    break;
 }
 if (geckoRelease != "") {
   geckoRelease = string.Join(geckoRelease, plus + ' / ') + plus;
