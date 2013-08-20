@@ -1,0 +1,20 @@
+<%
+s_str0 = $0;
+s_str1 = $0;
+
+var aquo = "&laquo;";   // "»"
+
+/*
+ For RTL locales (ar, he, ...)
+*/
+switch(env.locale) {
+    case "ar":
+    case "he":
+        aquo = "&raquo;";   // "«"
+        break;
+    default:
+}
+
+var result = aquo + '&nbsp;<a href="/' + env.locale + '/docs/Web/API/' + s_str0 + '">' + s_str1 + '</a>';
+
+%><%- result %>
