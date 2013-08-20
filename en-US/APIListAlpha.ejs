@@ -23,7 +23,9 @@ function pageSorter(a, b) {
 }
 
 function allowTerm(a) {
-    for (var i = 0, len = a.length; i < len; ++i) { if (a[i] === '.') return 0; }
+    for (var i = 0, len = a.length; i < len; ++i) { 
+        if ((a[i] === '.') || (a[i] === '(')) return 0; 
+    }
     return 1;
 }
 
