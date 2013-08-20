@@ -23,6 +23,11 @@ function pageSorter(a, b) {
 }
 
 function allowTerm(a) {
+    // An interface starts with a capital letter
+    if (a[0] === a[0].toLowerCase()) return 0;
+    
+    // An i/f doesn't contain a '.' (method or properties)
+    // An i/f doesn't contain a '(' (method or constructor)
     for (var i = 0, len = a.length; i < len; ++i) { 
         if ((a[i] === '.') || (a[i] === '(')) return 0; 
     }
