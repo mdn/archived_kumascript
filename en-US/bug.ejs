@@ -1,36 +1,40 @@
 <%
-//
-// Inserts a link to a bug in Mozilla's Bugzilla database.
-//
-// Ideally, this will style the bug based on whether or not it's been fixed, but there
-// are complications that currently prevent that from performing adequately, so that
-// capability has been disabled for now.
-//
-// Parameters:
-//
-// $0   The bug number to link to.
-//
+/*
+ * Inserts a link to a bug in Mozilla's Bugzilla database.
+ *
+ * $0 - The bug number to link to. As we follow resolved duplicate this may not be the number in the output.
+ */
 
-var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + $0;
-var s = "";
+var mdn = require("MDN:Common");
 
-/*TODO: Enable after Bug 765642 is fixed.
-var bugPageXML = web.xml(bugPageURL);
-if (#bugPageXML == 0) {
-  s = "Unable to access bug's page. Try reloading this page to see bug's status and summary in this tooltip.";
-} else {
-  s = xml.text(bugPageXML, '//span[@id="static_bug_status"]');
-  if (s){
-    // Remove \n and redundant spaces
-    s = string.trimEnd(string.replace(s, "\n", ""));
-    if (string.contains(s, "  "))
-      s = string.join(list.select(string.split(s, " "), "#$>0"), " ");
-    s += ' - ' + xml.text(bugPageXML, '//span[@id="short_desc_nonedit_display"]');
-  }
-  else if (string.contains(bugPageXML, "Access Denied"))
-    s = "The access to the bug's page is restricted.";
+var tip = '';
+var style = '';
+var bugNumber = $0;
+var url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '] } ]');
+var bugzillaDetail = mdn.fetchJSONResource(url);
+
+if (bugzillaDetail.error != null) {
+    if (bugzillaDetail.error.code == 102) {
+        tip = "The access to the bug's page is restricted.";
+    } else {
+        tip = "ERROR: " + bugzillaDetail.error.message;
+    }
+} else if (bugzillaDetail.result != null) {
+    var bugDetail = bugzillaDetail.result.bugs[0];
+    while (bugDetail.dupe_of != null) {
+        bugNumber = bugDetail.dupe_of;
+        url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '] } ]');
+        bugzillaDetail = mdn.fetchJSONResource(url);
+        bugDetail = bugzillaDetail.result.bugs[0];
+    }
+    if (bugDetail.resolution == "FIXED") {
+        tip = 'FIXED: ' + bugDetail.summary;
+        style = 'style="text-decoration:line-through;"';
+    } else {
+        tip = bugDetail.summary;
+    }
 }
-*/
+var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bugNumber;
 
 var s_bug = mdn.localString({
     "en-US": "bug",
@@ -39,5 +43,5 @@ var s_bug = mdn.localString({
     "ja"   : "バグ",
     "pl"   : "błąd"
 });
-
-%><a rel="external" href="<%=bugPageURL%>" title="<%=s%>"><%=s_bug%>&nbsp;<%=$0%></a>
+%>
+<a <%- style %> href="<%- bugPageURL %>" title="<%- tip %>"><%=s_bug%>&nbsp;<%- bugNumber %></a>
