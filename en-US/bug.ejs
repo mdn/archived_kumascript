@@ -17,7 +17,7 @@ var bugzillaDetail = mdn.fetchJSONResource(url);
 
 if (bugzillaDetail.error != null) {
     if (bugzillaDetail.error.code == 102) {
-        tip = "The access to the bug's page is restricted.";
+        tip = "Access to this bug is restricted.";
     } else {
         tip = "ERROR: " + bugzillaDetail.error.message;
     }
