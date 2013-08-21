@@ -3,6 +3,8 @@
  * Inserts a link to a bug in Mozilla's Bugzilla database.
  *
  * $0 - The bug number to link to. As we follow resolved duplicate this may not be the number in the output.
+ *
+ * http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Server/JSONRPC.html
  */
 
 var mdn = require("MDN:Common");
@@ -29,7 +31,7 @@ if (bugzillaDetail.error != null) {
     }
     if (bugDetail.resolution == "FIXED") {
         tip = 'FIXED: ' + bugDetail.summary;
-        style = 'style="text-decoration:line-through;"';
+//        style = 'style="text-decoration:line-through;"';
     } else {
         tip = bugDetail.summary;
     }
@@ -44,4 +46,4 @@ var s_bug = mdn.localString({
     "pl"   : "błąd"
 });
 %>
-<a <%- style %> href="<%- bugPageURL %>" title="<%- tip %>"><%=s_bug%>&nbsp;<%- bugNumber %></a>
+<a <%- style %> href="<%- bugPageURL %>" title="<%- kuma.htmlEscape(tip) %>"><%=s_bug%>&nbsp;<%- bugNumber %></a>
