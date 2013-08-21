@@ -10,7 +10,7 @@ var mdn = require("MDN:Common");
 var tip = '';
 var style = '';
 var bugNumber = $0;
-var url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '] } ]');
+var url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '], "include_fields":["summary","dupe_of","resolution"] } ]');
 var bugzillaDetail = mdn.fetchJSONResource(url);
 
 if (bugzillaDetail.error != null) {
@@ -23,7 +23,7 @@ if (bugzillaDetail.error != null) {
     var bugDetail = bugzillaDetail.result.bugs[0];
     while (bugDetail.dupe_of != null) {
         bugNumber = bugDetail.dupe_of;
-        url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '] } ]');
+        url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '], "include_fields":["summary","dupe_of","resolution"] } ]');
         bugzillaDetail = mdn.fetchJSONResource(url);
         bugDetail = bugzillaDetail.result.bugs[0];
     }
