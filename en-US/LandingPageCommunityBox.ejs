@@ -1,0 +1,14 @@
+<%
+// Presents a box showing assorted information about the community
+// for the technology area covered by a landing page.
+//
+// Parameters:
+//  $0  Name of the mailing list for the community
+//  $1  Name of the newsgroup for the community
+
+%>
+<div class="landingPageBox">
+<h2 class="Community">Community</h2>
+<h3>Forums</h3>
+<%-template("DiscussionList", [$0, $1])%>
+</div>
