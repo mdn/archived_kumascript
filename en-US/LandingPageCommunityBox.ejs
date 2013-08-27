@@ -12,10 +12,11 @@ var channelStr = "";
 
 if ($3) {
     channelStr = "<p>Also, be sure to join in the live discussion in the <a href='irc://irc.mozilla.org/" + $3 + "'>#" + $3 + "</a> channel on <a href='https://wiki.mozilla.org/IRC'>IRC</a>.";
+}
 %>
 <div class="landingPageBox">
 <h2 class="Community">Community</h2>
-<p>Join the $0 community on our mailing list or newsgroup:</p>
+<p>Join the <%=$0%> community on our mailing list or newsgroup:</p>
 <%-template("DiscussionList", [$1, $2])%>
 <%-channelStr%>
 </div>
