@@ -8,6 +8,7 @@
 //  $0  Name of the topic or community
 //  $1  Name of the mailing list for the topic
 //  $2  Name of the newsgroup for the topic
+//  $3  IRC channel for the community
 
 function pageSorter(a, b) {
     return a.title.localeCompare(b.title);
@@ -67,7 +68,7 @@ if (numTerms) {
 
 // Build the community box
 
-var communityBox = template("LandingPageCommunityBox", [$0, $1, $2]);
+var communityBox = template("LandingPageCommunityBox", [$0, $1, $2, $3]);
 
 // Now we have the entire list in HTML. Let's go through it and try to split it into two columns by force.
 
