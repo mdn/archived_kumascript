@@ -3,10 +3,11 @@
 // for the technology area covered by a landing page.
 //
 // Parameters:
-//  $0  Name of the mailing list for the community
-//  $1  Name of the newsgroup for the community
+//  $0  Name of the topic/community
+//  $1  Name of the mailing list for the community
+//  $2  Name of the newsgroup for the community
 
 %>
 <h2 class="Community">Community</h2>
-<h3>Forums</h3>
-<%-template("DiscussionList", [$0, $1])%>
+<p>Join the $0 community on our mailing list or newsgroup:</p>
+<%-template("DiscussionList", [$1, $2])%>
