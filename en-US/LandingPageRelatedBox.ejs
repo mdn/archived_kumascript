@@ -1,0 +1,39 @@
+<%
+// Creates the HTML for a "Related topics" box to be used on a landing page.
+//
+// Parameters:
+//  $0  First page to link to
+//  ... More pages to link to
+//
+// Example:
+//
+//  {{LandingPageRelatedBox("/en-US/docs/XUL", "/en-US/docs/Mozilla/Extensions")}}
+
+var linkList = "";
+var relTopicsTitle = "";
+var relTopicsMessage = "";
+
+switch(env.locale) {
+    default:
+        relTopicsTitle = "Related topics";
+        relTopicsMessage = "These topics may also be of interest:";
+        break;
+}
+
+var len = arguments.length;
+
+if (len) {
+    linkList = "<ul>";
+    for (var i=0; i<len; i++) {
+        var page = wiki.getPage(arguments[i]);
+        linkList += "<li><a href='" + page.url + "'>" + page.title + "</a></li>";
+    }
+    linkList += "</ul>"
+}
+%>
+
+<div class="landingPageBox">
+<h2 class="Related_Topics"><%=relTopicsTitle%></h2>
+<p><%=relTopicsMessage%></p>
+<%-linkList%>
+</div>
