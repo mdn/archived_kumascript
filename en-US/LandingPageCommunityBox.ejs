@@ -9,14 +9,32 @@
 //  $3  IRC channel name
 
 var channelStr = "";
+var headingStr = "";
+var messageStr = "";
+var ircLink = "";
+
+var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>IRC</a>";
+
+// Build the IRC channel URL if a channel name was specified
 
 if ($3) {
-    channelStr = "<p>Also, be sure to join in the live discussion in the <a href='irc://irc.mozilla.org/" + $3 + "'>#" + $3 + "</a> channel on <a href='https://wiki.mozilla.org/IRC'>IRC</a>.";
+    ircLink = "<a href='irc://irc.mozilla.org/" + $3 + "'>#" + $3 + "</a>";
 }
+
+switch(env.locale) {
+    default:
+        headingStr = "Community";
+        messageStr = "Join the " + $0 + " community on our mailing list or newsgroup:";
+        if ($3) {
+            channelStr = "Also, be sure to join in the live discussion in the " + ircLink + " channel on " + ircInfoLink + ".";
+        }
+        break;
+}
+
 %>
 <div class="landingPageBox">
-<h2 class="Community">Community</h2>
-<p>Join the <%=$0%> community on our mailing list or newsgroup:</p>
+<h2 class="Community"><%=headingStr%></h2>
+<p><%=messageStr%></p>
 <%-template("DiscussionList", [$1, $2])%>
-<%-channelStr%>
+<p><%-channelStr%></p>
 </div>
