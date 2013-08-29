@@ -5,4 +5,7 @@
         $1 - Class name for custom style
         $2 - Tooltip text (optional)
 
-*/%><div class="banner <%= $1 %>" title="<%= $2 %>"><span class="badgeText"><%- $0 %></span></div>
+*/%>
+<div class="banner <%= $1 %>" title="<%= $2 %>">
+<div class="bannerHeading"><%- $0 %></div>
+</div>
