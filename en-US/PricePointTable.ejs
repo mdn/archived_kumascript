@@ -5,7 +5,7 @@ var url = "https://marketplace.firefox.com/api/v1/webpay/prices/";
 var data = mdn.fetchJSONResource(url);
 %>
 <p>Last updated <%= Date.now() %>. To get the latest price information, clear your browser's cache by using Shift+Refresh.</p>
-<table>
+<table class='standard-table">
   <thead>
     <tr>
       <th>Price point</th>
