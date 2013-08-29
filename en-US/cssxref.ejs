@@ -21,5 +21,15 @@ var filter = ['en-US', 'ja'];
 
 if (filter.indexOf(lang) === -1) { URL = "/" + lang + "/docs/CSS/" + $0 + $2; }
 
-%>
-<%- template("xref", [URL, str]) %>
+var page = wiki.getPage(URL);
+var summary = "";
+
+if (!$2) {
+    if (page && page.summary) {
+        var summary = mdn.escapeQuotes(page.summary);
+    } else {
+        summary = "The documentation about this has not yet been written; please consider contributing!";
+    }
+}
+
+%> <a href="<%- URL %>" title="<%-summary%>"><code><%= str %></code></a>
