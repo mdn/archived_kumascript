@@ -2,7 +2,7 @@
 // Displays an indicator indicating the Gecko compatibility range for a technology
 // or API term.
 //
-// The indicator is not displayed if the Gecko version is more than 8 releases
+// The indicator is not displayed if the Gecko version is more than 9 releases
 // old; this is one year.
 //
 // Parameters:
@@ -20,7 +20,7 @@ var versionDetails = "";
 
 var currentGecko = template("CurrentGecko");
 
-if (parseInt(currentGecko, 10) - parseInt($1, 10) < 8) {
+if (parseInt(currentGecko, 10) - parseInt($1, 10) < 9) {
 
 	// At this point, we know we need to show the indicator, so build the version
 	// required string.
