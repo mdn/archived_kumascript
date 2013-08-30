@@ -28,25 +28,35 @@ switch(env.locale) {
 
 // Start with the on-site links
 
-var len = $0.articles.length;
+var len = 0;
 var numItems = 0;
 
-if (len) {
-    for (var i=0; i<len; i++) {
-        var page = wiki.getPage($0.articles[i]);
-        linkList += "<li><a href='" + page.url + "'>" + page.title + "</a></li>";
-        numItems++;
+for (prop in $0) {
+    relTopicsMessage += prop + " value: " + $0[prop] + "<br>";
+}
+
+if ($0.articles) {
+    len = $0.articles.length;
+
+    if (len) {
+        for (var i=0; i<len; i++) {
+            var page = wiki.getPage($0.articles[i]);
+            linkList += "<li><a href='" + page.url + "'>" + page.title + "</a></li>";
+            numItems++;
+        }
     }
 }
 
-// Now do the off-site links
+// Now do the off-site links, if any
 
-len = $0.links.length;
-
-if (len) {
-    for (var i=0; i<len; i++) {
-        linkList += "<li><a href='" + $0.links[i].url + "'>" + $0.links[i].name + "</a></li>";
-        numItems++;
+if ($0.links) {
+    len = $0.links.length;
+    
+    if (len) {
+        for (var i=0; i<len; i++) {
+            linkList += "<li><a href='" + $0.links[i].url + "'>" + $0.links[i].name + "</a></li>";
+            numItems++;
+        }
     }
 }
 
