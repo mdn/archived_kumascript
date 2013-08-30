@@ -82,7 +82,7 @@ var relatedBox = "";
 // Build the community box. We have to extract the parameters from the
 // "community" object, if there is one, then pass it into that macro.
 
-if ($0.community) {
+if ($0.community && $0.community != undefined) {
     var obj = $0.community;
     communityBox = template("LandingPageCommunityBox", [obj.name, obj.listname, obj.newsgroup, obj.channel]);
 }
@@ -90,7 +90,7 @@ if ($0.community) {
 // Build the related topics box. We pass the "related" object into
 // the LandingPageRelatedBox macro.
 
-if ($0.related) {
+if ($0.related && $0.related != undefined) {
     relatedBox = template("LandingPageRelatedBox", $0.related);
 }
 
