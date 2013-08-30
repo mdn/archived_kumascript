@@ -14,13 +14,8 @@
 //
 //  name:      The name to use for the link
 //  url:       The URL to link to
-//
-// Example:
-//
-//  {{LandingPageRelatedBox(
 
 var linkList = "";
-var offsiteList = "";
 var relTopicsTitle = "";
 var relTopicsMessage = "";
 
@@ -34,14 +29,14 @@ switch(env.locale) {
 // Start with the on-site links
 
 var len = $0.articles.length;
+var numItems = 0;
 
 if (len) {
-    linkList = "<ul>";
     for (var i=0; i<len; i++) {
         var page = wiki.getPage($0.articles[i]);
         linkList += "<li><a href='" + page.url + "'>" + page.title + "</a></li>";
+        numItems++;
     }
-    linkList += "</ul>"
 }
 
 // Now do the off-site links
@@ -49,11 +44,16 @@ if (len) {
 len = $0.links.length;
 
 if (len) {
-    offsiteList = "<ul>";
     for (var i=0; i<len; i++) {
-        offsiteList += "<li><a href='" + $1.links[i].url + "'>" + $1.links[i].name + "</a></li>";
+        linkList += "<li><a href='" + $0.links[i].url + "'>" + $0.links[i].name + "</a></li>";
+        numItems++;
     }
-    offsiteList += "</ul>";
+}
+
+// Wrap in <ul> if there are any items
+
+if (numItems) {
+    linkList = "<ul>" + linkList + "</ul>";
 }
 %>
 
@@ -61,5 +61,4 @@ if (len) {
 <h2 class="Related_Topics" id="Related_Topics"><%=relTopicsTitle%></h2>
 <p><%=relTopicsMessage%></p>
 <%-linkList%>
-<%-offsiteList%>
 </div>
