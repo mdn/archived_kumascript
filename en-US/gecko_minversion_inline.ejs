@@ -1,31 +1,11 @@
-<%/* Example: gecko_minversion_inline("9.9") */%>
 <%
-/* one parameter: Gecko version */
-/* get the page language */
-var lang = env.locale;
-
-var str = "Requires Gecko " + $0;
- 
-switch(lang) {
-    case 'fr':
-        str = "Nécessite Gecko " + $0;
-    break;
-    case 'ja':
-        str = "Gecko " + $0 + " が必要";
-    break;
-    case 'pl':
-        str = "Wymaga Gecko " + $0;
-    break;
-    case 'pt':
-        str = "Requer Gecko " + $0;
-    break;
-    case 'de':
-        str = "Ab Gecko " + $0;
-        break;
-    case 'es':
-        str = "Requiere Gecko " + $0;
-    break;
-    defaut: break;
-}
+// Inserts an inline indicator noting Gecko version requirements.
+// Nothing is displayed if the Gecko version is older than a certain time,
+// as defined in the GeckoVersionIndicator macro, which should be used
+// instead, as this simply calls through.
+//
+// Parameters:
+//  $0  Gecko version required.
 %>
-<span class="inlineIndicator geckoMinVer standardNote standardNoteInline" title="<%=template('geckoRelease', [$0])%>"><%=str%></span>
+
+<%-template("GeckoVersionIndicator", [0, $0])%>
