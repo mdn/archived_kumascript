@@ -59,7 +59,7 @@ if (parseInt(currentGecko, 10) - parseInt($1, 10) < 8) {
 			%><%-template("SimpleBadge", [primaryText, "geckoVersionBadge", versionDetails])%><%
 			break;
 		case 2:
-			%><%-template("SimpleBanner", [primaryText, "geckoVersionBadge", versionDetails])%><%
+			%><%-template("SimpleBanner", [primaryText + " " + template("geckoRelease", [$1]), "geckoVersionBadge", $2])%><%
 			break;
 	}
 }
