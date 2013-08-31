@@ -1,2 +1,11 @@
-<%/* Example: {{ fx_minversion_inline("9.9") }} */%>
-<%- template("minversionGeneric", ["inline","Firefox",$0]) %>
+<%
+// Inserts an inline indicator noting Firefox version requirements.
+// Nothing is displayed if the Firefox version is older than a certain time,
+// as defined in the GeckoVersionIndicator macro, which should be used
+// instead, as this simply calls through.
+//
+// Parameters:
+//  $0  Firefox version required.
+%>
+
+<%-template("FirefoxVersionIndicator", [0, $0])%>
