@@ -7,17 +7,19 @@
 // Parameters:
 //
 //  $0  Version of obsolescence
-/* one parameter: version of obsolescence (optional) */
-/* prepend version with HTML, CSS, JS or Gecko for those techs */
-/* for backwards compatibility unprefixed is Gecko, please avoid this */
+//
+// The version should be prepended with "html", "js", "css", or "gecko"
+// to indicate which technology the version number refers to. For backward
+// compatibility, unprefixed versions are assumed to refer to Gecko, but
+// you shouldn't rely on this.
 
 var str = "";
 var type = 0;   // assume we want the text badge
 
 if ($0 && $0 != undefined) {
   if (string.IsDigit($0)) {
-    str = "gecko" + $0;
-  } else {
+    str = "gecko" + $0;
+  } else {
     str = $0
   }
 } else {
