@@ -1,7 +1,6 @@
 <%
-var s_text = mdn.localString({
-    "en-US": "Experimental",
-    "fr": "Expérimental",
-    "ja": "実験的"
-});
-%><span class="inlineIndicator experimental experimentalInline"><%= s_text %></span>
+// Inserts an "experimental" icon. This just calls through to the newer
+// ExperimentalBadge macro, which you should use instead.
+//
+%>
+<%-template("ExperimentalBadge", [1])%>
