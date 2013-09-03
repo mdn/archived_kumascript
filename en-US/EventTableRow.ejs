@@ -11,6 +11,6 @@ Parameters:
 
 */%><tr>
   <td><code><%=$0%></code><% if($3) { %> <%- template("readOnlyInline") %><% } %></td>
-  <td><%-$1%></td>
+  <td><%-template("domxref", [$1])%></td>
   <td><%-$2%></td>
 </tr>
