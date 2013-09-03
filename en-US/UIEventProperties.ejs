@@ -1,14 +1,14 @@
 <%
 var el = env.locale;
 
-var s1 = "AbstractView (<code>window</code>)";
+var s1 = template("domxref", ["WindowProxy"]);
 
 var s2 = mdn.localString({
     "en-US" : "(the <code>window</code> of the document).",
     "ja"    : "（document の <code>window</code>）"
 });
 
-var s3 = "long (float)";
+var s3 = "<code>long</code> (<code>float</code>)";
 
 
 %><tr>
