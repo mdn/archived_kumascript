@@ -1,16 +1,34 @@
 <%
+// Inserts an inline indicator that notes that an item is obsolete.
+//
+// NOTE: "Obsolete" means that the indicated item NO LONGER FUNCTIONS. If
+//       the item still works, but should no longer be used, it's "deprecated".
+//
+// Parameters:
+//
+//  $0  Version of obsolescence
 /* one parameter: version of obsolescence (optional) */
 /* prepend version with HTML, CSS, JS or Gecko for those techs */
 /* for backwards compatibility unprefixed is Gecko, please avoid this */
 
 var str = "";
+var type = 0;   // assume we want the text badge
 
-if ($0) {
+if ($0 && $0 != undefined) {
   if (string.IsDigit($0)) {
     str = "gecko" + $0;
   } else {
     str = $0
   }
+} else {
+  type = 1; // switch to the icon if no version specified
 }
 
-%><%- template('obsoleteGeneric', ["inline",str]) %>
+// If a version was specified, we need to use the older badge type
+
+if (str.length) {
+    %><%- template('obsoleteGeneric', ["inline",str]) %><%
+} else {
+    %><%- template('ObsoleteBadge', [type]) %><%
+}
+%>
