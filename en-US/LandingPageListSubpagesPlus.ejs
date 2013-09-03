@@ -91,7 +91,7 @@ if ($0.community && $0.community != undefined) {
 // the LandingPageRelatedBox macro.
 
 if ($0.related && $0.related != undefined) {
-    relatedBox = template("LandingPageRelatedBox", $0.related);
+    relatedBox = template("LandingPageRelatedBox", [$0.related]);
 }
 
 // Now we have the entire list in HTML. Let's go through it and try to split it into two columns by force.
