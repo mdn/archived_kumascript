@@ -1,16 +1,14 @@
 <%
 var el = env.locale;
 var l = "en-US";
-var p = "Mozilla_event_reference";
+var p = "Web/Reference/Events";
+var s = ', '
 
 if (env.locale === "ja") {
     l = el;
-    p = "Web/Reference/Events/";
+    p = "Web/Reference/Events";
+    s = '、'
 }
 
 
-%><ul>
-<li><a href="/<%-l %>/docs/<%-p%>/copy"><code>copy</code></a></li>
-<li><a href="/<%-l %>/docs/<%-p%>/cut"><code>cut</code></a></li>
-<li><a href="/<%-l %>/docs/<%-p%>/paste"><code>paste</code></a></li>
-</ul>
+%><a href="/<%-l %>/docs/<%-p%>/copy"><code>copy</code></a><%-s%><a href="/<%-l %>/docs/<%-p%>/cut"><code>cut</code></a><%-s%><a href="/<%-l %>/docs/<%-p%>/paste"><code>paste</code></a>
