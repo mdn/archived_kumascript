@@ -10,4 +10,4 @@
  var lang = $1 || env.locale
  var url = '/' + lang + '/docs/tag/' + encodeURI($0);
 
-%><a href="<%- url %>" hreflang="<%- lang %>"><%= $0 %></a>
+%><a href="<%- url %>" hreflang="<%- lang %>" rel="tag"><%= $0 %></a>
