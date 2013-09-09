@@ -3,13 +3,17 @@
  * Inserts a link to a bug in Mozilla's Bugzilla database.
  *
  * $0 - The bug number to link to. As we follow resolved duplicate this may not be the number in the output.
+ * $1 - Type of output, bug (default) or table
  *
  * http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Server/JSONRPC.html
  */
 
 var mdn = require("MDN:Common");
 
-var tip = '';
+var type = $1 || 'bug';
+
+var desc = '';
+var tipStatus = '';
 var style = '';
 var bugNumber = $0;
 var url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '], "include_fields":["summary","dupe_of","resolution"] } ]');
@@ -17,9 +21,10 @@ var bugzillaDetail = mdn.fetchJSONResource(url);
 
 if (bugzillaDetail.error != null) {
     if (bugzillaDetail.error.code == 102) {
-        tip = "Access to this bug is restricted.";
+        desc = "Access to this bug is restricted.";
     } else {
-        tip = "ERROR: " + bugzillaDetail.error.message;
+        desc = bugzillaDetail.error.message;
+        tipStatus = "ERROR: ";
     }
 } else if (bugzillaDetail.result != null) {
     var bugDetail = bugzillaDetail.result.bugs[0];
@@ -30,11 +35,10 @@ if (bugzillaDetail.error != null) {
         bugDetail = bugzillaDetail.result.bugs[0];
     }
     if (bugDetail.resolution == "FIXED") {
-        tip = 'FIXED: ' + bugDetail.summary;
-//        style = 'style="text-decoration:line-through;"';
-    } else {
-        tip = bugDetail.summary;
+        tipStatus = 'FIXED: ';
+        style = "class='bug-resolved'";
     }
+    desc = bugDetail.summary;
 }
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bugNumber;
 
@@ -45,5 +49,13 @@ var s_bug = mdn.localString({
     "ja"   : "バグ",
     "pl"   : "błąd"
 });
+if (type == 'table'){ %>
+<tr>
+    <td><a <%= style %> href="<%= bugPageURL %>"><%= bugNumber %></a></td>
+    <td><%= desc %></td>
+</tr>
+<%
+} else {
 %>
-<a <%- style %> href="<%- bugPageURL %>" title="<%- kuma.htmlEscape(tip) %>"><%=s_bug%>&nbsp;<%- bugNumber %></a>
+<a href="<%= bugPageURL %>" title="<%= tipStatus + desc %>"><%=s_bug%>&nbsp;<%= bugNumber %></a>
+<% } %>
