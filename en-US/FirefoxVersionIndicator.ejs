@@ -7,7 +7,8 @@
 //
 // Parameters:
 //
-//  $0  Indicator type (0 = badge, 2 = banner; 1 for icon will draw as badge)
+//  $0  Indicator type (0 = badge, 2 = banner; 1 for icon will draw as badge;
+//                      3 = permanent badge)
 //	$1	Minimum Firefox version
 //	$2	Additional text (displayed in tooltip for badge or in the banner)
 
@@ -20,7 +21,7 @@ var versionDetails = "";
 
 var currentGecko = template("CurrentGecko");
 
-if (parseInt(currentGecko, 10) - parseInt($1, 10) < 9) {
+if ((parseInt(currentGecko, 10) - parseInt($1, 10) < 9) || ($0==3)) {
 
 	// At this point, we know we need to show the indicator, so build the version
 	// required string.
@@ -104,6 +105,7 @@ if (parseInt(currentGecko, 10) - parseInt($1, 10) < 9) {
 	switch(parseInt($0, 10)) {
 		case 0:
 		case 1:
+        case 3:
 			%><%-template("SimpleBadge", [versionLink, "firefoxVersionBadge", newIn + productVersion])%><%
 			break;
 		case 2:
