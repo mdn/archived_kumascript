@@ -217,13 +217,13 @@
         var page = require('DekiScript:Page');
         var pages = page.subpages(path, depth, self);
         
-        if (!reverse) {
+        if (reverse == 0) {
             pages.sort(alphanumForward);
         } else {
             pages.sort(alphanumBackward);
         }
         
-        return process_array(pages, ordered);
+        return process_array(pages, ordered != 0);
 
     	function chunkify(t) {
 			var tz = [], x = 0, y = -1, n = 0, i, j;
