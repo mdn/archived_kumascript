@@ -212,7 +212,8 @@
     // Inserts a pages sub tree
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Tree)
     // if reverse is non-zero, the sort is backward
-    tree: function(path, depth, self, reverse) {
+    // if ordered is true, the output is an <ol> instead of <ul>
+    tree: function(path, depth, self, reverse, ordered) {
         var page = require('DekiScript:Page');
         var pages = page.subpages(path, depth, self);
         
@@ -222,7 +223,7 @@
             pages.sort(alphanumBackward);
         }
         
-        return process_array(pages);
+        return process_array(pages, ordered);
 
     	function chunkify(t) {
 			var tz = [], x = 0, y = -1, n = 0, i, j;
@@ -270,17 +271,25 @@
 			return aa.length - bb.length;
 		}
 
-        function process_array(arr) {
+        function process_array(arr, ordered) {
             var result = '';
+            var openTag = '<ul>';
+            var closeTag = '</ul>';
+            
+            if (ordered) {
+                openTag = '<ol>';
+                closeTag = '</ol>';
+            }
+            
             if(arr.length) {
-                result += '<ul>';
+                result += openTag;
                 arr.forEach(function(item) {
                     if (!item) { return; }
                     result += '<li><a href="' + item.url + '">' + kuma.htmlEscape(item.title) + '</a>' +
-                              process_array(item.subpages || []) + '</li>';
+                              process_array(item.subpages || [], ordered) + '</li>';
                     
                 });
-                result += '</ul>';
+                result += closeTag;
             }
             return result;
         }   
