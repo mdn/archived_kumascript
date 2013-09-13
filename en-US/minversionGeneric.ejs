@@ -10,15 +10,13 @@ var lang = env.locale;
 
 var product = $1.trim();
 var version = $2.split('.',2).join('.').replace(/\.0/,'');
+if (product == 'Firefox OS' && $2 == '1.0.1') {
+    version = $2
+}
 
 var productVersion = product + ' ' + version
 var articleName = productVersion + " for developers";
-// Short term fix until products are moved
-var link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-if (product != 'Firefox') {
-    link = lang + '/docs/' + articleName;
-}
-
+var link = lang + '/docs/Mozilla/' + web.spacesToUnderscores(product) + '/Releases/' + version;
 var text = "This content covers features introduced in " + web.link(wiki.uri(link), productVersion);
 var note = productVersion + " note";
 var newIn = "New in ";
@@ -26,40 +24,24 @@ var newIn = "New in ";
 switch(lang) {
     case 'de':
         articleName = productVersion + " für Entwickler";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         text = "Dieser Artikel umfasst Features die in " + web.link(wiki.uri(link), productVersion) + " eingeführt wurden";
         note = "Hinweis zu " + productVersion;
         newIn = "Neu in ";
         break;
     case 'es':
         articleName = productVersion + " para desarrolladores";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         text = "Este artículo cubre características introducidas en " + web.link(wiki.uri(link), productVersion);
         note = "Nota sobre " + productVersion;
         newIn = "Nuevo en ";
         break;
     case 'fr':
         articleName = productVersion + " pour les développeurs";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         text = "Cet article traite de fonctionnalités introduites dans " + web.link(wiki.uri(link), productVersion);
         note = "Note concernant " + productVersion;
         newIn = "Nouveau dans ";
         break;
     case 'ja':
         articleName = productVersion + " for developers";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         text = "この記事は " + web.link(wiki.uri(link), productVersion) + "  の新機能について述べています";
         note = productVersion + " における注記";
         break;
@@ -69,45 +51,25 @@ switch(lang) {
         break;
     case 'pl':
         articleName = productVersion + " dla programistów";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         text = "Ten artykuł obejmuje funkcje wprowadzone w " + web.link(wiki.uri(link), productVersion);
         note = "Uwaga dotycząca Firefoksa " + version;
         newIn = "Nowość w ";
         break;
     case 'pt-PT':
         articleName = productVersion + " para desenvolvedores";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         text = "Este artigo cobre características introduzidas no " + web.link(wiki.uri(link), productVersion);
         newIn = "Novidade no ";
         break;
     case 'ru':
         articleName = productVersion + " для разработчиков";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         newIn = "Нововведение в ";
         break;
     case 'zh-CN':
         articleName = productVersion + " for developers";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         text = "该条目记录了 " + web.link(wiki.uri(link), productVersion) + " 引入的新特性";
         break;
     case 'zh-TW':
         articleName = productVersion + " 技術文件";
-        link = lang + '/docs/Mozilla/' + product + '/Releases/' + version;
-        if (product != 'Firefox') {
-            link = lang + '/docs/' + articleName;
-        }
         text = "本文描述 " + web.link(wiki.uri(link), productVersion) + " 之後加入的功能。";
         break;
     default: break;
