@@ -59,24 +59,6 @@ switch (env.locale) {
   <ol>
       <li><a href="<%=s_css_href%>"><%=s_css_title%></a> </li>
       <li><a href="<%=s_css_ref_href%>"><%=s_css_ref_title%></a>
-<ol> <li><a href="about:config">A</a><ol>
-<li><%- template("cssxref", [":active"]) %></li> 
-<li><%- template("cssxref", ["::after", "::after (:after)"]) %></li> 
-<li><%- template("cssxref", ["align-content"]) %></li> 
-<li><%- template("Cssxref", ["align-items"]) %></li> 
-<li><%- template("Cssxref", ["align-self"]) %></li> 
-<li><%- template("Xref_cssangle") %></li> 
-<li><%- template("Cssxref", ["animation"]) %></li> 
-<li><%- template("Cssxref", ["animation-delay"]) %></li> 
-<li><%- template("Cssxref", ["animation-direction"]) %></li> 
-<li><%- template("Cssxref", ["animation-duration"]) %></li> 
-<li><%- template("Cssxref", ["animation-fill-mode"]) %></li> 
-<li><%- template("Cssxref", ["animation-iteration-count"]) %></li> 
-<li><%- template("Cssxref", ["animation-name"]) %></li> 
-<li><%- template("Cssxref", ["animation-play-state"]) %></li> 
-<li><%- template("Cssxref", ["animation-timing-function"]) %></li> 
-<li><%- template("Cssxref", ["attr", "attr()"]) %></li> 
-<li><%- template("Cssxref", ["auto"]) %></li>
-</ol></li></ol></li> 
+<%- template("CSS_Ref") %>  
   </ol>
   <%}%>
