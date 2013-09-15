@@ -1,8 +1,19 @@
 <%
+function containsTag(tagList, tag) {
+    if (!tagList || tagList == undefined) return 0;
+    tag = tag.toLowerCase();
+    for (var i = 0, len = tagList.length; i < len; i++) {
+        if (tagList[i].toLowerCase() == tag) return 1;
+    }
+    return 0;
+}
+
 var s_css_href = '/en-US/docs/Web/CSS';
 var s_css_title = 'CSS';
 var s_css_ref_href = '/en-US/docs/Web/CSS/Reference';
 var s_css_ref_title = 'CSS Reference';
+var s_api_href = '/' + env.locale + '/docs/Web/API';
+var s_guide_href = '/' + env.locale + '/docs/Web/Guide/CSS';
 
 switch (env.locale) {
     case 'es':
@@ -52,13 +63,81 @@ switch (env.locale) {
         break;
     default: break;
 }
-%><span class="breadcrumbs cssRef_breadcrumbs"><% if (s_css_href) { %>&laquo; <a href="<%=s_css_href%>"><%=s_css_title%></a> <% } %>&laquo; <a href="<%=s_css_ref_href%>"><%=s_css_ref_title%></a></span>
+
+// Find the section of CSS this page belongs to (that is the first tag of the form "CSS XYZ")
+var tags = env.tags;
+var found_tag = '';
+for (i in tags) {
+    if ((tags[i] != 'CSS Reference') &&
+        (tags[i] != 'CSS Référence') &&
+        (tags[i] != s_css_ref_title)) { // Only keep this one one the 'accent' bug is fixed
+        if (tags[i].substr(0, 4) == 'CSS ') {
+            found_tag = tags[i];
+            break;
+        }
+    }
+}
+
+// Find the CSS entities belonging to the same subject
+if (found_tag) {
+    // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
+    var pageList = page.subpagesExpand(s_css_href);   // Get subpages, including tags
+    var resultCSS = [];
+
+    for (aPage in pageList) {
+        if (containsTag(pageList[aPage].tags, found_tag)) {
+            resultCSS.push(pageList[aPage].title);
+        }
+    }
+}
+
+
+// Find the interfaces belonging to the same subject
+if (found_tag) {
+    // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
+    var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
+    var resultAPI = [];
+
+    for (aPage in pageList) {
+        if (containsTag(pageList[aPage].tags, found_tag) &&
+            containsTag(pageList[aPage].tags, "Interface")) { // We only want interfaces, not properties or methods
+            resultAPI.push(pageList[aPage].title);
+        }
+    }
+}
+
+// Find the guides, tutorials, ... belonging to the same subject
+if (found_tag) {
+    // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
+    var pageList = page.subpagesExpand(s_guide_href);   // Get subpages, including tags
+    var resultGuide = [];
+
+    for (aPage in pageList) {
+        if (containsTag(pageList[aPage].tags, found_tag)) {
+            resultGuide.push({title: pageList[aPage].title, url: pageList[aPage].url});
+        }
+    }
+}
+%><span class="breadcrumbs cssRef_breadcrumbs themeUpdated"><% if (s_css_href) { %>&laquo; <a href="<%=s_css_href%>"><%=s_css_title%></a> <% } %>&laquo; <a href="<%=s_css_ref_href%>"><%=s_css_ref_title%></a></span>
 
   <% if (s_css_href) {  %>
   <h2 class="Quick_links" id="Quick_Links">Quick Links</h2>
   <ol>
-      <li><a href="<%=s_css_href%>"><%=s_css_title%></a> </li>
-      <li><a href="<%=s_css_ref_href%>"><%=s_css_ref_title%></a>
-<%- template("CSS_Ref_Core") %>  
+  <% if (found_tag) { 
+        for( aPage in resultGuide) { // Tutorials and guides matching
+  %>
+            <li><a href="<%-resultGuide[aPage].url%>"><%-resultGuide[aPage].title%></a></li>
+  <%    }
+        for (aTitle in resultCSS) { // CSS entities matching 
+  %>
+            <li><%- template("cssxref", [resultCSS[aTitle]]) %></li>
+  <%    } 
+        for (aTitle in resultAPI) { // CSSOM interfaces matching 
+  %>
+            <li><%- template("domxref", [resultAPI[aTitle]]) %></li>
+  <%    } 
+    } %>
+    <li><a href="<%=s_css_ref_href%>"><%=s_css_ref_title%></a>
+<%- template("CSS_Ref_Core") %></li>  
   </ol>
   <%}%>
