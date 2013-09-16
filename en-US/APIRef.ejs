@@ -17,7 +17,9 @@ function containsAPI(APIList, name) {
     name = name.toLowerCase();
     name = name.split('.')[0];
     for (var i = 0, len = APIList.length; i < len; i++) {
-        if (APIList[i].toLowerCase() == name) return 1;
+        if (APIList[i].toLowerCase() == name) {
+            return 1;
+        }
     }
     return 0;
 }
@@ -48,8 +50,8 @@ var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href=
 /* Generate quick links */
 
     /* Find the API Name from the URL: the part after the last / and before the first . */
-    var pageURL = page.href;
-    %><%-page.href%><br/><%
+    var pageURL = env.path;
+    
     var pageFolders = pageURL.split('/');
     if (pageFolders) {
     var pageName = pageFolders[pageFolders.length-1]; // We are only interested in the last part
@@ -66,8 +68,8 @@ var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href=
     var resultProps = [];
 
     for (aPage in pageList) {
-        if (containsAPI(APIList, pageList[aPage].href) &&
-            containsTag(pageList[aPage].tags, "Properties")) { // We only want properties
+        if (containsAPI(APIList, pageList[aPage].title) &&
+            containsTag(pageList[aPage].tags, "Property")) { // We only want properties
             resultProps.push(pageList[aPage].title);
         }
     }
@@ -78,8 +80,8 @@ var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href=
     var resultMethods = [];
 
     for (aPage in pageList) {
-        if (containsAPI(APIList, pageList[aPage].href) &&
-            containsTag(pageList[aPage].tags, "Methods") &&
+        if (containsAPI(APIList, pageList[aPage].title) &&
+            containsTag(pageList[aPage].tags, "Method") &&
             !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
             resultMethods.push(pageList[aPage].title);
         }
@@ -91,7 +93,7 @@ var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href=
     /* Display ancestor chain */
     // TBD: the chain, we only displays the lowest one!
     %>
-    <li><a href="<%- s_api_href + '/' + mainIF%>"><%-mainIF%></a></li>
+    <li><%- template("domxref", [mainIF]) %></a></li>
     <%
     /* Display properties */
     for (aProp in resultProps) { 
