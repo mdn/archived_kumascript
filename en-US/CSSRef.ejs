@@ -121,8 +121,8 @@ if (found_tag) {
 %><span class="breadcrumbs cssRef_breadcrumbs themeUpdated"><% if (s_css_href) { %>&laquo; <a href="<%=s_css_href%>"><%=s_css_title%></a> <% } %>&laquo; <a href="<%=s_css_ref_href%>"><%=s_css_ref_title%></a></span>
 
   <% if (s_css_href) {  %>
-  <h2 class="Quick_links" id="Quick_Links">Quick Links</h2>
-  <ol>
+  <section class="Quick_links" id="Quick_Links">
+   <ol>
   <% if (found_tag) { 
         for( aPage in resultGuide) { // Tutorials and guides matching
   %>
@@ -139,5 +139,6 @@ if (found_tag) {
     } %>
     <li><a href="<%=s_css_ref_href%>"><%=s_css_ref_title%></a>
 <%- template("CSS_Ref_Core") %></li>  
-  </ol>
+   </ol>
+  </section>
   <%}%>
