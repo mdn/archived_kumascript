@@ -8,7 +8,7 @@ function containsTag(tagList, tag) {
     if (!tagList || tagList == undefined) return 0;
     tag = tag.toLowerCase();
     for (var i = 0, len = tagList.length; i < len; i++) {
-        if (tagList[i].toLowerCase() == tag) return 1;
+        if (tagList[i].toLowerCase() === tag) return 1;
     }
     return 0;
 }
@@ -17,7 +17,7 @@ function containsAPI(APIList, name) {
     name = name.toLowerCase();
     name = name.split('.')[0];
     for (var i = 0, len = APIList.length; i < len; i++) {
-        if (APIList[i].toLowerCase() == name) {
+        if (APIList[i].toLowerCase() === name) {
             return 1;
         }
     }
@@ -87,18 +87,18 @@ var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href=
         }
     }
     %>
-<h2 class="Quick_links" id="Quick_Links">Quick Links</h2>
+<section class="Quick_links" id="Quick_Links">
   <ol>
     <%
     /* Display ancestor chain */
     // TBD: the chain, we only displays the lowest one!
     %>
-    <li><%- template("domxref", [mainIF]) %></a></li>
+    <li><b><%- template("domxref", [mainIF]) %></a></b></li>
     <%
     /* Display properties */
     for (aProp in resultProps) { 
     %>
-        <li><%- template("domxref", [resultProps[aProp], resultProps[aProp].split('.')[1]]) %></li>
+        <li><i><%- template("domxref", [resultProps[aProp], resultProps[aProp].split('.')[1]]) %></i></li>
 <%  } 
     /* Display constructor */
     // TBD.
@@ -110,3 +110,4 @@ var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href=
 <%  } } else {%>"bouh"<%}
 %>
     </ol>
+   </section>
