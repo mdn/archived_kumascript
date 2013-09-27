@@ -89,3 +89,17 @@ for (aPage in MLpageList) {
 }
 %>
 </ol>
+<h2>Pages missing the 'Method' or 'Property' tag</h2>
+<ol><%
+var MLpageList = page.subpagesExpand("/en-US/docs/Web/API");
+for (aPage in MLpageList) {
+        if ((MLpageList[aPage].title.indexOf('.') != -1) &&
+            !containsTag(MLpageList[aPage].tags, "Property")&&
+            !containsTag(MLpageList[aPage].tags, "Method")) { 
+%>
+   <li><%-MLpageList[aPage].url + ' (<a href="'+MLpageList[aPage].url+'">'+MLpageList[aPage].title+'</a>)'%></li>
+<%
+    }
+}
+%>
+</ol>
