@@ -100,13 +100,25 @@ switch(lang) {
         break;
 }
 
+var str_desc = mdn.localString({
+  "en-US": "This feature is obsolete. Although it is still supported by browsers, its usage is discouraged in new projects. Try to avoid using it.",
+  "de":    "",
+  "es":    "",
+  "fr":    "Cette fonctionnalité est obsolète. Bien qu'encore supportée par des navigateurs, son utilisation est découragée pour tout nouveau projet. Evitez de l'utiliser.",
+  "ja":    "",
+  "pl":    "",
+  "ru":    "",
+  "zh-CN": "",
+  "zh-TW": ""
+});
+
 switch($0) {
     case 'inline':
         %><span title="<%=tip%>" class="inlineIndicator obsolete obsoleteInline"><%-str%></span><%
         break;
     case 'header':
         if (string.length(tip)) { str = str + " " + tip; }
-        %><div class="overheadIndicator obsolete obsoleteHeader"><p><%-str%></p></div><%
+        %><div class="overheadIndicator obsolete obsoleteHeader"><p><strong><%-str%></strong><br/><%-str_desc%></p></div><%
         break;
     case 'method':
         if (string.length(tip)) { str = str + " " + tip; }
