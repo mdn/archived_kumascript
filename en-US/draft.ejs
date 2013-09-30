@@ -1,14 +1,14 @@
 <%
-var s_draft = 'DRAFT';
+var s_draft = 'Draft';
 var s_not_complete = 'This page is not complete.';
 
 switch (env.locale) {
     case 'es':
-        s_draft = 'BORRADOR';
+        s_draft = 'Borrador';
         s_not_complete = "Esta página no está completa.";
         break;
     case 'fr':
-        s_draft = 'BROUILLON';
+        s_draft = 'Brouillon';
         s_not_complete = "Cette page n'est pas terminée.";
         break;
     case 'ja':
@@ -20,7 +20,7 @@ switch (env.locale) {
         s_not_complete = "이 문서는 작성중입니다.";
         break;
     case 'pl':
-        s_draft = 'SZKIC';
+        s_draft = 'Szkic';
         s_not_complete = "Strona ta nie jest jeszcze ukończona.";
         break;
     case 'zh-CN':
@@ -32,11 +32,11 @@ switch (env.locale) {
         s_not_complete = '本頁仍未完成';
         break;
     case 'pt-PT':
-        s_draft = 'ESBOÇO';
+        s_draft = 'Esboço';
         s_not_complete = 'Esta página está incompleta.';
         break;
 }
-%><div class="overheadIndicator draft draftHeader">
-    <strong><%=s_draft%></strong>
-    <div><%=s_not_complete%></div>
+%><div class="overheadIndicator draft">
+    <p><strong><%=s_draft%></strong><br/>
+    <%=s_not_complete%></p>
 </div>
