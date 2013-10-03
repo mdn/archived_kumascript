@@ -1,4 +1,10 @@
 <%
+// Inserts a link to the specified attribute of a particular HTML element.
+//
+// Parameters:
+//  $0  The attribute to insert
+//  $1  The element on which the attribute is used
+
 var lang = env.locale;
 var result = '<code><a href="/' + lang + '/docs/Web/HTML/Element/' + $1 + '#attr-' + $0 +'">' + $0 + '</a></code>';
 %>
