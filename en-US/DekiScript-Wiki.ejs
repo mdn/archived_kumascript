@@ -213,6 +213,11 @@
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Tree)
     // if reverse is non-zero, the sort is backward
     // if ordered is true, the output is an <ol> instead of <ul>
+    //
+    // Special note: If ordered is true, pages whose locale differ from
+    // the current page's locale are omitted, to work around misplaced
+    // localizations showing up in navigation.
+    
     tree: function(path, depth, self, reverse, ordered) {
         var page = require('DekiScript:Page');
         var pages = page.subpages(path, depth, self);
@@ -285,6 +290,7 @@
                 result += openTag;
                 arr.forEach(function(item) {
                     if (!item) { return; }
+                    if (ordered && (item.locale != env.locale)) { return; }
                     result += '<li><a href="' + item.url + '">' + kuma.htmlEscape(item.title) + '</a>' +
                               process_array(item.subpages || [], ordered) + '</li>';
                     
