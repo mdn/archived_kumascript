@@ -8,16 +8,16 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
-var s_mathml_href = '/en-US/docs/Web/MathML';
-var s_mathml_title = 'MathML';
+function safe_tags(str) {
+    return str.replace(/</g,'&lt;').replace(/>/g,'&gt;') ;
+}
+
 var s_mathml_ref_href = '/en-US/docs/Web/MathML/Element';
 var s_mathml_ref_title = 'MathML Reference';
 var s_mathml_element_tag = 'MathML:Element';
 
 switch (env.locale) {
     case 'de':
-        s_mathml_href = '/de/docs/Web/MathML';
-        s_mathml_title = 'MathML';
         s_mathml_ref_href = 'de/docs/Web/MathML/Element';
         s_mathml_ref_title = 'MathML Referenz';
         s_mathml_element_tag = 'MathML:Element';
@@ -29,25 +29,21 @@ switch (env.locale) {
 var pageList = page.subpagesExpand(s_mathml_ref_href);   // Get subpages, including tags
 var result = [];
 
-    for (aPage in pageList) {fic tag
-        if (containsTag(pageList[aPage].tags, s_mathml_element_tag) {
-            result.push(pageList[aPage]);
-        }
+for (aPage in pageList) {
+    if (containsTag(pageList[aPage].tags, s_mathml_element_tag)) {
+        result.push(pageList[aPage]);
     }
 }
+%>
 
-%><span class="breadcrumbs cssRef_breadcrumbs themeUpdated"><% if (s_mathml_href) { %>&laquo; <a href="<%=s_mathml_href%>"><%=s_mathml_title%></a> <% } %>&laquo; <a href="<%=s_mathml_ref_href%>"><%=s_css_mathml_title%></a></span>
+<section class="Quick_links" id="Quick_Links">
+    <ol>
+        <li><strong><a href="<%=s_mathml_ref_href%>"><%=s_mathml_ref_title%></a></strong>
 
-  <% if (s_mathml_href) {  %>
-  <section class="Quick_links" id="Quick_Links">
-   <ol>
-    <li><a href="<%=s_mathml_ref_href%>"><%=s_mathml_ref_title%></a>
-    
-        <% for(aPage in result) { %>
-            <li><a href="<%-result[aPage].url%>"><%-result[aPage].title%></a></li>
-        <%    }  %>
+        <% for (aPage in result) { %>
+            <li><a href="<%-result[aPage].url%>"><%-safe_tags(result[aPage].title)%></a></li>
+        <% } %>
         
-    </li>  
-   </ol>
-  </section>
-  <%}%>
+        </li>  
+    </ol>
+</section>
