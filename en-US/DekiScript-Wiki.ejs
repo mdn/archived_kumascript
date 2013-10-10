@@ -228,7 +228,7 @@
             pages.sort(alphanumBackward);
         }
         
-        return process_array(pages, ordered != 0);
+        return process_array(null, pages, ordered != 0);
 
     	function chunkify(t) {
 			var tz = [], x = 0, y = -1, n = 0, i, j;
@@ -276,7 +276,7 @@
 			return aa.length - bb.length;
 		}
 
-        function process_array(arr, ordered) {
+        function process_array(folderItem, arr, ordered) {
             var result = '';
             var openTag = '<ul>';
             var closeTag = '</ul>';
@@ -288,11 +288,20 @@
             
             if(arr.length) {
                 result += openTag;
+
+                // First add an extra item for linking to the folder's page
+                // (only for ordered lists)
+                if (folderItem != null && ordered) {
+                    result += '<li><a href="' + folderItem.url + '">' + kuma.htmlEscape(folderItem.title) + '</a></li>';
+                }
+                
+                // Now dive into the child items
+                
                 arr.forEach(function(item) {
                     if (!item) { return; }
                     if (ordered && (item.locale != env.locale)) { return; }
                     result += '<li><a href="' + item.url + '">' + kuma.htmlEscape(item.title) + '</a>' +
-                              process_array(item.subpages || [], ordered) + '</li>';
+                              process_array(item, item.subpages || [], ordered) + '</li>';
                     
                 });
                 result += closeTag;
