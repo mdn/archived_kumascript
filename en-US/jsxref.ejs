@@ -1,0 +1,17 @@
+<%
+// Inserts a link to a JS API's documentation in the JS Reference.
+// Appropriate styling is applied.
+//
+// Parameters:
+//
+//  $0 - API name
+//  $1 - name to display (optional)
+//  $2 - anchor (#xyz) (optional)
+
+var lang = env.locale;
+var str = $1 || $0;
+str = str.toLowerCase();
+
+var URL = "/" + lang + "/docs/Web/JavaScript/Reference/" + $0 + $2;
+
+%><a href="<%- URL %>"><code><%= str %></code></a>
