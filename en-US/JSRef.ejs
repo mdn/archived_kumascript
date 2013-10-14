@@ -21,14 +21,14 @@ var s_js_property_tag = 'Property';
 var s_js_method_tag = 'Method';
 
 var pageList = page.subpagesExpand(s_js_ref_href);   // Get JS subpages, including tags
-var resultProps = [];
+var resultProperties = [];
 var resultMethods = [];
 
 // Get pages for the current section. Split up methods and properties.
 for (aPage in pageList) {
     if (containsTag(pageList[aPage].tags, s_js_subject_tag &&
         containsTag(pageList[aPage].tags, s_js_property_tag))) {
-        resultProps.push(pageList[aPage]);
+        resultProperties.push(pageList[aPage]);
     }
     if (containsTag(pageList[aPage].tags, s_js_subject_tag &&
         containsTag(pageList[aPage].tags, s_js_method_tag))) {
