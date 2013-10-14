@@ -1,3 +1,57 @@
 <%
-// This space intentionally blank
+// Generate quick links for JavaScript reference docs (still WIP, will grow with ongoing reorg)
+//
+// Parameters:
+//
+//  $0 - Current object/section/subject
+
+function containsTag(tagList, tag) {
+    if (!tagList || tagList == undefined) return 0;
+    tag = tag.toLowerCase();
+    for (var i = 0, len = tagList.length; i < len; i++) {
+        if (tagList[i].toLowerCase() == tag) return 1;
+    }
+    return 0;
+}
+
+var s_js_ref_href = '/en-US/docs/Web/JavaScript/Reference';
+var s_js_ref_title = 'JavaScript Reference';
+var s_js_subject_tag = $0;
+var s_js_property_tag = 'Property';
+var s_js_method_tag = 'Method';
+
+var pageList = page.subpagesExpand(s_js_ref_href);   // Get JS subpages, including tags
+var resultProps = [];
+var resultMethods = [];
+
+// Get pages for the current section. Split up methods and properties.
+for (aPage in pageList) {
+    if (containsTag(pageList[aPage].tags, s_js_subject_tag &&
+        containsTag(pageList[aPage].tags, s_js_property_tag))) {
+        resultProps.push(pageList[aPage]);
+    }
+    if (containsTag(pageList[aPage].tags, s_js_subject_tag &&
+        containsTag(pageList[aPage].tags, s_js_method_tag))) {
+        resultMethods.push(pageList[aPage]);
+    } 
+}
 %>
+
+<section class="Quick_links" id="Quick_Links">
+    <ol>
+        <li><strong><a href="<%=s_js_ref_href%>"><%=s_js_ref_title%></a></strong>
+            
+            <li><strong>Methods</strong>
+                <% for (aPage in resultMethods) { %>
+                    <li><a href="<%-resultMethods[aPage].url%>"><%-resultMethods[aPage].title%></a></li>
+                <% } %>
+            </li>
+            <li><strong>Properties</strong>
+                <% for (aPage in resultProperties) { %>
+                    <li><a href="<%-resultProperties[aPage].url%>"><%-resultProperties[aPage].title%></a></li>
+                <% } %>
+            </li>
+        
+        </li>  
+    </ol>
+</section>
