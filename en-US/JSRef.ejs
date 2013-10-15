@@ -3,7 +3,10 @@
 //
 // Parameters:
 //
-//  $0 - Current object/section/subject
+//  $0 - JavaScript reference section (e.g Global_Objects)
+//  $1 - JavaScript reference object/subject (e.g. Number, Array, Function)
+// 
+// {{JSRef("Global_Objects", "Number")}}
 
 function containsTag(tagList, tag) {
     if (!tagList || tagList == undefined) return 0;
@@ -14,39 +17,46 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
+// Strings for l10n
 var s_js_ref_href = '/en-US/docs/Web/JavaScript/Reference';
 var s_js_ref_title = 'JavaScript Reference';
-var s_js_subject_tag = $0;
+var s_js_section = $0;
+var s_js_subject = $1;
+var s_js_full_href = s_js_ref_href + '/' + s_js_section + '/' + s_js_subject;
 var s_js_property_tag = 'Property';
 var s_js_method_tag = 'Method';
+var s_js_title_methods = 'Methods';
+var s_js_title_properties = 'Properties';
 
-var pageList = page.subpagesExpand(s_js_ref_href);   // Get JS subpages, including tags
+var pageList = page.subpagesExpand(s_js_full_href);   // Get subpages, including tags
 var resultProperties = [];
 var resultMethods = [];
 
 // Get pages for the current section. Split up methods and properties.
 for (aPage in pageList) {
-    if (containsTag(pageList[aPage].tags, s_js_subject_tag &&
-        containsTag(pageList[aPage].tags, s_js_property_tag))) {
+    if (containsTag(pageList[aPage].tags, s_js_subject) &&
+        containsTag(pageList[aPage].tags, s_js_property_tag)) {
         resultProperties.push(pageList[aPage]);
     }
-    if (containsTag(pageList[aPage].tags, s_js_subject_tag &&
-        containsTag(pageList[aPage].tags, s_js_method_tag))) {
+    if (containsTag(pageList[aPage].tags, s_js_subject) &&
+        containsTag(pageList[aPage].tags, s_js_method_tag)) {
         resultMethods.push(pageList[aPage]);
     } 
-}
+} 
+
 %>
 
 <section class="Quick_links" id="Quick_Links">
     <ol>
-        <li><strong><a href="<%=s_js_ref_href%>"><%=s_js_ref_title%></a></strong>
+        <li><strong><%=s_js_ref_title%>:</strong> <a href="<%=s_js_full_href%>"><%=s_js_subject%></a>
             
-            <li><strong>Methods</strong>
+            <li><strong><%=s_js_title_methods%></strong>
                 <% for (aPage in resultMethods) { %>
                     <li><a href="<%-resultMethods[aPage].url%>"><%-resultMethods[aPage].title%></a></li>
                 <% } %>
             </li>
-            <li><strong>Properties</strong>
+            
+            <li><strong><%=s_js_title_properties%></strong>
                 <% for (aPage in resultProperties) { %>
                     <li><a href="<%-resultProperties[aPage].url%>"><%-resultProperties[aPage].title%></a></li>
                 <% } %>
