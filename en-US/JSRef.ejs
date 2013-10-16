@@ -49,19 +49,35 @@ for (aPage in pageList) {
 <section class="Quick_links" id="Quick_Links">
     <ol>
         <li><strong><%=s_js_ref_title%>:</strong> <a href="<%=s_js_full_href%>"><%=s_js_subject%></a>
-            
+
             <li><strong><%=s_js_title_methods%></strong>
                 <% for (aPage in resultMethods) { %>
-                    <li><a href="<%-resultMethods[aPage].url%>"><%-resultMethods[aPage].title%></a></li>
+                    <li>
+                        <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
+                            <%-template("ExperimentalBadge", [1])%>
+                        <% } %>
+                        <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
+                            <%-template("NonStandardBadge", [1])%>
+                        <% } %>
+                        <a href="<%-resultMethods[aPage].url%>"><%-resultMethods[aPage].title%></a>
+                    </li>
                 <% } %>
             </li>
-            
+
             <li><strong><%=s_js_title_properties%></strong>
                 <% for (aPage in resultProperties) { %>
-                    <li><a href="<%-resultProperties[aPage].url%>"><%-resultProperties[aPage].title%></a></li>
+                    <li>
+                        <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
+                            <%-template("ExperimentalBadge", [1])%>
+                        <% } %>
+                        <% if (containsTag(resultProperties[aPage].tags, 'Non-standard')) { %>
+                            <%-template("NonStandardBadge", [1])%>
+                        <% } %>
+                        <a href="<%-resultProperties[aPage].url%>"><%-resultProperties[aPage].title%></a>
+                    </li>
                 <% } %>
             </li>
-        
+
         </li>  
     </ol>
 </section>
