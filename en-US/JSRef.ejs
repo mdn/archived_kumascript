@@ -1,6 +1,8 @@
 <%
 // Generate quick links for JavaScript reference docs (still WIP, will grow with ongoing reorg)
 //
+// TODO: Add option to make methods/properties collapsable (but open by default)
+//
 // Parameters:
 //
 //  $0 - JavaScript reference section (e.g Global_Objects)
@@ -53,6 +55,7 @@ for (aPage in pageList) {
             <li><strong><%=s_js_title_methods%></strong>
                 <% for (aPage in resultMethods) { %>
                     <li>
+                        <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %><em><% } %>
                         <a href="<%-resultMethods[aPage].url%>"><%-resultMethods[aPage].title%></a>
                         <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
                             <%-template("ExperimentalBadge", [1])%>
@@ -60,6 +63,7 @@ for (aPage in pageList) {
                         <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
                             <%-template("NonStandardBadge", [1])%>
                         <% } %>
+                         <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %></em><% } %>
                     </li>
                 <% } %>
             </li>
@@ -67,6 +71,7 @@ for (aPage in pageList) {
             <li><strong><%=s_js_title_properties%></strong>
                 <% for (aPage in resultProperties) { %>
                     <li>
+                         <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %><em><% } %>
                         <a href="<%-resultProperties[aPage].url%>"><%-resultProperties[aPage].title%></a>
                         <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
                             <%-template("ExperimentalBadge", [1])%>
@@ -74,6 +79,7 @@ for (aPage in pageList) {
                         <% if (containsTag(resultProperties[aPage].tags, 'Non-standard')) { %>
                             <%-template("NonStandardBadge", [1])%>
                         <% } %>
+                         <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %></em><% } %>
                     </li>
                 <% } %>
             </li>
