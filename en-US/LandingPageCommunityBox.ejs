@@ -7,11 +7,17 @@
 //  $1  Name of the mailing list for the community
 //  $2  Name of the newsgroup for the community
 //  $3  IRC channel name
+//  $4  String containing a list of URLs and descriptions for additional
+//      links (null if none).
+//
+// The $4 string of additional links is formatted as a list like this:
+// url|description||url|description...
 
 var channelStr = "";
 var headingStr = "";
 var messageStr = "";
 var ircLink = "";
+var extraLinks = "";
 
 var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>IRC</a>";
 
@@ -19,6 +25,21 @@ var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>IRC</a>";
 
 if ($3) {
     ircLink = "<a href='irc://irc.mozilla.org/" + $3 + "'>#" + $3 + "</a>";
+}
+
+// If the extra links string is provided, build that HTML
+
+if ($4 && $4 != undefined) {
+    var list = $4.split("||");      // a list of each item in "url|description" format
+    
+    extraLinks = "<ul>";
+    
+    for (var i=0; i<list.length; i++) {
+        var comp = list[i].split("|");
+        extraLinks += "<li><a href='" + comp[0] + "'>" + comp[1] + "</a></li>";
+    }
+    
+    extraLinks += "</ul>";
 }
 
 switch(env.locale) {
@@ -37,4 +58,5 @@ switch(env.locale) {
 <p><%=messageStr%></p>
 <%-template("DiscussionList", [$1, $2])%>
 <p><%-channelStr%></p>
+<%-extraLinks%>
 </div>
