@@ -7,10 +7,25 @@
 //  $0 - API name
 //  $1 - name to display (optional)
 //  $2 - anchor (#xyz) (optional)
+//
+//  {{jsxref("Date.prototype.getNumber()")}}
+//  {{jsxref("Global_Objects/Date/getNumber", "Date.prototype.getNumber()")}}
+//
 
 var lang = env.locale;
 var str = $1 || $0;
 
-var URL = "/" + lang + "/docs/Web/JavaScript/Reference/" + $0 + $2;
+var URL = "/" + lang + "/docs/Web/JavaScript/Reference/";
+
+var api = $0.replace('()', '');
+var api2 = api.replace('.prototype.', '.');
+
+if (api2.indexOf(".") !== -1) {
+    URL += "Global_Objects/";
+    URL += api2.replace('.', '/');
+    URL += $2;
+} else {
+    URL += $0 + $2;
+}
 
 %><a href="<%- URL %>"><code><%= str %></code></a>
