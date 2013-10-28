@@ -62,6 +62,6 @@ switch($1.toLowerCase()) {
 /* 1000000 * 60 * 60 * 24 * 365 === 31536000000000 */
 if (date.now - env.modified < 31536000000000) template("note", [outdated]);
 %>
-<div style="border:solid #ddd 2px; margin-right:262px; margin-bottom:12px;">
+<div style="border:solid #ddd 2px; margin-bottom:12px;">
 <div style="background:#eee; padding:2px;"><%- template("source", [$0]) %><span style="text-align:right; float:right;"><%- scriptableOutput %></span></div>
 <span style="padding: 4px 2px;">
