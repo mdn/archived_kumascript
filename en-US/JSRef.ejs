@@ -1,8 +1,7 @@
 <%
-// Generate quick links for JavaScript reference docs (still WIP, will grow with ongoing reorg)
+// Generate quick links for JavaScript reference docs
 //
 // TODO: Add option to make methods/properties collapsable (but open by default)
-// TODO: Add summary titles to the links like in DomRef
 // TODO: Highlight or remove the link for the page you are currently on
 //
 // Parameters:
@@ -10,7 +9,7 @@
 //  $0 - JavaScript reference section (e.g Global_Objects)
 //  $1 - JavaScript reference object/subject (e.g. Number, Array, Function)
 // 
-// {{JSRef("Global_Objects", "Number")}}
+// {{JSRef("Global_Objects", "Number")}} - Generates quicklinks for the Number object including all methods and properties
 
 function containsTag(tagList, tag) {
     if (!tagList || tagList == undefined) return 0;
@@ -58,7 +57,7 @@ for (aPage in pageList) {
                 <% for (aPage in resultMethods) { %>
                     <li>
                         <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %><em><% } %>
-                        <a href="<%-resultMethods[aPage].url%>"><%-resultMethods[aPage].title%></a>
+                        <a href="<%-resultMethods[aPage].url%>" title="%-resultMethods[aPage].summary%>"><%-resultMethods[aPage].title%></a>
                         <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
                             <%-template("ExperimentalBadge", [1])%>
                         <% } %>
@@ -74,7 +73,7 @@ for (aPage in pageList) {
                 <% for (aPage in resultProperties) { %>
                     <li>
                          <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %><em><% } %>
-                        <a href="<%-resultProperties[aPage].url%>"><%-resultProperties[aPage].title%></a>
+                        <a href="<%-resultProperties[aPage].url%>" title="%-resultProperties[aPage].summary%>"><%-resultProperties[aPage].title%></a>
                         <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
                             <%-template("ExperimentalBadge", [1])%>
                         <% } %>
