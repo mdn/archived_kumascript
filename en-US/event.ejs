@@ -7,14 +7,26 @@
 /*   parameter will be used */
 /* @param [optional] */
 /*   An anchor to link to on the page. Link text will display as $0.$2 or $1.$2 */
+
+/* By default, we link to GlobalEventHandlers.$0; to override, specify */
+/* the interface as well, such as foo.onbar */
  
 /* get a page's language (Don't use page.language!) */
 var lang = env.locale;
  
 var api = $0;
-var str = $1 || $0;
+
+var iface = "GlobalEventHandlers";
+var idx = api.indexOf('.'); // Is the interface specified?
+
+if (idx != -1) {
+    iface = api.substring(0, idx);
+    api = api.substr(idx+1);
+}
+
+var str = $1 || api
  
-var URL = "/" + lang + '/docs/Web/Reference/Events/' + api;
+var URL = "/" + lang + '/docs/Web/API/' + iface + '.' + api;
  
 var anch = '';
  
