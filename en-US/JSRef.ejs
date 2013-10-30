@@ -1,8 +1,7 @@
 <%
 // Generate quick links for JavaScript reference docs
 //
-// TODO: Add option to make methods/properties collapsable (but open by default)
-// TODO: Highlight or remove the link for the page you are currently on
+// TODO: Highlight or remove the link for the page you are currently on (?)
 //
 // Parameters:
 //
@@ -51,40 +50,43 @@ for (aPage in pageList) {
 
 <section class="Quick_links" id="Quick_Links">
     <ol>
-        <li><strong><%=s_js_ref_title%>:</strong> <a href="<%=s_js_full_href%>"><%=s_js_subject%></a>
+        <li><a href="<%=s_js_full_href%>"><%=s_js_subject%></a></li>
 
-            <li><strong><%=s_js_title_methods%></strong>
-                <% for (aPage in resultMethods) { %>
-                    <li>
-                        <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %><em><% } %>
-                        <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><%-resultMethods[aPage].title%></a>
-                        <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
-                            <%-template("ExperimentalBadge", [1])%>
-                        <% } %>
-                        <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
-                            <%-template("NonStandardBadge", [1])%>
-                        <% } %>
-                         <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %></em><% } %>
-                    </li>
-                <% } %>
-            </li>
+        <li><a href="#" data-default="true"><strong><%=s_js_title_methods%></strong></a>
+            <ol>
+            <% for (aPage in resultMethods) { %>
+                <li>
+                    <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %><em><% } %>
+                    <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><%-resultMethods[aPage].title%></a>
+                    <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
+                        <span class="ql-badge"><%-template("ExperimentalBadge", [1])%></span>
+                    <% } %>
+                    <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
+                         <span class="ql-badge"><%-template("NonStandardBadge", [1])%></span>
+                    <% } %>
+                     <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %></em><% } %>
+                </li>
+            <% } %>
+            </ol>
+        </li>
 
-            <li><strong><%=s_js_title_properties%></strong>
-                <% for (aPage in resultProperties) { %>
-                    <li>
-                         <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %><em><% } %>
-                        <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary)%>"><%-resultProperties[aPage].title%></a>
-                        <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
-                            <%-template("ExperimentalBadge", [1])%>
-                        <% } %>
-                        <% if (containsTag(resultProperties[aPage].tags, 'Non-standard')) { %>
-                            <%-template("NonStandardBadge", [1])%>
-                        <% } %>
-                         <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %></em><% } %>
-                    </li>
-                <% } %>
-            </li>
+        <li><a href="#" data-default="true"><strong><%=s_js_title_properties%></strong></a>
+            <ol>
+            <% for (aPage in resultProperties) { %>
+                <li>
+                     <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %><em><% } %>
+                    <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary)%>"><%-resultProperties[aPage].title%></a>
+                    <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
+                         <span class="ql-badge"><%-template("ExperimentalBadge", [1])%></span>
+                    <% } %>
+                    <% if (containsTag(resultProperties[aPage].tags, 'Non-standard')) { %>
+                         <span class="ql-badge"><%-template("NonStandardBadge", [1])%></span>
+                    <% } %>
+                     <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %></em><% } %>
+                </li>
+            <% } %>
+            </ol>
+        </li>
 
-        </li>  
     </ol>
 </section>
