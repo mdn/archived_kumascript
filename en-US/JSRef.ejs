@@ -59,10 +59,10 @@ for (aPage in pageList) {
                     <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %><em><% } %>
                     <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><%-resultMethods[aPage].title%></a>
                     <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
-                        <span class="ql-badge"><%-template("ExperimentalBadge", [1])%></span>
+                        <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
                     <% } %>
                     <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
-                         <span class="ql-badge"><%-template("NonStandardBadge", [1])%></span>
+                         <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
                     <% } %>
                      <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %></em><% } %>
                 </li>
@@ -77,10 +77,10 @@ for (aPage in pageList) {
                      <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %><em><% } %>
                     <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary)%>"><%-resultProperties[aPage].title%></a>
                     <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
-                         <span class="ql-badge"><%-template("ExperimentalBadge", [1])%></span>
+                         <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
                     <% } %>
                     <% if (containsTag(resultProperties[aPage].tags, 'Non-standard')) { %>
-                         <span class="ql-badge"><%-template("NonStandardBadge", [1])%></span>
+                         <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
                     <% } %>
                      <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %></em><% } %>
                 </li>
