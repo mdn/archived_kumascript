@@ -64,6 +64,9 @@ for (aPage in pageList) {
                     <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
                          <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
                     <% } %>
+                    <% if (containsTag(resultMethods[aPage].tags, 'Deprecated')) { %>
+                         <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
+                    <% } %>
                      <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %></em><% } %>
                 </li>
             <% } %>
@@ -81,6 +84,9 @@ for (aPage in pageList) {
                     <% } %>
                     <% if (containsTag(resultProperties[aPage].tags, 'Non-standard')) { %>
                          <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
+                    <% } %>
+                    <% if (containsTag(resultProperties[aPage].tags, 'Deprecated')) { %>
+                         <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
                     <% } %>
                      <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %></em><% } %>
                 </li>
