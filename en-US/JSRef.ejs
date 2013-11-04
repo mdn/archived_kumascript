@@ -57,7 +57,7 @@ for (aPage in pageList) {
             <% for (aPage in resultMethods) { %>
                 <li>
                     <% if (containsTag(resultMethods[aPage].tags, 'prototype')) { %><em><% } %>
-                    <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><%-resultMethods[aPage].title%></a>
+                    <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><code><%-resultMethods[aPage].title%></code></a>
                     <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
                         <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
                     <% } %>
@@ -75,7 +75,7 @@ for (aPage in pageList) {
             <% for (aPage in resultProperties) { %>
                 <li>
                      <% if (containsTag(resultProperties[aPage].tags, 'prototype')) { %><em><% } %>
-                    <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary)%>"><%-resultProperties[aPage].title%></a>
+                    <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary)%>"><code><%-resultProperties[aPage].title%></code></a>
                     <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
                          <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
                     <% } %>
