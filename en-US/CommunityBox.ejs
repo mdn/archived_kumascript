@@ -13,20 +13,32 @@
 //      links (null if none).
 //
 // The $4 string of additional links is formatted as a list like this:
-// url|description||url|description...
+// heading|url|description||heading|url|description...
 
-var channelStr = "";
+var ircInfoStr = "";
 var headingStr = "";
 var messageStr = "";
 var ircLink = "";
 var extraLinks = "";
 
-var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>IRC</a>";
+var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>";
 
 // Build the IRC channel URL if a channel name was specified
 
 if ($3) {
     ircLink = "<a href='irc://irc.mozilla.org/" + $3 + "'>#" + $3 + "</a>";
+}
+
+// Generate localized strings
+
+switch(env.locale) {
+    default:
+        headingStr = "Join the community";
+        messageStr = "Mailing list/newsgroup:";
+        if ($3) {
+            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
+        }
+        break;
 }
 
 // If the extra links string is provided, build that HTML
@@ -37,42 +49,24 @@ if (($4 && $4 != undefined) || (ircLink.length)) {
     extraLinks = "<ul class='communitycontact'>";
     
     if (ircLink.length) {
-        extraLinks += "<li><strong>IRC: </strong>" + ircLink + "</li>";
+        extraLinks += "<li><strong>IRC: </strong>" + ircLink + " " + ircInfoStr + "</li>";
     }
     
     for (var i=0; i<list.length; i++) {
-        var comp = list[i].split("|");
-        extraLinks += "<li><a href='" + comp[0] + "'>" + comp[1] + "</a></li>";
+        var comp = list[i].split("|");  // comp[0] is heading, 1 is URL, 2 is description
+        extraLinks += "<li><strong>" + comp[0] + ": </strong><a href='" + comp[1] + "'>" + comp[2] + "</a></li>";
     }
     
     extraLinks += "</ul>";
 }
 
-switch(env.locale) {
-    default:
-        headingStr = "Join the community";
-        messageStr = "Mailing list/newsgroup:";
-        if ($3) {
-            channelStr = "Also, be sure to join in the live discussion in the " + ircLink + " channel on " + ircInfoLink + ".";
-        }
-        break;
-}
-
 %>
-
-<div class="landingPageBox">
-<h2 class="Community"><%=headingStr%></h2>
-<p><%=messageStr%></p>
-<%-template("DiscussionList", [$1, $2])%>
-<p><%-channelStr%></p>
-<%-extraLinks%>
-</div>
 
 <div class="overheadIndicator communitybox">
     <div class="column-container">
         <div class="column-half">
             <h2 id="Join_the_community"><%=headingStr%></h2>
-            <h3 id="Mailing_list"><%=messageStr%></h3>
+            <div class="communitysubhead"><%=messageStr%></div>
             <%-template("DiscussionList", [$1, $2, "communitymailinglist"])%>
         </div>
         <div class="column-half">
