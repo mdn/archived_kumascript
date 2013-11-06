@@ -39,9 +39,9 @@ switch(LOCALE) {
 		}
 		break;
 	default:
-		s1 += $1 + ' inherited from ' + web.link(wiki.uri(env.locale + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/prototype'), $0 + '.prototype');
+		s1 += $1 + ' inherited from ' + web.link(wiki.uri(env.locale + '/docs/Web/JavaScript/Reference/Global_Objects/' + $0 + '/prototype'), $0 + '.prototype');
 		for (; i < aLen; ++i) {
-			links.push(web.link(wiki.uri(LOCALE + '/docs/JavaScript/Reference/Global_Objects/' + $0 + '/' + arguments[i]), arguments[i]));
+			links.push(web.link(wiki.uri(LOCALE + '/docs/Web/JavaScript/Reference/Global_Objects/' + $0 + '/' + arguments[i]), arguments[i]));
 		}
 		break;
 }
