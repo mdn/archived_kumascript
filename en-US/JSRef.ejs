@@ -52,7 +52,7 @@ for (aPage in pageList) {
     <ol>
         <li><a href="<%=s_js_full_href%>"><%=s_js_subject%></a></li>
 
-        <li><a href="#" data-default="true"><strong><%=s_js_title_methods%></strong></a>
+        <li><a href="#" data-default-state="open"><strong><%=s_js_title_methods%></strong></a>
             <ol>
             <% for (aPage in resultMethods) { %>
                 <li>
@@ -73,7 +73,7 @@ for (aPage in pageList) {
             </ol>
         </li>
 
-        <li><a href="#" data-default="true"><strong><%=s_js_title_properties%></strong></a>
+        <li><a href="#" data-default-state="open"><strong><%=s_js_title_properties%></strong></a>
             <ol>
             <% for (aPage in resultProperties) { %>
                 <li>
