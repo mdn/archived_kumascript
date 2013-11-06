@@ -90,10 +90,10 @@ switch(lang) {
 		webFeed = " feed 消息來源";
 		break;
 	default:
-		mailingList = " as a mailing list";
-		newsgroup = " as a 		newsgroup";
-		googleGroup = " as a Google Group";
-		webFeed = " as a Web feed";
+		mailingList = "Mailing list";
+		newsgroup = "Newsgroup";
+		googleGroup = "Google Group";
+		webFeed = "RSS feed";
 		break;
 }
 
@@ -104,10 +104,9 @@ var listElem = "<ul";
 if ($2 && ($2 != undefined)) {
     listElem += " class='" + $2 + "'";
 }
-listElem += ">";
 %>
 
-<ul>
+<%-listElem%>
   <li><%- web.link('https://lists.mozilla.org/listinfo/' + $0, 		mailingList) %></li>
   <li><%- web.link('news://news.mozilla.org/' + $1, 		newsgroup) %></li>
   <li><%- web.link('http://groups.google.com/group/' + $1, 		googleGroup) %></li>
