@@ -69,9 +69,7 @@ switch(env.locale) {
         <div class="column-half">
             <h2 id="Join_the_community"><%=headingStr%></h2>
             <h3 id="Mailing_list"><%=messageStr%></h3>
-            <ul class="communitymailinglist">
-            <li><a href="">Mailing list</a></li>
-            </ul>
+            <%-template("DiscussionList", [$1, $2, "communitymailinglist"])%>
         </div>
         <div class="column-half">
             <%-extraLinks%>
