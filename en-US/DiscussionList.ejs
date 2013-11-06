@@ -102,7 +102,7 @@ switch(lang) {
 var listElem = "<ul";
 
 if ($2 && ($2 != undefined)) {
-    listElem += " class='communitymailinglist'";
+    listElem += " class='" + $2 + "'";
 }
 listElem += ">";
 %>
