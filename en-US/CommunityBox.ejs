@@ -1,14 +1,80 @@
 <%
-// Inserts a box providing information about reaching the community
-// for a given technology or product.
+// Presents a box showing assorted information about the community
+// for the technology area covered by a landing page.
+//
+// THIS IS THE NEW VERSION, PRESENTED AS A FULL-WIDTH BANNER.
 //
 // Parameters:
-//  $0  Community/technology name
-//  $1  IRC channel name
-//  $2  Mailing list name
-//  $3  Newsgroup name
-//  $4  Stack Overflow link (or null)
-//  $5  Array of other links (or null)
+//  $0  Name of the topic/community
+//  $1  Name of the mailing list for the community
+//  $2  Name of the newsgroup for the community
+//  $3  IRC channel name
+//  $4  String containing a list of URLs and descriptions for additional
+//      links (null if none).
+//
+// The $4 string of additional links is formatted as a list like this:
+// url|description||url|description...
 
+var channelStr = "";
+var headingStr = "";
+var messageStr = "";
+var ircLink = "";
+var extraLinks = "";
+
+var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>IRC</a>";
+
+// Build the IRC channel URL if a channel name was specified
+
+if ($3) {
+    ircLink = "<a href='irc://irc.mozilla.org/" + $3 + "'>#" + $3 + "</a>";
+}
+
+// If the extra links string is provided, build that HTML
+
+if ($4 && $4 != undefined) {
+    var list = $4.split("||");      // a list of each item in "url|description" format
+    
+    extraLinks = "<ul class='communitycontact'>";
+    
+    for (var i=0; i<list.length; i++) {
+        var comp = list[i].split("|");
+        extraLinks += "<li><a href='" + comp[0] + "'>" + comp[1] + "</a></li>";
+    }
+    
+    extraLinks += "</ul>";
+}
+
+switch(env.locale) {
+    default:
+        headingStr = "Join the community";
+        messageStr = "Mailing list/newsgroup:";
+        if ($3) {
+            channelStr = "Also, be sure to join in the live discussion in the " + ircLink + " channel on " + ircInfoLink + ".";
+        }
+        break;
+}
 
 %>
+
+<div class="landingPageBox">
+<h2 class="Community"><%=headingStr%></h2>
+<p><%=messageStr%></p>
+<%-template("DiscussionList", [$1, $2])%>
+<p><%-channelStr%></p>
+<%-extraLinks%>
+</div>
+
+<div class="overheadIndicator communitybox">
+    <div class="column-container">
+        <div class="column-half">
+            <h2 id="Join_the_community"><%=headingStr%></h2>
+            <h3 id="Mailing_list"><%=messageStr%></h3>
+            <ul class="communitymailinglist">
+            <li><a href="">Mailing list</a></li>
+            </ul>
+        </div>
+        <div class="column-half">
+            <%-extraLinks%>
+        </div>
+    </div>
+</div>
