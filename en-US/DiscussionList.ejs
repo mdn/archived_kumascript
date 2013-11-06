@@ -1,8 +1,14 @@
 <%
+// Outputs a list of discussion channels available for a topic.
+//
+// Parameters:
+//
+//  $0  The mailing list name
+//  $1  The newsgroup name
+//  $2  The class name to use for the list (null if none)
+
 var lang = env.locale /* get the page language */ ; 
 var mailingList, newsgroup, googleGroup, webFeed;
-
-
 
 /* Translation Targets
     * " mailingList"
@@ -89,7 +95,19 @@ switch(lang) {
 		googleGroup = " as a Google Group";
 		webFeed = " as a Web feed";
 		break;
-}%><ul>
+}
+
+// Build the <ul> element
+
+var listElem = "<ul";
+
+if ($2 && ($2 != undefined)) {
+    listElem += " class='communitymailinglist'";
+}
+listElem += ">";
+%>
+
+<ul>
   <li><%- web.link('https://lists.mozilla.org/listinfo/' + $0, 		mailingList) %></li>
   <li><%- web.link('news://news.mozilla.org/' + $1, 		newsgroup) %></li>
   <li><%- web.link('http://groups.google.com/group/' + $1, 		googleGroup) %></li>
