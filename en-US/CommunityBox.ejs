@@ -31,10 +31,14 @@ if ($3) {
 
 // If the extra links string is provided, build that HTML
 
-if ($4 && $4 != undefined) {
+if (($4 && $4 != undefined) || (ircLink.length)) {
     var list = $4.split("||");      // a list of each item in "url|description" format
     
     extraLinks = "<ul class='communitycontact'>";
+    
+    if (ircLink.length) {
+        extraLinks += "<li><strong>IRC: </strong>" + ircLink + "</li>";
+    }
     
     for (var i=0; i<list.length; i++) {
         var comp = list[i].split("|");
