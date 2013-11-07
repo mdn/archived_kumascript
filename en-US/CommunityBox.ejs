@@ -33,7 +33,7 @@ if ($3) {
 
 switch(env.locale) {
     default:
-        headingStr = "Join the community";
+        headingStr = "Join the " + $0 + " community";
         messageStr = "Mailing list/newsgroup:";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
@@ -64,8 +64,8 @@ if (($4 && $4 != undefined) || (ircLink.length)) {
 
 <div class="overheadIndicator communitybox">
     <div class="column-container">
+        <h2 id="Join_the_community"><%=headingStr%></h2>
         <div class="column-half">
-            <h2 id="Join_the_community"><%=headingStr%></h2>
             <div class="communitysubhead"><%=messageStr%></div>
             <%-template("DiscussionList", [$1, $2, "communitymailinglist"])%>
         </div>
