@@ -18,6 +18,7 @@
 var ircInfoStr = "";
 var headingStr = "";
 var messageStr = "";
+var messageNoteStr = "";
 var ircLink = "";
 var extraLinks = "";
 
@@ -35,6 +36,7 @@ switch(env.locale) {
     default:
         headingStr = "Join the " + $0 + " community";
         messageStr = "Mailing list/newsgroup:";
+        messageNoteStr = "Choose your preferred method for joining the discussion.";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
         }
@@ -67,6 +69,7 @@ if (($4 && $4 != undefined) || (ircLink.length)) {
         <h2 id="Join_the_community"><%=headingStr%></h2>
         <div class="column-half">
             <div class="communitysubhead"><%=messageStr%></div>
+            <div class="smaller"><%-messageNoteStr%></div>
             <%-template("DiscussionList", [$1, $2, "communitymailinglist"])%>
         </div>
         <div class="column-half">
