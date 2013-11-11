@@ -34,16 +34,6 @@ function allowTerm(a) {
     return 1;
 }
 
-function escapeQuotes(a) {
-    var b = "";
-    for (var i = 0, len = a.length; i < len; i++) {
-        var c = a[i];
-        if (c=="\"") c = "&quot;";
-        b += c;
-    }
-    return b.replace(/(<([^>]+)>)/ig, "");
-}
-
 function containsTag(tagList, tag) {
     if (!tagList || tagList == undefined) return 0;
     tag = tag.toLowerCase();
@@ -179,7 +169,7 @@ for (var i = 0; i < numLetters; i++) {
                         html += "<span>" + curLetter + "</span><ul>";
                         insertedHeading = true;
                     }
-                    html += '\n<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + locale + '</span>' + badge + '</span></li>';
+                    html += '\n<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + wiki.escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + locale + '</span>' + badge + '</span></li>';
                 }
                 termIndex++;
             } else {
