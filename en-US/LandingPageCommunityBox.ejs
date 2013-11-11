@@ -8,7 +8,7 @@
 //  $2  Name of the newsgroup for the community
 //  $3  IRC channel name
 //  $4  String containing a list of URLs and descriptions for additional
-//      links (null if none).
+//      links (empty string or null if none).
 //
 // The $4 string of additional links is formatted as a list like this:
 // url|description||url|description...
@@ -23,13 +23,13 @@ var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>IRC</a>";
 
 // Build the IRC channel URL if a channel name was specified
 
-if ($3) {
+if ($3 && $3.length) {
     ircLink = "<a href='irc://irc.mozilla.org/" + $3 + "'>#" + $3 + "</a>";
 }
 
 // If the extra links string is provided, build that HTML
 
-if ($4 && $4 != undefined) {
+if ($4 && $4.length) {
     var list = $4.split("||");      // a list of each item in "url|description" format
     
     extraLinks = "<ul>";
