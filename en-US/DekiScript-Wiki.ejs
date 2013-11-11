@@ -12,6 +12,20 @@
         var path = '/' + pathLang + path_strip.replace(/^(\/?\w{2}(?:[-|_]\w{2})?)?\/(?:docs\/)?/i,'/docs/').replace(/ /g,'_').replace(/%20/g,'_');
         return path;
     },
+    
+    //
+    // Given a string, escape any quotes within it so it can be
+    // passed to other functions.
+    //
+    escapeQuotes: function(a) {
+        var b = "";
+        for (var i = 0, len = a.length; i < len; i++) {
+          var c = a[i];
+          if (c=="\"") c = "&quot;";
+               b += c;
+        }
+        return b.replace(/(<([^>]+)>)/ig, "");
+    }
 
     // Given a path, attempt to construct an absolute URL to the wiki.
     // This is not a DekiScript function, but it's used by many of those below.
