@@ -13,7 +13,10 @@
 //      links (null if none).
 //
 // The $4 string of additional links is formatted as a list like this:
-// heading|url|description||heading|url|description...
+// heading|url|text|description||heading|url|text|description...
+//
+// The "description" part is optional and is used as non-linked added
+// text.
 
 var ircInfoStr = "";
 var headingStr = "";
@@ -56,7 +59,11 @@ if (($4 && $4 != undefined) || (ircLink.length)) {
     
     for (var i=0; i<list.length; i++) {
         var comp = list[i].split("|");  // comp[0] is heading, 1 is URL, 2 is description
-        extraLinks += "<li><strong>" + comp[0] + ": </strong><a href='" + comp[1] + "'>" + comp[2] + "</a></li>";
+        var tooltipPart = "";
+        if (comp[3]) {
+            tooltipPart = " title='" + comp[3] + "'";
+        }
+        extraLinks += "<li><strong>" + comp[0] + ": </strong><a href='" + comp[1] + "'" + tooltipPart + ">" + comp[2] + "</a></li>";
     }
     
     extraLinks += "</ul>";
