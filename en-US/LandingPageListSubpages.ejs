@@ -5,65 +5,13 @@
 // Parameters:
 //  None
 
-function pageSorter(a, b) {
-    return a.title.localeCompare(b.title);
-}
-
-function escapeQuotes(a) {
-    var b = "";
-    var len = a.length;
-    
-    for (var i=0; i<len; i++) {
-        var c = a[i];
-        if (c=="\"") {
-            c="&quot;";
-        }
-        b += c;
-    }
-    var regex = /(<([^>]+)>)/ig;
-    b = b.replace(regex, "");
-    return b;
-}
-
-function containsTag(tagList, tag) {
-    if (!tagList || tagList == undefined) return 0;
-    tag = tag.toLowerCase();
-    for (var i = 0, len = tagList.length; i < len; i++) {
-        if (tagList[i].toLowerCase() == tag) return 1;
-    }
-    return 0;
-}
-
-var termList = page.subpagesExpand();
-var numTerms = termList.length;
-var html = "";
-
-if (numTerms) {
-    var html = "<dl>";
-    
-    termList.sort(pageSorter);
-    
-    var termIndex = 0;
-    var numTerms = termList.length;
-    
-    for (var i=0; i<numTerms; i++) {
-        var page = termList[i];
-        
-        if (!containsTag(page.tags, "junk")) {
-            var title = page.title;
-            var summary = page.summary.replace(/<img[^>]*>/g," ");
-            var url = page.url;
-        
-            html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>";
-        }
-    }
-    
-    html += "</dl>";
-}
+var html = template("SubpagesWithSummaries");
 
 // Now we have the entire list in HTML. Let's go through it and try to split it into two columns by force.
 
 var len = html.length;
+var numTerms = html.match(/\<li\>/g).length;
+
 if (len) {
     var col1 = "";
     var col2 = "";
