@@ -10,12 +10,12 @@ var html = template("SubpagesWithSummaries");
 // Now we have the entire list in HTML. Let's go through it and try to split it into two columns by force.
 
 var len = html.length;
-var numTerms = html.match(/\<li\>/g).length;
 
 if (len) {
     var col1 = "";
     var col2 = "";
-    
+    var numTerms = (html.match(/\<li\>/g) || []).length;
+   
     if (numTerms > 1) {
         var pt = len/2;
         col2 = html.substr(pt);
