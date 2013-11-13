@@ -24,9 +24,12 @@ function containsAPI(APIList, name) {
     return 0;
 }
 
-s_str0 = $0;
-s_str1 = $0;
+var s_str = new Array();
+s_str[0] = $0;
+s_str[1] = $0;
 var s_api_href = '/' + env.locale + '/docs/Web/API';
+var s_api_title_methods    = "Methods";
+var s_api_title_properties = "Properties";
 
 var aquo = "&laquo;";   // "»"
 
@@ -41,73 +44,105 @@ switch(env.locale) {
     default:
 }
 
-var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href="/' + env.locale + '/docs/Web/API/' + s_str0 + '">' + s_str1 + '</a></span>';
+var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href="/' + env.locale + '/docs/Web/API/' + s_str[0] + '">' + s_str[1] + '</a></span>';
 
 %><%- result%>
 <%
 
-
-/* Generate quick links */
-
-    /* Find the API Name from the URL: the part after the last / and before the first . */
+/* Find the API Name from the URL: the part after the last / and before the first . */
     var pageURL = env.path;
     
     var pageFolders = pageURL.split('/');
     if (pageFolders) {
-    var pageName = pageFolders[pageFolders.length-1]; // We are only interested in the last part
-    var mainIF = pageName.split('.')[0];
-    var APIList = [];
-    APIList.push(mainIF);
-    /* Add to the list, the one that are listed in parameter: hierarchy */
+        var pageName = pageFolders[pageFolders.length-1]; // We are only interested in the last part
+        var mainIF = pageName.split('.')[0];
+        var APIList = [];
+        APIList.push(mainIF);
+        /* Add to the list, the one that are listed in parameter: hierarchy */
     
-    /* Add to the list, those that are implemented by it */
+        /* Add to the list, those that are implemented by it */
 
-    /* List properties of this API */
-    // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
-    var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
-    var resultProps = [];
+        /* List properties of this API */
+        // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
+        var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
+        var resultProps = [];
 
-    for (aPage in pageList) {
-        if (containsAPI(APIList, pageList[aPage].title) &&
-            containsTag(pageList[aPage].tags, "Property")) { // We only want properties
-            resultProps.push(pageList[aPage].title);
+        for (aPage in pageList) {
+            if (containsAPI(APIList, pageList[aPage].title) &&
+                containsTag(pageList[aPage].tags, "Property")) { // We only want properties
+                resultProps.push(pageList[aPage]);
+            }
+        }
+
+        /* Find the constructor of this API */
+
+        /* List methods of this API */
+        var resultMethods = [];
+
+        for (aPage in pageList) {
+            if (containsAPI(APIList, pageList[aPage].title) &&
+                containsTag(pageList[aPage].tags, "Method") &&
+                !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
+                resultMethods.push(pageList[aPage]);
+            }
         }
     }
-
-    /* Find the constructor of this API */
-
-    /* List methods of this API */
-    var resultMethods = [];
-
-    for (aPage in pageList) {
-        if (containsAPI(APIList, pageList[aPage].title) &&
-            containsTag(pageList[aPage].tags, "Method") &&
-            !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
-            resultMethods.push(pageList[aPage].title);
-        }
-    }
-    %>
+    
+%>
 <section class="Quick_links" id="Quick_Links">
   <ol>
     <%
     /* Display ancestor chain */
     // TBD: the chain, we only displays the lowest one!
     %>
-    <li><b><%- template("domxref", [mainIF]) %></a></b></li>
+    <li><%- '<a href="/' + env.locale + '/docs/' + s_str[0] + '">' + s_str[1] + '</a>'%></li>
+    <li><strong><%- template("domxref", [mainIF]) %></a></strong></li>
+    <% /* Display properties */ %>
+    <li data-default-state="open"><a href="#"><strong><%=s_api_title_properties%></strong></a>
+    <ol>
+    <% for (aProp in resultProps) { %>
+        <li>
+        <% if (containsTag(resultProps[aProp].tags, 'Experimental')) { %>
+            <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultProps[aProp].tags, 'Non-standard') ||
+               containsTag(resultProps[aProp].tags, 'Non Standard')) { %>
+             <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultProps[aProp].tags, 'Deprecated')) { %>
+             <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultProps[aProp].tags, 'Obsolete')) { %>
+             <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
+        <% } %>
+        <em><%- template("domxref", [resultProps[aProp].title]) %></em></li>
+    <%  } %>
+    </ol></li>
     <%
-    /* Display properties */
-    for (aProp in resultProps) { 
-    %>
-        <li><i><%- template("domxref", [resultProps[aProp], resultProps[aProp].split('.')[1]]) %></i></li>
-<%  } 
     /* Display constructor */
     // TBD.
 
     /* Display methods */
-    for (aMethod in resultMethods) { 
     %>
-        <li><%- template("domxref", [resultMethods[aMethod], resultMethods[aMethod].split('.')[1]]) %></li>
-<%  } } else {%>"bouh"<%}
-%>
-    </ol>
-   </section>
+    <li data-default-state="open"><a href="#"><strong><%=s_api_title_methods%></strong></a>
+    <ol>
+    <% for (aMethod in resultMethods) { %>
+        <li>
+        
+        <% if (containsTag(resultMethods[aMethod].tags, 'Experimental')) { %>
+            <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultMethods[aMethod].tags, 'Non-standard') ||
+               containsTag(resultMethods[aMethod].tags, 'Non Standard')) { %>
+             <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultMethods[aMethod].tags, 'Deprecated')) { %>
+             <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultMethods[aMethod].tags, 'Obsolete')) { %>
+             <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
+        <% } %><%- template("domxref", [resultMethods[aMethod].title, resultMethods[aMethod].title + '()']) %></li>
+    <%  } %>
+    </ol></li>
+  </ol>
+</section>
