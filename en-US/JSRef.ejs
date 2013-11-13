@@ -52,25 +52,6 @@ for (aPage in pageList) {
     <ol>
         <li><a href="<%=s_js_full_href%>"><%=s_js_subject%></a></li>
 
-        <li data-default-state="open"><a href="#"><strong><%=s_js_title_methods%></strong></a>
-            <ol>
-            <% for (aPage in resultMethods) { %>
-                <li>
-                    <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><code><%-resultMethods[aPage].title%></code></a>
-                    <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
-                        <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
-                    <% } %>
-                    <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
-                         <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
-                    <% } %>
-                    <% if (containsTag(resultMethods[aPage].tags, 'Deprecated')) { %>
-                         <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
-                    <% } %>
-                </li>
-            <% } %>
-            </ol>
-        </li>
-
         <li data-default-state="open"><a href="#"><strong><%=s_js_title_properties%></strong></a>
             <ol>
             <% for (aPage in resultProperties) { %>
@@ -83,6 +64,25 @@ for (aPage in pageList) {
                          <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
                     <% } %>
                     <% if (containsTag(resultProperties[aPage].tags, 'Deprecated')) { %>
+                         <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
+                    <% } %>
+                </li>
+            <% } %>
+            </ol>
+        </li>
+        
+        <li data-default-state="open"><a href="#"><strong><%=s_js_title_methods%></strong></a>
+            <ol>
+            <% for (aPage in resultMethods) { %>
+                <li>
+                    <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><code><%-resultMethods[aPage].title%></code></a>
+                    <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
+                        <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
+                    <% } %>
+                    <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
+                         <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
+                    <% } %>
+                    <% if (containsTag(resultMethods[aPage].tags, 'Deprecated')) { %>
                          <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
                     <% } %>
                 </li>
