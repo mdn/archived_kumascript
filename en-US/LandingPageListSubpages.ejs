@@ -1,6 +1,7 @@
 <%
 // Inserts a definition list of the subpages of the current page, with each
-// page's title as the <dt> term and its SEO summary as the <dd> term.
+// page's title as the <dt> term and its SEO summary as the <dd> term. The
+// List is presented in a two-column view where possible.
 //
 // Parameters:
 //  None
@@ -14,7 +15,7 @@ var len = html.length;
 if (len) {
     var col1 = "";
     var col2 = "";
-    var numTerms = (html.match(/\<li\>/g) || []).length;
+    var numTerms = (html.match(/\<dt /g) || []).length;
    
     if (numTerms > 1) {
         var pt = len/2;
