@@ -15,6 +15,10 @@
 // The $4 string of additional links is formatted as a list like this:
 // heading|url|text|description||heading|url|text|description...
 //
+// To have multiple links per heading, use "++" to join them:
+//
+// heading|url|text|description++url|text|description...
+//
 // The "description" part is optional and is used as non-linked added
 // text.
 
@@ -58,12 +62,37 @@ if (($4 && $4 != undefined) || (ircLink.length)) {
     }
     
     for (var i=0; i<list.length; i++) {
-        var comp = list[i].split("|");  // comp[0] is heading, 1 is URL, 2 is description
-        var tooltipPart = "";
-        if (comp[3]) {
-            tooltipPart = " title='" + comp[3] + "'";
+        // First, get the heading off the row and remove it
+        
+        var headingEnd = list[i].indexOf("|");
+        var heading = list[i].substr(0, headingEnd);
+        var row = list[i].slice(headingEnd+1);
+        
+        // Add the heading to the HTML
+        
+        extraLinks += "<li><strong>" + heading + ": </strong>";
+        
+        // Now split it up into all the terms for the heading
+        
+        var links = row.split("++");
+        
+        // Loop over all the links, adding them to the HTML
+        
+        for (var j=0; j<links.length; j++) {
+            var comp = links[j].split("|");  // comp[0] is URL, 1 is text, 2 is description
+            var tooltipPart = "";
+            
+            if (comp[2]) {
+               tooltipPart = " title='" + comp[2] + "'";
+            }
+            extraLinks += "<a href='" + comp[0] + "'" + tooltipPart + ">" + comp[1] + "</a>";
+            
+            if (j < (links.length-1)) {
+                extraLinks += ", ";
+            }
         }
-        extraLinks += "<li><strong>" + comp[0] + ": </strong><a href='" + comp[1] + "'" + tooltipPart + ">" + comp[2] + "</a></li>";
+        
+        extraLinks += "</li>";
     }
     
     extraLinks += "</ul>";
