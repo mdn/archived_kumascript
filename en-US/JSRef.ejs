@@ -23,7 +23,7 @@ function containsTag(tagList, tag) {
 
 
 // Data for inheritance chain
-var currentInheritence = ["Object", "Function"];
+var currentInheritance = ["Object", "Function"];
 var inheritance = {
     "Math": ["Object"],
     "Function": ["Object"],
@@ -66,7 +66,7 @@ if (containsTag(currentInheritance, "Function")) {
     source["Function"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
 }
 if (containsTag(currentInheritance, "Object")) {
-source["Object"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
+    source["Object"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
 }
 
 var result = {};
@@ -89,7 +89,7 @@ result['Object'] = {
     defaultOpened: false
 };
 }
-log.debug(result);
+
 var pageList;
 
 for (var object in source) {
