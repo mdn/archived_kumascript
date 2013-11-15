@@ -106,7 +106,7 @@ function buildSublist(pages, title) {
     
     for (aPage in pages) {
         result += '<li>';
-        
+        /*
         if (containsTag(resultProps[aPage].tags, 'Experimental')) {
             result += buildBadge("ExperimentalBadge");
         }
@@ -123,7 +123,7 @@ function buildSublist(pages, title) {
         if (containsTag(resultProps[aPage].tags, 'Obsolete')) {
             result += buildBadge("ObsoleteBadge");
         }
-        
+        */
         result += '<em>' + fn_template("domxref", [pages[aPage].title]) + '</em></li>';
     }
     
