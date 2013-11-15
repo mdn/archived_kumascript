@@ -52,6 +52,8 @@ for (aPage in pageList) {
     <ol>
         <li><strong><a href="<%=s_js_full_href%>"><code><%=s_js_subject%></code></a></strong></li>
 
+
+        <% if (resultProperties.length > 0) { %>
         <li data-default-state="open"><a href="#"><strong><%=s_js_title_properties%></strong></a>
             <ol>
             <% for (aPage in resultProperties) { %>
@@ -70,7 +72,10 @@ for (aPage in pageList) {
             <% } %>
             </ol>
         </li>
+        <% 
+        }
         
+        if (resultMethods.length > 0) { %>
         <li data-default-state="open"><a href="#"><strong><%=s_js_title_methods%></strong></a>
             <ol>
             <% for (aPage in resultMethods) { %>
@@ -89,6 +94,7 @@ for (aPage in pageList) {
             <% } %>
             </ol>
         </li>
+        <% } >
 
     </ol>
 </section>
