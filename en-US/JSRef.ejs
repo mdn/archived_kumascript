@@ -62,8 +62,12 @@ var s_js_title_inheritance = mdn.localString({
 // Collect pages
 var source = {};
 source[s_js_subject] = page.subpagesExpand(s_js_full_href);
-source["Function"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
+if (s_js_subject != "Function") {
+    source["Function"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
+}
+if (s_js_subject != "Object") {
 source["Object"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
+}
 
 var result = {};
 result[s_js_subject] = {
@@ -71,16 +75,20 @@ result[s_js_subject] = {
     properties: [],
     defaultOpened: true
 };
+if (s_js_subject != "Function") {
 result['Function'] = {
     methods: [],
     properties: [],
     defaultOpened: false
 };
+}
+if (s_js_subject != "Object") {
 result['Object'] = {
     methods: [],
     properties: [],
     defaultOpened: false
 };
+}
 
 var pageList;
 
