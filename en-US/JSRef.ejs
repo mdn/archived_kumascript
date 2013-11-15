@@ -10,6 +10,8 @@
 // 
 // {{JSRef("Global_Objects", "Number")}} - Generates quicklinks for the Number object including all methods and properties
 
+
+// Checks if a tag is in a given taglist:
 function containsTag(tagList, tag) {
     if (!tagList || tagList == undefined) return 0;
     tag = tag.toLowerCase();
@@ -19,22 +21,30 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
-// Strings for l10n
+// Strings:
 var s_js_ref_href = '/en-US/docs/Web/JavaScript/Reference';
-var s_js_ref_title = 'JavaScript Reference';
 var s_js_section = $0;
 var s_js_subject = $1;
 var s_js_full_href = s_js_ref_href + '/' + s_js_section + '/' + s_js_subject;
 var s_js_property_tag = 'Property';
 var s_js_method_tag = 'Method';
-var s_js_title_methods = 'Methods';
-var s_js_title_properties = 'Properties';
 
+
+var s_js_title_methods = mdn.localString({
+  "en-US": "Methods",
+  "fr"   : "Méthodes"
+});
+var s_js_title_properties = mdn.localString({
+  "en-US": "Properties",
+  "fr"   : "Propriétés"
+});
+
+
+// Get pages for the current section. Split up methods and properties:
 var pageList = page.subpagesExpand(s_js_full_href);   // Get subpages, including tags
 var resultProperties = [];
 var resultMethods = [];
 
-// Get pages for the current section. Split up methods and properties.
 for (aPage in pageList) {
     if (containsTag(pageList[aPage].tags, s_js_subject) &&
         containsTag(pageList[aPage].tags, s_js_property_tag)) {
@@ -46,6 +56,8 @@ for (aPage in pageList) {
     } 
 } 
 
+
+// Output: 
 %>
 
 <section class="Quick_links" id="Quick_Links">
@@ -72,10 +84,8 @@ for (aPage in pageList) {
             <% } %>
             </ol>
         </li>
-        <% 
-        }
         
-        if (resultMethods.length > 0) { %>
+        <% } if (resultMethods.length > 0) { %>
         <li data-default-state="open"><a href="#"><strong><%=s_js_title_methods%></strong></a>
             <ol>
             <% for (aPage in resultMethods) { %>
@@ -94,7 +104,7 @@ for (aPage in pageList) {
             <% } %>
             </ol>
         </li>
-        <% } >
+        <% } %>
 
     </ol>
 </section>
