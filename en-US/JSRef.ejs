@@ -32,11 +32,13 @@ var s_js_method_tag = 'Method';
 
 var s_js_title_methods = mdn.localString({
   "en-US": "Methods",
-  "fr"   : "Méthodes"
+  "fr"   : "Méthodes",
+  "de"   : "Methoden"
 });
 var s_js_title_properties = mdn.localString({
   "en-US": "Properties",
-  "fr"   : "Propriétés"
+  "fr"   : "Propriétés",
+  "de"   : "Eigenschaften"
 });
 
 
@@ -80,6 +82,9 @@ for (aPage in pageList) {
                     <% if (containsTag(resultProperties[aPage].tags, 'Deprecated')) { %>
                          <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
                     <% } %>
+                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                        <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
+                    <% } %>
                 </li>
             <% } %>
             </ol>
@@ -99,6 +104,9 @@ for (aPage in pageList) {
                     <% } %>
                     <% if (containsTag(resultMethods[aPage].tags, 'Deprecated')) { %>
                          <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
+                    <% } %>
+                    <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
+                        <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
                     <% } %>
                 </li>
             <% } %>
