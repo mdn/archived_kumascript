@@ -30,7 +30,7 @@ var inheritance = {
     "Object": [],
 };
 
-if (inheritance[$1]) {
+if (typeof inheritance[$1] != 'undefined') {
     currentInheritance = inheritance[$1];
 }
 
