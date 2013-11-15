@@ -94,52 +94,42 @@ if (pageFolders) {
     }
 }
 
-// This is a workaround to avoid a strand Kumascript bug 
-var fn_template = template;
-var fn_result = [];
+// This is a workaround to avoid a strange Kumascript bug 
+var fn_template = template.bind(this);
 
 function buildBadge(name) {
-    return [
-        '<span class="sidebar-icon">',
-        fn_template(name, [1]),
-        '</span>'
-    ].join('');    
+    return '<span class="sidebar-icon">' + fn_template(name, [1]) + '</span>';
 }
 
 function buildSublist(pages, title) {
-    fn_result.length = 0;
-    fn_result.push('<li data-default-state="open"><a href="#"><strong>');
-    fn_result.push(title);
-    fn_result.push('</strong></a><ol>');
+    var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
     
     for (aPage in pages) {
-        fn_result.push('<li>');
+        result += '<li>';
         
         if (containsTag(resultProps[aPage].tags, 'Experimental')) {
-            fn_result.push(buildBadge("ExperimentalBadge"));
+            result += buildBadge("ExperimentalBadge");
         }
         
         if (containsTag(resultProps[aPage].tags, 'Non-standard') ||
         containsTag(resultProps[aPage].tags, 'Non Standard')) {
-            fn_result.push(buildBadge("NonStandardBadge"));
+            result += buildBadge("NonStandardBadge");
         }
         
         if (containsTag(resultProps[aPage].tags, 'Deprecated')) {
-            fn_result.push(buildBadge("DeprecatedBadge"));
+            result += buildBadge("DeprecatedBadge");
         }
         
         if (containsTag(resultProps[aPage].tags, 'Obsolete')) {
-            fn_result.push(buildBadge("ObsoleteBadge"));
+            result += buildBadge("ObsoleteBadge");
         }
         
-        fn_result.push('<em>');
-        fn_result.push(fn_template("domxref", [pages[aPage].title]));
-        fn_result.push('</em></li>');
+        result += '<em>' + fn_template("domxref", [pages[aPage].title]) + '</em></li>';
     }
     
-    fn_result.push('</ol></li>');
+    result += '</ol></li>';
     
-    return fn_result.join('');
+    return result;
 }
     
 %>
