@@ -11,7 +11,7 @@
 // {{JSRef("Global_Objects", "Number")}} - Generates quicklinks for the Number object including all methods and properties
 
 
-// Checks if a tag is in a given taglist:
+// Helper: Checks if a tag is in a given taglist:
 function containsTag(tagList, tag) {
     if (!tagList || tagList == undefined) return 0;
     tag = tag.toLowerCase();
@@ -21,6 +21,20 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
+
+// Data for inheritance chain
+var currentInheritence = ["Object", "Function"];
+var inheritance = {
+    "Math": ["Object"],
+    "Function": ["Object"],
+    "Object": [],
+};
+
+if (inheritance[$1]) {
+    currentInheritance = inheritance[$1];
+}
+
+
 // Strings:
 var s_js_ref_href = '/en-US/docs/Web/JavaScript/Reference';
 var s_js_section = $0;
@@ -28,7 +42,6 @@ var s_js_subject = $1;
 var s_js_full_href = s_js_ref_href + '/' + s_js_section + '/' + s_js_subject;
 var s_js_property_tag = 'Property';
 var s_js_method_tag = 'Method';
-
 
 var s_js_title_methods = mdn.localString({
   "en-US": "Methods",
@@ -40,35 +53,76 @@ var s_js_title_properties = mdn.localString({
   "fr"   : "Propriétés",
   "de"   : "Eigenschaften"
 });
+var s_js_title_inheritance = mdn.localString({
+  "en-US": "Inheritance:",
+  "de"   : "Vererbung:"
+});
 
 
-// Get pages for the current section. Split up methods and properties:
-var pageList = page.subpagesExpand(s_js_full_href);   // Get subpages, including tags
-var resultProperties = [];
-var resultMethods = [];
+// Collect pages
+var source = {};
+source[s_js_subject] = page.subpagesExpand(s_js_full_href);
+source["Function"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
+source["Object"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
 
-for (aPage in pageList) {
-    if (containsTag(pageList[aPage].tags, s_js_subject) &&
-        containsTag(pageList[aPage].tags, s_js_property_tag)) {
-        resultProperties.push(pageList[aPage]);
+var result = {};
+result[s_js_subject] = {
+    methods: [],
+    properties: [],
+    defaultOpened: true
+};
+result['Function'] = {
+    methods: [],
+    properties: [],
+    defaultOpened: false
+};
+result['Object'] = {
+    methods: [],
+    properties: [],
+    defaultOpened: false
+};
+
+var pageList;
+
+for (var object in source) {
+    pageList = source[object];
+    for (aPage in pageList) {
+        if (containsTag(pageList[aPage].tags, object) &&
+            containsTag(pageList[aPage].tags, s_js_property_tag)) {
+            result[object].properties.push(pageList[aPage]);
+        }   
+        if (containsTag(pageList[aPage].tags, object) &&
+            containsTag(pageList[aPage].tags, s_js_method_tag)) {
+            result[object].methods.push(pageList[aPage]);
+        } 
     }
-    if (containsTag(pageList[aPage].tags, s_js_subject) &&
-        containsTag(pageList[aPage].tags, s_js_method_tag)) {
-        resultMethods.push(pageList[aPage]);
-    } 
-} 
+}
 
+var resultProperties;
+var resultMethods;
+var resultOpen;
+var len = 0;
 
 // Output: 
 %>
 
 <section class="Quick_links" id="Quick_Links">
     <ol>
-        <li><strong><a href="<%=s_js_full_href%>"><code><%=s_js_subject%></code></a></strong></li>
 
+        <%
+        for (object in result) {
+            len++;
+            resultProperties = result[object].properties;
+            resultMethods    = result[object].methods;
+            resultOpen       = result[object].defaultOpened;
+        %>
+        <% if(len == 2) { %>
+            <li><strong><%=s_js_title_inheritance%></strong></li>
+        <% } %>
+        <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + object%>"><code><%=object%></code></a></strong></li>
 
         <% if (resultProperties.length > 0) { %>
-        <li data-default-state="open"><a href="#"><strong><%=s_js_title_properties%></strong></a>
+        <li<%if(resultOpen) {%> data-default-state="open"<%}%>><a href="#"><strong><%=s_js_title_properties%></strong></a>
             <ol>
             <% for (aPage in resultProperties) { %>
                 <li>
@@ -91,7 +145,7 @@ for (aPage in pageList) {
         </li>
         
         <% } if (resultMethods.length > 0) { %>
-        <li data-default-state="open"><a href="#"><strong><%=s_js_title_methods%></strong></a>
+        <li<%if(resultOpen) {%> data-default-state="open"<%}%>><a href="#"><strong><%=s_js_title_methods%></strong></a>
             <ol>
             <% for (aPage in resultMethods) { %>
                 <li>
@@ -112,6 +166,8 @@ for (aPage in pageList) {
             <% } %>
             </ol>
         </li>
+        <% } %>
+        
         <% } %>
 
     </ol>
