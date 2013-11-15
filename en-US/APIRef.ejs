@@ -77,11 +77,13 @@ if (pageFolders) {
     for (aPage in pageList) {
         if (containsAPI(APIList, pageList[aPage].title)) {
             if(containsTag(pageList[aPage].tags, "Property")) { // We only want properties
+                pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
                 resultProps.push(pageList[aPage]);
             }
             
             if (containsTag(pageList[aPage].tags, "Method") &&
             !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
+                pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
                 resultMethods.push(pageList[aPage]);
             }
         }
@@ -89,13 +91,11 @@ if (pageFolders) {
         if (containsTag(pageList[aPage].tags, s_api_tag) &&
         pageList[aPage].title.indexOf('.') === -1 &&
         pageList[aPage].title !== mainIF) {
+            pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
             resultSeealso.push(pageList[aPage]);
         }
     }
 }
-
-// This is a workaround to avoid a strange Kumascript bug 
-// var fn_template = template;
 
 var badges = {
     ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
@@ -110,24 +110,24 @@ function buildSublist(pages, title) {
     for (aPage in pages) {
         result += '<li>';
         
-        if (containsTag(resultProps[aPage].tags, 'Experimental')) {
+        if (containsTag(pages[aPage].tags, 'Experimental')) {
             result += badges.ExperimentalBadge;
         }
         
-        if (containsTag(resultProps[aPage].tags, 'Non-standard') ||
+        if (containsTag(pages[aPage].tags, 'Non-standard') ||
         containsTag(resultProps[aPage].tags, 'Non Standard')) {
             result += badges.NonStandardBadge;
         }
         
-        if (containsTag(resultProps[aPage].tags, 'Deprecated')) {
+        if (containsTag(pages[aPage].tags, 'Deprecated')) {
             result += badges.DeprecatedBadge;
         }
         
-        if (containsTag(resultProps[aPage].tags, 'Obsolete')) {
+        if (containsTag(pages[aPage].tags, 'Obsolete')) {
             result += badges.ObsoleteBadge;
         }
         
-        result += '<em>' + template("domxref", [pages[aPage].title]) + '</em></li>';
+        result += '<em>' + pages[aPage].domxref + '</em></li>';
     }
     
     result += '</ol></li>';
@@ -153,54 +153,12 @@ function buildSublist(pages, title) {
     
     /* Display methods */ 
     if (resultMethods.length > 0) {
-    %>
-    <li data-default-state="open"><a href="#"><strong><%=s_api_title_methods%></strong></a>
-    <ol>
-    <% for (aPage in resultMethods) { %>
-        <li>
-        <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
-            <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultMethods[aPage].tags, 'Non-standard') ||
-               containsTag(resultMethods[aPage].tags, 'Non Standard')) { %>
-             <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultMethods[aPage].tags, 'Deprecated')) { %>
-             <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
-             <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
-        <% } %>
-        <em><%- template("domxref", [resultMethods[aPage].title]) %></em></li>
-    <%  } %>
-    </ol></li>
-    <% 
+        %><%-buildSublist(resultMethods, s_api_title_methods)%><%
     }
     
     /* Display related APIs */
     if (resultSeealso.length > 0) {
-    %>
-    <li data-default-state="open"><a href="#"><strong><%=s_api_title_seealso%></strong></a>
-    <ol>
-    <% for (aPage in resultSeealso) { %>
-        <li>
-        <% if (containsTag(resultSeealso[aPage].tags, 'Experimental')) { %>
-            <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultSeealso[aPage].tags, 'Non-standard') ||
-               containsTag(resultSeealso[aPage].tags, 'Non Standard')) { %>
-             <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultSeealso[aPage].tags, 'Deprecated')) { %>
-             <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultSeealso[aPage].tags, 'Obsolete')) { %>
-             <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
-        <% } %>
-        <em><%- template("domxref", [resultSeealso[aPage].title]) %></em></li>
-    <%  } %>
-    </ol></li>
-    <%
+        %><%-buildSublist(resultSeealso, s_api_title_seealso)%><%
     }
     %>
   </ol>
