@@ -95,10 +95,13 @@ if (pageFolders) {
 }
 
 // This is a workaround to avoid a strange Kumascript bug 
-var fn_template = template.bind(this);
+// var fn_template = template;
 
-function buildBadge(name) {
-    return '<span class="sidebar-icon">' + fn_template(name, [1]) + '</span>';
+var badges = {
+    ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
+    NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
+    DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
+    ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
 }
 
 function buildSublist(pages, title) {
@@ -106,25 +109,25 @@ function buildSublist(pages, title) {
     
     for (aPage in pages) {
         result += '<li>';
-        /*
+        
         if (containsTag(resultProps[aPage].tags, 'Experimental')) {
-            result += buildBadge("ExperimentalBadge");
+            result += badges.ExperimentalBadge;
         }
         
         if (containsTag(resultProps[aPage].tags, 'Non-standard') ||
         containsTag(resultProps[aPage].tags, 'Non Standard')) {
-            result += buildBadge("NonStandardBadge");
+            result += badges.NonStandardBadge;
         }
         
         if (containsTag(resultProps[aPage].tags, 'Deprecated')) {
-            result += buildBadge("DeprecatedBadge");
+            result += badges.DeprecatedBadge;
         }
         
         if (containsTag(resultProps[aPage].tags, 'Obsolete')) {
-            result += buildBadge("ObsoleteBadge");
+            result += badges.ObsoleteBadge;
         }
-        */
-        result += '<em>' + fn_template("domxref", [pages[aPage].title]) + '</em></li>';
+        
+        result += '<em>' + template("domxref", [pages[aPage].title]) + '</em></li>';
     }
     
     result += '</ol></li>';
