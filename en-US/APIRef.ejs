@@ -2,7 +2,7 @@
 // Creates a link to the interface on which this page is a method or property.
 //
 // Parameters:
-//  $0  The name of the interface this page belongs to.
+//  $0  A specific tag to releated APIs (or the API name for backward compatibility)
 
 function containsTag(tagList, tag) {
     if (!tagList || tagList == undefined) return 0;
@@ -24,125 +24,160 @@ function containsAPI(APIList, name) {
     return 0;
 }
 
-var s_str = new Array();
-s_str[0] = $0;
-s_str[1] = $0;
 var s_api_href = '/' + env.locale + '/docs/Web/API';
-var s_api_title_methods    = "Methods";
-var s_api_title_properties = "Properties";
 
-var aquo = "&laquo;";   // "»"
+var s_api_title_methods = mdn.localString({
+  "en-US": "Methods",
+  "fr"   : "Méthodes"
+});
 
-/*
- For RTL locales (ar, he, ...)
-*/
-switch(env.locale) {
-    case "ar":
-    case "he":
-        aquo = "&raquo;";   // "«"
-        break;
-    default:
-}
+var s_api_title_properties = mdn.localString({
+  "en-US": "Properties",
+  "fr"   : "Propriétés"
+});
 
-var result = '<span  class="breadcrumbs themeUpdated">' + aquo + '&nbsp;<a href="/' + env.locale + '/docs/Web/API/' + s_str[0] + '">' + s_str[1] + '</a></span>';
+var s_api_title_seealso = mdn.localString({
+  "en-US": "Related APIs",
+  "fr"   : "API connexes"
+});
 
-%><%- result%>
-<%
+var aquo = mdn.localString({
+  "en-US": "&laquo;", // "»"
+ 
+  // For RTL locales (ar, he, ...)
+  "ar"   : "&raquo;", // "«"
+  "he"   : "&raquo;", // "«"
+});
 
 /* Find the API Name from the URL: the part after the last / and before the first . */
-    var pageURL = env.path;
+var pageURL = env.path;
     
-    var pageFolders = pageURL.split('/');
-    if (pageFolders) {
-        var pageName = pageFolders[pageFolders.length-1]; // We are only interested in the last part
-        var mainIF = pageName.split('.')[0];
-        var APIList = [];
-        APIList.push(mainIF);
-        /* Add to the list, the one that are listed in parameter: hierarchy */
+var pageFolders = pageURL.split('/');
+if (pageFolders) {
+    var pageName = pageFolders[pageFolders.length-1]; // We are only interested in the last part
+    var mainIF = pageName.split('.')[0];
+    var APIList = [];
+    APIList.push(mainIF);
+
+    var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
     
-        /* Add to the list, those that are implemented by it */
+    /* List properties of this API */
+    var resultProps = [];
+    
+    /* List methods of this API */
+    var resultMethods = [];
 
-        /* List properties of this API */
-        // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
-        var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
-        var resultProps = [];
+    /* List related APIs */
+    var resultSeealso = [];
 
-        for (aPage in pageList) {
-            if (containsAPI(APIList, pageList[aPage].title) &&
-                containsTag(pageList[aPage].tags, "Property")) { // We only want properties
+    for (aPage in pageList) {
+        if (containsAPI(APIList, pageList[aPage].title)) {
+            if(containsTag(pageList[aPage].tags, "Property")) { // We only want properties
                 resultProps.push(pageList[aPage]);
             }
-        }
-
-        /* Find the constructor of this API */
-
-        /* List methods of this API */
-        var resultMethods = [];
-
-        for (aPage in pageList) {
-            if (containsAPI(APIList, pageList[aPage].title) &&
-                containsTag(pageList[aPage].tags, "Method") &&
-                !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
+            
+            if (containsTag(pageList[aPage].tags, "Method") &&
+            !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
                 resultMethods.push(pageList[aPage]);
+            }
+            
+            if ($1 && containsTag(pageList[aPage].tags, $0) &&
+            pageList[aPage].title.indexOf('.') === -1 &&
+            pageList[aPage].title !== mainIF) {
+                resultSeealso.push(pageList[aPage]);
             }
         }
     }
+}
     
 %>
+<span class="breadcrumbs themeUpdated"><%- aquo %>&nbsp;<a href="<%- s_api_href + '/' + mainIF %>"><%= mainIF %></a></span>
 <section class="Quick_links" id="Quick_Links">
   <ol>
     <%
     /* Display ancestor chain */
     // TBD: the chain, we only displays the lowest one!
     %>
-    <li><%- '<a href="/' + env.locale + '/docs/' + s_str[0] + '">' + s_str[1] + '</a>'%></li>
     <li><strong><%- template("domxref", [mainIF]) %></a></strong></li>
-    <% /* Display properties */ %>
+    <% 
+    
+    /* Display properties */ 
+    if (resultProps.length > 0) {
+    %>
     <li data-default-state="open"><a href="#"><strong><%=s_api_title_properties%></strong></a>
     <ol>
-    <% for (aProp in resultProps) { %>
+    <% for (aPage in resultProps) { %>
         <li>
-        <% if (containsTag(resultProps[aProp].tags, 'Experimental')) { %>
+        <% if (containsTag(resultProps[aPage].tags, 'Experimental')) { %>
             <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
         <% } %>
-        <% if (containsTag(resultProps[aProp].tags, 'Non-standard') ||
-               containsTag(resultProps[aProp].tags, 'Non Standard')) { %>
+        <% if (containsTag(resultProps[aPage].tags, 'Non-standard') ||
+               containsTag(resultProps[aPage].tags, 'Non Standard')) { %>
              <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
         <% } %>
-        <% if (containsTag(resultProps[aProp].tags, 'Deprecated')) { %>
+        <% if (containsTag(resultProps[aPage].tags, 'Deprecated')) { %>
              <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
         <% } %>
-        <% if (containsTag(resultProps[aProp].tags, 'Obsolete')) { %>
+        <% if (containsTag(resultProps[aPage].tags, 'Obsolete')) { %>
              <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
         <% } %>
-        <em><%- template("domxref", [resultProps[aProp].title]) %></em></li>
+        <em><%- template("domxref", [resultProps[aPage].title]) %></em></li>
     <%  } %>
     </ol></li>
-    <%
-    /* Display constructor */
-    // TBD.
-
-    /* Display methods */
+    <% 
+    }
+    
+    /* Display methods */ 
+    if (resultMethods.length > 0) {
     %>
     <li data-default-state="open"><a href="#"><strong><%=s_api_title_methods%></strong></a>
     <ol>
-    <% for (aMethod in resultMethods) { %>
+    <% for (aPage in resultMethods) { %>
         <li>
-        
-        <% if (containsTag(resultMethods[aMethod].tags, 'Experimental')) { %>
+        <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
             <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
         <% } %>
-        <% if (containsTag(resultMethods[aMethod].tags, 'Non-standard') ||
-               containsTag(resultMethods[aMethod].tags, 'Non Standard')) { %>
+        <% if (containsTag(resultMethods[aPage].tags, 'Non-standard') ||
+               containsTag(resultMethods[aPage].tags, 'Non Standard')) { %>
              <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
         <% } %>
-        <% if (containsTag(resultMethods[aMethod].tags, 'Deprecated')) { %>
+        <% if (containsTag(resultMethods[aPage].tags, 'Deprecated')) { %>
              <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
         <% } %>
-        <% if (containsTag(resultMethods[aMethod].tags, 'Obsolete')) { %>
+        <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
              <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
-        <% } %><%- template("domxref", [resultMethods[aMethod].title, resultMethods[aMethod].title + '()']) %></li>
+        <% } %>
+        <em><%- template("domxref", [resultMethods[aPage].title]) %></em></li>
     <%  } %>
     </ol></li>
+    <% 
+    }
+    
+    /* Display related APIs */
+    if (resultSeealso.length > 0) {
+    %>
+    <li data-default-state="open"><a href="#"><strong><%=s_api_title_seealso%></strong></a>
+    <ol>
+    <% for (aPage in resultSeealso) { %>
+        <li>
+        <% if (containsTag(resultSeealso[aPage].tags, 'Experimental')) { %>
+            <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultSeealso[aPage].tags, 'Non-standard') ||
+               containsTag(resultSeealso[aPage].tags, 'Non Standard')) { %>
+             <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultSeealso[aPage].tags, 'Deprecated')) { %>
+             <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
+        <% } %>
+        <% if (containsTag(resultSeealso[aPage].tags, 'Obsolete')) { %>
+             <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
+        <% } %>
+        <em><%- template("domxref", [resultSeealso[aPage].title]) %></em></li>
+    <%  } %>
+    </ol></li>
+    <%
+    }
+    %>
   </ol>
 </section>
