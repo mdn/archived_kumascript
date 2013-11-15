@@ -62,10 +62,10 @@ var s_js_title_inheritance = mdn.localString({
 // Collect pages
 var source = {};
 source[s_js_subject] = page.subpagesExpand(s_js_full_href);
-if (s_js_subject != "Function") {
+if (containsTag(currentInheritance, "Function")) {
     source["Function"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
 }
-if (s_js_subject != "Object") {
+if (containsTag(currentInheritance, "Object")) {
 source["Object"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
 }
 
@@ -75,14 +75,14 @@ result[s_js_subject] = {
     properties: [],
     defaultOpened: true
 };
-if (s_js_subject != "Function") {
+if (containsTag(currentInheritance, "Function")) {
 result['Function'] = {
     methods: [],
     properties: [],
     defaultOpened: false
 };
 }
-if (s_js_subject != "Object") {
+if (containsTag(currentInheritance, "Object")) {
 result['Object'] = {
     methods: [],
     properties: [],
