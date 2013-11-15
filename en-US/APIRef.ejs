@@ -94,49 +94,52 @@ if (pageFolders) {
     }
 }
 
-var TPL = template;
+// This is a workaround to avoid a strand Kumascript bug 
+var fn_template = template;
+var fn_result = [];
 
 function buildBadge(name) {
     return [
         '<span class="sidebar-icon">',
-        TPL(name, [1]),
+        fn_template(name, [1]),
         '</span>'
     ].join('');    
 }
 
 function buildSublist(pages, title) {
-    var result = [
-        '<li data-default-state="open"><a href="#"><strong>', title, '</strong></a><ol>'
-    ];
+    fn_result.length = 0;
+    fn_result.push('<li data-default-state="open"><a href="#"><strong>');
+    fn_result.push(title);
+    fn_result.push('</strong></a><ol>');
     
     for (aPage in pages) {
-        result.push('<li>');
+        fn_result.push('<li>');
         
         if (containsTag(resultProps[aPage].tags, 'Experimental')) {
-            result.push(buildBadge("ExperimentalBadge"));
+            fn_result.push(buildBadge("ExperimentalBadge"));
         }
         
         if (containsTag(resultProps[aPage].tags, 'Non-standard') ||
         containsTag(resultProps[aPage].tags, 'Non Standard')) {
-            result.push(buildBadge("NonStandardBadge"));
+            fn_result.push(buildBadge("NonStandardBadge"));
         }
         
         if (containsTag(resultProps[aPage].tags, 'Deprecated')) {
-            result.push(buildBadge("DeprecatedBadge"));
+            fn_result.push(buildBadge("DeprecatedBadge"));
         }
         
         if (containsTag(resultProps[aPage].tags, 'Obsolete')) {
-            result.push(buildBadge("ObsoleteBadge"));
+            fn_result.push(buildBadge("ObsoleteBadge"));
         }
         
-        result.push('<em>');
-        result.push(TPL("domxref", [pages[aPage].title]));
-        result.push('</em></li>');
+        fn_result.push('<em>');
+        fn_result.push(fn_template("domxref", [pages[aPage].title]));
+        fn_result.push('</em></li>');
     }
     
-    result.push('</ol></li>');
+    fn_result.push('</ol></li>');
     
-    return result.join('');
+    return fn_result.join('');
 }
     
 %>
