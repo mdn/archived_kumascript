@@ -23,9 +23,17 @@ var api2 = api.replace('.prototype.', '.');
 if (api2.indexOf(".") !== -1) {
     URL += "Global_Objects/";
     URL += api2.replace('.', '/');
-    URL += $2;
 } else {
-    URL += $0 + $2;
+    URL += $0;
 }
 
-%><a href="<%- URL %>"><code><%= str %></code></a>
+var page = wiki.getPage(URL);
+var summary = "";
+
+if (page && page.summary) {
+    var summary = mdn.escapeQuotes(page.summary);
+} else {
+    summary = "The documentation about this has not yet been written; please consider contributing!";
+}
+
+%><a href="<%- URL + $2 %>" title="<%-summary%>"><code><%= str %></code></a>
