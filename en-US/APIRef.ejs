@@ -93,6 +93,51 @@ if (pageFolders) {
         }
     }
 }
+
+var TPL = template;
+
+function buildBadge(name) {
+    return [
+        '<span class="sidebar-icon">',
+        TPL(name, [1]),
+        '</span>'
+    ].join('');    
+}
+
+function buildSublist(pages, title) {
+    var result = [
+        '<li data-default-state="open"><a href="#"><strong>', title, '</strong></a><ol>'
+    ];
+    
+    for (aPage in pages) {
+        result.push('<li>');
+        
+        if (containsTag(resultProps[aPage].tags, 'Experimental')) {
+            result.push(buildBadge("ExperimentalBadge"));
+        }
+        
+        if (containsTag(resultProps[aPage].tags, 'Non-standard') ||
+        containsTag(resultProps[aPage].tags, 'Non Standard')) {
+            result.push(buildBadge("NonStandardBadge"));
+        }
+        
+        if (containsTag(resultProps[aPage].tags, 'Deprecated')) {
+            result.push(buildBadge("DeprecatedBadge"));
+        }
+        
+        if (containsTag(resultProps[aPage].tags, 'Obsolete')) {
+            result.push(buildBadge("ObsoleteBadge"));
+        }
+        
+        result.push('<em>');
+        result.push(TPL("domxref", [pages[aPage].title]));
+        result.push('</em></li>');
+    }
+    
+    result.push('</ol></li>');
+    
+    return result.join('');
+}
     
 %>
 <span class="breadcrumbs themeUpdated"><%- aquo %>&nbsp;<a href="<%- s_api_href + '/' + mainIF %>"><%= mainIF %></a></span>
@@ -106,29 +151,8 @@ if (pageFolders) {
     <% 
     
     /* Display properties */ 
-    if (resultProps.length > 0) {
-    %>
-    <li data-default-state="open"><a href="#"><strong><%=s_api_title_properties%></strong></a>
-    <ol>
-    <% for (aPage in resultProps) { %>
-        <li>
-        <% if (containsTag(resultProps[aPage].tags, 'Experimental')) { %>
-            <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultProps[aPage].tags, 'Non-standard') ||
-               containsTag(resultProps[aPage].tags, 'Non Standard')) { %>
-             <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultProps[aPage].tags, 'Deprecated')) { %>
-             <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
-        <% } %>
-        <% if (containsTag(resultProps[aPage].tags, 'Obsolete')) { %>
-             <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
-        <% } %>
-        <em><%- template("domxref", [resultProps[aPage].title]) %></em></li>
-    <%  } %>
-    </ol></li>
-    <% 
+    if (resultProps.length > 0) { 
+        %><%-buildSublist(resultProps, s_api_title_properties)%><%
     }
     
     /* Display methods */ 
