@@ -136,7 +136,13 @@ var len = 0;
             <ol>
             <% for (aPage in resultProperties) { %>
                 <li>
+                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                        <s class="obsoleteElement">
+                    <% } %>
                     <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary)%>"><code><%-resultProperties[aPage].title%></code></a>
+                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                        </s>
+                    <% } %>
                     <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
                          <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
                     <% } %>
@@ -146,7 +152,7 @@ var len = 0;
                     <% if (containsTag(resultProperties[aPage].tags, 'Deprecated')) { %>
                          <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
                     <% } %>
-                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
                         <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
                     <% } %>
                 </li>
@@ -159,7 +165,13 @@ var len = 0;
             <ol>
             <% for (aPage in resultMethods) { %>
                 <li>
+                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                        <s class="obsoleteElement">
+                    <% } %>
                     <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><code><%-resultMethods[aPage].title%></code></a>
+                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                        </s>
+                    <% } %>
                     <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
                         <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
                     <% } %>
