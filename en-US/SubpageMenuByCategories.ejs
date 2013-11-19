@@ -23,8 +23,8 @@ function hasTag(aPage, aTag) {
         return false;
     }
     
-    for (oneTag in aPage.tags) {
-        if (oneTag == aTag) {
+    for (var i=0; i<aPage.tags.length; i++) {
+        if (aPage.tags[i] == aTag) {
             return true;
         }
     }
@@ -34,15 +34,6 @@ function hasTag(aPage, aTag) {
 
 var categoryList = JSON.parse($0);
 var html = "";
-var resultLists = [];
-
-// Create in resultLists an empty array for each tag in the category list
-
-for (category in categoryList) {
-    resultLists[category.tag] = [];
-    html += "<p>Created list for tag " + category.tag + "</p>";
-    html += "<p>" + JSON.stringify(category) + "</p>";
-}
 
 // Get a list of all subpages of the current page. This is, by default,
 // our list of "miscellaneous" pages. We'll then pull pages out of that
@@ -51,16 +42,22 @@ for (category in categoryList) {
 var miscPages = page.subpagesExpand(env.path, 1, 0);
 var numPages = miscPages.length;
 
-for (var i=0; i<numPages; i++) {
-    aPage = miscPages[i];
-    for (category in categoryList) {
-        if (hasTag(aPage, category.tag)) {
-            resultLists[category.tag].push(aPage);
-            miscPages.splice(i, 1);
-            i--;
+for (var i=0; i<categoryList.length; i++) {
+    var category = categoryList[i];
+    var resultList = [];
+    
+    html += "<h2>" + category.name + "</h2>";
+    
+    for (var j=0; j<numPages; j++) {
+        if (hasTag(miscPages[j], category.tag)) {
+            resultList.push(miscPages[j]);
+            miscPages.splice(j, 1);
+            j--;
             numPages--;
         }
     }
+    
+    html += template("SubpagesWithSummaries", [JSON.stringify(resultList)]);
 }
 
 // Output the misc pages
