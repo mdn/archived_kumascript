@@ -165,11 +165,11 @@ var len = 0;
             <ol>
             <% for (aPage in resultMethods) { %>
                 <li>
-                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                     <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
                         <s class="obsoleteElement">
                     <% } %>
                     <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><code><%-resultMethods[aPage].title%></code></a>
-                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                    <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
                         </s>
                     <% } %>
                     <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
