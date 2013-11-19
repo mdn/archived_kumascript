@@ -51,8 +51,14 @@ var miscPages = page.subpagesExpand(env.path, 1, 1);
 for (aPage in miscPages) {
     for (category in categoryList) {
         if (hasTag(aPage, category.tag)) {
-            resultLists[category.tag].push
+            resultLists[category.tag].push(aPage);
+            miscPages.splice(miscPages.indexOf(aPage), 1);
         }
     }
 }
+
+// Output the misc pages
+
+html += template("SubpagesWithSummaries", JSON.stringify(miscPages));
 %>
+<%-html%>
