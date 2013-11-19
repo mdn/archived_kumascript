@@ -21,6 +21,9 @@ function containsTag(tagList, tag) {
 }
 
 var termList;
+var html = "";
+
+html += "<p>" + $0 + "</p>";
 
 if ($0 && ($0 != undefined)) {
     termList = JSON.parse($0);
@@ -29,7 +32,6 @@ if ($0 && ($0 != undefined)) {
 }
 
 var numTerms = termList.length;
-var html = "";
 html += "<strong>Num terms: " + numTerms + "</strong>";
 
 if (numTerms) {
