@@ -21,8 +21,14 @@
         var b = "";
         for (var i = 0, len = a.length; i < len; i++) {
           var c = a[i];
-          if (c=="\"") c = "&quot;";
-               b += c;
+          if (c=="\"") {
+              c = "&quot;";
+          } else if (c=='<') {
+              c = "&lt;";
+          } else if (c=='>') {
+              c = "&gt;";
+          }
+          b += c;
         }
         return b.replace(/(<([^>]+)>)/ig, "");
     },
