@@ -59,6 +59,6 @@ for (aPage in miscPages) {
 
 // Output the misc pages
 
-html += template("SubpagesWithSummaries", JSON.stringify(miscPages));
+html += template("SubpagesWithSummaries", [JSON.stringify(miscPages)]);
 %>
 <%-html%>
