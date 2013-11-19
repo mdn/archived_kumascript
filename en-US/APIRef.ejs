@@ -76,21 +76,21 @@ if (pageFolders) {
 
     for (aPage in pageList) {
         if (containsAPI(APIList, pageList[aPage].title)) {
-            if(containsTag(pageList[aPage].tags, "Property")) { // We only want properties
+            if (containsTag(pageList[aPage].tags, "Property")) { // We only want properties
                 pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
                 resultProps.push(pageList[aPage]);
             }
             
             if (containsTag(pageList[aPage].tags, "Method") &&
-            !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
+                        !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
                 pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
                 resultMethods.push(pageList[aPage]);
             }
         }
         
         if (containsTag(pageList[aPage].tags, s_api_tag) &&
-        pageList[aPage].title.indexOf('.') === -1 &&
-        pageList[aPage].title !== mainIF) {
+                    pageList[aPage].title.indexOf('.') === -1 &&
+                    pageList[aPage].title !== mainIF) {
             pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
             resultSeealso.push(pageList[aPage]);
         }
@@ -115,7 +115,7 @@ function buildSublist(pages, title) {
         }
         
         if (containsTag(pages[aPage].tags, 'Non-standard') ||
-        containsTag(resultProps[aPage].tags, 'Non Standard')) {
+                    containsTag(pages[aPage].tags, 'Non Standard')) {
             result += badges.NonStandardBadge;
         }
         
