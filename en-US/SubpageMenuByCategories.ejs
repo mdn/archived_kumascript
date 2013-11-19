@@ -13,4 +13,46 @@
 //
 // "[{'tag': 'tagname', 'name': 'categoryname'}, ...]"
 
+//
+// hasTag
+//
+// Returns true if the specified page has the indicated tag.
+//
+function hasTag(aPage, aTag) {
+    if (aPage.tags == undefined || aPage.tags == null || aPage.tags.length == 0) {
+        return false;
+    }
+    
+    for (oneTag in aPage.tags) {
+        if (oneTag == aTag) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+var categoryList = JSON.parse($0);
+var html = "";
+var resultLists = [];
+
+// Create in resultLists an empty array for each tag in the category list
+
+for (category in categoryList) {
+    resultLists[category.tag] = [];
+}
+
+// Get a list of all subpages of the current page. This is, by default,
+// our list of "miscellaneous" pages. We'll then pull pages out of that
+// list as we move them into others by category.
+
+var miscPages = page.subpagesExpand(env.path, 1, 1);
+
+for (aPage in miscPages) {
+    for (category in categoryList) {
+        if (hasTag(aPage, category.tag)) {
+            resultLists[category.tag].push
+        }
+    }
+}
 %>
