@@ -23,11 +23,11 @@
           var c = a[i];
           if (c=="\"") {
               c = "&quot;";
-          } else if (c=='<') {
+          }/* else if (c=='<') {
               c = "&lt;";
           } else if (c=='>') {
               c = "&gt;";
-          }
+          }*/
           b += c;
         }
         return b.replace(/(<([^>]+)>)/ig, "");
