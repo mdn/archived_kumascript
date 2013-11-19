@@ -40,6 +40,8 @@ var resultLists = [];
 
 for (category in categoryList) {
     resultLists[category.tag] = [];
+    html += "<p>Created list for tag " + category.tag + "</p>";
+    html += "<p>" + JSON.stringify(category) + "</p>";
 }
 
 // Get a list of all subpages of the current page. This is, by default,
@@ -47,18 +49,22 @@ for (category in categoryList) {
 // list as we move them into others by category.
 
 var miscPages = page.subpagesExpand(env.path, 1, 0);
+var numPages = miscPages.length;
 
-for (aPage in miscPages) {
+for (var i=0; i<numPages; i++) {
+    aPage = miscPages[i];
     for (category in categoryList) {
         if (hasTag(aPage, category.tag)) {
             resultLists[category.tag].push(aPage);
-            miscPages.splice(miscPages.indexOf(aPage), 1);
+            miscPages.splice(i, 1);
+            i--;
+            numPages--;
         }
     }
 }
 
 // Output the misc pages
 
-html += template("SubpagesWithSummaries", [JSON.stringify(miscPages)]);
+html += "<h2 id='Other'>Other pages</h2>" + template("SubpagesWithSummaries", [JSON.stringify(miscPages)]);
 %>
 <%-html%>
