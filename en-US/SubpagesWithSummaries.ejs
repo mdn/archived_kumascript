@@ -8,22 +8,6 @@ function pageSorter(a, b) {
     return a.title.localeCompare(b.title);
 }
 
-function escapeQuotes(a) {
-    var b = "";
-    var len = a.length;
-    
-    for (var i=0; i<len; i++) {
-        var c = a[i];
-        if (c=="\"") {
-            c="&quot;";
-        }
-        b += c;
-    }
-    var regex = /(<([^>]+)>)/ig;
-    b = b.replace(regex, "");
-    return b;
-}
-
 function containsTag(tagList, tag) {
     if (!tagList || tagList == undefined) return 0;
     tag = tag.toLowerCase();
