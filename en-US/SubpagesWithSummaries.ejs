@@ -23,13 +23,14 @@ function containsTag(tagList, tag) {
 var termList;
 
 if ($0 && ($0 != undefined)) {
-    termList = $0.parse();
+    termList = JSON.parse($0);
 } else {
     termList = page.subpagesExpand();
 }
 
 var numTerms = termList.length;
 var html = "";
+html += "<strong>Num terms: " + numTerms + "</strong>";
 
 if (numTerms) {
     html = "<dl>";
