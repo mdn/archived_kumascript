@@ -2,7 +2,10 @@
 // Creates a list of the subpages of the current page, with their summaries,
 // as a definition list. Doesn't do any additional formatting.
 //
-// Parameters: None.
+// Parameters:
+//
+//  $0  A list of pages to output instead of the subpages of the current page;
+//      OPTIONAL.
 
 function pageSorter(a, b) {
     return a.title.localeCompare(b.title);
@@ -17,7 +20,14 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
-var termList = page.subpagesExpand();
+var termList;
+
+if ($0 && ($0 != undefined)) {
+    termList = $0.parse();
+} else {
+    termList = page.subpagesExpand();
+}
+
 var numTerms = termList.length;
 var html = "";
 
