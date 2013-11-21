@@ -108,10 +108,10 @@ for (var object in source) {
         } else {
             includeme = true;
         }
-        if (containsTag(pageList[aPage].tags, object) && containsTag(pageList[aPage].tags, s_js_property_tag) && includeme) {
+        if (containsTag(pageList[aPage].tags, result[object].title) && containsTag(pageList[aPage].tags, s_js_property_tag) && includeme) {
             result[object].properties.push(pageList[aPage]);
         }
-        if (containsTag(pageList[aPage].tags, object) && containsTag(pageList[aPage].tags, s_js_method_tag) && includeme) {
+        if (containsTag(pageList[aPage].tags, result[object].title) && containsTag(pageList[aPage].tags, s_js_method_tag) && includeme) {
             result[object].methods.push(pageList[aPage]);
         } 
     }
