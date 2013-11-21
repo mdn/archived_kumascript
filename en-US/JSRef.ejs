@@ -65,53 +65,63 @@ var s_js_title_inheritance = mdn.localString({
 var source = {};
 source[s_js_subject] = page.subpagesExpand(s_js_full_href);
 if (containsTag(currentInheritance, "Function")) {
-    source["Function"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
+    source["iFunction"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
 }
 if (containsTag(currentInheritance, "Object")) {
-    source["Object"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
+    source["iObject"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
 }
 
 var result = {};
 result[s_js_subject] = {
+    title: s_js_subject,
     methods: [],
     properties: [],
     defaultOpened: true
 };
 if (containsTag(currentInheritance, "Function")) {
-result['Function'] = {
+result['iFunction'] = {
+    title: 'Function',
     methods: [],
     properties: [],
     defaultOpened: false
 };
 }
 if (containsTag(currentInheritance, "Object")) {
-result['Object'] = {
+result['iObject'] = {
+    title: 'Object',
     methods: [],
     properties: [],
     defaultOpened: false
 };
 }
 
-var pageList;
+var pageList, isObj, includeme;
 
 for (var object in source) {
     pageList = source[object];
+    if (object == "iObject") {
+        isObj = true;
+    }
     for (aPage in pageList) {
-        if (containsTag(pageList[aPage].tags, object) &&
-            containsTag(pageList[aPage].tags, s_js_property_tag)) {
+        if (isObj) {
+            includeme = containsTag(pageList[aPage].tags, "prototype");
+        } else {
+            includeme = true;
+        }
+        if (containsTag(pageList[aPage].tags, object) && containsTag(pageList[aPage].tags, s_js_property_tag) && includeme) {
             result[object].properties.push(pageList[aPage]);
-        }   
-        if (containsTag(pageList[aPage].tags, object) &&
-            containsTag(pageList[aPage].tags, s_js_method_tag)) {
+        }
+        if (containsTag(pageList[aPage].tags, object) && containsTag(pageList[aPage].tags, s_js_method_tag) && includeme) {
             result[object].methods.push(pageList[aPage]);
         } 
     }
 }
 
-var resultProperties;
-var resultMethods;
-var resultOpen;
-var len = 0;
+var resultTitle,
+resultProperties,
+resultMethods,
+resultOpen,
+len = 0;
 
 // Output: 
 %>
@@ -122,14 +132,15 @@ var len = 0;
         <%
         for (object in result) {
             len++;
+            resultTitle      = result[object].title
             resultProperties = result[object].properties;
             resultMethods    = result[object].methods;
             resultOpen       = result[object].defaultOpened;
         %>
-        <% if(len == 2) { %>
+        <% if (len == 2) { %>
             <li><strong><%=s_js_title_inheritance%></strong></li>
         <% } %>
-        <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + object%>"><code><%=object%></code></a></strong></li>
+        <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + object%>"><code><%=resultTitle%></code></a></strong></li>
 
         <% if (resultProperties.length > 0) { %>
         <li<%if(resultOpen) {%> data-default-state="open"<%}%>><a href="#"><strong><%=s_js_title_properties%></strong></a>
