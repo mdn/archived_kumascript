@@ -22,15 +22,17 @@
     //
     // Parameters:
     //  
-    hasTag: function(aPage, aTag) {
-        var theTag = aTag.toLowerCase();
-        
+    hasTag: function(aPage, aTag) {        
         // First, returrn false at once if there are no tags on the page
         
         if (aPage.tags == undefined || aPage.tags == null || aPage.tags.length == 0) {
             return false;
         }
-        
+
+        // Convert to lower case for comparing
+
+        var theTag = aTag.toLowerCase();
+
         // Now look for a match
         
         for (var i=0; i<aPage.tags.length; i++) {
