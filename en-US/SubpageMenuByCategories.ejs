@@ -54,7 +54,11 @@ for (var i=0; i<categoryList.length; i++) {
     
     for (var j=0; j<numPages; j++) {
         if (page.hasTag(miscPages[j], category.tag)) {
-            resultList.push(miscPages[j]);
+            if (page.hasTag(miscPages[j], "Important")) {       // If it's important, put it at the front of the list
+                resultList.unshift(miscPages[j]);
+            } else {
+                resultList.push(miscPages[j]);                  // Otherwise the end
+            }
             miscPages.splice(j, 1);
             j--;
             numPages--;
