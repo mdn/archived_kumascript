@@ -43,32 +43,29 @@ if (haveFeatures) {
     featureBoxes += "</ul>";
 }
 
-// Iterate over the pages, adding them to each list they match
-// and removing them from the "misc" list
+// Iterate over the pages, adding them to each list they match.
 
 for (var i=0; i<categoryList.length; i++) {
     var category = categoryList[i];
-    var resultList = [];
+    var currentList = [];
+    var otherList = [];
     
     html += "<h2>" + category.name + "</h2>";
     
-    for (var j=0; j<numPages; j++) {
+    for (var j=0; j<miscPages.length; j++) {
         if (page.hasTag(miscPages[j], category.tag)) {
-            if (page.hasTag(miscPages[j], "Important")) {       // If it's important, put it at the front of the list
-                resultList.unshift(miscPages[j]);
-            } else {
-                resultList.push(miscPages[j]);                  // Otherwise the end
-            }
-            miscPages.splice(j, 1);
-            j--;
-            numPages--;
+            currentList.push(miscPages[j]);                  // Otherwise the end
+        } else {
+            otherList.push(miscPages[j]);
         }
     }
     
-    html += template("SubpagesWithSummaries", [JSON.stringify(resultList)]);
+    miscPages = otherList;           // The ones left over are still in consideration for the next list
+    
+    html += template("SubpagesWithSummaries", [JSON.stringify(currentList)]);
 }
 
-// Output the misc pages
+// Output the pages that didn't match any category
 
 html += "<h2 id='Other'>Other pages</h2>" + template("SubpagesWithSummaries", [JSON.stringify(miscPages)]);
 html = template("MakeColumnsForDL", [html]);
