@@ -11,15 +11,6 @@ function pageSorter(a, b) {
     return a.title.localeCompare(b.title);
 }
 
-function containsTag(tagList, tag) {
-    if (!tagList || tagList == undefined) return 0;
-    tag = tag.toLowerCase();
-    for (var i = 0, len = tagList.length; i < len; i++) {
-        if (tagList[i].toLowerCase() == tag) return 1;
-    }
-    return 0;
-}
-
 var termList;
 var html = "";
 
@@ -34,18 +25,30 @@ var numTerms = termList.length;
 if (numTerms) {
     html = "<dl>";
     
+    // Alphabetize the list
+    
     termList.sort(pageSorter);
+    
+    // Now look for any items that are tagged "Important" and move them to the
+    // top of the list. We will start our search at the end of the list and
+    // move toward the front. By doing this, we keep the items in alphabetical
+    // order so that they show up in the proper order in each section. Trust me,
+    // this totally makes sense.
+    
+    for (var i=numTerms-1; i>=0; i--) {
+        var aPage = termList[i];
+    }
     
     var termIndex = 0;
     var numTerms = termList.length;
     
     for (var i=0; i<numTerms; i++) {
-        var page = termList[i];
+        var aPage = termList[i];
         
-        if (!containsTag(page.tags, "junk")) {
-            var title = page.title;
+        if (!page.hasTag(aPage, "junk")) {
+            var title = aPage.title;
             var summary = page.summary.replace(/<img[^>]*>/g," ");
-            var url = page.url;
+            var url = aPage.url;
         
             html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>";
         }
