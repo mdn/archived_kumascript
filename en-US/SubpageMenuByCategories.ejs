@@ -30,7 +30,7 @@ var haveFeatures = false;
 // presented in grid boxes.
 
 for (var i=0; i<numPages; i++) {
-    if (page.hasTag("Featured", miscPages[i].path)) {
+    if (page.hasTag(miscPages[i], "Featured")) {
         if (featureBoxes == null) {
             featureBoxes = "<ul class='card-grid'>";
             haveFeatures = true;
@@ -53,7 +53,7 @@ for (var i=0; i<categoryList.length; i++) {
     html += "<h2>" + category.name + "</h2>";
     
     for (var j=0; j<numPages; j++) {
-        if (page.hasTag(category.tag, miscPages[j].path)) {
+        if (page.hasTag(miscPages[j], category.tag)) {
             resultList.push(miscPages[j]);
             miscPages.splice(j, 1);
             j--;
