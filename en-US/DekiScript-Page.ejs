@@ -16,6 +16,32 @@
             uri: env.url
         });
     },
+    
+    // Determines whether or not the page has the specified tag. Returns true
+    // if it does, otherwise false. This is case-insensitive.
+    //
+    // Parameters:
+    //  
+    hasTag: function(aTag, path) {
+        var aPage = wiki.getPage(path);
+        var theTag = aTag.toLowerCase();
+        
+        // First, returrn false at once if there are no tags on the page
+        
+        if (aPage.tags == undefined || aPage.tags == null || aPage.tags.length == 0) {
+            return false;
+        }
+        
+        // Now look for a match
+        
+        for (var i=0; i<aPage.tags.length; i++) {
+            if (aPage.tags[i].toLowerCase == theTag) {
+                return true;
+            }
+        }
+        
+        return false;
+    },
 
     // http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Page.Subpages
     // Optional path, defaults to current page
