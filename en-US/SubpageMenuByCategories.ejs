@@ -13,25 +13,6 @@
 //
 // "[{'tag': 'tagname', 'name': 'categoryname'}, ...]"
 
-//
-// hasTag
-//
-// Returns true if the specified page has the indicated tag.
-//
-function hasTag(aPage, aTag) {
-    if (aPage.tags == undefined || aPage.tags == null || aPage.tags.length == 0) {
-        return false;
-    }
-    
-    for (var i=0; i<aPage.tags.length; i++) {
-        if (aPage.tags[i] == aTag) {
-            return true;
-        }
-    }
-    
-    return false;
-}
-
 var categoryList = JSON.parse($0);
 var html = "";
 
@@ -49,7 +30,7 @@ var haveFeatures = false;
 // presented in grid boxes.
 
 for (var i=0; i<numPages; i++) {
-    if (hasTag(miscPages[i], "Featured")) {
+    if (page.hasTag("Featured", miscPages[i].path)) {
         if (featureBoxes == null) {
             featureBoxes = "<ul class='card-grid'>";
             haveFeatures = true;
@@ -72,7 +53,7 @@ for (var i=0; i<categoryList.length; i++) {
     html += "<h2>" + category.name + "</h2>";
     
     for (var j=0; j<numPages; j++) {
-        if (hasTag(miscPages[j], category.tag)) {
+        if (page.hasTag(category.tag, miscPages[j].path)) {
             resultList.push(miscPages[j]);
             miscPages.splice(j, 1);
             j--;
