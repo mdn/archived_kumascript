@@ -140,7 +140,7 @@ len = 0;
         <% if (len == 2) { %>
             <li><strong><%=s_js_title_inheritance%></strong></li>
         <% } %>
-        <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + object%>"><code><%=resultTitle%></code></a></strong></li>
+        <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + resultTitle%>"><code><%=resultTitle%></code></a></strong></li>
 
         <% if (resultProperties.length > 0) { %>
         <li<%if(resultOpen) {%> data-default-state="open"<%}%>><a href="#"><strong><%=s_js_title_properties%></strong></a>
