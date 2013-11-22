@@ -22,8 +22,6 @@ if ($0 && ($0 != undefined)) {
 
 var numTerms = termList.length;
 
-html += "<p>" + numTerms + " items</p>";
-
 if (numTerms) {
     // Alphabetize the list
     
@@ -37,7 +35,7 @@ if (numTerms) {
         
         if (!page.hasTag(aPage, "junk")) {
             var title = aPage.title;
-            var summary = page.summary.replace(/<img[^>]*>/g," ");
+            var summary = aPage.summary.replace(/<img[^>]*>/g," ");
             var url = aPage.url;
         
             html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>";
