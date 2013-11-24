@@ -23,4 +23,34 @@
 //  image: The URL of an image to use in the box -- sized to fill the box; optional
 //
 
+var numBoxes = 0;
+var descList = $0.split("||");      // Each entry is one box's descriptor
+
+// Set up the start of the boxes' HTML
+
+var featureBoxes = "<ul class='card-grid'>";
+
+// Iterate over each descriptor, building the boxes
+
+for (var i=0; i<descList.length; i++) {
+    var params = descList[i].split("|");     // Get each parameter
+    var path = params[0];
+    var title = params[1];
+    var faChar = params[2];
+    var image = params[3];
+    var page = wiki.getPage(path);
+    
+    // Handle the Font Awesome character
+    
+    if (faChar != "*") {
+        faChar = "<i class='" + faChar + "'></i> ";
+    }
+        
+    featureBoxes += "<li><span>" + faChar + "<a href='" + path + "'>" + " " + title + "</a></span><p>" + page.summary + "</p></li>";
+}
+
+// Finish out the grid
+
+featureBoxes += "</ul>";
 %>
+<%-featureBoxes%>
