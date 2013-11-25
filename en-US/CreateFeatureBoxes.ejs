@@ -39,14 +39,25 @@ for (var i=0; i<descList.length; i++) {
     var faChar = params[2];
     var image = params[3];
     var page = wiki.getPage(path);
+    var imageElem = "";
+    var hasImage = false;
+    var extraClass = "";
     
     // Handle the Font Awesome character
     
     if (faChar != "*") {
         faChar = "<i class='" + faChar + "'></i> ";
     }
-        
-    featureBoxes += "<li><span>" + faChar + "<a href='" + path + "'>" + " " + title + "</a></span><p>" + page.summary + "</p></li>";
+    
+    // Set up the string for the background attribute
+    
+    if (image != "*") {
+        imageElem = "<img src='" + image + "'>";
+        extraClass = " class='double-card'";
+        hasImage = true;
+    }
+    
+    featureBoxes += "<li" + extraClass + ">" + imageElem + "<span>" + faChar + "<a href='" + path + "'>" + " " + title + "</a></span><p>" + page.summary + "</p></li>";
 }
 
 // Finish out the grid
