@@ -29,5 +29,12 @@ switch(lang) {
         dest = basePath + 'HTML/Element/' + name;
         break;
 }
-
+if (name.indexOf(" ")==-1) {
 %><a href="<%- dest %>" title="<%-summary%>"><code>&lt;<%- name %>&gt;</code></a>
+<%
+}
+else {%>
+<a href="<%- dest %>" title="<%-summary%>"><%- name %></code></a>
+<%
+}
+%>
