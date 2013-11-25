@@ -1,10 +1,19 @@
 <%
-
+function containsTag(tagList, tag) {
+    if (!tagList || tagList == undefined) return 0;
+    tag = tag.toLowerCase();
+    for (var i = 0, len = tagList.length; i < len; i++) {
+        if (tagList[i].toLowerCase() == tag) return 1;
+    }
+    return 0;
+}
 
 var s_html_href = '/'+env.locale+'/docs/Web/HTML';
 var s_html_title = 'HTML';
 var s_html_ref_href = '/'+env.locale+'/docs/Web/HTML/Element';
 var s_html_ref_title = 'HTML Elements';
+var s_html_guide_href = '/'+env.locale+'/docs/Web/Guide/HTML';
+var s_api_href = '/' + env.locale + '/docs/Web/API';
 switch (env.locale) {
     case 'fr':
         s_html_href = '/'+env.locale+'/docs/HTML';
@@ -14,10 +23,80 @@ switch (env.locale) {
     default: break;
 }
 
+// Find the section of HTML this page belongs to (that is the first tag of the form "HTML XYZ")
+var tags = env.tags;
+var found_tag = '';
+for (i in tags) {
+    if (tags[i] != s_html_ref_title) {
+        if (tags[i].substr(0, 5) == 'HTML ') {
+            found_tag = tags[i];
+            break;
+        }
+    }
+}
+
+// Find the HTML Tags belonging to the same subject
+if (found_tag) {
+    // Find the pages, sub-pages of HTML/Element that are tagged with that specific tag
+    var pageList = page.subpagesExpand(s_html_ref_href);   // Get subpages, including tags
+    var resultHTML = [];
+
+    for (aPage in pageList) {
+        if (containsTag(pageList[aPage].tags, found_tag)) {
+            resultHTML.push(pageList[aPage].title.replace(/[<>]/g, ""));
+        }
+    }
+}
+
+/*
+// Find the interfaces belonging to the same subject
+if (found_tag) {
+    // Find the pages, sub-pages of HTML/ that are tagged with that specific tag
+    var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
+    var resultAPI = [];
+
+    for (aPage in pageList) {
+        if (containsTag(pageList[aPage].tags, found_tag) &&
+            containsTag(pageList[aPage].tags, "Interface")) { // We only want interfaces, not properties or methods
+            resultAPI.push(pageList[aPage].title);
+        }
+    }
+}
+
+// Find the guides, tutorials, ... belonging to the same subject
+if (found_tag) {
+    // Find the pages, sub-pages of Guide/HTML that are tagged with that specific tag
+    var pageList = page.subpagesExpand(s_html_guide_href);   // Get subpages, including tags
+    var resultGuide = [];
+
+    for (aPage in pageList) {
+        if (containsTag(pageList[aPage].tags, found_tag)) {
+            resultGuide.push({title: pageList[aPage].title, url: pageList[aPage].url});
+        }
+    }
+}
+*/
+var resultGuide = [];
+var resultAPI = [];
 
  if (s_html_href) {  %>
   <section class="Quick_links" id="Quick_Links">
-   <ol><li data-default-state="open"><a href="<%-s_html_href%>"><%-s_html_ref_title%></a><ol>
+  <ol>
+   <% if (found_tag) { 
+        for( aPage in resultGuide) { // Tutorials and guides matching
+  %>
+            <li><a href="<%-resultGuide[aPage].url%>"><%-resultGuide[aPage].title%></a></li>
+  <%    }
+        for (aTitle in resultHTML) { // HTML entities matching 
+  %>
+            <li><%- template("HTMLelement", [resultHTML[aTitle]]) %></li>
+  <%    } 
+        for (aTitle in resultAPI) { // HTML-DOM interfaces matching 
+  %>
+            <li><%- template("domxref", [resultAPI[aTitle]]) %></li>
+  <%    } 
+    } %>
+   <li><ol><li><a href="<%-s_html_href%>"><%-s_html_ref_title%></a><ol>
    <li>A
  <ol>
   <li><%-template("HTMLElement", ["a"])%></li>
@@ -220,6 +299,7 @@ switch (env.locale) {
   <li><%-template("HTMLElement", ["xmp"])%></s></li>
  </ol>
     </li>  
+   </ol></li>
    </ol></li>
    </ol>
   </section>
