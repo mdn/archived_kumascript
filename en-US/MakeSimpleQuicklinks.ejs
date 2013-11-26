@@ -1,0 +1,23 @@
+<%
+// Creates a quicklinks box that contains the pages given as arguments. Only
+// one level of hierarchy is allowed by this macro.
+//
+// Parameters:
+//
+//  $0..$n  The pages to link to in quicklinks.
+
+var quicklinks = "<section id='Quick_Links'><ol>";
+var count = arguments.length;
+
+for (var i=0; i<count; i++) {
+    var page = wiki.getPage(arguments[i]);
+    var path = page.url;
+    var title = wiki.escapeQuotes(page.summary);
+    var text = page.title;
+    
+    quicklinks += "<li><a href='" + path + "' title='" + title + "'>" + text + "</a></li>";
+}
+
+quicklinks += "</ol></section>";
+%>
+<%-quicklinks%>
