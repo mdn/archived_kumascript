@@ -86,7 +86,7 @@ if (found_tag) {
 
     for (aPage in pageList) {
         if (containsTag(pageList[aPage].tags, found_tag)) {
-            resultCSS.push(pageList[aPage].title);
+            resultCSS.push({title: pageList[aPage].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[aPage].url});
         }
     }
 }
@@ -128,9 +128,9 @@ if (found_tag) {
   %>
             <li><a href="<%-resultGuide[aPage].url%>"><%-resultGuide[aPage].title%></a></li>
   <%    }
-        for (aTitle in resultCSS) { // CSS entities matching 
+        for ( aPage in resultCSS) { // CSS entities matching 
   %>
-            <li><%- template("cssxref", [resultCSS[aTitle]]) %></li>
+            <li><a href="<%- resultCSS[aPage].url %>"><code><%-resultCSS[aPage].title%></code></a></li>
   <%    } 
         for (aTitle in resultAPI) { // CSSOM interfaces matching 
   %>
