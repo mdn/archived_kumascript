@@ -522,12 +522,14 @@ url  = specList[spec] && specList[spec].url  || 'about:unknown';
 if ($2) {
 	title = mdn.localString({
 		"en-US": "The definition of '" + $2 + "' in that specification.",
-		"fr": "La définition de '" + $2 + "' dans cette spécification."
+		"fr": "La définition de '" + $2 + "' dans cette spécification.",
+		"de": "Die Definition von '" + $2 + "' in dieser Spezifikation."
 	});	
 } else {
 	title = mdn.localString({
 		"en-US": "The '" + name + "' specification",
-		"fr": "La spécificaction '" + name + "'"
+		"fr": "La spécificaction '" + name + "'",
+		"de": "Die '" + name + "' Spezifikation"
 	});	
 }
 
