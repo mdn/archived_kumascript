@@ -14,9 +14,7 @@ var data = mdn.fetchJSONResource(url);
       <th>Brazil real $ (R$)</th>
       <th>Colombia peso $ (COP$)</th>
       <th>Poland zloty zł (PLN)</th>
-      <th>
-        <p>Spain euro €(EUR)</p>
-      </th>
+      <th>Spain euro € (EUR)</th>
       <th>Venezuela US dollar (US$) credit card only</th>
     </tr>
   </thead>
@@ -47,7 +45,13 @@ for (var i = 0; i < data.meta.total_count; i++) { %>
 
     <tr>
       <td><b><%= data.objects[i].name %></b></td>
-      <td>$<%= data.objects[i].localized.price %></td>
+      <td><% //some objects have no price defined.
+          if ( data.objects[i].localized.price ){ %>
+            <%= data.objects[i].localized.price %>
+          <% } else { %>
+            --
+          <% } %>
+      </td>
       <td><% // Available for credit card. Some tiers are not applicable.
                if ( data.objects[i].name == "Tier 0" ) { %>
             No
