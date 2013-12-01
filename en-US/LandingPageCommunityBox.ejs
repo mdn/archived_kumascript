@@ -43,6 +43,13 @@ if ($4 && $4.length) {
 }
 
 switch(env.locale) {
+    case "de":
+        headingStr = "Community";
+        messageStr = "Trete der " + $0 + " Community über unsere Mailing-Liste oder Newsgruppe bei:";
+        if ($3) {
+            channelStr = "Du kannst auch über den " + ircLink + " Kannal auf " + ircInfoLink + " live mitdiskutieren.";
+        }
+        break;
     default:
         headingStr = "Community";
         messageStr = "Join the " + $0 + " community on our mailing list or newsgroup:";
