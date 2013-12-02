@@ -105,7 +105,9 @@
         return cacheFn(key, cache_tmout, function (next) {
             var opts = {
                 method: 'GET',
-                headers: { 'Cache-Control': env.cache_control },
+                headers: { 'Cache-Control': env.cache_control, 
+                           'Accept': 'application/json',
+                           'Content-Type': 'application/json' },
                 url: url
             };
             try {
