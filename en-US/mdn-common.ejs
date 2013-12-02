@@ -1,4 +1,4 @@
-<% module.exports = {
+<% var MDN = module.exports = {
     
     /**
      * Given a set of strings like this:
@@ -95,54 +95,67 @@
         if (err_result) { throw err_result; }
         return result;
     },
-    
+        
     // #### fetchJSONResource
     // Fetch an HTTP resource with JSON representation, parse the JSON and 
     // return a JS object.
     fetchJSONResource: function (url, cache_tmout) {
-        if (!cache_tmout) cache_tmout = 3600;
         var key = 'kuma:json_resource:' + md5(url.toLowerCase());
-        return cacheFn(key, cache_tmout, function (next) {
-            var opts = {
-                method: 'GET',
-                headers: { 'Cache-Control': env.cache_control, 
-                           'Accept': 'application/json',
-                           'Content-Type': 'application/json' },
-                url: url
-            };
-            try {
-                request(opts, function (err, resp, body) {
-                    var result = null;
-                    if (resp && 200 == resp.statusCode) {
-                        result = JSON.parse(body);
-                    }
-                    next(result);
-                });
-            } catch (e) {
-                next(null);
-            }            
-        });
+        var opts = {
+            method: 'GET',
+            headers: { 'Cache-Control': env.cache_control, 
+                       'Accept': 'application/json',
+                       'Content-Type': 'application/json' },
+            url: url
+        };
+        return JSON.parse(MDN.fetchHTTPResource(url, cache_tmout, key, opts));
     },
-    
+
     // #### fetchHTTPResource
     // Fetch an HTTP resource, return the response body.
-    fetchHTTPResource: function (url, cache_tmout) {
+    fetchHTTPResource: function (url, cache_tmout, key, opts) {
         if (!cache_tmout) cache_tmout = 3600;
-        var key = 'kuma:http_resource:' + md5(url.toLowerCase());
+        key = key || 'kuma:http_resource:' + md5(url.toLowerCase());
         return cacheFn(key, cache_tmout, function (next) {
-            var opts = {
+            opts = opts || {
                 method: 'GET',
                 headers: { 'Cache-Control': env.cache_control },
                 url: url
             };
             try {
-                request(opts, function (err, resp, body) {
-                    var result = null;
-                    if (resp && 200 == resp.statusCode) {
-                        result = body;
-                    }
-                    next(result);
-                });
+                var req = request.get(opts);
+                req.on('response', function(res) {
+                    var chunks = [];
+                    var content_length = 0;
+                    res.on('error', function(chunk) {
+                        next(null);
+                    });
+                    res.on('data', function(chunk) {
+                        chunks.push(chunk);
+                        content_length += chunk.length;
+                    });
+                    res.on('end', function() {
+                        var buffer = new Buffer(content_length);
+                        var offset = 0;
+                        for (var i=0; i<chunks.length; i++) {
+                            chunks[i].copy(buffer, offset);
+                            offset += chunks[i].length;
+                        }
+                        var encoding = res.headers['content-encoding'];
+                        if (encoding == 'gzip') {
+                            zlib.gunzip(buffer, function(err, decoded) {
+                                next(decoded && decoded.toString());
+                            });
+                        } else if (encoding == 'deflate') {
+                            zlib.inflate(buffer, function(err, decoded) {
+                              next(decoded && decoded.toString());
+                            })
+                        } else {
+                            next(buffer.toString());
+                        }
+                    });
+                });                 
+                req.on('error', function(err) { next(null); });                
             } catch (e) {
                 next(null);
             }            
