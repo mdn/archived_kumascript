@@ -1,0 +1,33 @@
+<%
+// Produces a list of recent discussions from Stack Overflow for the
+// Mozilla Developer Program home page.
+
+var tags = ['firefox','firefox-os','html5-apps'];
+var items = [];
+var html = "";
+
+for (var i=0; i<tags.length; i++) {
+    var url = 'https://api.stackexchange.com/2.1/questions?pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
+    var data = mdn.fetchJSONResource(url);
+    if (data && data.items) {
+        items = items.concat(data.items);
+    }
+}
+
+items.sort(function (a,b) {
+    return b.last_activity_date - a.last_activity_date
+});
+
+var numItems = parseInt(items.length, 10);
+if (numItems > 5) {
+    numItems = 5;
+}
+
+for (var i=0; i<numItems; i++) {
+    var item = items[i];
+    html += "<li><a href='" + item.link + "'>" + item.title + "</a></li>";
+}
+%>
+<ul class="no-bullets">
+<%-html%>
+</ul>
