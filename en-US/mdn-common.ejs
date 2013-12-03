@@ -108,7 +108,9 @@
                        'Content-Type': 'application/json' },
             url: url
         };
-        return JSON.parse(MDN.fetchHTTPResource(url, cache_tmout, key, opts));
+        var data = MDN.fetchHTTPResource(url, cache_tmout, key, opts);
+        log.debug(data);
+        return JSON.parse(data);
     },
 
     // #### fetchHTTPResource
