@@ -99,9 +99,10 @@
     // #### fetchJSONResource
     // Fetch an HTTP resource with JSON representation, parse the JSON and 
     // return a JS object.
-    fetchJSONResource: function (url, cache_tmout) {
+    fetchJSONResource: function (url, cache_tmout, debug) {
         var key = 'kuma:json_resource:' + md5(url.toLowerCase());
         var opts = {
+            debug: debug,
             method: 'GET',
             headers: { 'Cache-Control': env.cache_control, 
                        'Accept': 'application/json',
@@ -109,7 +110,7 @@
             url: url
         };
         var data = MDN.fetchHTTPResource(url, cache_tmout, key, opts);
-        log.debug(data);
+        if (debug) log.debug(data);
         return JSON.parse(data);
     },
 
@@ -143,6 +144,7 @@
                             chunks[i].copy(buffer, offset);
                             offset += chunks[i].length;
                         }
+                        if (opts.debug) log.debug("HEADERS " + kuma.inspect(res.headers));
                         var encoding = res.headers['content-encoding'];
                         if (encoding == 'gzip') {
                             zlib.gunzip(buffer, function(err, decoded) {
