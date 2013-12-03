@@ -12,7 +12,6 @@ var items = [];
 for (var i=0; i<tags.length; i++) {
     var url = 'https://api.stackexchange.com/2.1/questions?key='+encodeURI(so_key)+'&pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
     try {
-        if (debug) log.debug("url " + url);
         var data = mdn.fetchJSONResource(url, 3600, 'DevProgramListSOTopics_v1', true);
         if (data && data.items) {
             items = items.concat(data.items);
