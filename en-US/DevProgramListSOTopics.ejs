@@ -2,28 +2,31 @@
 // Produces a list of recent discussions from Stack Overflow for the
 // Mozilla Developer Program home page.
 
-var tags = ['firefox','firefox-os','html5-apps'];
-var items = [];
-var html = "";
-
-for (var i=0; i<tags.length; i++) {
-    var url = 'https://api.stackexchange.com/2.1/questions?pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
-    try {
-        var data = mdn.fetchJSONResource(url);
-        if (data && data.items) {
-            items = items.concat(data.items);
+var items = mdn.cacheFnIgnoreCacheControl('DevProgramListSOTopics', 600, function (next) {
+    var tags = ['firefox','firefox-os','html5-apps'];
+    var items = [];
+    
+    for (var i=0; i<tags.length; i++) {
+        var url = 'https://api.stackexchange.com/2.1/questions?pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
+        try {
+            var data = mdn.fetchJSONResource(url);
+            if (data && data.items) {
+                items = items.concat(data.items);
+            }
+        } catch(e) {
+            var item = {
+                link: "",
+                title: "Unable to connect to Stack Overflow"
+            };
+            items = items.concat([item]);
         }
-    } catch(e) {
-        var item = {
-            link: "",
-            title: "Unable to connect to Stack Overflow"
-        };
-        items = items.concat([item]);
     }
-}
-
-items.sort(function (a,b) {
-    return b.last_activity_date - a.last_activity_date;
+    
+    items.sort(function (a,b) {
+        return b.last_activity_date - a.last_activity_date;
+    });
+    
+    next(items);
 });
 
 var numItems = items.length;
@@ -31,6 +34,7 @@ if (numItems > 5) {
     numItems = 5;
 }
 
+var html = "";
 for (var i=0; i<numItems; i++) {
     var item = items[i];
     html += "<li><a href='" + item.link + "'>" + kuma.htmlEscape(item.title) + "</a></li>";
