@@ -1,17 +1,18 @@
 <%
 // Inserts a list of upcoming events from "Where's Mozilla".
 
-var wmHTML = mdn.fetchHTTPResource("https://developer.mozilla.org/en-US/events");
+var dataJSON = template("LoadCSV", ["https://spreadsheets.google.com/pub?key=0AsZa7UiEJyV7dHFQalNmTHF3Qm9md043UkdNV3k3Znc&output=csv"]);
+var events = JSON.parse(dataJSON);
+var wmHTML = "<table class='dev-program-table'>";
 
-var idx = wmHTML.indexOf('<table id="upcoming"');
+wmHTML += "<tbody>";
 
 /*
-if (idx >= 0) {
-    wmHTML = wmHTML.slice(idx);
-    idx = wmHTML.indexOf('</table>');
-    wmHTML = wmHTML.slice(0, idx+8);
-}*/
-wmHTML = "<p>Nothing here yet.</p>";
+events.sort(function (a,b) {
+    return b.last_activity_date - a.last_activity_date
+});*/
+
+wmHTML += "</tbody></table>";
 %>
 
 <%-wmHTML%>
