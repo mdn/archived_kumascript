@@ -1,33 +1,35 @@
 <%
 // Produces a list of recent discussions from Stack Overflow for the
 // Mozilla Developer Program home page.
+var debug = true;
 
-//var items = mdn.cacheFnIgnoreCacheControl('DevProgramListSOTopics', 600, function (next) {
-    var tags = ['firefox','firefox-os','html5-apps'];
-    var items = [];
-    
-    for (var i=0; i<tags.length; i++) {
-        var url = 'https://api.stackexchange.com/2.1/questions?pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
-        try {
-            var data = mdn.fetchJSONResource(url);
-            if (data && data.items) {
-                items = items.concat(data.items);
-            }
-        } catch(e) {
-            var item = {
-                link: "",
-                title: "Unable to connect to Stack Overflow"
-            };
-            items = items.concat([item]);
+// NOTE: This SO app key is public, but that's okay because they say:
+// "This is not considered a secret, and may be safely embed in client side code or distributed binaries."
+var so_key = 'i7BYjOX7xKaTodRmQxOcfQ((';
+var tags = ['firefox','firefox-os','html5-apps'];
+var items = [];
+
+for (var i=0; i<tags.length; i++) {
+    var url = 'https://api.stackexchange.com/2.1/questions?key='+encodeURI(so_key)+'&pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
+    try {
+        if (debug) log.debug("url " + url);
+        var data = mdn.fetchJSONResource(url, 3600, 'DevProgramListSOTopics_v1', true);
+        if (data && data.items) {
+            items = items.concat(data.items);
         }
+    } catch(e) {
+        if (debug) log.debug("EXC " + e);
+        var item = {
+            link: "",
+            title: "Unable to connect to Stack Overflow"
+        };
+        items = items.concat([item]);
     }
-    
-    items.sort(function (a,b) {
-        return b.last_activity_date - a.last_activity_date;
-    });
-    
-//    next(items);
-//});
+}
+
+items.sort(function (a,b) {
+    return b.last_activity_date - a.last_activity_date;
+});
 
 var numItems = items.length;
 if (numItems > 5) {
