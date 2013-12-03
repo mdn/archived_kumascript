@@ -117,9 +117,7 @@
     fetchHTTPResource: function (url, cache_tmout, key, ignore_cache_control, opts) {
         if (!cache_tmout) cache_tmout = 3600;
         key = key || 'kuma:http_resource:' + md5(url.toLowerCase());
-        var cacher = ignore_cache_control ? 
-            MDN.cacheFnIgnoreCacheControl : cacheFn;
-        return cacher(key, cache_tmout, function (next) {
+        var to_cache = function (next) {
             opts = opts || {
                 method: 'GET',
                 headers: { 'Cache-Control': env.cache_control },
@@ -163,7 +161,12 @@
             } catch (e) {
                 next(null);
             }            
-        });
+        };
+        if (ignore_cache_control) {
+            return MDN.cacheFnIgnoreCacheControl(key, cache_tmout, to_cache);
+        } else {
+            return cacheFn(key, cache_tmout, to_cache);
+        }
     },
     
     /* Returns the appropriate string (usually a comma+space) for usage in a enumeration list for the current locale */
