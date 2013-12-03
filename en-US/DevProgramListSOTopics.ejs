@@ -18,14 +18,14 @@ items.sort(function (a,b) {
     return b.last_activity_date - a.last_activity_date
 });
 
-var numItems = parseInt(items.length, 10);
+var numItems = items.length;
 if (numItems > 5) {
     numItems = 5;
 }
 
 for (var i=0; i<numItems; i++) {
     var item = items[i];
-    html += "<li><a href='" + item.link + "'>" + item.title + "</a></li>";
+    html += "<li><a href='" + encodeURI(item.link) + "'>" + kuma.htmlEscape(item.title) + "</a></li>";
 }
 %>
 <ul class="no-bullets">
