@@ -1,6 +1,7 @@
 <%
 function containsTag(tagList, tag) {
-    if (!tagList || tagList == undefined) return 0;
+    if (tagList == null || tagList == undefined) return 0;
+    if (tag == undefined || tag == null) return 0;
     tag = tag.toLowerCase();
     for (var i = 0, len = tagList.length; i < len; i++) {
         if (tagList[i].toLowerCase() == tag) return 1;
@@ -36,7 +37,8 @@ for (i in tags) {
 }
 
 // Find the HTML Tags belonging to the same subject
-if (found_tag) {
+
+if (found_tag != undefined && found_tag != null && found_tag.length) {
     // Find the pages, sub-pages of HTML/Element that are tagged with that specific tag
     var pageList = page.subpagesExpand(s_html_ref_href);   // Get subpages, including tags
     var resultHTML = [];
