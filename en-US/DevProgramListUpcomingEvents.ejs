@@ -1,0 +1,17 @@
+<%
+// Inserts a list of upcoming events from "Where's Mozilla".
+
+var wmHTML = mdn.fetchHTTPResource("https://developer.mozilla.org/en-US/events");
+
+var idx = wmHTML.indexOf('<table id="upcoming"');
+
+/*
+if (idx >= 0) {
+    wmHTML = wmHTML.slice(idx);
+    idx = wmHTML.indexOf('</table>');
+    wmHTML = wmHTML.slice(0, idx+8);
+}*/
+wmHTML = "<p>Nothing here yet.</p>";
+%>
+
+<%-wmHTML%>
