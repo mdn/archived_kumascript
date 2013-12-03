@@ -99,27 +99,27 @@
     // #### fetchJSONResource
     // Fetch an HTTP resource with JSON representation, parse the JSON and 
     // return a JS object.
-    fetchJSONResource: function (url, cache_tmout, debug) {
+    fetchJSONResource: function (url, cache_tmout, key, ignore_cache_control, opts) {
         var key = 'kuma:json_resource:' + md5(url.toLowerCase());
         var opts = {
-            debug: debug,
             method: 'GET',
             headers: { 'Cache-Control': env.cache_control, 
                        'Accept': 'application/json',
                        'Content-Type': 'application/json' },
             url: url
         };
-        var data = MDN.fetchHTTPResource(url, cache_tmout, key, opts);
-        if (debug) log.debug(data);
+        var data = MDN.fetchHTTPResource(url, cache_tmout, key, ignore_cache_control, opts);
         return JSON.parse(data);
     },
 
     // #### fetchHTTPResource
     // Fetch an HTTP resource, return the response body.
-    fetchHTTPResource: function (url, cache_tmout, key, opts) {
+    fetchHTTPResource: function (url, cache_tmout, key, ignore_cache_control, opts) {
         if (!cache_tmout) cache_tmout = 3600;
         key = key || 'kuma:http_resource:' + md5(url.toLowerCase());
-        return cacheFn(key, cache_tmout, function (next) {
+        var cacher = ignore_cache_control ? 
+            MDN.cacheFnIgnoreCacheControl : cacheFn;
+        return cacher(key, cache_tmout, function (next) {
             opts = opts || {
                 method: 'GET',
                 headers: { 'Cache-Control': env.cache_control },
