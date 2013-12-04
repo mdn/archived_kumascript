@@ -9,15 +9,28 @@ var so_key = 'i7BYjOX7xKaTodRmQxOcfQ((';
 var tags = ['firefox','firefox-os','html5-apps'];
 var items = [];
 
+// Add item to array only if it doesn't already exist
+function addItem(item) {
+    for (var i=0; i<items.length; i++) {
+        if (items[i].question_id == item.question_id) {
+            return;
+        }
+    }
+    items.push(item);
+}
+
 for (var i=0; i<tags.length; i++) {
     var url = 'https://api.stackexchange.com/2.1/questions?key='+encodeURI(so_key)+'&pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
     try {
         var data = mdn.fetchJSONResource(url, 3600, 'DevProgramListSOTopics_v1', true);
         if (data && data.items) {
-            items = items.concat(data.items);
+            for (var j=0; j<data.items.length; j++) {
+                addItem(data.items[j]);
+            }
+            //items = items.concat(data.items);
         }
     } catch(e) {
-        if (debug) log.debug("EXC " + e);
+        //if (debug) log.debug("EXC " + e);
         var item = {
             link: "",
             title: "Unable to connect to Stack Overflow"
