@@ -1,8 +1,7 @@
 <%
 // Inserts a list of upcoming events from "Where's Mozilla".
 
-var fileReader = require("FileReader");
-var events = fileReader.loadArrayFromCSV("https://spreadsheets.google.com/pub?key=0AsZa7UiEJyV7dHFQalNmTHF3Qm9md043UkdNV3k3Znc&output=csv");
+var events = mdn.loadArrayFromCSV("https://spreadsheets.google.com/pub?key=0AsZa7UiEJyV7dHFQalNmTHF3Qm9md043UkdNV3k3Znc&output=csv");
 var wmHTML = "<table class='dev-program-table'>";
 
 wmHTML += "<tbody>";
