@@ -22,17 +22,27 @@ function compareDates(a, b) {
 events.sort(compareDates);
 
 var numEvents = events.length;
+if (numEvents > 5) {
+    numEvents = 5;
+}
 
 for (var i=0; i<numEvents; i++) {
     var event = events[i];
-    var dateStr = event[startDateCol];
-    var startDate = Date.parse(dateStr);
-    var row="<tr>";
-    row += "<td>" + event[confNameCol] + "</td>";
-    row += "<td>" + startDate + "</td>";
-    row += "<td>" + event[locationCol] + "</td>";
-    row += "</tr>";
-    wmHTML += row;
+    var startDate = date.parse(event[startDateCol]);
+    
+    if (startDate != NaN) {
+        var row="<tr>";
+        row += "<td>" + event[confNameCol] + "</td>";
+        row += "<td>" + startDate.toLocaleString() + "</td>";
+        row += "<td>" + event[locationCol] + "</td>";
+        row += "</tr>";
+        wmHTML += row;
+    } else {
+        numEvents++; // do another row since we hit a NaN
+        if (numEvents > events.length) {
+            break;
+        }
+    }
 }
 
 wmHTML += "</tbody></table>";
