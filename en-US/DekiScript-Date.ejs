@@ -1,5 +1,9 @@
 <% module.exports = buildAPI({
     now: function () {
         return (new Date());
+    },
+    
+    parse: function(str) {
+        return (Date.parse(str));
     }
 }); %>
