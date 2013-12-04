@@ -4,12 +4,36 @@
 var events = mdn.loadArrayFromCSV("https://spreadsheets.google.com/pub?key=0AsZa7UiEJyV7dHFQalNmTHF3Qm9md043UkdNV3k3Znc&output=csv");
 var wmHTML = "<table class='dev-program-table'>";
 
+const confNameCol = 1;
+const startDateCol = 2;
+const endDateCol = 3;
+const locationCol = 4;
+
 wmHTML += "<tbody>";
 
-/*
-events.sort(function (a,b) {
-    return b.last_activity_date - a.last_activity_date
-});*/
+events.shift(); // remove the headings
+
+function compareDates(a, b) {
+    var db = new Date(b[startDateCol]);
+    var da = new Date(a[startDateCol]);
+    return db-da;
+}
+
+events.sort(compareDates);
+
+var numEvents = events.length;
+
+for (var i=0; i<numEvents; i++) {
+    var event = events[i];
+    var dateStr = event[startDateCol];
+    var startDate = Date.parse(dateStr);
+    var row="<tr>";
+    row += "<td>" + event[confNameCol] + "</td>";
+    row += "<td>" + startDate + "</td>";
+    row += "<td>" + event[locationCol] + "</td>";
+    row += "</tr>";
+    wmHTML += row;
+}
 
 wmHTML += "</tbody></table>";
 %>
