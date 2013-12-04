@@ -100,8 +100,8 @@
     // Fetch an HTTP resource with JSON representation, parse the JSON and 
     // return a JS object.
     fetchJSONResource: function (url, cache_tmout, key, ignore_cache_control, opts) {
-        var key = 'kuma:json_resource:' + md5(url.toLowerCase());
-        var opts = {
+        var key = key || 'kuma:json_resource:' + md5(url.toLowerCase());
+        var opts = opts || {
             method: 'GET',
             headers: { 'Cache-Control': env.cache_control, 
                        'Accept': 'application/json',
@@ -110,6 +110,21 @@
         };
         var data = MDN.fetchHTTPResource(url, cache_tmout, key, ignore_cache_control, opts);
         return JSON.parse(data);
+    },
+    
+    // #### fetchTextResource
+    // Fetch a text resource and return it as a string.
+    fetchTextResource: function (url, type, cache_tmout, key, ignore_cache_control, opts) {
+        var key = key || 'kuma:text_resource:' + md5(url.toLowerCase());
+        var opts = opts || {
+            method: 'GET',
+            headers: { 'Cache-Control': env.cache_control, 
+                       'Accept': type,
+                       'Content-Type': type },
+            url: url
+        };
+        var data = MDN.fetchHTTPResource(url, cache_tmout, key, ignore_cache_control, opts);
+        return data;
     },
 
     // #### fetchHTTPResource
