@@ -15,7 +15,7 @@
 
 // Helper: Checks if a tag is in a given taglist:
 function containsTag(tagList, tag) {
-    if (!tagList || tagList == undefined) return 0;
+    if (!tagList || typeof tagList == 'undefined') return 0;
     tag = tag.toLowerCase();
     for (var i = 0, len = tagList.length; i < len; i++) {
         if (tagList[i].toLowerCase() == tag) return 1;
