@@ -280,7 +280,7 @@
     
     loadArrayFromCSV: function(url, separator) {
         url = url.replace(/&amp;/i, "&");
-        var html = mdn.fetchTextResource(url, "text/csv");
-        return fileReader.CSVToArray(html, separator);
+        var html = MDN.fetchTextResource(url, "text/csv");
+        return MDN.CSVToArray(html, separator);
     }
 } %>
