@@ -5,5 +5,10 @@
     
     parse: function(str) {
         return (Date.parse(str));
+    },
+    
+    getLocaleDateString: function(d, locales, options) {
+        var theDate = new Date(d);
+        return theDate.toLocaleDateString(locales, options);
     }
 }); %>
