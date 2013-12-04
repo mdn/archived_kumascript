@@ -8,6 +8,7 @@ const confNameCol = 1;
 const startDateCol = 2;
 const endDateCol = 3;
 const locationCol = 4;
+const urlCol = 5;
 
 wmHTML += "<tbody>";
 
@@ -26,22 +27,22 @@ if (numEvents > 5) {
     numEvents = 5;
 }
 
-for (var i=0; i<numEvents; i++) {
+for (var i=numEvents-1; i>=0; i--) {
     var event = events[i];
     var startDate = date.parse(event[startDateCol]);
+    var url = event[urlCol];
+    
+    if (url.substr(0, 5) != "http:" && url.substr(0,6) != "https:") {
+        url = "http://" + url;
+    }
     
     if (startDate != NaN) {
         var row="<tr>";
-        row += "<td>" + event[confNameCol] + "</td>";
-        row += "<td>" + startDate.toLocaleString() + "</td>";
+        row += "<td><a href='" + url + "'>" + event[confNameCol] + "</a></td>";
+        row += "<td>" + date.getLocaleDateString(startDate) + "</td>";
         row += "<td>" + event[locationCol] + "</td>";
         row += "</tr>";
         wmHTML += row;
-    } else {
-        numEvents++; // do another row since we hit a NaN
-        if (numEvents > events.length) {
-            break;
-        }
     }
 }
 
