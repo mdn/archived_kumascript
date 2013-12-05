@@ -52,47 +52,53 @@ switch(env.locale) {
 
 // If the extra links string is provided, build that HTML
 
-if (($4 && $4 != undefined) || (ircLink.length)) {
-    var list = $4.split("||");      // a list of each item in "url|description" format
-    
+var haveExtra = $4 && ($4 != undefined);
+
+if (haveExtra || ircLink.length) {
+    var list;
+        
     extraLinks = "<ul class='communitycontact'>";
     
     if (ircLink.length) {
         extraLinks += "<li><strong>IRC: </strong>" + ircLink + " " + ircInfoStr + "</li>";
     }
     
-    for (var i=0; i<list.length; i++) {
-        // First, get the heading off the row and remove it
+    if (haveExtra) {
+        list = $4.split("||");      // a list of each item in "url|description" format
         
-        var headingEnd = list[i].indexOf("|");
-        var heading = list[i].substr(0, headingEnd);
-        var row = list[i].slice(headingEnd+1);
-        
-        // Add the heading to the HTML
-        
-        extraLinks += "<li><strong>" + heading + ": </strong>";
-        
-        // Now split it up into all the terms for the heading
-        
-        var links = row.split("++");
-        
-        // Loop over all the links, adding them to the HTML
-        
-        for (var j=0; j<links.length; j++) {
-            var comp = links[j].split("|");  // comp[0] is URL, 1 is text, 2 is description
-            var tooltipPart = "";
+        for (var i=0; i<list.length; i++) {
+            // First, get the heading off the row and remove it
             
-            if (comp[2]) {
-               tooltipPart = " title='" + comp[2] + "'";
-            }
-            extraLinks += "<a href='" + comp[0] + "'" + tooltipPart + ">" + comp[1] + "</a>";
+            var headingEnd = list[i].indexOf("|");
+            var heading = list[i].substr(0, headingEnd);
+            var row = list[i].slice(headingEnd+1);
             
-            if (j < (links.length-1)) {
-                extraLinks += ", ";
+            // Add the heading to the HTML
+            
+            extraLinks += "<li><strong>" + heading + ": </strong>";
+            
+            // Now split it up into all the terms for the heading
+            
+            var links = row.split("++");
+            
+            // Loop over all the links, adding them to the HTML
+        
+            for (var j=0; j<links.length; j++) {
+                var comp = links[j].split("|");  // comp[0] is URL, 1 is text, 2 is description
+                var tooltipPart = "";
+            
+                if (comp[2]) {
+                    tooltipPart = " title='" + comp[2] + "'";
+                }
+                extraLinks += "<a href='" + comp[0] + "'" + tooltipPart + ">" + comp[1] + "</a>";
+                
+                if (j < (links.length-1)) {
+                    extraLinks += ", ";
+                }
             }
+            
+            extraLinks += "</li>";
         }
-        
-        extraLinks += "</li>";
     }
     
     extraLinks += "</ul>";
