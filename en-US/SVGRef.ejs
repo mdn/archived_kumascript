@@ -1,13 +1,7 @@
 <%
-function containsTag(tagList, tag) {
-    if (tagList == null || tagList == undefined) return 0;
-    if (tag == undefined || tag == null) return 0;
-    tag = tag.toLowerCase();
-    for (var i = 0, len = tagList.length; i < len; i++) {
-        if (tagList[i].toLowerCase() == tag) return 1;
-    }
-    return 0;
-}
+// Generates and inserts the quicklinks box for the SVG Reference.
+//
+// Parameters: None.
 
 var s_svg_href = '/'+env.locale+'/docs/Web/SVG';
 var s_svg_title = 'SVG';
@@ -44,7 +38,7 @@ if (found_tag != undefined && found_tag != null && found_tag.length) {
     var resultSVG = [];
 
     for (aPage in pageList) {
-        if (containsTag(pageList[aPage].tags, found_tag)) {
+        if (page.hasTag(pageList[aPage], found_tag)) {
             resultSVG.push(pageList[aPage].title.replace(/[<>]/g, ""));
         }
     }
