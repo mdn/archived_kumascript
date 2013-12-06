@@ -118,7 +118,7 @@
     // Fetch an HTTP resource with JSON representation, parse the JSON and 
     // return a JS object.
     fetchJSONResource: function (url, opts) {
-        opts = MDN.defaults(opts, {
+        opts = MDN.defaults(opts || {}, {
             headers: { 'Cache-Control': env.cache_control, 
                        'Accept': 'application/json',
                        'Content-Type': 'application/json' },
@@ -129,7 +129,7 @@
     // #### fetchHTTPResource
     // Fetch an HTTP resource, return the response body.
     fetchHTTPResource: function (url, opts) {
-        opts = MDN.defaults(opts, {
+        opts = MDN.defaults(opts || {}, {
             method: 'GET',
             headers: { 'Cache-Control': env.cache_control, 
                        'Accept': "text/plain",
@@ -159,7 +159,6 @@
                             chunks[i].copy(buffer, offset);
                             offset += chunks[i].length;
                         }
-                        if (opts.debug) log.debug("HEADERS " + kuma.inspect(res.headers));
                         var encoding = res.headers['content-encoding'];
                         if (encoding == 'gzip') {
                             zlib.gunzip(buffer, function(err, decoded) {
