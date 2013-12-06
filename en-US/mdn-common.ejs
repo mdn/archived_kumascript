@@ -95,49 +95,51 @@
         if (err_result) { throw err_result; }
         return result;
     },
+    
+    // #### defaults(object, *defaults)
+    //
+    // Fill in undefined properties in object with values from the defaults 
+    // objects, and return the object. As soon as the property is filled, 
+    // further defaults will have no effect.
+    //
+    // Stolen from http://underscorejs.org/#defaults
+    defaults: function (obj) {
+        Array.prototype.slice.call(arguments, 1).forEach(function(source) {
+            if (source) {
+                for (var prop in source) {
+                    if (obj[prop] === void 0) obj[prop] = source[prop];
+                }
+            }
+        });
+        return obj;
+    },
         
     // #### fetchJSONResource
     // Fetch an HTTP resource with JSON representation, parse the JSON and 
     // return a JS object.
-    fetchJSONResource: function (url, cache_tmout, key, ignore_cache_control, opts) {
-        var key = key || 'kuma:json_resource:' + md5(url.toLowerCase());
-        var opts = opts || {
-            method: 'GET',
+    fetchJSONResource: function (url, opts) {
+        opts = MDN.defaults(opts, {
             headers: { 'Cache-Control': env.cache_control, 
                        'Accept': 'application/json',
                        'Content-Type': 'application/json' },
-            url: url
-        };
-        var data = MDN.fetchHTTPResource(url, cache_tmout, key, ignore_cache_control, opts);
-        return JSON.parse(data);
+        });
+        return JSON.parse(MDN.fetchHTTPResource(url, opts));
     },
     
-    // #### fetchTextResource
-    // Fetch a text resource and return it as a string.
-    fetchTextResource: function (url, type, cache_tmout, key, ignore_cache_control, opts) {
-        var key = key || 'kuma:text_resource:' + md5(url.toLowerCase());
-        var opts = opts || {
-            method: 'GET',
-            headers: { 'Cache-Control': env.cache_control, 
-                       'Accept': type,
-                       'Content-Type': type },
-            url: url
-        };
-        var data = MDN.fetchHTTPResource(url, cache_tmout, key, ignore_cache_control, opts);
-        return data;
-    },
-
     // #### fetchHTTPResource
     // Fetch an HTTP resource, return the response body.
-    fetchHTTPResource: function (url, cache_tmout, key, ignore_cache_control, opts) {
-        if (!cache_tmout) cache_tmout = 3600;
-        key = key || 'kuma:http_resource:' + md5(url.toLowerCase());
+    fetchHTTPResource: function (url, opts) {
+        opts = MDN.defaults(opts, {
+            method: 'GET',
+            headers: { 'Cache-Control': env.cache_control, 
+                       'Accept': "text/plain",
+                       'Content-Type': "text/plain" },
+            url: url,
+            cache_key: 'kuma:http_resource:' + md5(url.toLowerCase()),
+            cache_timeout: 3600,
+            ignore_cache_control: false
+        });
         var to_cache = function (next) {
-            opts = opts || {
-                method: 'GET',
-                headers: { 'Cache-Control': env.cache_control },
-                url: url
-            };
             try {
                 var req = request.get(opts);
                 req.on('response', function(res) {
@@ -177,10 +179,10 @@
                 next(null);
             }            
         };
-        if (ignore_cache_control) {
-            return MDN.cacheFnIgnoreCacheControl(key, cache_tmout, to_cache);
+        if (opts.ignore_cache_control) {
+            return MDN.cacheFnIgnoreCacheControl(opts.cache_key, opts.cache_timeout, to_cache);
         } else {
-            return cacheFn(key, cache_tmout, to_cache);
+            return cacheFn(opts.cache_key, opts.cache_timeout, to_cache);
         }
     },
     
@@ -280,7 +282,11 @@
     
     loadArrayFromCSV: function(url, separator) {
         url = url.replace(/&amp;/i, "&");
-        var html = MDN.fetchTextResource(url, "text/csv");
+        var html = MDN.fetchHTTPResource(url, {
+            headers: { 'Cache-Control': env.cache_control, 
+                       'Accept': 'text/csv',
+                       'Content-Type': 'text/csv' },
+        });
         return MDN.CSVToArray(html, separator);
     }
 } %>
