@@ -1,7 +1,7 @@
 <%
 // Produces a list of recent discussions from Stack Overflow for the
 // Mozilla Developer Program home page.
-var debug = false;
+var debug = true;
 
 // NOTE: This SO app key is public, but that's okay because they say:
 // "This is not considered a secret, and may be safely embed in client side code or distributed binaries."
@@ -10,31 +10,28 @@ var tags = ['firefox','firefox-os','html5-apps'];
 var items = [];
 
 // Add item to array only if it doesn't already exist
+var seen = {};
 function addItem(item) {
-    for (var i=0; i<items.length; i++) {
-        if (items[i].question_id == item.question_id) {
-            return;
-        }
-    }
+    if (item.question_id in seen) return;
     items.push(item);
+    seen[item.question_id] = 1;
 }
 
 for (var i=0; i<tags.length; i++) {
     var url = 'https://api.stackexchange.com/2.1/questions?key='+encodeURI(so_key)+'&pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
     try {
         var data = mdn.fetchJSONResource(url, {
-            cache_key: 'DevProgramListSOTopic_v3',
-            cache_timeout: 3600,
+            cache_key: 'DevProgramListSOTopic_v5_' + tags[i],
+            cache_timeout: 600,
             ignore_cache_control: true
         });
         if (data && data.items) {
             for (var j=0; j<data.items.length; j++) {
                 addItem(data.items[j]);
             }
-            //items = items.concat(data.items);
         }
     } catch(e) {
-        //if (debug) log.debug("EXC " + e);
+        if (debug) log.debug("EXC " + e);
         var item = {
             link: "",
             title: "Unable to connect to Stack Overflow"
