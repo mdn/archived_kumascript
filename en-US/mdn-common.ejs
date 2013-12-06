@@ -75,12 +75,14 @@
         mc.get(key, function (err, c_result) {
             if (c_result) {
                 result = c_result;
+                log.debug("CACHE HIT FOR " + key);
                 f['return']();
             } else {
                 try {
                     to_cache(function (val) {
                         mc.set(key, val, tm_out, function (err, c_result) {
                             result = val;
+                            log.debug("CACHE MISS FOR " + key);
                             f['return']();
                         });
                     });
