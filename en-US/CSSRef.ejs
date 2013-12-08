@@ -70,6 +70,7 @@ var found_tag = '';
 for (i in tags) {
     if ((tags[i] != 'CSS Reference') &&
         (tags[i] != 'CSS Référence') &&
+        (tags[i] != 'CSS Property') &&
         (tags[i] != s_css_ref_title)) { // Only keep this one one the 'accent' bug is fixed
         if (tags[i].substr(0, 4) == 'CSS ') {
             found_tag = tags[i];
