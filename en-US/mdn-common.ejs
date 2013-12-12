@@ -96,6 +96,42 @@
         return result;
     },
     
+    // #### memcacheSet(key, value, timeout)
+    //
+    // Store a value in memcache with the given key and timeout (in seconds)
+    memcacheSet: function (key, value, tmout) {
+        var result = null,
+            err_result = null,
+            f = new Future(),
+            mc = memcached;
+        mc.set(key, value, tmout, function (err, c_result) {
+            err_result = err;
+            result = c_result;
+            f['return']();
+        });
+        f.wait();
+        if (err_result) { throw err_result; }
+        return result;
+    },
+    
+    // #### memcacheGet(key)
+    //
+    // Fetch the value for a key from memcache
+    memcacheGet: function (key) {
+        var result = null,
+            err_result = null,
+            f = new Future(),
+            mc = memcached;
+        mc.get(key, function (err, c_result) {
+            err_result = err;
+            result = c_result;
+            f['return']();
+        });
+        f.wait();
+        if (err_result) { throw err_result; }
+        return result;
+    },
+    
     // #### defaults(object, *defaults)
     //
     // Fill in undefined properties in object with values from the defaults 
