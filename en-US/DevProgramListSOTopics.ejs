@@ -21,7 +21,7 @@ for (var i=0; i<tags.length; i++) {
     var url = 'https://api.stackexchange.com/2.1/questions?key='+encodeURI(so_key)+'&pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
     try {
         var data = mdn.fetchJSONResource(url, {
-            cache_key: 'DevProgramListSOTopic_v5_' + tags[i],
+            cache_key: 'DevProgramListSOTopic_v6_' + tags[i],
             cache_timeout: 600,
             ignore_cache_control: true
         });
