@@ -19,24 +19,38 @@ function addItem(item) {
 
 for (var i=0; i<tags.length; i++) {
     var url = 'https://api.stackexchange.com/2.1/questions?key='+encodeURI(so_key)+'&pagesize=5&order=desc&sort=activity&site=stackoverflow&tagged=' + tags[i];
+    var cache_key = 'DevProgramListSOTopic_v7_' + tags[i];
+    var data = null;
     try {
-        var data = mdn.fetchJSONResource(url, {
-            cache_key: 'DevProgramListSOTopic_v6_' + tags[i],
-            cache_timeout: 600,
-            ignore_cache_control: true
-        });
-        if (data && data.items) {
-            for (var j=0; j<data.items.length; j++) {
-                addItem(data.items[j]);
-            }
-        }
+        // First, try fetching from Stack Overflow.
+        var raw = mdn.fetchHTTPResource(url, { ignore_cache_control: true });
+        data = JSON.parse(raw);
+        
+        // Since we made it this far, the data is probably worth caching as 
+        // a fallback in case of errors.
+        mdn.memcacheSet(cache_key, raw, 86400);
     } catch(e) {
-        if (debug) log.debug("EXC " + e);
-        var item = {
-            link: "",
-            title: "Unable to connect to Stack Overflow"
-        };
-        items = items.concat([item]);
+        try {
+            // There was an error fetching or parsing SO data, so try to use 
+            // the last good result from cache.
+            data = JSON.parse(mdn.memcacheGet(cache_key));
+        } catch (e) {
+            // Both the request and the cache failed, so give up.
+            data = {
+                items: [
+                    {
+                        question_id: -1,
+                        link: "http://stackoverflow.com/r/mozilla",
+                        title: "Stack Overflow data is temporarily unavailable"
+                    }
+                ]
+            };
+        }
+    }
+    if (data && data.items) {
+        for (var j=0; j<data.items.length; j++) {
+            addItem(data.items[j]);
+        }
     }
 }
 
