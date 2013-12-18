@@ -151,7 +151,7 @@ len = 0;
                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
                         <s class="obsoleteElement">
                     <% } %>
-                    <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary)%>"><code><%-resultProperties[aPage].title%></code></a>
+                    <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary || '')%>"><code><%-resultProperties[aPage].title%></code></a>
                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
                         </s>
                     <% } %>
@@ -180,7 +180,7 @@ len = 0;
                      <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
                         <s class="obsoleteElement">
                     <% } %>
-                    <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary)%>"><code><%-resultMethods[aPage].title%></code></a>
+                    <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary || '')%>"><code><%-resultMethods[aPage].title%></code></a>
                     <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
                         </s>
                     <% } %>
