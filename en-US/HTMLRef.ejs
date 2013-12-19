@@ -29,7 +29,7 @@ var tags = env.tags;
 var found_tag = '';
 for (i in tags) {
     if (tags[i] != s_html_ref_title) {
-        if (tags[i].substr(0, 5) == 'HTML ') {
+        if (('' + tags[i]).substr(0, 5) == 'HTML ') {
             found_tag = tags[i];
             break;
         }
