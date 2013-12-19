@@ -1,6 +1,31 @@
 <% var MDN = module.exports = {
     
     /**
+     * Return an HTML link using the given url, text, and title.
+     */
+    link: function (url, text, title) {
+        var e = MDN.htmlEscapeArgs(['url', 'text', 'title'], arguments);
+        return [
+            '<a href="', e.url, '" title="', e.title, '">',
+            e.text,
+            '</a>'
+        ].join('');
+    },
+    
+    /**
+     * Given a set of names and a corresponding list of values, apply HTML
+     * escaping to each of the values and return an object with the results
+     * associated with the names.
+     */
+    htmlEscapeArgs: function (names, args) {
+        var e = {};
+        names.forEach(function (name, idx) {
+            e[name] = kuma.htmlEscape(args[idx]);
+        });
+        return e;
+    },
+    
+    /**
      * Given a set of strings like this:
      *     { "en-US": "Foo", "de": "Bar", "es": "Baz" }
      * Return the one which matches the current locale.
