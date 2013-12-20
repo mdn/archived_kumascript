@@ -133,10 +133,10 @@ len = 0;
         <%
         for (object in result) {
             len++;
-            resultTitle      = result[object].title
-            resultProperties = result[object].properties;
-            resultMethods    = result[object].methods;
-            resultOpen       = result[object].defaultOpened;
+            resultTitle      = result[object].title || '';
+            resultProperties = result[object].properties || '';
+            resultMethods    = result[object].methods || '';
+            resultOpen       = result[object].defaultOpened || '';
         %>
         <% if (len == 2) { %>
             <li><strong><%=s_js_title_inheritance%></strong></li>
@@ -151,7 +151,9 @@ len = 0;
                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
                         <s class="obsoleteElement">
                     <% } %>
-                    <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary || '')%>"><code><%-resultProperties[aPage].title%></code></a>
+                    <% if (resultProperties[aPage].url != '') { %>
+                      <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary || '')%>"><code><%-resultProperties[aPage].title%></code></a>
+                    <% } %>
                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
                         </s>
                     <% } %>
@@ -180,7 +182,9 @@ len = 0;
                      <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
                         <s class="obsoleteElement">
                     <% } %>
-                    <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary || '')%>"><code><%-resultMethods[aPage].title%></code></a>
+                    <% if (resultMethods[aPage].url != '') { %>
+                        <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary || '')%>"><code><%-resultMethods[aPage].title%></code></a>
+                    <% } %>
                     <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
                         </s>
                     <% } %>
