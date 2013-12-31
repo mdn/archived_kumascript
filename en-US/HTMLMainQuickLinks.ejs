@@ -6,6 +6,41 @@
 var lang = env.locale;
 
 switch(lang) {
+    case "fr": %>
+<section id="Quick_Links">
+  <ol>
+   <li><%-template("LinkItem", ["Cascading Style Sheets (CSS)", "/fr/docs/CSS"])%></li>
+   <li><%-template("LinkItem", ["Document Object Model (DOM)", "/fr/docs/DOM"])%></li>
+   <li><%-template("LinkItem", ["Guide sur les APIs Web", "/en-US/docs/Web/Guide/API"])%></li>
+   <li><%-template("LinkItem", ["Référence API Web", "/en-US/docs/Web/Reference/API"])%></li>
+   <li><a href="#" title="Outils Développeur indépendant">Outils développeur hors navigateur</a>
+    <ol>
+     <li><a href="http://validator.w3.org/" title="Le World Wide Web Consortium propose un validateur HTML, qui vérifie la syntaxe des documents HTML.">Validateur HTML W3C</a></li>
+     <li><a href="http://tidy.sourceforge.net/" title="Un utilitaire Open-Source pour nettoyer du code HTML.">HTML Tidy</a></li>
+     <li><a href="http://prettydiff.com/?html" title="Un utilitaire Web pour comparer deux versions d'un fichier, avec un support spécial pour la comparaison du HTML.">Pretty Diff</a></li>
+    </ol>
+   </li>
+   <li><a href="#" title="Outils Développeur de Firefox">Outils Développeurs Firefox</a>
+    <ol>
+     <li><%-template("LinkItem", ["Outils Développeurs intégrés", "/fr/docs/Outils"])%></li>
+     <li><a href="https://addons.mozilla.org/fr/firefox/addon/firebug/">Module Firebug</a></li>
+     <li><a href="https://addons.mozilla.org/fr/firefox/addon/web-developer/">Module Web Developer</a></li>
+    </ol>
+   </li>
+   <li><a href="#" title="Outils Développeur de Safari">Outils Développeur Safari</a>
+    <ol>
+     <li><a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/Introduction/Introduction.html">Inspecteur Web de Safari</a></li>
+    </ol>
+   </li>
+   <li><a href="#" title="Outils Développeur de Chrome">Outils Développeur Chrome</a>
+    <ol>
+     <li><a href="https://developers.google.com/chrome-developer-tools/">Chrome DevTools</a></li>
+    </ol>
+   </li>
+  </ol>
+ </section>
+<% // END FRENCH
+        break;
     default: %>
 <section id="Quick_Links">
   <ol>
