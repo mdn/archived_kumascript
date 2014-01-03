@@ -27,6 +27,28 @@ var str_long = mdn.localString({
   "zh-TW": ""
 });
 
+var str_fxos_long = mdn.localString({
+  "en-US": "This feature is not on a current W3C standards track, but it is supported on the Firefox OS platform. Although implementations may change in the future and it is not supported widely across browsers, it is suitable for usage in dedicated Firefox OS app functionality.",
+  "de":    "",
+  "es":    "",
+  "fr":    "",
+  "ja":    "",
+  "pl":    "",
+  "ru":    "",
+  "zh-CN": "",
+  "zh-TW": ""
+});
+
+var fxosCheck = 0;
+
+for(i = 0 ; i <= env.tags.length-1 ; i++) {
+    if (env.tags[i] == "Firefox OS") {
+      fxosCheck = 1;
+	} 
+}
+
+if (fxosCheck == 0) {
+
 switch($0) {
   case 'inline':
     %><span class="inlineIndicator nonStandard nonStandardInline"><%-str_inline%></span><%
@@ -38,4 +60,21 @@ switch($0) {
       </div><%
     break;
 }
+
+} else if (fxosCheck == 1) {
+    
+switch($0) {
+  case 'inline':
+    %><span class="inlineIndicator nonStandard nonStandardInline"><%-str_inline%></span><%
+    break;
+  case 'header':
+    %><div class="overheadIndicator nonStandard nonStandardHeader">
+      <p><strong><%-str_inline%></strong><br/>
+      <%-str_fxos_long%></p>
+      </div><%
+    break;
+}
+    
+}
+
 %>
