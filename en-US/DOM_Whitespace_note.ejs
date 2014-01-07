@@ -22,6 +22,19 @@ function showEnglish() {
 <%
 }
 
+function showPortugueseBr() {
+%>
+    <p>Navegador baseados na engine Gecko inserem nós de texto no documento para representar espaços em branco na marcação do fonte. 
+    Portanto um nó obtido, por exemplo, usando <%-linkFirstChild%> ou <%-linkPrevSib%> pode fazer referência a um
+    espaço em banco ao invés do elemento que o autor pretendia obter.</p>
+    
+    <p>Veja <a href="/en-US/docs/Web/Guide/DOM/Whitespace_in_the_DOM">Whitespace in the DOM</a> e
+    <a href="http://www.w3.org/DOM/faq.html#emptytext">W3C DOM 3 FAQ: Why are some Text nodes empty?</a>
+    Para mais informações.
+    </p>
+<%
+}
+
 function showKorean() {
 %>
     <p>Gecko 기반 브라우저는 소스 마크업에서 공백을 나타내기 위해 문서 내에 텍스트 노드를 삽입합니다. 
@@ -66,6 +79,9 @@ function showJapanese() {%>
 switch(lang) {
     case 'zh-CN':
         showZHcn();
+        break;
+    case 'pt-BR':
+        showPortugueseBr();
         break;
     case 'ko':
         showKorean();
