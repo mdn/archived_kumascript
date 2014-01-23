@@ -1,0 +1,61 @@
+<%
+// Generates summary data for documentation status metrics
+//
+// Parameters:
+//  $0  -   The section to look at (e.g. "/en-us/docs/Web/JavaScript")
+
+var pageList = page.subpagesExpand($0),
+    pageCounter = 0,
+    noTagsCounter = 0,
+    needsTagCounter = 0;
+
+function hasNoTags(tagList) {
+    if (!tagList || tagList == undefined || tagList.length == 0) {
+      return 1;
+    }
+    return 0;
+}
+function containsNeedsWorkTag(tagList) {
+    if (!tagList || tagList == undefined) return 0;
+    for (var i = 0, len = tagList.length; i < len; i++) {
+        if (tagList[i].toLowerCase().substr(0, 5) == 'needs') return 1;
+    }
+    return 0;
+}
+
+function getPages(pageList) {
+    if (pageList) {
+        for (var i = 0; i < pageList.length; i++) {
+            pageCounter++;
+            if (hasNoTags(pageList[i].tags)) { noTagsCounter++; }
+            if (containsNeedsWorkTag(pageList[i].tags)) { needsTagCounter++; }
+            
+            var subpage = getPages(pageList[i].subpages);
+            if (subpage) {
+                pageCounter++;
+                if (hasNoTags(subpage.tags)) { noTagsCounter++; }
+                if (containsNeedsWorkTag(subpage.tags)) { needsTagCounter++; }
+            }
+        }
+    }
+}
+
+getPages(pageList);
+
+%>
+<table class="standard-table">
+  <thead>
+    <tr>
+      <th>Pages</th>
+      <th>No tags</th>
+      <th><em>Needs*</em> tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=pageCounter%></td>
+      <td><%=noTagsCounter%> (<%=Math.ceil((noTagsCounter / pageCounter) * 100)%>%)</td>
+      <td><%=needsTagCounter%> (<%=Math.ceil((needsTagCounter / pageCounter) * 100)%>%)</td>
+    </tr>
+  </tbody>
+</table>
