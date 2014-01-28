@@ -20,9 +20,15 @@ var URL = "/" + lang + "/docs/Web/JavaScript/Reference/";
 var api = $0.replace('()', '');
 var api2 = api.replace('.prototype.', '.');
 
+
+var page = wiki.getPage(URL + $0);
+var objectPage = wiki.getPage(URL + 'Global_Objects/' +  $0);
+
 if (api2.indexOf(".") !== -1) {
     URL += "Global_Objects/";
     URL += api2.replace('.', '/');
+} else if (!page.slug && objectPage.slug) {
+    URL = URL + 'Global_Objects/' +  $0;
 } else {
     URL += $0;
 }
