@@ -2,11 +2,13 @@
 // Generate quick links for JavaScript reference docs
 //
 // TODO: Highlight or remove the link for the page you are currently on (?)
+// TODO: Ordering of prototype / static methods (bug 948576)
 //
 // Parameters:
 //
 //  $0 - JavaScript reference section (e.g Global_Objects)
 //  $1 - JavaScript reference object/subject (e.g. Number, Array, Function)
+//  $2 - Related objects to display (comma separated)
 // 
 // Example: {{JSRef("Global_Objects", "Number")}} 
 // Includes quicklinks for the Number object including all methods and properties
@@ -58,6 +60,10 @@ var s_js_title_properties = mdn.localString({
 var s_js_title_inheritance = mdn.localString({
   "en-US": "Inheritance:",
   "de"   : "Vererbung:"
+});
+var s_js_title_related = mdn.localString({
+  "en-US": "Related:",
+  "de"   : "Verwandt:"
 });
 
 
@@ -143,6 +149,7 @@ len = 0;
         <% } %>
         <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + resultTitle%>"><code><%=resultTitle%></code></a></strong></li>
 
+
         <% if (resultProperties.length > 0) { %>
         <li<%if(resultOpen) {%> data-default-state="open"<%}%>><a href="#"><strong><%=s_js_title_properties%></strong></a>
             <ol>
@@ -204,6 +211,14 @@ len = 0;
             <% } %>
             </ol>
         </li>
+        <% } %>
+        
+        <% if (len == 1 && $2) { %>
+            <li><strong><%=s_js_title_related%></strong></li>
+            <% var arr = $2.split(","); 
+                for (var i = 0; i <  arr.length; i++) { %>
+                    <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + arr[i]%>"><code><%=arr[i]%></code></a></strong></li>
+            <% } %>
         <% } %>
         
         <% } %>
