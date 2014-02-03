@@ -77,7 +77,7 @@ getPages(pageList);
  for (var key in metrics) {
   if (metrics.hasOwnProperty(key)) { 
       var href = metrics[key][1];
-      var title = metrics[key][0].replace("_", " ");
+      var title = metrics[key][0].replace(/_/g, " ");
       if (href.indexOf('#', 0) === 0) {
         href = env.path + metrics[key][1];
       }
