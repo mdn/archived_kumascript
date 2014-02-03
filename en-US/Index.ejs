@@ -1,0 +1,52 @@
+<%
+// Builds an index / inventory table for a section
+//
+// Parameters:
+//  $0  -  The slug to build the index for (e.g. "/en-us/docs/Web/JavaScript")
+
+
+var section = $0;
+
+
+var pageList = page.subpagesExpand(section);
+var result = [];
+
+function getPages(pageList) {
+    if (pageList) {
+        for (var i = 0; i < pageList.length; i++) {
+            result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags})
+            var subpage = getPages(pageList[i].subpages);
+        }
+    }
+}
+
+getPages(pageList);
+
+
+var lang = env.locale;
+switch(lang) {
+    default:
+        heading = "Found " + result.length + " pages:";
+        page = "Page";
+        tags = "Tags";
+        break;
+}
+%>
+
+<p><strong><%=heading%></strong></p>
+<table class="fullwidth-table">
+<thead>
+    <th><%=page%></th>
+    <th><%=tags%></th>
+</thead>
+<tbody>
+
+<% for (i=0; i < result.length; i++) { %>
+<tr>
+    <td><a href='<%=result[i].url%>'><%=result[i].title%></a></td>
+    <td><%=result[i].tags.join(", ")%></td>
+</tr>
+<% } %>
+
+</tbody>
+</table>
