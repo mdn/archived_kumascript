@@ -75,8 +75,14 @@ getPages(pageList);
       <th>Pages</th>
 <%
  for (var key in metrics) {
-  if (metrics.hasOwnProperty(key)) { %>
-    <th><a href="<%=metrics[key][1]%>"><%=metrics[key][0]%></a></th>
+  if (metrics.hasOwnProperty(key)) { 
+      var href = metrics[key][1];
+      var title = metrics[key][0].replace("_", " ");
+      if (href.indexOf('#', 0) === 0) {
+        href = env.path + metrics[key][1];
+      }
+%>
+    <th><a href="<%=href%>"><%=title%></a></th>
 <%  }
 } %>
     </tr>
