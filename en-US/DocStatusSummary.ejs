@@ -68,11 +68,13 @@ function getPages(pageList) {
 
 getPages(pageList);
 
+var indexPage = $0 + '/Index';
+
 %>
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
-      <th>Pages</th>
+      <th><a href="<%=indexPage%>">Pages</a></th>
 <%
  for (var key in metrics) {
   if (metrics.hasOwnProperty(key)) { 
