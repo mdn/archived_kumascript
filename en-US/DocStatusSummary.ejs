@@ -9,12 +9,13 @@
 var pageList = page.subpagesExpand($0);
 var pageCounter = 0;
 var metrics = {
-                                    // title, link, counter
-  "noTags":                  ["No tags", "#No_tags", 0],
-  "needsTags":            ["Needs* tags", "#Need_tags", 0],
-  "editorialReviews":   ["Editorial reviews", "#Editorial_reviews", 0],
+                      // title, link, counter
+  "noTags":           ["No tags", "#No_tags", 0],
+  "needsTags":        ["Needs* tags", "#Need_tags", 0],
+  "editorialReviews": ["Editorial reviews", "#Editorial_reviews", 0],
   "technicalReviews": ["Technical reviews", "#Technical_reviews", 0],
 }
+
 if ($1) {
   var customMetrics = JSON.parse($1);
   for (var key in customMetrics) {
