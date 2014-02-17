@@ -1,0 +1,81 @@
+<%
+// Generates a table of the localization status for a given section
+//
+// Parameters:
+//  $0  -  The slug to build the table for (e.g. "/en-us/docs/Web/JavaScript")
+//  $1  -  The locale to check for the localization status
+
+
+var section = $0;
+var locale = $1;
+
+
+var pageList = page.subpagesExpand(section);
+var result = [];
+
+function getPages(pageList) {
+    if (pageList) {
+        for (var i = 0; i < pageList.length; i++) {
+            result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags})
+            var subpage = getPages(pageList[i].subpages);
+        }
+    }
+}
+
+function isOutdated(enDate, l10ndate) {
+    if (!enDate || enDate == undefined || !l10ndate || l10ndate == undefined) return 0;
+    if (new Date(l10nDate) < new Date(enDate)) return 1;
+    return 0;
+}
+
+function daysBetween(date1, date2) {
+  var aDay = 1000*60*60*24;
+
+  var d1ms = date1.getTime();
+  var d2ms = date2.getTime();
+  var diff = d2ms - d1ms;
+    
+  return Math.round(diff/aDay); 
+}
+
+
+function hasTranslation(pageTranslations, locale) {
+    if (!pageTranslations || typeof pageTranslations == 'undefined') return 0;
+    for (var i = 0, len = pageTranslations.length; i < len; i++) {
+        if (pageTranslations[i].locale == locale) return 1;
+    }
+    return 0;
+}
+
+getPages(pageList);
+
+
+var lang = env.locale;
+switch(lang) {
+    default:
+        heading = "Localization status for " + locale;
+        page = "Page";
+        translation = "Translation";
+        break;
+}
+%>
+
+<p><strong><%=heading%></strong></p>
+<table class="fullwidth-table">
+<thead>
+    <th><%=page%></th>
+    <th><%=translation%></th>
+</thead>
+<tbody>
+
+<% for (i=0; i < result.length; i++) { %>
+<tr>
+    <td><a href='<%=result[i].url%>'><%=result[i].title%></a></td>
+    <% if (hasTranslation(result[i].translations, locale)) { %>
+      <td>Yes</td>
+    <% } %>
+</tr>
+<% } %>
+
+</tbody>
+</table>
