@@ -12,23 +12,30 @@ var locale = $1;
 
 var pageList = page.subpagesExpand(section);
 var result = [];
+var translationCounter = 0;
 
 function getPages(pageList) {
     if (pageList) {
         for (var i = 0; i < pageList.length; i++) {
-            result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags})
+            result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, translations: pageList[i].translations, last_edit: pageList[i].last_edit})
             var subpage = getPages(pageList[i].subpages);
+            if(hasTranslation(pageList[i].translations, locale)) {
+                translationCounter++;
+            }
         }
     }
 }
 
-function isOutdated(enDate, l10ndate) {
-    if (!enDate || enDate == undefined || !l10ndate || l10ndate == undefined) return 0;
+function isOutdated(enDate, l10nDate) {
+    if (!enDate || typeof enDate == 'undefined' || !l10nDate || typeof l10nDate == 'undefined') return 0;
     if (new Date(l10nDate) < new Date(enDate)) return 1;
     return 0;
 }
 
 function daysBetween(date1, date2) {
+  date1 = new Date(date1);
+  date2 = new Date(date2);
+  
   var aDay = 1000*60*60*24;
 
   var d1ms = date1.getTime();
@@ -38,11 +45,18 @@ function daysBetween(date1, date2) {
   return Math.round(diff/aDay); 
 }
 
-
 function hasTranslation(pageTranslations, locale) {
     if (!pageTranslations || typeof pageTranslations == 'undefined') return 0;
     for (var i = 0, len = pageTranslations.length; i < len; i++) {
         if (pageTranslations[i].locale == locale) return 1;
+    }
+    return 0;
+}
+
+function getTranslation(pageTranslations, locale) {
+    if (!pageTranslations || typeof pageTranslations == 'undefined') return 0;
+    for (var i = 0, len = pageTranslations.length; i < len; i++) {
+        if (pageTranslations[i].locale == locale) return pageTranslations[i];
     }
     return 0;
 }
@@ -53,14 +67,36 @@ getPages(pageList);
 var lang = env.locale;
 switch(lang) {
     default:
-        heading = "Localization status for " + locale;
+        summary = "Summary";
+        details = "Details";
         page = "Page";
-        translation = "Translation";
+        pages = "Pages";
+        translation = "Translated";
         break;
 }
+
+var percent = Math.ceil((translationCounter / result.length) * 100);
 %>
 
-<p><strong><%=heading%></strong></p>
+<h2><%=summary%></h2>
+<table class="docstatussummary standard-table">
+  <thead>
+    <tr>
+      <th><%=pages%></th>
+      <th><%=translation%></th>
+      <th>Outdated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=result.length%></td>
+      <td><%=translationCounter%> (<%=percent%>%)</td>
+      <td>tbd</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2><%=details%></h2>
 <table class="fullwidth-table">
 <thead>
     <th><%=page%></th>
@@ -71,8 +107,16 @@ switch(lang) {
 <% for (i=0; i < result.length; i++) { %>
 <tr>
     <td><a href='<%=result[i].url%>'><%=result[i].title%></a></td>
-    <% if (hasTranslation(result[i].translations, locale)) { %>
-      <td>Yes</td>
+    <% if (hasTranslation(result[i].translations, locale)) {
+        var translation = getTranslation(result[i].translations, locale);
+        if (isOutdated(result[i].last_edit, translation.last_edit)) { 
+            var days = daysBetween(translation.last_edit, result[i].last_edit); %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>">Yes, but not up to date (<%=days%> days older).</a></td>
+        <% } else { %>
+            <td><a href="<%=translation.url%>">Yes.</a></td>
+        <% } %>
+    <% } else { %>
+        <td style="background-color: #FCC">Not available.</td>
     <% } %>
 </tr>
 <% } %>
