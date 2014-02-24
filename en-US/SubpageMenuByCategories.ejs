@@ -13,8 +13,19 @@
 //
 // "[{'tag': 'tagname', 'name': 'categoryname'}, ...]"
 
+var lang = env.locale;
 var categoryList = JSON.parse($0);
 var html = "";
+var otherPagesText = "";
+
+switch(lang) {
+    default:
+        otherPagesText = "Other pages";
+        break;
+    case 'fr':
+        otherPagesText = "Autres pages";
+        break;
+}
 
 // Get a list of all subpages of the current page. This is, by default,
 // our list of "miscellaneous" pages. We'll then pull pages out of that
@@ -67,7 +78,12 @@ for (var i=0; i<categoryList.length; i++) {
 
 // Output the pages that didn't match any category
 
-html += "<h2 id='Other'>Other pages</h2>" + template("SubpagesWithSummaries", [JSON.stringify(miscPages)]);
+if (miscPages.length) {
+    html += "<h2 id='Other'>" + otherPagesText + "</h2>" + template("SubpagesWithSummaries", [JSON.stringify(miscPages)]);
+}
+
+// Split the list up into multiple columns
+
 html = template("MakeColumnsForDL", [html]);
 %>
 <%-featureBoxes%>
