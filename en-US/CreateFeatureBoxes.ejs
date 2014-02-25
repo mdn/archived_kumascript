@@ -61,7 +61,7 @@ for (var i=0; i<descList.length; i++) {
     
     // Pull the page summary if text is "*"
     
-    if (text != "*") {
+    if (text == "*") {
         var page = wiki.getPage(path);
         text = page.summary;
     }
