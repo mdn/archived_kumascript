@@ -7,7 +7,7 @@
 //
 // The descriptor string format is:
 //
-// path|title|fa-character|image||...
+// path|title|text|fa-character|image||...
 //
 // Where:
 //
@@ -36,9 +36,9 @@ for (var i=0; i<descList.length; i++) {
     var params = descList[i].split("|");     // Get each parameter
     var path = params[0];
     var title = params[1];
-    var faChar = params[2];
-    var image = params[3];
-    var page = wiki.getPage(path);
+    var text = params[2];
+    var faChar = params[3];
+    var image = params[4];
     var imageElem = "";
     var hasImage = false;
     var extraClass = "";
@@ -47,6 +47,8 @@ for (var i=0; i<descList.length; i++) {
     
     if (faChar != "*") {
         faChar = "<i class='" + faChar + "'></i> ";
+    } else {
+        faChar = "";
     }
     
     // Set up the string for the background attribute
@@ -57,7 +59,14 @@ for (var i=0; i<descList.length; i++) {
         hasImage = true;
     }
     
-    featureBoxes += "<li" + extraClass + ">" + imageElem + "<span>" + faChar + "<a href='" + path + "'>" + " " + title + "</a></span><p>" + page.summary + "</p></li>";
+    // Pull the page summary if text is "*"
+    
+    if (text != "*") {
+        var page = wiki.getPage(path);
+        text = page.summary;
+    }
+    
+    featureBoxes += "<li" + extraClass + ">" + imageElem + "<span>" + faChar + "<a href='" + path + "'>" + " " + title + "</a></span><p>" + text + "</p></li>";
 }
 
 // Finish out the grid
