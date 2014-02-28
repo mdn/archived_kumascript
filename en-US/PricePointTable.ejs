@@ -134,7 +134,7 @@ for (var i = 0; i < data.meta.total_count; i++) {
     <tr>
       <th><%= price[i].name %></th>
 <%
-      for (var j = 0; j < arrayLength; j++) {
+        for (var j = 0; j < arrayLength; j++) {
 %>
       <td>
 <%
@@ -156,15 +156,17 @@ for (var i = 0; i < data.meta.total_count; i++) {
 %>
         <%= (currPos == "before"?currSymbol:"") + price[i].region[columnRegionID][0].price + (currPos != "before"?currSymbol:"") %>
 <%
-                numberOfPricesDisplayed++;
+                    numberOfPricesDisplayed++;
                 
-                // If different than the second price, we need to put a link to footnote [1]
-                if (!price[i].region[columnRegionID][0].currency ||
-                    (price[i].region[columnRegionID][0].currency != price[i].region[columnRegionID][1].currency) ||
-                    (price[i].region[columnRegionID][0].price    != price[i].region[columnRegionID][1].price)) {
+                    // If different than the second price, we need to put a link to footnote [1]
+                    if (!price[i].region[columnRegionID][0].currency || !price[i].region[columnRegionID[1].currency ||
+                        (price[i].region[columnRegionID][0].currency != price[i].region[columnRegionID][1].currency) ||
+                        (price[i].region[columnRegionID][0].price    != price[i].region[columnRegionID][1].price)) {
 %>          <span class="footnote"><a href="#pricetable_fn_1" alt="Footnote: credit card purchase only" title="Credit card purchase only">[1]</a></span>
 <%          
+                    }
                 }
+                
                 // We display the second price
                 if (price[i].region[columnRegionID][1].currency) {
                     if (numberOfPricesDisplayed) {
@@ -181,18 +183,18 @@ for (var i = 0; i < data.meta.total_count; i++) {
                         currPos    = "before";
                     }
 %>
-        <%= (currPos == "before"?currSymbol:"") + price[i].region[columnRegionID][01].price + (currPos != "before"?currSymbol:"") %>
+        <%= (currPos == "before"?currSymbol:"") + price[i].region[columnRegionID][1].price + (currPos != "before"?currSymbol:"") %>
 <%
-                numberOfPricesDisplayed++;
+                 numberOfPricesDisplayed++;
                 
-                // If different than the first price, we need to put a link to footnote [1]
-                if (!price[i].region[columnRegionID][1].currency ||
-                    (price[i].region[columnRegionID][0].currency != price[i].region[columnRegionID][1].currency) ||
-                    (price[i].region[columnRegionID][0].price    != price[i].region[columnRegionID][1].price)) {
-%>          <span class="footnote"><a href="#pricetable_fn_2" alt="Footnote: purchase via carrier only" title="Ppurchase via carrie only">[2]</a></span>
+                    // If different than the first price, we need to put a link to footnote [1]
+                    if (!price[i].region[columnRegionID][0].currency || !price[i].region[columnRegionID[1].currency ||
+                        (price[i].region[columnRegionID][0].currency != price[i].region[columnRegionID][1].currency) ||
+                        (price[i].region[columnRegionID][0].price    != price[i].region[columnRegionID][1].price)) {
+%>          <span class="footnote"><a href="#pricetable_fn_2" alt="Footnote: purchase via carrier only" title="Purchase via carrier only">[2]</a></span>
 <%          
-                }
-                    
+                    }
+                }    
             }
             if (numberOfPricesDisplayed == 0) {
 %> 
@@ -202,7 +204,7 @@ for (var i = 0; i < data.meta.total_count; i++) {
 %>
       </td>
 <%
-      }
+        }
 %>
     </tr>
 <%
@@ -214,5 +216,7 @@ for (var i = 0; i < data.meta.total_count; i++) {
 
 </table>
 <ul style="list-style-type: none">
-    <li id="pricetable_fn_1">[1] Can only be purchased using a credit card, not by carrier billing.</li>
+    <li id="pricetable_fn_1">[1] Credit card purchase only.</li>
+    <li id="pricetable_fn_1">[2] Carrier billing only, no credit card purchase.</li>
+
 </ul>
