@@ -1,114 +1,176 @@
 <%
 // price point table using data pulled from the Firefox Marketplace REST API
 
+// Define a few data not available through the API
+
+// Currencies
+var currency = {}; 
+currency.EUR = { "symbol": "€",   "symbol_pos" : "before" };
+currency.COP = { "symbol": "$",   "symbol_pos" : "before" };
+currency.GBP = { "symbol": "£",   "symbol_pos" : "before" };
+currency.HUF = { "symbol": "Ft&nbsp;", "symbol_pos" : "before" };
+currency.MXN = { "symbol": "$",   "symbol_pos" : "before" };
+currency.PLN = { "symbol": "&nbsp;zł", "symbol_pos" : "after"  };
+currency.USD = { "symbol": "$",   "symbol_pos" : "before" };
+
+// Tax: index is the region index of the rest API
+var tax = {}; 
+tax[ 1] = {"included": false, "value": ""};   // Rest of the world
+tax[ 2] = {"included": false, "value": ""};   // US
+tax[ 7] = {"included": false, "value": ""}; // Brazil
+tax[ 8] = {"included": true,  "value": "21%"}; // Spain
+tax[ 9] = {"included": true,  "value": "16%"}; // Colombia
+tax[10] = {"included": true,  "value": ""}; // Venezuela
+tax[11] = {"included": true,  "value": "23%"}; // Poland
+tax[12] = {"included": true,  "value": "16%"}; // Mexico: changed in 2014
+tax[13] = {"included": true,  "value": "27%"}; // Hungary
+tax[14] = {"included": true,  "value": "19%"}; // Germany
+
+// Create table of price point
+//
+// Format:
+// price["tier"] = {"credit_card_purchase": true, "region":  [region_id : { "price": xyz, "currency":XYZ }, region_id2 : …]}
+// Only values with paid == true are considered
+// If several values for the same identifier (tier/region) the latest is used
+// The following field are ignored: "dev", "carrier", "provider", "id"
+
 var url = "https://marketplace.firefox.com/api/v1/webpay/prices/";
 var data = mdn.fetchJSONResource(url);
+
+var regionList = new Array; // list of regions (used to define the columns)
+var price = new Array; // list of prices (per tier/region)
+for (var i = 0; i < data.meta.total_count; i++) { 
+    tier = {
+        "name":                 data.objects[i].name,
+        "credit_card_purchase": ( data.objects[i].pricePoint != "0" ) &&
+                                ( data.objects[i].pricePoint != "1" ) &&
+                                ( data.objects[i].pricePoint != "5" ) &&
+                                ( data.objects[i].pricePoint != "7" )
+            };
+            
+    regions = new Array;
+                                       
+    for (var j = 0; j < data.objects[i].prices.length; j++) {
+        if (data.objects[i].prices[j].dev) { // Only if paid!
+            regions[data.objects[i].prices[j].region] = {};
+            regions[data.objects[i].prices[j].region].price    = data.objects[i].prices[j].price;
+            regions[data.objects[i].prices[j].region].currency = data.objects[i].prices[j].currency;
+            if (regionList.indexOf(data.objects[i].prices[j].region) == -1) { regionList.push(data.objects[i].prices[j].region); } // We add it to the region list
+        }
+    }
+    tier.region = regions;
+
+    price.push(tier);
+}
+
+// Build region information for header
+//
+// Format:
+// region[id] = { "name": Xyz, "default_currency": XYZ, "credit_card_only": bool}
+
+var region = new Array; // list of regions 
+var url = "https://marketplace.firefox.com/api/v1/services/region/";
+var data = mdn.fetchJSONResource(url);
+for (var i = 0; i < data.meta.total_count; i++) { 
+    if (regionList.indexOf(data.objects[i].id) != -1) { // Only if we need to display this region
+        region.push({
+        "id"              : data.objects[i].id,
+        "name"            : data.objects[i].name,
+        "default_currency": data.objects[i].default_currency,
+        "credit_card_only": (data.objects[i].id == 10)
+        });
+    }
+}
+
 %>
-<p>Last updated <%= Date.now() %>. To get the latest price information, clear your browser's cache by using Shift+Refresh.</p>
 <table class="standard-table">
   <thead>
     <tr>
-      <th>Price point</th>
-      <th>US dollar $ - base price</th>
-      <th>Available for credit card purchase</th>
-      <th>Brazil real $ (R$)</th>
-      <th>Colombia peso $ (COP$)</th>
-      <th>Poland zloty zł (PLN)</th>
-      <th>Spain euro € (EUR)</th>
-      <th>Venezuela US dollar (US$) credit card only</th>
+      <th rowspan="2">Price point</th>
+      <th rowspan="2">Available for credit card purchase</th>
+<%
+    var arrayLength = region.length;
+    for (var i=0; i < arrayLength; i++) {
+        if (region[i]) { // there may be gaps!
+%>
+      <th><%= region[i].name %></th> 
+<%      }
+    }
+%>
+    <tr>
+<%
+    for (var i=0; i < arrayLength; i++) {
+        if (region[i]) { // there may be gaps!
+%>
+      <th><%= region[i].default_currency %></th>
+<%      }
+    }
+%>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><b>VAT/Tax included in price</b></td>
-      <td>No</td>
-      <td>n/a</td>
-      <td>No</td>
-      <td>Yes</td>
-      <td>Yes</td>
-      <td>Yes</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><b>VAT % in price</b></td>
-      <td>--</td>
-      <td>n/a</td>
-      <td>n/a</td>
-      <td>16%</td>
-      <td>23%</td>
-      <td>21%</td>
-      <td>n/a</td>
+      <th>VAT/Tax included in price</th>
+      <td>—</td>
+<%
+    for (var i=0; i < arrayLength; i++) {
+        if (region[i]) { // there may be gaps!
+            if (tax[region[i].id]) {
+%>
+      <td><%= tax[region[i].id].included?"yes":"no" %><%= (tax[region[i].id].included&&tax[region[i].id].value)?"&nbsp;("+tax[region[i].id].value+")":""%></td>
+<%          } else { // Unknown
+%>
+      <td>unknown</td>
+<%          }
+        }
+    }
+%>
     </tr>
 
 <% // create price point rows
-for (var i = 0; i < data.meta.total_count; i++) { %>
-
+    for (var i = 0; i < price.length; i++) { 
+%>
     <tr>
-      <td><b><%= data.objects[i].name %></b></td>
-      <td><% //some objects have no price defined.
-          if ( data.objects[i].localized.price ){ %>
-            <%= data.objects[i].localized.price %>
-          <% } else { %>
-            --
-          <% } %>
+      <th><%= price[i].name %></th>
+      <td><%= price[i].credit_card_purchase?"yes":"no" %></td>
+<%
+      for (var j = 0; j < arrayLength; j++) {
+            columnRegionID = region[j].id;
+            if (price[i].region[columnRegionID]) { // there may be gaps!
+                if (currency[price[i].region[columnRegionID].currency]) {
+                    currSymbol = currency[price[i].region[columnRegionID].currency].symbol;
+                    currPos    = currency[price[i].region[columnRegionID].currency].symbol_pos;
+                }
+                else { // default values
+                    currSymbol = price[i].region[columnRegionID].currency + " ";
+                    currPos    = "before";
+                }
+%>
+      <td><%= (currPos == "before"?currSymbol:"") + price[i].region[columnRegionID].price + (currPos != "before"?currSymbol:"") %>
+<%
+                if (region[j].credit_card_only && (parseFloat(price[i].region[columnRegionID].price) != 0.0) ) {
+%>          <span class="footnote"><a href="#pricetable_fn_1" alt="Footnote: credit card purchase only" title="Credit card purchase only">[1]</a></span>
+<%              }
+%>
       </td>
-      <td><% // Available for credit card. Some tiers are not applicable.
-               if ( data.objects[i].name == "Tier 0" ) { %>
-            No
-          <% } else if ( data.objects[i].name == "Tier 1" ) { %>
-            No
-          <% } else if ( data.objects[i].name == "Tier 5" ) { %>
-            No
-          <% } else if ( data.objects[i].name == "Tier 7" ) { %>
-            No
-          <% } else { %>
-            Yes
-          <% } %>
-      </td>
-      <td><!-- Brazil real -->
-        n/a
-      </td>
-      <td><% // Colombia peso. COP is missing from some JSON objects, this handles it.
-             var copExists = 0;
-             for (var j = 0; j < data.objects[i].prices.length; j++) { %>
-              <% if (data.objects[i].prices[j].currency == "COP") { %>
-                $<%= data.objects[i].prices[j].price %>
-              <% copExists = 1 } 
-             } 
-             if (copExists == 0) { %>
-               n/a
-             <% } %>
-      </td>
-      <td><% // Poland zloty 
-               for (var j = 0; j < data.objects[i].prices.length; j++) { %>
-            <% if (data.objects[i].prices[j].currency == "PLN") { %>
-              <%= data.objects[i].prices[j].price %> zł
-            <% } %>
-          <% } %>
-      </td>
-      <td><% // Spain euro
-               for (var j = 0; j < data.objects[i].prices.length; j++) { %>
-            <% if (data.objects[i].prices[j].region == 8) { %>
-              €<%= data.objects[i].prices[j].price %>
-            <% } %>
-          <% } %>
-      </td>
-      <td><% // Venezuela credit card. Some tiers are not applicable.
-               if ( data.objects[i].name == "Tier 0" ) { %>
-            n/a
-          <% } else if ( data.objects[i].name == "Tier 1" ) { %>
-            n/a
-          <% } else if ( data.objects[i].name == "Tier 5" ) { %>
-            n/a
-          <% } else if ( data.objects[i].name == "Tier 7" ) { %>
-            n/a
-          <% } else { %>
-            $<%= data.objects[i].localized.price %>
-          <% } %>
-      </td>
+<%
+            }
+            else {
+%>
+      <td>n/a</td>
+<%
+            }
+      }
+%>
     </tr>
-
-<% } %>
+<%
+    }
+%>
 
   </tbody>
+  <caption style="caption-side:bottom;text-align:right"><small>Last updated: <%= Date.now() %>.</small></caption>
+
 </table>
+<ul style="list-style-type: none">
+    <li id="pricetable_fn_1">[1] Can only be purchased using a credit card, not by carrier billing.</li>
+</ul>
