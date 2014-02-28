@@ -179,7 +179,7 @@ for (var i = 0; i < data.meta.total_count; i++) {
             &nbsp;/&nbsp;
 <%
                     }
-                    if (currency[price[i].region[columnRegionID][1]]) {
+                    if (currency[price[i].region[columnRegionID][1].currency]) {
                         currSymbol = currency[price[i].region[columnRegionID][1].currency].symbol;
                         currPos    = currency[price[i].region[columnRegionID][1].currency].symbol_pos;
                     }
