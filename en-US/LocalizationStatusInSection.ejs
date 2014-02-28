@@ -77,13 +77,13 @@ switch(lang) {
         page = "Page";
         pages = "Pages";
         translation = "Translated";
-        uptodate = "Up-to-date";
+        uptodate = "Translations up to date";
         break;
 }
 
 var translationPercent = Math.ceil((translationCounter / result.length) * 100);
-var uptodateCounter = result.length - outdatedCounter;
-var uptodatePercent = Math.ceil((uptodateCounter / result.length) * 100);
+var uptodateCounter = translationCounter - outdatedCounter;
+var uptodatePercent = Math.ceil((uptodateCounter / translationCounter) * 100);
 %>
 
 <h2><%=summary%></h2>
