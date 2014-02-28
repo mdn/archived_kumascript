@@ -113,10 +113,10 @@
     // revision, show, and heading
     //
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Page)
-    page: function (path, section, revision, show, heading) {
+    page: function (path, section, revision, show, heading, ignore_cache_control) {
         var key = 'kuma:include:' + md5(path.toLowerCase());
 
-        return cacheFn(key, 3600, function (next) {
+        var regenerate = function (next) {            
             var params = ['raw=1', 'macros=1', 'include=1'];
 
             if (section) { params.push('section='+encodeURIComponent(section)); }
@@ -142,7 +142,19 @@
             } catch (e) {
                 next('');
             }
-        });
+        };
+        if (ignore_cache_control) {
+            var mdn = require('MDN:Common');
+            return mdn.cacheFnIgnoreCacheControl(key, 3600, regenerate);
+        } else {
+            return cacheFn(key, 3600, regenerate);
+        }
+    },
+
+    // Readable shortcut to wiki.page with optional parameters
+    // and ignore_cache_control=true
+    pageIgnoreCacheControl: function (path, section, revision, show, heading) {
+        return wiki.page(path, section, revision, show, heading, true);
     },
 
     // Returns the page object for the specified page.
