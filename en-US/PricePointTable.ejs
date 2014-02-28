@@ -23,9 +23,10 @@ currency.UYU = { "symbol": "$U",         "symbol_pos" : "before" };
 
 // Tax: index is the region index of the rest API
 var tax = {}; 
-tax[ 1] = {"included": false, "value": ""};   // Rest of the world
-tax[ 2] = {"included": false, "value": ""};   // US
-tax[ 7] = {"included": false, "value": ""}; // Brazil
+tax[ 1] = {"included": false, "value": ""};    // Rest of the world
+tax[ 2] = {"included": false, "value": ""};    // US
+tax[ 4] = {"included": true,  "value": "20%"}; // UK
+tax[ 7] = {"included": false, "value": ""};    // Brazil
 tax[ 8] = {"included": true,  "value": "21%"}; // Spain
 tax[ 9] = {"included": true,  "value": "16%"}; // Colombia
 tax[10] = {"included": true,  "value": "12%"}; // Venezuela
