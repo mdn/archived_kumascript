@@ -13,14 +13,19 @@ var locale = $1;
 var pageList = page.subpagesExpand(section);
 var result = [];
 var translationCounter = 0;
+var outdatedCounter = 0;
 
 function getPages(pageList) {
     if (pageList) {
         for (var i = 0; i < pageList.length; i++) {
             result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, translations: pageList[i].translations, last_edit: pageList[i].last_edit})
             var subpage = getPages(pageList[i].subpages);
-            if(hasTranslation(pageList[i].translations, locale)) {
+            if (hasTranslation(pageList[i].translations, locale)) {
                 translationCounter++;
+            }
+            var translation = getTranslation(pageList[i].translations, locale);
+            if (isOutdated(pageList[i].last_edit, translation.last_edit)) {
+                outdatedCounter++;
             }
         }
     }
@@ -72,10 +77,13 @@ switch(lang) {
         page = "Page";
         pages = "Pages";
         translation = "Translated";
+        uptodate = "Up-to-date";
         break;
 }
 
-var percent = Math.ceil((translationCounter / result.length) * 100);
+var translationPercent = Math.ceil((translationCounter / result.length) * 100);
+var uptodateCounter = result.length - outdatedCounter;
+var uptodatePercent = Math.ceil((uptodateCounter / result.length) * 100);
 %>
 
 <h2><%=summary%></h2>
@@ -84,14 +92,14 @@ var percent = Math.ceil((translationCounter / result.length) * 100);
     <tr>
       <th><%=pages%></th>
       <th><%=translation%></th>
-      <th>Outdated</th>
+      <th><%=uptodate%></th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><%=result.length%></td>
-      <td><%=translationCounter%> (<%=percent%>%)</td>
-      <td>tbd</td>
+      <td><%=translationCounter%> (<%=translationPercent%>%)</td>
+      <td><%=uptodateCounter%> (<%=uptodatePercent%>%)</td>
     </tr>
   </tbody>
 </table>
