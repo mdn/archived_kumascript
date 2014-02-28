@@ -40,21 +40,25 @@ var data = mdn.fetchJSONResource(url);
 var regionList = new Array; // list of regions (used to define the columns)
 var price = new Array; // list of prices (per tier/region)
 for (var i = 0; i < data.meta.total_count; i++) { 
-    tier = {
-        "name":                 data.objects[i].name,
-        "credit_card_purchase": ( data.objects[i].pricePoint != "0" ) &&
-                                ( data.objects[i].pricePoint != "1" ) &&
-                                ( data.objects[i].pricePoint != "5" ) &&
-                                ( data.objects[i].pricePoint != "7" )
-            };
+    tier = {"name": data.objects[i].name};
             
     regions = new Array;
                                        
     for (var j = 0; j < data.objects[i].prices.length; j++) {
         if (data.objects[i].prices[j].dev) { // Only if paid!
             regions[data.objects[i].prices[j].region] = {};
-            regions[data.objects[i].prices[j].region].price    = data.objects[i].prices[j].price;
-            regions[data.objects[i].prices[j].region].currency = data.objects[i].prices[j].currency;
+            
+            
+            // Price for credit card purchase
+            if ((data.objects[i].prices[j].method == 1) || (data.objects[i].prices[j].method == 2)) {
+                regions[data.objects[i].prices[j].region][0].price    = data.objects[i].prices[j].price;
+                regions[data.objects[i].prices[j].region][0].currency = data.objects[i].prices[j].currency;
+            }
+            // Price for carrier purchase
+            if ((data.objects[i].prices[j].method == 0) || (data.objects[i].prices[j].method == 2)) {
+                regions[data.objects[i].prices[j].region][1].price    = data.objects[i].prices[j].price;
+                regions[data.objects[i].prices[j].region][1].currency = data.objects[i].prices[j].currency;
+            }
             if (regionList.indexOf(data.objects[i].prices[j].region) == -1) { regionList.push(data.objects[i].prices[j].region); } // We add it to the region list
         }
     }
@@ -76,8 +80,7 @@ for (var i = 0; i < data.meta.total_count; i++) {
         region.push({
         "id"              : data.objects[i].id,
         "name"            : data.objects[i].name,
-        "default_currency": data.objects[i].default_currency,
-        "credit_card_only": (data.objects[i].id == 10)
+        "default_currency": data.objects[i].default_currency
         });
     }
 }
@@ -87,7 +90,6 @@ for (var i = 0; i < data.meta.total_count; i++) {
   <thead>
     <tr>
       <th rowspan="2">Price point</th>
-      <th rowspan="2">Available for credit card purchase</th>
 <%
     var arrayLength = region.length;
     for (var i=0; i < arrayLength; i++) {
@@ -111,7 +113,6 @@ for (var i = 0; i < data.meta.total_count; i++) {
   <tbody>
     <tr>
       <th>VAT/Tax included in price</th>
-      <td>—</td>
 <%
     for (var i=0; i < arrayLength; i++) {
         if (region[i]) { // there may be gaps!
@@ -132,34 +133,75 @@ for (var i = 0; i < data.meta.total_count; i++) {
 %>
     <tr>
       <th><%= price[i].name %></th>
-      <td><%= price[i].credit_card_purchase?"yes":"no" %></td>
 <%
       for (var j = 0; j < arrayLength; j++) {
-            columnRegionID = region[j].id;
-            if (price[i].region[columnRegionID]) { // there may be gaps!
-                if (currency[price[i].region[columnRegionID].currency]) {
-                    currSymbol = currency[price[i].region[columnRegionID].currency].symbol;
-                    currPos    = currency[price[i].region[columnRegionID].currency].symbol_pos;
-                }
-                else { // default values
-                    currSymbol = price[i].region[columnRegionID].currency + " ";
-                    currPos    = "before";
-                }
 %>
-      <td><%= (currPos == "before"?currSymbol:"") + price[i].region[columnRegionID].price + (currPos != "before"?currSymbol:"") %>
+      <td>
 <%
-                if (region[j].credit_card_only && (parseFloat(price[i].region[columnRegionID].price) != 0.0) ) {
+            columnRegionID = region[j].id;
+            numberOfPricesDisplayed = 0;
+            
+            if (price[i].region[columnRegionID]) { // there may be gaps!
+                            // Display first value (credit card)
+
+                if (price[i].region[columnRegionID][0].currency) {
+                    if (currency[price[i].region[columnRegionID][0].currency]) {
+                        currSymbol = currency[price[i].region[columnRegionID][0].currency].symbol;
+                        currPos    = currency[price[i].region[columnRegionID][0].currency].symbol_pos;
+                    }
+                    else { // default values
+                        currSymbol = price[i].region[columnRegionID][0].currency + " ";
+                        currPos    = "before";
+                    }
+%>
+        <%= (currPos == "before"?currSymbol:"") + price[i].region[columnRegionID][0].price + (currPos != "before"?currSymbol:"") %>
+<%
+                numberOfPricesDisplayed++;
+                
+                // If different than the second price, we need to put a link to footnote [1]
+                if (!price[i].region[columnRegionID][0].currency ||
+                    (price[i].region[columnRegionID][0].currency != price[i].region[columnRegionID][1].currency) ||
+                    (price[i].region[columnRegionID][0].price    != price[i].region[columnRegionID][1].price)) {
 %>          <span class="footnote"><a href="#pricetable_fn_1" alt="Footnote: credit card purchase only" title="Credit card purchase only">[1]</a></span>
-<%              }
+<%          
+                }
+                // We display the second price
+                if (price[i].region[columnRegionID][1].currency) {
+                    if (numberOfPricesDisplayed) {
+%>
+            &nbsp;/&nbsp;
+<%
+                    }
+                    if (currency[price[i].region[columnRegionID][1].currency]) {
+                        currSymbol = currency[price[i].region[columnRegionID][1].currency].symbol;
+                        currPos    = currency[price[i].region[columnRegionID][1].currency].symbol_pos;
+                    }
+                    else { // default values
+                        currSymbol = price[i].region[columnRegionID][1].currency + " ";
+                        currPos    = "before";
+                    }
+%>
+        <%= (currPos == "before"?currSymbol:"") + price[i].region[columnRegionID][01].price + (currPos != "before"?currSymbol:"") %>
+<%
+                numberOfPricesDisplayed++;
+                
+                // If different than the first price, we need to put a link to footnote [1]
+                if (!price[i].region[columnRegionID][1].currency ||
+                    (price[i].region[columnRegionID][0].currency != price[i].region[columnRegionID][1].currency) ||
+                    (price[i].region[columnRegionID][0].price    != price[i].region[columnRegionID][1].price)) {
+%>          <span class="footnote"><a href="#pricetable_fn_2" alt="Footnote: purchase via carrier only" title="Ppurchase via carrie only">[2]</a></span>
+<%          
+                }
+                    
+            }
+            if (numberOfPricesDisplayed == 0) {
+%> 
+                n/a
+<%
+            }
 %>
       </td>
 <%
-            }
-            else {
-%>
-      <td>n/a</td>
-<%
-            }
       }
 %>
     </tr>
