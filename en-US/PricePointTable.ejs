@@ -5,13 +5,21 @@
 
 // Currencies
 var currency = {}; 
-currency.EUR = { "symbol": "€",   "symbol_pos" : "before" };
-currency.COP = { "symbol": "$",   "symbol_pos" : "before" };
-currency.GBP = { "symbol": "£",   "symbol_pos" : "before" };
-currency.HUF = { "symbol": "Ft&nbsp;", "symbol_pos" : "before" };
-currency.MXN = { "symbol": "$",   "symbol_pos" : "before" };
-currency.PLN = { "symbol": "&nbsp;zł", "symbol_pos" : "after"  };
-currency.USD = { "symbol": "$",   "symbol_pos" : "before" };
+currency.EUR = { "symbol": "€",          "symbol_pos" : "before" };
+currency.COP = { "symbol": "$",       "symbol_pos" : "before" };
+currency.GBP = { "symbol": "£",          "symbol_pos" : "before" };
+currency.HUF = { "symbol": "Ft&nbsp;",   "symbol_pos" : "before" };
+currency.MXN = { "symbol": "$",          "symbol_pos" : "before" };
+currency.PLN = { "symbol": "&nbsp;zł",   "symbol_pos" : "after"  };
+currency.USD = { "symbol": "$",          "symbol_pos" : "before" };
+currency.CHF = { "symbol": "&nbsp;SFr.", "symbol_pos" : "after"  };
+currency.RSD = { "symbol": "РСД&nbsp;",  "symbol_pos" : "before" };
+currency.RMB = { "symbol": "¥",          "symbol_pos" : "before" };
+currency.CLP = { "symbol": "$",          "symbol_pos" : "before" };
+currency.ARS = { "symbol": "$",          "symbol_pos" : "before" };
+currency.BRL = { "symbol": "R$",         "symbol_pos" : "before" };
+currency.PEN = { "symbol": "&nbsp;S/.",  "symbol_pos" : "after" };
+currency.UYU = { "symbol": "$U",         "symbol_pos" : "before" };
 
 // Tax: index is the region index of the rest API
 var tax = {}; 
@@ -20,11 +28,21 @@ tax[ 2] = {"included": false, "value": ""};   // US
 tax[ 7] = {"included": false, "value": ""}; // Brazil
 tax[ 8] = {"included": true,  "value": "21%"}; // Spain
 tax[ 9] = {"included": true,  "value": "16%"}; // Colombia
-tax[10] = {"included": true,  "value": ""}; // Venezuela
+tax[10] = {"included": true,  "value": "12%"}; // Venezuela
 tax[11] = {"included": true,  "value": "23%"}; // Poland
 tax[12] = {"included": true,  "value": "16%"}; // Mexico: changed in 2014
 tax[13] = {"included": true,  "value": "27%"}; // Hungary
 tax[14] = {"included": true,  "value": "19%"}; // Germany
+tax[15] = {"included": true,  "value": "19%"}; // Montenegro
+tax[16] = {"included": true,  "value": "20%"}; // Serbia
+tax[17] = {"included": true,  "value": "23%"}; // Greece
+tax[18] = {"included": true,  "value": "18%"}; // Peru
+tax[19] = {"included": true,  "value": "22%"}; // Uruguay
+tax[20] = {"included": true,  "value": "21%"}; // Argentina
+tax[21] = {"included": true,  "value": "17%"}; // China
+tax[22] = {"included": true,  "value": "22%"}; // Italy
+tax[23] = {"included": true,  "value": "19%"}; // Chile
+
 
 // Create table of price point
 //
