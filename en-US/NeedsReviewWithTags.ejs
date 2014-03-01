@@ -89,7 +89,11 @@ for (i=0; i<requestedTags.length; i++) {
 
 switch(lang) {
     default:
-        heading = "Found " + prunedList.length + " pages needing " + $0 + " review with tags " + tagString + ":";
+        heading = "Found " + prunedList.length + " pages needing " + $0 + " review";
+        if (requestedTags.length != 0) {
+            heading = heading + " with tags " + tagString;
+        }
+        heading = heading + ":";
         break;
 }
 
