@@ -1,0 +1,60 @@
+<%
+// Presents a box showing assorted information about the community
+// for the technology area covered by a landing page.
+//
+// THIS IS THE NEW VERSION, PRESENTED AS A FULL-WIDTH BANNER.
+//
+// Parameters:
+//  $0  Name of the topic
+//  $1  Name of the driver
+//  $2  IRC channel name
+//  $3  Driver's IRC pseudo
+//  $4  Mailing-list to ask any question
+
+var ircInfoStr = "";
+var headingStr = "";
+var messageStr = "";
+var messageNoteStr = "";
+var ircLink = "";
+
+var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>";
+
+// Build the IRC channel URL if a channel name was specified
+
+if ($2) {
+    ircLink = "<a href='irc://irc.mozilla.org/" + $2 + "'>#" + $2 + "</a>";
+}
+
+// Generate localized strings
+
+switch(env.locale) {
+    case "fr":
+        headingStr = "Aider le projet de documentation '" + $0 + "'";
+        messageStr = "Liste de diffusion/newsgroup :";
+        messageNoteStr = "Choisissez votre méthode préférée pour rejoindre la discussion.";
+        if ($2) {
+            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "en apprendre plus</a>)</span>";
+        }
+        break;
+    default:
+        headingStr = "Help the '" + $0 + "' documentation project";
+        messageStr = "Mailing list/newsgroup:";
+        messageNoteStr = "Choose your preferred method for joining the discussion.";
+        if ($2) {
+            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
+        }
+        break;
+}
+
+%>
+
+<div class="overheadIndicator communitybox">
+    <div class="column-container">
+        <span id="Help_topic"><%=headingStr%></h2>
+        <div class="column-half">
+            <div class="communitysubhead"><%=messageStr%></div>
+            <div class="smaller"><%-messageNoteStr%></div>
+            <%-template("DiscussionList", [$1, $2, "communitymailinglist"])%>
+        </div>
+    </div>
+</div>
