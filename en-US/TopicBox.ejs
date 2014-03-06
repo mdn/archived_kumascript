@@ -13,7 +13,7 @@
 
 var ircInfoStr = "";
 var headingStr = "";
-var topicDriver = $1 + "(IRC pseudo: " + $2 + ")";
+var topicDriverStr = "";
 var messageStr = "";
 var messageNoteStr = "";
 var ircLink = "";
@@ -31,18 +31,16 @@ if ($2) {
 switch(env.locale) {
     case "fr":
         headingStr = "Aider le projet de documentation '" + $0 + "'";
-        messageStr = "Liste de diffusion/newsgroup :";
-        messageNoteStr = "Choisissez votre méthode préférée pour rejoindre la discussion.";
+        topicDriverStr = "Coordinateur du domaine : " + $1 + " (IRC pseudo: " + $1 + ")";
         if ($2) {
-            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "en apprendre plus</a>)</span>";
+            messageStr = "N'hésitez pas à le contacter sur le canal IRC : " + ircInfoLink + "</span>";
         }
         break;
     default:
         headingStr = "Help the '" + $0 + "' documentation project";
-        messageStr = "Mailing list/newsgroup:";
-        messageNoteStr = "Choose your preferred method for joining the discussion.";
+        topicDriverStr = "Topic driver : " + $1 + " (IRC pseudo: " + $1 + ")";
         if ($2) {
-            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
+            messageStr = "Don't hesitate to take contact on the IRC channel : " + ircInfoLink + "</span>";
         }
         break;
 }
@@ -52,6 +50,11 @@ switch(env.locale) {
 <div class="overheadIndicator communitybox">
     <div class="column-container">
         <div class="communitysubhead" id="Help_topic"><%=headingStr%></div>
-        <div class="smaller"><%=topicDriver%></div>
+        <div class="smaller"><%=topicDriverStr%></div>
+        if (messageStr) { 
+%>
+            <div class="smaller"><%=messageStr%></div>
+<%      }
+
     </div>
 </div>
