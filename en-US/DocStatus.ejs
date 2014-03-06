@@ -3,14 +3,25 @@
 //
 // Parameters:
 //  $0  -  The section to look at (e.g. "/en-us/docs/Web/JavaScript")
-//  $1  -  Bugzilla query for dev-doc-needed
-//  $2  -  Bugzilla query for documentaion requests
-//  $3  -  Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
-//         e.g. { cleanup: {title: "Clean-up", link: "#Cleanup_on_standard_built-in_ECMAScript_objects", counter: 250 }
+//  $1  -  Date for pages to be marked as outdated. 365 days and more is always outdated.
+//  $2  -  Bugzilla query for dev-doc-needed
+//  $3  -  Bugzilla query for documentaion requests
+//  $4  -  Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
+//         e.g. { "cleanup": {"title": "Clean-up", "link": "#Cleanup_on_standard_built-in_ECMAScript_objects", "counter": 142 }}
 
+/*** Variables ***/
 var pageList = page.subpagesExpand($0);
+var outdate = $1;
+var bzddn = $2;
+var bzdr = $3;
+var cMetrics = $4;
+
 var metrics = {
-    pageCounter: 0,
+    pages: {
+        title: 'Pages',
+        link: $0 + '/Index',
+        counter: 0
+    },
     noTags: {
         title: 'No tags',
         link: '#No_tags',
@@ -31,6 +42,11 @@ var metrics = {
         link: '#Technical_reviews',
         counter: 0
     },
+    outdated: {
+        title: 'Outdated pages',
+        link: '#Outdated_pages',
+        counter: 0
+    },
     ddn: {
         title:'Dev-doc-needed bugs',
         link: '#Dev-doc-needed_bugs',
@@ -40,20 +56,33 @@ var metrics = {
         title: 'Documentation requests',
         link: '#Documentation_requests',
         counter: 0
-    },
-    outdated: {
-        title: 'Outdated pages',
-        link: '#Outdated_pages',
-        counter: 0
     }
 };
 
-if ($1) {
-  var customMetrics = JSON.parse($1);
+var output = {
+    noTags: [],
+    needsTags: [],
+    editorialReviews: [],
+    technicalReviews: [],
+    outdated: [],
+    ddn: [],
+    dr: []
+};
+
+
+/*** Add custom metrics to the metrics object ***/
+
+
+if (cMetrics) {
+  var customMetrics = JSON.parse(cMetrics);
   for (var key in customMetrics) {
     metrics[key] = customMetrics[key];
   }
 }
+
+
+/*** Helper functions ***/
+
 
 function hasNoTags(tagList) {
     if (!tagList || tagList == undefined || tagList.length == 0) {
@@ -78,64 +107,93 @@ function hasReviewTag(reviewTags, reviewType) {
     return 0;
 }
 
+function isOutdated(pageDate, compareDate) {
+    if (!pageDate || pageDate == undefined) return 0;
+    if (new Date(pageDate) < new Date(compareDate)) return 1;
+    return 0;
+}
+
+function daysBetween(date1, date2) {
+  var aDay = 1000*60*60*24;
+
+  var d1ms = date1.getTime();
+  var d2ms = date2.getTime();
+  var diff = d2ms - d1ms;
+    
+  return Math.round(diff/aDay); 
+}
+
+
+/*** Get pages recursively by walking through the page tree and collect data ***/
+
+
 function getPages(pageList) {
     if (pageList) {
         for (var i = 0; i < pageList.length; i++) {
-            metrics.pageCounter++;
-            if (hasNoTags(pageList[i].tags)) { metrics.noTags.counter++; }
-            if (containsNeedsWorkTag(pageList[i].tags)) { metrics.needsTags.counter++; }
-            if (hasReviewTag(pageList[i].review_tags, 'editorial')) { metrics.editorialReviews.counter++; }
-            if (hasReviewTag(pageList[i].review_tags, 'technical')) { metrics.technicalReviews.counter++; }
+            metrics.pages.counter++;
+            if (hasNoTags(pageList[i].tags)) {
+                metrics.noTags.counter++; 
+                output.noTags.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url});
+            }
+            if (containsNeedsWorkTag(pageList[i].tags)) {
+                metrics.needsTags.counter++;
+                output.needsTags.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags.toString().match(/needs[A-Za-z0-9]+/gi).toString()});
+            }
+            if (hasReviewTag(pageList[i].review_tags, 'editorial')) { 
+                metrics.editorialReviews.counter++;
+                output.editorialReviews.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url});
+            }
+            if (hasReviewTag(pageList[i].review_tags, 'technical')) { 
+                metrics.technicalReviews.counter++;
+                output.technicalReviews.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url});
+            }
+            var pageAge = daysBetween(new Date(pageList[i].last_edit), new Date());
+            if ((outdate != undefined && isOutdated(pageList[i].last_edit, outdate)) || pageAge > 365) {
+                metrics.outdated.counter++;
+                output.outdated.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, age: pageAge});
+            }
             
             var subpage = getPages(pageList[i].subpages);
-            /*if (subpage) {
-                metrics.pageCounter++;
-                if (hasNoTags(subpage.tags)) { metrics.noTags.counter++; }
-                if (containsNeedsWorkTag(subpage.tags)) { metrics.needsTags.counter++; }
-                if (hasReviewTag(subpage.review_tags, 'editorial')) { metrics.editorialReviews.counter++; }
-                if (hasReviewTag(subpage.review_tags, 'technical')) { metrics.technicalReviews.counter++; }
-            } */
         }
     }
 }
 
 getPages(pageList);
 
-var indexPage = $0 + '/Index';
+
+/*** Output ***/
+
 
 %>
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
-      <th><a href="<%=indexPage%>">Pages</a></th>
 <%
- for (var key in metrics) {
-  if (metrics.hasOwnProperty(key)) { 
-      var href = metrics[key][1];
-      var title = metrics[key][0].replace(/_/g, " ");
-      if (href.indexOf('#', 0) === 0) {
-        href = env.path + metrics[key][1];
-      }
+for (var obj in metrics) {
+    var href = metrics[obj].link;
+    if (href && href.indexOf('#', 0) === 0) {
+        href = env.path + href;
+    }
 %>
-    <th><a href="<%=href%>"><%=title%></a></th>
-<%  }
-} %>
+    <th><a href="<%=href%>"><%=metrics[obj].title%></a></th>
+<% } %>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><%=pageCounter%></td>
 <%
- for (var key in metrics) {
-  if (metrics.hasOwnProperty(key)) {
-    var percent = Math.ceil((metrics[key].counter / metrics.pageCounter) * 100);
+for (var obj in metrics) {
+    var percent = Math.ceil((metrics[obj].counter / metrics.pages.counter) * 100);
     var color = "rgb(204, 255, 153)";
     if (percent >= 5) { color = "rgb(255, 255, 153)" }
     if (percent >= 10) { color = "rgb(255, 204, 204)" }
- %>
-    <td style="background-color: <%=color%>;"><%=metrics[key].counter%> (<%=percent%>%) </td>
-<%  }
-} %>
+    if (obj == 'pages') { 
+%>
+    <td><%=metrics.pages.counter%></td>
+<% } else { %>
+    <td style="background-color: <%=color%>;"><%=metrics[obj].counter%> (<%=percent%>%) </td>
+<% }
+}%>
     </tr>
   </tbody>
 </table>
