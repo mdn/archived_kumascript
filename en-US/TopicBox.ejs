@@ -13,6 +13,7 @@
 
 var ircInfoStr = "";
 var headingStr = "";
+var topicDriver = $1 + "(IRC pseudo: " + $2 + ")";
 var messageStr = "";
 var messageNoteStr = "";
 var ircLink = "";
@@ -50,11 +51,7 @@ switch(env.locale) {
 
 <div class="overheadIndicator communitybox">
     <div class="column-container">
-        <span id="Help_topic"><%=headingStr%></h2>
-        <div class="column-half">
-            <div class="communitysubhead"><%=messageStr%></div>
-            <div class="smaller"><%-messageNoteStr%></div>
-            <%-template("DiscussionList", [$1, $2, "communitymailinglist"])%>
-        </div>
+        <div class="communitysubhead" id="Help_topic"><%=headingStr%></div>
+        <div class="smaller"><%=topicDriver%></div>
     </div>
 </div>
