@@ -14,7 +14,7 @@ var result = [];
 function getPages(pageList) {
     if (pageList) {
         for (var i = 0; i < pageList.length; i++) {
-            result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags})
+            result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags.sort()})
             var subpage = getPages(pageList[i].subpages);
         }
     }
