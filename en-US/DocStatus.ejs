@@ -137,7 +137,7 @@ function getPages(pageList) {
             }
             if (containsNeedsWorkTag(pageList[i].tags)) {
                 metrics.needsTags.counter++;
-                output.needsTags.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags.toString().match(/needs[A-Za-z0-9]+/gi).toString()});
+                output.needsTags.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, note: pageList[i].tags.toString().match(/needs[A-Za-z0-9]+/gi).toString()});
             }
             if (hasReviewTag(pageList[i].review_tags, 'editorial')) { 
                 metrics.editorialReviews.counter++;
@@ -150,7 +150,7 @@ function getPages(pageList) {
             var pageAge = daysBetween(new Date(pageList[i].last_edit), new Date());
             if ((outdate != undefined && isOutdated(pageList[i].last_edit, outdate)) || pageAge > 365) {
                 metrics.outdated.counter++;
-                output.outdated.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, age: pageAge});
+                output.outdated.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, note: pageAge + ' days old'});
             }
             
             var subpage = getPages(pageList[i].subpages);
@@ -197,3 +197,29 @@ for (var obj in metrics) {
     </tr>
   </tbody>
 </table>
+
+<p>See also <a href="<%=env.page%>#Translation">translation status</a> of this section.</p>
+
+
+<% for (var obj in output) { %>
+<h2><%=metrics[obj].title%></h2>
+<%
+    var result = output[obj];
+    switch(env.locale) {
+    default:
+        amount = "Found " + result.length + " pages:";
+        break;
+    }
+%>
+
+<p><strong><%=amount%></strong></p>
+<div class="wideColumnBox wideColumnBoxList">
+<ul><%
+
+for (i=0; i < result.length; i++) {
+    %><li><a href='<%=result[i].url%>'><%=result[i].title%></a><% if (result[i].note != undefined) { %><br/><small><%=result[i].note%></small><% } %></li><%
+}
+
+%>
+</ul></div>
+<% } %>
