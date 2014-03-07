@@ -15,9 +15,9 @@
 var ircChannelName = "mdn";
 var mlName = "dev-mdc";
 var driver = {};
-var driver.CSS = { "name"      : "Jean-Yves Perrier",
-                   "ircPseudo" : "teoli",
-                   "mdnPseudo" : "teoli"
+driver.CSS = {  "name"      : "Jean-Yves Perrier",
+                "ircPseudo" : "teoli",
+                "mdnPseudo" : "teoli"
 };
                    
 
@@ -50,12 +50,6 @@ switch(env.locale) {
 <div class="overheadIndicator communitybox">
     <div class="column-container">
         <div class="communitysubhead" id="Help_topic"><%=headingStr%></div>
-        <div class="smaller"><%=topicDriverStr%></div>
-<%
-        if (messageStr) { 
-%>
-            <div class="smaller"><%=ircMessageStr%><%=ircLink%></div>
-<%      }
-%>
+        <div class="smaller"><%-topicDriverStr%></div>
     </div>
 </div>
