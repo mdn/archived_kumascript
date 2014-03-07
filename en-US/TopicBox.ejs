@@ -11,13 +11,37 @@ var ircChannelName = "mdn";
 var mlName = "dev-mdc";
 var ngName = "mozilla.dev.mdc";
 var driver = {};
-driver.CSS = {  "name"      : "Jean-Yves Perrier",
-                "ircPseudo" : "teoli",
-                "mdnPseudo" : "teoli",
-                "docStatus" : "MDN/Doc_status/CSS"
-};
-                   
 
+switch ($0) {
+    case 'CSS':
+        driver =    {   "name"      : "Jean-Yves Perrier",
+                        "ircPseudo" : "teoli",
+                        "mdnPseudo" : "teoli",
+                        "docStatus" : "MDN/Doc_status/CSS"
+                    };
+        break;
+    case 'HTML':
+        driver =    {   "name"      : "Jean-Yves Perrier",
+                        "ircPseudo" : "teoli",
+                        "mdnPseudo" : "teoli",
+                        "docStatus" : "MDN/Doc_status/HTML"
+                    };
+        break;
+   case 'JavaScript':
+        driver =    {   "name"      : "Florian Scholz",
+                        "ircPseudo" : "fscholz",
+                        "mdnPseudo" : "fscholz",
+                        "docStatus" : "MDN/Doc_status/JavaScript"
+                    };
+        break;
+   default:
+        driver =    {   "name"      : "Eric Shepherd",
+                        "ircPseudo" : "sheppy",
+                        "mdnPseudo" : "sheppy",
+                        "docStatus" : "MDN/Doc_status"
+                    };
+}
+                   
 var headingStr = "";
 var topicDriverStr = "";
 var ircStr = "";
@@ -33,15 +57,15 @@ ircLink = "<a href='irc://irc.mozilla.org/" + ircChannelName + "'>#" + ircChanne
 switch(env.locale) {
     case "fr":
         headingStr = "Aidez le projet de documentation '" + $0 + "'…";
-        statusStr = "Consultez le <a href='/fr/docs/" + driver.CSS.docStatus + "'>statut</a>< de la documentation '" + $0 + "'.";
-        topicDriverStr = "Coordinateur du domaine : <a href='/en-US/profiles/" + driver.CSS.mdnPseudo + "'>" + driver.CSS.name + "</a> (Pseudo IRC: " + driver.CSS.ircPseudo + ")";
+        statusStr = "Consultez le <a href='/fr/docs/" + driver.docStatus + "'>statut</a>< de la documentation '" + $0 + "'.";
+        topicDriverStr = "Coordinateur du domaine : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (Pseudo IRC: " + driver.ircPseudo + ")";
         ircStr = "N'hésitez pas à nous contacter sur #" + ircLink + "ou sur la liste de diffusion " + mlName + " :";
         break;
     default:
         headingStr = "Help the '" + $0 + "' documentation project…";
-        statusStr = "Look at the current <a href='/en-US/docs/" + driver.CSS.docStatus + "'>status</a> of the '" + $0 +"' documentation.";
-        topicDriverStr = "Topic driver : <a href='en-US/profiles/" + driver.CSS.mdnPseudo + "'>" + driver.CSS.name + "</a> (IRC pseudo: " + driver.CSS.ircPseudo + ")";
-        ircStr = "Don't hesitate to contact us on " + ircLink + " or on the " + mlName + " mailing-list:";
+        statusStr = "Look at the current <a href='/en-US/docs/" + driver.docStatus + "'>status</a> of the '" + $0 +"' documentation.";
+        topicDriverStr = "Topic driver : <a href='en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (IRC pseudo: " + driver.ircPseudo + ")";
+        ircStr = "Don't hesitate to contact us on " + ircLink + " or on the <em>" + mlName + "</em> mailing-list:";
         break;
 }
 %>
