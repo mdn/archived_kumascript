@@ -66,7 +66,7 @@ if (numItems > 5) {
 var html = "";
 for (var i=0; i<numItems; i++) {
     var item = items[i];
-    html += "<li><a href='" + item.link + "'>" + kuma.htmlEscape(item.title) + "</a></li>";
+    html += "<li><a href='" + item.link + "'>" + item.title + "</a></li>";
 }
 %>
 <ul class="no-bullets">
