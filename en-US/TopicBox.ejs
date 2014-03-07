@@ -9,13 +9,20 @@
 //  $1  Name of the driver
 //  $2  IRC channel name
 //  $3  Driver's IRC pseudo
-//  $4  Mailing-list to ask any question
+//  $4  Driver's MDN pseudo
+//  $5  Mailing-list to ask any question
 
-var ircInfoStr = "";
+var ircChannelName = "mdn";
+var mlName = "dev-mdc";
+var driver = {};
+var driver.CSS = { "name"      : "Jean-Yves Perrier",
+                   "ircPseudo" : "teoli",
+                   "mdnPseudo" : "teoli"
+};
+                   
+
 var headingStr = "";
 var topicDriverStr = "";
-var messageStr = "";
-var messageNoteStr = "";
 var ircLink = "";
 
 var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>";
@@ -31,17 +38,11 @@ if ($2) {
 switch(env.locale) {
     case "fr":
         headingStr = "Aider le projet de documentation '" + $0 + "'";
-        topicDriverStr = "Coordinateur du domaine : " + $1 + " (IRC pseudo: " + $1 + ")";
-        if ($2) {
-            messageStr = "N'hésitez pas à le contacter sur le canal IRC : " + ircInfoLink + "</span>";
-        }
+        topicDriverStr = "Coordinateur du domaine : <a href='developer.mozilla.org/en-US/profiles/" + driver.CSS.mdnPseudo + "'>" + driver.CSS.name + "</a> (Pseudo IRC: " + driver.CSS.ircPseudo + ")";
         break;
     default:
         headingStr = "Help the '" + $0 + "' documentation project";
-        topicDriverStr = "Topic driver : " + $1 + " (IRC pseudo: " + $1 + ")";
-        if ($2) {
-            messageStr = "Don't hesitate to take contact on the IRC channel : " + ircInfoLink + "</span>";
-        }
+        topicDriverStr = "Topic driver : <a href='developer.mozilla.org/en-US/profiles/" + driver.CSS.mdnPseudo + "'>" + driver.CSS.name + "</a> (IRC pseudo: " + driver.CSS.ircPseudo + ")";
         break;
 }
 %>
@@ -50,9 +51,10 @@ switch(env.locale) {
     <div class="column-container">
         <div class="communitysubhead" id="Help_topic"><%=headingStr%></div>
         <div class="smaller"><%=topicDriverStr%></div>
+<%
         if (messageStr) { 
 %>
-            <div class="smaller"><%=messageStr%></div>
+            <div class="smaller"><%=ircMessageStr%><%=ircLink%></div>
 <%      }
 %>
     </div>
