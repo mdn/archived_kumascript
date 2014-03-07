@@ -6,43 +6,42 @@
 //
 // Parameters:
 //  $0  Name of the topic
-//  $1  Name of the driver
-//  $2  IRC channel name
-//  $3  Driver's IRC pseudo
-//  $4  Driver's MDN pseudo
-//  $5  Mailing-list to ask any question
 
 var ircChannelName = "mdn";
 var mlName = "dev-mdc";
+var ngName = "mozilla.dev.mdc";
 var driver = {};
 driver.CSS = {  "name"      : "Jean-Yves Perrier",
                 "ircPseudo" : "teoli",
-                "mdnPseudo" : "teoli"
+                "mdnPseudo" : "teoli",
+                "docStatus" : "MDN/Doc_status/CSS"
 };
                    
 
 var headingStr = "";
 var topicDriverStr = "";
-var ircLink = "";
+var ircStr = "";
+var statusStr = "";
 
 var ircInfoLink = "<a href='https://wiki.mozilla.org/IRC'>";
 
 // Build the IRC channel URL if a channel name was specified
-
-if ($2) {
-    ircLink = "<a href='irc://irc.mozilla.org/" + $2 + "'>#" + $2 + "</a>";
-}
+ircLink = "<a href='irc://irc.mozilla.org/" + ircChannelName + "'>#" + ircChannelName + "</a>";
 
 // Generate localized strings
 
 switch(env.locale) {
     case "fr":
-        headingStr = "Aider le projet de documentation '" + $0 + "'";
-        topicDriverStr = "Coordinateur du domaine : <a href='developer.mozilla.org/en-US/profiles/" + driver.CSS.mdnPseudo + "'>" + driver.CSS.name + "</a> (Pseudo IRC: " + driver.CSS.ircPseudo + ")";
+        headingStr = "Aidez le projet de documentation '" + $0 + "'…";
+        statusStr = "Consultez le <a href='/fr/docs/" + driver.CSS.docStatus + "'>statut</a>< de la documentation '" + $0 + "'.";
+        topicDriverStr = "Coordinateur du domaine : <a href='/en-US/profiles/" + driver.CSS.mdnPseudo + "'>" + driver.CSS.name + "</a> (Pseudo IRC: " + driver.CSS.ircPseudo + ")";
+        ircStr = "N'hésitez pas à nous contacter sur #" + ircLink + "ou sur la liste de diffusion " + mlName + " :";
         break;
     default:
-        headingStr = "Help the '" + $0 + "' documentation project";
-        topicDriverStr = "Topic driver : <a href='developer.mozilla.org/en-US/profiles/" + driver.CSS.mdnPseudo + "'>" + driver.CSS.name + "</a> (IRC pseudo: " + driver.CSS.ircPseudo + ")";
+        headingStr = "Help the '" + $0 + "' documentation project…";
+        statusStr = "Look at the current <a href='/en-US/docs/" + driver.CSS.docStatus + "'>status</a> of the '" + $0 +"' documentation.";
+        topicDriverStr = "Topic driver : <a href='en-US/profiles/" + driver.CSS.mdnPseudo + "'>" + driver.CSS.name + "</a> (IRC pseudo: " + driver.CSS.ircPseudo + ")";
+        ircStr = "Don't hesitate to contact us on " + ircLink + " or on the " + mlName + " mailing-list:";
         break;
 }
 %>
@@ -50,6 +49,12 @@ switch(env.locale) {
 <div class="overheadIndicator communitybox">
     <div class="column-container">
         <div class="communitysubhead" id="Help_topic"><%=headingStr%></div>
-        <div class="smaller"><%-topicDriverStr%></div>
+        <div class="communitycontact"><%-topicDriverStr%></div>
+        <div class="communitycontact"><%-statusStr%></div>
+        <div class="communitysubhead communitycontact"><%-ircStr%></div>
+        <%-template("DiscussionList", [mlName, ngName, "communitymailinglist"])%>
+        </ul>
+    </div>
+    </ul>
     </div>
 </div>
