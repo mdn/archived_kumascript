@@ -30,6 +30,10 @@ var specList = {
         name : "Clipboard API",
         url  : "http://dev.w3.org/2006/webapi/clipops/clipops.html"
     },
+    'Compositing':{
+        name : "Compositing and blending Level 1",
+        url  : "http://dev.w3.org/fxtf/compositing-1/"
+    },
     'Contacts':{
         name : "Contacts Manager API",
         url  : "http://contacts-manager-api.sysapps.org/"
@@ -520,6 +524,7 @@ var specList = {
     }
 }
 
+specList['Compositing'] = specList['Blending'];
 specList['CSS3 2D Transforms'] = specList['CSS3 3D Transforms'] = specList['CSS3 Transforms'];
 specList['CSS3 UI'] = specList['CSS3 Basic UI'];
 specList['WebSMS'] = specList['Messaging'];
