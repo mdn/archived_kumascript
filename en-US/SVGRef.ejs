@@ -22,10 +22,12 @@ switch (env.locale) {
 var tags = env.tags;
 var found_tag = '';
 for (i in tags) {
-    if (tags[i] != s_svg_ref_title) {
-        if (tags[i].substr(0, 4) == 'SVG ') {
-            found_tag = tags[i];
-            break;
+    if( tag.hasOwnProperty(i) ) {
+        if (tags[i] != s_svg_ref_title) {
+            if (tags[i].substr(0, 4) == 'SVG ') {
+                found_tag = tags[i];
+                break;
+            }
         }
     }
 }
