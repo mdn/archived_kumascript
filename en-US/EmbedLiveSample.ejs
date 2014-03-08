@@ -24,10 +24,14 @@ if ($4) {
 sampleUrl = Web.spacesToUnderscores(sampleUrl);
  
 var widthHeight = "";
-if ($1 && $2) {
-    widthHeight = "width='" + $1 + "' height='" + $2 + "' ";
+if ($1) {
+    widthHeight = "width='" + $1 + "' ";
 }
-var liveSample = '<iframe  frameborder="0" ' + widthHeight + 'src="' + template('LiveSampleURL', [$0, sampleUrl]) + '"></iframe>';
+if ($2) {
+    widthHeight += "height='" + $2 + "' ";
+}
+
+var liveSample = '<iframe class="live-sample-frame" frameborder="0" ' + widthHeight + 'src="' + template('LiveSampleURL', [$0, sampleUrl]) + '"></iframe>';
 if ($3) {
     str += '<table><thead><tr>';
     str += '<th scope="col" style="text-align: center;">Screenshot</th>';
