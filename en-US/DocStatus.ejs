@@ -8,6 +8,8 @@
 //  $3  -  Bugzilla query for documentaion requests
 //  $4  -  Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
 //         e.g. { "cleanup": {"title": "Clean-up", "link": "#Cleanup_on_standard_built-in_ECMAScript_objects", "counter": 142 }}
+/*** Module loading */
+var Bugzilla = require("Bugzilla");
 
 /*** Variables ***/
 var slug = $0;
@@ -162,6 +164,12 @@ function getPages(pageList) {
 
 getPages(pageList);
 
+/*** Bugzilla querying */
+
+if (bzddn) {
+    var bugs = Bugzilla.search(bzddn);
+    log.debug(bugs);
+}
 
 /*** Output ***/
 
