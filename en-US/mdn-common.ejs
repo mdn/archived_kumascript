@@ -348,5 +348,16 @@
                        'Content-Type': 'text/csv' },
         });
         return MDN.CSVToArray(html, separator);
+    },
+    
+    /* http://www.bugzilla.org/docs/4.2/en/html/api/Bugzilla/WebService/Bug.html#search */
+    bzSearch: function (query) {
+        /* Fix colon (":") encoding problems */
+        query = query.replace(/&amp;/g, "&");
+        query = encodeURI(query);
+        query = query.replace(/&/g, "%26");
+        var url = 'https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.search&params=' + query;
+        var resource = MDN.fetchJSONResource(url);
+        return resource.result;
     }
 } %>
