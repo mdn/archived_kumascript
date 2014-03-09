@@ -1,6 +1,6 @@
 <%
 function containsTag(tagList, tag) {
-    if (!tagList || tagList == undefined) return 0;
+    if (!tagList || typeof tagList == 'undefined') return 0;
     tag = tag.toLowerCase();
     for (var i = 0, len = tagList.length; i < len; i++) {
         if (tagList[i].toLowerCase() == tag) return 1;
@@ -68,7 +68,8 @@ switch (env.locale) {
 var tags = env.tags;
 var found_tag = '';
 for (i in tags) {
-    if ((tags[i] != 'CSS Reference') &&
+    if ((tags.hasOwnProperty(i)) &&
+        (tags[i] != 'CSS Reference') &&
         (tags[i] != 'CSS Référence') &&
         (tags[i] != 'CSS Property') &&
         (tags[i] != s_css_ref_title)) { // Only keep this one one the 'accent' bug is fixed
