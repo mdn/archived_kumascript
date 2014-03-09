@@ -2,7 +2,7 @@
 // Builds a documentation status page
 //
 // Parameters:
-//  $0  -  The section to look at (e.g. "/en-us/docs/Web/JavaScript")
+//  $0  -  The section to look at (e.g. "Web/JavaScript")
 //  $1  -  Date for pages to be marked as outdated. 365 days and more is always outdated.
 //  $2  -  Bugzilla query for dev-doc-needed
 //  $3  -  Bugzilla query for documentaion requests
@@ -10,16 +10,20 @@
 //         e.g. { "cleanup": {"title": "Clean-up", "link": "#Cleanup_on_standard_built-in_ECMAScript_objects", "counter": 142 }}
 
 /*** Variables ***/
-var pageList = page.subpagesExpand($0);
+var slug = $0;
+var enURL = '/en-us/docs/' + slug;
+var pageList = page.subpagesExpand(enURL);
 var outdate = $1;
 var bzddn = $2;
 var bzdr = $3;
 var cMetrics = $4;
 
+var languages = ['de', 'es', 'fr', 'ja', 'pl', 'pt-BR', 'zh-CN'];
+
 var metrics = {
     pages: {
         title: 'Pages',
-        link: $0 + '/Index',
+        link: enURL + '/Index',
         counter: 0
     },
     noTags: {
@@ -196,7 +200,7 @@ for (var obj in metrics) {
   </tbody>
 </table>
 
-<p>See also <a href="<%=env.page%>#Translation">translation status</a> of this section.</p>
+<p>See also <a href="<%=env.url%>#Localizations">localization status</a> of this section.</p>
 
 
 <% for (var obj in output) { %>
@@ -212,12 +216,16 @@ for (var obj in metrics) {
 
 <p><strong><%=amount%></strong></p>
 <div class="wideColumnBox wideColumnBoxList">
-<ul><%
-
-for (i=0; i < result.length; i++) {
-    %><li><a href='<%=result[i].url%>'><%=result[i].title%></a><% if (result[i].note != undefined) { %><br/><small><%=result[i].note%></small><% } %></li><%
-}
-
-%>
+<ul>
+<% for (i=0; i < result.length; i++) { %>
+    <li><a href='<%=result[i].url%>'><%=result[i].title%></a><% if (result[i].note != undefined) { %><br/><small><%=result[i].note%></small><% } %></li>
+<% } %>
 </ul></div>
 <% } %>
+<h2>Localizations</h2>
+<p>Please help us to localize this documentation into different languages.</p>
+<ul>
+<% for (i=0; i < languages.length; i++) { %>
+        <li><a href="/<%=languages[i]%>/docs/<%=env.slug%>"><%=languages[i]%></a></li>
+    <% } %>
+</ul>
