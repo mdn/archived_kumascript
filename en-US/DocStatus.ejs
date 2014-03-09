@@ -3,13 +3,14 @@
 //
 // Parameters:
 //  $0  -  The section to look at (e.g. "Web/JavaScript")
-//  $1  -  Date for pages to be marked as outdated. 365 days and more is always outdated.
-//  $2  -  Bugzilla query for dev-doc-needed
-//  $3  -  Bugzilla query for documentaion requests
-//  $4  -  Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
+//  $1  -  (optional) Date for pages to be marked as outdated. 365 days and more is always outdated.
+//  $2  -  (optional) Bugzilla query for dev-doc-needed
+//  $3  -  (optional) Bugzilla query for documentaion requests
+//  $4  -  (optional) Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
 //         e.g. { "cleanup": {"title": "Clean-up", "link": "#Cleanup_on_standard_built-in_ECMAScript_objects", "counter": 142 }}
-/*** Module loading */
-var Bugzilla = require("Bugzilla");
+
+/*** Module loading ***/
+var MDN = require("MDN:Common");
 
 /*** Variables ***/
 var slug = $0;
@@ -21,6 +22,7 @@ var bzdr = $3;
 var cMetrics = $4;
 
 var languages = ['de', 'es', 'fr', 'ja', 'pl', 'pt-BR', 'zh-CN'];
+var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
 
 var metrics = {
     pages: {
@@ -53,11 +55,13 @@ var metrics = {
         link: '#Outdated_pages',
         counter: 0
     },
+    //TODO this is optional
     ddn: {
         title:'Dev-doc-needed bugs',
         link: '#Dev-doc-needed_bugs',
         counter: 0
     },
+    //TODO this is optional
     dr: {
         title: 'Documentation requests',
         link: '#Documentation_requests',
@@ -167,13 +171,18 @@ getPages(pageList);
 /*** Bugzilla querying */
 
 if (bzddn) {
-    var bugs = Bugzilla.search(bzddn);
-    log.debug(bugs);
+    var ddnBugs = MDN.bzSearch(bzddn);
+    metrics.ddn.counter = ddnBugs.bugs.length;
+}
+
+if (bzdr) {
+    var drBugs = MDN.bzSearch(bzdr);
+    metrics.dr.counter = drBugs.bugs.length;
 }
 
 /*** Output ***/
 
-
+/*** Summary table **/
 %>
 <table class="docstatussummary standard-table">
   <thead>
@@ -211,6 +220,9 @@ for (var obj in metrics) {
 <p>See also <a href="<%=env.url%>#Localizations">localization status</a> of this section.</p>
 
 
+<% /*** page metrics ***/ %>
+
+
 <% for (var obj in output) { %>
 <h2><%=metrics[obj].title%></h2>
 <%
@@ -230,6 +242,62 @@ for (var obj in metrics) {
 <% } %>
 </ul></div>
 <% } %>
+
+
+<% /*** Bug lists ***/ %>
+<% /*** TODO: Make both optional ***/ %>
+
+
+<h2>Dev-doc-needed bugs</h2>
+<p><strong>Found <%=ddnBugs.bugs.length%> bugs.</strong></p>
+
+<table class="standard-table">
+    <thead>
+        <tr>
+            <th>Bug</th>
+            <th>Summary</th>
+            <th>Release</th>
+        </tr>
+    </thead>
+<tbody>
+
+<% for (var i=0; i < ddnBugs.bugs.length; i++) { %>
+<tr>
+    <td><a href="<%= bugPageURL + ddnBugs.bugs[i].id %>"><%= ddnBugs.bugs[i].id %></a></td>
+    <td><%= ddnBugs.bugs[i].summary %></td>
+    <td><%= ddnBugs.bugs[i].target_milestone %></td>
+</tr>
+<% } %>
+
+</tbody>
+</table>
+
+<h2>Documentation requests</h2>
+<p><strong>Found <%=drBugs.bugs.length%> bugs.</strong></p>
+
+<table class="standard-table">
+    <thead>
+        <tr>
+            <th>Bug</th>
+            <th>Summary</th>
+        </tr>
+    </thead>
+<tbody>
+
+<% for (var i=0; i < drBugs.bugs.length; i++) { %>
+<tr>
+    <td><a href="<%= bugPageURL + drBugs.bugs[i].id %>"><%= drBugs.bugs[i].id %></a></td>
+    <td><%= drBugs.bugs[i].summary %></td>
+</tr>
+<% } %>
+
+</tbody>
+</table>
+
+
+<% /*** Localizations ***/ %>
+
+
 <h2>Localizations</h2>
 <p>Please help us to localize this documentation into different languages.</p>
 <ul>
@@ -237,3 +305,7 @@ for (var obj in metrics) {
         <li><a href="/<%=languages[i]%>/docs/<%=env.slug%>"><%=languages[i]%></a></li>
     <% } %>
 </ul>
+
+<div class="json" style="display: none">
+    <%=JSON.stringify(metrics) %>
+</div>
