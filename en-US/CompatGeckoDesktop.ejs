@@ -73,27 +73,27 @@ switch(geckoVer)
     fxVer = '10.0';
     break;
   case '11':
-  case '11.0':
-    fxVer = '11.0';
-    break;
-  case '12':
-  case '12.0':
-    fxVer = '12.0';
-    break;
-  case '13':
-  case '13.0':
-    fxVer = '13.0';
-    break;
-  case '14':
-  case '14.0':
-    fxVer = '14.0';
-    break;
-  case '15':
-  case '15.0':
-    fxVer = '15.0';
-    break;
+  case '11.0':
+    fxVer = '11.0';
+    break;
+  case '12':
+  case '12.0':
+    fxVer = '12.0';
+    break;
+  case '13':
+  case '13.0':
+    fxVer = '13.0';
+    break; 
+  case '14':
+  case '14.0':
+    fxVer = '14.0';
+    break;
+  case '15':
+  case '15.0':
+    fxVer = '15.0';
+    break;
   case '16':
-  case '16.0':
+  case '16.0':
     fxVer = '16.0';
     break;
   case '17':
@@ -152,7 +152,32 @@ switch(geckoVer)
   case '30.0':
     fxVer = '30.0';
     break;
+  case '31':
+  case '31.0':
+    fxVer = '31.0';
+    break;
+  case '32':
+  case '32.0':
+    fxVer = '302.0';
+    break;
+  case '33':
+  case '33.0':
+    fxVer = '33.0';
+    break;
+  case '34':
+  case '34.0':
+    fxVer = '34.0';
+    break;
 }
-fxVer = fxVer + " (" + geckoVer + ")";
+release = fxVer - 0.0; // Convert to a number (so that when we convert back, it won't have the trailing '.0' if an integer.
+releaseDateStr = template("FirefoxReleaseDate", [fxVer]);
+titleStr = ""; // Default value
+titleStr = mdn.localString(
+    {"fr" : "Sorti le " + releaseDateStr + ".",
+     "en-US" : "Released on " + releaseDateStr + "."
+    });
+    
+url = '<a href="/en-US/Firefox/Releases/' + release + '"'+ (titleStr?' title="'+titleStr+'"':'') + '>'+ fxVer + '</a>';
+fxVer = url + " (" + geckoVer + ")";
 %>
-<%= fxVer %>
+<%- fxVer %>
