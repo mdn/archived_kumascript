@@ -3,10 +3,11 @@
 //
 // Parameters:
 //  $0  -  The section to look at (e.g. "Web/JavaScript")
-//  $1  -  (optional) Date for pages to be marked as outdated. 365 days and more is always outdated.
-//  $2  -  (optional) Bugzilla query for dev-doc-needed
-//  $3  -  (optional) Bugzilla query for documentaion requests
-//  $4  -  (optional) Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
+//  $1  -  (optional) Group tags. An array of tags to filter the section even more (only pages with these tags are included then; OR logic).
+//  $2  -  (optional) Date for pages to be marked as outdated. 365 days and more is always outdated.
+//  $3  -  (optional) Bugzilla query for dev-doc-needed
+//  $4  -  (optional) Bugzilla query for documentaion requests
+//  $5  -  (optional) Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
 //         e.g. { "cleanup": {"title": "Clean-up", "link": "#Cleanup_on_standard_built-in_ECMAScript_objects", "counter": 142 }}
 
 /*** Module loading ***/
@@ -16,10 +17,14 @@ var MDN = require("MDN:Common");
 var slug = $0;
 var enURL = '/en-us/docs/' + slug;
 var pageList = page.subpagesExpand(enURL);
-var outdate = $1;
-var bzddn = $2;
-var bzdr = $3;
-var cMetrics = $4;
+var groupTags = [];
+if ($1) {
+    groupTags = JSON.parse($1);
+}
+var outdate = $2;
+var bzddn = $3;
+var bzdr = $4;
+var cMetrics = $5;
 
 var languages = ['de', 'es', 'fr', 'ja', 'pl', 'pt-BR', 'zh-CN'];
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
@@ -54,18 +59,6 @@ var metrics = {
         title: 'Outdated pages',
         link: '#Outdated_pages',
         counter: 0
-    },
-    //TODO this is optional
-    ddn: {
-        title:'Dev-doc-needed bugs',
-        link: '#Dev-doc-needed_bugs',
-        counter: 0
-    },
-    //TODO this is optional
-    dr: {
-        title: 'Documentation requests',
-        link: '#Documentation_requests',
-        counter: 0
     }
 };
 
@@ -78,8 +71,22 @@ var output = {
 };
 
 
-/*** Add custom metrics to the metrics object ***/
+/*** Add optional and custom metrics to the metrics object ***/
+if (bzddn) {
+    metrics.ddn = {
+        title:'Dev-doc-needed bugs',
+        link: '#Dev-doc-needed_bugs',
+        counter: 0
+    };
+}
 
+if (bzdr) {
+    metrics.dr = {
+        title: 'Documentation requests',
+        link: '#Documentation_requests',
+        counter: 0
+    };
+}
 
 if (cMetrics) {
   var customMetrics = JSON.parse(cMetrics);
@@ -91,6 +98,14 @@ if (cMetrics) {
 
 /*** Helper functions ***/
 
+
+function hasTags(tags, needle) {
+    if (!tags || tags == undefined) return 0;
+    for (var i = 0, len = tags.length; i < len; i++) {
+        if (tags[i].toLowerCase() === needle.toLowerCase()) return 1;
+    }
+    return 0;
+}
 
 function hasNoTags(tagList) {
     if (!tagList || tagList == undefined || tagList.length == 0) {
@@ -134,31 +149,46 @@ function daysBetween(date1, date2) {
 
 /*** Get pages recursively by walking through the page tree and collect data ***/
 
+function collect(page) {
+    metrics.pages.counter++;
+    var cleanTitle = page.title.replace('<','&lt;').replace('>','&gt;');
+    var pageurl = page.url;
+            
+    if (hasNoTags(page.tags)) {
+        metrics.noTags.counter++; 
+        output.noTags.push({title: cleanTitle, url: pageurl});
+    }
+    if (containsNeedsWorkTag(page.tags)) {
+        metrics.needsTags.counter++;
+        var needsTags = page.tags.toString().match(/needs[A-Za-z0-9]+/gi).toString();
+        output.needsTags.push({title: cleanTitle, url: pageurl, note: needsTags});
+    }
+    if (hasReviewTag(page.review_tags, 'editorial')) { 
+        metrics.editorialReviews.counter++;
+        output.editorialReviews.push({title: cleanTitle, url: pageurl});
+    }
+    if (hasReviewTag(page.review_tags, 'technical')) { 
+        metrics.technicalReviews.counter++;
+        output.technicalReviews.push({title: cleanTitle, url: pageurl});
+    }
+    var pageAge = daysBetween(new Date(page.last_edit), new Date());
+    if ((outdate != undefined && isOutdated(page.last_edit, outdate)) || pageAge > 365) {
+        metrics.outdated.counter++;
+        output.outdated.push({title: cleanTitle, url: pageurl, note: pageAge + ' days old'});
+    }
+}
 
 function getPages(pageList) {
     if (pageList) {
         for (var i = 0; i < pageList.length; i++) {
-            metrics.pages.counter++;
-            if (hasNoTags(pageList[i].tags)) {
-                metrics.noTags.counter++; 
-                output.noTags.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url});
-            }
-            if (containsNeedsWorkTag(pageList[i].tags)) {
-                metrics.needsTags.counter++;
-                output.needsTags.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, note: pageList[i].tags.toString().match(/needs[A-Za-z0-9]+/gi).toString()});
-            }
-            if (hasReviewTag(pageList[i].review_tags, 'editorial')) { 
-                metrics.editorialReviews.counter++;
-                output.editorialReviews.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url});
-            }
-            if (hasReviewTag(pageList[i].review_tags, 'technical')) { 
-                metrics.technicalReviews.counter++;
-                output.technicalReviews.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url});
-            }
-            var pageAge = daysBetween(new Date(pageList[i].last_edit), new Date());
-            if ((outdate != undefined && isOutdated(pageList[i].last_edit, outdate)) || pageAge > 365) {
-                metrics.outdated.counter++;
-                output.outdated.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, note: pageAge + ' days old'});
+            if (groupTags.length > 0) {
+                for (var j = 0; j < groupTags.length; j++) {
+                    if (hasTags(pageList[i].tags, groupTags[j])) {
+                        collect(pageList[i]);
+                    }
+                }
+            } else {
+                collect(pageList[i]);
             }
             
             var subpage = getPages(pageList[i].subpages);
@@ -168,7 +198,9 @@ function getPages(pageList) {
 
 getPages(pageList);
 
-/*** Bugzilla querying */
+
+/*** Bugzilla querying ***/
+
 
 if (bzddn) {
     var ddnBugs = MDN.bzSearch(bzddn);
@@ -180,28 +212,34 @@ if (bzdr) {
     metrics.dr.counter = drBugs.bugs.length;
 }
 
+
+
 /*** Output ***/
 
-/*** Summary table **/
+
+
+/*** Summary table ***/
 %>
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
 <%
 for (var obj in metrics) {
+if (metrics.hasOwnProperty(obj) && typeof metrics[obj] !== 'undefined') {
     var href = metrics[obj].link;
     if (href && href.indexOf('#', 0) === 0) {
         href = env.path + href;
     }
 %>
     <th><a href="<%=href%>"><%=metrics[obj].title%></a></th>
-<% } %>
+<% }} %>
     </tr>
   </thead>
   <tbody>
     <tr>
 <%
 for (var obj in metrics) {
+if (metrics.hasOwnProperty(obj) && typeof metrics[obj] !== 'undefined') {
     var percent = Math.ceil((metrics[obj].counter / metrics.pages.counter) * 100);
     var color = "rgb(204, 255, 153)";
     if (percent >= 5) { color = "rgb(255, 255, 153)" }
@@ -212,7 +250,7 @@ for (var obj in metrics) {
 <% } else { %>
     <td style="background-color: <%=color%>;"><%=metrics[obj].counter%> (<%=percent%>%) </td>
 <% }
-}%>
+}}%>
     </tr>
   </tbody>
 </table>
@@ -223,7 +261,10 @@ for (var obj in metrics) {
 <% /*** page metrics ***/ %>
 
 
-<% for (var obj in output) { %>
+<% 
+for (var obj in output) {
+if (output.hasOwnProperty(obj) && output[obj].length > 0) {
+%>
 <h2><%=metrics[obj].title%></h2>
 <%
     var result = output[obj];
@@ -241,58 +282,60 @@ for (var obj in metrics) {
     <li><a href='<%=result[i].url%>'><%=result[i].title%></a><% if (result[i].note != undefined) { %><br/><small><%=result[i].note%></small><% } %></li>
 <% } %>
 </ul></div>
-<% } %>
+<% }} %>
 
 
 <% /*** Bug lists ***/ %>
-<% /*** TODO: Make both optional ***/ %>
 
-
-<h2>Dev-doc-needed bugs</h2>
-<p><strong>Found <%=ddnBugs.bugs.length%> bugs.</strong></p>
-
-<table class="standard-table">
-    <thead>
-        <tr>
-            <th>Bug</th>
-            <th>Summary</th>
-            <th>Release</th>
-        </tr>
-    </thead>
-<tbody>
-
-<% for (var i=0; i < ddnBugs.bugs.length; i++) { %>
-<tr>
-    <td><a href="<%= bugPageURL + ddnBugs.bugs[i].id %>"><%= ddnBugs.bugs[i].id %></a></td>
-    <td><%= ddnBugs.bugs[i].summary %></td>
-    <td><%= ddnBugs.bugs[i].target_milestone %></td>
-</tr>
+<% if (bzddn && ddnBugs.bugs.length > 0) { %>
+    <h2>Dev-doc-needed bugs</h2>
+    <p><strong>Found <%=ddnBugs.bugs.length%> bugs:</strong></p>
+    
+    <table class="standard-table">
+        <thead>
+            <tr>
+                <th>Bug</th>
+                <th>Summary</th>
+                <th>Release</th>
+            </tr>
+        </thead>
+    <tbody>
+    
+    <% for (var i=0; i < ddnBugs.bugs.length; i++) { %>
+    <tr>
+        <td><a href="<%= bugPageURL + ddnBugs.bugs[i].id %>"><%= ddnBugs.bugs[i].id %></a></td>
+        <td><%= ddnBugs.bugs[i].summary %></td>
+        <td><%= ddnBugs.bugs[i].target_milestone %></td>
+    </tr>
+    <% } %>
+    
+    </tbody>
+    </table>
 <% } %>
 
-</tbody>
-</table>
-
-<h2>Documentation requests</h2>
-<p><strong>Found <%=drBugs.bugs.length%> bugs.</strong></p>
-
-<table class="standard-table">
-    <thead>
-        <tr>
-            <th>Bug</th>
-            <th>Summary</th>
-        </tr>
-    </thead>
-<tbody>
-
-<% for (var i=0; i < drBugs.bugs.length; i++) { %>
-<tr>
-    <td><a href="<%= bugPageURL + drBugs.bugs[i].id %>"><%= drBugs.bugs[i].id %></a></td>
-    <td><%= drBugs.bugs[i].summary %></td>
-</tr>
+<% if (bzdr && drBugs.bugs.length > 0) { %>
+    <h2>Documentation requests</h2>
+    <p><strong>Found <%=drBugs.bugs.length%> bugs:</strong></p>
+    
+    <table class="standard-table">
+        <thead>
+            <tr>
+                <th>Bug</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+    <tbody>
+    
+    <% for (var i=0; i < drBugs.bugs.length; i++) { %>
+    <tr>
+        <td><a href="<%= bugPageURL + drBugs.bugs[i].id %>"><%= drBugs.bugs[i].id %></a></td>
+        <td><%= drBugs.bugs[i].summary %></td>
+    </tr>
+    <% } %>
+    
+    </tbody>
+    </table>
 <% } %>
-
-</tbody>
-</table>
 
 
 <% /*** Localizations ***/ %>
@@ -300,11 +343,14 @@ for (var obj in metrics) {
 
 <h2>Localizations</h2>
 <p>Please help us to localize this documentation into different languages.</p>
-<ul>
 <% for (i=0; i < languages.length; i++) { %>
-        <li><a href="/<%=languages[i]%>/docs/<%=env.slug%>"><%=languages[i]%></a></li>
-    <% } %>
-</ul>
+    <h3><a href="/<%=languages[i]%>/docs/<%=env.slug%>"><%=languages[i]%></a></h3>
+    <% 
+        // getting the summary section fails until bug 982174 is fixed
+    %>
+    <% template("page", ['/' + languages[i] + '/docs/' + env.slug, "Summary"])%>
+<% } %>
+
 
 <div class="json" style="display: none">
     <%=JSON.stringify(metrics) %>
