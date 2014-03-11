@@ -14,27 +14,29 @@ var driver = {};
 
 switch ($0) {
     case 'CSS':
-        driver =    {   "name"      : "Jean-Yves Perrier",
-                        "ircPseudo" : "teoli",
-                        "mdnPseudo" : "teoli",
-                        "docStatus" : "MDN/Doc_status/CSS"
-                    };
-        break;
     case 'HTML':
         driver =    {   "name"      : "Jean-Yves Perrier",
                         "ircPseudo" : "teoli",
                         "mdnPseudo" : "teoli",
-                        "docStatus" : "MDN/Doc_status/HTML"
+                        "docStatus" : "MDN/Doc_status/" + $0
                     };
-        break;
-   case 'JavaScript':
+    break;
+    case 'JavaScript':
+    case 'MathML':
+    case 'SVG':
         driver =    {   "name"      : "Florian Scholz",
                         "ircPseudo" : "fscholz",
                         "mdnPseudo" : "fscholz",
-                        "docStatus" : "MDN/Doc_status/JavaScript"
+                        "docStatus" : "MDN/Doc_status/" + $0
                     };
-        break;
-   default:
+    case 'DevTools':
+        driver =    {   "name"      : "Will Bamberg",
+                        "ircPseudo" : "wbamberg",
+                        "mdnPseudo" : "wbamberg",
+                        "docStatus" : "MDN/Doc_status/" + $0
+                    };
+    break;
+    default:
         driver =    {   "name"      : "Eric Shepherd",
                         "ircPseudo" : "sheppy",
                         "mdnPseudo" : "sheppy",
@@ -64,7 +66,7 @@ switch(env.locale) {
     default:
         headingStr = "Help the '" + $0 + "' documentation project…";
         statusStr = "Look at the current <a href='/en-US/docs/" + driver.docStatus + "'>status</a> of the '" + $0 +"' documentation.";
-        topicDriverStr = "Topic driver : <a href='en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (IRC pseudo: " + driver.ircPseudo + ")";
+        topicDriverStr = "Topic driver : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (IRC pseudo: " + driver.ircPseudo + ")";
         ircStr = "Don't hesitate to contact us on " + ircLink + " or on the <em>" + mlName + "</em> mailing-list:";
         break;
 }
