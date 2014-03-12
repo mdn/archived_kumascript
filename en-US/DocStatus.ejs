@@ -15,7 +15,12 @@ var MDN = require("MDN:Common");
 
 /*** Variables ***/
 var slug = $0;
-var enURL = '/en-us/docs/' + slug;
+var enURL = '';
+if (slug.indexOf("/en-US") != -1) {
+    enURL = slug;
+} else {
+    enURL = '/en-US/docs/' + slug;
+}
 var pageList = page.subpagesExpand(enURL);
 var groupTags = [];
 if ($1) {
@@ -345,10 +350,7 @@ if (output.hasOwnProperty(obj) && output[obj].length > 0) {
 <p>Please help us to localize this documentation into different languages.</p>
 <% for (i=0; i < languages.length; i++) { %>
     <h3><a href="/<%=languages[i]%>/docs/<%=env.slug%>"><%=languages[i]%></a></h3>
-    <% 
-        // getting the summary section fails until bug 982174 is fixed
-    %>
-    <% template("page", ['/' + languages[i] + '/docs/' + env.slug, "Summary"])%>
+    <%-template("page", ['/' + languages[i] + '/docs/' + env.slug, "Summary"])%>
 <% } %>
 
 
