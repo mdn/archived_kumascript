@@ -13,7 +13,18 @@ var page = wiki.page(mdn.localString({
 var re = new RegExp("<\\s*span\\s+id\\s*=\\s*"+'"syntax-'+$0+'"'+"[^>]*>(.*)<\\s*/\\s*span\\s*\\>","igm");
 var result = re.exec(page);
 
-result = (!result) ? "Syntax not found in DB" : result[1];
+var lang = env.locale;
+var missing = "Syntax not found in DB";
+switch (lang) {
+case "en-us":
+    missing = "Syntax not found in DB";
+	break;
+case "zh-cn":
+	missing = "该属性的语法尚未添加";
+	break;
+}
+
+result = (!result) ? missing : result[1];
 
 
 %><%- result %>
