@@ -47,172 +47,57 @@ date["32.0"]="20140902";
 date["33.0"]="20141014";
 date["34.0"]="20141125";
 
-
-switch(geckoVer)
-{
-  case '1':
-  case '1.0':
-  case '1.7 or earlier':
-  case '1.7':
-    fxVer = '1.0';
-    geckoVer = loca;
-    break;
-  case '1.8':
-    fxVer = '1.5';
-    break;
-  case '1.8.1':
-    fxVer = '2.0';
-    break;
-  case '1.9':
-    fxVer = '3.0';
-    break;
-  case '1.9.1':
-    fxVer = '3.5';
-    break;
-  case '1.9.1.4':
-    fxVer = '3.5.4';
-    break;
-  case '1.9.2':
-    fxVer = '3.6';
-    break;
-  case '1.9.2.4':
-    fxVer = '3.6.4';
-    break;
-  case '1.9.2.5':
-    fxVer = '3.6.5';
-    break;
-  case '1.9.2.9':
-    fxVer = '3.6.9';
-    break;
-  case '2':
-  case '2.0':
-    fxVer = '4.0';
-    break;
-  case '5':
-  case '5.0':
-    fxVer = '5.0';
-    break;
-  case '6':
-  case '6.0':
-    fxVer = '6.0';
-    break;
-  case '7':
-  case '7.0':
-    fxVer = '7.0';
-    break;
-  case '8':
-  case '8.0':
-    fxVer = '8.0';
-    break;
-  case '9':
-  case '9.0':
-    fxVer = '9.0';
-    break;
-  case '10':
-  case '10.0':
-    fxVer = '10.0';
-    break;
-  case '11':
-  case '11.0':
-    fxVer = '11.0';
-    break;
-  case '12':
-  case '12.0':
-    fxVer = '12.0';
-    break;
-  case '13':
-  case '13.0':
-    fxVer = '13.0';
-    break; 
-  case '14':
-  case '14.0':
-    fxVer = '14.0';
-    break;
-  case '15':
-  case '15.0':
-    fxVer = '15.0';
-    break;
-  case '16':
-  case '16.0':
-    fxVer = '16.0';
-    break;
-  case '17':
-  case '17.0':
-    fxVer = '17.0';
-    break;
-  case '18':
-  case '18.0':
-    fxVer = '18.0';
-    break;
-  case '19':
-  case '19.0':
-    fxVer = '19.0';
-    break;
-  case '20':
-  case '20.0':
-    fxVer = '20.0';
-    break;
-  case '21':
-  case '21.0':
-    fxVer = '21.0';
-    break;
-  case '22':
-  case '22.0':
-    fxVer = '22.0';
-    break;
-  case '23':
-  case '23.0':
-    fxVer = '23.0';
-    break;
-  case '24':
-  case '24.0':
-    fxVer = '24.0';
-    break;
-  case '25':
-  case '25.0':
-    fxVer = '25.0';
-    break;
-  case '26':
-  case '26.0':
-    fxVer = '26.0';
-    break;
-  case '27':
-  case '27.0':
-    fxVer = '27.0';
-    break;
-  case '28':
-  case '28.0':
-    fxVer = '28.0';
-    break;
-  case '29':
-  case '29.0':
-    fxVer = '29.0';
-    break;
-  case '30':
-  case '30.0':
-    fxVer = '30.0';
-    break;
-  case '31':
-  case '31.0':
-    fxVer = '31.0';
-    break;
-  case '32':
-  case '32.0':
-    fxVer = '302.0';
-    break;
-  case '33':
-  case '33.0':
-    fxVer = '33.0';
-    break;
-  case '34':
-  case '34.0':
-    fxVer = '34.0';
-    break;
+if (geckoVer-0.0 >= 5) {
+    fxVer = geckoVer;
 }
+else {
+    switch(geckoVer)
+    {
+    case '1':
+    case '1.0':
+    case '1.7 or earlier':
+    case '1.7':
+        fxVer = '1.0';
+        geckoVer = loca;
+        break;
+    case '1.8':
+        fxVer = '1.5';
+        break;
+    case '1.8.1':
+        fxVer = '2.0';
+        break;
+    case '1.9':
+        fxVer = '3.0';
+        break;
+    case '1.9.1':
+        fxVer = '3.5';
+        break;
+     case '1.9.1.4':
+        fxVer = '3.5.4';
+        break;
+    case '1.9.2':
+        fxVer = '3.6';
+        break;
+    case '1.9.2.4':
+        fxVer = '3.6.4';
+        break;
+    case '1.9.2.5':
+        fxVer = '3.6.5';
+        break;
+    case '1.9.2.9':
+        fxVer = '3.6.9';
+        break;
+    case '2':
+    case '2.0':
+        fxVer = '4.0';
+        break;
+    default:
+        fxVer = 'Unknown';
+  }
 release = fxVer - 0.0; // Convert to a number (so that when we convert back, it won't have the trailing '.0' if an integer.
 releaseDateStr = date[fxVer];
 titleStr = ""; // Default value
-if (fxVer != "1.0") { // No release notes for 1.0
+if ((fxVer != "1.0") && (fxVer != "Unknown")) { // No release notes for 1.0
     titleStr = mdn.localString(
         {"fr" : "Sorti le " + releaseDateStr + ".",
          "en-US" : "Released on " + releaseDateStr + "."
