@@ -8,6 +8,46 @@ var loca = mdn.localString({
     'fr'    : '1.7 ou moins'
 });
 
+var date = {};
+date["1.0"]="20041111";
+date["1.5"]="20051125";
+date["2.0"]="20061024";
+date["3.0"]="20080617";
+date["3.5"]="20090630";
+date["3.6"]="20100121";
+date["4.0"]="20110322";
+date["5.0"]="20110621";
+date["6.0"]="20110816";
+date["7.0"]="20110926";
+date["8.0"]="20111108";
+date["9.0"]="20111220";
+date["10.0"]="20120131";
+date["11.0"]="20120313";
+date["12.0"]="20120424";
+date["13.0"]="20120605";
+date["14.0"]="20120717";
+date["15.0"]="20120828";
+date["16.0"]="20121009";
+date["17.0"]="20121120";
+date["18.0"]="20130108";
+date["19.0"]="20130902";
+date["20.0"]="20130402";
+date["21.0"]="20130514";
+date["22.0"]="20130625";
+date["23.0"]="20130806";
+date["24.0"]="20130917";
+date["25.0"]="20131029";
+date["26.0"]="20131210";
+date["27.0"]="20140204";
+date["28.0"]="20140318";
+date["29.0"]="20140429";
+date["30.0"]="20140610";
+date["31.0"]="20140722";
+date["32.0"]="20140902";
+date["33.0"]="20141014";
+date["34.0"]="20141125";
+
+
 switch(geckoVer)
 {
   case '1':
@@ -170,13 +210,14 @@ switch(geckoVer)
     break;
 }
 release = fxVer - 0.0; // Convert to a number (so that when we convert back, it won't have the trailing '.0' if an integer.
-releaseDateStr = template("FirefoxReleaseDate", [fxVer]);
+releaseDateStr = date[fxVer];
 titleStr = ""; // Default value
-titleStr = mdn.localString(
-    {"fr" : "Sorti le " + releaseDateStr + ".",
-     "en-US" : "Released on " + releaseDateStr + "."
-    });
-    
+if (fxVer != "1.0") { // No release notes for 1.0
+    titleStr = mdn.localString(
+        {"fr" : "Sorti le " + releaseDateStr + ".",
+         "en-US" : "Released on " + releaseDateStr + "."
+        });
+}
 url = '<a href="/en-US/Firefox/Releases/' + release + '"'+ (titleStr?' title="'+titleStr+'"':'') + '>'+ fxVer + '</a>';
 fxVer = url + " (" + geckoVer + ")";
 %>
