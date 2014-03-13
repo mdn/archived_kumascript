@@ -352,10 +352,14 @@ if (output.hasOwnProperty(obj) && output[obj].length > 0) {
 
 <h2 id="Localizations">Localizations</h2>
 <p>Please help us to localize this documentation into different languages.</p>
+<div class="wideColumnBox wideColumnBoxList">
 <% for (i=0; i < languages.length; i++) { %>
-    <h3><a href="/<%=languages[i]%>/docs/<%=env.slug%>"><%=languages[i]%></a></h3>
-    <%-template("page", ['/' + languages[i] + '/docs/' + env.slug, "Summary"])%>
+    <div style="display: inline-block;">
+        <h3><a href="/<%=languages[i]%>/docs/<%=env.slug%>"><%=languages[i]%></a></h3>
+        <%-template("page", ['/' + languages[i] + '/docs/' + env.slug, "Summary"])%>
+    </div>
 <% } %>
+</div>
 
 
 <% /*** Doc status metrics API :-) ***/ %>
