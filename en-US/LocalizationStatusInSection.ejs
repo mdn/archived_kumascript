@@ -158,3 +158,21 @@ if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
 
 </tbody>
 </table>
+
+<%
+var metrics = {
+    pages: {
+        title: 'Number of English pages',
+        counter: result.length
+    },
+    translations: {
+        title: 'Translations available',
+        counter: translationCounter
+    },
+    updateNeeded: {
+        title: 'Translations up to date',
+        counter: uptodateCounter
+    }
+};
+%>
+<div id="json" style="display: none"><%=JSON.stringify(metrics) %></div>
