@@ -113,7 +113,7 @@ var uptodatePercent = Math.ceil((uptodateCounter / translationCounter) * 100);
 if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
 %>
 
-<h2><%=summary%></h2>
+<h2 id="<%=summary%>"><%=summary%></h2>
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
@@ -131,7 +131,7 @@ if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
   </tbody>
 </table>
 
-<h2><%=details%></h2>
+<h2 id="<%=details%>"><%=details%></h2>
 <table class="fullwidth-table">
 <thead>
     <th><%=page%></th>
