@@ -77,7 +77,7 @@ var output = {
 
 
 /*** Add optional and custom metrics to the metrics object ***/
-if (bzddn) {
+if (bzddn && bzddn != '') {
     metrics.ddn = {
         title:'Dev-doc-needed bugs',
         link: '#Dev-doc-needed_bugs',
@@ -85,7 +85,7 @@ if (bzddn) {
     };
 }
 
-if (bzdr) {
+if (bzdr && bzdr != '') {
     metrics.dr = {
         title: 'Documentation requests',
         link: '#Documentation_requests',
@@ -93,7 +93,7 @@ if (bzdr) {
     };
 }
 
-if (cMetrics) {
+if (cMetrics && cMetrics != '') {
   var customMetrics = JSON.parse(cMetrics);
   for (var key in customMetrics) {
     metrics[key] = customMetrics[key];
@@ -207,12 +207,12 @@ getPages(pageList);
 /*** Bugzilla querying ***/
 
 
-if (bzddn) {
+if (bzddn && bzddn != '') {
     var ddnBugs = MDN.bzSearch(bzddn);
     metrics.ddn.counter = ddnBugs.bugs.length;
 }
 
-if (bzdr) {
+if (bzdr && bzdr != '') {
     var drBugs = MDN.bzSearch(bzdr);
     metrics.dr.counter = drBugs.bugs.length;
 }
@@ -292,7 +292,9 @@ if (output.hasOwnProperty(obj) && output[obj].length > 0) {
 
 <% /*** Bug lists ***/ %>
 
-<% if (bzddn && ddnBugs.bugs.length > 0) { %>
+<% if (bzddn && bzddn != '') { 
+    if (ddnBugs.bugs.length > 0) {
+%>
     <h2>Dev-doc-needed bugs</h2>
     <p><strong>Found <%=ddnBugs.bugs.length%> bugs:</strong></p>
     
@@ -316,9 +318,11 @@ if (output.hasOwnProperty(obj) && output[obj].length > 0) {
     
     </tbody>
     </table>
-<% } %>
+<% } } %>
 
-<% if (bzdr && drBugs.bugs.length > 0) { %>
+<% if (bzdr && bzdr != '') { 
+    if (drBugs.bugs.length > 0) {
+%>
     <h2>Documentation requests</h2>
     <p><strong>Found <%=drBugs.bugs.length%> bugs:</strong></p>
     
@@ -340,7 +344,7 @@ if (output.hasOwnProperty(obj) && output[obj].length > 0) {
     
     </tbody>
     </table>
-<% } %>
+<% } } %>
 
 
 <% /*** Localizations ***/ %>
@@ -354,6 +358,6 @@ if (output.hasOwnProperty(obj) && output[obj].length > 0) {
 <% } %>
 
 
-<div class="json" style="display: none">
-    <%=JSON.stringify(metrics) %>
-</div>
+<% /*** Doc status metrics API :-) ***/ %>
+
+<div id="json" style="display: none"><%=JSON.stringify(metrics) %></div>
