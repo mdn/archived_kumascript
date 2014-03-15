@@ -166,6 +166,8 @@ function collect(page) {
     if (containsNeedsWorkTag(page.tags)) {
         metrics.needsTags.counter++;
         var needsTags = page.tags.toString().match(/needs[A-Za-z0-9]+/gi).toString();
+        var re = /,/g;
+        needsTags = needsTags.replace(re, ', ');
         output.needsTags.push({title: cleanTitle, url: pageurl, note: needsTags});
     }
     if (hasReviewTag(page.review_tags, 'editorial')) { 
