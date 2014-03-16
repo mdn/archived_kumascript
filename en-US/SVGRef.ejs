@@ -21,13 +21,11 @@ switch (env.locale) {
 // Find the section of SVG this page belongs to (that is the first tag of the form "SVG XYZ")
 var tags = env.tags;
 var found_tag = '';
-for (i in tags) {
-    if( tag.hasOwnProperty(i) ) {
-        if (tags[i] != s_svg_ref_title) {
-            if (tags[i].substr(0, 4) == 'SVG ') {
-                found_tag = tags[i];
-                break;
-            }
+if (tags || typeof tags != 'undefined') {
+    for (i in tags) {
+        if( tags.hasOwnProperty(i) && tags[i] != s_svg_ref_title && tags[i].substr(0, 4) == 'SVG ') {
+            found_tag = tags[i];
+            break;
         }
     }
 }
