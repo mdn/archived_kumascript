@@ -14,6 +14,7 @@ function containsTag(tagList, tag) {
 }
 
 function containsAPI(APIList, name) {
+    if (!name || typeof name == 'undefined') return 0;
     name = name.toLowerCase();
     name = name.split('.')[0];
     for (var i = 0, len = APIList.length; i < len; i++) {
