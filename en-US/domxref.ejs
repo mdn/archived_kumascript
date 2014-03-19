@@ -50,6 +50,11 @@ if (!$2) {
         var summary = mdn.escapeQuotes(page.summary);
     } else {
         summary = "The documentation about this has not yet been written; please consider contributing!";
+        switch(lang){
+            case "zh-CN":
+                summary = "此页面仍未被本地化, 期待您的翻译!";
+                break;
+        }
     }
 }
 
