@@ -28,8 +28,9 @@ function allowTerm(a) {
     
     // An i/f doesn't contain a '.' (method or properties)
     // An i/f doesn't contain a '(' (method or constructor)
+    // An i/f doesn't contain a ' ' (API landing page)
     for (var i = 0, len = a.length; i < len; ++i) { 
-        if ((a[i] === '.') || (a[i] === '(')) return 0; 
+        if ((a[i] === '.') || (a[i] === '(') || (a[i] === ' ')) return 0; 
     }
     return 1;
 }
@@ -133,6 +134,7 @@ for (var i = 0; i < numLetters; i++) {
                 termIndex++;
                 continue;
             }
+            
             
             if (!term.isLocalized && backupLocale) {
                 locale = "&nbsp;(" + backupLocale + ")";
