@@ -1,0 +1,17 @@
+<%
+/*
+ * Get flod's JSON to display status of MDN UI localization
+ *
+ */
+
+var MDN = require("MDN:Common");
+var url = 'http://l10n.mozilla-community.org/~flod/webstatus/webstatus.json';
+
+var resource = MDN.fetchJSONResource(url);
+log.debug(resource);
+
+if (resource.hasOwnProperty("de")) {
+    log.debug(resource.de.mdn);
+}
+
+%>
