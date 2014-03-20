@@ -67,6 +67,10 @@ var metrics = {
     }
 };
 
+if (groupTags.length > 0) {
+    metrics.noTags = undefined;
+}
+
 var output = {
     noTags: [],
     needsTags: [],
