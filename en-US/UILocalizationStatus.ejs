@@ -4,14 +4,50 @@
  *
  */
 
+var locale = $0;
 var MDN = require("MDN:Common");
 var url = 'http://l10n.mozilla-community.org/~flod/webstatus/webstatus.json';
+var mdnProjects = ["mdn", "mdn-js", "mdn-promote"];
+var result = [];
 
 var resource = MDN.fetchJSONResource(url);
-log.debug(resource);
 
-if (resource.hasOwnProperty("de")) {
-    log.debug(resource.de.mdn);
+if (resource.hasOwnProperty(locale)) {
+    var language = resource[locale];
+    
+    for (var project in language) {
+        if (language.hasOwnProperty(project) && mdnProjects.indexOf(project) >= 0) {
+            result[project] = language[project];
+        }
+    }
 }
-
 %>
+
+<table class="standard-table">
+    <tr>
+        <th><a href="https://localize.mozilla.org/<%=locale.replace("-", "_")%>/mdn/LC_MESSAGES/">Project</a></th>
+        <th>Words</th>
+        <th>Status</th>
+    </tr>
+
+<% 
+for (var project in result) {
+    if (result.hasOwnProperty(project)) {
+        var translatedPercent = Math.floor(result[project].percentage);
+        var untranslatedPercent = Math.ceil((result[project].untranslated / result[project].total) * 100);
+        var fuzzyPercent = Math.ceil((result[project].fuzzy / result[project].total) * 100);
+%>    
+
+    <tr>
+        <td><%=result[project].name%></td>
+        <td class="total"><%=result[project].total%></td>
+        <td class="status" style="width:300px">
+            <span style="display: inline-block;height: 15px; float:left; background-color: #28910D; width: <%=translatedPercent%>%;" title="<%=result[project].translated%> translated words"></span>
+            <span style="display: inline-block;height: 15px; float:left; background-color: #FCCA00; width: <%=untranslatedPercent%>%;"   title="<%=result[project].untranslated%> untranslated words"></span>
+            <span style="display: inline-block;height: 15px; float:left; background-color: #F00;    width: <%=fuzzyPercent%>%;"   title="<%=result[project].fuzzy%> fuzzy words"></span>
+    </td>
+<%
+    }
+}
+%>
+</table>
