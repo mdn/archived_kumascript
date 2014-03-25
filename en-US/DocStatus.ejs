@@ -31,6 +31,7 @@ var bzddn = $3;
 var bzdr = $4;
 var cMetrics = $5;
 
+// TODO: Use something like 'env.translations' here instead of a static list
 var languages = ['de', 'es', 'fr', 'ja', 'pl', 'pt-BR', 'zh-CN', 'ko'];
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
 
@@ -358,6 +359,34 @@ if (output.hasOwnProperty(obj) && output[obj].length > 0) {
 
 <h2 id="Localizations">Localizations</h2>
 <p>Please help us to localize this documentation into different languages.</p>
+
+<% /* Once we have env.translations, build one table...
+     Could calls localization status json to get the data, with env.translation we can make sure that it is there...
+     eg.g https://developer.mozilla.org/fr/docs/MDN/Doc_status/CSS?raw&macros&section=json
+<table class"standard-table">
+    <thead>
+        <tr>
+            <th>Locale</th>
+            <th>Pages</th> 
+            <th>Translated</th> 
+            <th>Translations up to date</th> 
+        </tr>
+    </thead>
+    <tbody>
+for (i=0; i < languages.length; i++) {
+
+    <tr>
+        <td><a href="/=languages[i] + '/docs/' + env.slug">=languages[i]</td>
+        <td>491</td> 
+        <td>38 (8%)</td> 
+        <td>6 (16%)</td> 
+    </tr>
+    
+}
+    </tbody>
+</table> */
+%>
+
 <div class="wideColumnBox wideColumnBoxList">
 <% for (i=0; i < languages.length; i++) { %>
     <div style="display: inline-block;">
