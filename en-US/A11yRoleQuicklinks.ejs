@@ -1,0 +1,12 @@
+<%
+// Inserts quicklinks for the accessibility roles.
+var lang = env.locale;
+var url = "";
+
+switch(lang) {
+    default:
+        url = "/en-US/docs/Web/Accessibility/AT-APIs/Gecko/Roles";
+        break;
+}
+%>
+<%-template("QuickLinksWithSubpages", [url])%>
