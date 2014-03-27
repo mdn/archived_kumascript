@@ -14,7 +14,7 @@ var result = [];
 function getPages(pageList) {
     if (pageList) {
         for (var i = 0; i < pageList.length; i++) {
-            result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags.sort()})
+            result.push({title: pageList[i].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[i].url, tags: pageList[i].tags.sort(), summary: pageList[i].summary || '<strong>No summary!</strong>'})
             var subpage = getPages(pageList[i].subpages);
         }
     }
@@ -28,7 +28,7 @@ switch(lang) {
     default:
         heading = "Found " + result.length + " pages:";
         page = "Page";
-        tags = "Tags";
+        tags = "Tags and summary";
         break;
 }
 %>
@@ -43,9 +43,12 @@ switch(lang) {
 
 <% for (i=0; i < result.length; i++) { %>
 <tr>
-    <td><a href='<%=result[i].url%>'><%=result[i].title%></a></td>
-    <td><%=result[i].tags.join(", ")%></td>
+    <td rowspan="2"><a href='<%=result[i].url%>'><%=result[i].title%></a></td>
+    <td><strong><%=result[i].tags.join(", ")%></strong></td>
 </tr>
+<tr>
+    <td><%-result[i].summary%></td>
+<tr>
 <% } %>
 
 </tbody>
