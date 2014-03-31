@@ -1,2 +1,26 @@
-<%= $0 %>
-<div style="margin-left: 5%"><%= $1 %></div>
+<%
+// Inserts a link to a terme in our glossary.
+// Appropriate styling is applied.
+//
+// Parameters:
+//
+//  $0 - Terme name
+//  $1 - name to display (optional)
+//  $2 - Remove custom style on links
+
+var lang = env.locale;
+var str = $1 || $0;
+var css = !$2 ? "glossaryLink" : "";
+
+// Terme location
+var URL = "/" + lang + "/docs/Glossary/" + $0.replace(' ','_');
+
+var summary = "";
+var page = wiki.getPage(URL);
+
+if (page && page.summary) {
+    summary = str + ': ' + mdn.escapeQuotes(page.summary);
+} else {
+    summary = "The definition of that terme (" + str + ") has not been written yet; please consider contributing!";
+}
+%><a href="<%- URL %>" title="<%-summary%>" class="<%-css%>"><%= str %></a>
