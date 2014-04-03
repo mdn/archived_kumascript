@@ -43,7 +43,7 @@ if (!$1 == 0) {
 // Handle the icon case
 
 if ($1 != 0) {
-    html = "<a href='" + downloadURL + "'><img src='" + iconURL + "' width='" + $1 + "px'></a>";
+    html = "<a class='ignore-external' href='" + downloadURL + "'><img src='" + iconURL + "' width='" + $1 + "px'></a>";
 }
 %>
 <%-html%>
