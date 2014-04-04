@@ -1,0 +1,36 @@
+<%
+/*
+ * Displays an overview table for documentation status
+ *
+ */
+ 
+ 
+/*** Collect doc status data ***/
+var MDN = require("MDN:Common");
+var result = [];
+
+var pageList = page.subpagesExpand('/en-US/docs/MDN/Doc_status');
+
+for (var aPage in pageList) {
+    var url = 'https://developer.mozilla.org' + pageList[aPage].url + '?raw&macros&section=json';
+    var resource = MDN.fetchHTTPResource(url);
+    if (resource != '') {
+        result.push(JSON.parse(resource));
+    }
+}
+
+/*** Summary table ***/
+%>
+<table class="docstatussummary standard-table">
+  <thead>
+    <tr>
+        <td>Section</td>
+        <td>Pages</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td></td>
+    </tr>
+</tbody>
+</table>
