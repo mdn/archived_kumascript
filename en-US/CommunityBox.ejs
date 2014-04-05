@@ -56,7 +56,7 @@ switch(env.locale) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "en apprendre plus</a>)</span>";
         }
     break;
-    default:
+    case "en":
         headingStr = "Join the " + $0 + " community";
         messageStr = "Mailing list/newsgroup:";
         messageNoteStr = "Choose your preferred method for joining the discussion.";
@@ -64,6 +64,14 @@ switch(env.locale) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
         }
         break;
+    default: // Like English + info about ltr!
+        needDir = "ltr";
+        headingStr = "Join the " + $0 + " community";
+        messageStr = "Mailing list/newsgroup:";
+        messageNoteStr = "Choose your preferred method for joining the discussion.";
+        if ($3) {
+            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
+        }
 }
 
 // If the extra links string is provided, build that HTML
@@ -121,8 +129,8 @@ if (haveExtra || ircLink.length) {
 }
 
 %>
+<div class="overheadIndicator communitybox" <%- needDir?'dir="' + needDir + '"':''%>>
 
-<div class="overheadIndicator communitybox">
     <div class="column-container">
         <h2 id="Join_the_community"><%=headingStr%></h2>
         <div class="column-half">
