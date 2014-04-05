@@ -40,6 +40,14 @@ if ($3) {
 // Generate localized strings
 
 switch(env.locale) {
+    case "de":
+        headingStr = "Werde Teil der " + $0 + " Community";
+        messageStr = "Mailing Liste/Newsgroup:";
+        messageNoteStr = "Wähle eine der Möglichkeiten, um an der Diskussion teilzunehmen.";
+        if ($3) {
+            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "mehr erfahren</a>)</span>";
+        }
+    break;
     case "fr":
         headingStr = "Rejoignez la communauté " + $0 ;
         messageStr = "Liste de diffusion/newsgroup :";
@@ -47,7 +55,7 @@ switch(env.locale) {
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "en apprendre plus</a>)</span>";
         }
-        break;
+    break;
     default:
         headingStr = "Join the " + $0 + " community";
         messageStr = "Mailing list/newsgroup:";
