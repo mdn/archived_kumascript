@@ -148,7 +148,7 @@ if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
             var days = daysBetween(translation.last_edit, result[i].last_edit); %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>">Yes, but not up to date (<%=days%> days older).</a></td>
         <% } else { %>
-            <td><a href="<%=translation.url%>">Yes.</a></td>
+            <td style="background-color: #CF9"><a href="<%=translation.url%>">Yes, and up to date.</a></td>
         <% } %>
     <% } else { %>
         <td style="background-color: #FCC">Not available.</td>
