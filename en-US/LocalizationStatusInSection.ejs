@@ -15,8 +15,10 @@ if ($2) {
 
 var pageList = page.subpagesExpand(section);
 var result = [];
+var priorities = []
 var translationCounter = 0;
 var outdatedCounter = 0;
+var priorityCounter = 0;
 
 function collect(page) {
     result.push({title: page.title.replace('<','&lt;').replace('>','&gt;'), url: page.url, translations: page.translations, last_edit: page.last_edit})
@@ -28,22 +30,29 @@ function collect(page) {
     if (isOutdated(page.last_edit, translation.last_edit)) {
         outdatedCounter++;
     }
+    
+    if (hasTags(page.tags, "l10n:priority")) {
+        priorities.push({title: page.title.replace('<','&lt;').replace('>','&gt;'), url: page.url, translations: page.translations, last_edit: page.last_edit});
+        priorityCounter++;
+    }
 }
 
 function getPages(pageList) {
     if (pageList) {
         for (var i = 0; i < pageList.length; i++) {
-            if (groupTags.length > 0) {
-                for (var j = 0; j < groupTags.length; j++) {
-                    if (hasTags(pageList[i].tags, groupTags[j])) {
-                        collect(pageList[i]);
+            if (!hasTags(pageList[i].tags, "l10n:exclude")) {
+                if (groupTags.length > 0) {
+                    for (var j = 0; j < groupTags.length; j++) {
+                        if (hasTags(pageList[i].tags, groupTags[j])) {
+                            collect(pageList[i]);
+                        }
                     }
+                } else {
+                    collect(pageList[i]);
                 }
-            } else {
-                collect(pageList[i]);
+                
+                var subpage = getPages(pageList[i].subpages);
             }
-            
-            var subpage = getPages(pageList[i].subpages);
         }
     }
 }
@@ -99,10 +108,10 @@ var lang = env.locale;
 switch(lang) {
     default:
         summary = "Summary";
-        details = "Details";
+        details = "All articles";
         page = "Page";
         pages = "Pages";
-        translation = "Translated";
+        translated = "Translated";
         uptodate = "Translations up to date";
         break;
 }
@@ -111,14 +120,14 @@ var translationPercent = Math.ceil((translationCounter / result.length) * 100);
 var uptodateCounter = translationCounter - outdatedCounter;
 var uptodatePercent = Math.ceil((uptodateCounter / translationCounter) * 100);
 if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
-%>
 
+%>
 <h2 id="<%=summary%>"><%=summary%></h2>
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
       <th><%=pages%></th>
-      <th><%=translation%></th>
+      <th><%=translated%></th>
       <th><%=uptodate%></th>
     </tr>
   </thead>
@@ -130,12 +139,41 @@ if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
     </tr>
   </tbody>
 </table>
-
-<h2 id="<%=details%>"><%=details%></h2>
-<table class="fullwidth-table">
+<% if (priorityCounter > 0) { %>
+<h2 id="Priority_articles">Priority articles</h2>
+<table class="fullwidth-table standard-table">
 <thead>
     <th><%=page%></th>
-    <th><%=translation%></th>
+    <th><%=translated%></th>
+</thead>
+<tbody>
+
+<% for (i=0; i < priorities.length; i++) { %>
+<tr>
+    <td><a href='<%=priorities[i].url%>'><%=priorities[i].title%></a></td>
+    <% if (hasTranslation(priorities[i].translations, locale)) {
+        var translation = getTranslation(priorities[i].translations, locale);
+        if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
+            var days = daysBetween(translation.last_edit, priorities[i].last_edit); %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>">Yes, but not up to date (<%=days%> days older).</a></td>
+        <% } else { %>
+            <td style="background-color: #CF9"><a href="<%=translation.url%>">Yes, and up to date.</a></td>
+        <% } %>
+    <% } else { %>
+        <td style="background-color: #FCC">Not available.</td>
+    <% } %>
+</tr>
+<% } %>
+
+</tbody>
+</table>
+<% } %>
+
+<h2 id="<%=details%>"><%=details%></h2>
+<table class="fullwidth-table standard-table">
+<thead>
+    <th><%=page%></th>
+    <th><%=translated%></th>
 </thead>
 <tbody>
 
