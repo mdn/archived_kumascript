@@ -7,7 +7,7 @@
  
 /*** Collect doc status data ***/
 var MDN = require("MDN:Common");
-var result = [];
+var result = {};
 
 var pageList = page.subpagesExpand('/en-US/docs/MDN/Doc_status');
 
@@ -15,22 +15,35 @@ for (var aPage in pageList) {
     var url = 'https://developer.mozilla.org' + pageList[aPage].url + '?raw&macros&section=json';
     var resource = MDN.fetchHTTPResource(url);
     if (resource != '') {
-        result.push(JSON.parse(resource));
+        result[pageList[aPage].title] = JSON.parse(resource);
     }
 }
+
+log.debug(result);
 
 /*** Summary table ***/
 %>
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
-        <td>Section</td>
-        <td>Pages</td>
+        <th>Section</th>
+        <th>Pages</th>
+        <th>No tags</th>
+        <th>Needs* tags</th>
+        <th>Editorial reviews</th>
+        <th>Technical reviews</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-        <td></td>
-    </tr>
+    <% for (var key in result) { %>
+        <tr>
+            <td><%=key%></td>
+            <td><%=result[key].pages.counter%></td>
+            <td><%=result[key].noTags.counter%></td>
+            <td><%=result[key].needsTags.counter%></td>
+            <td><%=result[key].editorialReviews.counter%></td>
+            <td><%=result[key].technicalReviews.counter%></td>
+        </tr>
+    <% } %>
 </tbody>
 </table>
