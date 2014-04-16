@@ -1,0 +1,70 @@
+<%
+/*
+ * Displays an overview table for l10n status
+ *
+ */
+ 
+ 
+/*** Collect doc status data ***/
+var MDN = require("MDN:Common");
+var result = {};
+var totalPages = 0,
+    totalTranslated = 0,
+    totalUpToDate = 0;
+var pageList = page.subpagesExpand('/' + env.locale + '/docs/MDN/Doc_status');
+
+function getPages(pageList) {
+    if (pageList) {
+        for (var aPage in pageList) {
+            var url = 'https://developer.mozilla.org' + pageList[aPage].url + '?raw&macros&section=json';
+            var resource = MDN.fetchHTTPResource(url);
+            if (resource != '') {
+                result[pageList[aPage].title] = {};
+                result[pageList[aPage].title].metrics = JSON.parse(resource);
+                result[pageList[aPage].title].url = pageList[aPage].url;
+            }
+            
+            var subpage = getPages(pageList[aPage].subpages);
+        }
+    }
+}
+
+getPages(pageList);
+
+/*** Summary table ***/
+%>
+<table class="docstatussummary standard-table">
+  <thead>
+    <tr>
+        <th>Section</th>
+        <th>Pages</th>
+        <th>Translated</th>
+        <th>Translations up to date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%     
+        for (var key in result) {
+        if (result.hasOwnProperty(key) && typeof key != 'undefined') {
+        totalPages += result[key].metrics.pages.counter;
+        totalTranslated += result[key].metrics.translations.counter;
+        totalUpToDate += result[key].metrics.updateNeeded.counter;
+        
+        var translationPercent = Math.ceil((result[key].metrics.translations.counter / result[key].metrics.pages.counter) * 100);
+        var uptodatePercent = Math.ceil((result[key].metrics.updateNeeded.counter / result[key].metrics.pages.counter) * 100);
+    %>
+        <tr>
+            <td><a href="<%=result[key].url%>"><%=key.replace("documentation status", "", "i")%></a></td>
+            <td><%=result[key].metrics.pages.counter%></td>
+            <td><%=result[key].metrics.translations.counter%> (<%=translationPercent%>%)</td>
+            <td><%=result[key].metrics.updateNeeded.counter%> (<%=uptodatePercent%>%)</td>
+        </tr>
+    <% }} %>
+    <tr>
+        <td><strong>Total</strong></td>
+        <td><strong><%=totalPages%></strong></td>
+        <td><strong><%=totalTranslated%></strong></td>
+        <td><strong><%=totalUpToDate%></strong></td>
+    </tr>
+</tbody>
+</table>
