@@ -65,6 +65,14 @@ switch(env.locale) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "maggiori informazioni</a>)</span>";
         }
         break;
+    case "pt-BR":
+        headingStr = "Junte-se à comunidade " + $0;
+        messageStr = "Lista de emails/newsgroup:";
+        messageNoteStr = "Escolha a sua forma preferida de juntar-se à discussão.";
+        if ($3) {
+            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "saiba mais</a>)</span>";
+        }
+        break;
     case "en":
         headingStr = "Join the " + $0 + " community";
         messageStr = "Mailing list/newsgroup:";
