@@ -5,17 +5,43 @@
 // Parameters:
 //
 //  $0..$n  The pages to link to in quicklinks.
+//
+// If an item starts with "http://" or "https://", there must be a "|<title>"
+// at the end to give the item a title to use in the list. You can optionally
+// also include text for the tooltip. For example:
+//
+// {{MakeSimpleQuicklinks("/en-US/docs/foo", "http://somesite.com|Awesome Site",
+//     "https://othersite.com|Another site|Tooltip for another site")}}
 
 var quicklinks = "<section id='Quick_Links'><ol>";
 var count = arguments.length;
 
 for (var i=0; i<count; i++) {
-    var page = wiki.getPage(arguments[i]);
-    var path = page.url;
-    var title = wiki.escapeQuotes(page.summary);
-    var text = page.title;
+    var item = arguments[i];
+    var path = "";
+    var title = "";
+    var text = "";
     
-    quicklinks += "<li><a href='" + path + "' title='" + title + "'>" + text + "</a></li>";
+    if (item.substr(0, 7) == "http://" || item.substr(0, 8) == "https://") {
+      var ar = item.split("|");
+      path = ar[0];
+      text = ar[1];
+      if (ar.length > 2) {
+        title = wiki.escapeQuotes(ar[2]);
+      }
+    } else {
+      var page = wiki.getPage(item);
+      path = page.url;
+      title = wiki.escapeQuotes(page.summary);
+      text = page.title;
+    }
+    
+    quicklinks += "<li><a href='" + path + "'";
+    
+    if (title) {
+        quicklinks += " title='" + title + "'";
+    }
+    quicklinks += ">" + text + "</a></li>";
 }
 
 quicklinks += "</ol></section>";
