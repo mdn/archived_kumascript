@@ -20,8 +20,11 @@ var url = "";
 var urllist = $0.split("|");
 var count = urllist.length;
 
+log.debug("URL list: " + urllist);
+log.debug("Count: " + count);
+
 for (var i=0; i<count; i++) {
-    var page = wiki.getPage($0);
+    var page = wiki.getPage(urllist[i]);
     
     if (page) {
         url = urllist[i];
