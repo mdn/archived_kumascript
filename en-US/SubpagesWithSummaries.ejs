@@ -48,7 +48,7 @@ if (numTerms) {
     for (var i=0; i<numTerms; i++) {
         var aPage = termList[i];
         
-        if (!page.hasTag(aPage, "junk")) {
+        if (!page.hasTag(aPage, "junk") && (aPage.title != "Index")) {
             var title = aPage.title;
             var summary = aPage.summary.replace(/<img[^>]*>/g," ");
             var url = aPage.url;
