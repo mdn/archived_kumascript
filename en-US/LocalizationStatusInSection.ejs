@@ -6,6 +6,55 @@
 //  $1  -  The locale to check for the localization status
 //  $2  -  (optional) Group tags. An array of tags to filter the section even more (only pages with these tags are included then; OR logic).
 
+/* LOCALISATION STRINGS */
+var l10nSummary = mdn.localString({
+    "en-US": "Summary",
+    "fr"   : "En bref"
+});
+
+var l10nDetails = mdn.localString({
+    "en-US": "All articles",
+    "fr"   : "Tous les articles"
+});
+
+var l10nPage = mdn.localString({
+    "en-US": "Page"
+});
+
+var l10nPages = mdn.localString({
+    "en-US": "Pages"
+});
+    
+var l10nPriority = mdn.localString({
+    "en-US": "Priority articles",
+    "fr"   : "Articles prioritaires"
+});
+    
+var l10nStateUnavailable = mdn.localString({
+    "en-US": "Not available",
+    "fr"   : "Indisponible"
+});
+
+var l10nStateUptodate = mdn.localString({
+    "en-US": "Yes, and up to date",
+    "fr"   : "Oui et à jour"
+});
+
+var l10nStateOutofdate = mdn.localString({
+    "en-US": "Yes, but not up to date (#d# days older).",
+    "fr"   : "Oui mais pas à jour (#d# jours d'écart)"
+});
+    
+var l10nTranslated = mdn.localString({
+    "en-US": "Translated",
+    "fr"   : "Traduction"
+});
+    
+var l10nUptodate = mdn.localString({
+    "en-US": "Translations up to date",
+    "fr"   : "Traductions à jour"
+});
+
 var section = $0;
 var locale = $1;
 var groupTags = [];
@@ -57,7 +106,6 @@ function getPages(pageList) {
     }
 }
 
-
 function isOutdated(enDate, l10nDate) {
     if (!enDate || typeof enDate == 'undefined' || !l10nDate || typeof l10nDate == 'undefined') return 0;
     if (new Date(l10nDate) < new Date(enDate)) return 1;
@@ -103,32 +151,19 @@ function hasTags(tags, needle) {
 
 getPages(pageList);
 
-
-var lang = env.locale;
-switch(lang) {
-    default:
-        summary = "Summary";
-        details = "All articles";
-        page = "Page";
-        pages = "Pages";
-        translated = "Translated";
-        uptodate = "Translations up to date";
-        break;
-}
-
 var translationPercent = Math.ceil((translationCounter / result.length) * 100);
 var uptodateCounter = translationCounter - outdatedCounter;
 var uptodatePercent = Math.ceil((uptodateCounter / translationCounter) * 100);
-if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
 
+if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
 %>
-<h2 id="<%=summary%>"><%=summary%></h2>
+<h2 id="<%=l10nSummary.replace(" ","_")%>"><%=l10nSummary%></h2>
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
-      <th><%=pages%></th>
-      <th><%=translated%></th>
-      <th><%=uptodate%></th>
+      <th><%=l10nPages%></th>
+      <th><%=l10nTranslated%></th>
+      <th><%=l10nUptodate%></th>
     </tr>
   </thead>
   <tbody>
@@ -140,11 +175,11 @@ if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
   </tbody>
 </table>
 <% if (priorityCounter > 0) { %>
-<h2 id="Priority_articles">Priority articles</h2>
+<h2 id="<%=l10nPriority.replace(" ","_")%>"><%=l10nPriority%></h2>
 <table class="fullwidth-table standard-table">
 <thead>
-    <th><%=page%></th>
-    <th><%=translated%></th>
+    <th><%=l10nPage%></th>
+    <th><%=l10nTranslated%></th>
 </thead>
 <tbody>
 
@@ -155,12 +190,12 @@ if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
         var translation = getTranslation(priorities[i].translations, locale);
         if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, priorities[i].last_edit); %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>">Yes, but not up to date (<%=days%> days older).</a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
         <% } else { %>
-            <td style="background-color: #CF9"><a href="<%=translation.url%>">Yes, and up to date.</a></td>
+            <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
         <% } %>
     <% } else { %>
-        <td style="background-color: #FCC">Not available.</td>
+        <td style="background-color: #FCC"><%=l10nStateUnavailable%></td>
     <% } %>
 </tr>
 <% } %>
@@ -169,11 +204,11 @@ if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
 </table>
 <% } %>
 
-<h2 id="<%=details%>"><%=details%></h2>
+<h2 id="<%=l10nDetails.replace(" ","_")%>"><%=l10nDetails%></h2>
 <table class="fullwidth-table standard-table">
 <thead>
-    <th><%=page%></th>
-    <th><%=translated%></th>
+    <th><%=l10nPage%></th>
+    <th><%=l10nTranslated%></th>
 </thead>
 <tbody>
 
@@ -184,12 +219,12 @@ if(isNaN(uptodatePercent)) { uptodatePercent = 0; }
         var translation = getTranslation(result[i].translations, locale);
         if (isOutdated(result[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, result[i].last_edit); %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>">Yes, but not up to date (<%=days%> days older).</a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
         <% } else { %>
-            <td style="background-color: #CF9"><a href="<%=translation.url%>">Yes, and up to date.</a></td>
+            <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
         <% } %>
     <% } else { %>
-        <td style="background-color: #FCC">Not available.</td>
+        <td style="background-color: #FCC"><%=l10nStateUnavailable%></td>
     <% } %>
 </tr>
 <% } %>
