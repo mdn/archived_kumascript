@@ -103,6 +103,27 @@
             }
         }
         return result;
-    }
+    },
+    
+    translations: function (path) {
+        var url = '';
+        if (path) {
+            var p = kuma.url.parse(env.url, true);
+            url = p.protocol + '//' + p.host + encodeURI(path) + '$json';
+        } else {
+            url = env.url + '$json';
+        }
+        var mdn = require('MDN:Common');
+        var json = mdn.fetchJSONResource(url);
+        var result = [];
+        if (json != null) {
+            if (!self) {
+                result = json.translations || [];
+            } else {
+                result = [json];
+            }
+        }
+        return result;
+    },
     
 }); %>
