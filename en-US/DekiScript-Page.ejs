@@ -117,11 +117,7 @@
         var json = mdn.fetchJSONResource(url);
         var result = [];
         if (json != null) {
-            if (!self) {
-                result = json.translations || [];
-            } else {
-                result = [json];
-            }
+            result = json.translations || [];
         }
         return result;
     },
