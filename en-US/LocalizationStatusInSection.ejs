@@ -62,7 +62,7 @@ if ($2) {
     groupTags = JSON.parse($2);
 }
 
-var pageList = page.subpagesExpand(section);
+var pageList = page.subpagesExpand(section, '', true);
 var result = [];
 var priorities = []
 var translationCounter = 0;
