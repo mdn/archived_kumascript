@@ -31,8 +31,7 @@ var bzddn = $3;
 var bzdr = $4;
 var cMetrics = $5;
 
-// TODO: Use something like 'env.translations' here instead of a static list
-var languages = ['bn-BD', 'de', 'es', 'fa', 'fr', 'ja', 'pl', 'pt-BR', 'zh-CN', 'ko'];
+var languages = page.translations(env.path);
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
 
 var metrics = {
@@ -411,8 +410,8 @@ for (i=0; i < languages.length; i++) {
 <div class="wideColumnBox wideColumnBoxList">
 <% for (i=0; i < languages.length; i++) { %>
     <div style="display: inline-block;">
-        <h3><a href="/<%=languages[i]%>/docs/<%=env.slug%>"><%=languages[i]%></a></h3>
-        <%-template("page", ['/' + languages[i] + '/docs/' + env.slug, "Summary"])%>
+        <h3><a href="/<%=languages[i].locale%>/docs/<%=env.slug%>"><%=languages[i].locale%></a></h3>
+        <%-template("page", ['/' + languages[i].locale + '/docs/' + env.slug, "Summary"])%>
     </div>
 <% } %>
 </div>
