@@ -71,6 +71,12 @@ function process_array(folderItem, arr) {
                 return;
             }
             
+            // Skip this item if it's title is "Index"
+            
+            if (item.title == "Index") {
+                return;
+            }
+            
             result += '<li><a href="' + item.url + '">' + htmlEscape(item.title) + '</a>' + process_array(item, item.subpages || []) + '</li>';
         });
         result += closeTag;
