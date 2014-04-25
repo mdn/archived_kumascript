@@ -74,7 +74,7 @@ if (groupTags.length > 0) {
 
 var output = {
     noTags: [],
-    needsTags: [],
+    needsTags: {},
     editorialReviews: [],
     technicalReviews: [],
     outdated: []
@@ -163,6 +163,7 @@ function collect(page) {
     metrics.pages.counter++;
     var cleanTitle = page.title.replace('<','&lt;').replace('>','&gt;');
     var pageurl = page.url;
+    var rgx = /needs[A-Za-z0-9]+/gi;
             
     if (hasNoTags(page.tags)) {
         metrics.noTags.counter++; 
@@ -170,10 +171,12 @@ function collect(page) {
     }
     if (containsNeedsWorkTag(page.tags)) {
         metrics.needsTags.counter++;
-        var needsTags = page.tags.toString().match(/needs[A-Za-z0-9]+/gi).toString();
-        var re = /,/g;
-        needsTags = needsTags.replace(re, ', ');
-        output.needsTags.push({title: cleanTitle, url: pageurl, note: needsTags});
+        page.tags.forEach(function (tag) {
+            if (rgx.test(tag)) {
+                output.needsTags[tag] = output.needsTags[tag] || [];
+                output.needsTags[tag].push({title: cleanTitle, url: pageurl});
+            }
+        });
     }
     if (hasReviewTag(page.review_tags, 'editorial')) { 
         metrics.editorialReviews.counter++;
@@ -275,14 +278,14 @@ if (metrics.hasOwnProperty(obj) && typeof metrics[obj] !== 'undefined') {
 
 <% 
 for (var obj in output) {
-if (output.hasOwnProperty(obj) && output[obj].length > 0) {
+if (output.hasOwnProperty(obj) && metrics[obj].counter > 0) {
 %>
 <h2 id="<%=metrics[obj].link.slice(1)%>"><%=metrics[obj].title%></h2>
 <%
     var result = output[obj];
     switch(env.locale) {
     default:
-        amount = "Found " + result.length + " pages:";
+        amount = "Found " + metrics[obj].counter + " pages:";
         break;
     }
 %>
@@ -290,10 +293,28 @@ if (output.hasOwnProperty(obj) && output[obj].length > 0) {
 <p><strong><%=amount%></strong></p>
 <div class="wideColumnBox wideColumnBoxList">
 <ul>
-<% for (i=0; i < result.length; i++) { %>
+<% if (Array.isArray(result)) {
+    for (i=0; i < result.length; i++) { %>
     <li><a href='<%=result[i].url%>'><%=result[i].title%></a><% if (result[i].note != undefined) { %><br/><small><%=result[i].note%></small><% } %></li>
-<% } %>
-</ul></div>
+<%  } 
+} else { 
+    for (ntag in result) {
+        if (result.hasOwnProperty(ntag)) {
+%>
+    <li>
+        <strong><%= ntag %></strong>
+        <ul>
+<%          for (i=0; i < result[ntag].length; i++) { %>
+            <li><a href='<%=result[ntag][i].url%>'><%=result[ntag][i].title%></a></li>
+<%          } %>
+        </ul>
+    </li>
+<%
+        }
+    }
+} %>
+</ul>
+</div>
 <% }} %>
 
 
