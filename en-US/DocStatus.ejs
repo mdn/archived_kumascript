@@ -21,7 +21,7 @@ if (slug.indexOf("/en-US") != -1) {
 } else {
     enURL = '/en-US/docs/' + slug;
 }
-var pageList = page.subpagesExpand(enURL);
+var pageList = page.subpagesExpand(enURL, '', true);
 var groupTags = [];
 if ($1) {
     groupTags = JSON.parse($1);
