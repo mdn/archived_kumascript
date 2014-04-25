@@ -227,6 +227,27 @@ if (bzdr && bzdr != '') {
 }
 
 
+/* Data for L10n status table */
+
+var l10nResult = {};
+
+function getL10nPages(pageList) {
+    if (pageList) {
+        for (var aPage in pageList) {
+            var url = 'https://developer.mozilla.org' + pageList[aPage].url + '?raw&macros&section=json';
+            var resource = MDN.fetchHTTPResource(url);
+            if (resource != '') {
+                l10nResult[pageList[aPage].locale] = {};
+                l10nResult[pageList[aPage].locale].metrics = JSON.parse(resource);
+                l10nResult[pageList[aPage].locale].url = pageList[aPage].url;
+            }
+        }
+    }
+}
+
+getL10nPages(languages);
+
+
 
 /*** Output ***/
 
@@ -374,47 +395,37 @@ if (output.hasOwnProperty(obj) && metrics[obj].counter > 0) {
 <% } } %>
 
 
-<% /*** Localizations ***/ %>
+<% /*** L10n status table ***/ %>
 
 
 <h2 id="Localizations">Localizations</h2>
 <p>Please help us to localize this documentation into different languages.</p>
-
-<% /* Once we have env.translations, build one table...
-     Could calls localization status json to get the data, with env.translation we can make sure that it is there...
-     eg.g https://developer.mozilla.org/fr/docs/MDN/Doc_status/CSS?raw&macros&section=json
-<table class"standard-table">
-    <thead>
-        <tr>
-            <th>Locale</th>
-            <th>Pages</th> 
-            <th>Translated</th> 
-            <th>Translations up to date</th> 
-        </tr>
-    </thead>
-    <tbody>
-for (i=0; i < languages.length; i++) {
-
+<table class="standard-table">
+  <thead>
     <tr>
-        <td><a href="/=languages[i] + '/docs/' + env.slug">=languages[i]</td>
-        <td>491</td> 
-        <td>38 (8%)</td> 
-        <td>6 (16%)</td> 
+        <th>Language</th>
+        <th>Pages</th>
+        <th>Translated</th>
+        <th>Translations up to date</th>
     </tr>
-    
-}
-    </tbody>
-</table> */
-%>
-
-<div class="wideColumnBox wideColumnBoxList">
-<% for (i=0; i < languages.length; i++) { %>
-    <div style="display: inline-block;">
-        <h3><a href="/<%=languages[i].locale%>/docs/<%=env.slug%>"><%=languages[i].locale%></a></h3>
-        <%-template("page", ['/' + languages[i].locale + '/docs/' + env.slug, "Summary"])%>
-    </div>
-<% } %>
-</div>
+  </thead>
+  <tbody>
+    <%     
+        for (var key in l10nResult) {
+        if (l10nResult.hasOwnProperty(key) && typeof key != 'undefined') {
+        
+        var translationPercent = Math.ceil((l10nResult[key].metrics.translations.counter / l10nResult[key].metrics.pages.counter) * 100);
+        var uptodatePercent = Math.ceil((l10nResult[key].metrics.updateNeeded.counter / l10nResult[key].metrics.pages.counter) * 100);
+    %>
+        <tr>
+            <td><a href="<%=l10nResult[key].url%>"><%=key%></a></td>
+            <td><%=l10nResult[key].metrics.pages.counter%></td>
+            <td><%=l10nResult[key].metrics.translations.counter%> (<%=translationPercent%>%)</td>
+            <td><%=l10nResult[key].metrics.updateNeeded.counter%> (<%=uptodatePercent%>%)</td>
+        </tr>
+    <% }} %>
+</tbody>
+</table>
 
 
 <% /*** Doc status metrics API :-) ***/ %>
