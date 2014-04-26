@@ -9,38 +9,64 @@
 // 
 // {{js_property_attributes(1,1,0)}}
 
-var writable = 'No';
-var enumerable = 'No';
-var configurable = 'No';
+var header, 
+    writable_name, 
+    enumerable_name,
+    configurable_name,
+    yes,
+    no;
+
+switch(env.locale) {
+    case "fr":
+        header = 'Propriétés de';
+        writable_name = 'Écrivable';
+        enumerable_name = 'Énumérable';
+        configurable_name = 'Configurable';
+        yes = 'oui';
+        no = 'non';
+        break;
+    default:
+        header = 'Property attributes of';
+        writable_name = 'Writable';
+        enumerable_name = 'Enumerable';
+        configurable_name = 'Configurable';
+        yes = 'yes';
+        no = 'no';
+        break;
+}
+
+var writable = no;
+var enumerable = no;
+var configurable = no;
 
 if ($0 == 1) {
-    writable = 'Yes';
+    writable = yes;
 }
 if ($1 == 1) {
-    enumerable = 'Yes';
+    enumerable = yes;
 }
 if ($2 == 1) {
-    configurable = 'Yes';
+    configurable = yes;
 }
 
 %>
 <table class="standard-table">
   <thead>
     <tr>
-      <th class="header" colspan="2">Property attributes of <code><%=env.title%></code></th>
+      <th class="header" colspan="2"><%=header%> <code><%=env.title%></code></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Writable</td>
+      <td><%=writable_name%></td>
       <td><%=writable%></td>
     </tr>
     <tr>
-      <td>Enumerable</td>
+      <td><%=enumerable_name%></td>
       <td><%=enumerable%></td>
     </tr>
     <tr>
-      <td>Configurable</td>
+      <td><%=configurable_name%></td>
       <td><%=configurable%></td>
     </tr>
   </tbody>
