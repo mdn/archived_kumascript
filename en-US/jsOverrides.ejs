@@ -78,10 +78,15 @@ var prototypes = {
 
 var prefix;
 
-if(env.locale === "ja") {
-    prefix = '/ja/docs/JavaScript/Reference/Global_Objects/';
-} else if (env.locale === 'en-US') {
-    prefix = '/en-US/docs/Web/JavaScript/Reference/Global_Objects/';
+switch(env.locale) {
+    case "ja":
+        prefix = '/ja/docs/JavaScript/Reference/Global_Objects/';
+    case "fr":
+        prefix = '/fr/docs/JavaScript/Reference/Objets_globaux/';
+        break;
+    default:
+        prefix = '/en-US/docs/Web/JavaScript/Reference/Global_Objects/';
+        break;
 }
 
 var pageuri = wiki.uri(prefix + $0);
