@@ -69,6 +69,11 @@ var s_js_title_related = mdn.localString({
   "fr"   : "En relation :",
   "de"   : "Verwandt:"
 });
+var s_js_title_standard_builtins = mdn.localString({
+  "en-US": "Standard built-in objects",
+  "de"   : "Standard-Objekte"
+});
+
 
 
 // Collect pages
@@ -138,7 +143,7 @@ len = 0;
 
 <section class="Quick_links" id="Quick_Links">
     <ol>
-        <li><strong><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects">Standard built-in objects</a></strong></li>
+        <li><strong><a href="/<%=env.locale%>/docs/Web/JavaScript/Reference/Global_Objects"><%=s_js_title_standard_builtins%></a></strong></li>
 
         <%
         for (object in result) {
