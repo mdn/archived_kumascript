@@ -47,7 +47,7 @@ var metrics = {
     },
     needsTags: {
         title: 'Needs* tags',
-        link: '#Need_tags',
+        link: '#Needs*_tags',
         counter: 0
     },
     editorialReviews: {
@@ -78,6 +78,10 @@ var output = {
     technicalReviews: [],
     outdated: []
 };
+
+if (groupTags.length > 0) {
+    output.noTags = undefined;
+}
 
 
 /*** Add optional and custom metrics to the metrics object ***/
@@ -297,8 +301,9 @@ if (metrics.hasOwnProperty(obj) && typeof metrics[obj] !== 'undefined') {
 
 
 <% 
+
 for (var obj in output) {
-if (output.hasOwnProperty(obj) && metrics[obj].counter > 0) {
+if (output.hasOwnProperty(obj) && typeof metrics[obj] != 'undefined' && metrics[obj].counter > 0) {
 %>
 <h2 id="<%=metrics[obj].link.slice(1)%>"><%=metrics[obj].title%></h2>
 <%
