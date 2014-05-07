@@ -1,0 +1,87 @@
+<%
+// This template allows to build reference tables for HTML
+//
+// Param:
+// $0 : An optional tag to filter the list of HTML elements
+
+var l10n = {
+    element : mdn.localString({
+        "en-US": "Element",
+        "fr"   : "Élément"
+    }),
+    description : mdn.localString({
+        "en-US": "Description"
+    }),
+};
+
+var tag, badge,
+    RGXCleanTag    = /[<>]/g,
+    HTMLRefBaseURL = "/docs/Web/HTML/Element",
+    HTMLLocalBaseURL = "/" + env.locale + HTMLRefBaseURL + "/",
+    HTMLDocPages   = page.subpagesExpand("/en-US" + HTMLRefBaseURL),
+    HTMLTags       = [];
+
+function hasTag(tagList, tag) {
+    if (!Array.isArray(tagList) || !tag) return false;
+    tag = tag.toLowerCase();
+    
+    for (var i = 0, l = tagList.length; i < l; i++) {
+        if (tagList[i].toLowerCase() === tag) return true;
+    }
+
+    return false;
+}
+
+function tagLink(tag) {
+    return template("HTMLelement", [tag])
+}
+
+// Get the relevant pages
+HTMLDocPages.forEach(function (page) {
+    var p, t;
+
+    if (!$0 || hasTag(page.tags, $0)) {
+        t = page.title.replace(RGXCleanTag, "");
+        p = wiki.getPage(HTMLLocalBaseURL + t);
+        HTMLTags.push({
+            tagName      : t,
+            summary      : (p && p.summary) || "",
+            deprecated   : hasTag(page.tags, 'deprecated') || hasTag(page.tags, 'obsolete'),
+            experimental : hasTag(page.tags, 'experimental'),
+            html5        : hasTag(page.tags, 'HTML5')
+        });
+    }
+});
+%>
+<table class="standard-table">
+ <thead>
+  <tr>
+   <th scope="col">&nbsp;</th>
+   <th scope="col"><%- l10n.element %></th>
+   <th scope="col"><%- l10n.description %></th>
+  </tr>
+ </thead>
+ <tbody>
+ <%
+ for (var i = 0, l = HTMLTags.length; i < l; i++) {
+    badge = HTMLTags[i].html5        ? '<a href="/' + env.locale + '/docs/HTML/HTML5"><img alt="HTML5" src="/files/3843/HTML5_Badge_32.png" width="16" height="16"></a>'
+          : HTMLTags[i].experimental ? template("FontAwesomeIcon", ["icon-cogs"])
+          : '&nbsp;';
+    
+    tag = HTMLTags[i].tagName !== 'heading elements' ? tagLink(HTMLTags[i].tagName)
+        : ['h1','h2','h3','h4','h5','h6'].map(tagLink).join(', ');
+    
+    if (HTMLTags[i].deprecated) {
+        tag = '<s class="obsoleteElement deprecatedElement">' + tag + '</s>';
+    }
+ %>
+  <tr>
+   <td style="vertical-align: top;"><%- badge %></td>
+   <td style="vertical-align: top;"><%- tag %></td>
+   <td><%- HTMLTags[i].summary %></td>
+  </tr>
+<%
+}
+%>
+ </tbody>
+</table>
