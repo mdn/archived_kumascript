@@ -130,7 +130,7 @@ switch(lang) {
 
 var stackoverflowURL;
 
-if ($3 == "Firefox OS") {
+if ($3 == "Firefox OS" || $3 == "Open Web Apps") {
    stackoverflowURL = "http://stackoverflow.com/questions/tagged/firefox-os";
 } else if ($3 == "Developer tools") {
    stackoverflowURL = "http://stackoverflow.com/questions/tagged/firefox-developer-tools";    
@@ -140,16 +140,16 @@ if ($3 == "Firefox OS") {
 
 // determine which Twitter link to include
 
-var twitterURLfragment;
+var twitterURLFragment;
 
 if ($3 == "Firefox OS") {
-   twitterURLfragment = "Boot2Gecko";
+   twitterURLFragment = "Boot2Gecko";
 } else if ($3 == "Developer tools") {
-   twitterURLfragment = "FirefoxDevTools";    
+   twitterURLFragment = "FirefoxDevTools";    
 } else if ($3 == "Open Web Apps") {
-   twitterURLfragment = "mozappsdev";    
+   twitterURLFragment = "mozappsdev";    
 } else {
-   twitterURLfragment = "mozilla";    
+   twitterURLFragment = "mozilla";    
 }
 
 // Build the <ul> element
