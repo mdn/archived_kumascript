@@ -6,15 +6,18 @@
 //  $0  The mailing list name
 //  $1  The newsgroup name
 //  $2  The class name to use for the list (null if none)
+//  $3 name of the topic/community (was $0 in CommunityBox template)
 
 var lang = env.locale /* get the page language */ ; 
-var mailingList, newsgroup, googleGroup, webFeed;
+var mailingList, newsgroup, googleGroup, webFeed, stackOverflow, twitter;
 
 /* Translation Targets
     * " mailingList"
 	* " newsgroup"
 	* " googleGroup"
 	* " webFeed"
+    * " stackOverflow"
+    * " twitter"
 */
 switch(lang) {
 	case 'ca':
@@ -22,79 +25,131 @@ switch(lang) {
 		newsgroup = " com un grup de discussió";
 		googleGroup = " com un grup de Google";
 		webFeed = " com un canal web";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'cs':
 		mailingList = " e-mailovou konferenci";
 		newsgroup = " diskuzní skupinu";
 		googleGroup = " Google Group";
 		webFeed = " RSS kanál";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'de':
 		mailingList = " als Mailing-Liste";
 		newsgroup = " als Newsgroup";
 		googleGroup = " als Google Group";
 		webFeed = " als Web-Feed";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'es':
 		mailingList = " como lista de correo";
 		newsgroup = " como grupo de noticias";
 		googleGroup = " como grupo de Google";
 		webFeed = " como RSS";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'fi':
 		mailingList = " sähköposti listana";
 		newsgroup = " uutisryhmänä";
 		googleGroup = " Google Rymänä";
 		webFeed = " RSS kanál";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'fr':
 		mailingList = " Liste de diffusion";
 		newsgroup = " 		newsgroup";
 		googleGroup = " Groupe Google";
 		webFeed = " Flux de syndication";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'it':
 		mailingList = " come mailing list";
 		newsgroup = " come 		newsgroup";
 		googleGroup = " come Gruppo su Google";
 		webFeed = " come Web feed";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'ja':
 		mailingList = " メーリングリストとして";
 		newsgroup = " ニュースグループとして";
 		googleGroup = " Google Group として";
 		webFeed = " フィードとして";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'ko':
 		mailingList = " 메일링 리스트";
 		newsgroup = " 뉴스그룹";
 		googleGroup = " Google 그룹";
 		webFeed = " 웹 Feed";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'pl':
 		mailingList = " jako listę dyskusyjna";
 		newsgroup = " jako 		newsgroup";
 		googleGroup = " jako grupę Google";
 		webFeed = " jako kanał";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'zh-CN':
 		mailingList = " 邮件列表";
 		newsgroup = " 新闻组";
 		googleGroup = " Google Group（中文）";
 		webFeed = " Web feed";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	case 'zh-TW':
 		mailingList = " 郵件討論";
 		newsgroup = " 新聞群組";
 		googleGroup = " Google 群組";
 		webFeed = " feed 消息來源";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
 	default:
 		mailingList = "Mailing list";
 		newsgroup = "Newsgroup";
 		googleGroup = "Google Group";
 		webFeed = "RSS feed";
+        stackOverflow = " Stack Overflow";
+        twitter = " Twitter";
 		break;
+}
+
+// determine which stack overflow link to include
+
+var stackoverflowURL;
+
+if ($3 == "Firefox OS") {
+   stackoverflowURL = "http://stackoverflow.com/questions/tagged/firefox-os";
+} else if ($3 == "Developer tools") {
+   stackoverflowURL = "http://stackoverflow.com/questions/tagged/firefox-developer-tools";    
+} else {
+   stackoverflowURL = "http://stackoverflow.com/r/mozilla";    
+}
+
+// determine which Twitter link to include
+
+var twitterURLfragment;
+
+if ($3 == "Firefox OS") {
+   twitterURLfragment = "Boot2Gecko";
+} else if ($3 == "Developer tools") {
+   twitterURLfragment = "FirefoxDevTools";    
+} else if ($3 == "Open Web Apps") {
+   twitterURLfragment = "mozappsdev";    
+} else {
+   twitterURLfragment = "mozilla";    
 }
 
 // Build the <ul> element
@@ -108,7 +163,9 @@ if ($2 && ($2 != undefined)) {
 
 <%-listElem %>
   <li><%- web.link('https://lists.mozilla.org/listinfo/' + $0, 		mailingList) %></li>
-  <li><%- web.link('news:news.mozilla.org/' + $1, 		newsgroup) %></li>
+  <li><%- web.link('https://twitter.com/' + twitterURLFragment,     	twitter) %></li>
+  <li><%- web.link(stackoverflowURL,         stackOverflow) %></li>
+  //<li><%- web.link('news:news.mozilla.org/' + $1, 		newsgroup) %></li>
   <li><%- web.link('http://groups.google.com/group/' + $1, 		googleGroup) %></li>
   <li><%- web.link('http://groups.google.com/group/' + $1 + '/feeds', 		webFeed) %></li>
 </ul>
