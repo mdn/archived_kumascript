@@ -44,7 +44,7 @@ switch(env.locale) {
     case "de":
         headingStr = "Werde Teil der " + $0 + " Community";
         messageStr = "Mailing Liste/Newsgroup:";
-        messageNoteStr = "Wähle eine der Möglichkeiten, um an der Diskussion teilzunehmen.";
+        messageNoteStr = "Wähle eine der Möglichkeiten, um an der Diskussion teilzunehmen:";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "mehr erfahren</a>)</span>";
         }
@@ -52,7 +52,7 @@ switch(env.locale) {
     case "fr":
         headingStr = "Rejoignez la communauté " + $0 ;
         messageStr = "Liste de diffusion/newsgroup :";
-        messageNoteStr = "Choisissez votre méthode préférée pour rejoindre la discussion.";
+        messageNoteStr = "Choisissez votre méthode préférée pour rejoindre la discussion:";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "en apprendre plus</a>)</span>";
         }
@@ -60,7 +60,7 @@ switch(env.locale) {
     case "it":
         headingStr = "Unisciti alla comunità " + $0;
         messageStr = "Mailing list/newsgroup:";
-        messageNoteStr = "Scegli il metodo che preferisci per unirti alla discussione.";
+        messageNoteStr = "Scegli il metodo che preferisci per unirti alla discussione:";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "maggiori informazioni</a>)</span>";
         }
@@ -68,7 +68,7 @@ switch(env.locale) {
     case "pt-BR":
         headingStr = "Junte-se à comunidade " + $0;
         messageStr = "Lista de emails/newsgroup:";
-        messageNoteStr = "Escolha a sua forma preferida de juntar-se à discussão.";
+        messageNoteStr = "Escolha a sua forma preferida de juntar-se à discussão:";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "saiba mais</a>)</span>";
         }
@@ -76,7 +76,7 @@ switch(env.locale) {
     case "en":
         headingStr = "Join the " + $0 + " community";
         messageStr = "Mailing list/newsgroup:";
-        messageNoteStr = "Choose your preferred method for joining the discussion.";
+        messageNoteStr = "Choose your preferred method for joining the discussion:";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
         }
@@ -85,7 +85,7 @@ switch(env.locale) {
         needDir = "ltr";
         headingStr = "Join the " + $0 + " community";
         messageStr = "Mailing list/newsgroup:";
-        messageNoteStr = "Choose your preferred method for joining the discussion.";
+        messageNoteStr = "Choose your preferred method for joining the discussion:";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
         }
@@ -162,9 +162,9 @@ if (haveExtra || ircLink.length) {
     <div class="column-container">
         <h2 id="Join_the_community"><%=headingStr%></h2>
         <div class="column-half">
-            <div class="communitysubhead"><%=messageStr%></div>
-            <div class="smaller"><%-messageNoteStr%></div>
-            <%-template("DiscussionList", [$1, $2, "communitymailinglist"])%>
+            <!--<div class="communitysubhead"><%=messageStr%></div>-->
+            <div class="communitysubhead"><%-messageNoteStr%></div>
+            <%-template("DiscussionList", [$1, $2, "communitymailinglist", $0])%>
         </div>
         <div class="column-half">
             <%-extraLinks%>
