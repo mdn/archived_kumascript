@@ -34,7 +34,7 @@ if ($2) {
 // Allow only the following local to go to the new URL
 // as other locals haven't move the pages yet.
 // fr is on its way to move, even if it's not complete it's easier that way
-var filter = ['en-US', 'ja', 'fr', 'ko'];
+var filter = ['en-US', 'ja', 'fr', 'ko', 'pt-BR', 'zh-CN'];
 
 if (filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) {
     URL = URLnew;
