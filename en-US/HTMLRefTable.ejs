@@ -2,7 +2,10 @@
 // This template allows to build reference tables for HTML
 //
 // Param:
-// $0 : An optional tag to filter the list of HTML elements
+// $0 : An optional tag to filter the list of HTML elements or a configuration object
+//      The configuration object get to optional parameters:
+//      * include : An array of tags, the HTML Element page must have one of them to be listed
+//      * exclude : An array of tags, the HTML Element page must NOT have any of them to be listed
 
 var l10n = {
     element : mdn.localString({
@@ -15,40 +18,53 @@ var l10n = {
 };
 
 var tag, badge,
+    TagFilters = {
+        include : typeof $0 === 'string' ? [$0]
+                : $0 && $0.include && Array.isArray($0.include) ? $0.include
+                : [],
+        exclude : $0 && $0.exclude && Array.isArray($0.exclude) ? $0.exclude
+                : []
+    }
     RGXCleanTag    = /[<>]/g,
     HTMLRefBaseURL = "/docs/Web/HTML/Element",
     HTMLLocalBaseURL = "/" + env.locale + HTMLRefBaseURL + "/",
     HTMLDocPages   = page.subpagesExpand("/en-US" + HTMLRefBaseURL),
     HTMLTags       = [];
 
-function hasTag(tagList, tag) {
-    if (!Array.isArray(tagList) || !tag) return false;
-    tag = tag.toLowerCase();
+function hasCommonTag(A, B) {
+    if (!Array.isArray(A) || !Array.isArray(A)) return false;
+
+    // We check tag as case insensitive.
+    var fn = function (v) { return v.toLowerCase(); };
     
-    for (var i = 0, l = tagList.length; i < l; i++) {
-        if (tagList[i].toLowerCase() === tag) return true;
+    // To fasten check, we make sure b is always the smaller array.
+    var a = A.length >= B.length ? A.map(fn) : B.map(fn);
+    var b = A.length >= B.length ? B.map(fn) : A.map(fn);
+    
+    for (var i in b) {
+        if (a.indexOf(b[i]) > -1) return true;    
     }
 
     return false;
 }
 
-function tagLink(tag) {
-    return template("HTMLelement", [tag])
-}
-
 // Get the relevant pages
 HTMLDocPages.forEach(function (page) {
-    var p, t;
+    var p, t, o;
 
-    if (!$0 || hasTag(page.tags, $0)) {
+    if ((TagFilters.include.length === 0 ||  hasCommonTag(page.tags, TagFilters.include))
+    &&  (TagFilters.exclude.length === 0 || !hasCommonTag(page.tags, TagFilters.exclude))) {
         t = page.title.replace(RGXCleanTag, "");
         p = wiki.getPage(HTMLLocalBaseURL + t);
+
         HTMLTags.push({
             tagName      : t,
+            tagLink      : t.toLowerCase() !== 'heading elements' ? template("HTMLelement", [t])
+                         : ['h1','h2','h3','h4','h5','h6'].map(function (tg) { return template("HTMLelement", [tg]); }).join(', '),
             summary      : (p && p.summary) || "",
-            deprecated   : hasTag(page.tags, 'deprecated') || hasTag(page.tags, 'obsolete'),
-            experimental : hasTag(page.tags, 'experimental'),
-            html5        : hasTag(page.tags, 'HTML5')
+            deprecated   : hasCommonTag(page.tags, ['deprecated', 'obsolete']),
+            experimental : hasCommonTag(page.tags, ['experimental']),
+            html5        : hasCommonTag(page.tags, ['HTML5'])
         });
     }
 });
@@ -68,16 +84,17 @@ HTMLDocPages.forEach(function (page) {
           : HTMLTags[i].experimental ? template("FontAwesomeIcon", ["icon-cogs"])
           : '&nbsp;';
     
-    tag = HTMLTags[i].tagName !== 'heading elements' ? tagLink(HTMLTags[i].tagName)
-        : ['h1','h2','h3','h4','h5','h6'].map(tagLink).join(', ');
-    
+    /* Curent CSS styles provide a bad contrast so we avoid doing this yet.
     if (HTMLTags[i].deprecated) {
-        tag = '<s class="obsoleteElement deprecatedElement">' + tag + '</s>';
+        tag = '<s class="obsoleteElement deprecatedElement">' + HTMLTags[i].tagLink + '</s>';
+    } else {
+        tag = HTMLTags[i].tagLink;
     }
+    */
  %>
   <tr>
    <td style="vertical-align: top;"><%- badge %></td>
-   <td style="vertical-align: top;"><%- tag %></td>
+   <td style="vertical-align: top;"><%- HTMLTags[i].tagLink %></td>
    <td><%- HTMLTags[i].summary %></td>
   </tr>
 <%
