@@ -13,7 +13,7 @@ var str = $1 || $0;
 var css = !$2 ? "glossaryLink" : "";
 
 // Terme location
-var URL = "/" + lang + "/docs/Glossary/" + $0.replace(' ','_');
+var URL = "/" + lang + "/docs/Glossary/" + $0.replace(/\s+/g,'_');
 
 var summary = "";
 var page = wiki.getPage(URL);
