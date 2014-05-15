@@ -7,6 +7,7 @@
 //  $0 - API name
 //  $1 - name to display (optional)
 //  $2 - anchor (#xyz) (optional)
+//  $3 - If set, do not put the text in <code></code>
 //
 //  {{jsxref("Date.prototype.getNumber()")}}
 //  {{jsxref("Global_Objects/Date/getNumber", "Date.prototype.getNumber()")}}
@@ -47,4 +48,8 @@ if (page && page.summary) {
     }
 }
 
-%><a href="<%- URL + $2 %>" title="<%-summary%>"><code><%= str %></code></a>
+var code = '';
+var endcode = '';
+if (!$3) { code = '<code>'; endcode = '</code>' }
+
+%><a href="<%- URL + $2 %>" title="<%-summary%>"><%- code %><%= str %><%- endcode %></a>
