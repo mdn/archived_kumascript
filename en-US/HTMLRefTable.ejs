@@ -3,9 +3,10 @@
 //
 // Param:
 // $0 : An optional tag to filter the list of HTML elements or a configuration object
-//      The configuration object get to optional parameters:
+//      The configuration object get three optional parameters:
 //      * include : An array of tags, the HTML Element page must have one of them to be listed
 //      * exclude : An array of tags, the HTML Element page must NOT have any of them to be listed
+//      * elements: An array of elements name to add to the list of HTML elements (useful for custom list or not documented elements)  
 
 var l10n = {
     element : mdn.localString({
@@ -17,14 +18,19 @@ var l10n = {
     }),
 };
 
+function lowerMe(S) {
+    return S.toLowerCase();
+}
+
 var tag, badge,
     TagFilters = {
-        include : typeof $0 === 'string' ? [$0]
-                : $0 && $0.include && Array.isArray($0.include) ? $0.include
+        include : typeof $0 === 'string' ? [lowerMe($0)]
+                : $0 && $0.include && Array.isArray($0.include) ? $0.include.map(lowerMe)
                 : [],
-        exclude : $0 && $0.exclude && Array.isArray($0.exclude) ? $0.exclude
+        exclude : $0 && $0.exclude && Array.isArray($0.exclude) ? $0.exclude.map(lowerMe)
                 : []
-    }
+    },
+    ForcedElements = $0 && $0.elements && Array.isArray($0.elements) ? $0.elements.map(lowerMe) : [],
     RGXCleanTag    = /[<>]/g,
     HTMLRefBaseURL = "/docs/Web/HTML/Element",
     HTMLLocalBaseURL = "/" + env.locale + HTMLRefBaseURL + "/",
@@ -33,13 +39,10 @@ var tag, badge,
 
 function hasCommonTag(A, B) {
     if (!Array.isArray(A) || !Array.isArray(A)) return false;
-
-    // We check tag as case insensitive.
-    var fn = function (v) { return v.toLowerCase(); };
     
     // To fasten check, we make sure b is always the smaller array.
-    var a = A.length >= B.length ? A.map(fn) : B.map(fn);
-    var b = A.length >= B.length ? B.map(fn) : A.map(fn);
+    var a = A.length >= B.length ? A : B;
+    var b = A.length >= B.length ? B : A;
     
     for (var i in b) {
         if (a.indexOf(b[i]) > -1) return true;    
@@ -50,23 +53,53 @@ function hasCommonTag(A, B) {
 
 // Get the relevant pages
 HTMLDocPages.forEach(function (page) {
-    var p, t, o;
+    var p,
+        t = lowerMe(page.title.replace(RGXCleanTag, "")),
+        tags = page.tags.map(lowerMe);
 
-    if ((TagFilters.include.length === 0 ||  hasCommonTag(page.tags, TagFilters.include))
-    &&  (TagFilters.exclude.length === 0 || !hasCommonTag(page.tags, TagFilters.exclude))) {
-        t = page.title.replace(RGXCleanTag, "");
+    if (ForcedElements.indexOf(t) > -1
+    || ((TagFilters.include.length === 0 ||  hasCommonTag(tags, TagFilters.include))
+    &&  (TagFilters.exclude.length === 0 || !hasCommonTag(tags, TagFilters.exclude)))){
         p = wiki.getPage(HTMLLocalBaseURL + t);
 
         HTMLTags.push({
             tagName      : t,
-            tagLink      : t.toLowerCase() !== 'heading elements' ? template("HTMLelement", [t])
+            tagLink      : t !== 'heading elements' ? template("HTMLelement", [t])
                          : ['h1','h2','h3','h4','h5','h6'].map(function (tg) { return template("HTMLelement", [tg]); }).join(', '),
             summary      : (p && p.summary) || "",
-            deprecated   : hasCommonTag(page.tags, ['deprecated', 'obsolete']),
-            experimental : hasCommonTag(page.tags, ['experimental']),
-            html5        : hasCommonTag(page.tags, ['HTML5'])
+            deprecated   : hasCommonTag(tags, ['deprecated', 'obsolete']),
+            experimental : hasCommonTag(tags, ['experimental']),
+            html5        : hasCommonTag(tags, ['html5']),
+            component    : hasCommonTag(tags, ['html components'])
         });
     }
+});
+
+var ElementList = HTMLTags.map(function (ele) {
+    return ele.tagName;
+});
+var missingElement = ForcedElements.map(function (ele) {
+    if(ElementList.indexOf(ele) === -1) {
+        return ele;
+    }
+});
+
+if (missingElement.length > 0) {
+    missingElement.forEach(function (t) {
+        HTMLTags.push({
+            tagName      : t,
+            tagLink      : template("HTMLelement", [t]),
+            summary      : "",
+            deprecated   : false,
+            experimental : false,
+            html5        : false,
+            component    : false
+        });
+    });
+}
+
+HTMLTags.sort(function (a, b) {
+    return a.tagName.localeCompare(b.tagName);
 });
 %>
 <table class="standard-table">
@@ -80,17 +113,11 @@ HTMLDocPages.forEach(function (page) {
  <tbody>
  <%
  for (var i = 0, l = HTMLTags.length; i < l; i++) {
-    badge = HTMLTags[i].html5        ? '<a href="/' + env.locale + '/docs/HTML/HTML5"><img alt="HTML5" src="/files/3843/HTML5_Badge_32.png" width="16" height="16"></a>'
-          : HTMLTags[i].experimental ? template("FontAwesomeIcon", ["icon-cogs"])
+    badge = HTMLTags[i].deprecated   ? template("FontAwesomeIcon", ["icon-thumbs-down-alt"])
+          : HTMLTags[i].experimental ? template("FontAwesomeIcon", ["icon-beaker"])
+          : HTMLTags[i].component    ? template("FontAwesomeIcon", ["icon-cogs"])
+          : HTMLTags[i].html5        ? '<a href="/' + env.locale + '/docs/HTML/HTML5"><img alt="HTML5" src="/files/3843/HTML5_Badge_32.png" width="16" height="16"></a>'
           : '&nbsp;';
-    
-    /* Curent CSS styles provide a bad contrast so we avoid doing this yet.
-    if (HTMLTags[i].deprecated) {
-        tag = '<s class="obsoleteElement deprecatedElement">' + HTMLTags[i].tagLink + '</s>';
-    } else {
-        tag = HTMLTags[i].tagLink;
-    }
-    */
  %>
   <tr>
    <td style="vertical-align: top;"><%- badge %></td>
