@@ -8,6 +8,10 @@
 //      * exclude : An array of tags, the HTML Element page must NOT have any of them to be listed
 //      * elements: An array of elements name to add to the list of HTML elements (useful for custom list or not documented elements)  
 
+
+// LOCALISATION
+// ------------
+
 var l10n = {
     element : mdn.localString({
         "en-US": "Element",
@@ -16,11 +20,56 @@ var l10n = {
     description : mdn.localString({
         "en-US": "Description"
     }),
+    
+    deprecated : mdn.localString({
+        "en-US": "This element is deprecated",
+        "fr"   : "Cet élément est obsolète"
+    }),
+    
+    experimental : mdn.localString({
+        "en-US": "This element is considered experimental",
+        "fr"   : "Cet élément est considéré comme experimental"
+    }),
+    
+    html5 : mdn.localString({
+        "en-US": "This element has been introduce with HTML5",
+        "fr"   : "Cet élément a été ajouté avec HTML5"
+    }),
+    
+    components : mdn.localString({
+        "en-US": "This element has been introduce with the Web Components specifications",
+        "fr"   : "Cet élément a été introduit par les spécifications sur les Web Components"
+    })
 };
 
+
+// UTILS
+// -----
+
+// Simple function to turn a string into lower case. This especialy made to work
+// as a walking function for Array.prototypt.map
 function lowerMe(S) {
     return S.toLowerCase();
 }
+
+// Function to check is two Arrays has at least one value in common.
+function hasCommonTag(A, B) {
+    if (!Array.isArray(A) || !Array.isArray(A)) return false;
+    
+    // To fasten check, we make sure b is always the smaller array.
+    var a = A.length >= B.length ? A : B;
+    var b = A.length >= B.length ? B : A;
+    
+    for (var i in b) {
+        if (a.indexOf(b[i]) > -1) return true;    
+    }
+
+    return false;
+}
+
+
+// CODE VARIABLES
+// --------------
 
 var tag, badge,
     TagFilters = {
@@ -37,21 +86,11 @@ var tag, badge,
     HTMLDocPages   = page.subpagesExpand("/en-US" + HTMLRefBaseURL),
     HTMLTags       = [];
 
-function hasCommonTag(A, B) {
-    if (!Array.isArray(A) || !Array.isArray(A)) return false;
-    
-    // To fasten check, we make sure b is always the smaller array.
-    var a = A.length >= B.length ? A : B;
-    var b = A.length >= B.length ? B : A;
-    
-    for (var i in b) {
-        if (a.indexOf(b[i]) > -1) return true;    
-    }
 
-    return false;
-}
+// BUSINESS LOGIC
+// --------------
 
-// Get the relevant pages
+// Get the relevant pages for HTML Elements based on the template input
 HTMLDocPages.forEach(function (page) {
     var p,
         t = lowerMe(page.title.replace(RGXCleanTag, "")),
@@ -64,8 +103,11 @@ HTMLDocPages.forEach(function (page) {
 
         HTMLTags.push({
             tagName      : t,
+            
+            // We need to special case the "Heading elements" article which stand for all hn elements.
             tagLink      : t !== 'heading elements' ? template("HTMLelement", [t])
                          : ['h1','h2','h3','h4','h5','h6'].map(function (tg) { return template("HTMLelement", [tg]); }).join(', '),
+            
             summary      : (p && p.summary) || "",
             deprecated   : hasCommonTag(tags, ['deprecated', 'obsolete']),
             experimental : hasCommonTag(tags, ['experimental']),
@@ -75,9 +117,12 @@ HTMLDocPages.forEach(function (page) {
     }
 });
 
+// Handle elements inside the ForcedElements liste which currently do not have
+// an english documentation page yet.
 var ElementList = HTMLTags.map(function (ele) {
     return ele.tagName;
 });
+
 var missingElement = ForcedElements.map(function (ele) {
     if(ElementList.indexOf(ele) === -1) {
         return ele;
@@ -98,6 +143,7 @@ if (missingElement.length > 0) {
     });
 }
 
+// We make sure elements are sorted in alphabetical order.
 HTMLTags.sort(function (a, b) {
     return a.tagName.localeCompare(b.tagName);
 });
@@ -113,10 +159,10 @@ HTMLTags.sort(function (a, b) {
  <tbody>
  <%
  for (var i = 0, l = HTMLTags.length; i < l; i++) {
-    badge = HTMLTags[i].deprecated   ? template("FontAwesomeIcon", ["icon-thumbs-down-alt"])
-          : HTMLTags[i].experimental ? template("FontAwesomeIcon", ["icon-beaker"])
-          : HTMLTags[i].component    ? template("FontAwesomeIcon", ["icon-cogs"])
-          : HTMLTags[i].html5        ? '<a href="/' + env.locale + '/docs/HTML/HTML5"><img alt="HTML5" src="/files/3843/HTML5_Badge_32.png" width="16" height="16"></a>'
+    badge = HTMLTags[i].deprecated   ? template("FontAwesomeIcon", ["icon-thumbs-down-alt", l10n.deprecated])
+          : HTMLTags[i].experimental ? template("FontAwesomeIcon", ["icon-beaker", l10n.experimental])
+          : HTMLTags[i].component    ? template("FontAwesomeIcon", ["icon-cogs", l10n.components])
+          : HTMLTags[i].html5        ? '<a href="/' + env.locale + '/docs/HTML/HTML5"><img alt="' + l10n.html5 + '" src="/files/3843/HTML5_Badge_32.png" width="16" height="16"></a>'
           : '&nbsp;';
  %>
   <tr>
