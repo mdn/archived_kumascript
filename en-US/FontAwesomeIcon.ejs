@@ -3,5 +3,8 @@
 //
 // Parameters:
 //  $0  Icon name
+//  $1  An optional title
+
+var title = $1 ? ' title="' + $1 + '"' : '';
 %>
-<i class="<%=$0%>"></i>
+<i class="<%=$0%>"<%=title%>></i>
