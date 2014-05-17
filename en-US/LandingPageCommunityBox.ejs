@@ -50,6 +50,13 @@ switch(env.locale) {
             channelStr = "Du kannst auch über den " + ircLink + " Kannal auf " + ircInfoLink + " live mitdiskutieren.";
         }
         break;
+    case "zh-CN":
+        headingStr = "社区";
+        messageStr = "我们有下面这些与 " + $0 + " 相关的社区：";
+        if ($3) {
+            channelStr = "另外，也欢迎加入我们的 " + ircLink + " 频道 " + ircInfoLink + " 。";
+        }
+        break;
     default:
         headingStr = "Community";
         messageStr = "Join the " + $0 + " community on our mailing list or newsgroup:";
