@@ -53,8 +53,13 @@ var termList = page.subpagesExpand();
 var numTerms = termList.length;
 var html = "";
 
+var documentation = mdn.localString({
+  "en-US": "Documentation",
+  "zh-CN": "文档"
+});
+
 if (numTerms) {
-    var html = "<h2 class='Documentation'>Documentation</h2><dl>";
+    var html = "<h2 class='Documentation'>" + documentation + "</h2><dl>";
     
     termList.sort(pageSorter);
     
