@@ -11,6 +11,9 @@
 //  $1  URL
 
 var page = wiki.getPage($1);
-var summary = wiki.escapeQuotes(page.summary);
+var summary = '';
+if (page.summary) { // If the page doesn't exist (not yet translated)
+    summary = wiki.escapeQuotes(page.summary);
+}
 %>
-<a href="<%-$1%>" title="<%-summary%>"><%-$0%></a>
+<a href="<%-$1%>" <%- summary?'title="'+summary+'"':''%>><%-$0%></a>
