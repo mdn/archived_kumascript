@@ -26,6 +26,10 @@ var specList = {
         name : "Battery Status API",
         url  : "http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html"
     },
+    'Beacon':{
+        name : 'Beacon',
+        url  : 'http://www.w3.org/TR/beacon/'
+    },
     'Clipboard API':{
         name : "Clipboard API",
         url  : "http://dev.w3.org/2006/webapi/clipops/clipops.html"
@@ -354,6 +358,10 @@ var specList = {
         name : 'HTML5 Web Messaging',
         url  : 'http://dev.w3.org/html5/postmsg/'
     },
+    'HTML5 Web application':{
+        name : 'HTML5 Web application',
+        url  : 'http://www.w3.org/html/wg/drafts/html/master/webappapis.html'
+    },
     'HTML5 W3C':{
         name : 'HTML5',
         url  : 'http://www.w3.org/TR/html5/'
@@ -533,11 +541,7 @@ var specList = {
     'XMLHttpRequest':{
         name : 'XMLHttpRequest',
         url  : 'https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html'
-    },
-    'Beacon':{
-        name : 'Beacon',
-        url  : 'http://www.w3.org/TR/beacon/'
-    } 
+    }
 }
 
 specList['Compositing'] = specList['Blending'];
@@ -550,7 +554,7 @@ name = specList[spec] && specList[spec].name || 'Unknown';
 url  = specList[spec] && specList[spec].url  || 'about:unknown';
 
 if ($2) {
-	title = mdn.localString({
+    title = mdn.localString({
 		"en-US": "The definition of '" + $2 + "' in that specification.",
 		"fr": "La définition de '" + $2 + "' dans cette spécification.",
 		"de": "Die Definition von '" + $2 + "' in dieser Spezifikation."
