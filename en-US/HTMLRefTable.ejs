@@ -17,6 +17,7 @@ var l10n = {
         "en-US": "Element",
         "fr"   : "Élément"
     }),
+
     description : mdn.localString({
         "en-US": "Description"
     }),
@@ -159,10 +160,10 @@ HTMLTags.sort(function (a, b) {
  <tbody>
  <%
  for (var i = 0, l = HTMLTags.length; i < l; i++) {
-    badge = HTMLTags[i].deprecated   ? template("FontAwesomeIcon", ["icon-thumbs-down-alt", l10n.deprecated])
-          : HTMLTags[i].experimental ? template("FontAwesomeIcon", ["icon-beaker", l10n.experimental])
-          : HTMLTags[i].component    ? template("FontAwesomeIcon", ["icon-cogs", l10n.components])
-          : HTMLTags[i].html5        ? '<a href="/' + env.locale + '/docs/HTML/HTML5"><img alt="' + l10n.html5 + '" src="/files/3843/HTML5_Badge_32.png" width="16" height="16"></a>'
+    badge = HTMLTags[i].deprecated   ? '<span title="' + l10n.deprecated   + '">' + template("FontAwesomeIcon", ["icon-thumbs-down-alt"]) + '<span>'
+          : HTMLTags[i].experimental ? '<span title="' + l10n.experimental + '">' + template("FontAwesomeIcon", ["icon-beaker"]) + '<span>'
+          : HTMLTags[i].component    ? '<span title="' + l10n.components   + '">' + template("FontAwesomeIcon", ["icon-cogs"]) + '<span>'
+          : HTMLTags[i].html5        ? '<a href="/' + env.locale + '/docs/HTML/HTML5"><img alt="HTML5" title="' + l10n.html5 + '" src="/files/3843/HTML5_Badge_32.png" width="16" height="16"></a>'
           : '&nbsp;';
  %>
   <tr>
