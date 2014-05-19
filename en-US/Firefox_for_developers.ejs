@@ -23,12 +23,7 @@ var str = mdn.localString({
     "en-US": ["Firefox ", " for developers"]
 });
 
-var loc = mdn.localString({
-    "en-US" : "en-US",
-    "fr" : "fr",
-    "ja": "ja",
-    "zh-CN": "zh-CN"
-});
+var loc = env.locale;
 
 // for newer version
 for (var i = maxVersion; i >= minVersion; i--) {
