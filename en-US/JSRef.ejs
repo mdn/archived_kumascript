@@ -170,12 +170,6 @@ len = 0;
             <% for (aPage in resultProperties) { %>
                 <li>
                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
-                        <s class="obsoleteElement">
-                    <% } %>
-                    <% if (resultProperties[aPage].url != '') { %>
-                      <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary || '')%>"><code><%-resultProperties[aPage].title%></code></a>
-                    <% } %>
-                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
                         </s>
                     <% } %>
                     <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
@@ -190,6 +184,12 @@ len = 0;
                     <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
                         <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
                     <% } %>
+                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                        <s class="obsoleteElement">
+                    <% } %>
+                    <% if (resultProperties[aPage].url != '') { %>
+                      <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary || '')%>"><code><%-resultProperties[aPage].title%></code></a>
+                    <% } %>
                 </li>
             <% } %>
             </ol>
@@ -200,12 +200,6 @@ len = 0;
             <ol>
             <% for (aPage in resultMethods) { %>
                 <li>
-                     <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
-                        <s class="obsoleteElement">
-                    <% } %>
-                    <% if (resultMethods[aPage].url != '') { %>
-                        <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary || '')%>"><code><%-resultMethods[aPage].title%></code></a>
-                    <% } %>
                     <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
                         </s>
                     <% } %>
@@ -220,6 +214,12 @@ len = 0;
                     <% } %>
                     <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
                         <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
+                    <% } %>
+                     <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
+                        <s class="obsoleteElement">
+                    <% } %>
+                    <% if (resultMethods[aPage].url != '') { %>
+                        <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary || '')%>"><code><%-resultMethods[aPage].title%></code></a>
                     <% } %>
                 </li>
             <% } %>
