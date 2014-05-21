@@ -559,6 +559,9 @@ if ($2) {
 		"fr": "La définition de '" + $2 + "' dans cette spécification.",
 		"de": "Die Definition von '" + $2 + "' in dieser Spezifikation."
 	});	
+    name = mdn.localString({
+    	"en-US": $2 + ' in ' + name
+	});	
 } else {
 	title = mdn.localString({
 		"en-US": "The '" + name + "' specification",
@@ -567,7 +570,7 @@ if ($2) {
 	});	
 }
 
-result = '<a href="' + url + anchor + '" lang="en" class="external" title="' + title + '">' + $2 + ' in ' + name + "</a>";
+result = '<a href="' + url + anchor + '" lang="en" class="external" title="' + title + '">' + name + "</a>";
 
 
 %><%- result %>
