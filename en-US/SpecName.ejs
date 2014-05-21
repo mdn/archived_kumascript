@@ -567,7 +567,7 @@ if ($2) {
 	});	
 }
 
-result = '<a href="' + url + anchor + '" lang="en" class="external" title="' + title + '">' + name + "</a>";
+result = '<a href="' + url + anchor + '" lang="en" class="external" title="' + title + '">' + $2 + ' in ' + name + "</a>";
 
 
 %><%- result %>
