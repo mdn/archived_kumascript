@@ -558,7 +558,8 @@ if ($2) {
     title = mdn.localString({
 		"en-US": "The definition of '" + $2 + "' in that specification.",
 		"fr": "La définition de '" + $2 + "' dans cette spécification.",
-		"de": "Die Definition von '" + $2 + "' in dieser Spezifikation."
+		"de": "Die Definition von '" + $2 + "' in dieser Spezifikation.",
+        "zh-CN": $2
 	});
     
     result = '<a href="' + url + anchor + '" hreflang="en" lang="en" class="external">' + name + '<br><small lang="' + lang + '">' + title + "</small></a>";
@@ -567,7 +568,8 @@ if ($2) {
 	title = mdn.localString({
 		"en-US": "The '" + name + "' specification",
 		"fr": "La spécificaction '" + name + "'",
-		"de": "Die '" + name + "' Spezifikation"
+    	"de": "Die '" + name + "' Spezifikation",
+        "zh-CN": name
 	});
     
     result = '<a href="' + url + anchor + '" hreflang="en" lang="en" class="external" title="' + title + '">' + name + "</a>";
