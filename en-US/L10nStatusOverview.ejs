@@ -16,15 +16,17 @@ var pageList = page.subpagesExpand('/' + env.locale + '/docs/MDN/Doc_status');
 function getPages(pageList) {
     if (pageList) {
         for (var aPage in pageList) {
-            var url = 'https://developer.mozilla.org' + pageList[aPage].url + '?raw&macros&section=json';
-            var resource = MDN.fetchHTTPResource(url);
-            if (resource != '') {
-                result[pageList[aPage].title] = {};
-                result[pageList[aPage].title].metrics = JSON.parse(resource);
-                result[pageList[aPage].title].url = pageList[aPage].url;
-            }
+            if (pageList[aPage].url.indexOf("Doc_status/Overview") == -1) {
+                var url = 'https://developer.mozilla.org' + pageList[aPage].url + '?raw&macros&section=json';
+                var resource = MDN.fetchHTTPResource(url);
+                if (resource != '') {
+                    result[pageList[aPage].title] = {};
+                    result[pageList[aPage].title].metrics = JSON.parse(resource);
+                    result[pageList[aPage].title].url = pageList[aPage].url;
+                }
             
-            var subpage = getPages(pageList[aPage].subpages);
+                var subpage = getPages(pageList[aPage].subpages);
+            }
         }
     }
 }
@@ -46,18 +48,22 @@ getPages(pageList);
     <%     
         for (var key in result) {
         if (result.hasOwnProperty(key) && typeof key != 'undefined') {
-        totalPages += result[key].metrics.pages.counter;
-        totalTranslated += result[key].metrics.translations.counter;
-        totalUpToDate += result[key].metrics.updateNeeded.counter;
+            var pageCounter = result[key].metrics.pages.counter || 0;
+            var translationCounter = result[key].metrics.translations.counter || 0;
+            var updateCounter = result[key].metrics.updateNeeded.counter || 0;
+       
+            totalPages += pageCounter;
+            totalTranslated += translationCounter;
+            totalUpToDate += updateCounter;
         
-        var translationPercent = Math.ceil((result[key].metrics.translations.counter / result[key].metrics.pages.counter) * 100);
-        var uptodatePercent = Math.ceil((result[key].metrics.updateNeeded.counter / result[key].metrics.pages.counter) * 100);
+            var translationPercent = Math.ceil((translationCounter / pageCounter) * 100);
+            var uptodatePercent = Math.ceil((updateCounter / pageCounter) * 100);
     %>
         <tr>
             <td><a href="<%=result[key].url%>"><%=key.replace("documentation status", "", "i")%></a></td>
-            <td><%=result[key].metrics.pages.counter%></td>
-            <td><%=result[key].metrics.translations.counter%> (<%=translationPercent%>%)</td>
-            <td><%=result[key].metrics.updateNeeded.counter%> (<%=uptodatePercent%>%)</td>
+            <td><%=pageCounter%></td>
+            <td><%=translationCounter%> (<%=translationPercent%>%)</td>
+            <td><%=updateCounter%> (<%=uptodatePercent%>%)</td>
         </tr>
     <% }} %>
     <tr>
