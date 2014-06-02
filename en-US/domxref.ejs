@@ -19,6 +19,7 @@ var lang = env.locale;
 var api = $0;
 var str = $1 || $0;
 
+if (api.indexOf(" ") !== -1) api = api.replace(" ", "_");
 if (api.substr(-2) === '()') api = api.substr(0, api.length - 2);
 
 var URLnew = "/" + lang + '/docs/Web/API/' + api;
