@@ -21,18 +21,19 @@ var filter = ['en-US', 'ja', 'de', 'bn-BD'];
 
 if (filter.indexOf(lang) === -1) { URL = "/" + lang + "/docs/CSS/" + $0 + $2; }
 
+var thisPage = wiki.getPage(URL);
+
 if (!$1) {
-    if (page.hasTag(wiki.getPage(URL), "CSS Function")) {
+    if (page.hasTag(thisPage, "CSS Function")) {
         str += "()";
     }
 }
     
 var summary = "";
-var page = wiki.getPage(URL);
 
 if (!$2) {
-    if (page && page.summary) {
-        summary = mdn.escapeQuotes(page.summary);
+    if (thisPage && thisPage.summary) {
+        summary = mdn.escapeQuotes(thisPage.summary);
     } else {
         summary = "The documentation about this has not yet been written; please consider contributing!";
     }
