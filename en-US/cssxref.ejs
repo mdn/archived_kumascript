@@ -28,7 +28,7 @@ if (!$1) {
 }
     
 var summary = "";
-/*var page = wiki.getPage(URL);
+var page = wiki.getPage(URL);
 
 if (!$2) {
     if (page && page.summary) {
@@ -36,5 +36,5 @@ if (!$2) {
     } else {
         summary = "The documentation about this has not yet been written; please consider contributing!";
     }
-}*/
+}
 %><a href="<%- URL %>" title="<%-summary%>"><code><%= str %></code></a>
