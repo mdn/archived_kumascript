@@ -21,6 +21,12 @@ var filter = ['en-US', 'ja', 'de', 'bn-BD'];
 
 if (filter.indexOf(lang) === -1) { URL = "/" + lang + "/docs/CSS/" + $0 + $2; }
 
+if (!$1) {
+    if (page.hasTag(wiki.getPage(URL), "CSS Function")) {
+        str += "()";
+    }
+}
+    
 var summary = "";
 /*var page = wiki.getPage(URL);
 
