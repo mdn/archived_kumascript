@@ -14,7 +14,14 @@ var lang = env.locale;
 var api = $0;
 var str = $1 || $0;
  
-var URL = "/" + lang + '/docs/Web/Reference/Events/' + api;
+var URL = "/" + lang + "/docs/Web/Events/" + api + $2;
+ 
+// Locals that use the new location
+// Add your local when you have moved your pages
+var filter = ['en-US'];
+
+if (filter.indexOf(lang) === -1) { URL = "/" + lang + '/docs/Web/Reference/Events/' + api + $2; }
+
  
 var anch = '';
  
