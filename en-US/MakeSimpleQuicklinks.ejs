@@ -31,9 +31,13 @@ for (var i=0; i<count; i++) {
       }
     } else {
       var page = wiki.getPage(item);
-      if (page) {
+      if (page && page.url) {
         path = page.url;
-        title = wiki.escapeQuotes(page.summary);
+        if (page.summary) {
+            title = wiki.escapeQuotes(page.summary);
+        } else {
+            title = "";
+        }
         text = page.title;
       } else {
           path = item;
