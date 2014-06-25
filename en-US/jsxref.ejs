@@ -13,43 +13,41 @@
 //  {{jsxref("Global_Objects/Date/getNumber", "Date.prototype.getNumber()")}}
 //
 
-var lang = env.locale;
+var l10n = {
+    slug : mdn.localString({
+        "en-US": "Global_Objects/",
+        "fr"   : "Objets_globaux/"
+    }),
+    summary : mdn.localString({
+        "en-US": "The documentation about this has not yet been written; please consider contributing!",
+        "zh-CN": "此页面仍未被本地化, 期待您的翻译!"
+    })
+};
+
 var str = $1 || $0;
 
-var URL = "/" + lang + "/docs/Web/JavaScript/Reference/";
+var URL = "/" + env.locale + "/docs/Web/JavaScript/Reference/";
 
-var api = $0.replace('()', '');
-var api2 = api.replace('.prototype.', '.');
-
+var api  = $0.replace('()', '').replace('.prototype.', '.');
 
 var page = wiki.getPage(URL + $0);
-var objectPage = wiki.getPage(URL + 'Global_Objects/' +  $0);
+var objectPage = wiki.getPage(URL + l10n.slug +  $0);
 
-if (api2.indexOf(".") !== -1) {
-    URL += "Global_Objects/";
-    URL += api2.replace('.', '/');
+if (api.indexOf(".") !== -1) {
+    URL += l10n.slug + api.replace('.', '/');
 } else if (!page.slug && objectPage.slug) {
-    URL = URL + 'Global_Objects/' +  $0;
+    URL += l10n.slug + $0;
 } else {
     URL += $0;
 }
 
-var page = wiki.getPage(URL);
-var summary = "";
+var summary = l10n.summary;
 
 if (page && page.summary) {
-    var summary = mdn.escapeQuotes(page.summary);
-} else {
-    summary = "The documentation about this has not yet been written; please consider contributing!";
-    switch(lang){
-        case "zh-CN":
-            summary = "此页面仍未被本地化, 期待您的翻译!";
-            break;
-    }
+    summary = mdn.escapeQuotes(page.summary);
 }
 
-var code = '';
-var endcode = '';
-if (!$3) { code = '<code>'; endcode = '</code>' }
+var code    = !$3 ? '<code>'  : '';
+var endcode = !$3 ? '</code>' : '';
 
 %><a href="<%- URL + $2 %>" title="<%-summary%>"><%- code %><%= str %><%- endcode %></a>
