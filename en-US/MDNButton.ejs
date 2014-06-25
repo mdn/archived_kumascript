@@ -1,0 +1,11 @@
+<%
+// Creates an in-page button to be used on MDN "easy task" type pages, such
+// as the MDN Inbox.
+//
+// Parameters:
+//  $0  Button name
+//  $1  URL of link
+
+var html = "<div class='addpage-button'><a class='ignore-external addpage-button' href='" + $1 + "'>" + $0 + "</a></div>";
+%>
+<%-html%>
