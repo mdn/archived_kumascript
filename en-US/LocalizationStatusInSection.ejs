@@ -44,6 +44,10 @@ var l10nStateOutofdate = mdn.localString({
     "en-US": "Yes, but not up to date (#d# days older).",
     "fr"   : "Oui mais pas à jour (#d# jours d'écart)"
 });
+
+var l10nStateInprogress = mdn.localString({
+    "en-US": "Yes, but translation in progress.",
+});
     
 var l10nTranslated = mdn.localString({
     "en-US": "Translated",
@@ -203,6 +207,9 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
         if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, priorities[i].last_edit); %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
+        <% }
+        else if (translation.localization_tags && hasLocalizationTag(translation.localization_tags, "inprogress")) { %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a></td>
         <% } else { %>
             <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
         <% } %>
@@ -232,6 +239,9 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
         if (isOutdated(result[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, result[i].last_edit); %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
+        <% }
+        else if (translation.localization_tags && hasLocalizationTag(translation.localization_tags, "inprogress")) { %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a></td>
         <% } else { %>
             <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
         <% } %>
@@ -259,8 +269,9 @@ var metrics = {
         counter: uptodateCounter
     },
     inprogress: {
-        title: 'Translations in-progress',
+        title: 'Translations in progress',
         counter: inprogressCounter
+    }
 };
 %>
 <div id="json" style="display: none"><%=JSON.stringify(metrics) %></div>
