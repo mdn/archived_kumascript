@@ -68,6 +68,7 @@ var priorities = []
 var translationCounter = 0;
 var outdatedCounter = 0;
 var priorityCounter = 0;
+var inprogressCounter = 0;
 
 function collect(page) {
     result.push({title: page.title.replace('<','&lt;').replace('>','&gt;'), url: page.url, translations: page.translations, last_edit: page.last_edit})
@@ -78,6 +79,9 @@ function collect(page) {
     var translation = getTranslation(page.translations, locale);
     if (isOutdated(page.last_edit, translation.last_edit)) {
         outdatedCounter++;
+    }
+    if (translation.localization_tags && hasLocalizationTag(translation.localization_tags, "inprogress")) {
+        inprogressCounter++;
     }
     
     if (hasTags(page.tags, "l10n:priority")) {
@@ -145,6 +149,14 @@ function hasTags(tags, needle) {
     if (!tags || tags == undefined) return 0;
     for (var i = 0, len = tags.length; i < len; i++) {
         if (tags[i].toLowerCase() === needle.toLowerCase()) return 1;
+    }
+    return 0;
+}
+
+function hasLocalizationTag(localizationTags, tagType) {
+    if (!localizationTags || localizationTags == undefined) return 0;
+    for (var i = 0, len = localizationTags.length; i < len; i++) {
+        if (localizationTags[i] === tagType) return 1;
     }
     return 0;
 }
@@ -245,7 +257,10 @@ var metrics = {
     updateNeeded: {
         title: 'Translations up to date',
         counter: uptodateCounter
-    }
+    },
+    inprogress: {
+        title: 'Translations in-progress',
+        counter: inprogressCounter
 };
 %>
 <div id="json" style="display: none"><%=JSON.stringify(metrics) %></div>
