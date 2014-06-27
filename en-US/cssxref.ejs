@@ -13,7 +13,7 @@ var str = $1 || $0;
 str = str.toLowerCase();
 
 // New CSS location
-var URL = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
+var URL = "/" + lang + "/docs/Web/CSS/" + $0 ;//+ $2;
 
 // Locals that use the new location
 // Add your local when you have moved your pages
@@ -40,4 +40,4 @@ if (!$2) {
     }
 }
 */
-%><a href="<%- URL %>" title="<%-summary%>"><code><%= str %></code></a>
+%><a href="<%- URL %>"><code><%= str %></code></a>
