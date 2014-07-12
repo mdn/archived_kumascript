@@ -9,6 +9,7 @@
 //  $2 - anchor (#xyz) (optional)
 //  $3 - If set, do not put the text in <code></code>
 //
+//  {{jsxref("Date")}}
 //  {{jsxref("Date.prototype.getNumber()")}}
 //  {{jsxref("Global_Objects/Date/getNumber", "Date.prototype.getNumber()")}}
 //
@@ -42,10 +43,12 @@ if (api.indexOf(".") !== -1) {
 }
 
 var summary = l10n.summary;
+page = wiki.getPage(URL);
 
 if (page && page.summary) {
     summary = mdn.escapeQuotes(page.summary);
 }
+
 
 var code    = !$3 ? '<code>'  : '';
 var endcode = !$3 ? '</code>' : '';
