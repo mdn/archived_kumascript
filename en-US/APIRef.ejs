@@ -62,7 +62,7 @@ var aquo = mdn.localString({
 var pageURL = env.path;
     
 var pageFolders = pageURL.split('/');
-if (pageFolders) {
+if (pageFolders.length > 0) {
     var pageName = pageFolders[pageFolders.length-1]; // We are only interested in the last part
     var mainIF = pageName.split('.')[0];
     var APIList = [];
