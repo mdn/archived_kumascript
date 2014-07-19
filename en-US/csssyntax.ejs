@@ -16,12 +16,17 @@ var result = re.exec(page);
 var lang = env.locale;
 var missing = "Syntax not found in DB!";
 switch (lang) {
-case "en-us":
-    missing = "Syntax not found in DB!";
-	break;
-case "zh-cn":
-	missing = "该属性的语法尚未添加";
-	break;
+    case "en-us":
+        missing = "Syntax not found in DB!";
+        break;
+
+    case "de":
+        missing = "Syntax nicht in der Datenbank gefunden!";
+        break;
+
+    case "zh-cn":
+        missing = "该属性的语法尚未添加";
+        break;
 }
 
 result = (!result) ? missing : result[1];
