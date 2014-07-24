@@ -21,11 +21,14 @@ var html = "";
 var otherPagesText = "";
 
 switch(lang) {
-    default:
-        otherPagesText = "Other pages";
+    case 'de':
+        otherPagesText = "Andere Seiten";
         break;
     case 'fr':
         otherPagesText = "Autres pages";
+        break;
+    default:
+        otherPagesText = "Other pages";
         break;
 }
 
