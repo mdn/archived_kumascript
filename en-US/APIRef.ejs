@@ -42,6 +42,13 @@ var s_api_title_properties = mdn.localString({
   "zh-CN": "属性"
 });
 
+var s_api_title_ctors = mdn.localString({
+  "en-US": "Constructors",
+  "fr"   : "Constructeurs",
+  "de"   : "Konstruktoren",
+  "zh-CN": "Constructors"
+});
+
 var s_api_title_seealso = mdn.localString({
   "en-US": "Related APIs",
   "fr"   : "API connexes",
@@ -69,17 +76,23 @@ if (pageFolders.length > 0) {
     APIList.push(mainIF);
 
     var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
-    
     /* List properties of this API */
     var resultProps = [];
     
     /* List methods of this API */
     var resultMethods = [];
+    
+    /* List constructors of this API */
+    var resultCtors = [];
 
     /* List related APIs */
     var resultSeealso = [];
 
     for (aPage in pageList) {
+        if (containsTag(pageList[aPage].tags, "Constructor")) {
+            mainIF = pageName.split('(')[0];   
+        }
+
         if (containsAPI(APIList, pageList[aPage].title)) {
             if (containsTag(pageList[aPage].tags, "Property")) { // We only want properties
                 pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
@@ -90,6 +103,11 @@ if (pageFolders.length > 0) {
                         !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
                 pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
                 resultMethods.push(pageList[aPage]);
+            }
+            
+            if (containsTag(pageList[aPage].tags, "Constructor")) { // We only want ctors
+                pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
+                resultCtors.push(pageList[aPage]);
             }
         }
         
@@ -150,6 +168,11 @@ function buildSublist(pages, title) {
     %>
     <li><strong><%- template("domxref", [mainIF]) %></a></strong></li>
     <% 
+    
+    /* Display ctors */ 
+    if (resultCtors.length > 0) { 
+        %><%-buildSublist(resultCtors, s_api_title_ctors)%><%
+    }
     
     /* Display properties */ 
     if (resultProps.length > 0) { 
