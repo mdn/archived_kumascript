@@ -13,6 +13,10 @@
     var target = "/" + lang + "/docs/DOM/" + $1;
     
     switch(lang) {
+        "de":
+            str = "Die " + template("interface", [$0]) + " Schnittstelle implementiert die DOM " + web.link(target, $1) + " Schnittstelle. Siehe diese Seite für Details.";
+            break;
+
         default:
             str = "The " + template("interface", [$0]) + " interface implements the DOM " + web.link(target, $1) + " interface. See that page for details.";
             break;
