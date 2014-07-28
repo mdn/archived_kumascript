@@ -19,6 +19,7 @@ var loginUrl = "https://developer.mozilla.org/index.php?title=Special:Userlogin&
 
 var heading = mdn.localString({
     "en-US" : "That page doesn't exist yet",
+    "de"    : "Diese Seite existiert bisher nicht",
     "ja"    : "この URL のページはまだ存在しません。"
 });
 
@@ -42,7 +43,7 @@ if ($1 && string.length($1)) {
 
 switch(lang) {
     case 'de':
-        intro = "The page you're trying to visit (" + $0 + ") doesn't exist yet. If you'd like, you can log in and create it.";
+        intro = "Die Seite (" + $0 + "), die du versuchst, zu besuchen, existiert bisher noch nicht. Falls du willst, kannst du dich anmelden und sie erstellen.";
         break;
     default:
         break;
