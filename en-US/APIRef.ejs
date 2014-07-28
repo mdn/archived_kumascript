@@ -89,10 +89,6 @@ if (pageFolders.length > 0) {
     var resultSeealso = [];
 
     for (aPage in pageList) {
-        if (containsTag(pageList[aPage].tags, "Constructor")) {
-            mainIF = pageName.split('(')[0];   
-        }
-
         if (containsAPI(APIList, pageList[aPage].title)) {
             if (containsTag(pageList[aPage].tags, "Property")) { // We only want properties
                 pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
@@ -103,11 +99,6 @@ if (pageFolders.length > 0) {
                         !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
                 pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
                 resultMethods.push(pageList[aPage]);
-            }
-            
-            if (containsTag(pageList[aPage].tags, "Constructor")) { // We only want ctors
-                pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
-                resultCtors.push(pageList[aPage]);
             }
         }
         
