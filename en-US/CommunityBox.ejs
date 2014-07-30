@@ -81,6 +81,14 @@ switch(env.locale) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "了解 IRC</a>)</span>";
         }
         break;
+    case "ru":
+        headingStr = "Присоединись к сообществу " + $0 + " расширений";
+        messageStr = "Почтовая рассылка:";
+        messageNoteStr = "Выбери удобный способ для общения:";
+        if ($3) {
+            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "Узнай больше</a>)</span>";
+        }
+        break;
     case "en":
         headingStr = "Join the " + $0 + " community";
         messageStr = "Mailing list/newsgroup:";
