@@ -9,26 +9,41 @@
 var html = $0;
 var len = html.length;
 
+// Remove the surrounding <dl> - we will do our own in each column.
+
+html = html.replace(/<dl[^>]*>|<\/dl>$/g, "");
+
 if (len) {
-    var col1 = "";
-    var col2 = "";
-    var numTerms = (html.match(/\<dt /g) || []).length;
-   
-    if (numTerms > 1) {
-        var pt = len/2;
-        col2 = html.substr(pt);
-        ofs = col2.search("<dt ");
-        pt += ofs;
-        col2 = html.substr(pt);
-        col1 = html.substr(0, pt);
+    var items = html.split("<dt ");
+    items.shift();  // The first item is empty here since the string should start with "<dt"
+    var sum = 0;
+    var lengths = items.map(function(v) {
+        sum += v.length;
+        return v.length;
+    });
+        
+    var n = 0;
+    var ts = 0;
+    
+    // Figure out how many items go in the first column. If there are only
+    // two items in the list, this is always 1, to be sure both columns
+    // have content.
+    
+    if (items.length == 2) {
+        n = 1;
     } else {
-        col1 = html;
+        while (ts < sum/2) {
+            ts += lengths[n++];
+        }
     }
+    
+    var col1 = "<dt " + items.slice(0, n).join("<dt ");
+    var col2 = "<dt " + items.slice(n, items.length).join("<dt ");
     
     %>
     <div class="row topicpage-table">
-    <div class="section"><%-col1%></div>
-    <div class="section"><%-col2%></div>
+    <div class="section"><dl><%-col1%></dl></div>
+    <div class="section"><dl><%-col2%></dl></div>
     </div>
     <%
 } else {
