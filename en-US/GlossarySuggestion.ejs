@@ -1,8 +1,35 @@
-/**
- * This template allow to filter a list of entry to the glossary
- * 
- * The list provide as input will be filter against the existing glossary entry and only the missing entry will be displayed
- * 
- * Parameters:
- * $0 : A JSON object with a property "suggestion" which is an Array of suggested terms
- * /
+<%
+// This template allow to filter a list of entry to the glossary
+//
+// The list provide as input will be filter against the existing glossary entry and only the missing entry will be displayed
+//
+// Parameters:
+// $0 : A JSON object with a property "suggestion" which is an Array of suggested terms
+
+var URL = mdn.localString({
+    "en-US": "/en-US/docs/Glossary",
+    "fr"   : "/fr/docs/Glossaire"
+})
+
+var suggestion = $0 && $0.suggestion && Array.isArray($0.suggestion) ? $0.suggestion : [];
+
+suggestion = suggestion.map(function (s) {
+    return s.toLowerCase();
+})
+
+page.subpagesExpand(URL).forEach(function (entry) {
+    var index = suggestion.indexOf(entry.toLowerCase())
+    if (index > -1) {
+        suggestion = suggestion.splice(index, 1);
+    }
+});
+%>
+<ul class="multiColumnList">
+<%
+for (var i = 0, l = suggestion.length; i < l; i++) {
+%>
+ <li><%- template("Glossary", [suggestion[i],'',1]) %></li>
+<%
+}
+%>
+</ul>
