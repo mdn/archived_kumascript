@@ -1,35 +1,84 @@
 <%
-// This template allow to filter a list of entry to the glossary
-//
-// The list provide as input will be filter against the existing glossary entry and only the missing entry will be displayed
+// This template allow to build a list of entry to the glossary with some filter applied on it
 //
 // Parameters:
-// $0 : A JSON object with a property "suggestion" which is an Array of suggested terms
+// $0 : A JSON object with one or more of the following properties:
+//      * `terms` : An array of terms to list (if undefined, consider the whole list of terms available in the glossary)
+//      * `filter`: A filter to be applied to the input list of terms. It can be one of the following:
+//                  * `notdefined` : Only terms that are not defined will be listed
+//                  * `defined`    : Only terms that are currently defined will be listed
+//                  * `all`        : (default) no filter applied, all terms are listed
+//      * `split` : A string with one of the value `h1`, `h2`, `h3`, `h4`, `h5`, `h6`. If this property is define with a valid value, the list of terms will be split with intermediate title for each letter.
+//      * `css`   : A sring representing some extra CSS class to apply to the list (to the top most UL elements)
 
 var URL = mdn.localString({
     "en-US": "/en-US/docs/Glossary",
     "fr"   : "/fr/docs/Glossaire"
-})
-
-var suggestion = $0 && $0.suggestion && Array.isArray($0.suggestion) ? $0.suggestion : [];
-
-suggestion = suggestion.map(function (s) {
-    return s.toLowerCase();
-})
-
-page.subpagesExpand(URL).forEach(function (entry) {
-    var index = suggestion.indexOf(entry.toLowerCase())
-    if (index > -1) {
-        suggestion = suggestion.splice(index, 1);
-    }
 });
+
+var i, l, c, splitTitle, letter = /[a-z]/i;
+var csscl  = $0 && $0.css ? $0.css : "";
+var pages  = page.subpages(URL, 1);
+var UCKeys = pages.map(function (p) { return p.title; });
+var keys   = pages.map(function (p) { return p.title.toLowerCase(); });
+var UCTerms= $0 && $0.terms && Array.isArray($0.terms) ? $0.terms : UCKeys;
+var terms  = UCTerms.map(function (t) { return t.toLowerCase(); });
+var split  = $0 && $0.split && /^h[1-6]$/i.test($0.split) ? $0.split.toLowerCase() : false;
+var filter = $0 && $0.filter && $0.filter.toLowerCase() === 'notdefined' ? 'notdefined' :
+             $0 && $0.filter && $0.filter.toLowerCase() === 'defined'    ? 'defined'    :
+                                                         /* Otherwise */   'all';
+var list = [];
+
+function sortMe(a, b) {
+    if (!letter.test(a) && letter.test(b)) { return  1; }
+    if (!letter.test(b) && letter.test(a)) { return -1; }
+    return a.localeCompare(b);
+}
+
+function filterMe(term) {
+    if ((keys.indexOf(term) === -1 && (filter === 'all' || filter === 'notdefined'))
+     || (keys.indexOf(term)  >  -1 && (filter === 'all' || filter === 'defined'))) {
+        this.push(term);
+    }
+};
+
+terms.forEach(filterMe, list);
+list.sort(sortMe);
+
+for (i = 0, l = list.length; i < l; i++) {
+    if (split) {
+        c = list[i].charAt(0).toUpperCase();
+
+        if (!letter.test(c)) {
+            c = 'Other';
+        }
+
+        if (splitTitle !== c) {
+            splitTitle = c;
+            if (i > 0) {
 %>
-<ul class="multiColumnList">
+    </ul>
 <%
-for (var i = 0, l = suggestion.length; i < l; i++) {
+            }
 %>
- <li><%- template("Glossary", [suggestion[i],'',1]) %></li>
+    <%- '<' + split + '>' + splitTitle + '</' + split + '>' %>
+    <ul class="<%= csscl %>">
 <%
+        }
+    }
+    
+    else if (i === 0) {
+%>
+    <ul class="<%= csscl %>">
+<%
+    }
+%>
+        <li><%- template("Glossary", [UCTerms[terms.indexOf(list[i])],'',1]) %></li>
+<%
+    if (i === l-1) {
+%>
+    </ul>
+<%
+    }
 }
 %>
-</ul>
