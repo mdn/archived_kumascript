@@ -3,8 +3,32 @@
  * Displays an overview table for l10n status
  *
  */
- 
- 
+
+var sectionColumnTitle = mdn.localString({
+    "en-US": "Section",
+    "de"   : "Bereich"
+});
+
+var pagesColumnTitle = mdn.localString({
+    "en-US": "Pages",
+    "de"   : "Bereich"
+});
+
+var translatedColumnTitle = mdn.localString({
+    "en-US": "Translated",
+    "de"   : "Übersetzt"
+});
+
+var translationsUpToDateColumnTitle = mdn.localString({
+    "en-US": "Translation up to date",
+    "de"   : "Übersetzung aktuell"
+});
+
+var total = mdn.localString({
+    "en-US": "Total",
+    "de"   : "Gesamt"
+});
+
 /*** Collect doc status data ***/
 var MDN = require("MDN:Common");
 var result = {};
@@ -38,10 +62,10 @@ getPages(pageList);
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
-        <th>Section</th>
-        <th>Pages</th>
-        <th>Translated</th>
-        <th>Translations up to date</th>
+        <th><%=sectionColumnTitle%></th>
+        <th><%=pagesColumnTitle%></th>
+        <th><%=translatedColumnTitle%></th>
+        <th><%=translationsUpToDateColumnTitle%></th>
     </tr>
   </thead>
   <tbody>
@@ -70,7 +94,7 @@ getPages(pageList);
         </tr>
     <% }} %>
     <tr>
-        <td><strong>Total</strong></td>
+        <td><strong><%=total%></strong></td>
         <td><strong><%=totalPages%></strong></td>
         <td><strong><%=totalTranslated%> (<%=totalTranslatedPercent%>%)</strong></td>
         <td><strong><%=totalUpToDate%> (<%=totalUpToDatePercent%>%)</strong></td>
