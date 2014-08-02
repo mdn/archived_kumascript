@@ -4,6 +4,21 @@
  *
  */
 
+var projectColumnTitle = mdn.localString({
+    "en-US": "Project",
+    "de"   : "Projekt"
+});
+
+var wordsColumnTitle = mdn.localString({
+    "en-US": "Words",
+    "de"   : "Wörter"
+});
+
+var statusColumnTitle = mdn.localString({
+    "en-US": "Status",
+    "de"   : "Status"
+});
+
 var locale = $0;
 var MDN = require("MDN:Common");
 var url = 'http://l10n.mozilla-community.org/~flod/webstatus/webstatus.json';
@@ -25,9 +40,9 @@ if (resource.hasOwnProperty(locale)) {
 
 <table class="standard-table">
     <tr>
-        <th><a href="https://localize.mozilla.org/<%=locale.replace("-", "_")%>/mdn/LC_MESSAGES/">Project</a></th>
-        <th>Words</th>
-        <th>Status</th>
+        <th><a href="https://localize.mozilla.org/<%=locale.replace("-", "_")%>/mdn/LC_MESSAGES/"><%=projectColumnTitle%></a></th>
+        <th><%=wordsColumnTitle%></th>
+        <th><%=statusColumnTitle%></th>
     </tr>
 
 <% 
