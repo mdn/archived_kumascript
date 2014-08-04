@@ -16,6 +16,11 @@ var product = $1 || "Mozilla";
 var lang = env.locale;
 
 switch(lang) {
+    "de":
+        mozillaOnly = product + " spezifische API";
+        message = $0 || "Diese API ist nur in Gecko-basierter Software, einschließlich Firefox und Firefox OS, verfügbar.";
+        break;
+
     default:
         mozillaOnly = product + "-specific API";
         message = $0 || "This API is only available in Gecko-based software, including Firefox and Firefox OS.";
