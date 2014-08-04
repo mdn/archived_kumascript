@@ -48,9 +48,9 @@ if (resource.hasOwnProperty(locale)) {
 <% 
 for (var project in result) {
     if (result.hasOwnProperty(project)) {
-        var translatedPercent = Math.floor(result[project].percentage);
-        var untranslatedPercent = Math.ceil((result[project].untranslated / result[project].total) * 100);
-        var fuzzyPercent = Math.ceil((result[project].fuzzy / result[project].total) * 100);
+        var translatedPercent = Math.round(result[project].translated / result[project].total * 1000) / 10;
+        var untranslatedPercent = Math.round(result[project].untranslated / result[project].total * 1000) / 10;
+        var fuzzyPercent = 100 - translatedPercent - untranslatedPercent;
 %>    
 
     <tr>
