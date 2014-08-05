@@ -58,8 +58,23 @@ switch(arg)
   default:
     if (arg >= 5) {
       geckoRelease = ['Firefox ' + arg, 'Thunderbird ' + arg, 'SeaMonkey 2.' + (Number(arg)-3).toString()];
-      if (arg == 18) {
-        geckoRelease.push("Firefox OS 1.0.1");
+      switch(arg)
+      {
+        case '18':
+          geckoRelease.push("Firefox OS 1.0.1", "Firefox OS 1.1");
+          break;
+        case '26':
+          geckoRelease.push("Firefox OS 1.2");
+          break;
+        case '28':
+          geckoRelease.push("Firefox OS 1.3");
+          break;
+        case '30':
+          geckoRelease.push("Firefox OS 1.4");
+          break;
+        case '32':
+          geckoRelease.push("Firefox OS 2.0");
+          break;
       }
     }
     break;
