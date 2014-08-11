@@ -15,8 +15,14 @@
 //
 
 var l10n = {
+    refslug : mdn.localString({
+       "en-US": "Reference/",
+       "es"   : "Referencia/",
+       "fr"   : "Reference/"
+    }),
     slug : mdn.localString({
         "en-US": "Global_Objects/",
+        "es"   : "Objetos_globales/",
         "fr"   : "Objets_globaux/"
     }),
     summary : mdn.localString({
@@ -27,7 +33,7 @@ var l10n = {
 
 var str = $1 || $0;
 
-var URL = "/" + env.locale + "/docs/Web/JavaScript/Reference/";
+var URL = "/" + env.locale + "/docs/Web/JavaScript/" + l10n.refslug;
 
 var api  = $0.replace('()', '').replace('.prototype.', '.');
 
