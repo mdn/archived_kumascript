@@ -42,7 +42,16 @@ if (typeof inheritance[$1] != 'undefined') {
 
 
 // Strings:
-var s_js_ref_href = '/' + env.locale + '/docs/Web/JavaScript/Reference';
+var s_refslug = "Reference";
+s_refslug = mdn.localString({
+       "en-US": "Reference",
+       "es"   : "Referencia",
+       "fr"   : "Reference",
+       "de"   : "Reference",
+       "zh-CN": "Reference"
+    });
+
+var s_js_ref_href = '/' + env.locale + '/docs/Web/JavaScript/' + s_refslug;
 var s_js_section = $0;
 var s_js_subject = $1;
 var s_js_full_href = s_js_ref_href + '/' + s_js_section + '/' + s_js_subject;
@@ -53,12 +62,14 @@ var s_js_title_methods = mdn.localString({
   "en-US": "Methods",
   "fr"   : "Méthodes",
   "de"   : "Methoden",
+  "es"   : "Métodos",
   "zh-CN": "方法"
 });
 var s_js_title_properties = mdn.localString({
   "en-US": "Properties",
   "fr"   : "Propriétés",
   "de"   : "Eigenschaften",
+  "es"   : "Propriedades",
   "zh-CN": "属性"
 });
 var s_js_title_inheritance = mdn.localString({
