@@ -94,13 +94,36 @@
     // top level of the text to the specified value and adjusts all subsequent
     // headings accordingly. This adjustment happens regardless of the value of
     // show.
-    //
-    // heading is not supported at this time
-    _adjustHeadings: function(html, show, heading) {
+    // The heading parameter uses the values 0-5, as did DekiScript, 0 represents
+    // a page header or H1, 1 - H2, 2 - H3 etc
+    _adjustHeadings: function(html, section, show, heading) {
+        if (html && heading) {
+            // Get header level of page or section level
+            var level = 1;
+            if (section) {
+                level = Number(html.match(/^<h(\d)[^>]*>/i)[1]);
+            }
+            var offset = 1 - level + Number(heading);
+            // Change content header levels, there is probably a better way of doing this...
+            var re;
+            if (offset > 0) {
+                for(i = 6; i >= level; i--) {
+                    re = new RegExp("(<\/?h)" + i + "([^>]*>)", "gi");
+                    html = html.replace(re, "$1" + (i + offset) + "$2");
+                }
+            }
+            else if  (offset < 0) {
+                for(i = level; i <= 6; i++) {
+                    re = new RegExp("(<\/?h)" + i + "([^>]*>)", "gi");
+                    html = html.replace(re, "$1" + (i + offset) + "$2");
+                }
+            }
+        }
+
         if (show) { return html; }
         
-        // Rip out the first header we find
-        if (html) { html = html.replace(/^<(H|h)\d[^>]*>[^<]*(<\/B\d>|<\/h\d>)/ig,"") + ""; }
+        // Rip out the section header
+        if (html) { html = html.replace(/^<h\d[^>]*>[^<]*<\/h\d>/ig,"") + ""; }
         
         return html;
     },
@@ -108,9 +131,7 @@
     // Retrieve the content of a document for inclusion, optionally filtering 
     // for a single section.
     //
-    // Doesn't (yet?) support all the parameters offered by DekiScript, 
-    // but I don't think MDN pages use them all. Missing in particular: 
-    // revision, show, and heading
+    // Doesn't support the revision parameter offered by DekiScript
     //
     // [See also](http://developer.mindtouch.com/en/docs/DekiScript/Reference/Wiki_Functions_and_Variables/Wiki.Page)
     page: function (path, section, revision, show, heading, ignore_cache_control) {
@@ -139,7 +160,7 @@
                         if (show == undefined) {
                             show = 0;
                         }
-                        result = wiki._adjustHeadings(result, show, heading);
+                        result = wiki._adjustHeadings(result, section, show, heading);
                     }
                     next(result);
                 });
