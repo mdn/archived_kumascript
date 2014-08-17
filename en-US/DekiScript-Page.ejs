@@ -105,6 +105,127 @@
         return result;
     },
     
+    // If reverse is non-zero, the sort is backward
+    function subPagesSort (pages, reverse) {
+        if (reverse == 0) {
+            pages.sort(alphanumForward);
+        } else {
+            pages.sort(alphanumBackward);
+        }
+
+        return pages;
+
+        function chunkify(t) {
+    		var tz = [], x = 0, y = -1, n = 0, i, j;
+
+			while (i = (j = t.charAt(x++)).charCodeAt(0)) {
+                var m = (i == 46 || (i >=48 && i <= 57));
+				if (m !== n) {
+					tz[++y] = "";
+	    			n = m;
+				}
+				tz[y] += j;
+			}
+			return tz;
+		}
+
+        function alphanumForward(a, b) {
+
+			var aa = chunkify(a.title);
+			var bb = chunkify(b.title);
+
+			for (x = 0; aa[x] && bb[x]; x++) {
+				if (aa[x] !== bb[x]) {
+					var c = Number(aa[x]), d = Number(bb[x]);
+					if (c == aa[x] && d == bb[x]) {
+						return c - d;
+					} else return (aa[x] > bb[x]) ? 1 : -1;
+				}
+			}
+			return aa.length - bb.length;
+		}
+
+        function alphanumBackward(a, b) {
+
+    		var bb = chunkify(a.title);
+			var aa = chunkify(b.title);
+
+			for (x = 0; aa[x] && bb[x]; x++) {
+				if (aa[x] !== bb[x]) {
+					var c = Number(aa[x]), d = Number(bb[x]);
+					if (c == aa[x] && d == bb[x]) {
+						return c - d;
+					} else return (aa[x] > bb[x]) ? 1 : -1;
+				}
+			}
+			return aa.length - bb.length;
+		}
+    },
+    
+    // Flatten subPages list
+    function subPagesFlatten (pages) {
+        
+        var output = [];
+        
+        process_array(pages);
+
+        return output;
+
+        function process_array(arr) {
+            if(arr.length) {
+                arr.forEach(function(item) {
+                    if (!item) { return; }
+                    process_array(item.subpages || []);
+                    // If only a header for a branch
+                    if (item.url == "") {
+                        return
+                    }
+                    item.subpages =[];
+                    output.push(item);
+                });
+            }
+        }
+    },
+    
+    // If ordered is true, the output is an <ol> instead of <ul>
+    //
+    // Special note: If ordered is true, pages whose locale differs from
+    // the current page's locale are omitted, to work around misplaced
+    // localizations showing up in navigation.
+    function subPagesFormatList (pages, ordered) {
+        return process_array(pages, ordered != 0);
+        
+        function process_array(arr, ordered) {
+            var result = '';
+            var openTag = '<ul>';
+            var closeTag = '</ul>';
+            
+            if (ordered) {
+                openTag = '<ol>';
+                closeTag = '</ol>';
+            }
+            
+            if(arr.length) {
+                result += openTag;
+                arr.forEach(function(item) {
+                    if (!item) { return; }
+                    if (ordered && (item.locale != locale)) { return; }
+                    result += '<li>';
+                    if (item.url != '') {
+                        result += '<a href="' + item.url + '">' + kuma.htmlEscape(item.title) + '</a>';
+                    } else {
+                        result += item.title;
+                    }
+                    result += process_array(item.subpages || [], ordered) + '</li>';
+                    
+                });
+                result += closeTag;
+            }
+            return result;
+        }
+        
+    },
+    
     translations: function (path) {
         var url = '';
         if (path) {
