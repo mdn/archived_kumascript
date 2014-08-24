@@ -3,7 +3,10 @@
  * Inserts a link to a bug in Mozilla's Bugzilla database.
  *
  * $0 - The bug number to link to. As we follow resolved duplicate this may not be the number in the output.
- * $1 - Type of output, bug (default) or table
+ * $1 - Type of output:
+ *      bug (default) - Linked bug number, title of link includes status and summary
+ *      table - Row in a table, columns are linked bug number and summary
+ *      summary - Linked bug number and summary
  *
  * http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Server/JSONRPC.html
  */
@@ -50,11 +53,15 @@ var s_bug = mdn.localString({
     "pl"   : "błąd",
     "de"   : "Bug"
 });
-if (type == 'table'){ %>
+if (type == 'table') { %>
 <tr>
     <td><a <%= style %> href="<%= bugPageURL %>"><%= bugNumber %></a></td>
     <td><%= desc %></td>
 </tr>
+<%
+} else if (type == 'summary') {
+%>
+<a href="<%= bugPageURL %>"><%=s_bug%>&nbsp;<%= bugNumber %> – <%= desc %></a>
 <%
 } else {
 %>
