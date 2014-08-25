@@ -27,7 +27,10 @@ while (bugDupe != null) {
     bugNumber = bugDupe;
     url = encodeURI('https://bugzilla.mozilla.org/rest/bug/' + bugDupe + '?include_fields=summary,dupe_of,resolution');
     bugzillaDetail = mdn.fetchJSONResource(url);
-    if (bugzillaDetail.error != null) {
+    if (bugzillaDetail == null) {
+        desc = "Unable to contact Bugzilla server.";
+        bugDupe = null;
+    } else if (bugzillaDetail.error != null) {
         if (bugzillaDetail.code == 102) {
             desc = "Access to this bug is restricted.";
         } else {
@@ -40,8 +43,8 @@ while (bugDupe != null) {
         bugDupe = bugDetail.dupe_of;
         if (!bugDupe) {
             if (bugDetail.resolution == "FIXED") {
-            tipStatus = 'FIXED: ';
-            style = "class='bug-resolved'";
+                tipStatus = 'FIXED: ';
+                style = "class='bug-resolved'";
             }
             desc = bugDetail.summary;
         }
