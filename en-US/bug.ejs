@@ -8,7 +8,8 @@
  *      table - Row in a table, columns are linked bug number and summary
  *      summary - Linked bug number and summary
  *
- * http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Server/JSONRPC.html
+ * http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Server/REST.html
+ * https://wiki.mozilla.org/Bugzilla:REST_API
  */
 
 var mdn = require("MDN:Common");
@@ -18,31 +19,38 @@ var type = $1 || 'bug';
 var desc = '';
 var tipStatus = '';
 var style = '';
-var bugNumber = $0;
-var url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '], "include_fields":["summary","dupe_of","resolution"] } ]');
-var bugzillaDetail = mdn.fetchJSONResource(url);
-
-if (bugzillaDetail.error != null) {
-    if (bugzillaDetail.error.code == 102) {
-        desc = "Access to this bug is restricted.";
+var bugNumber;
+var bugDupe = $0;
+var url;
+var bugDetail = [];
+while (bugDupe != null) {
+    bugNumber = bugDupe;
+    url = encodeURI('https://bugzilla.mozilla.org/rest/bug/' + bugDupe + '?include_fields=summary,dupe_of,resolution');
+    bugzillaDetail = mdn.fetchJSONResource(url);
+    if (bugzillaDetail.error != null) {
+        if (bugzillaDetail.code == 102) {
+            desc = "Access to this bug is restricted.";
+        } else {
+            desc = bugzillaDetail.message;
+            tipStatus = "ERROR: ";
+        }
+        bugDupe = null;
+    } else if (bugzillaDetail.bugs != null) {
+        bugDetail = bugzillaDetail.bugs[0];
+        bugDupe = bugDetail.dupe_of;
+        if (!bugDupe) {
+            if (bugDetail.resolution == "FIXED") {
+            tipStatus = 'FIXED: ';
+            style = "class='bug-resolved'";
+            }
+            desc = bugDetail.summary;
+        }
     } else {
-        desc = bugzillaDetail.error.message;
-        tipStatus = "ERROR: ";
+        desc = "Unknown error.";
+        bugDupe = null;
     }
-} else if (bugzillaDetail.result != null) {
-    var bugDetail = bugzillaDetail.result.bugs[0];
-    while (bugDetail.dupe_of != null) {
-        bugNumber = bugDetail.dupe_of;
-        url = encodeURI('https://bugzilla.mozilla.org/jsonrpc.cgi?method=Bug.get&params=[ { "ids": [' +  bugNumber + '], "include_fields":["summary","dupe_of","resolution"] } ]');
-        bugzillaDetail = mdn.fetchJSONResource(url);
-        bugDetail = bugzillaDetail.result.bugs[0];
-    }
-    if (bugDetail.resolution == "FIXED") {
-        tipStatus = 'FIXED: ';
-        style = "class='bug-resolved'";
-    }
-    desc = bugDetail.summary;
 }
+
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bugNumber;
 
 var s_bug = mdn.localString({
