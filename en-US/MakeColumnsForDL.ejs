@@ -12,7 +12,7 @@ var len = html.length;
 // Remove the surrounding <dl> - we will do our own in each column.
 
 html = html.replace(/<dl[^>]*>|<\/dl>$/g, "");
-
+log.debug("HTML: " + html);
 if (len) {
     var items = html.split("<dt ");
     items.shift();  // The first item is empty here since the string should start with "<dt"
