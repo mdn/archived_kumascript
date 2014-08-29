@@ -84,7 +84,6 @@ for (var i=0; i<categoryList.length; i++) {
 // Output the pages that didn't match any category
 
 if (miscPages.length) {
-    log.debug("Adding section: " + otherPagesText);
     html += "<h2 id='Other'>" + otherPagesText + "</h2>" + template("SubpagesWithSummaries", [JSON.stringify(miscPages)]);
 }
 
