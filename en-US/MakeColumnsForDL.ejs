@@ -7,13 +7,12 @@
 //  $0  The HTML containing a <dl> to turn into a two column menu.
 
 var html = $0;
-var len = html.length;
 
 // Remove the surrounding <dl> - we will do our own in each column.
 
-html = html.replace(/<dl[^>]*>|<\/dl>$/g, "");
-
 log.debug("HTML: " + html);
+html = html.replace(/<dl[^>]*>|<\/dl>$/g, "");
+var len = html.length;
 
 if (len) {
     var items = html.split("<dt ");
