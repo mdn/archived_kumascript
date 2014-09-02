@@ -15,7 +15,7 @@ html = html.replace(/<dl[^>]*>|<\/dl>$/g, "");
 
 if (len) {
     var items = html.split("<dt ");
-    items.shift();  // The first item is empty here since the string should start with "<dt"
+    //items.shift();  // The first item is empty here since the string should start with "<dt"
     var sum = 0;
     var lengths = items.map(function(v) {
         sum += v.length;
@@ -37,7 +37,9 @@ if (len) {
         }
     }
     
-    var col1 = "<dt " + items.slice(0, n).join("<dt ");
+    var col1 = items[0];
+    log.debug(items[0]);
+    var col1 += "<dt " + items.slice(1, n).join("<dt ");
     var col2 = "<dt " + items.slice(n, items.length).join("<dt ");
     
     %>
