@@ -1,0 +1,17 @@
+<%
+var str = "Not available in workers ";
+var title = "This feature cannot be used in Web Workers.";
+
+switch(env.locale) {
+    case "ja":
+        str = "読取専用 ";
+        break;
+    case "fr":
+        str = "Non disponible dans les workers ";
+        title = "Cette fonction n'est pas accessible dans un worker Web.";
+        break;
+    default:
+        break;
+}
+
+%><span title="<%= title %>" class="unimplementedBadge"><%= str %></span>
