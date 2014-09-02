@@ -13,6 +13,8 @@ var len = html.length;
 
 html = html.replace(/<dl[^>]*>|<\/dl>$/g, "");
 
+log.debug("HTML: " + html);
+
 if (len) {
     var items = html.split("<dt ");
     //items.shift();  // The first item is empty here since the string should start with "<dt"
