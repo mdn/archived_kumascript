@@ -91,7 +91,9 @@ if (miscPages.length) {
 
 // Split the list up into multiple columns
 
+log.debug("Calling MakeColumnsForDL with input " + html);
 html = template("MakeColumnsForDL", [html]);
+log.debug("Back from MakeColumnsForDL with result: " + html);
 %>
 <%-featureBoxes%>
 <%-html%>
