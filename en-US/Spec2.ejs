@@ -159,54 +159,64 @@ var label = {
   'REC': mdn.localString({
     'en-US' : 'Recommendation',
     'ja'    : '勧告',
-    'de'    : 'Empfehlung'
+    'de'    : 'Empfehlung',
+    'ru'    : 'Рекомендация'
   }),
   'PR' : mdn.localString({
     'en-US' : 'Proposed Recommendation',
     'ja'    : '勧告案',
-    'de'    : 'Vorgeschlagene Empfehlung'
+    'de'    : 'Vorgeschlagene Empfehlung',
+    'ru'    : 'Предложенная рекомендация'
   }),
   'CR' : mdn.localString({
     'en-US' : 'Candidate Recommendation',
     'ja'    : '勧告候補',
-    'de'    : 'Anwärter Empfehlung'
+    'de'    : 'Anwärter Empfehlung',
+    'ru'    : 'Кандидат в рекомендации'
   }),
   'WD' : mdn.localString({
     'en-US' : 'Working Draft',
     'ja'    : '草案',
-    'de'    : 'Arbeitsentwurf'
+    'de'    : 'Arbeitsentwurf',
+    'ru'    : 'Рабочий черновик'
   }),
   'ED' : mdn.localString({
     'en-US' : 'Editor\'s Draft',
     'ja'    : '勧告改訂案',
-    'de'    : 'Bearbeiterentwurf'
+    'de'    : 'Bearbeiterentwurf',
+    'ru'    : 'Редакторский черновик'
   }),
   'Old-Transforms' : mdn.localString({
     'en-US' : 'This has been merged in another draft. Please update',
-    'ja'    : 'この仕様は他のドラフトへ移動されました。アップデートしてください。'
+    'ja'    : 'この仕様は他のドラフトへ移動されました。アップデートしてください。',
+    'ru'    : 'Эта спецификация была слита с другим черновиком. Пожалуйста, обновите'
   }),
   'Living' : mdn.localString({
     'en-US' : 'Living Standard',
-    'de'    : 'Lebender Standard'
+    'de'    : 'Lebender Standard',
+    'ru'    : 'Живой стандарт'
   }),
   'RFC' : mdn.localString({
     'en-US'   : 'IETF RFC'
   }),
   'Standard' : mdn.localString({
     'en-US' : 'Standard',
-    'de'    : 'Standard'
+    'de'    : 'Standard',
+    'ru'    : 'Стандарт'
   }),
   'Draft'  : mdn.localString({
     'en-US' : 'Draft',
     'ja'    : 'ドラフト',
-    'de'    : 'Entwurf'
+    'de'    : 'Entwurf',
+    'ru'    : 'Черновик'
   })
 }
 
 var unknown_label = mdn.localString({
     'en-US' : 'Unknown',
     'ja'    : '不明',
-    'de'    : 'Unbekannt'
+    'de'    : 'Unbekannt',
+    'ru'    : 'Неизвестно'
 });
 
 %><span class="spec-<%- status[$0] || ''  %>"><%= (status[$0] && label[status[$0]]) || unknown_label %></span>
