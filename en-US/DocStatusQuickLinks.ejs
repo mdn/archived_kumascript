@@ -1,36 +1,61 @@
 <% 
  // Collection of documentation status pages for sections and languages
+var titleValues = mdn.localString({
+    'en-US': {
+        'Doc_status': 'Documentation status pages',
+        'Overview': 'Overview',
+        'Sections': 'Sections',
+        'API': 'API',
+        'Apps': 'Apps',
+        'CSS': 'CSS',
+        'DevTools': 'DevTools',
+        'Firefox_OS': 'Firefox OS',
+        'Games': 'Games',
+        'HTML': 'HTML',
+        'JavaScript': 'JavaScript',
+        'Marketplace': 'Marketplace',
+        'MathML': 'MathML',
+        'SVG': 'SVG',
+        'Maintenance_pages': 'Maintenance pages',
+        'Editorial_reviews': 'Editorial reviews',
+        'Technical_reviews': 'Technical reviews',
+        'with-errors': 'Pages with errors',
+        'without-parent': 'Pages without a parent',
+        'top-level': 'Top-level pages',
+        'Localizations': 'Localizations'
+    }
+};
 %>
 <section class="Quick_links" id="Quick_Links">
     <ol>
-        <li><strong><a href="/<%=env.locale%>/docs/MDN/Doc_status">Documentation status pages</a></strong></li>
-        <li><strong><a href="/<%=env.locale%>/docs/MDN/Doc_status/Overview">Overview</a></strong></li>
-        <li><strong>Sections:</strong></li>
+        <li><strong><a href="/<%=env.locale%>/docs/MDN/Doc_status"><%=titleValues['Doc_status']%></a></strong></li>
+        <li><strong><a href="/<%=env.locale%>/docs/MDN/Doc_status/Overview"><%=titleValues['Overview']%></a></strong></li>
+        <li><strong><%=titleValues['Sections']%>:</strong></li>
             <ol>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Accessibility">Accessibility</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/API">API</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Apps">Apps</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/CSS">CSS</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/DevTools">DevTools</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Firefox_OS">Firefox OS</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Games">Games</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/HTML">HTML</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/JavaScript">JavaScript</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Marketplace">Marketplace</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/MathML">MathML</a>
-                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/SVG">SVG</a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Accessibility"><%=titleValues['Accessibility']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/API"><%=titleValues['API']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Apps"><%=titleValues['Apps']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/CSS"><%=titleValues['CSS']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/DevTools"><%=titleValues['DevTools']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Firefox_OS"><%=titleValues['Firefox_OS']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Games"><%=titleValues['Games']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/HTML"><%=titleValues['HTML']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/JavaScript"><%=titleValues['JavaScript']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/Marketplace"><%=titleValues['Marketplace']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/MathML"><%=titleValues['MathML']%></a>
+                <li><a href="/<%=env.locale%>/docs/MDN/Doc_status/SVG"><%=titleValues['SVG']%></a>
             </ol>
         </li>
-        <li><strong>Maintenance pages:</strong></li>
+        <li><strong><%=titleValues['Maintenance_pages']%>:</strong></li>
             <ol>
-                <li><a href="/<%=env.locale%>/docs/needs-review/editorial">Editorial reviews</a></li>
-                <li><a href="/<%=env.locale%>/docs/needs-review/technical">Technical reviews</a></li>
-                <li><a href="/<%=env.locale%>/docs/with-errors">Pages with errors</a></li>
-                <li><a href="/<%=env.locale%>/docs/without-parent">Pages without a parent</a></li>
-                <li><a href="/<%=env.locale%>/docs/top-level">Top-level pages</a></li>
+                <li><a href="/<%=env.locale%>/docs/needs-review/editorial"><%=titleValues['Editorial_reviews']%></a></li>
+                <li><a href="/<%=env.locale%>/docs/needs-review/technical"><%=titleValues['Technical_reviews']%></a></li>
+                <li><a href="/<%=env.locale%>/docs/with-errors"><%=titleValues['with-errors']%></a></li>
+                <li><a href="/<%=env.locale%>/docs/without-parent"><%=titleValues['without-parent']%></a></li>
+                <li><a href="/<%=env.locale%>/docs/top-level"><%=titleValues['top-level']%></a></li>
             </ol>
         </li>
-        <li><strong>Localizations:</strong></li>
+        <li><strong><%=titleValues['Localizations']%>:</strong></li>
             <ol>
                 <li><a href="/bn-BD/docs/MDN/Doc_status/Overview">বাংলা (বাংলাদেশ) (bn-BD)</a>
                 <li><a href="/de/docs/MDN/Doc_status/Overview">Deutsch (de)</a>
