@@ -72,6 +72,12 @@ switch(env.locale) {
         topicDriverStr = "Coordinateur du domaine : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (Pseudo IRC: " + driver.ircPseudo + ")";
         ircStr = "N'hésitez pas à nous contacter sur #" + ircLink + "ou sur la liste de diffusion " + mlName + " :";
         break;
+    case "ru":
+        headingStr = "Помочь проекту документирования '" + $0 + "'…";
+        statusStr = "Взгляните на текущий <a href='/ru/docs/" + driver.docStatus + "'>статус</a> of the '" + $0 +"' документации.";
+        topicDriverStr = "Координатор проекта: <a href='/ru/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (псевдоним IRC: " + driver.ircPseudo + ")";
+        ircStr = "Не стесняйтесь обращаться к нам на " + ircLink + " или пишите в список рассылки <em>" + mlName + "</em>:";
+        break;
     default:
         headingStr = "Help the '" + $0 + "' documentation project…";
         statusStr = "Look at the current <a href='/en-US/docs/" + driver.docStatus + "'>status</a> of the '" + $0 +"' documentation.";
