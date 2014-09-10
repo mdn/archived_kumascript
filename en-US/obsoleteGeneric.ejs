@@ -86,6 +86,10 @@ switch(lang) {
         str = "Przestarzały";
         if (string.length(ver)) { str = str + " " + ver; }
         break;
+    case 'ru':
+        str = "Вышла из употребления";
+        if (string.length(ver)) { str = str + " с версии " + ver; }
+        break;
     case 'zh-TW':
         str = "已過時";
         if (string.length(ver)) { str = str + " " + ver; }
@@ -103,7 +107,8 @@ switch(lang) {
 var str_desc = mdn.localString({
   "en-US": "This feature is obsolete. Although it may still work in some browsers, its use is discouraged since it could be removed at any time. Try to avoid using it.",
   "de":    "Dieses Feature ist veraltet. Obwohl es in manchen Browsern immer noch funktioniert, wird von seiner Benutzung abgeraten, da es jederzeit entfernt werden kann. Es sollte daher nicht mehr verwendet werden.",
-  "fr":    "Cette fonctionnalité est obsolète. Bien qu'encore supportée par des navigateurs, son utilisation est découragée pour tout nouveau projet. Évitez de l'utiliser."
+  "fr":    "Cette fonctionnalité est obsolète. Bien qu'encore supportée par des navigateurs, son utilisation est découragée pour tout nouveau projet. Évitez de l'utiliser.",
+  "ru":    "Эта возможность вышла из употребления. Хотя она может продолжать работать в некоторых браузерах, её использование не рекомендуется, поскольку она может быть удалена в любое время. Старайтесь избегать её использования."
 });
 
 switch($0) {
