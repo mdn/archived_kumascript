@@ -7,14 +7,7 @@
 //  $0  The HTML containing a <dl> to turn into a two column menu.
 
 var html = $0;
-
-// Remove the surrounding <dl> - we will do our own in each column.
-// XXX - Need to deal with multiple DLs properly here; each will need
-// its <dl> back.
-
-//html = html.replace(/<dl[^>]*>|<\/dl>$/g, "");
 var len = html.length;
-log.debug("MakeColumnsForDL: Length = " + len);
 
 if (len) {
     var items = html.split("<dt ");
@@ -41,7 +34,7 @@ if (len) {
     }
     
     //var col1 = ""; //items[0];
-    var col1 = "<dt " + items.slice(1, n).join("<dt ");
+    var col1 = items[0] + "<dt " + items.slice(1, n).join("<dt ");
     var col2 = "<dt " + items.slice(n, items.length).join("<dt ");
     
     %>
