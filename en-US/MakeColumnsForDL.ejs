@@ -14,6 +14,7 @@ var html = $0;
 
 //html = html.replace(/<dl[^>]*>|<\/dl>$/g, "");
 var len = html.length;
+log.debug("MakeColumnsForDL: Length = " + len);
 
 if (len) {
     var items = html.split("<dt ");
