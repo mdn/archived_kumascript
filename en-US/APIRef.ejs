@@ -4,11 +4,8 @@
 // Parameters:
 //  $0  A specific tag to releated APIs (or the API name for backward compatibility)
 
-function containsTag(aPage, tag) {
-    if (!aPage) return 0;
-    aPage = getEnglishPage(aPage);
-    if (!aPage) return 0;
-    var tagList = aPage.tags;
+function containsTag(tagList, tag) {
+    if (!tagList || typeof tagList == 'undefined') return 0;
     tag = tag.toLowerCase();
     for (var i = 0, len = tagList.length; i < len; i++) {
         if (tagList[i].toLowerCase() === tag) return 1;
@@ -26,10 +23,6 @@ function containsAPI(APIList, name) {
         }
     }
     return 0;
-}
-
-function getEnglishPage(aPage){
-    return wiki.getPage(aPage.url.replace(env.locale, "en-US"));
 }
 
 var s_api_tag  = $0;
@@ -53,7 +46,7 @@ var s_api_title_ctors = mdn.localString({
   "en-US": "Constructors",
   "fr"   : "Constructeurs",
   "de"   : "Konstruktoren",
-  "zh-CN": "构造函数"
+  "zh-CN": "Constructors"
 });
 
 var s_api_title_seealso = mdn.localString({
@@ -97,19 +90,19 @@ if (pageFolders.length > 0) {
 
     for (aPage in pageList) {
         if (containsAPI(APIList, pageList[aPage].title)) {
-            if (containsTag(pageList[aPage], "Property")) { // We only want properties
+            if (containsTag(pageList[aPage].tags, "Property")) { // We only want properties
                 pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
                 resultProps.push(pageList[aPage]);
             }
             
-            if (containsTag(pageList[aPage], "Method") &&
-                        !containsTag(pageList[aPage], "Constructor")) { // We only want methods
+            if (containsTag(pageList[aPage].tags, "Method") &&
+                        !containsTag(pageList[aPage].tags, "Constructor")) { // We only want methods
                 pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
                 resultMethods.push(pageList[aPage]);
             }
         }
         
-        if (containsTag(pageList[aPage], s_api_tag) &&
+        if (containsTag(pageList[aPage].tags, s_api_tag) &&
                     pageList[aPage].title.indexOf('.') === -1 &&
                     pageList[aPage].title !== mainIF) {
             pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
@@ -131,20 +124,20 @@ function buildSublist(pages, title) {
     for (aPage in pages) {
         result += '<li>';
         
-        if (containsTag(pages[aPage], 'Experimental')) {
+        if (containsTag(pages[aPage].tags, 'Experimental')) {
             result += badges.ExperimentalBadge;
         }
         
-        if (containsTag(pages[aPage], 'Non-standard') ||
-                    containsTag(pages[aPage], 'Non Standard')) {
+        if (containsTag(pages[aPage].tags, 'Non-standard') ||
+                    containsTag(pages[aPage].tags, 'Non Standard')) {
             result += badges.NonStandardBadge;
         }
         
-        if (containsTag(pages[aPage], 'Deprecated')) {
+        if (containsTag(pages[aPage].tags, 'Deprecated')) {
             result += badges.DeprecatedBadge;
         }
         
-        if (containsTag(pages[aPage], 'Obsolete')) {
+        if (containsTag(pages[aPage].tags, 'Obsolete')) {
             result += badges.ObsoleteBadge;
         }
         
