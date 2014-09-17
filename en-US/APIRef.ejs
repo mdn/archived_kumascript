@@ -6,7 +6,7 @@
 var hasTag = page.hasTag;
 function containsTag(aPage, tag) {
     if (!aPage || !aPage.url) return 0;
-    return hasTag(getEnglishPage(aPage), tag);
+    return hasTag(aPage, tag) || hasTag(getEnglishPage(aPage), tag);
 }
 
 function containsAPI(APIList, name) {
