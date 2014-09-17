@@ -15,16 +15,19 @@
 // and also includes inherited methods/properties from Object and Function
 
 
-// Helper: Checks if a tag is in a given taglist:
-function containsTag(tagList, tag) {
-    if (!tagList || typeof tagList == 'undefined') return 0;
-    tag = tag.toLowerCase();
-    for (var i = 0, len = tagList.length; i < len; i++) {
-        if (tagList[i].toLowerCase() == tag) return 1;
-    }
-    return 0;
+// Helper: Checks if a page has a given tag:
+var hasTag = page.hasTag;
+function containsTag(aPage, tag) {
+    if (!aPage || !aPage.url) return 0;
+    return hasTag(getEnglishPage(aPage), tag);
 }
 
+// Helper: Get the en-US page:
+var getPage = wiki.getPage;
+var locale = env.locale;
+function getEnglishPage(aPage){
+    return getPage(aPage.url.replace(locale, "en-US"));
+}
 
 // Data for inheritance chain
 var currentInheritance = ["Object", "Function"];
@@ -102,10 +105,10 @@ var s_js_title_standard_builtins = mdn.localString({
 // Collect pages
 var source = {};
 source[s_js_subject] = page.subpagesExpand(s_js_full_href);
-if (containsTag(currentInheritance, "Function")) {
+if (currentInheritance.indexOf("Function") > -1) {
     source["iFunction"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
 }
-if (containsTag(currentInheritance, "Object")) {
+if (currentInheritance.indexOf("Object") > -1) {
     source["iObject"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
 }
 
@@ -116,7 +119,7 @@ result[s_js_subject] = {
     properties: [],
     defaultOpened: true
 };
-if (containsTag(currentInheritance, "Function")) {
+if (currentInheritance.indexOf("Function") > -1) {
 result['iFunction'] = {
     title: 'Function',
     methods: [],
@@ -124,7 +127,7 @@ result['iFunction'] = {
     defaultOpened: false
 };
 }
-if (containsTag(currentInheritance, "Object")) {
+if (currentInheritance.indexOf("Object") > -1) {
 result['iObject'] = {
     title: 'Object',
     methods: [],
@@ -142,14 +145,14 @@ for (var object in source) {
     }
     for (aPage in pageList) {
         if (isObj) {
-            includeme = containsTag(pageList[aPage].tags, "prototype");
+            includeme = containsTag(pageList[aPage], "prototype");
         } else {
             includeme = true;
         }
-        if (containsTag(pageList[aPage].tags, result[object].title) && containsTag(pageList[aPage].tags, s_js_property_tag) && includeme) {
+        if (containsTag(pageList[aPage], result[object].title) && containsTag(pageList[aPage], s_js_property_tag) && includeme) {
             result[object].properties.push(pageList[aPage]);
         }
-        if (containsTag(pageList[aPage].tags, result[object].title) && containsTag(pageList[aPage].tags, s_js_method_tag) && includeme) {
+        if (containsTag(pageList[aPage], result[object].title) && containsTag(pageList[aPage], s_js_method_tag) && includeme) {
             result[object].methods.push(pageList[aPage]);
         } 
     }
