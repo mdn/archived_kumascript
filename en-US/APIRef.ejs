@@ -5,7 +5,7 @@
 //  $0  A specific tag to releated APIs (or the API name for backward compatibility)
 var hasTag = page.hasTag;
 function containsTag(aPage, tag) {
-    if (!aPage) return 0;
+    if (!aPage || !aPage.url) return 0;
     return hasTag(getEnglishPage(aPage), tag);
 }
 
