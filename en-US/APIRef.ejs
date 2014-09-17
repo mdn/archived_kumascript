@@ -90,25 +90,26 @@ if (pageFolders.length > 0) {
     /* List related APIs */
     var resultSeealso = [];
 
-    for (aPage in pageList) {
-        if (containsAPI(APIList, pageList[aPage].title)) {
-            if (containsTag(pageList[aPage], "Property")) { // We only want properties
-                pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
-                resultProps.push(pageList[aPage]);
+    for (var i in pageList) {
+        var aPage = pageList[i];
+        if (containsAPI(APIList, aPage.title)) {
+            if (containsTag(aPage, "Property")) { // We only want properties
+                aPage.domxref = template("domxref", [aPage.title]);
+                resultProps.push(aPage);
             }
             
-            if (containsTag(pageList[aPage], "Method") &&
-                        !containsTag(pageList[aPage], "Constructor")) { // We only want methods
-                pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
-                resultMethods.push(pageList[aPage]);
+            if (containsTag(aPage, "Method") &&
+                        !containsTag(aPage, "Constructor")) { // We only want methods
+                aPage.domxref = template("domxref", [aPage.title]);
+                resultMethods.push(aPage);
             }
         }
         
-        if (containsTag(pageList[aPage], s_api_tag) &&
-                    pageList[aPage].title.indexOf('.') === -1 &&
-                    pageList[aPage].title !== mainIF) {
-            pageList[aPage].domxref = template("domxref", [pageList[aPage].title]);
-            resultSeealso.push(pageList[aPage]);
+        if (containsTag(aPage, s_api_tag) &&
+                    aPage.title.indexOf('.') === -1 &&
+                    aPage.title !== mainIF) {
+            aPage.domxref = template("domxref", [aPage.title]);
+            resultSeealso.push(aPage);
         }
     }
 }
@@ -123,27 +124,28 @@ var badges = {
 function buildSublist(pages, title) {
     var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
     
-    for (aPage in pages) {
+    for (var i in pages) {
+        var aPage = pages[i];
         result += '<li>';
         
-        if (containsTag(pages[aPage], 'Experimental')) {
+        if (containsTag(aPage, 'Experimental')) {
             result += badges.ExperimentalBadge;
         }
         
-        if (containsTag(pages[aPage], 'Non-standard') ||
-                    containsTag(pages[aPage], 'Non Standard')) {
+        if (containsTag(aPage, 'Non-standard') ||
+                    containsTag(aPage, 'Non Standard')) {
             result += badges.NonStandardBadge;
         }
         
-        if (containsTag(pages[aPage], 'Deprecated')) {
+        if (containsTag(aPage, 'Deprecated')) {
             result += badges.DeprecatedBadge;
         }
         
-        if (containsTag(pages[aPage], 'Obsolete')) {
+        if (containsTag(aPage, 'Obsolete')) {
             result += badges.ObsoleteBadge;
         }
         
-        result += '<em>' + pages[aPage].domxref + '</em></li>';
+        result += '<em>' + aPage.domxref + '</em></li>';
     }
     
     result += '</ol></li>';
