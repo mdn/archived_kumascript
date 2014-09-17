@@ -190,25 +190,25 @@ len = 0;
             <ol>
             <% for (aPage in resultProperties) { %>
                 <li>
-                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                    <% if (containsTag(resultProperties[aPage], 'Obsolete')) { %>
                         <s class="obsoleteElement">
                     <% } %>
                     <% if (resultProperties[aPage].url != '') { %>
                       <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary || '')%>"><code><%-resultProperties[aPage].title%></code></a>
                     <% } %>
-                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                    <% if (containsTag(resultProperties[aPage], 'Obsolete')) { %>
                         </s>
                     <% } %>
-                    <% if (containsTag(resultProperties[aPage].tags, 'Experimental')) { %>
+                    <% if (containsTag(resultProperties[aPage], 'Experimental')) { %>
                          <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
                     <% } %>
-                    <% if (containsTag(resultProperties[aPage].tags, 'Non-standard')) { %>
+                    <% if (containsTag(resultProperties[aPage], 'Non-standard')) { %>
                          <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
                     <% } %>
-                    <% if (containsTag(resultProperties[aPage].tags, 'Deprecated')) { %>
+                    <% if (containsTag(resultProperties[aPage], 'Deprecated')) { %>
                          <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
                     <% } %>
-                    <% if (containsTag(resultProperties[aPage].tags, 'Obsolete')) { %>
+                    <% if (containsTag(resultProperties[aPage], 'Obsolete')) { %>
                         <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
                     <% } %>
                 </li>
@@ -221,25 +221,25 @@ len = 0;
             <ol>
             <% for (aPage in resultMethods) { %>
                 <li>
-                     <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
+                     <% if (containsTag(resultMethods[aPage], 'Obsolete')) { %>
                         <s class="obsoleteElement">
                     <% } %>
                     <% if (resultMethods[aPage].url != '') { %>
                         <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary || '')%>"><code><%-resultMethods[aPage].title%></code></a>
                     <% } %>
-                    <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
+                    <% if (containsTag(resultMethods[aPage], 'Obsolete')) { %>
                         </s>
                     <% } %>
-                    <% if (containsTag(resultMethods[aPage].tags, 'Experimental')) { %>
+                    <% if (containsTag(resultMethods[aPage], 'Experimental')) { %>
                         <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
                     <% } %>
-                    <% if (containsTag(resultMethods[aPage].tags, 'Non-standard')) { %>
+                    <% if (containsTag(resultMethods[aPage], 'Non-standard')) { %>
                          <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
                     <% } %>
-                    <% if (containsTag(resultMethods[aPage].tags, 'Deprecated')) { %>
+                    <% if (containsTag(resultMethods[aPage], 'Deprecated')) { %>
                          <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
                     <% } %>
-                    <% if (containsTag(resultMethods[aPage].tags, 'Obsolete')) { %>
+                    <% if (containsTag(resultMethods[aPage], 'Obsolete')) { %>
                         <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
                     <% } %>
                 </li>
