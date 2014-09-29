@@ -46,11 +46,16 @@ var l10nPriority = mdn.localString({
 });
     
 var l10nStateUnavailable = mdn.localString({
-    "en-US": "Not available",
-    "de"   : "Nicht verfügbar",
-    "fr"   : "Indisponible",
-    "pt-BR": "Indisponível",
-    "ru"   : "Перевод не доступен"
+    "en-US": "Not available.",
+    "de"   : "Nicht verfügbar.",
+    "fr"   : "Indisponible.",
+    "pt-BR": "Indisponível.",
+    "ru"   : "Перевод не доступен."
+});
+
+var l10nTranslateNow = mdn.localString({
+    "en-US": "Translate now.",
+    "de"   : "Jetzt übersetzen.",
 });
 
 var l10nStateUptodate = mdn.localString({
@@ -279,7 +284,7 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
             <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
         <% } %>
     <% } else { %>
-        <td style="background-color: #FCC"><%=l10nStateUnavailable%></td>
+        <td style="background-color: #FCC"><%=l10nStateUnavailable%> <a href="<%=result[i].url%>$translate?tolocale=<%=locale%>"><%=l10nTranslateNow%></a></td>
     <% } %>
 </tr>
 <% } %>
