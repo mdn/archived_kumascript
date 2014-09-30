@@ -27,6 +27,13 @@ function getEnglishPage(aPage){
     return getPage(aPage.url.replace(locale, "en-US"));
 }
 
+function domxref(aPage) {
+  var apiUrl = aPage.title;
+  if (apiUrl.indexOf(" ") !== -1) apiUrl = apiUrl.replace(" ", "_");
+  if (apiUrl.substr(-2) === '()') apiUrl = apiUrl.substr(0, api.length - 2);
+  return '<a href="/' + locale + '/Web/API/' + apiUrl + '" title="' + aPage.summary + '"><code>' + aPage.title + '</code></a>';
+}
+
 var s_api_tag  = $0;
 var s_api_href = '/' + env.locale + '/docs/Web/API';
 
@@ -94,13 +101,13 @@ if (pageFolders.length > 0) {
         var aPage = pageList[i];
         if (containsAPI(APIList, aPage.title)) {
             if (containsTag(aPage, "Property")) { // We only want properties
-                aPage.domxref = template("domxref", [aPage.title]);
+                aPage.domxref = domxref(aPage);
                 resultProps.push(aPage);
             }
             
             if (containsTag(aPage, "Method") &&
                         !containsTag(aPage, "Constructor")) { // We only want methods
-                aPage.domxref = template("domxref", [aPage.title]);
+                aPage.domxref = domxref(aPage);
                 resultMethods.push(aPage);
             }
         }
@@ -108,7 +115,7 @@ if (pageFolders.length > 0) {
         if (containsTag(aPage, s_api_tag) &&
                     aPage.title.indexOf('.') === -1 &&
                     aPage.title !== mainIF) {
-            aPage.domxref = template("domxref", [aPage.title]);
+            aPage.domxref = domxref(aPage);
             resultSeealso.push(aPage);
         }
     }
