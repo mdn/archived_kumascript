@@ -174,14 +174,13 @@ function buildSublist(pages, title) {
 }
     
 %>
-<span class="breadcrumbs themeUpdated"><%- aquo %>&nbsp;<a href="<%- s_api_href + '/' + mainIF %>"><%= mainIF %></a></span>
 <section class="Quick_links" id="Quick_Links">
   <ol>
     <%
     /* Display ancestor chain */
     // TBD: the chain, we only displays the lowest one!
     %>
-    <li><strong><%- template("domxref", [mainIF]) %></a></strong></li>
+    <li><strong><a href="<%- s_api_href + '/' + mainIF %>"><code><%= mainIF %></a></code></strong></li>
     <% 
     
     /* Display ctors */ 
