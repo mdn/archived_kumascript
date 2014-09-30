@@ -25,6 +25,11 @@ function containsAPI(APIList, name) {
 
 var getPage = wiki.getPage;
 var locale = env.locale;
+
+// This is a huge perf hit for non-en-US pages that call {{APIRef()}}
+// It calls each en-US page to check for tags that are present there
+// but are missing on the locale pages. We should probably not do this.
+// Locale pages need to get the tags right, or tags should be on all locales by default.
 function getEnglishPage(aPage){
     if (locale != 'en-US') {
       return getPage(aPage.url.replace(locale, "en-US"));
@@ -40,7 +45,7 @@ function domxref(aPage) {
   return '<a href="/' + locale + '/Web/API/' + apiUrl + '" title="' + escapeSummary(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
 }
 
-var s_api_tag  = $0;
+var s_api_tag  = $0 || '';
 var s_api_href = '/' + env.locale + '/docs/Web/API';
 
 var s_api_title_methods = mdn.localString({
@@ -118,11 +123,13 @@ if (pageFolders.length > 0) {
             }
         }
         
-        if (containsTag(aPage, s_api_tag) &&
+        if (s_api_tag != '') {
+            if (containsTag(aPage, s_api_tag) &&
                     aPage.title.indexOf('.') === -1 &&
                     aPage.title !== mainIF) {
-            aPage.domxref = domxref(aPage);
-            resultSeealso.push(aPage);
+                aPage.domxref = domxref(aPage);
+                resultSeealso.push(aPage);
+            }
         }
     }
 }
