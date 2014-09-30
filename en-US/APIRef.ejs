@@ -3,6 +3,8 @@
 //
 // Parameters:
 //  $0  A specific tag to releated APIs (or the API name for backward compatibility)
+
+
 var hasTag = page.hasTag;
 function containsTag(aPage, tag) {
     if (!aPage || !aPage.url) return 0;
@@ -24,14 +26,18 @@ function containsAPI(APIList, name) {
 var getPage = wiki.getPage;
 var locale = env.locale;
 function getEnglishPage(aPage){
-    return getPage(aPage.url.replace(locale, "en-US"));
+    if (locale != 'en-US') {
+      return getPage(aPage.url.replace(locale, "en-US"));
+    }
+    return 0;
 }
 
+var escapeSummary = mdn.escapeQuotes;
 function domxref(aPage) {
   var apiUrl = aPage.title;
   if (apiUrl.indexOf(" ") !== -1) apiUrl = apiUrl.replace(" ", "_");
   if (apiUrl.substr(-2) === '()') apiUrl = apiUrl.substr(0, api.length - 2);
-  return '<a href="/' + locale + '/Web/API/' + apiUrl + '" title="' + mdn.escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
+  return '<a href="/' + locale + '/Web/API/' + apiUrl + '" title="' + escapeSummary(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
 }
 
 var s_api_tag  = $0;
