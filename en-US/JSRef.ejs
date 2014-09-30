@@ -26,7 +26,10 @@ function containsTag(aPage, tag) {
 var getPage = wiki.getPage;
 var locale = env.locale;
 function getEnglishPage(aPage){
-    return getPage(aPage.url.replace(locale, "en-US"));
+    if (locale != 'en-US') {
+      return getPage(aPage.url.replace(locale, "en-US"));
+    }
+    return 0;
 }
 
 // Data for inheritance chain
