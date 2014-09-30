@@ -38,7 +38,7 @@ function getEnglishPage(aPage){
 }
 
 var escapeSummary = mdn.escapeQuotes;
-function domxref(aPage) {
+function apiLink(aPage) {
   var apiUrl = aPage.title;
   if (apiUrl.indexOf(" ") !== -1) apiUrl = apiUrl.replace(" ", "_");
   if (apiUrl.substr(-2) === '()') apiUrl = apiUrl.substr(0, api.length - 2);
@@ -112,13 +112,13 @@ if (pageFolders.length > 0) {
         var aPage = pageList[i];
         if (containsAPI(APIList, aPage.title)) {
             if (containsTag(aPage, "Property")) { // We only want properties
-                aPage.domxref = domxref(aPage);
+                aPage.domxref = apiLink(aPage);
                 resultProps.push(aPage);
             }
             
             if (containsTag(aPage, "Method") &&
                         !containsTag(aPage, "Constructor")) { // We only want methods
-                aPage.domxref = domxref(aPage);
+                aPage.domxref = apiLink(aPage);
                 resultMethods.push(aPage);
             }
         }
@@ -127,7 +127,7 @@ if (pageFolders.length > 0) {
             if (containsTag(aPage, s_api_tag) &&
                     aPage.title.indexOf('.') === -1 &&
                     aPage.title !== mainIF) {
-                aPage.domxref = domxref(aPage);
+                aPage.domxref = apiLink(aPage);
                 resultSeealso.push(aPage);
             }
         }
