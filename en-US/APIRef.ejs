@@ -41,7 +41,7 @@ var escapeSummary = mdn.escapeQuotes;
 function apiLink(aPage) {
   var apiUrl = aPage.title;
   if (apiUrl.indexOf(" ") !== -1) apiUrl = apiUrl.replace(" ", "_");
-  if (apiUrl.substr(-2) === '()') apiUrl = apiUrl.substr(0, api.length - 2);
+  if (apiUrl.substr(-2) === '()') apiUrl = apiUrl.substr(0, apiUrl.length - 2);
   return '<a href="/' + locale + '/Web/API/' + apiUrl + '" title="' + escapeSummary(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
 }
 
