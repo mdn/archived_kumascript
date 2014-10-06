@@ -42,7 +42,7 @@ function apiLink(aPage) {
   var apiUrl = aPage.title;
   if (apiUrl.indexOf(" ") !== -1) apiUrl = apiUrl.replace(" ", "_");
   if (apiUrl.substr(-2) === '()') apiUrl = apiUrl.substr(0, apiUrl.length - 2);
-  return '<a href="/' + locale + '/Web/API/' + apiUrl + '" title="' + escapeSummary(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
+  return '<a href="/' + locale + '/docs/Web/API/' + apiUrl + '" title="' + escapeSummary(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
 }
 
 var s_api_tag  = $0 || '';
