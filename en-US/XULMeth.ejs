@@ -12,7 +12,7 @@ var methodName = mdn.localString({
 });
 
 var destOldType = lang + '/docs/XUL:' + methodName + ':' + $0;
-var destNewType = lang + '/docs/XUL/' + methodName + '/' + $0;
+var destNewType = lang + '/docs/Mozilla/Tech/XUL/' + methodName + '/' + $0;
 
 if (wiki.pageExists(destNewType)) {
   %><span id="<%=(anch)%>"><code><%-(web.link(wiki.uri(destNewType), dispApi))%></code></span><%
