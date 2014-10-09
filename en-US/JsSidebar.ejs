@@ -1,5 +1,4 @@
 <%
-
 var currentSection = $0;
 
 function state(section) {
@@ -9,74 +8,111 @@ function state(section) {
   return "closed";
 }
 
+var text = mdn.localString({
+  'en-US': {
+    'Tutorials': 'Tutorials:',
+    'Guide': 'JavaScript Guide',
+    'Introductory': 'Introductory',
+    'Getting_started': 'Getting started',
+    'Overview': 'JavaScript technologies overview',
+    'OO_JavaScript': 'Introduction to Object Oriented JavaScript',
+    'Intermediate': 'Intermediate',
+    'Re-introduction': 'A re-introduction to JavaScript',
+    'Data_structures': 'JavaScript data structures',
+    'Equality': 'Equality comparisons and when to use them',
+    'Advanced': 'Advanced',
+    'Inheritance': 'Inheritance and the prototype chain',
+    'Strict_mode': 'Strict mode',
+    'Typed_arrays': 'JavaScript typed arrays',
+    'Memory_Management': 'Memory Management',
+    'References': 'References:',
+    'Global_Objects': 'Built-in objects',
+    'Operators': 'Expressions &amp; operators',
+    'Statements': 'Statements &amp; declarations',
+    'Functions': 'Functions',
+    'More': 'More',
+    'Lexcial_grammar': 'Lexcial grammar',
+    'Data_types': 'Data types and data structures',
+    'Transitioning_to_strict_mode': 'Transitioning to strict mode',
+    'Template_strings': 'Template strings',
+    'Deprecated_features': 'Deprecated features',
+    'Documentation': 'Documentation:',
+    'Useful_lists': 'Useful lists',
+    'Index': 'All pages index',
+    'Methods_Index': 'Methods index',
+    'Properties_Index': 'Properties index',
+    'JavaScript_tag': 'Pages tagged "JavaScript"',
+    'Contribute': 'Contribute',
+    'Doc_status': 'JavaScript doc status',
+    'The_MDN_project': 'The MDN project'
+  }
+});
 %>
-
-
 <section class="Quick_links" id="Quick_Links">
  <ol>
   <li><a href="/en-US/docs/Web/JavaScript"><strong><em>JavaScript</em></strong></a></li>
-  <li><a href="/en-US/docs/Web/JavaScript/Tutorials"><strong>Tutorials:</strong></a></li>
-  <li data-default-state="<%=state('JavaScript Guide')%>"><a href="/en-US/docs/Web/JavaScript/Guide">JavaScript Guide</a>
-     <%-template("ListSubpages", ['/en-US/docs/Web/JavaScript/Guide', 1, 0, 1])%>
+  <li><a href="/en-US/docs/Web/JavaScript/Tutorials"><strong><%=text['Tutorials']%></strong></a></li>
+  <li data-default-state="<%=state('JavaScript Guide')%>"><a href="/en-US/docs/Web/JavaScript/Guide"><%=text['Guide']%></a>
+   <%-template("ListSubpages", ['/en-US/docs/Web/JavaScript/Guide', 1, 0, 1])%>
   </li>
-  <li data-default-state="<%=state('Introductory')%>"><a href="#">Introductory</a>
+  <li data-default-state="<%=state('Introductory')%>"><a href="#"><%=text['Introductory']%></a>
    <ol>
-    <li><a href="/en-US/docs/Web/JavaScript/Getting_Started">Getting started</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/JavaScript_technologies_overview">JavaScript technologies overview</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript">Introduction to Object Oriented JavaScript</a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Getting_Started"><%=text['Getting_Started']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/JavaScript_technologies_overview"><%=text['Overview']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript"><%=text['OO_JavaScript']%></a></li>
    </ol>
   </li>
-  <li data-default-state="<%=state('Intermediate')%>"><a href="#">Intermediate</a>
+  <li data-default-state="<%=state('Intermediate')%>"><a href="#"><%=text['Intermediate']%></a>
    <ol>
-    <li><a href="/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">A re-introduction to JavaScript</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Data_structures">JavaScript data structures</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain">Equality comparisons and when to use them</a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript"><%=text['Re-introduction']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Data_structures"><%=text['Data_structures']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain"><%=text['Equality']%></a></li>
    </ol>
   </li>
-  <li data-default-state="<%=state('Advanced')%>"><a href="#">Advanced</a>
+  <li data-default-state="<%=state('Advanced')%>"><a href="#"><%=text['Advanced']%></a>
    <ol>
-    <li><a href="/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain">Inheritance and the prototype chain</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Reference/Strict_mode">Strict mode</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Typed_arrays">JavaScript typed arrays</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Memory_Management">Memory Management</a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain"><%=text['Inheritance']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Reference/Strict_mode"><%=text['Strict_mode']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Typed_arrays"><%=text['Typed_arrays']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Memory_Management"><%=text['Memory_Management']%></a></li>
    </ol>
   </li>
-  <li><strong><a href="/en-US/docs/Web/JavaScript/Reference">References:</a></strong></li>
-  <li data-default-state="<%=state('Objects')%>"><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects">Built-in objects</a>
-      <%-template("ListSubpages", ['/en-US/docs/Web/JavaScript/Reference/Global_Objects', 1, 0, 1])%>
+  <li><strong><a href="/en-US/docs/Web/JavaScript/Reference"><%=text['Reference']%></a></strong></li>
+  <li data-default-state="<%=state('Objects')%>"><a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects"><%=text['Global_Objects']%></a>
+   <%-template("ListSubpages", ['/en-US/docs/Web/JavaScript/Reference/Global_Objects', 1, 0, 1])%>
   </li>
-  <li data-default-state="<%=state('Operators')%>"><a href="/en-US/docs/Web/JavaScript/Reference/Operators">Expressions &amp; operators</a>
-    <%-template("ListSubpages", ['/en-US/docs/Web/JavaScript/Reference/Operators', 1, 0, 1])%>
+  <li data-default-state="<%=state('Operators')%>"><a href="/en-US/docs/Web/JavaScript/Reference/Operators"><%=text['Operators']%></a>
+   <%-template("ListSubpages", ['/en-US/docs/Web/JavaScript/Reference/Operators', 1, 0, 1])%>
   </li>
-  <li data-default-state="<%=state('Statements')%>"><a href="/en-US/docs/Web/JavaScript/Reference/Statements">Statements &amp; declarations</a>
+  <li data-default-state="<%=state('Statements')%>"><a href="/en-US/docs/Web/JavaScript/Reference/Statements"><%=text['Statements']%></a>
    <%-template("ListSubpages", ['/en-US/docs/Web/JavaScript/Reference/Statements', 1, 0, 1])%>
   </li>
-  <li data-default-state="<%=state('Functions')%>"><a href="/en-US/docs/Web/JavaScript/Reference/Functions">Functions</a>
+  <li data-default-state="<%=state('Functions')%>"><a href="/en-US/docs/Web/JavaScript/Reference/Functions"><%=text['Functions']%></a>
    <%-template("ListSubpages", ['/en-US/docs/Web/JavaScript/Reference/Functions', 1, 0, 1])%>
   </li>
-  <li data-default-state="<%=state('More')%>"><a href="#">More</a>
+  <li data-default-state="<%=state('More')%>"><a href="#"><%=text['More']%></a>
    <ol>
-    <li><a href="/en-US/docs/Web/JavaScript/Reference/Lexical_grammar">Lexcial grammar</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Data_structures">Data types and data structures</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Reference/Strict_mode">Strict mode</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Reference/Strict_mode/Transitioning_to_strict_mode">Transitioning to strict mode</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Reference/template_strings">Template strings</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Reference/Deprecated_and_obsolete_features">Deprecated features</a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Reference/Lexical_grammar"><%=text['Lexical_grammar']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Data_structures"><%=text['Data_structures']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Reference/Strict_mode"><%=text['Strict_mode']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Reference/Strict_mode/Transitioning_to_strict_mode"><%=text['Transitioning_to_strict_mode']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Reference/template_strings"><%=text['Template_strings']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Reference/Deprecated_and_obsolete_features"><%=text['Deprecated_features']%></a></li>
    </ol>
   </li>
-  <li><strong><a href="/en-US/docs/MDN">Documentation:</a></strong></li>
-  <li data-default-state="<%=state('Useful lists')%>"><a href="#">Useful lists</a>
+  <li><strong><a href="/en-US/docs/MDN"><%=text['Documentation']%></a></strong></li>
+  <li data-default-state="<%=state('Useful lists')%>"><a href="#"><%=text['Useful_lists']%></a>
    <ol>
-    <li><a href="/en-US/docs/Web/JavaScript/Index">All pages index</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Reference/Methods_Index">Methods index</a></li>
-    <li><a href="/en-US/docs/Web/JavaScript/Reference/Properties_Index">Properties index</a></li>
-    <li><a href="/en-US/docs/tag/JavaScript">Pages tagged "JavaScript"</a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Index"><%=text['Index']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Reference/Methods_Index"><%=text['Methods_Index']%></a></li>
+    <li><a href="/en-US/docs/Web/JavaScript/Reference/Properties_Index"><%=text['Properties_Index']%></a></li>
+    <li><a href="/en-US/docs/tag/JavaScript"><%=text['JavaScript_tag']%></a></li>
    </ol>
   </li>
-  <li data-default-state="<%=state('Contribute')%>"><a href="#">Contribute</a>
+  <li data-default-state="<%=state('Contribute')%>"><a href="#"><%=text['Contribute']%></a>
    <ol>
-    <li><a href="/en-US/docs/MDN/Doc_status/JavaScript">JavaScript doc status</a></li>
-    <li><a href="/en-US/docs/MDN">The MDN project</a></li>
+    <li><a href="/en-US/docs/MDN/Doc_status/JavaScript"><%=text['Doc_status']%></a></li>
+    <li><a href="/en-US/docs/MDN"><%=text['The_MDN_project']%></a></li>
    </ol>
   </li>
  </ol>
