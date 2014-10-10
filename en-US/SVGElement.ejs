@@ -12,7 +12,7 @@ var URL = "/" + env.locale + "/docs/Web/SVG/" + mdn.localString(slug) + "/" + $0
 
 // Gather the page summary
 
-var term = $0.toLowerCase();
+var term = $0;
 var page = wiki.getPage(URL);
 var summary = "";
 if (page && page.summary) {
