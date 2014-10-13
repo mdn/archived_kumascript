@@ -124,7 +124,7 @@ if (pageFolders.length > 0) {
         }
         
         if (s_api_tag != '') {
-            if (containsTag(aPage, s_api_tag) &&
+            if (containsTag(aPage, s_api_tag) && !containsTag(aPage, "Constructor") && !containsTag(aPage, "Helper") &&
                     aPage.title.indexOf('.') === -1 &&
                     aPage.title !== mainIF) {
                 aPage.domxref = apiLink(aPage);
