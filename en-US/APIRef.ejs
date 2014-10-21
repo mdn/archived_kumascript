@@ -5,7 +5,7 @@
 //  $0  A specific tag to releated APIs (or the API name for backward compatibility)
 
 var pageURL = env.path;
-var mainInterface = pageUrl.split('.')[0];
+var mainInterfaceURL = pageURL.split('.')[0];
  
 function isSubpage() {
   var pageFolders = pageURL.split('/');
@@ -17,17 +17,9 @@ function isSubpage() {
 }
 
 if (isSubpage()) {
-%>
-
-<section class="Quick_links" id="Quick_Links">
- <ol>
-  
-  <%- template("page", [mainInterface, "Quick_Links"]) %>
-  
- </ol>
-</section>
-
-%>
+  var output = '<section class="Quick_links" id="Quick_Links"><ol>';
+      output += template("page", [mainInterfaceURL, "Quick_Links"]);
+      output += '</ol></section>';
 } else {
 
 var hasTag = page.hasTag;
@@ -197,38 +189,31 @@ function buildSublist(pages, title) {
     
     return result;
 }
-    
-%>
-<section class="Quick_links" id="Quick_Links">
-  <ol>
-    <%
-    /* Display ancestor chain */
-    // TBD: the chain, we only displays the lowest one!
-    %>
-    <li><strong><a href="<%- s_api_href + '/' + mainIF %>"><code><%= mainIF %></a></code></strong></li>
-    <% 
-    
-    /* Display ctors */ 
+
+var output = '<section class="Quick_links" id="Quick_Links"><ol>';
+    output += '<li><strong><a href="' +  s_api_href + '/' + mainIF + '"><code>' + mainIF + '</a></code></strong></li>';
+   
+   /* Display ctors */ 
     if (resultCtors.length > 0) { 
-        %><%-buildSublist(resultCtors, s_api_title_ctors)%><%
+        output += buildSublist(resultCtors, s_api_title_ctors);
     }
     
     /* Display properties */ 
     if (resultProps.length > 0) { 
-        %><%-buildSublist(resultProps, s_api_title_properties)%><%
+        output += buildSublist(resultProps, s_api_title_properties);
     }
     
     /* Display methods */ 
     if (resultMethods.length > 0) {
-        %><%-buildSublist(resultMethods, s_api_title_methods)%><%
+        output += buildSublist(resultMethods, s_api_title_methods);
     }
     
     /* Display related APIs */
     if (resultSeealso.length > 0) {
-        %><%-buildSublist(resultSeealso, s_api_title_seealso)%><%
+        output += buildSublist(resultSeealso, s_api_title_seealso);
     }
-    %>
-  </ol>
-</section>
-
-<% } %>
+    output += '</ol></section>';
+ 
+}
+%>
+<%-output%>
