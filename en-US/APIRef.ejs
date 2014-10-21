@@ -4,6 +4,31 @@
 // Parameters:
 //  $0  A specific tag to releated APIs (or the API name for backward compatibility)
 
+var pageURL = env.path;
+var mainInterface = pageUrl.split('.')[0];
+ 
+function isSubpage() {
+  var pageFolders = pageURL.split('/');
+  if (pageFolders.length > 0) {
+    var pageName = pageFolders[pageFolders.length-1];
+    return pageName.indexOf('.') != -1;
+  }
+  return false;
+}
+
+if (isSubpage()) {
+%>
+
+<section class="Quick_links" id="Quick_Links">
+ <ol>
+  
+  <%- template("page", [mainInterface, "Quick_Links"]) %>
+  
+ </ol>
+</section>
+
+%>
+} else {
 
 var hasTag = page.hasTag;
 function containsTag(aPage, tag) {
@@ -205,3 +230,5 @@ function buildSublist(pages, title) {
     %>
   </ol>
 </section>
+
+<% } %>
