@@ -142,7 +142,7 @@ function missingTags(tagList, requiredTags) {
     if (!tagList || tagList == undefined || tagList.length == 0) {
         var yay = 0;
         for (var i = 0, len = tagList.length; i < len; i++) {
-            if (hasTags(requiredTags, tagList[i].toLowerCase()) {
+            if (hasTags(requiredTags, tagList[i].toLowerCase())) {
                 yay++;
             }
         }
