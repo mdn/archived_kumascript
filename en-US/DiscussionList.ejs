@@ -6,7 +6,9 @@
 //  $0  The mailing list name
 //  $1  The newsgroup name
 //  $2  The class name to use for the list (null if none)
-//  $3 name of the topic/community (was $0 in CommunityBox template)
+//  $3  Name of the topic/community (was $0 in CommunityBox template)
+//  $4  Twitter ID (null if none)
+//  $5  Stack Overflow tag (null if none)
 
 var lang = env.locale /* get the page language */ ; 
 var mailingList, newsgroup, googleGroup, webFeed, stackOverflow, twitter;
@@ -134,22 +136,32 @@ switch(lang) {
 		break;
 }
 
-// determine which stack overflow link to include
+// Build the Stack Overflow URL using the SO tag
 
-var stackoverflowURL;
+var stackOverflowURL = null;
 
+if ($5) {
+    stackOverflowURL = "http://stackoverflow.com/questions/tagged/" + $5;
+}
+
+/*** OLD HACK THAT GUESSED (USUALLY WRONG) SO LINKS ***
 if ($3 == "Firefox OS" || $3 == "Open Web Apps") {
    stackoverflowURL = "http://stackoverflow.com/questions/tagged/firefox-os";
 } else if ($3 == "Developer tools") {
    stackoverflowURL = "http://stackoverflow.com/questions/tagged/firefox-developer-tools";    
 } else {
    stackoverflowURL = "http://stackoverflow.com/r/mozilla";    
+} */
+
+// Build the Twitter link (if any)
+
+var twitterURL = null;
+
+if ($4) {
+    twitterURL = "https://twitter.com/" + $4;
 }
 
-// determine which Twitter link to include
-
-var twitterURLFragment;
-
+/***** OLD GUESSING MECHANISM FOR CREATING TWITTER LINKS °°°°°
 if ($3 == "Firefox OS") {
    twitterURLFragment = "Boot2Gecko";
 } else if ($3 == "Developer tools") {
@@ -159,6 +171,7 @@ if ($3 == "Firefox OS") {
 } else {
    twitterURLFragment = "mozilla";    
 }
+*/
 
 // Build the <ul> element
 
@@ -171,8 +184,8 @@ if ($2 && ($2 != undefined)) {
 
 <%-listElem %>
   <li><%- web.link('https://lists.mozilla.org/listinfo/' + $0, 		mailingList) %></li>
-  <li><%- web.link('https://twitter.com/' + twitterURLFragment,     	twitter) %></li>
-  <li><%- web.link(stackoverflowURL,         stackOverflow) %></li>
+  <li><%- if (twitterURL != null) { web.link(twitterURL, twitter) } %></li>
+  <li><%- if (stackOverflowURL != null) { web.link(stackoverflowURL,         stackOverflow) } %></li>
   <li><%- web.link('http://groups.google.com/group/' + $1, 		googleGroup) %></li>
   <li><%- web.link('http://groups.google.com/group/' + $1 + '/feeds', 		webFeed) %></li>
 </ul>
