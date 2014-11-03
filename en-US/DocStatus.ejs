@@ -80,9 +80,6 @@ var metrics = {
 if (groupTags.length > 0) {
     metrics.noTags = undefined;
 }
-if (requiredTags.length > 0) {
-    metrics.requiredTags = undefined;
-}
 
 var output = {
     noTags: [],
@@ -96,13 +93,6 @@ var output = {
 if (groupTags.length > 0) {
     output.noTags = undefined;
 }
-
-if (requiredTags.length > 0) {
-    output.requiredTags = undefined;
-}
-
-log.debug(output);
-log.debug(metrics);
 
 /*** Add optional and custom metrics to the metrics object ***/
 if (bzddn && bzddn != '') {
@@ -151,8 +141,8 @@ function missingTags(tagList, requiredTags) {
     if (!tagList || tagList == undefined || tagList.length == 0) {
         var yay = 0;
         for (var i = 0, len = tagList.length; i < len; i++) {
-            if (hasTags(requiredTags, tagList[i].toLowerCase())) {
-                yay++;
+            for (var j = 0, len = requiredTags.length; j < len; j++) {
+                if (tagList[i] == requiredTags[j]) yay++;
             }
         }
         if (yay == 0) return 1;
