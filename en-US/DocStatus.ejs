@@ -9,6 +9,7 @@
 //  $4  -  (optional) Bugzilla query for documentaion requests
 //  $5  -  (optional) Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
 //         e.g. { "cleanup": {"title": "Clean-up", "link": "#Cleanup_on_standard_built-in_ECMAScript_objects", "counter": 142 }}
+//  $6  -  (optional) Tags that all pages should have. (OR logic)
 
 /*** Module loading ***/
 var MDN = require("MDN:Common");
@@ -30,6 +31,10 @@ var outdate = $2;
 var bzddn = $3;
 var bzdr = $4;
 var cMetrics = $5;
+var requiredTags = [];
+if ($6) {
+    requiredTags = JSON.parse($6);
+}
 
 var languages = page.translations(env.path);
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
@@ -70,6 +75,9 @@ var metrics = {
 if (groupTags.length > 0) {
     metrics.noTags = undefined;
 }
+if (requiredTags.length > 0) {
+    metrics.requiredTags = undefined;
+}
 
 var output = {
     noTags: [],
@@ -83,6 +91,9 @@ if (groupTags.length > 0) {
     output.noTags = undefined;
 }
 
+if (requiredTags.length > 0) {
+    output.requiredTags = undefined;
+}
 
 /*** Add optional and custom metrics to the metrics object ***/
 if (bzddn && bzddn != '') {
@@ -123,6 +134,19 @@ function hasTags(tags, needle) {
 function hasNoTags(tagList) {
     if (!tagList || tagList == undefined || tagList.length == 0) {
       return 1;
+    }
+    return 0;
+}
+
+function missingTags(tagList, requiredTags) {
+    if (!tagList || tagList == undefined || tagList.length == 0) {
+        var yay = 0;
+        for (var i = 0, len = tagList.length; i < len; i++) {
+            if (hasTags(requiredTags, tagList[i].toLowerCase()) {
+                yay++;
+            }
+        }
+        if (yay == 0) return 1;
     }
     return 0;
 }
@@ -185,9 +209,13 @@ function collect(page) {
         metrics.editorialReviews.counter++;
         output.editorialReviews.push({title: cleanTitle, url: pageurl});
     }
-    if (hasReviewTag(page.review_tags, 'technical')) { 
+    if (hasReviewTag(page.review_tags, 'technical')) {
         metrics.technicalReviews.counter++;
         output.technicalReviews.push({title: cleanTitle, url: pageurl});
+    }
+    if (missingTags(page.tags, requiredTags)) {
+        metrics.requiredTags.counter++;
+        output.requiredTags.push({title: cleanTitle, url: pageurl});
     }
     var pageAge = daysBetween(new Date(page.last_edit), new Date());
     if ((outdate != undefined && isOutdated(page.last_edit, outdate)) || pageAge > 365) {
