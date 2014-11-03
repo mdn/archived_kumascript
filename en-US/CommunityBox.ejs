@@ -11,6 +11,8 @@
 //  $3  IRC channel name
 //  $4  String containing a list of URLs and descriptions for additional
 //      links (null if none).
+//  $5  Stack Overflow tag to promote, if any
+//  $6  Twitter ID to promote, if any
 //
 // The $4 string of additional links is formatted as a list like this:
 // heading|url|text|description||heading|url|text|description...
@@ -179,7 +181,7 @@ if (haveExtra || ircLink.length) {
         <h2 id="Join_the_community"><%=headingStr%></h2>
         <div class="column-half">
             <div class="communitysubhead"><%-messageNoteStr%></div>
-            <%-template("DiscussionList", [$1, $2, "communitymailinglist", $0])%>
+            <%-template("DiscussionList", [$1, $2, "communitymailinglist", $0, $5, $6])%>
         </div>
         <div class="column-half">
             <%-extraLinks%>
