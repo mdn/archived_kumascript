@@ -10,12 +10,8 @@
 //  $4  Twitter ID (null if none)
 //  $5  Stack Overflow tag (null if none)
 
-debug.log("Starting");
-
 var lang = env.locale; /* get the page language */ ; 
 var mailingList, newsgroup, googleGroup, webFeed, stackOverflow, twitter;
-
-debug.log("Testing");
 
 /* Translation Targets
     * " mailingList"
@@ -149,7 +145,6 @@ if ($5 && ($5 != undefined)) {
     stackOverflowURL = "http://stackoverflow.com/questions/tagged/" + $5;
     soHTML = "<li>" + web.link(stackOverflowURL, stackOverflow) + "</li>";
 }
-debug.log("Stack Overflow: " + soHTML);
 
 /*** OLD HACK THAT GUESSED (USUALLY WRONG) SO LINKS ***
 if ($3 == "Firefox OS" || $3 == "Open Web Apps") {
@@ -169,8 +164,6 @@ if ($4 && ($4 != undefined)) {
     twitterURL = "https://twitter.com/" + $4;
     twitHTML = "<li>" + web.link(twitterURL, twitter) + "</li>";
 }
-
-debug.log("Twitter: " + twitter);
 
 /***** OLD GUESSING MECHANISM FOR CREATING TWITTER LINKS °°°°°
 if ($3 == "Firefox OS") {
@@ -195,8 +188,8 @@ if ($2 && ($2 != undefined)) {
 
 <%-listElem %>
   <li><%- web.link('https://lists.mozilla.org/listinfo/' + $0, mailingList) %></li>
-  <%- $twitHTML %>
-  <%- $soHTML %>
+  <%- twitHTML %>
+  <%- soHTML %>
   <li><%- web.link('http://groups.google.com/group/' + $1, googleGroup) %></li>
   <li><%- web.link('http://groups.google.com/group/' + $1 + '/feeds', webFeed) %></li>
 </ul>
