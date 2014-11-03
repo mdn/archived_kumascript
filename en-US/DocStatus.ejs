@@ -138,15 +138,16 @@ function hasNoTags(tagList) {
 }
 
 function missingTags(tagList, requiredTags) {
-    if (!tagList || tagList == undefined || tagList.length == 0) {
-        var yay = 0;
-        for (var i = 0, len = tagList.length; i < len; i++) {
-            for (var j = 0, len = requiredTags.length; j < len; j++) {
-                if (tagList[i] == requiredTags[j]) yay++;
-            }
-        }
-        if (yay == 0) return 1;
-    }
+   if (!tagList || tagList == undefined) return 0;
+   var yay = 0;
+   for (var i = 0; i < tagList.length; i++) {
+      for (var j = 0; j < requiredTags.length; j++) {
+          if (tagList[i].toLowerCase() == requiredTags[j].toLowerCase()) {
+              yay++;                                                                     
+          }
+      }
+   }
+   if (yay == 0) return 1;
     return 0;
 }
 
