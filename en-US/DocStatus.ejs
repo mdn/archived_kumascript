@@ -35,9 +35,9 @@ var requiredTags = [];
 if ($6) {
     requiredTags = JSON.parse($6);
 }
-%>
-<%- log.debug(requiredTags); %>
-<%
+
+log.debug(requiredTags);
+
 var languages = page.translations(env.path);
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=';
 
