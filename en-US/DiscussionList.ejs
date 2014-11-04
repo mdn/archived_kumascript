@@ -141,7 +141,7 @@ switch(lang) {
 var stackOverflowURL = null;
 var soHTML = "";
 
-if ($5 && ($5 != undefined)) {
+if ($5 && ($5 != undefined) && ($5.length != 0)) {
     stackOverflowURL = "http://stackoverflow.com/questions/tagged/" + $5;
     soHTML = "<li>" + web.link(stackOverflowURL, stackOverflow) + "</li>";
 }
@@ -160,7 +160,7 @@ if ($3 == "Firefox OS" || $3 == "Open Web Apps") {
 var twitterURL = null;
 var twitHTML = "";
 
-if ($4 && ($4 != undefined)) {
+if ($4 && ($4 != undefined) && ($4.length != 0)) {
     twitterURL = "https://twitter.com/" + $4;
     twitHTML = "<li>" + web.link(twitterURL, twitter) + "</li>";
 }
