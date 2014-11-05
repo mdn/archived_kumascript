@@ -141,6 +141,7 @@ function missingTags(tagList, requiredTags) {
    if (!tagList || tagList == undefined) return 0;
    var yay = 0;
    for (var i = 0; i < tagList.length; i++) {
+      if (tagList[i] == 'Index') return 0;
       for (var j = 0; j < requiredTags.length; j++) {
           if (tagList[i].toLowerCase() == requiredTags[j].toLowerCase()) {
               yay++;                                                                     
