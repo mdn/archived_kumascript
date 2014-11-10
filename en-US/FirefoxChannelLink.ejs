@@ -16,7 +16,12 @@ var html = "";
 if (channel == "nightly") {
     downloadURL = "https://nightly.mozilla.org";
     iconURL = "/files/7513/Firefox-Nightly-300dpi.png";
-} else {
+} 
+else if (channel == "developer") {
+    downloadURL = "https://www.mozilla.org/en-US/firefox/developer/";
+    iconURL = "/files/9069/firefox-dev-ed_logo-only_1024.png";    
+}
+else {
     switch(channel) {
         case "aurora":
             downloadURL = baseURL + "#aurora";
