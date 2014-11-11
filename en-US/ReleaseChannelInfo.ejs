@@ -8,10 +8,22 @@ switch(string.tolower($3)) {
     url = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-central/";
     break;
   case "aurora":
-    url = "https://www.mozilla.org/en-US/firefox/aurora/";
+    if ($0 < 35) {
+        url = "https://www.mozilla.org/en-US/firefox/channel/#aurora";
+    } else {
+        url = "https://www.mozilla.org/en-US/firefox/developer/";
+        switch(env.locale) {
+            default:
+                $3 = "Developer Edition";
+                break;
+        }
+    }
     break;
   case "beta":
-    url = "http://www.mozilla.com/en-US/firefox/channel/";
+    url = "http://www.mozilla.com/en-US/firefox/channel/#beta";
+    break;
+  case "release":
+    url = "https://www.mozilla.org/en-US/firefox/channel/#firefox";
     break;
 };
 var str = "<p>Firefox " + $0 + ", based on Gecko " + $1 + ", will ship in " + $2 + ". This article provides information about the changes in this release that will affect developers. Nightly builds of what will become Firefox " + $0 + " are " + web.link(url, 'currently available') + " on the " + string.ToUpperFirst($3) + " channel.</p><div class='note'><strong>Note:</strong> Items listed here are tentatively slated for Firefox " + $0 + "; however, they may be held for a future release if testing shows they're not ready by the time Firefox " + $0 + " is due to ship. Please keep an eye on this page to stay up to date on the plans for Firefox " + $0 + ".</div>";
