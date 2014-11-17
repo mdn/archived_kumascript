@@ -45,7 +45,11 @@ var text = mdn.localString({
     'JavaScript_tag': 'Pages tagged "JavaScript"',
     'Contribute': 'Contribute',
     'Doc_status': 'JavaScript doc status',
-    'The_MDN_project': 'The MDN project'
+    'The_MDN_project': 'The MDN project',
+    'slug_objects': '/docs/Web/JavaScript/Reference/Global_Objects',
+    'slug_operators': '/docs/Web/JavaScript/Reference/Operators',
+    'slug_statements': '/docs/Web/JavaScript/Reference/Statements',
+    'slug_functions': '/docs/Web/JavaScript/Reference/Functions'
   },
   'ru': {
     'Tutorials': 'Уроки:',
@@ -82,7 +86,53 @@ var text = mdn.localString({
     'JavaScript_tag': 'Страницы, помеченные «JavaScript»',
     'Contribute': 'Внести свой вклад',
     'Doc_status': 'Статус документации по JavaScript',
-    'The_MDN_project': 'Проект MDN'
+    'The_MDN_project': 'Проект MDN',
+    'slug_objects': '/docs/Web/JavaScript/Reference/Global_Objects',
+    'slug_operators': '/docs/Web/JavaScript/Reference/Operators',
+    'slug_statements': '/docs/Web/JavaScript/Reference/Statements',
+    'slug_functions': '/docs/Web/JavaScript/Reference/Functions'
+  },
+  'fr': {
+    'Tutorials': 'Tutorials:',
+    'Guide': 'JavaScript Guide',
+    'Introductory': 'Introductory',
+    'Getting_Started': 'Getting started',
+    'Overview': 'JavaScript technologies overview',
+    'OO_JavaScript': 'Introduction to Object Oriented JavaScript',
+    'Intermediate': 'Intermediate',
+    'Re-introduction': 'A re-introduction to JavaScript',
+    'Data_structures': 'JavaScript data structures',
+    'Equality': 'Equality comparisons and when to use them',
+    'Advanced': 'Advanced',
+    'Inheritance': 'Inheritance and the prototype chain',
+    'Strict_mode': 'Strict mode',
+    'Typed_arrays': 'JavaScript typed arrays',
+    'Memory_Management': 'Memory Management',
+    'Reference': 'References:',
+    'Global_Objects': 'Built-in objects',
+    'Operators': 'Expressions &amp; operators',
+    'Statements': 'Statements &amp; declarations',
+    'Functions': 'Functions',
+    'More': 'More',
+    'Lexical_grammar': 'Lexical grammar',
+    'Data_types': 'Data types and data structures',
+    'Transitioning_to_strict_mode': 'Transitioning to strict mode',
+    'Template_strings': 'Template strings',
+    'Deprecated_features': 'Deprecated features',
+    'Documentation': 'Documentation:',
+    'Useful_lists': 'Useful lists',
+    'Index': 'All pages index',
+    'Methods_Index': 'Methods index',
+    'Properties_Index': 'Properties index',
+    'JavaScript_tag': 'Pages tagged "JavaScript"',
+    'Contribute': 'Contribute',
+    'Doc_status': 'JavaScript doc status',
+    'The_MDN_project': 'The MDN project',
+    'slug_objects': '/docs/Web/JavaScript/Reference/Objets_globaux',
+    'slug_operators': '/docs/Web/JavaScript/Reference/Opérateurs',
+    'slug_statements': '/docs/Web/JavaScript/Reference/Statements',
+    'slug_functions': '/docs/Web/JavaScript/Reference/Functions'
+
   }
 });
 %>
@@ -117,16 +167,16 @@ var text = mdn.localString({
   </li>
   <li><strong><a href="/<%=locale%>/docs/Web/JavaScript/Reference"><%=text['Reference']%></a></strong></li>
   <li data-default-state="<%=state('Objects')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Global_Objects"><%=text['Global_Objects']%></a>
-   <%-template("ListSubpages", ['/' + locale + '/docs/Web/JavaScript/Reference/Global_Objects', 1, 0, 1])%>
+   <%-template("ListSubpages", ['/' + locale + text['slug_objects'], 1, 0, 1])%>
   </li>
   <li data-default-state="<%=state('Operators')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Operators"><%=text['Operators']%></a>
-   <%-template("ListSubpages", ['/' + locale + '/docs/Web/JavaScript/Reference/Operators', 1, 0, 1])%>
+   <%-template("ListSubpages", ['/' + locale + text['slug_operators'], 1, 0, 1])%>
   </li>
   <li data-default-state="<%=state('Statements')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Statements"><%=text['Statements']%></a>
-   <%-template("ListSubpages", ['/' + locale + '/docs/Web/JavaScript/Reference/Statements', 1, 0, 1])%>
+   <%-template("ListSubpages", ['/' + locale + text['slug_statements'], 1, 0, 1])%>
   </li>
   <li data-default-state="<%=state('Functions')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Functions"><%=text['Functions']%></a>
-   <%-template("ListSubpages", ['/' + locale + '/docs/Web/JavaScript/Reference/Functions', 1, 0, 1])%>
+   <%-template("ListSubpages", ['/' + locale + text['slug_functions'], 1, 0, 1])%>
   </li>
   <li data-default-state="<%=state('More')%>"><a href="#"><%=text['More']%></a>
    <ol>
