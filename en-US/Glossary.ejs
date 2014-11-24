@@ -1,10 +1,10 @@
 <%
-// Inserts a link to a terme in our glossary.
+// Inserts a link to a term's entry in our glossary.
 // Appropriate styling is applied.
 //
 // Parameters:
 //
-//  $0 - Terme name
+//  $0 - Term name
 //  $1 - name to display (optional)
 //  $2 - Remove custom style on links (optional)
 
@@ -27,7 +27,7 @@ if (page && page.summary) {
     summary = str + ': ' + mdn.escapeQuotes(page.summary);
 } else {
     summary = mdn.localString({
-        "en-US": "The definition of that term (" + str + ") has not been written yet; please consider contributing!",
+        "en-US": "The definition of that term (" + str + ") has not been written yet; please consider contributing it!",
         "fr"   : "La définition de ce terme ("+ str + ") n'a pas encore été rédigée; Nous serions heureux de vous voir l'écrire !"
     });
 }
