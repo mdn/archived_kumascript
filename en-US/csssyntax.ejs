@@ -7,7 +7,7 @@ var page = wiki.page(mdn.localString({
     "ja"   : "ja/docs/Web/CSS/CSS_values_syntax",
     "fr"   : "fr/docs/CSS/Syntaxe_des_valeurs_CSS",
     "de"   : "de/docs/CSS/CSS_werte_syntax",
-    "zh-CN": "zh-CN/docs/Web/CSS/CSS_values_syntax"
+    "zh-CN": "en-US/docs/Web/CSS/CSS_values_syntax"
 })); // "en-US" is default.
 
 var re = new RegExp("<\\s*span\\s+id\\s*=\\s*"+'"syntax-'+$0+'"'+"[^>]*>(.*)<\\s*/\\s*span\\s*\\>","igm");
@@ -24,7 +24,7 @@ switch (lang) {
         missing = "Syntax nicht in der Datenbank gefunden!";
         break;
 
-    case "zh-cn":
+    case "zh-CN":
         missing = "该属性的语法尚未添加";
         break;
 }
