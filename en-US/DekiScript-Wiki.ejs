@@ -277,6 +277,13 @@
     
     tree: function(path, depth, self, reverse, ordered) {
         var page = require('DekiScript:Page');
+        
+        // If the path ends with a slash, remove it.
+        
+        if (path.substr(-1, 1) === '/') {
+            path = path.slice(0, -1);
+        }
+        
         var pages = page.subpages(path, depth, self);
         
         if (reverse == 0) {
