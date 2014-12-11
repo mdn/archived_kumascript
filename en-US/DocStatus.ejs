@@ -336,6 +336,14 @@ if (output.hasOwnProperty(obj) && typeof metrics[obj] != 'undefined' && metrics[
 %>
 <h2 id="<%=metrics[obj].link.slice(1)%>"><%=metrics[obj].title%></h2>
 <%
+    if (obj === 'requiredTags') {
+%>
+<p><small><em>At least missing one of the following</em>: <%- requiredTags.map(function(tag){
+    return template('Tag', [tag])
+}).join(', ') %></small></p>
+<%
+    }
+
     var result = output[obj];
     switch(env.locale) {
     default:
