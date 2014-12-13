@@ -49,7 +49,7 @@ var text = mdn.localString({
   
   <li><strong><%=text['References']%></strong></li>
   <li data-default-state="<%=state('JSAPI')%>"><a href="/<%=locale%>/docs/Mozilla/Projects/SpiderMonkey/JSAPI_reference"><%=text['JSAPI_reference']%></a>
-    <%-template("ListSubpages", ['/' + locale + '/docs/Mozilla/Projects/SpiderMonkey/JSAPI_reference', 1, 0, 1])%>
+    <%-template("ListSubpagesForSidebar", ['/' + locale + '/docs/Mozilla/Projects/SpiderMonkey/JSAPI_reference'])%>
   </li>
   <li data-default-state="<%=state('Debugger-API')%>"><a href="/<%=locale%>/docs/Tools/Debugger-API"><%=text['Debugger-API']%></a>
     <%-template("ListSubpages", ['/' + locale + '/docs/Tools/Debugger-API', 1, 0, 1])%>
