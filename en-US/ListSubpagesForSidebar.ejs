@@ -14,7 +14,8 @@ if (path.substr(-1, 1) === '/') {
     path = path.slice(0, -1);
 }
     
-var pages = page.subpages(path);
+var pages = page.subpagesExpand(path);
+var containsTag = page.hasTag;
 
 var result = '';
 var openTag = '<ol>';
@@ -22,13 +23,38 @@ var closeTag = '</ol>';
 var code    = !$1 ? '<code>'  : '';
 var endcode = !$1 ? '</code>' : '';
 
+var badges = {
+    ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
+    NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
+    DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
+    ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
+};
+
 if(pages.length) {
     result += openTag;
 
     pages.forEach(function(item) {
         if (!item) { return; }
-        var summary = item.summary || '';
-        result += '<li><a href="' + item.url + '" title="' + summary + '">' + code + kuma.htmlEscape(item.title) + endcode + '</a>' + '</li>';
+        var summary =  mdn.escapeQuotes(item.summary) || '';
+        result += '<li>';
+        
+        if (containsTag(item, 'Experimental')) {
+            result += badges.ExperimentalBadge;
+        }
+        
+        if (containsTag(item, 'Non-standard') || containsTag(item, 'Non Standard')) {
+            result += badges.NonStandardBadge;
+        }
+        
+        if (containsTag(item, 'Deprecated')) {
+            result += badges.DeprecatedBadge;
+        }
+        
+        if (containsTag(item, 'Obsolete')) {
+            result += badges.ObsoleteBadge;
+        }
+        
+        result += '<a href="' + item.url + '" title="' + summary + '">' + code + kuma.htmlEscape(item.title) + endcode + '</a>' + '</li>';
     });
     
     result += closeTag;
