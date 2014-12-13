@@ -1,0 +1,37 @@
+<%
+// Inserts a tree of subpages of the specified page to be used in the sidebar (quicklinks)
+// Displays common flags/icons
+//
+// Parameters:
+//  $0 - The path of the page whose subpages should be listed
+//  $1 - If set, do not put the text in <code></code>
+
+
+var path = $0;
+
+// If the path ends with a slash, remove it.    
+if (path.substr(-1, 1) === '/') {
+    path = path.slice(0, -1);
+}
+    
+var pages = page.subpages(path);
+
+var result = '';
+var openTag = '<ol>';
+var closeTag = '</ol>';
+var code    = !$1 ? '<code>'  : '';
+var endcode = !$1 ? '</code>' : '';
+
+if(pages.length) {
+    result += openTag;
+
+    pages.forEach(function(item) {
+        if (!item) { return; }
+        var summary = item.summary || '';
+        result += '<li><a href="' + item.url + '" title="' + summary + '">' + code + kuma.htmlEscape(item.title) + endcode + '</a>' + '</li>';
+    });
+    
+    result += closeTag;
+}
+%>
+<%- result %>
