@@ -16,10 +16,10 @@ var str = "Introduced in " + link;
 
 switch(lang) {
     case 'fr':
-        if(wiki.pageExists('/fr/docs/JavaScript/Nouveautés_dans_JavaScript/' + $0)) {
-            link = web.link(wiki.uri('/fr/docs/JavaScript/Nouveautés_dans_JavaScript/' + $0), 'JavaScript ' + $0);
-        } else if(wiki.pageExists('/fr/docs/Nouveautés_dans_JavaScript_' + $0)) {
-            link = web.link(wiki.uri('/fr/docs/Nouveautés_dans_JavaScript_' + $0), 'JavaScript ' + $0);
+        if(wiki.pageExists('/fr/docs/Web/JavaScript/New_in_JavaScript/' + $0)) {
+            link = web.link(wiki.uri('/fr/docs/Web/JavaScript/New_in_JavaScript/' + $0), 'JavaScript ' + $0);
+        } else if(wiki.pageExists('/fr/docs/Web/JavaScript/New_in_JavaScript/Nouveaut%C3%A9s_dans_JavaScript_' + $0)) {
+            link = web.link(wiki.uri('/fr/docs/Web/JavaScript/New_in_JavaScript/Nouveaut%C3%A9s_dans_JavaScript_' + $0), 'JavaScript ' + $0);
         }
         str = "Introduit dans " + link;
         break;
