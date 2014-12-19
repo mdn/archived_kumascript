@@ -14,9 +14,9 @@ var str = mdn.localString({
 var headlineLevel = $2 || "3";
   
   
-%><div>
+%><div class="headingWithIndicator">
+    <h<%= headlineLevel %> name="<%=$0%>()"><%= $0 %>()</h<%= headlineLevel %>>
     <span class="indicatorInHeadline standardNote standardNoteMethod"><%-
      str[0] %><%= $1 %><%- str[1] %> <%- template("geckoRelease", [$1])
     %></span>
-    <h<%= headlineLevel %> name="<%=$0%>()"><%= $0 %>()</h<%= headlineLevel %>>
 </div>
