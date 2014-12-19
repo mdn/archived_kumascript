@@ -12,7 +12,7 @@ str = mdn.localString({
 });
 
 
-%><div>
-    <span class="indicatorInHeadline minVer geckoMinVerMethod"><%- str %><%- template("geckoRelease", [$1]) %></span>
+%><div class="headingWithIndicator">
     <h2<%- idAttr %>><%= $0 %></h2>
+    <span class="indicatorInHeadline minVer geckoMinVerMethod"><%- str %><%- template("geckoRelease", [$1]) %></span>
 </div>
