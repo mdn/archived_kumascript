@@ -147,7 +147,7 @@ for (var i = 0; i < numLetters; i++) {
             
             // Build any badge text that may be needed
             
-            if (containsTag(tags, "Non-standard")) {
+            if (containsTag(tags, "Non-standard") || containsTag(tags, "Non standard")) {
                 badge = " " + template("NonStandardBadge", ["1"]);
             }
             
