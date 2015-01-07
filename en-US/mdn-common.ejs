@@ -37,6 +37,26 @@
     },
     
     /**
+     * Given a string, replaces all placeholders outlined by $1$, $2$, etc.
+     * within it.
+     * 
+     * The number within the placeholder indicates the index within the
+     * replacement array starting by 1.
+     * 
+     * Example:
+     *   replacePlaceholders("$1$ $2$, $1$ $3$", ["hello", "world", "editor"])
+     *   => "hello world, hello editor"
+     */
+    replacePlaceholders: function (string, replacements) {
+        function replacePlaceholder(placeholder, offset, string) {
+          var index = placeholder.substring(1, placeholder.length - 1) - 1;
+          return index < replacements.length ? replacements[index] : '';
+        }
+
+        return string.replace(/\$\d+\$/g, replacePlaceholder);
+    },
+
+    /**
      * Given a string, escapes all quotes within it.
      */
     escapeQuotes: function(a) {
