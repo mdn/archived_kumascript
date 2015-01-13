@@ -20,17 +20,11 @@ var l10n = {
     })
 }
 
-// UTILS
-// ----------------------------------------------------------------------------
-function lowerMe(S) {
-    return S.toLowerCase();
-}
-
 // ENVIRONEMENT
 // ----------------------------------------------------------------------------
 var ARTICLES  = [];
-var TAGS      = ($0.tags && Array.isArray($0.tags) ? $0.tags : [$0]).map(lowerMe);
-var URL_ROOTS =  $0.urls && Array.isArray($0.urls) ? $0.urls : [
+var TAGS      = $0.tags && Array.isArray($0.tags) ? $0.tags : [$0];
+var URL_ROOTS = $0.urls && Array.isArray($0.urls) ? $0.urls : [
     '/Learn',
     '/docs/Web/Guide',
     '/docs/Web/Tutorials'
@@ -42,9 +36,8 @@ URL_ROOTS.forEach(function (root) {
     var url = '/' + env.locale + root;
     var pages = page.subpagesExpand(url).forEach(function (p) {
         var self  = env.url.indexOf(p.url) > -1;
-        var tags  = p.tags.map(lowerMe);
         var match = !self && TAGS.every(function (t) {
-            return tags.indexOf(t) > -1;
+            return page.hasTag(p, t);
         });
         
         if (match) {
