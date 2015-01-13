@@ -6,10 +6,10 @@
 // $0 : A tag to filter the list of articles
 //      or a configuration object with the following properties:
 //      * urls: (optional) An Array of URL prefixes (starting with / without the local) that the articles must match
-//      * tags: An Array of tags articles must have to get in the list
-//
-// Note: This template is not recursive, which means that with the URL /Learn, it will only search direct children of
-//       that URL but not the children of the children (So /Learn/foo will be caught but /Learn/foo/bar won't)
+//      * tags: An Array of tags articles must have to get in the list. If a tag is prefixe with "!" it means articles
+//              must NOT have that tag
+//      * recursive: (optional) A boolean indicating if articles must be search deeply into the URL tree. Default: false
+
 
 // L10N
 // ----------------------------------------------------------------------------
@@ -20,9 +20,11 @@ var l10n = {
     })
 }
 
+
 // ENVIRONEMENT
 // ----------------------------------------------------------------------------
 var ARTICLES  = [];
+var DEEP      = $0.recursive ? null : 1;
 var TAGS      = $0.tags && Array.isArray($0.tags) ? $0.tags : [$0];
 var URL_ROOTS = $0.urls && Array.isArray($0.urls) ? $0.urls : [
     '/Learn',
@@ -30,16 +32,21 @@ var URL_ROOTS = $0.urls && Array.isArray($0.urls) ? $0.urls : [
     '/docs/Web/Tutorials'
 ];
 
+
 // PAGE LOGIC EXTRACTION
 // ----------------------------------------------------------------------------
 URL_ROOTS.forEach(function (root) {
     var url = '/' + env.locale + root;
-    var pages = page.subpagesExpand(url).forEach(function (p) {
+    var pages = page.subPagesFlatten(page.subpagesExpand(url, DEEP)).forEach(function (p) {
         var self  = env.url.indexOf(p.url) > -1;
         var match = !self && TAGS.every(function (t) {
+            if (t.indexOf("!") === 0) {
+                return !page.hasTag(p, t.substr(1));
+            }
+
             return page.hasTag(p, t);
         });
-        
+
         if (match) {
             ARTICLES.push({
                 title   : p.title,
