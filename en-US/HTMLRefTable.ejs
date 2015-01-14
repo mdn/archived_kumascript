@@ -84,7 +84,7 @@ var tag, badge,
     RGXCleanTag    = /[<>]/g,
     HTMLRefBaseURL = "/docs/Web/HTML/Element",
     HTMLLocalBaseURL = "/" + env.locale + HTMLRefBaseURL + "/",
-    HTMLDocPages   = page.subpagesExpand("/en-US" + HTMLRefBaseURL),
+    HTMLDocPages   = page.subpagesExpand("/en-US" + HTMLRefBaseURL, 1),
     HTMLTags       = [];
 
 
@@ -124,9 +124,10 @@ var ElementList = HTMLTags.map(function (ele) {
     return ele.tagName;
 });
 
-var missingElement = ForcedElements.map(function (ele) {
+var missingElement = [];
+ForcedElements.forEach(function (ele) {
     if(ElementList.indexOf(ele) === -1) {
-        return ele;
+        missingElement.push(ele);
     }
 });
 
