@@ -191,7 +191,7 @@ function buildSublist(pages, title) {
 }
 
 var output = '<section class="Quick_links" id="Quick_Links"><ol>';
-    output += '<li><strong><a href="' +  s_api_href + '/' + mainIF + '"><code>' + mainIF.replace('_', ' ') + '</a></code></strong></li>';
+    output += '<li><strong><a href="' +  s_api_href + '/' + mainIF + '"><code>' + mainIF.replace(new RegExp('_', 'g'), ' ') + '</a></code></strong></li>';
    
    /* Display ctors */ 
     if (resultCtors.length > 0) { 
