@@ -36,7 +36,7 @@ var text = mdn.localString({
 <section class="Quick_links" id="Quick_Links">
  <ol>
   <li><a href="/<%=locale%>/docs/Web/HTML"><strong><em>HTML</em></strong></a></li>
-  <li><a href="/<%=locale%>/docs/Web/HTML/Tutorials"><strong><%=text['Tutorials']%></strong></a></li>
+  <li><strong><%=text['Tutorials']%></strong></li>
   <li data-default-state="<%=state('Introductory')%>"><a href="#"><%=text['Introductory']%></a>
    <ol>
     <li><a href="/<%=locale%>/docs/Web/Guide/HTML"><%=text['HTML_Guide']%></a></li>
@@ -52,7 +52,7 @@ var text = mdn.localString({
     <li><a href="/<%=locale%>/docs/Web/HTML/Optimizing_your_pages_for_speculative_parsing"><%=text['Speculative_parsing']%></a></li>
    </ol>
   </li>
-  <li><strong><a href="/<%=locale%>/docs/Web/JavaScript/Reference"><%=text['Reference']%></a></strong></li>
+  <li><strong><a href="/<%=locale%>/docs/Web/HTML/Reference"><%=text['Reference']%></a></strong></li>
   <li data-default-state="<%=state('Elements')%>"><a href="/<%=locale%>/docs/Web/HTML/Element"><%=text['HTML_Elements']%></a>
    <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_elements'], 1])%>
   </li>
