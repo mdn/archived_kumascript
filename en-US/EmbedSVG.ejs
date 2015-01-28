@@ -7,7 +7,7 @@ env.files.forEach(function (aFile) {
     if(!found && $0 === aFile.filename) {
         found = true;
 %>
-<iframe src="<%- aFile.url %>" width="<%- width %>" height="<%- height %>" frameborder="0"></iframe>
+<iframe src="<%- aFile.url %>" width="<%- width %>" height="<%- height %>" frameborder="0" sandbox="allow-scripts"></iframe>
 <%
     }
 });
