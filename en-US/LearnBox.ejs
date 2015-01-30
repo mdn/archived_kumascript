@@ -75,8 +75,8 @@ sources.forEach(function (root) {
 if (articles.length > 0) {
     var a = articles[Math.floor(Math.random() * (articles.length))];
 %>
-<div class="warning warning-review">
-  <p style="margin: 0 0 0.5em;"><em><%- title %></em></p>
+<div class="moreinfo">
+  <p style="margin: 0 0 0.5em; font-size:120%;"><%- title %></p>
   <dl style="font-style: normal;">
     <dt><a href="<%- a.url %>" style="border: none"><%- a.title %></a></dt>
     <dd><%- a.summary %></dd>
