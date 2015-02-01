@@ -17,7 +17,14 @@ var str = 'For ' + s1 + ' available on <code>' + eTitle + '</code> instances, se
 
 switch(env.locale) {
     case 'fr':
-        str = 'Pour les ' + s1 + ' héritées par les instances de <code>' + eTitle + '</code> consultez ' + web.link(eURL + '/prototype#' + encURL , string.toupperfirst(s1) + ' des instances de ' + eTitle) + '.';
+        var s2 = s1;
+        switch (s1){
+            case 'properties':
+                s2 = 'propriétés';
+                break;
+            case 'methods':
+                s2 = 'méthodes';
+        str = 'Pour les ' + s2 + ' héritées par les instances de <code>' + eTitle + '</code> consultez ' + web.link(eURL + '/prototype#' + encURL , string.toupperfirst(s2) + ' des instances de ' + eTitle) + '.';
         break;
     case 'ru':
         // Падежи, не забываем о них
