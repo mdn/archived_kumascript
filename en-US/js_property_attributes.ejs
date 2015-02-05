@@ -18,7 +18,7 @@ var header,
 
 switch(env.locale) {
     case "fr":
-        header = 'Attributs de';
+        header = 'Attributs de <code>' + env.title + '</code>';
         writable_name = 'Écrivable';
         enumerable_name = 'Énumérable';
         configurable_name = 'Configurable';
@@ -26,7 +26,7 @@ switch(env.locale) {
         no = 'Non';
         break;
     case "es":
-        header = 'Atributos de la propiedad';
+        header = 'Atributos de la propiedad <code>' + env.title + '</code>';
         writable_name = 'Sobrescribir';
         enumerable_name = 'Numerable';
         configurable_name = 'Configurable';
@@ -34,15 +34,23 @@ switch(env.locale) {
         no = 'No';
         break;
     case "ru":
-        header = 'Атрибуты свойства ';
+        header = 'Атрибуты свойства' + '<code>' + env.title + '</code>';
         writable_name = 'Записываемое';
         enumerable_name = 'Перечисляемое';
         configurable_name = 'Настраиваемое';
         yes = 'да';
         no = 'нет';
         break;
+    case "zh-CN":
+        header = '<code>' + env.title + '</code> 属性的属性特性：';
+        writable_name = 'writable';
+        enumerable_name = 'enumerable';
+        configurable_name = 'configurable';
+        yes = 'true';
+        no = 'false';
+        break;
     default:
-        header = 'Property attributes of';
+        header = 'Property attributes of <code>' + env.title + '</code>';
         writable_name = 'Writable';
         enumerable_name = 'Enumerable';
         configurable_name = 'Configurable';
@@ -69,7 +77,7 @@ if ($2 == 1) {
 <table class="standard-table">
   <thead>
     <tr>
-      <th class="header" colspan="2"><%=header%> <code><%=env.title%></code></th>
+      <th class="header" colspan="2"><%-header%></th>
     </tr>
   </thead>
   <tbody>
