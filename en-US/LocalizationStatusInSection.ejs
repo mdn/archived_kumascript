@@ -265,7 +265,7 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
         var translation = getTranslation(priorities[i].translations, locale);
         if (translation.review_tags && hasFlags(translation.review_tags, "editorial")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateEditorial%></a></td>
-        <% } else  if (translation.review_tags && hasFlags(translation.review_tags, "technical")) { { %>
+        <% } else  if (translation.review_tags && hasFlags(translation.review_tags, "technical")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a></td>
         <% } else if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, priorities[i].last_edit); %>
@@ -298,11 +298,14 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
     <td><a href='<%=result[i].url%>'><%=result[i].title%></a></td>
     <% if (hasTranslation(result[i].translations, locale)) {
         var translation = getTranslation(result[i].translations, locale);
-        if (isOutdated(result[i].last_edit, translation.last_edit)) { 
+        if (translation.review_tags && hasFlags(translation.review_tags, "editorial")) { %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateEditorial%></a></td>
+        <% } else  if (translation.review_tags && hasFlags(translation.review_tags, "technical")) { %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a></td>
+        <% } else if (isOutdated(result[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, result[i].last_edit); %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
-        <% }
-        else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
+        <% } else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a></td>
         <% } else { %>
             <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
