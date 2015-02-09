@@ -83,6 +83,16 @@ var l10nStateInprogress = mdn.localString({
     "ru"   : "Перевод есть, но он ещё не закончен",
     "fr"   : "Traduction en cours"
 });
+
+var l10nStateEditorial = mdn.localString({
+    "en-US": "Yes, but editorial review needed.",
+    "de"   : "Ja, aber redaktionelle Überprüfung benötigt.",
+});
+
+var l10nStateTechnical = mdn.localString({
+    "en-US": "Yes, but technical review needed.",
+    "de"   : "Ja, aber technische Überprüfung benötigt.",
+});
     
 var l10nTranslated = mdn.localString({
     "en-US": "Translated",
@@ -114,6 +124,8 @@ var translationCounter = 0;
 var outdatedCounter = 0;
 var priorityCounter = 0;
 var inprogressCounter = 0;
+var editorialCounter = 0;
+var technicalCounter = 0;
 
 function collect(page) {
     result.push({title: page.title.replace('<','&lt;').replace('>','&gt;'), url: page.url, translations: page.translations, last_edit: page.last_edit})
@@ -125,8 +137,14 @@ function collect(page) {
     if (isOutdated(page.last_edit, translation.last_edit)) {
         outdatedCounter++;
     }
-    if (translation.localization_tags && hasLocalizationTag(translation.localization_tags, "inprogress")) {
+    if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) {
         inprogressCounter++;
+    }
+    if (translation.review_tags && hasFlags(translation.review_tags, "editorial")) {
+        editorialCounter++;
+    }
+    if (translation.review_tags && hasFlags(translation.review_tags, "technical")) {
+        technicalCounter++;
     }
     
     if (hasTags(page.tags, "l10n:priority")) {
@@ -198,10 +216,10 @@ function hasTags(tags, needle) {
     return 0;
 }
 
-function hasLocalizationTag(localizationTags, tagType) {
-    if (!localizationTags || localizationTags == undefined) return 0;
-    for (var i = 0, len = localizationTags.length; i < len; i++) {
-        if (localizationTags[i] === tagType) return 1;
+function hasFlags(flagType, flag) {
+    if (!flagType || flagType == undefined) return 0;
+    for (var i = 0, len = flagType.length; i < len; i++) {
+        if (flagType[i] === flag) return 1;
     }
     return 0;
 }
@@ -245,11 +263,14 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
     <td><a href='<%=priorities[i].url%>'><%=priorities[i].title%></a></td>
     <% if (hasTranslation(priorities[i].translations, locale)) {
         var translation = getTranslation(priorities[i].translations, locale);
-        if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
+        if (translation.review_tags && hasFlags(translation.review_tags, "editorial")) { %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateEditorial%></a></td>
+        <% } else  if (translation.review_tags && hasFlags(translation.review_tags, "technical")) { { %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a></td>
+        <% } else if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, priorities[i].last_edit); %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
-        <% }
-        else if (translation.localization_tags && hasLocalizationTag(translation.localization_tags, "inprogress")) { %>
+        <% } else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a></td>
         <% } else { %>
             <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
@@ -281,7 +302,7 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
             var days = daysBetween(translation.last_edit, result[i].last_edit); %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
         <% }
-        else if (translation.localization_tags && hasLocalizationTag(translation.localization_tags, "inprogress")) { %>
+        else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a></td>
         <% } else { %>
             <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
@@ -312,6 +333,14 @@ var metrics = {
     inprogress: {
         title: 'Translations in progress',
         counter: inprogressCounter
+    },
+    editorial: {
+        title: 'Translations in need of editorial review',
+        counter: editorialCounter
+    },
+    technical: {
+        title: 'Translations in need of technical review',
+        counter: technicalCounter
     }
 };
 %>
