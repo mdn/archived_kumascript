@@ -110,6 +110,16 @@ var l10nUptodate = mdn.localString({
     "ru"   : "Актуальных переводов"
 });
 
+var l10nTechReviewed = mdn.localString({
+    "en-US": "Translations technically reviewed",
+    "de"   : "Übersetzungen technisch überprüft",
+});
+
+var l10nEditReviewed = mdn.localString({
+    "en-US": "Translations editorially reviewed",
+    "de"   : "Übersetzungen redaktionell überprüft",
+});
+
 var section = $0;
 var locale = $1;
 var groupTags = [];
@@ -229,6 +239,10 @@ getPages(pageList);
 var translationPercent = Math.ceil((translationCounter / result.length) * 100);
 var uptodateCounter = translationCounter - outdatedCounter;
 var uptodatePercent = Math.ceil((uptodateCounter / translationCounter) * 100);
+var editCounter = translationCounter - editorialCounter;
+var editPercent = Math.ceil((editCounter / translationCounter) * 100);
+var techCounter = translationCounter - technicalCounter;
+var techPercent = Math.ceil((techCounter / translationCounter) * 100);
 
 if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
 %>
@@ -239,6 +253,8 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
       <th><%=l10nPages%></th>
       <th><%=l10nTranslated%></th>
       <th><%=l10nUptodate%></th>
+      <th><%=l10nTechReviewed%></th>
+      <th><%=l10nEditReviewed%></th>
     </tr>
   </thead>
   <tbody>
@@ -246,6 +262,8 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
       <td><%=result.length%></td>
       <td><%=translationCounter%> (<%=translationPercent%>%)</td>
       <td><%=uptodateCounter%> (<%=uptodatePercent%>%)</td>
+      <td><%=techCounter%> (<%=techPercent%>%)</td>
+      <td><%=editCounter%> (<%=editPercent%>%)</td>
     </tr>
   </tbody>
 </table>
