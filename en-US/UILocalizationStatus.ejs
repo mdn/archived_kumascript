@@ -24,14 +24,15 @@ var statusColumnTitle = mdn.localString({
 
 var locale = $0;
 var MDN = require("MDN:Common");
-var url = 'http://l10n.mozilla-community.org/~flod/webstatus/webstatus.json';
+var url = 'http://l10n.mozilla-community.org/~flod/webstatus/web_status.json';
 var mdnProjects = ["mdn", "mdn-js", "mdn-promote"];
 var result = [];
 
 var resource = MDN.fetchJSONResource(url);
+var locales = resource.locales;
 
-if (resource.hasOwnProperty(locale)) {
-    var language = resource[locale];
+if (locales.hasOwnProperty(locale)) {
+    var language = locales[locale];
     
     for (var project in language) {
         if (language.hasOwnProperty(project) && mdnProjects.indexOf(project) >= 0) {
