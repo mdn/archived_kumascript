@@ -69,19 +69,19 @@ var l10nStateUptodate = mdn.localString({
 });
 
 var l10nStateOutofdate = mdn.localString({
-    "en-US": "Yes, but not up to date (#d# days older)",
-    "de"   : "Ja, aber nicht aktuell (#d# Tage älter)",
-    "fr"   : "Oui mais pas à jour (#d# jours d'écart)",
-    "pt-BR": "Sim, mas desatualizado (há #d# dias)",
-    "ru"   : "Перевод есть, но он не актуален (устарел на #d# дня)"
+    "en-US": "Yes, but not up to date (#d# days older).",
+    "de"   : "Ja, aber nicht aktuell (#d# Tage älter).",
+    "fr"   : "Oui mais pas à jour (#d# jours d'écart).",
+    "pt-BR": "Sim, mas desatualizado (há #d# dias).",
+    "ru"   : "Перевод есть, но он не актуален (устарел на #d# дня)."
 });
 
 var l10nStateInprogress = mdn.localString({
-    "en-US": "Yes, but translation in progress",
-    "de"   : "Ja, aber Übersetzung in Bearbeitung",
-    "pt-BR": "Sim, mas com tradução em andamento",
-    "ru"   : "Перевод есть, но он ещё не закончен",
-    "fr"   : "Traduction en cours"
+    "en-US": "Yes, but translation in progress.",
+    "de"   : "Ja, aber Übersetzung in Bearbeitung.",
+    "pt-BR": "Sim, mas com tradução em andamento.",
+    "ru"   : "Перевод есть, но он ещё не закончен.",
+    "fr"   : "Traduction en cours."
 });
 
 var l10nStateEditorial = mdn.localString({
@@ -96,6 +96,11 @@ var l10nStateTechnical = mdn.localString({
     "ru"   : "Перевод есть, но требуются технические правки.",
 });
     
+var l10nEditTranslation = mdn.localString({
+    "en-US": "Edit.",
+    "ru"   : "Редактировать.",
+});
+
 var l10nTranslated = mdn.localString({
     "en-US": "Translated",
     "de"   : "Übersetzt",
@@ -286,14 +291,14 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
     <% if (hasTranslation(priorities[i].translations, locale)) {
         var translation = getTranslation(priorities[i].translations, locale);
         if (translation.review_tags && hasFlags(translation.review_tags, "editorial")) { %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateEditorial%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateEditorial%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else  if (translation.review_tags && hasFlags(translation.review_tags, "technical")) { %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, priorities[i].last_edit); %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else { %>
             <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
         <% } %>
@@ -321,14 +326,14 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
     <% if (hasTranslation(result[i].translations, locale)) {
         var translation = getTranslation(result[i].translations, locale);
         if (translation.review_tags && hasFlags(translation.review_tags, "editorial")) { %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateEditorial%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateEditorial%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else  if (translation.review_tags && hasFlags(translation.review_tags, "technical")) { %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a></td>
-        <% } else if (isOutdated(result[i].last_edit, translation.last_edit)) { 
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
+        <% } else if (isOutdated(result[i].last_edit, translation.last_edit)) {
             var days = daysBetween(translation.last_edit, result[i].last_edit); %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else { %>
             <td style="background-color: #CF9"><a href="<%=translation.url%>"><%=l10nStateUptodate%></a></td>
         <% } %>
