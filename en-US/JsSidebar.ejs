@@ -13,6 +13,7 @@ var text = mdn.localString({
   'en-US': {
     'Tutorials': 'Tutorials:',
     'Guide': 'JavaScript Guide',
+    'Guide_Introduction': 'Introduction',
     'Introductory': 'Introductory',
     'Basics': 'JavaScript basics',
     'Overview': 'JavaScript technologies overview',
@@ -58,6 +59,7 @@ var text = mdn.localString({
   'ru': {
     'Tutorials': 'Уроки:',
     'Guide': 'Руководство по JavaScript',
+    'Guide_Introduction': 'Introduction',
     'Introductory': 'Базовые',
     'Basics': 'JavaScript basics',
     'Overview': 'Обзор технологий JavaScript',
@@ -103,6 +105,7 @@ var text = mdn.localString({
   'fr': {
     'Tutorials': 'Tutoriel&nbsp;:',
     'Guide': 'Guide JavaScript',
+    'Guide_Introduction': 'Introduction',
     'Introductory': 'Débutant',
     'Basics': 'JavaScript basics',
     'Overview': 'Aperçu des technologies JavaScript',
@@ -148,6 +151,7 @@ var text = mdn.localString({
   'zh-CN': {
     'Tutorials': '教程:',
     'Guide': 'JavaScript 指南',
+    'Guide_Introduction': 'Introduction',
     'Introductory': '快速入门',
     'Basics': 'JavaScript 基础知识',
     'Overview': 'JavaScript 知识概要',
@@ -197,7 +201,9 @@ var text = mdn.localString({
   <li><a href="/<%=locale%>/docs/Web/JavaScript"><strong><em>JavaScript</em></strong></a></li>
   <li><a href="/<%=locale%>/docs/Web/JavaScript/Tutorials"><strong><%=text['Tutorials']%></strong></a></li>
   <li data-default-state="<%=state('JavaScript Guide')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Guide"><%=text['Guide']%></a>
-   <%-template("ListSubpages", ['/' + locale + '/docs/Web/JavaScript/Guide', 1, 0, 1])%>
+    <ol>
+      <li><a href="/<%=locale%>/docs/Web/JavaScript/Guide/Introduction"><%=text['Guide_Introduction']%></a></li>
+   </ol>
   </li>
   <li data-default-state="<%=state('Introductory')%>"><a href="#"><%=text['Introductory']%></a>
    <ol>
