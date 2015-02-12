@@ -1,0 +1,23 @@
+<%
+// Creates a link to the specified server code sample in the MDN
+// Sample Server repository on Github.
+//
+// Parameters:
+//  $0  The name of the sample
+//  $1  The link text (optional)
+//
+
+// urlRoot is the link to the base directory under which all the samples
+// live. THIS NEEDS TO BE UPDATED ONCE WE MOVE THE REPO UNDER THE "mozilla"
+// ACCOUNT ON GITHUB!
+
+var urlRoot = "https://github.com/a2sheppy/mdn-samples/tree/master/s/";
+
+// Build the URL to the sample
+
+var url = urlRoot + $0;
+var text = $1 || $0;
+
+var html = "<a href='" + url + "'>" + text + "</a>";
+%>
+<%-html%>
