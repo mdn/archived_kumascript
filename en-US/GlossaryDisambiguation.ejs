@@ -1,0 +1,35 @@
+<%
+// This macro is made to deal with Glossary disambiguation
+// It must be include inside any disambiguation page and will automatically list the various terms definitions
+
+// ENVIRONEMENT
+// ----------------------------------------------------------------------------
+var ARTICLES  = [];
+
+// EXTRACT CONTENT
+// ----------------------------------------------------------------------------
+
+page.subpagesExpand(env.path, 1).foreach(function (p) {
+    ARTICLE.push({
+        title  : p.title
+        summary: p.summary
+    });
+});
+
+ARTICLES.sort(function (a,b) {
+    return a.title.localeCompare(b.title);
+})
+
+// DISPLAY
+// ----------------------------------------------------------------------------
+%>
+<dl>
+<%
+for (n in ARTICLES) {
+%>
+    <dt><a href="<%= ARTICLES[n].url %>"><%- ARTICLES[n].title %></a></dt>
+    <dd><%- ARTICLES[n].summary %></dd>
+<%
+}
+%>
+</dl>
