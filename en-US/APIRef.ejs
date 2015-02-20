@@ -39,7 +39,7 @@ var impl = webAPIData[0][mainIF].impl;
 var inh = webAPIData[0][mainIF].inh;
 var groups = [];
 if (group) {
-  groups = webAPIGroups[0][group];
+  groups = webAPIGroups[0][group] || [];
   var self = groups.indexOf(mainIF);
   groups.splice(self, 1);
   groups.sort();
