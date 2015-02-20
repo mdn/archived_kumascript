@@ -1,219 +1,189 @@
 <%
-// Creates a link to the interface on which this page is a method or property.
+// API Sidebar
 //
 // Parameters:
-//  $0  A specific tag to releated APIs (or the API name for backward compatibility)
+//  $0  A tag for the API group (searches for related APIs)
 
-var pageURL = env.path;
-var mainInterfaceURL = pageURL.split('.')[0];
- 
-function isSubpage() {
-  var pageFolders = pageURL.split('/');
-  if (pageFolders.length > 0) {
-    var pageName = pageFolders[pageFolders.length-1];
-    return pageName.indexOf('.') != -1;
-  }
-  return false;
-}
-
-if (isSubpage()) {
-  var output = '<section class="Quick_links" id="Quick_Links"><ol>';
-      output += template("page", [mainInterfaceURL, "Quick_Links"]);
-      output += '</ol></section>';
-} else {
-
-var hasTag = page.hasTag;
-function containsTag(aPage, tag) {
-    if (!aPage || !aPage.url) return 0;
-    return hasTag(aPage, tag) || hasTag(getEnglishPage(aPage), tag);
-}
-
-function containsAPI(APIList, name) {
-    if (!name || typeof name == 'undefined') return 0;
-    name = name.toLowerCase();
-    name = name.split('.')[0];
-    for (var i = 0, len = APIList.length; i < len; i++) {
-        if (APIList[i].toLowerCase() === name) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-var getPage = wiki.getPage;
+// Variables and data
+var slug = env.slug;
 var locale = env.locale;
+var APIHref = '/' + locale + '/docs/Web/API';
+var mainIF = slug.replace('Web/API/','').split('/')[0];
+var group = $0;
+var hasTag = page.hasTag;
+var escapeQuotes = mdn.escapeQuotes;
 
-// This is a huge perf hit for non-en-US pages that call {{APIRef()}}
-// It calls each en-US page to check for tags that are present there
-// but are missing on the locale pages. We should probably not do this.
-// Locale pages need to get the tags right, or tags should be on all locales by default.
-function getEnglishPage(aPage){
-    if (locale != 'en-US') {
-      return getPage(aPage.url.replace(locale, "en-US"));
+var webAPIData = string.deserialize(template("InterfaceData"));
+if (group) {
+  var webAPIGroups = string.deserialize(template("GroupData"));
+}
+
+var text = mdn.localString({
+  'en-US': {
+    'Methods': 'Methods',
+    'Properties': 'Properties',
+    'Constructor': 'Constructor',
+    'Inheritance': 'Inheritance:',
+    'Related': 'Related pages:',
+  },
+  'de': {
+    'Methods': 'Methoden',
+    'Properties': 'Eigenschaften',
+  }
+});
+
+
+// Collect all the things
+var mainIFPages = page.subpagesExpand(APIHref + '/' + mainIF);
+var impl = webAPIData[0][mainIF].impl;
+var inh = webAPIData[0][mainIF].inh;
+var groups = [];
+if (group) {
+  groups = webAPIGroups[0][group];
+  var self = groups.indexOf(mainIF);
+  groups.splice(self, 1);
+  groups.sort();
+}
+    
+var pageList = mainIFPages;
+
+var properties = [];
+var methods = [];
+var ctors = [];
+var inheritedIF = [];
+
+function collect(pageList) {
+  for (var i in pageList) {
+    var aPage = pageList[i];
+    if (hasTag(aPage, "Property")) {
+        properties.push(aPage);
     }
-    return 0;
-}
-
-var escapeSummary = mdn.escapeQuotes;
-function apiLink(aPage) {
-  var apiUrl = aPage.title;
-  if (apiUrl.indexOf(" ") !== -1) apiUrl = apiUrl.replace(" ", "_");
-  if (apiUrl.substr(-2) === '()') apiUrl = apiUrl.substr(0, apiUrl.length - 2);
-  return '<a href="/' + locale + '/docs/Web/API/' + apiUrl + '" title="' + escapeSummary(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
-}
-
-var s_api_tag  = $0 || '';
-var s_api_href = '/' + env.locale + '/docs/Web/API';
-
-var s_api_title_methods = mdn.localString({
-  "en-US": "Methods",
-  "fr"   : "Méthodes",
-  "de"   : "Methoden",
-  "zh-CN": "方法"
-});
-
-var s_api_title_properties = mdn.localString({
-  "en-US": "Properties",
-  "fr"   : "Propriétés",
-  "de"   : "Eigenschaften",
-  "zh-CN": "属性"
-});
-
-var s_api_title_ctors = mdn.localString({
-  "en-US": "Constructors",
-  "fr"   : "Constructeurs",
-  "de"   : "Konstruktoren",
-  "zh-CN": "构造函数"
-});
-
-var s_api_title_seealso = mdn.localString({
-  "en-US": "Related APIs",
-  "fr"   : "API connexes",
-  "de"   : "Verwandte APIs",
-  "zh-CN": "相关 API"
-});
-
-var aquo = mdn.localString({
-  "en-US": "&laquo;", // "»"
- 
-  // For RTL locales (ar, he, ...)
-  "ar"   : "&raquo;", // "«"
-  "he"   : "&raquo;", // "«"
-  "zh-CN": "&raquo;"  // "«"
-});
-
-/* Find the API Name from the URL: the part after the last / and before the first . */
-var pageURL = env.path;
-    
-var pageFolders = pageURL.split('/');
-if (pageFolders.length > 0) {
-    var pageName = pageFolders[pageFolders.length-1]; // We are only interested in the last part
-    var mainIF = pageName.split('.')[0];
-    var APIList = [];
-    APIList.push(mainIF);
-
-    var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
-    /* List properties of this API */
-    var resultProps = [];
-    
-    /* List methods of this API */
-    var resultMethods = [];
-    
-    /* List constructors of this API */
-    var resultCtors = [];
-
-    /* List related APIs */
-    var resultSeealso = [];
-
-    for (var i in pageList) {
-        var aPage = pageList[i];
-        if (containsAPI(APIList, aPage.title)) {
-            if (containsTag(aPage, "Property")) { // We only want properties
-                aPage.domxref = apiLink(aPage);
-                resultProps.push(aPage);
-            }
-            
-            if (containsTag(aPage, "Method") &&
-                        !containsTag(aPage, "Constructor")) { // We only want methods
-                aPage.domxref = apiLink(aPage);
-                resultMethods.push(aPage);
-            }
-        }
-        
-        if (s_api_tag != '') {
-            if (containsTag(aPage, s_api_tag) && !containsTag(aPage, "Constructor") && !containsTag(aPage, "Helper") && !containsTag(aPage, "Overview") &&
-                    aPage.title.indexOf('.') === -1 &&
-                    aPage.title !== mainIF) {
-                aPage.domxref = apiLink(aPage);
-                resultSeealso.push(aPage);
-            }
-        }
+    if (hasTag(aPage, "Method")) {
+        methods.push(aPage);
     }
+    if (hasTag(aPage, "Constructor")) {
+        ctors.push(aPage);
+    }
+  }
 }
+
+collect(mainIFPages);
+
+if (impl.length > 0) {
+  for (var i = 0; i < impl.length; i++) {
+    var implementPages = page.subpagesExpand(APIHref + '/' + impl[i]);
+    collect(implementPages);
+  }
+}
+
+function APISort(a, b) {
+  var aSplit = a.title.split('.');
+  var a = aSplit[aSplit.length - 1];
+  var bSplit = b.title.split('.');
+  var b =  bSplit[bSplit.length - 1];
+  if (a > b) {
+    return 1;
+  }
+  if (a < b) {
+    return -1;
+  }
+  return 0;
+}
+
+properties.sort(APISort);
+methods.sort(APISort);
+ctors.sort(APISort);
+
+function getInheritance(inh) {
+  if (inh.length > 0 && webAPIData[0].hasOwnProperty(inh)) {
+    inheritedIF.push(inh);
+    var inh = webAPIData[0][inh].inh;
+    getInheritance(inh);
+  }
+}
+getInheritance(inh);
+
+
+// output helpers
 
 var badges = {
-    ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
-    NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
-    DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
-    ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
+  ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
+  NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
+  DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
+  ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
 }
 
 function buildSublist(pages, title) {
-    var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
-    
-    for (var i in pages) {
-        var aPage = pages[i];
-        result += '<li>';
-        
-        if (containsTag(aPage, 'Experimental')) {
-            result += badges.ExperimentalBadge;
-        }
-        
-        if (containsTag(aPage, 'Non-standard') ||
-                    containsTag(aPage, 'Non Standard')) {
-            result += badges.NonStandardBadge;
-        }
-        
-        if (containsTag(aPage, 'Deprecated')) {
-            result += badges.DeprecatedBadge;
-        }
-        
-        if (containsTag(aPage, 'Obsolete')) {
-            result += badges.ObsoleteBadge;
-        }
-        
-        result += aPage.domxref + '</li>';
+  var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
+
+  for (var i in pages) {
+    var aPage = pages[i];
+    result += '<li>';
+
+    if (hasTag(aPage, 'Experimental')) {
+        result += badges.ExperimentalBadge;
+    }
+
+    if (hasTag(aPage, 'Non-standard') || hasTag(aPage, 'Non Standard')) {
+        result += badges.NonStandardBadge;
+    }
+
+    if (hasTag(aPage, 'Deprecated')) {
+        result += badges.DeprecatedBadge;
+    }
+
+    if (hasTag(aPage, 'Obsolete')) {
+        result += badges.ObsoleteBadge;
     }
     
-    result += '</ol></li>';
-    
-    return result;
+    if (slug == aPage.slug) {
+        result += '<em><code>' + aPage.title + '</code></em></li>'
+    } else {
+        result += '<a href="' + aPage.url + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a></li>';
+    }
+  }
+
+  result += '</ol></li>';
+
+  return result;
 }
 
-var output = '<section class="Quick_links" id="Quick_Links"><ol>';
-    output += '<li><strong><a href="' +  s_api_href + '/' + mainIF + '"><code>' + mainIF.replace(new RegExp('_', 'g'), ' ') + '</a></code></strong></li>';
-   
-   /* Display ctors */ 
-    if (resultCtors.length > 0) { 
-        output += buildSublist(resultCtors, s_api_title_ctors);
-    }
-    
-    /* Display properties */ 
-    if (resultProps.length > 0) { 
-        output += buildSublist(resultProps, s_api_title_properties);
-    }
-    
-    /* Display methods */ 
-    if (resultMethods.length > 0) {
-        output += buildSublist(resultMethods, s_api_title_methods);
-    }
-    
-    /* Display related APIs */
-    if (resultSeealso.length > 0) {
-        output += buildSublist(resultSeealso, s_api_title_seealso);
-    }
-    output += '</ol></section>';
- 
+function buildIFList(interfaces, title) {
+  var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
+
+  for (var i = 0; i < interfaces.length; i++) {
+    var url = interfaces[i].replace('()', '').replace('.', '/');
+    result += '<li><a href="' + APIHref + '/' + url + '"><code>' + interfaces[i] + '</code></a></li>';
+  }
+
+  result += '</ol></li>';
+
+  return result;
 }
+
+
+// output
+var output = '<section class="Quick_links" id="Quick_Links"><ol>';
+output += '<li><strong><a href="' +  APIHref + '/' + mainIF + '"><code>' + mainIF + '</a></code></strong></li>';
+
+if (ctors.length > 0) { 
+  output += buildSublist(ctors, text['Constructor']);
+}
+
+if (properties.length > 0) { 
+  output += buildSublist(properties, text['Properties']);
+}
+if (methods.length > 0) { 
+  output += buildSublist(methods, text['Methods']);
+}
+if (inh.length > 0) {
+  output += buildIFList(inheritedIF, text['Inheritance']);
+}
+if (groups.length > 0) {
+  output += buildIFList(groups, text['Related']);
+}
+
+output += '</ol></section>';
 %>
+
 <%-output%>
