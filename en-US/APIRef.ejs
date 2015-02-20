@@ -35,8 +35,8 @@ var text = mdn.localString({
 
 // Collect all the things
 var mainIFPages = page.subpagesExpand(APIHref + '/' + mainIF);
-var impl = webAPIData[0][mainIF].impl;
-var inh = webAPIData[0][mainIF].inh;
+var impl = webAPIData[0][mainIF].impl || [];
+var inh = webAPIData[0][mainIF].inh || '';
 var groups = [];
 if (group) {
   groups = webAPIGroups[0][group] || [];
