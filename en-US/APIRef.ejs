@@ -35,8 +35,8 @@ var text = mdn.localString({
 
 // Collect all the things
 var mainIFPages = page.subpagesExpand(APIHref + '/' + mainIF);
-var impl = webAPIData[0][mainIF].impl || [];
-var inh = webAPIData[0][mainIF].inh || '';
+var impl = webAPIData[0][mainIF] != undefined ? webAPIData[0][mainIF].impl : [];
+var inh = webAPIData[0][mainIF] != undefined ? webAPIData[0][mainIF].inh : '';
 var groups = [];
 if (group) {
   groups = webAPIGroups[0][group] || [];
@@ -95,10 +95,12 @@ methods.sort(APISort);
 ctors.sort(APISort);
 
 function getInheritance(inh) {
-  if (inh.length > 0 && webAPIData[0].hasOwnProperty(inh)) {
+  if (inh.length > 0) {
     inheritedIF.push(inh);
-    var inh = webAPIData[0][inh].inh;
-    getInheritance(inh);
+    if (webAPIData[0].hasOwnProperty(inh)) {
+        var inh = webAPIData[0][inh].inh;
+        getInheritance(inh);
+    }
   }
 }
 getInheritance(inh);
