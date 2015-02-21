@@ -34,7 +34,7 @@ var text = mdn.localString({
 
 
 // Collect all the things
-var mainIFPages = page.subpagesExpand(APIHref + '/' + mainIF);
+var mainIFPages = page.subpagesExpand('/en-US/docs/Web/API/' + mainIF);
 var impl = webAPIData[0][mainIF] != undefined ? webAPIData[0][mainIF].impl : [];
 var inh = webAPIData[0][mainIF] != undefined ? webAPIData[0][mainIF].inh : '';
 var groups = [];
@@ -71,7 +71,7 @@ collect(mainIFPages);
 
 if (impl.length > 0) {
   for (var i = 0; i < impl.length; i++) {
-    var implementPages = page.subpagesExpand(APIHref + '/' + impl[i]);
+    var implementPages = page.subpagesExpand('/en-US/docs/Web/API/' + impl[i]);
     collect(implementPages);
   }
 }
@@ -141,7 +141,7 @@ function buildSublist(pages, title) {
     if (slug == aPage.slug) {
         result += '<em><code>' + aPage.title + '</code></em></li>'
     } else {
-        result += '<a href="' + aPage.url + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a></li>';
+        result += '<a href="' + aPage.url.replace('en-US', locale) + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a></li>';
     }
   }
 
