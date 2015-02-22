@@ -136,13 +136,20 @@ function buildSublist(pages, title) {
 
     if (hasTag(aPage, 'Obsolete')) {
         result += badges.ObsoleteBadge;
+        result += '<s class="obsoleteElement">';
     }
     
     if (slug == aPage.slug) {
-        result += '<em><code>' + aPage.title + '</code></em></li>'
+        result += '<em><code>' + aPage.title + '</code></em>'
     } else {
-        result += '<a href="' + aPage.url.replace('en-US', locale) + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a></li>';
+        result += '<a href="' + aPage.url.replace('en-US', locale) + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
     }
+    
+    if (hasTag(aPage, 'Obsolete')) {
+        result += '</s>';
+    }
+    
+    result += '</li>';
   }
 
   result += '</ol></li>';
