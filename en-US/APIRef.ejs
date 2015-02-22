@@ -80,14 +80,8 @@ function APISort(a, b) {
   var aSplit = a.title.split('.');
   var a = aSplit[aSplit.length - 1];
   var bSplit = b.title.split('.');
-  var b =  bSplit[bSplit.length - 1];
-  if (a > b) {
-    return 1;
-  }
-  if (a < b) {
-    return -1;
-  }
-  return 0;
+  var b = bSplit[bSplit.length - 1];
+  return a.toLowerCase().localeCompare(b.toLowerCase());
 }
 
 properties.sort(APISort);
