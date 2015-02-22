@@ -19,26 +19,15 @@ var lang = env.locale;
 var api = $0;
 var str = $1 || $0;
 
-if (api.indexOf(" ") !== -1) api = api.replace(" ", "_");
-if (api.substr(-2) === '()') api = api.substr(0, api.length - 2);
+api.replace(' ', '_').replace('()', '').replace(/\./g, '/');
 
-var URLnew = "/" + lang + '/docs/Web/API/' + api;
-var URL = "/" + lang + '/docs/DOM/' + api;
+var URL = "/" + lang + '/docs/Web/API/' + api;
 
 var anch = '';
 
 if ($2) {
   str = str + '.' + $2;
   anch = '#' + $2;
-}
-
-// Allow only the following local to go to the new URL
-// as other locals haven't move the pages yet.
-// fr is on its way to move, even if it's not complete it's easier that way
-var filter = ['en-US', 'ja', 'fr', 'ko', 'pt-BR', 'zh-CN'];
-
-if (filter.indexOf(lang) > -1 && wiki.pageExists(URLnew)) {
-    URL = URLnew;
 }
 
 // Now that we have the URL, let's gather the page summary for our tooltip
