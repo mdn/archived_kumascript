@@ -24,6 +24,7 @@ var text = mdn.localString({
     'Properties': 'Properties',
     'Constructor': 'Constructor',
     'Inheritance': 'Inheritance:',
+    'Implemented_by': 'Implemented by:',
     'Related': 'Related pages:',
   },
   'de': {
@@ -51,6 +52,7 @@ var properties = [];
 var methods = [];
 var ctors = [];
 var inheritedIF = [];
+var implementedBy = [];
 
 function collect(pageList) {
   for (var i in pageList) {
@@ -99,6 +101,15 @@ function getInheritance(inh) {
 }
 getInheritance(inh);
 
+function getImplementedBy(data) {
+  for (var key in data) {
+    if (data.hasOwnProperty(key) && data[key].impl.indexOf(mainIF) != -1) {
+      implementedBy.push(key);
+    }
+  }
+  implementedBy.sort();  
+}
+getImplementedBy(webAPIData[0]);
 
 // output helpers
 
@@ -181,6 +192,9 @@ if (methods.length > 0) {
 }
 if (inh.length > 0) {
   output += buildIFList(inheritedIF, text['Inheritance']);
+}
+if (implementedBy.length > 0) {
+  output += buildIFList(implementedBy, text['Implemented_by']);
 }
 if (groups.length > 0) {
   output += buildIFList(groups, text['Related']);
