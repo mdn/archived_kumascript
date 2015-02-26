@@ -1,18 +1,18 @@
 <%
-/* Used for generating cross-references within the DOM documentation. */
-/* This will first try to link to DOM/$0, then DOM:$0 if that doesn't exist */
-/* if you specify the API name with parens (ie, "foo()"), the link is to */
-/* lang/DOM/foo but the title is displayed as "foo()" to make it clear it's */
-/* a function */
-/* @param */
-/*   The path of the page to link to, relative to the DOM documentation path. */
-/* @param [optional] */
-/*   The text to use for the link.  If omitted, the value of the first */
-/*   parameter will be used */
-/* @param [optional] */
-/*   An anchor to link to on the page. Link text will display as $0.$2 or $1.$2 */
-/* @param [optional] "/
-/*   If set, do not put the domxref text in code */
+/* Used for generating cross-references within the Web API documentation.
+ * if you specify the API name with parens (ie, "bar()"), the link is to
+ * lang/Web/API/Foo/bar but the title is displayed as "bar()" to make it clear it's
+ * a function.
+ * @param
+ *   The path of the page to link to, relative to the Web/API/ documentation path.
+ * @param [optional] 
+ *   The text to use for the link.  If omitted, the value of the first
+ *   parameter will be used
+ * @param [optional] 
+ *   An anchor to link to on the page. Link text will display as $0.$2 or $1.$2 
+ * @param [optional] 
+ *   If set, do not put the domxref text in code 
+ */
 
 /* get a page's language (Don't use page.language!) */
 var lang = env.locale;
@@ -20,6 +20,9 @@ var api = $0;
 var str = $1 || $0;
 
 api = api.replace(' ', '_').replace('()', '').replace(/\./g, '/');
+// Ensure Interfaces are always uppercased in links 
+// (important for red links to create correct new pages)
+api = api.charAt(0).toUpperCase() + api.slice(1);
 
 var URL = "/" + lang + '/docs/Web/API/' + api;
 
