@@ -18,12 +18,12 @@
 var lang = env.locale;
 var api = $0;
 var str = $1 || $0;
-var rtlLocales = new Array('ar', 'he', 'fa');
+var rtlLocales = {ar:true, he:true, fa:true};
 
 api = api.replace(' ', '_').replace('()', '').replace(/\./g, '/');
 
-if (rtlLocales.included(lang)) { //RTL locale
-    str = api.replace('()', '<bdi>()</bdi>');
+if (lang in rtlLocales) { //RTL locale
+    str = str.replace('()', '<bdi>()</bdi>');
 }
 // Ensure Interfaces are always uppercased in links 
 // (important for red links to create correct new pages)
