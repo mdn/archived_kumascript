@@ -22,7 +22,7 @@ var rtlLocales = new Array('ar', 'he', 'fa');
 
 api = api.replace(' ', '_').replace('()', '').replace(/\./g, '/');
 
-if (env.locale in rtlLocales) { //RTL locale
+if (rtlLocales.included(lang) { //RTL locale
     str = api.replace('()', '<bdi>()</bdi>')
 }
 // Ensure Interfaces are always uppercased in links 
