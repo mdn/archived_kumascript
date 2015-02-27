@@ -23,7 +23,7 @@ var rtlLocales = new Array('ar', 'he', 'fa');
 api = api.replace(' ', '_').replace('()', '').replace(/\./g, '/');
 
 if (rtlLocales.included(lang) { //RTL locale
-    str = api.replace('()', '<bdi>()</bdi>')
+    str = api.replace('()', '<bdi>()</bdi>');
 }
 // Ensure Interfaces are always uppercased in links 
 // (important for red links to create correct new pages)
