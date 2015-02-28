@@ -12,6 +12,7 @@ var mainIF = slug.replace('Web/API/','').split('/')[0];
 var group = $0;
 var hasTag = page.hasTag;
 var escapeQuotes = mdn.escapeQuotes;
+var rtlLocales = ['ar', 'he', 'fa'];
 
 var webAPIData = string.deserialize(template("InterfaceData"));
 if (group) {
@@ -145,6 +146,10 @@ function buildSublist(pages, title) {
   for (var i in pages) {
     var aPage = pages[i];
     result += '<li>';
+    
+    if (rtlLocales.indexOf(lang) != -1) {
+        str = '<bdi>';
+    }
 
     if (hasTag(aPage, 'Experimental')) {
         result += badges.ExperimentalBadge;
@@ -171,6 +176,10 @@ function buildSublist(pages, title) {
     
     if (hasTag(aPage, 'Obsolete')) {
         result += '</s>';
+    }
+    
+    if (rtlLocales.indexOf(lang) != -1) {
+        str = '</bdi>';
     }
     
     result += '</li>';
