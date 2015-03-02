@@ -66,22 +66,28 @@ ircLink = "<a href='irc://irc.mozilla.org/" + ircChannelName + "'>#" + ircChanne
 // Generate localized strings
 
 switch(env.locale) {
-    case "fr":
+    case "fr":  // French
         headingStr = "Aidez le projet de documentation '" + $0 + "'…";
         statusStr = "Consultez le <a href='/fr/docs/" + driver.docStatus + "'>statut</a>< de la documentation '" + $0 + "'.";
         topicDriverStr = "Coordinateur du domaine : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (Pseudo IRC: " + driver.ircPseudo + ")";
         ircStr = "N'hésitez pas à nous contacter sur #" + ircLink + "ou sur la liste de diffusion " + mlName + " :";
         break;
-    case "ru":
+    case "ru":  // Russian
         headingStr = "Помочь проекту документирования '" + $0 + "'…";
         statusStr = "Взгляните на текущий <a href='/ru/docs/" + driver.docStatus + "'>статус</a> документации по проекту '" + $0 +"'.";
         topicDriverStr = "Координатор проекта: <a href='/ru/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (псевдоним IRC: " + driver.ircPseudo + ")";
         ircStr = "Не стесняйтесь обращаться к нам на " + ircLink + " или пишите в список рассылки <em>" + mlName + "</em>:";
         break;
-    default:
+    case "id":  // Bahasa Indonesia
+        headingStr = "Bantu proyek dokumentasi '" + $0 + "'";
+        statusStr = "Lihatlah <a href='/en-US/docs/" + driver.docStatus + "'>status</a> saat ini dari dokumentasi '" + $0 +"'.";
+        topicDriverStr = "Pengarah topic : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (IRC pseudo: " + driver.ircPseudo + ")";
+        ircStr = "Jangan ragu untuk menghubungi kami di " + ircLink + " atau di mailing-list " + mlName + ":";
+        break;
+    default:    // English
         headingStr = "Help the '" + $0 + "' documentation project…";
         statusStr = "Look at the current <a href='/en-US/docs/" + driver.docStatus + "'>status</a> of the '" + $0 +"' documentation.";
-        topicDriverStr = "Topic driver : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (IRC pseudo: " + driver.ircPseudo + ")";
+        topicDriverStr = "Topic driver : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (IRC nickname: " + driver.ircPseudo + ")";
         ircStr = "Don't hesitate to contact us on " + ircLink + " or on the <em>" + mlName + "</em> mailing-list:";
         break;
 }
