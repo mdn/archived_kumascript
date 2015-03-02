@@ -1,15 +1,8 @@
 <%
 // Creates a list of API Interfaces sorted alphabetically
 
-function pageSorter(a, b) {
-    return a.title.toLowerCase().localeCompare( b.title.toLowerCase() );
-}
-
 function isInterface(pageSlug) {
-    if (pageSlug.indexOf('_') != -1) {
-        return false;
-    }
-    return true;
+    return (pageSlug.indexOf('_') == -1) && (pageSlug != 'Reference');
 }
 
 function containsTag(tagList, tag) {
@@ -24,27 +17,24 @@ function containsTag(tagList, tag) {
 var pages = page.subpagesExpand('/en-US/docs/Web/API'); // get subpages, including tags
 var slug = env.slug;
 var locale = env.locale;
-var letters = "";
+var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var html = "";
 
-switch(lang) {
-    default:    // en-US
-        letters ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        break;
-}
-
 var numLetters = letters.length;
+var numPages = pages.length;
 var p = 0;
+
 
 for (var i = 0; i < numLetters; i++) {
     var curLetter = letters[i];
     var insertedHeading = false; // Haven't done this letter's heading yet
     
-    if (p < pages.length) {
+    if (p < numPages) {
         do {
             var tags = pages[p].tags;
             var url = pages[p].url;
             var summary = pages[p].summary;
+            var title = pages[p].title;
             
             // skip landing pages
             if (!isInterface(pages[p].slug)) {
