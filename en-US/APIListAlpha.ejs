@@ -1,38 +1,15 @@
 <%
-// Creates a list of API terms from each top-level subpage of the page
-// on which this template is used.
-//
-// Parameters:
-//  $0 - If 0, all subpages are included; if 1, pages with "." in their
-//       titles are left out.
-//  $1 - Text to insert before the term's name
-//  $2 - Text to insert after the term's name
-//  $3 - Language whose pages are used if not present in the current locale.
-//       (optional)
-//
-// If $3 is specified, any pages from that language (usually "en-US")
-// are included in this list if they don't exist in the current locale.
-
-var insertBefore = $1 || "";
-var insertAfter =  $2 || "";
-var skipMembers =  $0 || 0;
-var backupLocale = $3 || null;
+// Creates a list of API Interfaces sorted alphabetically
 
 function pageSorter(a, b) {
     return a.title.toLowerCase().localeCompare( b.title.toLowerCase() );
 }
 
-function allowTerm(a) {
-    // An interface starts with a capital letter
-    if (a[0] === a[0].toLowerCase()) return 0;
-    
-    // An i/f doesn't contain a '.' (method or properties)
-    // An i/f doesn't contain a '(' (method or constructor)
-    // An i/f doesn't contain a ' ' (API landing page)
-    for (var i = 0, len = a.length; i < len; ++i) { 
-        if ((a[i] === '.') || (a[i] === '(') || (a[i] === ' ')) return 0; 
+function isInterface(pageSlug) {
+    if (pageSlug.indexOf('_') != -1) {
+        return false;
     }
-    return 1;
+    return true;
 }
 
 function containsTag(tagList, tag) {
@@ -44,59 +21,11 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
-// Given a list and a title, find the index
-// to the page with that title. Returns -1
-// if not found.
-function indexOfTitle(title, list) {
-    var length = list.length;
-    title = title.toLowerCase();
-    
-    for (var i = 0; i < length; i++) {
-        if (list[i].title.toLowerCase() == title) return i;
-    }
-    return -1;  // not found
-}
-
-var otherList = null;
-var otherSlug = null;
-var termList = page.subpagesExpand();   // Get subpages, including tags
-var lang = env.slug;
+var pages = page.subpagesExpand('/en-US/docs/Web/API'); // get subpages, including tags
+var slug = env.slug;
+var locale = env.locale;
 var letters = "";
 var html = "";
-var extra = "";
-
-// Get the other list if we need it
-if (backupLocale) {
-    otherSlug = "/" + backupLocale + "/docs/" + env.slug;
-    otherList = page.subpagesExpand(otherSlug);
-}
-
-// If we have otherList, replace duplicate entries
-// with those from termList.
-if (termList && termList.length) {
-    if (otherList) {
-        for (var i = 0, len = termList.length; i < len; i++) {
-            var idx = indexOfTitle(termList[i].title, otherList);
-            
-            // If it's in the local language, copy it in to replace
-            // the backup language's version
-            if (idx >= 0) {
-                otherList[idx] = termList[i];
-                otherList[idx].isLocalized = true;      // note that it's the localized version
-            }
-        }
-        
-        // Finally, we need to use otherList as termList. If we've merged
-        // the translated and backup page lists, this gives us the merged list.
-        // If there are no translated pages, this gives us the backup list.
-        
-        termList = otherList;
-    }
-} else {        // Fall back to the other list since we have no subpages
-    termList = otherList;
-}
-                
-termList.sort(pageSorter);
 
 switch(lang) {
     default:    // en-US
@@ -105,47 +34,27 @@ switch(lang) {
 }
 
 var numLetters = letters.length;
-var termIndex = 0;
-var numTerms = termList.length;
+var p = 0;
 
 for (var i = 0; i < numLetters; i++) {
     var curLetter = letters[i];
-    var insertedHeading;
+    var insertedHeading = false; // Haven't done this letter's heading yet
     
-    insertedHeading = false;            // Haven't done this letter's heading yet
-    
-    if (termIndex < numTerms) {
+    if (p < pages.length) {
         do {
-            var term = termList[termIndex];
-            var title = term.title;
-            var tags = term.tags;
-            var locale = "";                // Will be set if the page is in the backup locale
+            var tags = pages[p].tags;
+            var url = pages[p].url;
+            var summary = pages[p].summary;
             
-            // If the page has no tags, skip it
-            
-            if (!tags || !tags.length) {
-                termIndex++;
+            // skip landing pages
+            if (!isInterface(pages[p].slug)) {
+                p++;
                 continue;
             }
-            
-            // Leave out functions and properties if desired
-            
-            if (skipMembers && !allowTerm(title)) {
-                termIndex++;
-                continue;
-            }
-            
-            
-            if (!term.isLocalized && backupLocale) {
-                locale = "&nbsp;<small>(" + backupLocale + ")</small>";
-            } else {
-                locale = " ";
-            }
-            
-            var url = term.url;
+
             var badge = "";
             
-            // Build any badge text that may be needed
+            // add badges if needed
             
             if (containsTag(tags, "Non-standard") || containsTag(tags, "Non standard")) {
                 badge = " " + template("NonStandardBadge", ["1"]);
@@ -171,19 +80,16 @@ for (var i = 0; i < numLetters; i++) {
                         html += "<span>" + curLetter + "</span><ul>";
                         insertedHeading = true;
                     }
-                    html += '\n<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url + '" title="' + wiki.escapeQuotes(term.summary) + '">' + insertBefore + title + insertAfter + '</a></code>' + locale + '</span>' + badge + '</span></li>';
+                    html += '\n<li><span class="indexListRow"><span class="indexListTerm"><code><a href="' + url.replace("en-US", locale) + '" title="' + wiki.escapeQuotes(summary) + '">' + title + '</a></code></span>' + badge + '</span></li>';
                 }
-                termIndex++;
+                p++;
             } else {
                 break;
             }
-        } while (termIndex < numTerms);
+        } while (p < pages.length);
     }
     html += "\n</ul>\n";
 }
-
-var el = env.locale;
-if(el === "ja") html = html.replace(/en\-US/gmi, "ja").replace(/\(ja\)/gmi, "");
 
 
 %><div class="index">
