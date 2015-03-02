@@ -81,8 +81,8 @@ switch(env.locale) {
     case "id":  // Bahasa Indonesia
         headingStr = "Bantu proyek dokumentasi '" + $0 + "'";
         statusStr = "Lihatlah <a href='/en-US/docs/" + driver.docStatus + "'>status</a> saat ini dari dokumentasi '" + $0 +"'.";
-        topicDriverStr = "Pengarah topic : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (IRC pseudo: " + driver.ircPseudo + ")";
-        ircStr = "Jangan ragu untuk menghubungi kami di " + ircLink + " atau di mailing-list " + mlName + ":";
+        topicDriverStr = "Pengarah topik : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (IRC pseudo: " + driver.ircPseudo + ")";
+        ircStr = "Jangan ragu untuk menghubungi kami di " + ircLink + " atau di mailing-list <em>" + mlName + "</em>:";
         break;
     default:    // English
         headingStr = "Help the '" + $0 + "' documentation project…";
