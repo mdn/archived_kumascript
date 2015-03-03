@@ -327,7 +327,7 @@ var text = mdn.localString({
     <li><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Deprecated_and_obsolete_features"><%=text['Deprecated_features']%></a></li>
    </ol>
   </li>
-  <li data-default-state="<%=state('New_in_JS')%>"><a href="/<%=locale%>/<%=text['slug_new_in_js']%>"><%=text['New_in_JS']%></a>
+  <li data-default-state="<%=state('New_in_JS')%>"><a href="/<%=locale%><%=text['slug_new_in_js']%>"><%=text['New_in_JS']%></a>
    <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_new_in_js'], 1])%>
   </li>
   <li><strong><a href="/<%=locale%>/docs/MDN"><%=text['Documentation']%></a></strong></li>
