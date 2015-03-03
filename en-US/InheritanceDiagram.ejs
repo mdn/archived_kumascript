@@ -55,10 +55,12 @@ function rectWithText(x, y, fill, interface, reverse) {
     xpos -= l;
     x = xpos;
   }
-  var str = '<rect x="'+x+'" y="'+y+'" width="'+l+'" height="50" fill="'+fill+'" stroke="#D4DDE4" stroke-width="2px" />';
+  var str = ;
   str += '<a xlink:href="' + href + interface + '" target="_top">' +
-         '<text '+flip+' x="'+inv+(x+l/2)+'" y="'+(y+29)+'" font-size="12px" font-family="Consolas,Monaco,Andale Mono,monospace"'+
-         ' fill="#4D4E53" text-anchor="middle" alignment-baseline="middle">'+interface+'</text></a>';
+           '<rect x="'+x+'" y="'+y+'" width="'+l+'" height="50" fill="'+fill+'" stroke="#D4DDE4" stroke-width="2px" />' +
+           '<text '+flip+' x="'+inv+(x+l/2)+'" y="'+(y+29)+'" font-size="12px" font-family="Consolas,Monaco,Andale Mono,monospace"' +
+           ' fill="#4D4E53" text-anchor="middle" alignment-baseline="middle">'+interface+'</text>' +
+         '</a>';
   if (!reverse) {
     xpos += l;
   }
@@ -124,8 +126,16 @@ for (var i = 0; i < inheritanceChain.length; i++) {
 result +='</svg></div>';
 
 %>
-<div class="hidden"><pre class="brush: html">
-<%=result%>
-</pre></div>
+<div class="hidden">
+
+<pre class="brush: html">
+  <%=result%>
+</pre>
+
+<pre class="brush: css">
+  a:hover text { fill: #0095DD; pointer-events: all;}
+</pre>
+
+</div>
 
 <%-template("EmbedLiveSample", [section, width, height])%>
