@@ -245,13 +245,13 @@ function hasFlags(flagType, flag) {
 
 getPages(pageList);
 
-var translationPercent = Math.ceil((translationCounter / result.length) * 100);
+var translationPercent = Math.floor((translationCounter / result.length) * 100);
 var uptodateCounter = translationCounter - outdatedCounter;
-var uptodatePercent = Math.ceil((uptodateCounter / translationCounter) * 100);
+var uptodatePercent = Math.floor((uptodateCounter / translationCounter) * 100);
 var editCounter = translationCounter - editorialCounter;
-var editPercent = Math.ceil((editCounter / translationCounter) * 100);
+var editPercent = Math.floor((editCounter / translationCounter) * 100);
 var techCounter = translationCounter - technicalCounter;
-var techPercent = Math.ceil((techCounter / translationCounter) * 100);
+var techPercent = Math.floor((techCounter / translationCounter) * 100);
 
 if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
 %>
