@@ -1,5 +1,5 @@
 <%
-// $1 is an optional tag that can be forced to (instead of inferring)
+// $0 is an optional tag that can be forced to (instead of inferring)
 
 function containsTag(tagList, tag) {
     if (!tagList || typeof tagList == 'undefined') return 0;
@@ -67,7 +67,7 @@ switch (env.locale) {
 }
 
 // Find the section of CSS this page belongs to (that is the first tag of the form "CSS XYZ")
-if ($1) {
+if (!$0) {
     var tags = env.tags;
     var found_tag = '';
     for (i in tags) {
@@ -84,7 +84,7 @@ if ($1) {
     }
 }
 else { // Explicitly given tag
-    found_tag = $1;
+    found_tag = $0;
 }
 
 // Find the CSS entities belonging to the same subject
