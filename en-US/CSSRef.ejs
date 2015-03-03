@@ -1,4 +1,6 @@
 <%
+// $1 is an optional tag that can be forced to (instead of inferring)
+
 function containsTag(tagList, tag) {
     if (!tagList || typeof tagList == 'undefined') return 0;
     tag = tag.toLowerCase();
@@ -65,19 +67,24 @@ switch (env.locale) {
 }
 
 // Find the section of CSS this page belongs to (that is the first tag of the form "CSS XYZ")
-var tags = env.tags;
-var found_tag = '';
-for (i in tags) {
-    if ((tags.hasOwnProperty(i)) &&
-        (tags[i] != 'CSS Reference') &&
-        (tags[i] != 'CSS Référence') &&
-        (tags[i] != 'CSS Property') &&
-        (tags[i] != s_css_ref_title)) { // Only keep this one one the 'accent' bug is fixed
-        if (tags[i].substr(0, 4) == 'CSS ') {
-            found_tag = tags[i];
-            break;
+if ($1) {
+    var tags = env.tags;
+    var found_tag = '';
+    for (i in tags) {
+        if ((tags.hasOwnProperty(i)) &&
+            (tags[i] != 'CSS Reference') &&
+            (tags[i] != 'CSS Référence') &&
+            (tags[i] != 'CSS Property') &&
+            (tags[i] != s_css_ref_title)) { // Only keep this one one the 'accent' bug is fixed
+            if (tags[i].substr(0, 4) == 'CSS ') {
+                found_tag = tags[i];
+                break;
+            }
         }
     }
+}
+else { // Explicitly given tag
+    found_tag = $1;
 }
 
 // Find the CSS entities belonging to the same subject
