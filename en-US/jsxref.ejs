@@ -14,26 +14,12 @@
 //  {{jsxref("Global_Objects/Date/getNumber", "Date.prototype.getNumber()")}}
 //
 
+var jsl10n = string.deserialize(template('L10n:JavaScript'));
+
 var l10n = {
-    refslug : mdn.localString({
-       "en-US": "Reference/",       // US English
-       "es"   : "Referencia/",      // Spanish (Español)
-       "fr"   : "Reference/",       // French
-       "ca"   : "Referencia/"       // Catalan
-    }),
-    slug : mdn.localString({
-        "en-US": "Global_Objects/",
-        "es"   : "Objetos_globales/",
-        "fr"   : "Objets_globaux/",
-        "ca"   : "Objectes_standard/"
-    }),
-    summary : mdn.localString({
-        "en-US": "The documentation about this has not yet been written; please consider contributing!",
-        "ru"   : "Документация об этом ещё не написана; пожалуйста, поспособствуйте её написанию!",
-        "zh-CN": "此页面仍未被本地化, 期待您的翻译!",
-        "fr"   : "Cette documentation n'a pas encore été rédigée, vous pouvez aider en contribuant&nbsp;!",
-        "ca"   : "Aquesta pàgina encara no ha estat traduïda. Si us plau consideri contribuir-hi!"
-    })
+    refslug: mdn.getLocalString(jsl10n, 'slug_reference'),
+    slug: mdn.getLocalString(jsl10n, 'slug_global_objects'),
+    summary: mdn.getLocalString(jsl10n, 'summary'),
 };
 
 var str = $1 || $0;
