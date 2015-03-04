@@ -36,6 +36,12 @@
         return strings[lang];
     },
     
+    getLocalString: function (strings, key) {
+        var lang = env.locale;
+        if (!(lang in strings[key])) lang = 'en-US';
+        return strings[key][lang];
+    },
+    
     /**
      * Given a string, replaces all placeholders outlined by $1$, $2$, etc.
      * within it.
