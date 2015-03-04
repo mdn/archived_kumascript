@@ -464,8 +464,8 @@ if (output.hasOwnProperty(obj) && typeof metrics[obj] != 'undefined' && metrics[
         for (var key in l10nResult) {
         if (l10nResult.hasOwnProperty(key) && typeof key != 'undefined') {
         
-        var translationPercent = Math.ceil((l10nResult[key].metrics.translations.counter / l10nResult[key].metrics.pages.counter) * 100);
-        var uptodatePercent = Math.ceil((l10nResult[key].metrics.updateNeeded.counter / l10nResult[key].metrics.pages.counter) * 100);
+        var translationPercent = Math.floor((l10nResult[key].metrics.translations.counter / l10nResult[key].metrics.pages.counter) * 100);
+        var uptodatePercent = Math.floor((l10nResult[key].metrics.updateNeeded.counter / l10nResult[key].metrics.pages.counter) * 100);
     %>
         <tr>
             <td><a href="<%=l10nResult[key].url%>"><%=key%></a></td>
