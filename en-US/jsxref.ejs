@@ -15,11 +15,12 @@
 //
 
 var jsl10n = string.deserialize(template('L10n:JavaScript'));
+var commonl10n = string.deserialize(template('L10n:Common'));
 
 var l10n = {
     refslug: mdn.getLocalString(jsl10n, 'slug_reference'),
     slug: mdn.getLocalString(jsl10n, 'slug_global_objects'),
-    summary: mdn.getLocalString(jsl10n, 'summary'),
+    summary: mdn.getLocalString(commonl10n, 'summary'),
 };
 
 var str = $1 || $0;
