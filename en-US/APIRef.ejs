@@ -19,39 +19,16 @@ if (group) {
   var webAPIGroups = string.deserialize(template("GroupData"));
 }
 
-var text = mdn.localString({
-  'en-US': {
-    'Methods': 'Methods',
-    'Properties': 'Properties',
-    'Constructor': 'Constructor',
-    'Inheritance': 'Inheritance:',
-    'Implemented_by': 'Implemented by:',
-    'Related': 'Related pages for '+ group + ':',
-  },
-  'de': {
-    'Methods': 'Methoden',
-    'Properties': 'Eigenschaften',
-    'Constructor': 'Konstruktor',
-    'Inheritance': 'Vererbung:',
-    'Implemented_by': 'Implementiert von:',
-    'Related': 'Ähnliche Seiten zu '+ group + ':',
-  },
-  'fr': {
-    'Methods': 'Methodes',
-    'Properties': 'Propriétés',
-    'Constructor': 'Construteur',
-    'Inheritance': 'Héritage:',
-    'Implemented_by': 'Implémenté par:',
-    'Related': 'Pages similaires de ' + group + ':',
-  },
-  'it': {
-    'Methods': 'Metodi',
-    'Properties': 'Proprietà',
-    'Constructor': 'Costruttore',
-    'Implemented_by': 'Implementato da:',
-    'Related': 'Pagine correlate du ' + group + ':',
-  }
-});
+var commonl10n = string.deserialize(template('L10n:Common'));
+
+var text = {
+    'Methods': mdn.getLocalString(commonl10n, 'Methods'),
+    'Properties': mdn.getLocalString(commonl10n, 'Properties'),
+    'Constructor': mdn.getLocalString(commonl10n, 'Constructor'),
+    'Inheritance': mdn.getLocalString(commonl10n, 'Inheritance'),
+    'Implemented_by': mdn.getLocalString(commonl10n, 'Implemented_by'),
+    'Related': mdn.getLocalString(commonl10n, 'Related_pages'),
+};
 
 
 // Collect all the things
