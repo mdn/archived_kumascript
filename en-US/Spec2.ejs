@@ -183,42 +183,56 @@ var label = {
     'en-US' : 'Recommendation',
     'ja'    : '勧告',
     'de'    : 'Empfehlung',
-    'ru'    : 'Рекомендация'
+    'ru'    : 'Рекомендация',
+    'fr'    : 'Recomendation'
   }),
   'PR' : mdn.localString({
     'en-US' : 'Proposed Recommendation',
     'ja'    : '勧告案',
     'de'    : 'Vorgeschlagene Empfehlung',
-    'ru'    : 'Предложенная рекомендация'
+    'ru'    : 'Предложенная рекомендация',
+    'fr'    : 'Recommendation proposée'
   }),
   'CR' : mdn.localString({
     'en-US' : 'Candidate Recommendation',
     'ja'    : '勧告候補',
     'de'    : 'Anwärter Empfehlung',
-    'ru'    : 'Кандидат в рекомендации'
+    'ru'    : 'Кандидат в рекомендации',
+    'fr'    : 'Candidat au statut de recommendation'
+  }),
+  'RC' : mdn.localString({
+    'en-US' : 'Release Candidate',
+    'ja'    : '勧告候補',
+    'de'    : 'Anwärter Empfehlung',
+    'ru'    : 'Кандидат в рекомендации',
+    'fr'    : 'Candidat recommendation'
   }),
   'WD' : mdn.localString({
     'en-US' : 'Working Draft',
     'ja'    : '草案',
     'de'    : 'Arbeitsentwurf',
-    'ru'    : 'Рабочий черновик'
+    'ru'    : 'Рабочий черновик',
+    'fr'    : 'Version de travail'
   }),
   'ED' : mdn.localString({
     'en-US' : 'Editor\'s Draft',
     'ja'    : '勧告改訂案',
     'de'    : 'Bearbeiterentwurf',
-    'ru'    : 'Редакторский черновик'
+    'ru'    : 'Редакторский черновик',
+    'fr'    : 'Brouillon de l\'éditeur'
   }),
   'Old-Transforms' : mdn.localString({
     'en-US' : 'This has been merged in another draft. Please update.',
     'ja'    : 'この仕様は他のドラフトへ移動されました。アップデートしてください。',
     'de'    : 'Diese Spezifikation wurde mit einem anderen Entwurf zusammengeführt. Bitte aktualisieren.',
-    'ru'    : 'Эта спецификация была слита с другим черновиком. Пожалуйста, обновите.'
+    'ru'    : 'Эта спецификация была слита с другим черновиком. Пожалуйста, обновите.',
+    'fr'    : 'Cette spécification a été fusionnée avec une autre. Veuillez mettre à jour cette mention.0
   }),
   'Living' : mdn.localString({
     'en-US' : 'Living Standard',
     'de'    : 'Lebender Standard',
-    'ru'    : 'Живой стандарт'
+    'ru'    : 'Живой стандарт',
+    'fr'    : 'Standard évolutif'
   }),
   'RFC' : mdn.localString({
     'en-US'   : 'IETF RFC'
@@ -227,12 +241,14 @@ var label = {
     'en-US' : 'Standard',
     'de'    : 'Standard',
     'ru'    : 'Стандарт'
+    'fr'    : 'Standard'
   }),
   'Draft'  : mdn.localString({
     'en-US' : 'Draft',
     'ja'    : 'ドラフト',
     'de'    : 'Entwurf',
-    'ru'    : 'Черновик'
+    'ru'    : 'Черновик',
+    'fr'    : 'Projet'
   })
 }
 
@@ -240,7 +256,8 @@ var unknown_label = mdn.localString({
     'en-US' : 'Unknown',
     'ja'    : '不明',
     'de'    : 'Unbekannt',
-    'ru'    : 'Неизвестно'
+    'ru'    : 'Неизвестно',
+    'fr'    : 'Statut incoonu'
 });
 
 %><span class="spec-<%- status[$0] || ''  %>"><%= (status[$0] && label[status[$0]]) || unknown_label %></span>
