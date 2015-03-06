@@ -2,9 +2,9 @@
 /*
   Draws an responsive SVG diagram for the inheritance chain (inverted in rtl)
 
-  $0 - section - defaults to "Inheritance_chain"
-  $1 - width - defaults to 600
-  $2 - height  - defaults to 70
+  $0 - width - defaults to 600
+  $1 - height  - defaults to 70
+  $2 - offset - defaults to 50
 */
 
 var data = string.deserialize(template("InterfaceData"));
@@ -16,9 +16,9 @@ var rtlLocales = ['ar', 'he', 'fa'];
 var inheritanceChain = [mainIF];
 var descendants = [];
 var inh = data[0][mainIF] != undefined ? data[0][mainIF].inh : '';
-var section = $0 || 'Inheritance_chain';
-var width = $1 || 600;
-var height = $2 || 70;
+var width = $0 || 600;
+var height = $1 || 70;
+var offset = $2 || 50;
 var rtl = false;
 if (rtlLocales.indexOf(locale) != -1) {
     rtl = true;
@@ -82,7 +82,7 @@ function lineWithTriangle(x, y, reverse) {
 var padding = (height / width) * 100;
 var xpos = 1;
 var ypos = 1;
-var viewbox = 'viewbox="-50 0 '+ width + ' ' + height +'"';
+var viewbox = 'viewbox="-'+ offset + ' 0 '+ width + ' ' + height +'"';
 
 if (rtl) {
   viewbox = 'viewbox="510 0 '+ width + ' ' + height +'" transform="scale(-1 1)"';
@@ -124,7 +124,7 @@ for (var i = 0; i < inheritanceChain.length; i++) {
 result +='</svg></div>';
 
 %>
-<div class="hidden">
+<div class="hidden" id="inheritance_diagram">
 
 <pre class="brush: html">
   <%=result%>
@@ -136,4 +136,4 @@ result +='</svg></div>';
 
 </div>
 
-<%-template("EmbedLiveSample", [section, width, height])%>
+<%-template("EmbedLiveSample", ["inheritance_diagram", width, height])%>
