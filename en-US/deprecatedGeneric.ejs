@@ -131,7 +131,7 @@ switch($0) {
     case 'header':
         if (tip.length) { str = str + " " + tip; }
         %><div class="overheadIndicator deprecated deprecatedHeader">
-            <p><strong><%-str%></strong><br/><%-str_desc%></p>
+            <p><strong><%-template("ObsoleteBadge", [1])%> <%-str%></strong><br/><%-str_desc%></p>
         </div><%
         break;
     case 'method':
