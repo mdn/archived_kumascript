@@ -15,6 +15,7 @@ var css = !$2 ? "glossaryLink" : "";
 var URL_EN = "/en-US/docs/Glossary/";
 var URL    = mdn.localString({
     "en-US": URL_EN,
+    "de"   : "/de/docs/Glossary/",
     "fr"   : "/fr/docs/Glossaire/",
     "pt-BR": "/pt-BR/docs/Glossario/",
 });
@@ -25,6 +26,7 @@ URL    += $0.replace(/\s+/g,'_');
 var page    = wiki.getPage(URL);
 var summary = mdn.localString({
     "en-US": "The definition of that term (" + str + ") has not been written yet; please consider contributing it!",
+    "de"   : "Die Definition dieses Ausdrucks (" + str + ") wurde noch nicht geschrieben; bitte hilf mit und trage sie bei!",
     "fr"   : "La définition de ce terme ("+ str + ") n'a pas encore été rédigée. Nous serions heureux de vous voir l'écrire&nbsp;!"
 });
 
