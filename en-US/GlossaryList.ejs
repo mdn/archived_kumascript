@@ -11,11 +11,7 @@
 //      * `split` : A string with one of the value `h1`, `h2`, `h3`, `h4`, `h5`, `h6`. If this property is define with a valid value, the list of terms will be split with intermediate title for each letter.
 //      * `css`   : A sring representing some extra CSS class to apply to the list (to the top most UL elements)
 
-var URL = mdn.localString({
-    "en-US": "/en-US/docs/Glossary",
-    "fr"   : "/fr/docs/Glossaire",
-    "pt-BR": "/pt-BR/docs/Glossario",
-});
+var URL = "/en-US/docs/Glossary";
 
 var i, l, c, splitTitle, letter = /[a-z]/i;
 var csscl  = $0 && $0.css ? $0.css : "";
