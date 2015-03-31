@@ -88,7 +88,7 @@ function process_array(folderItem, arr) {
 // Get all the subpages of this page. This will be treated as the main list of pages; we will
 // pull out the requested pages afterward.
 
-var alphaList = page.subpagesExpand(/*env.path*/"/en-US/docs/MDN", 2, 0);
+var alphaList = page.subpagesExpand(/*env.path*/"/" + lang + "/docs/MDN", 2, 0);
 var numPages = alphaList.length;
 
 alphaList.sort(alphanumForward);
