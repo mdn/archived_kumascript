@@ -25,11 +25,12 @@ var text = {
     'Properties': mdn.getLocalString(commonl10n, 'Properties'),
     'Methods': mdn.getLocalString(commonl10n, 'Methods'),
     'Inheritance': mdn.getLocalString(commonl10n, 'Inheritance'),
-    'Related': mdn.getLocalString(commonl10n, 'Related_pages').replace('$1', $1),
+    'Related': mdn.getLocalString(commonl10n, 'Related_pages_wo_group'),
 };
 
 // Variables
 var containsTag = page.hasTag;
+var escapeQuotes = mdn.escapeQuotes;
 var slug = env.slug;
 var locale = env.locale;
 var slug_stdlib = '/' + env.locale + '/docs/Web/JavaScript/' + text['refslug'] + text['stdlibslug'];
@@ -46,8 +47,8 @@ var inheritanceData = {
     "arguments": [],
     "Reflect": ["Object"],
 };
-if (typeof inheritanceData[$1] != 'undefined') {
-    inheritance = inheritanceData[$1];
+if (typeof inheritanceData[mainObj] != 'undefined') {
+    inheritance = inheritanceData[mainObj];
 }
 
 // Data for related pages
@@ -110,105 +111,112 @@ for (var object in source) {
     }
 }
 
+// Output helper
+
+var badges = {
+  ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
+  NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
+  DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
+  ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
+}
+
+function buildSublist(pages, title, opened) {
+  var result = '<li>';
+  if (opened) {
+    result = '<li data-default-state="open">';
+  }
+  result += '<a href="#"><strong>' + title + '</strong></a><ol>';
+
+  for (var i in pages) {
+    var aPage = pages[i];
+    result += '<li>';
+    
+    if (containsTag(aPage, 'Experimental')) {
+        result += badges.ExperimentalBadge;
+    }
+
+    if (containsTag(aPage, 'Non-standard') || containsTag(aPage, 'Non Standard')) {
+        result += badges.NonStandardBadge;
+    }
+
+    if (containsTag(aPage, 'Deprecated')) {
+        result += badges.DeprecatedBadge;
+    }
+
+    if (containsTag(aPage, 'Obsolete')) {
+        result += badges.ObsoleteBadge;
+        result += '<s class="obsoleteElement">';
+    }
+    
+    if (rtlLocales.indexOf(locale) != -1) {
+        result += '<bdi>';
+    }
+    
+    if (slug == aPage.slug) {
+        result += '<em><code>' + aPage.title + '</code></em>'
+    } else {
+        result += '<a href="' + aPage.url.replace('en-US', locale) + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
+    }
+    
+    if (rtlLocales.indexOf(locale) != -1) {
+        result += '</bdi>';
+    }
+    
+    if (containsTag(aPage, 'Obsolete')) {
+        result += '</s>';
+    }
+    
+    result += '</li>';
+  }
+
+  result += '</ol></li>';
+
+  return result;
+}
+
+
 var resultTitle,
 resultProperties,
 resultMethods,
 resultOpen,
 len = 0;
 
-// Output: 
+// Output
+
+var output  = '<section class="Quick_links" id="Quick_Links"><ol>';
+    output += '<li><strong><a href="'+slug_stdlib+'">'+text['stdlib']+'</a></strong></li>';
+
+    for (object in result) {
+        len++;
+        resultTitle      = result[object].title || '';
+        resultProperties = result[object].properties || '';
+        resultMethods    = result[object].methods || '';
+        resultOpen       = result[object].defaultOpened || '';
+
+        if (len == 2) {
+          output += '<li><strong>'+text['Inheritance']+'</strong></li>';
+        }
+
+        output += '<li><strong><a href="'+slug_stdlib + resultTitle +'"><code>'+resultTitle+'</code></a></strong></li>';
+
+        if (resultProperties.length > 0) {
+          output += buildSublist(resultProperties, text['Properties'], resultOpen);
+        }
+        if (resultMethods.length > 0) {
+          output += buildSublist(resultMethods, text['Methods'], resultOpen);
+        }
+
+        if (len == 1 && $2) {
+            output += '<li><strong>'+text['Related']+'</strong></li>';
+            var arr = $2.split(",");
+            for (var i = 0; i <  arr.length; i++) {
+              output += '<li><strong><a href="'+slug_stdlib + arr[i]+'"><code>'+arr[i]+'</code></a></strong></li>';
+            }
+        }
+
+    }
+
+output += '</ol></section>';
 %>
 
-<section class="Quick_links" id="Quick_Links">
-    <ol>
-        <li><strong><a href="<%=slug_stdlib%>"><%=text['stdlib']%></a></strong></li>
-
-        <%
-        for (object in result) {
-            len++;
-            resultTitle      = result[object].title || '';
-            resultProperties = result[object].properties || '';
-            resultMethods    = result[object].methods || '';
-            resultOpen       = result[object].defaultOpened || '';
-        %>
-        <% if (len == 2) { %>
-            <li><strong><%=text['Inheritance']%></strong></li>
-        <% } %>
-        <li><strong><a href="<%=slug_stdlib + resultTitle%>"><code><%=resultTitle%></code></a></strong></li>
-
-
-        <% if (resultProperties.length > 0) { %>
-        <li<%if(resultOpen) {%> data-default-state="open"<%}%>><a href="#"><strong><%=text['Properties']%></strong></a>
-            <ol>
-            <% for (aPage in resultProperties) { %>
-                <li>
-                    <% if (containsTag(resultProperties[aPage], 'Obsolete')) { %>
-                        <s class="obsoleteElement">
-                    <% } %>
-                    <% if (resultProperties[aPage].url != '') { %>
-                      <a href="<%-resultProperties[aPage].url%>" title="<%-mdn.escapeQuotes(resultProperties[aPage].summary || '')%>"><code><%-resultProperties[aPage].title%></code></a>
-                    <% } %>
-                    <% if (containsTag(resultProperties[aPage], 'Obsolete')) { %>
-                        </s>
-                    <% } %>
-                    <% if (containsTag(resultProperties[aPage], 'Experimental')) { %>
-                         <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
-                    <% } %>
-                    <% if (containsTag(resultProperties[aPage], 'Non-standard')) { %>
-                         <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
-                    <% } %>
-                    <% if (containsTag(resultProperties[aPage], 'Deprecated')) { %>
-                         <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
-                    <% } %>
-                    <% if (containsTag(resultProperties[aPage], 'Obsolete')) { %>
-                        <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
-                    <% } %>
-                </li>
-            <% } %>
-            </ol>
-        </li>
-        
-        <% } if (resultMethods.length > 0) { %>
-        <li<%if(resultOpen) {%> data-default-state="open"<%}%>><a href="#"><strong><%=text['Methods']%></strong></a>
-            <ol>
-            <% for (aPage in resultMethods) { %>
-                <li>
-                     <% if (containsTag(resultMethods[aPage], 'Obsolete')) { %>
-                        <s class="obsoleteElement">
-                    <% } %>
-                    <% if (resultMethods[aPage].url != '') { %>
-                        <a href="<%-resultMethods[aPage].url%>" title="<%-mdn.escapeQuotes(resultMethods[aPage].summary || '')%>"><code><%-resultMethods[aPage].title%></code></a>
-                    <% } %>
-                    <% if (containsTag(resultMethods[aPage], 'Obsolete')) { %>
-                        </s>
-                    <% } %>
-                    <% if (containsTag(resultMethods[aPage], 'Experimental')) { %>
-                        <span class="sidebar-icon"><%-template("ExperimentalBadge", [1])%></span>
-                    <% } %>
-                    <% if (containsTag(resultMethods[aPage], 'Non-standard')) { %>
-                         <span class="sidebar-icon"><%-template("NonStandardBadge", [1])%></span>
-                    <% } %>
-                    <% if (containsTag(resultMethods[aPage], 'Deprecated')) { %>
-                         <span class="sidebar-icon"><%-template("DeprecatedBadge", [1])%></span>
-                    <% } %>
-                    <% if (containsTag(resultMethods[aPage], 'Obsolete')) { %>
-                        <span class="sidebar-icon"><%-template("ObsoleteBadge", [1])%></span>
-                    <% } %>
-                </li>
-            <% } %>
-            </ol>
-        </li>
-        <% } %>
-        
-        <% if (len == 1 && $2) { %>
-            <li><strong><%=text['Related_pages']%></strong></li>
-            <% var arr = $2.split(","); 
-                for (var i = 0; i <  arr.length; i++) { %>
-                    <li><strong><a href="<%=slug_stdlib + arr[i]%>"><code><%=arr[i]%></code></a></strong></li>
-            <% } %>
-        <% } %>
-        
-        <% } %>
-
-    </ol>
-</section>
+<%-output%>
