@@ -60,7 +60,7 @@ if (groupData["TypedArray"].indexOf(mainObj) != -1) { mainObj = "TypedArray"; }
 if (groupData["Error"].indexOf(mainObj) != -1) { mainObj = "Error"; }
 
 // Get related pages from groups and exclude self
-var group;
+var group = [];
 for(g in groupData) {
     var index = groupData[g].indexOf(mainObj);
     if(index != -1 ) {
@@ -72,12 +72,12 @@ for(g in groupData) {
 
 // Collect pages
 var source = {};
-source[mainObj] = page.subpagesExpand(slug_stdlib + mainObj);
+source[mainObj] = page.subpagesExpand('/en-US/docs/Web/JavaScript/Reference/Global_Objects/' + mainObj);
 if  (inheritance.indexOf("Function") > -1) {
-    source["iFunction"] = page.subpagesExpand(slug_stdlib + 'Function');
+    source["iFunction"] = page.subpagesExpand('/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function');
 }
 if  (inheritance.indexOf("Object") > -1) {
-    source["iObject"] = page.subpagesExpand(slug_stdlib + 'Object');
+    source["iObject"] = page.subpagesExpand('/en-US/docs/Web/JavaScript/Reference/Global_Objects/''Object');
 }
 
 var result = {};
@@ -170,7 +170,10 @@ function buildSublist(pages, title, opened) {
     if (slug == aPage.slug) {
         result += '<em><code>' + aPage.title + '</code></em>'
     } else {
-        result += '<a href="' + aPage.url.replace('en-US', locale) + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
+        result += '<a href="'
+               + aPage.url.replace('en-US', locale).replace('Reference', text['refslug']).replace('Global_Objects', text['stdlibslug'])
+               + '" title="' + escapeQuotes(aPage.summary) 
+               + '"><code>' + aPage.title + '</code></a>';
     }
     
     if (rtlLocales.indexOf(locale) != -1) {
@@ -214,12 +217,12 @@ var output  = '<section class="Quick_links" id="Quick_Links"><ol>';
 
         output += '<li><strong><a href="'+slug_stdlib + resultTitle +'"><code>'+resultTitle+'</code></a></strong></li>';
 
-       /* if (resultProperties.length > 0) {
+        if (resultProperties.length > 0) {
           output += buildSublist(resultProperties, text['Properties'], resultOpen);
         }
         if (resultMethods.length > 0) {
           output += buildSublist(resultMethods, text['Methods'], resultOpen);
-        } */
+        }
 
         if (len == 1 && group.length > 0) {
             output += '<li><strong>'+text['Related']+'</strong></li>';
