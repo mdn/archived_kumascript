@@ -1,18 +1,13 @@
 <%
-// Generate quick links for JavaScript reference docs
+// Generate quick links for JavaScript standard objects docs
 //
-// TODO: Highlight or remove the link for the page you are currently on (?)
 // TODO: Ordering of prototype / static methods (bug 948576)
 //
-// Parameters:
+// Parameters are OBSOLETE. DO NOT USE ANYMORE.
 //
 //  $0 - JavaScript reference section (e.g Global_Objects) – OBSOLETE
 //  $1 - JavaScript reference object/subject (e.g. Number, Array, Function) – OBSOLETE
-//  $2 - Related objects to display (comma separated)
-// 
-// Example: {{JSRef("Global_Objects", "Number")}} 
-// Includes quicklinks for the Number object including all methods and properties
-// and also includes inherited methods/properties from Object and Function
+//  $2 - Related objects to display (comma separated) – OBSOLETE
 
 // Strings
 var commonl10n = string.deserialize(template('L10n:Common'));
@@ -33,6 +28,7 @@ var containsTag = page.hasTag;
 var escapeQuotes = mdn.escapeQuotes;
 var slug = env.slug;
 var locale = env.locale;
+var rtlLocales = ['ar', 'he', 'fa'];
 var slug_stdlib = '/' + env.locale + '/docs/Web/JavaScript/' + text['refslug'] + text['stdlibslug'];
 var mainObj = slug.replace('Web/JavaScript/' + text['refslug'] + text['stdlibslug'], '').split('/')[0];
 
@@ -52,8 +48,27 @@ if (typeof inheritanceData[mainObj] != 'undefined') {
 }
 
 // Data for related pages
-// TBD
+var groupData = {
+    "Error": ["Error", "EvalError", "InternalError", "RangeError", "ReferenceError", "SyntaxError", "TypeError", "URIError"],
+    "Intl": ["Intl", "Collator", "DateTimeFormat", "NumberFormat"],
+    "TypedArray": ["TypedArray", "Int8Array", "Uint8Array", "Uint8ClampedArray", "Int16Array", "Uint16Array",
+                   "Int32Array", "Uint32Array", "Float32Array", "Float64Array"],
+};
 
+// Exceptions, we want the main object in the sidebar (e.g. Int8Array -> TypedArray)
+if (groupData["TypedArray"].indexOf(mainObj) != -1) { mainObj = "TypedArray"; }
+if (groupData["Error"].indexOf(mainObj) != -1) { mainObj = "Error"; }
+
+// Get related pages from groups and exclude self
+var group;
+for(g in groupData) {
+    var index = groupData[g].indexOf(mainObj);
+    if(index != -1 ) {
+        group = groupData[g];
+        group.splice(index, 1);
+        break;
+    }
+}
 
 // Collect pages
 var source = {};
@@ -199,18 +214,17 @@ var output  = '<section class="Quick_links" id="Quick_Links"><ol>';
 
         output += '<li><strong><a href="'+slug_stdlib + resultTitle +'"><code>'+resultTitle+'</code></a></strong></li>';
 
-        if (resultProperties.length > 0) {
+       /* if (resultProperties.length > 0) {
           output += buildSublist(resultProperties, text['Properties'], resultOpen);
         }
         if (resultMethods.length > 0) {
           output += buildSublist(resultMethods, text['Methods'], resultOpen);
-        }
+        } */
 
-        if (len == 1 && $2) {
+        if (len == 1 && group.length > 0) {
             output += '<li><strong>'+text['Related']+'</strong></li>';
-            var arr = $2.split(",");
-            for (var i = 0; i <  arr.length; i++) {
-              output += '<li><strong><a href="'+slug_stdlib + arr[i]+'"><code>'+arr[i]+'</code></a></strong></li>';
+            for (var i = 0; i < group.length; i++) {
+              output += '<li><strong><a href="'+slug_stdlib + group[i]+'"><code>'+group[i]+'</code></a></strong></li>';
             }
         }
 
