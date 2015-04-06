@@ -171,7 +171,7 @@ function buildSublist(pages, title, opened) {
         result += '<em><code>' + aPage.title + '</code></em>'
     } else {
         result += '<a href="'
-               + aPage.url + '$translate?tolocale=' + locale
+               + aPage.url.replace('en-US', locale)
                + '" title="' + escapeQuotes(aPage.summary)
                + '"><code>' + aPage.title + '</code></a>';
     }
