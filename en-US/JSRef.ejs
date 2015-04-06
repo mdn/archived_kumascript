@@ -6,7 +6,7 @@
 //
 // Parameters:
 //
-//  $0 - JavaScript reference section (e.g Global_Objects)
+//  $0 - JavaScript reference section (e.g Global_Objects) – OBSOLETE
 //  $1 - JavaScript reference object/subject (e.g. Number, Array, Function)
 //  $2 - Related objects to display (comma separated)
 // 
@@ -16,10 +16,14 @@
 
 
 var containsTag = page.hasTag;
+var slug = env.slug;
+var locale = env.locale;
+var slug_stdlib = '/' + env.locale + '/docs/Web/JavaScript/' + text['refslug'] + text['stdlibslug'];
+var mainObj = slug.replace(slug_stdlib, '').split('/')[0];
 
 // Data for inheritance chain
-var currentInheritance = ["Object", "Function"];
-var inheritance = {
+var inheritance = ["Object", "Function"];
+var inheritanceData = {
     "Math": ["Object"],
     "Function": ["Object"],
     "Object": ["Function"],
@@ -29,8 +33,8 @@ var inheritance = {
     "Reflect": ["Object"],
 };
 
-if (typeof inheritance[$1] != 'undefined') {
-    currentInheritance = inheritance[$1];
+if (typeof inheritanceData[$1] != 'undefined') {
+    inheritance = inheritanceData[$1];
 }
 
 // Strings
@@ -39,6 +43,7 @@ var jsl10n = string.deserialize(template('L10n:JavaScript'));
 
 var text = {
     'refslug': mdn.getLocalString(jsl10n, 'slug_reference'),
+    'stdlibslug': mdn.getLocalString(jsl10n, 'slug_global_objects'),
     'stdlib': mdn.getLocalString(jsl10n, 'stdlib'),
     'Properties': mdn.getLocalString(commonl10n, 'Properties'),
     'Methods': mdn.getLocalString(commonl10n, 'Methods'),
@@ -46,31 +51,25 @@ var text = {
     'Related': mdn.getLocalString(commonl10n, 'Related_pages').replace('$1', $1),
 };
 
-var s_js_ref_href = '/' + env.locale + '/docs/Web/JavaScript/' + text['refslug'];
-var s_js_section = $0;
-var s_js_subject = $1;
-var s_js_full_href = s_js_ref_href + s_js_section + '/' + s_js_subject;
-var s_js_property_tag = 'Property';
-var s_js_method_tag = 'Method';
 
 // Collect pages
 var source = {};
-source[s_js_subject] = page.subpagesExpand(s_js_full_href);
-if (currentInheritance.indexOf("Function") > -1) {
-    source["iFunction"] = page.subpagesExpand(s_js_ref_href + s_js_section + '/Function');
+source[mainObj] = page.subpagesExpand(slug_stdlib + mainObj);
+if  inheritance.indexOf("Function") > -1) {
+    source["iFunction"] = page.subpagesExpand(slug_stdlib + 'Function');
 }
-if (currentInheritance.indexOf("Object") > -1) {
-    source["iObject"] = page.subpagesExpand(s_js_ref_href + s_js_section + '/Object');
+if  inheritance.indexOf("Object") > -1) {
+    source["iObject"] = page.subpagesExpand(slug_stdlib + 'Object');
 }
 
 var result = {};
-result[s_js_subject] = {
-    title: s_js_subject,
+result[mainObj] = {
+    title: mainObj,
     methods: [],
     properties: [],
     defaultOpened: true
 };
-if (currentInheritance.indexOf("Function") > -1) {
+if  inheritance.indexOf("Function") > -1) {
 result['iFunction'] = {
     title: 'Function',
     methods: [],
@@ -78,7 +77,7 @@ result['iFunction'] = {
     defaultOpened: false
 };
 }
-if (currentInheritance.indexOf("Object") > -1) {
+if  inheritance.indexOf("Object") > -1) {
 result['iObject'] = {
     title: 'Object',
     methods: [],
@@ -100,10 +99,10 @@ for (var object in source) {
         } else {
             includeme = true;
         }
-        if (containsTag(pageList[aPage], result[object].title) && containsTag(pageList[aPage], s_js_property_tag) && includeme) {
+        if (containsTag(pageList[aPage], result[object].title) && containsTag(pageList[aPage], 'Property') && includeme) {
             result[object].properties.push(pageList[aPage]);
         }
-        if (containsTag(pageList[aPage], result[object].title) && containsTag(pageList[aPage], s_js_method_tag) && includeme) {
+        if (containsTag(pageList[aPage], result[object].title) && containsTag(pageList[aPage], 'Method') && includeme) {
             result[object].methods.push(pageList[aPage]);
         } 
     }
@@ -120,7 +119,7 @@ len = 0;
 
 <section class="Quick_links" id="Quick_Links">
     <ol>
-        <li><strong><a href="<%=s_js_ref_href + s_js_section%>"><%=text['stdlib']%></a></strong></li>
+        <li><strong><a href="<%=slug_stdlib%>"><%=text['stdlib']%></a></strong></li>
 
         <%
         for (object in result) {
@@ -133,7 +132,7 @@ len = 0;
         <% if (len == 2) { %>
             <li><strong><%=text['Inheritance']%></strong></li>
         <% } %>
-        <li><strong><a href="<%=s_js_ref_href + s_js_section + '/' + resultTitle%>"><code><%=resultTitle%></code></a></strong></li>
+        <li><strong><a href="<%=slug_stdlib + resultTitle%>"><code><%=resultTitle%></code></a></strong></li>
 
 
         <% if (resultProperties.length > 0) { %>
@@ -203,7 +202,7 @@ len = 0;
             <li><strong><%=text['Related_pages']%></strong></li>
             <% var arr = $2.split(","); 
                 for (var i = 0; i <  arr.length; i++) { %>
-                    <li><strong><a href="<%=s_js_ref_href + s_js_section + '/' + arr[i]%>"><code><%=arr[i]%></code></a></strong></li>
+                    <li><strong><a href="<%=slug_stdlib + arr[i]%>"><code><%=arr[i]%></code></a></strong></li>
             <% } %>
         <% } %>
         
