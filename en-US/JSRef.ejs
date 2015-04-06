@@ -49,7 +49,7 @@ var text = {
 var s_js_ref_href = '/' + env.locale + '/docs/Web/JavaScript/' + text['refslug'];
 var s_js_section = $0;
 var s_js_subject = $1;
-var s_js_full_href = s_js_ref_href + '/' + s_js_section + '/' + s_js_subject;
+var s_js_full_href = s_js_ref_href + s_js_section + '/' + s_js_subject;
 var s_js_property_tag = 'Property';
 var s_js_method_tag = 'Method';
 
@@ -57,10 +57,10 @@ var s_js_method_tag = 'Method';
 var source = {};
 source[s_js_subject] = page.subpagesExpand(s_js_full_href);
 if (currentInheritance.indexOf("Function") > -1) {
-    source["iFunction"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Function');
+    source["iFunction"] = page.subpagesExpand(s_js_ref_href + s_js_section + '/Function');
 }
 if (currentInheritance.indexOf("Object") > -1) {
-    source["iObject"] = page.subpagesExpand(s_js_ref_href + '/' + s_js_section + '/Object');
+    source["iObject"] = page.subpagesExpand(s_js_ref_href + s_js_section + '/Object');
 }
 
 var result = {};
@@ -120,7 +120,7 @@ len = 0;
 
 <section class="Quick_links" id="Quick_Links">
     <ol>
-        <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section%>"><%=text['stdlib']%></a></strong></li>
+        <li><strong><a href="<%=s_js_ref_href + s_js_section%>"><%=text['stdlib']%></a></strong></li>
 
         <%
         for (object in result) {
@@ -133,7 +133,7 @@ len = 0;
         <% if (len == 2) { %>
             <li><strong><%=text['Inheritance']%></strong></li>
         <% } %>
-        <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + resultTitle%>"><code><%=resultTitle%></code></a></strong></li>
+        <li><strong><a href="<%=s_js_ref_href + s_js_section + '/' + resultTitle%>"><code><%=resultTitle%></code></a></strong></li>
 
 
         <% if (resultProperties.length > 0) { %>
@@ -203,7 +203,7 @@ len = 0;
             <li><strong><%=text['Related_pages']%></strong></li>
             <% var arr = $2.split(","); 
                 for (var i = 0; i <  arr.length; i++) { %>
-                    <li><strong><a href="<%=s_js_ref_href + '/' + s_js_section + '/' + arr[i]%>"><code><%=arr[i]%></code></a></strong></li>
+                    <li><strong><a href="<%=s_js_ref_href + s_js_section + '/' + arr[i]%>"><code><%=arr[i]%></code></a></strong></li>
             <% } %>
         <% } %>
         
