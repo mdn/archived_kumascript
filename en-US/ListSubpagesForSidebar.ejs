@@ -1,11 +1,11 @@
 <%
 // Inserts a tree of subpages of the specified page to be used in the sidebar (quicklinks)
 // Displays common flags/icons
+// Includes the parent page at the top of the list.
 //
 // Parameters:
-//  $0 - The path of the page whose subpages should be listed
-//  $1 - If set, do not put the text in <code></code>
-
+//  $0 - The path of the page whose subpages should be listed.
+//  $1 - If true, do not put the text in <code></code>.
 
 var path = $0;
 
@@ -14,10 +14,12 @@ if (path.substr(-1, 1) === '/') {
     path = path.slice(0, -1);
 }
     
-var pages = page.subpagesExpand(path);
+var pages = page.subpagesExpand(path, -1, 1);
 var containsTag = page.hasTag;
+var escapeQuotes = mdn.escapeQuotes;
+var htmlEscape = kuma.htmlEscape;
 
-var result = '';
+var output = '';
 var openTag = '<ol>';
 var closeTag = '</ol>';
 var code    = !$1 ? '<code>'  : '';
@@ -30,34 +32,47 @@ var badges = {
     ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
 };
 
-if(pages.length) {
-    result += openTag;
+function createLink(item) {
+    var result = '';
+    var summary =  escapeQuotes(item.summary) || '';
+    result += '<li>';
+    
+    if (containsTag(item, 'Experimental')) {
+        result += badges.ExperimentalBadge;
+    }
+    
+    if (containsTag(item, 'Non-standard') || containsTag(item, 'Non Standard')) {
+        result += badges.NonStandardBadge;
+    }
+    
+    if (containsTag(item, 'Deprecated')) {
+        result += badges.DeprecatedBadge;
+    }
+    
+    if (containsTag(item, 'Obsolete')) {
+        result += badges.ObsoleteBadge;
+    }
+    
+    result += '<a href="' + item.url + '" title="' + summary + '">' + code + htmlEscape(item.title) + endcode + '</a>' + '</li>';
+    return result;
+}
 
+if (pages.length) {
+    output += openTag;
+    
     pages.forEach(function(item) {
         if (!item) { return; }
-        var summary =  mdn.escapeQuotes(item.summary) || '';
-        result += '<li>';
-        
-        if (containsTag(item, 'Experimental')) {
-            result += badges.ExperimentalBadge;
-        }
-        
-        if (containsTag(item, 'Non-standard') || containsTag(item, 'Non Standard')) {
-            result += badges.NonStandardBadge;
-        }
-        
-        if (containsTag(item, 'Deprecated')) {
-            result += badges.DeprecatedBadge;
-        }
-        
-        if (containsTag(item, 'Obsolete')) {
-            result += badges.ObsoleteBadge;
-        }
-        
-        result += '<a href="' + item.url + '" title="' + summary + '">' + code + kuma.htmlEscape(item.title) + endcode + '</a>' + '</li>';
+        output += createLink(item);
     });
     
-    result += closeTag;
+    if (pages[0].subpages.length > 0) {
+      pages[0].subpages.forEach(function(item) {
+        if (!item) { return; }
+        output += createLink(item);
+      });
+    }
+    
+    output += closeTag;
 }
 %>
-<%- result %>
+<%- output %>
