@@ -21,7 +21,10 @@ var text = {
     'Methods': mdn.getLocalString(commonl10n, 'Methods'),
     'Inheritance': mdn.getLocalString(commonl10n, 'Inheritance'),
     'Related': mdn.getLocalString(commonl10n, 'Related_pages_wo_group'),
+    'translate': mdn.getLocalString(commonl10n, '[Translate]'),
+    'translationCTA': mdn.getLocalString(commonl10n, 'TranslationCTA'),
 };
+
 
 // Variables
 var containsTag = page.hasTag;
@@ -146,6 +149,27 @@ function buildSublist(pages, title, opened) {
     var aPage = pages[i];
     result += '<li>';
     
+    var summary = escapeQuotes(aPage.summary) || '';
+    var url = aPage.url.replace('en-US', locale);
+    var title = aPage.title;
+    var translated = false;
+    
+    if (locale != 'en-US') {
+        aPage.translations.forEach(function(translation){
+            if(translation.locale === locale) {
+                summary = escapeQuotes(translation.summary) || '';
+                url = translation.url;
+                title = translation.title;
+                translated = true;
+            }
+        });
+    }
+    
+    var cta = '';
+     if (!translated && locale != 'en-US') {
+        cta += ' <a href="'+ url +'$translate" style="opacity:0.5" title="'+ text['translationCTA'] + '">' + text['translate'] + '</a>';
+    }
+    
     if (containsTag(aPage, 'Experimental')) {
         result += badges.ExperimentalBadge;
     }
@@ -171,9 +195,9 @@ function buildSublist(pages, title, opened) {
         result += '<em><code>' + aPage.title + '</code></em>'
     } else {
         result += '<a href="'
-               + aPage.url.replace('en-US', locale)
-               + '" title="' + escapeQuotes(aPage.summary)
-               + '"><code>' + aPage.title + '</code></a>';
+               + url
+               + '" title="' + summary
+               + '"><code>' + title + '</code></a>' + cta;
     }
     
     if (rtlLocales.indexOf(locale) != -1) {
