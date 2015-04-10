@@ -1,0 +1,26 @@
+<%
+// Embeds a YouTube video into the article.
+//
+// Parameters:
+//  $0  Video ID
+//  $1  Width (optional - will be 640 if not specified)
+//  $2  Height (optional - will be 480 if not specified)
+//
+// If the video URL is https://www.youtube.com/embed/G4FnzvLr_ak, the ID
+// is "G4FnzvLr_ak".
+
+var src = "<iframe allowfullscreen src='https://www.youtube.com/embed/" + $0 + "/?feature=player_detailpage'";
+
+var width = $1 || 640;
+var width = $2 || 480;
+
+if (width != 0) {
+    src += " width='" + width + "'";
+}
+if (height != 0) {
+    src += " height='" + height + "'";
+}
+
+src += "></iframe>";
+%>
+<%-src%>
