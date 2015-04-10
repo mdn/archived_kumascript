@@ -288,13 +288,13 @@ var text = mdn.localString({
   </li>
   <li><strong><a href="/<%=locale%>/docs/Web/JavaScript/Reference"><%=text['Reference']%></a></strong></li>
   <li data-default-state="<%=state('Objects')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Global_Objects"><%=text['Global_Objects']%></a>
-   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Global_Objects'])%>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Global_Objects', 1])%>
   </li>
   <li data-default-state="<%=state('Operators')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Operators"><%=text['Operators']%></a>
    <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Operators', 1])%>
   </li>
   <li data-default-state="<%=state('Statements')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Statements"><%=text['Statements']%></a>
-   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Statements'])%>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Statements', 1])%>
   </li>
   <li data-default-state="<%=state('Functions')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Functions"><%=text['Functions']%></a>
    <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Functions', 1])%>
