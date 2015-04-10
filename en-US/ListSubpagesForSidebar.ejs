@@ -26,28 +26,45 @@ var closeTag = '</ol>';
 var code    = !$1 ? '<code>'  : '';
 var endcode = !$1 ? '</code>' : '';
 
+str_translate = mdn.localString({
+    "de": "[Übersetzen]",
+    "en-US": "[Translate]"
+});
+
+var str_title = mdn.localString({
+    "de": "Unsere Freiwilligen haben diesen Artikel noch nicht in Deutsch übersetzt. Machen Sie mit und helfen Sie, das zu erledigen!",
+    "en-US": "Our volunteers haven't translated this article into your language yet. Join us and help get the job done!"
+});
+
 var badges = {
-    ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
-    NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
-    DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
-    ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
+    ExperimentalBadge      : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
+    NonStandardBadge       : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
+    DeprecatedBadge        : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
+    ObsoleteBadge          : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
 };
 
 function createLink(item) {
     var result = '';
-    
+
     var summary = escapeQuotes(item.summary) || '';
     var url = item.url.replace('en-US', locale);
     var title = htmlEscape(item.title);
-    
+
+    var translated = false;
     if (locale != 'en-US') {
         item.translations.forEach(function(translation){
             if(translation.locale === locale) {
                 summary = escapeQuotes(translation.summary) || '';
                 url = translation.url;
                 title = translation.title;
+                translated = true;
             }
         });
+    }
+    
+    var cta = '';
+     if (!translated && locale != 'en-US') {
+        cta += ' <a href="'+ url +'$translate" style="opacity:0.5" title="'+ str_title + '">' + str_translate + '</a>';
     }
     
     result += '<li>';
@@ -68,7 +85,7 @@ function createLink(item) {
         result += badges.ObsoleteBadge;
     }
     
-    result += '<a href="' + url + '" title="' + summary + '">' + code + title + endcode + '</a>' + '</li>';
+    result += '<a href="' + url + '" title="' + summary + '">' + code + title + endcode + '</a>' + cta + '</li>';
     return result;
 }
 
