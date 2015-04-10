@@ -53,7 +53,7 @@ function createLink(item) {
         result += badges.ObsoleteBadge;
     }
     
-    result += '<a href="' + item.url + '" title="' + summary + '">' + code + htmlEscape(item.title) + endcode + '</a>' + '</li>';
+    result += '<a href="' + item.url.replace('en-US', env.locale); + '" title="' + summary + '">' + code + htmlEscape(item.title) + endcode + '</a>' + '</li>';
     return result;
 }
 
