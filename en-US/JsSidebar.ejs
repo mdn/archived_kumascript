@@ -66,12 +66,6 @@ var text = mdn.localString({
     'Contribute': 'Contribute',
     'Doc_status': 'JavaScript doc status',
     'The_MDN_project': 'The MDN project',
-    'slug_objects': '/docs/Web/JavaScript/Reference/Global_Objects',
-    'slug_operators': '/docs/Web/JavaScript/Reference/Operators',
-    'slug_statements': '/docs/Web/JavaScript/Reference/Statements',
-    'slug_functions': '/docs/Web/JavaScript/Reference/Functions',
-    'slug_classes': '/docs/Web/JavaScript/Reference/Classes',
-    'slug_new_in_js': '/docs/Web/JavaScript/New_in_JavaScript',
   },
   'ru': {
     'Tutorials': 'Уроки:',
@@ -129,12 +123,6 @@ var text = mdn.localString({
     'Contribute': 'Внести свой вклад',
     'Doc_status': 'Статус документации по JavaScript',
     'The_MDN_project': 'Проект MDN',
-    'slug_objects': '/docs/Web/JavaScript/Reference/Global_Objects',
-    'slug_operators': '/docs/Web/JavaScript/Reference/Operators',
-    'slug_statements': '/docs/Web/JavaScript/Reference/Statements',
-    'slug_functions': '/docs/Web/JavaScript/Reference/Functions',
-    'slug_classes': '/docs/Web/JavaScript/Reference/Classes',
-    'slug_new_in_js': '/docs/Web/JavaScript/New_in_JavaScript',
   },
   'fr': {
     'Tutorials': 'Tutoriel&nbsp;:',
@@ -192,12 +180,6 @@ var text = mdn.localString({
     'Contribute': 'Contribuer',
     'Doc_status': 'Statut de la documentation',
     'The_MDN_project': 'Le projet MDN',
-    'slug_objects': '/docs/Web/JavaScript/Reference/Objets_globaux',
-    'slug_operators': '/docs/Web/JavaScript/Reference/Opérateurs',
-    'slug_statements': '/docs/Web/JavaScript/Reference/Instructions',
-    'slug_functions': '/docs/Web/JavaScript/Reference/Fonctions',
-    'slug_classes': '/docs/Web/JavaScript/Reference/Classes',
-    'slug_new_in_js': '/docs/Web/JavaScript/Nouveautés_et_historique_de_JavaScript',
   },
   'zh-CN': {
     'Tutorials': '教程:',
@@ -254,13 +236,7 @@ var text = mdn.localString({
     'JavaScript_tag': '拥有 "JavaScript" 标签的页面',
     'Contribute': '贡献',
     'Doc_status': 'JavaScript 文档翻译状态',
-    'The_MDN_project': 'MDN 项目',
-    'slug_objects': '/docs/Web/JavaScript/Reference/Global_Objects',
-    'slug_operators': '/docs/Web/JavaScript/Reference/Operators',
-    'slug_statements': '/docs/Web/JavaScript/Reference/Statements',
-    'slug_functions': '/docs/Web/JavaScript/Reference/Functions',
-    'slug_classes': '/docs/Web/JavaScript/Reference/Classes',
-    'slug_new_in_js': '/docs/Web/JavaScript/New_in_JavaScript',
+    'The_MDN_project': 'MDN 项目'
   },
 });
 %>
@@ -311,20 +287,20 @@ var text = mdn.localString({
    </ol>
   </li>
   <li><strong><a href="/<%=locale%>/docs/Web/JavaScript/Reference"><%=text['Reference']%></a></strong></li>
-  <li data-default-state="<%=state('Objects')%>"><a href="/<%=locale%><%=text['slug_objects']%>"><%=text['Global_Objects']%></a>
-   <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_objects']])%>
+  <li data-default-state="<%=state('Objects')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Global_Objects"><%=text['Global_Objects']%></a>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Global_Objects'])%>
   </li>
-  <li data-default-state="<%=state('Operators')%>"><a href="/<%=locale%><%=text['slug_operators']%>"><%=text['Operators']%></a>
-   <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_operators'], 1])%>
+  <li data-default-state="<%=state('Operators')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Operators"><%=text['Operators']%></a>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Operators', 1])%>
   </li>
-  <li data-default-state="<%=state('Statements')%>"><a href="/<%=locale%><%=text['slug_statements']%>"><%=text['Statements']%></a>
-   <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_statements']])%>
+  <li data-default-state="<%=state('Statements')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Statements"><%=text['Statements']%></a>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Statements'])%>
   </li>
-  <li data-default-state="<%=state('Functions')%>"><a href="/<%=locale%><%=text['slug_functions']%>"><%=text['Functions']%></a>
-   <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_functions'], 1])%>
+  <li data-default-state="<%=state('Functions')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Functions"><%=text['Functions']%></a>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Functions', 1])%>
   </li>
-  <li data-default-state="<%=state('Classes')%>"><a href="/<%=locale%><%=text['slug_classes']%>"><%=text['Classes']%></a>
-   <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_classes'], 1])%>
+  <li data-default-state="<%=state('Classes')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Classes"><%=text['Classes']%></a>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Classes', 1])%>
   </li>
   <li data-default-state="<%=state('More')%>"><a href="#"><%=text['More']%></a>
    <ol>
@@ -338,8 +314,8 @@ var text = mdn.localString({
     <li><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Deprecated_and_obsolete_features"><%=text['Deprecated_features']%></a></li>
    </ol>
   </li>
-  <li data-default-state="<%=state('New_in_JS')%>"><a href="/<%=locale%><%=text['slug_new_in_js']%>"><%=text['New_in_JS']%></a>
-   <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_new_in_js'], 1])%>
+  <li data-default-state="<%=state('New_in_JS')%>"><a href="/<%=locale%>/docs/Web/JavaScript/New_in_JavaScript"><%=text['New_in_JS']%></a>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/New_in_JavaScript', 1])%>
   </li>
   <li><strong><a href="/<%=locale%>/docs/MDN"><%=text['Documentation']%></a></strong></li>
   <li data-default-state="<%=state('Useful lists')%>"><a href="#"><%=text['Useful_lists']%></a>
