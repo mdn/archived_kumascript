@@ -26,15 +26,12 @@ var closeTag = '</ol>';
 var code    = !$1 ? '<code>'  : '';
 var endcode = !$1 ? '</code>' : '';
 
-str_translate = mdn.localString({
-    "de": "[Übersetzen]",
-    "en-US": "[Translate]"
-});
-
-var str_title = mdn.localString({
-    "de": "Unsere Freiwilligen haben diesen Artikel noch nicht in Deutsch übersetzt. Machen Sie mit und helfen Sie, das zu erledigen!",
-    "en-US": "Our volunteers haven't translated this article into your language yet. Join us and help get the job done!"
-});
+// Strings
+var commonl10n = string.deserialize(template('L10n:Common'));
+var text = {
+    'translate': mdn.getLocalString(commonl10n, '[Translate]'),
+    'title': mdn.getLocalString(commonl10n, 'TranslationCTA'),
+};
 
 var badges = {
     ExperimentalBadge      : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
@@ -64,7 +61,7 @@ function createLink(item) {
     
     var cta = '';
      if (!translated && locale != 'en-US') {
-        cta += ' <a href="'+ url +'$translate" style="opacity:0.5" title="'+ str_title + '">' + str_translate + '</a>';
+        cta += ' <a href="'+ url +'$translate" style="opacity:0.5" title="'+ text['title'] + '">' + text['translate'] + '</a>';
     }
     
     result += '<li>';
