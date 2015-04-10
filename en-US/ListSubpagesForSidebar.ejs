@@ -8,6 +8,7 @@
 //  $1 - If true, do not put the text in <code></code>.
 
 var path = $0;
+var locale = env.locale;
 
 // If the path ends with a slash, remove it.    
 if (path.substr(-1, 1) === '/') {
@@ -34,7 +35,21 @@ var badges = {
 
 function createLink(item) {
     var result = '';
-    var summary =  escapeQuotes(item.summary) || '';
+    
+    var summary = escapeQuotes(item.summary) || '';
+    var url = item.url.replace('en-US', locale);
+    var title = htmlEscape(item.title);
+    
+    if (locale != 'en-US') {
+        item.translations.forEach(function(translation){
+            if(translation.locale === locale) {
+                summary = escapeQuotes(translation.summary) || '';
+                url = translation.url;
+                title = translation.title;
+            }
+        });
+    }
+    
     result += '<li>';
     
     if (containsTag(item, 'Experimental')) {
@@ -53,7 +68,7 @@ function createLink(item) {
         result += badges.ObsoleteBadge;
     }
     
-    result += '<a href="' + item.url.replace('en-US', env.locale); + '" title="' + summary + '">' + code + htmlEscape(item.title) + endcode + '</a>' + '</li>';
+    result += '<a href="' + url + '" title="' + summary + '">' + code + title + endcode + '</a>' + '</li>';
     return result;
 }
 
