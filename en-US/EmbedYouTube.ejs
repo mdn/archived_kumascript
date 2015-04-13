@@ -3,24 +3,30 @@
 //
 // Parameters:
 //  $0  Video ID
-//  $1  Width (optional - will be 640 if not specified)
-//  $2  Height (optional - will be 480 if not specified)
+//  $1  Aspect Ratio (optional - will be 16:9 if not specified)
 //
 // If the video URL is https://www.youtube.com/embed/G4FnzvLr_ak, the ID
 // is "G4FnzvLr_ak".
 
-var src = "<iframe allowfullscreen src='https://www.youtube.com/embed/" + $0 + "/?feature=player_detailpage'";
 
-var width = $1 || 640;
-var height = $2 || 480;
+var ratio = $1 || "16:9";
+var ratio_class = '';
 
-if (width != 0) {
-    src += " width='" + width + "'";
+if (ratio == "16:9") {
+    // default, no change needed
+} else if (ratio == "4:3") {
+    ratio_class = "intrinsic-container-4x3";
+} else {
+    // no match, use default
+    // adding any more ratios must be done in co-operation with style sheet changes
 }
-if (height != 0) {
-    src += " height='" + height + "'";
-}
 
-src += "></iframe>";
+var video = "<div class='intrinsic-wrapper'>";
+video += "<div class='intrinsic-container " + ratio_class + "'>";
+video += "<iframe allowfullscreen src='https://www.youtube.com/embed/" + $0 + "?rel=0'></iframe>";
+video +="</div>";
+video +="</div>";
+
 %>
-<%-src%>
+
+<%-video%>
