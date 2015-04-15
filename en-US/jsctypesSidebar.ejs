@@ -11,7 +11,7 @@ function state(section) {
 
 var text = mdn.localString({
   'en-US': {
-    'Using js-ctypes': 'Using js-ctypes',
+    'Introduction': 'Introduction',
     'References': 'References',
     'Examples': 'Examples',
   }
@@ -21,14 +21,14 @@ var text = mdn.localString({
  <ol>
   <li><a href="/<%=locale%>/docs/Mozilla/js-ctypes"><strong><em>js-ctypes</em></strong></a></li>
 
-  <li data-default-state="<%=state('Using js-ctypes')%>"><a href="/<%=locale%>/docs/Mozilla/js-ctypes/Using_js-ctypes"><%=text['Using js-ctypes']%></a>
-    <%-template("ListSubpagesForSidebar", ['/' + locale + '/docs/Mozilla/js-ctypes/Using_js-ctypes'])%>
+  <li data-default-state="<%=state('Introduction')%>"><a href="/<%=locale%>/docs/Mozilla/js-ctypes/Using_js-ctypes"><%=text['Using js-ctypes']%></a>
+    <%-template("ListSubpagesForSidebar", ['/' + locale + '/docs/Mozilla/js-ctypes/Using_js-ctypes', 1])%>
   </li>
   <li data-default-state="<%=state('References')%>"><a href="/<%=locale%>/docs/Mozilla/js-ctypes/js-ctypes_reference"><%=text['References']%></a>
     <%-template("ListSubpagesForSidebar", ['/' + locale + '/docs/Mozilla/js-ctypes/js-ctypes_reference'])%>
   </li>
   <li data-default-state="<%=state('Examples')%>"><a href="/<%=locale%>/docs/Mozilla/js-ctypes/Examples"><%=text['Examples']%></a>
-    <%-template("ListSubpagesForSidebar", ['/' + locale + '/docs/Mozilla/js-ctypes/Examples'])%>
+    <%-template("ListSubpagesForSidebar", ['/' + locale + '/docs/Mozilla/js-ctypes/Examples', 1])%>
   </li>
  </ol>
 </section>
