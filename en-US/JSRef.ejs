@@ -45,6 +45,7 @@ var inheritanceData = {
     "Intl": ["Object"],
     "arguments": [],
     "Reflect": ["Object"],
+    "Proxy": [],
 };
 if (typeof inheritanceData[mainObj] != 'undefined') {
     inheritance = inheritanceData[mainObj];
@@ -56,11 +57,13 @@ var groupData = {
     "Intl": ["Intl", "Collator", "DateTimeFormat", "NumberFormat"],
     "TypedArray": ["TypedArray", "Int8Array", "Uint8Array", "Uint8ClampedArray", "Int16Array", "Uint16Array",
                    "Int32Array", "Uint32Array", "Float32Array", "Float64Array"],
+    "Proxy": ["Proxy", "handler"],
 };
 
 // Exceptions, we want the main object in the sidebar (e.g. Int8Array -> TypedArray)
 if (groupData["TypedArray"].indexOf(mainObj) != -1) { mainObj = "TypedArray"; }
 if (groupData["Error"].indexOf(mainObj) != -1) { mainObj = "Error"; }
+if (groupData["Proxy"].indexOf(mainObj) != -1) { mainObj = "Proxy/handler"; }
 
 // Get related pages from groups and exclude self
 var group = [];
@@ -120,10 +123,10 @@ for (var object in source) {
         } else {
             includeme = true;
         }
-        if (containsTag(pageList[aPage], result[object].title) && containsTag(pageList[aPage], 'Property') && includeme) {
+        if (containsTag(pageList[aPage], 'Property') && includeme) {
             result[object].properties.push(pageList[aPage]);
         }
-        if (containsTag(pageList[aPage], result[object].title) && containsTag(pageList[aPage], 'Method') && includeme) {
+        if (containsTag(pageList[aPage], 'Method') && includeme) {
             result[object].methods.push(pageList[aPage]);
         } 
     }
