@@ -9,10 +9,11 @@ var ARTICLES  = [];
 // EXTRACT CONTENT
 // ----------------------------------------------------------------------------
 
-page.subpagesExpand(env.path, 1).foreach(function (p) {
-    ARTICLE.push({
-        title  : p.title
-        summary: p.summary
+page.subpagesExpand(env.path, 1).forEach(function (p) {
+    ARTICLES.push({
+        title  : p.title,
+        summary: p.summary,
+        url    : p.url,
     });
 });
 
