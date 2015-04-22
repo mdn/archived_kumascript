@@ -18,21 +18,11 @@ if (page && page.summary) {
 }
 
 switch(lang) {
-    case "ja":
-    case "en-US":
-    case "fr":
-    case "zh-CN":
-    case "pt-BR":
-    case "it":
-    case "de":
-    case "hi-IN":
-    case "ta":
-        break;
     case 'es':
-        dest = basePath + 'HTML/Elemento/' + name;
+        dest = basePath + 'Web/HTML/Elemento/' + name;
         break;
     default:        // Using the old path for now
-        dest = basePath + 'HTML/Element/' + name;
+        dest = basePath + 'Web/HTML/Element/' + name;
         break;
 }
 if (name.indexOf(" ")==-1) {
