@@ -4,6 +4,7 @@
 // Parameters:
 //  $0  The attribute to insert
 //  $1  The element on which the attribute is used (optional)
+//  $2  The text to display (between code)
 //
 // If the element isn't specified, the link is made to the Global Attributes
 // page.
@@ -13,11 +14,13 @@ var url = "";
 
 $0 = $0.toLowerCase();
 
+var text = ($1 && ($2!=undefined))?$2:$0;
+
 if ($1 && ($1 != undefined)) {
     url = '/' + lang + '/docs/Web/HTML/Element/' + $1;
 } else {
     url = '/' + lang + 'docs/Web/HTML/Global_attributes';
 }
-var result = '<code><a href="' + url + '#attr-' + $0 +'">' + $0 + '</a></code>';
+var result = '<code><a href="' + url + '#attr-' + $0 +'">' + text + '</a></code>';
 %>
 <%- result %>
