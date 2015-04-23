@@ -46,6 +46,7 @@ var inheritanceData = {
     "arguments": [],
     "Reflect": ["Object"],
     "Proxy": [],
+    "SIMD": ["Object"],
 };
 if (typeof inheritanceData[mainObj] != 'undefined') {
     inheritance = inheritanceData[mainObj];
@@ -58,6 +59,7 @@ var groupData = {
     "TypedArray": ["TypedArray", "Int8Array", "Uint8Array", "Uint8ClampedArray", "Int16Array", "Uint16Array",
                    "Int32Array", "Uint32Array", "Float32Array", "Float64Array"],
     "Proxy": ["Proxy", "handler"],
+    "SIMD": ["float32x4", "float64x2", "int8x16", "int16x8", "int32x4"],
 };
 
 // Exceptions, we want the main object in the sidebar (e.g. Int8Array -> TypedArray)
