@@ -28,8 +28,6 @@ var text = mdn.localString({
     'Contribute': 'Contribute',
     'Doc_status': 'HTML doc status',
     'The_MDN_project': 'The MDN project',
-    'slug_elements': '/docs/Web/HTML/Element',
-    'slug_global_attributes': '/docs/Web/HTML/Global_attributes',
   },
   'fr': {
     'Tutorials': 'Tutoriels:',
@@ -49,8 +47,6 @@ var text = mdn.localString({
     'Contribute': 'Contribuer',
     'Doc_status': 'Statut de la documentation HTML',
     'The_MDN_project': 'Le projet MDN',
-    'slug_elements': '/docs/Web/HTML/Element',
-    'slug_global_attributes': '/docs/Web/HTML/Attributs_globaux',
   }
 });
 %>
@@ -75,10 +71,10 @@ var text = mdn.localString({
   </li>
   <li><strong><a href="/<%=locale%>/docs/Web/HTML/Reference"><%=text['Reference']%></a></strong></li>
   <li data-default-state="<%=state('Elements')%>"><a href="/<%=locale%>/docs/Web/HTML/Element"><%=text['HTML_Elements']%></a>
-   <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_elements'], 1])%>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/HTML/Element', 1])%>
   </li>
   <li data-default-state="<%=state('Global_attributes')%>"><a href="/<%=locale%>/docs/Web/HTML/Global_attributes"><%=text['Global_attributes']%></a>
-   <%-template("ListSubpagesForSidebar", ['/' + locale + text['slug_global_attributes']])%>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/HTML/Global_attributes'])%>
   </li>
   <li><strong><a href="/<%=locale%>/docs/MDN"><%=text['Documentation']%></a></strong></li>
   <li data-default-state="<%=state('Useful lists')%>"><a href="#"><%=text['Useful_lists']%></a>
