@@ -53,7 +53,7 @@ function createLink(item) {
             if(translation.locale === locale) {
                 summary = escapeQuotes(translation.summary) || '';
                 url = translation.url;
-                title = translation.title;
+                title = htmlEscape(translation.title);
                 translated = true;
             }
         });
