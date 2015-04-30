@@ -12,7 +12,8 @@ var l10nSummary = mdn.localString({
     "de"   : "Übersicht",
     "fr"   : "En bref",
     "pt-BR": "Resumo",
-    "ru"   : "Сводка"
+    "ru"   : "Сводка",
+    "zh-CN": "翻译状态概览"
 });
 
 var l10nDetails = mdn.localString({
@@ -20,7 +21,8 @@ var l10nDetails = mdn.localString({
     "de"   : "Alle Artikel",
     "fr"   : "Tous les articles",
     "pt-BR": "Todos os artigos",
-    "ru"   : "Все статьи"
+    "ru"   : "Все статьи",
+    "zh-CN": "所有文档"
 });
 
 var l10nPage = mdn.localString({
@@ -28,7 +30,8 @@ var l10nPage = mdn.localString({
     "de"   : "Seite",
     "fr"   : "Page",
     "pt-BR": "Página",
-    "ru"   : "Страница"
+    "ru"   : "Страница",
+    "zh-CN": "文档标题及链接"
 });
 
 var l10nPages = mdn.localString({
@@ -36,7 +39,8 @@ var l10nPages = mdn.localString({
     "de"   : "Seiten",
     "fr"   : "Pages",
     "pt-BR": "Páginas",
-    "ru"   : "Страницы"
+    "ru"   : "Страницы",
+    "zh-CN": "文档总页数"
 });
     
 var l10nPriority = mdn.localString({
@@ -44,7 +48,8 @@ var l10nPriority = mdn.localString({
     "de"   : "Priorisierte Artikel",
     "fr"   : "Articles prioritaires",
     "pt-BR": "Artigos prioritários",
-    "ru"   : "Приоритетные статьи"
+    "ru"   : "Приоритетные статьи",
+    "zh-CN": "优先级较高的文档"
 });
     
 var l10nStateUnavailable = mdn.localString({
@@ -52,7 +57,8 @@ var l10nStateUnavailable = mdn.localString({
     "de"   : "Nicht verfügbar.",
     "fr"   : "Indisponible.",
     "pt-BR": "Indisponível.",
-    "ru"   : "Перевод не доступен."
+    "ru"   : "Перевод не доступен.",
+    "zh-CN": "还没有同学翻译过。。。"
 });
 
 var l10nTranslateNow = mdn.localString({
@@ -60,7 +66,8 @@ var l10nTranslateNow = mdn.localString({
     "de"   : "Jetzt übersetzen.",
     "fr"   : "Traduire.",
     "ru"   : "Перевести.",
-    "fr"   : "Traduire."
+    "fr"   : "Traduire.",
+    "zh-CN": "我来译！"
 });
 
 var l10nStateUptodate = mdn.localString({
@@ -68,7 +75,8 @@ var l10nStateUptodate = mdn.localString({
     "de"   : "Ja, und aktuell",
     "fr"   : "Oui et à jour",
     "pt-BR": "Sim e atualizado",
-    "ru"   : "Перевод есть и актуален"
+    "ru"   : "Перевод есть и актуален",
+    "zh-CN": "翻译完成！哦耶～"
 });
 
 var l10nStateOutofdate = mdn.localString({
@@ -76,7 +84,8 @@ var l10nStateOutofdate = mdn.localString({
     "de"   : "Ja, aber nicht aktuell (#d# Tage älter).",
     "fr"   : "Oui mais pas à jour (#d# jours d'écart).",
     "pt-BR": "Sim, mas desatualizado (há #d# dias).",
-    "ru"   : "Перевод есть, но он не актуален (устарел на #d# дня)."
+    "ru"   : "Перевод есть, но он не актуален (устарел на #d# дня).",
+    "zh-CN": "以前翻译过但现在没有与最新的英文文档保持同步（英文文档更新于 #d# 天前）。"
 });
 
 var l10nStateInprogress = mdn.localString({
@@ -84,7 +93,8 @@ var l10nStateInprogress = mdn.localString({
     "de"   : "Ja, aber Übersetzung in Bearbeitung.",
     "pt-BR": "Sim, mas com tradução em andamento.",
     "ru"   : "Перевод есть, но он ещё не закончен.",
-    "fr"   : "Traduction en cours."
+    "fr"   : "Traduction en cours.",
+    "zh-CN": "貌似某位同学的翻译工作半途而废了。。。"
 });
 
 var l10nStateEditorial = mdn.localString({
@@ -92,6 +102,7 @@ var l10nStateEditorial = mdn.localString({
     "de"   : "Ja, aber redaktionelle Überprüfung benötigt.",
     "fr"   : "Oui, mais relecture éditoriale nécessaire.",
     "ru"   : "Перевод есть, но требуются редакторские правки.",
+    "zh-CN": "已经翻译完成，但需要有人做文档格式方面的 review。"
 });
 
 var l10nStateTechnical = mdn.localString({
@@ -99,12 +110,14 @@ var l10nStateTechnical = mdn.localString({
     "de"   : "Ja, aber technische Überprüfung benötigt.",
     "fr"   : "Oui, mais relecture technique nécessaire.",
     "ru"   : "Перевод есть, но требуются технические правки.",
+    "zh-CN": "已经翻译完成，但需要有人做技术方面的 review。"
 });
     
 var l10nEditTranslation = mdn.localString({
     "en-US": "Edit.",
     "fr" : "Éditer.",
     "ru"   : "Редактировать.",
+    "zh-CN": "我来译！"
 });
 
 var l10nTranslated = mdn.localString({
@@ -112,15 +125,26 @@ var l10nTranslated = mdn.localString({
     "de"   : "Übersetzt",
     "fr"   : "Traduction",
     "pt-BR": "Traduzido",
-    "ru"   : "Переведено"
+    "ru"   : "Переведено",
+    "zh-CN": "翻译过的文档数量"
 });
-    
+   
+var l10nTranslationStatus= mdn.localString({
+    "en-US": "Translated?",
+    "de"   : "Übersetzt",
+    "fr"   : "Traduction",
+    "pt-BR": "Traduzido",
+    "ru"   : "Переведено",
+    "zh-CN": "目前翻译状态"
+}); 
+
 var l10nUptodate = mdn.localString({
     "en-US": "Translations up to date",
     "de"   : "Übersetzungen auf neustem Stand",
     "fr"   : "Traductions à jour",
     "pt-BR": "Traduções atualizadas",
-    "ru"   : "Актуальных переводов"
+    "ru"   : "Актуальных переводов",
+    "zh-CN": "翻译过并且与英文文档保持同步的文档数量"
 });
 
 var l10nTechReviewed = mdn.localString({
@@ -128,6 +152,7 @@ var l10nTechReviewed = mdn.localString({
     "de"   : "Übersetzungen technisch überprüft",
     "fr"   : "Relecture technique réalisée",
     "ru"   : "Технически одобренных",
+    "zh-CN": "翻译完成但需要技术性 review （技术上正确与否）的文档数量"
 });
 
 var l10nEditReviewed = mdn.localString({
@@ -135,6 +160,7 @@ var l10nEditReviewed = mdn.localString({
     "de"   : "Übersetzungen redaktionell überprüft",
     "fr"   : "Relecture éditorelle réalisée",
     "ru"   : "Редакторско одобренных",
+    "zh-CN": "翻译完成但需要文档格式方面 review （格式、样式等是否正确）的文档数量"
 });
 
 var section = $0;
@@ -289,7 +315,7 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
 <table class="fullwidth-table standard-table">
 <thead>
     <th><%=l10nPage%></th>
-    <th><%=l10nTranslated%></th>
+    <th><%=l10nTranslationStatus%></th>
 </thead>
 <tbody>
 
@@ -324,7 +350,7 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
 <table class="fullwidth-table standard-table">
 <thead>
     <th><%=l10nPage%></th>
-    <th><%=l10nTranslated%></th>
+    <th><%=l10nTranslationStatus%></th>
 </thead>
 <tbody>
 
