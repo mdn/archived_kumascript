@@ -30,6 +30,9 @@ var text = {
 var containsTag = page.hasTag;
 var escapeQuotes = mdn.escapeQuotes;
 var slug = env.slug;
+var output = "";
+// slug is not available in preview mode.
+if (slug) {
 var locale = env.locale;
 var rtlLocales = ['ar', 'he', 'fa'];
 var slug_stdlib = '/' + env.locale + '/docs/Web/JavaScript/' + text['refslug'] + text['stdlibslug'];
@@ -231,8 +234,8 @@ len = 0;
 
 // Output
 
-var output  = '<section class="Quick_links" id="Quick_Links"><ol>';
-    output += '<li><strong><a href="'+slug_stdlib+'">'+text['stdlib']+'</a></strong></li>';
+output  = '<section class="Quick_links" id="Quick_Links"><ol>';
+output += '<li><strong><a href="'+slug_stdlib+'">'+text['stdlib']+'</a></strong></li>';
 
     for (object in result) {
         len++;
@@ -264,6 +267,7 @@ var output  = '<section class="Quick_links" id="Quick_Links"><ol>';
     }
 
 output += '</ol></section>';
+}
 %>
 
 <%-output%>
