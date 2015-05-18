@@ -1,4 +1,11 @@
 <%
+// Insert a link to a page on an external wiki.
+//
+// Parameters:
+//  $0  Wiki to link to ("wikipedia" or "wikimo")
+//  $1  Path to page on the destination wiki
+//  $2  Alternate link text to use instead of $1
+
 var path = $1;
 var title = $2 || path;
 
