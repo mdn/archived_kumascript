@@ -8,6 +8,9 @@
 var slug = env.slug;
 var locale = env.locale;
 var APIHref = '/' + locale + '/docs/Web/API';
+var output = "";
+// slug is not available in preview mode.
+if (slug) {
 var mainIF = slug.replace('Web/API/','').split('/')[0];
 var group = $0;
 var hasTag = page.hasTag;
@@ -182,7 +185,7 @@ function buildIFList(interfaces, title) {
 
 
 // output
-var output = '<section class="Quick_links" id="Quick_Links"><ol>';
+output = '<section class="Quick_links" id="Quick_Links"><ol>';
 output += '<li><strong><a href="' +  APIHref + '/' + mainIF + '"><code>' + mainIF + '</a></code></strong></li>';
 
 if (ctors.length > 0) { 
@@ -206,6 +209,7 @@ if (groups.length > 0) {
 }
 
 output += '</ol></section>';
+}
 %>
 
 <%-output%>
