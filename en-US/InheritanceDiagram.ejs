@@ -9,6 +9,9 @@
 
 var data = string.deserialize(template("InterfaceData"));
 var slug = env.slug;
+var result = "";
+// slug is not available in preview mode.
+if (slug) {
 var locale = env.locale;
 var href = 'https://developer.mozilla.org/' + locale + '/docs/Web/API/';
 var mainIF = slug.replace('Web/API/','').split('/')[0];
@@ -87,7 +90,7 @@ var viewbox = 'viewbox="-'+ offset + ' 0 '+ width + ' ' + height +'"';
 if (rtl) {
   viewbox = 'viewbox="510 0 '+ width + ' ' + height +'" transform="scale(-1 1)"';
 }
-var result = '<div id="interfaceDiagram" style="display: inline-block; position: relative; width: 100%; padding-bottom: '+ padding +'%; vertical-align: middle; overflow: hidden;">' +
+result = '<div id="interfaceDiagram" style="display: inline-block; position: relative; width: 100%; padding-bottom: '+ padding +'%; vertical-align: middle; overflow: hidden;">' +
              '<svg style="display: inline-block; position: absolute; top: 0; left: 0;" '+ viewbox +' preserveAspectRatio="xMinYMin meet">';
 
 for (var i = 0; i < inheritanceChain.length; i++) {
@@ -122,7 +125,7 @@ for (var i = 0; i < inheritanceChain.length; i++) {
 }
 
 result +='</svg></div>';
-
+}
 %>
 <div class="hidden" id="inheritance_diagram">
 
