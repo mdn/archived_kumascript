@@ -12,6 +12,7 @@ var output = "";
 // slug is not available in preview mode.
 if (slug) {
 var mainIF = slug.replace('Web/API/','').split('/')[0];
+mainIF = mainIF.charAt(0).toUpperCase() + mainIF.slice(1);
 var group = $0;
 var hasTag = page.hasTag;
 var escapeQuotes = mdn.escapeQuotes;
@@ -103,7 +104,7 @@ getInheritance(inh);
 
 function getImplementedBy(data) {
   for (var key in data) {
-    if (data.hasOwnProperty(key) && data[key].impl.toString().toLowerCase().indexOf(mainIF.toLowerCase()) != -1) {
+    if (data.hasOwnProperty(key) && data[key].impl.indexOf(mainIF) != -1) {
       implementedBy.push(key);
     }
   }
