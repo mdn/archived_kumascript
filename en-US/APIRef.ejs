@@ -16,6 +16,7 @@ mainIF = mainIF.charAt(0).toUpperCase() + mainIF.slice(1);
 var group = $0;
 var hasTag = page.hasTag;
 var escapeQuotes = mdn.escapeQuotes;
+var htmlEscape = kuma.htmlEscape;
 var rtlLocales = ['ar', 'he', 'fa'];
 
 var webAPIData = string.deserialize(template("InterfaceData"));
@@ -128,7 +129,9 @@ function buildSublist(pages, title) {
 
   for (var i in pages) {
     var aPage = pages[i];
-    
+    var summary = escapeQuotes(aPage.summary) || '';
+    var url = aPage.url.replace('en-US', locale);
+    var title = htmlEscape(aPage.title);
     
     var translated = false;
     if (locale != 'en-US') {
@@ -174,7 +177,7 @@ function buildSublist(pages, title) {
     if (slug == aPage.slug) {
         result += '<em><code>' + aPage.title + '</code></em>'
     } else {
-        result += '<a href="' + aPage.url.replace('en-US', locale) + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a>' + cta;
+        result += '<a href="' + url + '" title="' + summary + '"><code>' + title + '</code></a>' + cta;
     }
     
     if (rtlLocales.indexOf(locale) != -1) {
