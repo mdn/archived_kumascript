@@ -32,6 +32,8 @@ var text = {
     'Inheritance': mdn.getLocalString(commonl10n, 'Inheritance'),
     'Implemented_by': mdn.getLocalString(commonl10n, 'Implemented_by'),
     'Related': mdn.getLocalString(commonl10n, 'Related_pages').replace('$1', group),
+    'translate': mdn.getLocalString(commonl10n, '[Translate]'),
+    'title': mdn.getLocalString(commonl10n, 'TranslationCTA'),
 };
 
 
@@ -126,6 +128,26 @@ function buildSublist(pages, title) {
 
   for (var i in pages) {
     var aPage = pages[i];
+    
+    
+    var translated = false;
+    if (locale != 'en-US') {
+        aPage.translations.forEach(function(translation){
+            if(translation.locale === locale) {
+                summary = escapeQuotes(translation.summary) || '';
+                url = translation.url;
+                title = htmlEscape(translation.title);
+                translated = true;
+            }
+        });
+    }
+    
+    var cta = '';
+     if (!translated && locale != 'en-US') {
+        cta += ' <a href="'+ url +'$translate" style="opacity:0.5" title="'+ text['title'] + '">' + text['translate'] + '</a>';
+    }
+    
+    
     result += '<li>';
     
     if (hasTag(aPage, 'Experimental')) {
@@ -152,7 +174,7 @@ function buildSublist(pages, title) {
     if (slug == aPage.slug) {
         result += '<em><code>' + aPage.title + '</code></em>'
     } else {
-        result += '<a href="' + aPage.url.replace('en-US', locale) + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a>';
+        result += '<a href="' + aPage.url.replace('en-US', locale) + '" title="' + escapeQuotes(aPage.summary) + '"><code>' + aPage.title + '</code></a>' + cta;
     }
     
     if (rtlLocales.indexOf(locale) != -1) {
