@@ -103,7 +103,7 @@ getInheritance(inh);
 
 function getImplementedBy(data) {
   for (var key in data) {
-    if (data.hasOwnProperty(key) && data[key].impl.indexOf(mainIF) != -1) {
+    if (data.hasOwnProperty(key) && data[key].impl.toString().toLowerCase().indexOf(mainIF.toLowerCase()) != -1) {
       implementedBy.push(key);
     }
   }
