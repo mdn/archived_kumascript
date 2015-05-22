@@ -2,6 +2,18 @@
 /* parameters: */
 /* $0 = name of specification */
 
+//
+// List of all specifications and their current status.
+//
+// Possible values:
+//  ED          Editor's Draft
+//  WD          Working Draft
+//  CR          Candidate Recommendation
+//  REC         Recommendation
+//  Living      A living specification (constantly changing)
+//  Standard    A long-time accepted standard, unspecified
+//
+
 var status = {
   'Alarm API'                  : 'WD',
   'AmbientLight'               : 'CR',
@@ -150,7 +162,7 @@ var status = {
   'Shadow DOM'                 : 'WD',
   'Telephony API'              : 'ED',
   'Touch Events'               : 'PR',
-  'Typed Array'                : 'WD',
+  'Typed Array'                : 'Obsolete',
   'Vibration API'              : 'PR',
   'UI Events'                  : 'WD',
   'Undo Manager'               : 'ED',
@@ -256,6 +268,9 @@ var label = {
     'de'    : 'Entwurf',
     'ru'    : 'Черновик',
     'fr'    : 'Projet'
+  }),
+  'Obsolete' : mdn.localString({
+      'en-US' : 'Obsolete'
   })
 }
 
