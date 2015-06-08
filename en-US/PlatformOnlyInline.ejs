@@ -15,7 +15,7 @@ if($1) {
     str = mdn.localString({
         "de": "Nur " + $0 + " "  + $1,
         "en-US": $0 + " "  + $1 + " Only",
-        "zh-CN": "只支持Gecko移动设备" + ($1 ? ("(Gecko" + $1 +"以上)") : "")
+        "zh-CN": "只支持Gecko移动设备" + "(Gecko" + $1 + "以上)"
     });
 
     title = mdn.localString({
