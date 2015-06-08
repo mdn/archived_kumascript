@@ -21,7 +21,7 @@ if($1) {
     title = mdn.localString({
         "de": "Nur verfügbar in " + $0 + " "  + $1,
         "en-US": "Available only in " + $0 + " " + $1,
-        "zh-CN": "只在内核为Gecko " + ($1 ? ($1 + " " + template(geckoRelease, [$1]) + "以上版本") : "") + "的" + $0 + "中可用"
+        "zh-CN": "只在内核为 " + $1 + "的" + $0 + "中可用"
     });
 } else {
     str = mdn.localString({
