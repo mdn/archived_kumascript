@@ -12,16 +12,15 @@ $1: Gecko version feature is supported in mobile or desktop (optional if specifi
 var str = "";
 var title = "";
 if($1) { 
-  switch(env.locale) {
-  case 'zh-cn':
-      str = "只支持Gecko移动设备" + ($1?("(Gecko" + $1 +"以上)"):"");
-      title = "只在内核为Gecko " + ($1?($1 + " " + template(geckoRelease, [$1]) + "以上版本"):"") + "的" + $0 + "中可用";
-      break;
-    default:
-      str = $0 + " "  + $1 + " Only";
-      title = "Available only in " + $0 + " " + $1;
-      break;
-  }
+    str = mdn.localString({
+        "en-US": $0 + " "  + $1 + " Only",
+        "zh-CN": "只支持Gecko移动设备" + ($1 ? ("(Gecko" + $1 +"以上)") : "")
+    });
+    
+    title = mdn.localString({
+        "en-US": "Available only in " + $0 + " " + $1,
+        "zh-CN": "只在内核为Gecko " + ($1 ? ($1 + " " + template(geckoRelease, [$1]) + "以上版本") : "") + "的" + $0 + "中可用"
+    });
 } else {
   str = $0 + " Only";
   title = $0 + " Only";
