@@ -16,18 +16,19 @@ var URL    = "/en-US/docs/Glossary";
 var i, l, c, splitTitle, startWithDigit = /^\d/;
 var csscl  = $0 && $0.css ? $0.css : "";
 var pages  = page.subPagesFlatten(page.subpagesExpand(URL, 2));
+var locale = env.locale;
 
 // Retrieve locale pages when accurate and simplify the data model {url, title, summary}
 pages = pages.map(function (p) {
     var result = {
-        url    : p.url.replace('en-US', env.locale),
+        url    : p.url.replace('en-US', locale),
         title  : p.title,
         summary: mdn.escapeQuotes(p.summary)
     };
 
-    if (env.locale !== 'en-US' && Array.isArray(p.translations)) {
+    if (locale !== 'en-US' && Array.isArray(p.translations)) {
         p.translations.some(function (loc) {
-            if (env.locale === loc.locale) {
+            if (locale === loc.locale) {
                 result = {
                     url    : loc.url,
                     title  : loc.title,
@@ -69,7 +70,7 @@ function filterMe(term) {
         this.push(pages[i]);
     }
 
-    else if (env.locale === 'en-US' && (filter === 'all' || filter === 'notdefined')) {
+    else if (locale === 'en-US' && (filter === 'all' || filter === 'notdefined')) {
         this.push({
             url    : URL + term.replace(' ', '_'),
             title  : term,
