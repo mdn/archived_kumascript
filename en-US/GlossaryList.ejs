@@ -72,7 +72,7 @@ function filterMe(term) {
 
     else if (locale === 'en-US' && (filter === 'all' || filter === 'notdefined')) {
         this.push({
-            url    : URL + term.replace(' ', '_'),
+            url    : URL + '/' + term.replace(' ', '_'),
             title  : term,
             summary: 'The definition of that term (' + term + ') has not been written yet; please consider contributing it!'
         });
