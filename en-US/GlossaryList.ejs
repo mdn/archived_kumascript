@@ -47,8 +47,7 @@ pages = pages.map(function (p) {
 
 var UCKeys = pages.map(function (p) { return p.title; });
 var keys   = pages.map(function (p) { return p.title.toLowerCase(); });
-var UCTerms= $0 && $0.terms && Array.isArray($0.terms) ? $0.terms : UCKeys;
-var terms  = UCTerms.map(function (t) { return t.toLowerCase(); });
+var terms  = $0 && $0.terms && Array.isArray($0.terms) ? $0.terms : UCKeys;
 var split  = $0 && $0.split && /^h[1-6]$/i.test($0.split) ? $0.split.toLowerCase() : false;
 var filter = $0 && $0.filter && $0.filter.toLowerCase() === 'notdefined' ? 'notdefined' :
              $0 && $0.filter && $0.filter.toLowerCase() === 'defined'    ? 'defined'    :
@@ -64,7 +63,7 @@ function sortMe(a, b) {
 }
 
 function filterMe(term) {
-    var i = keys.indexOf(term);
+    var i = keys.indexOf(term.toLowerCase());
 
     if (i  >  -1 && (filter === 'all' || filter === 'defined')) {
         this.push(pages[i]);
@@ -72,7 +71,7 @@ function filterMe(term) {
 
     else if (locale === 'en-US' && (filter === 'all' || filter === 'notdefined')) {
         this.push({
-            url    : URL + '/' + term.replace(' ', '_'),
+            url    : URL + '/' + term.toLowerCase().replace(' ', '_'),
             title  : term,
             summary: 'The definition of that term (' + term + ') has not been written yet; please consider contributing it!'
         });
@@ -84,8 +83,8 @@ list.sort(sortMe);
 
 for (i = 0, l = list.length; i < l; i++) {
     if (split) {
-        // This is seriously broken for non-latin locale
-        // We need something smarter
+        // This is potentialy broken for non-latin locale
+        // Using the Intl ES API could be a better solution
         c = list[i].title.charAt(0).toUpperCase();
 
         if (startWithDigit.test(c)) {
