@@ -48,32 +48,38 @@ var metrics = {
     noTags: {
         title: 'No tags',
         link: '#No_tags',
-        counter: 0
+        counter: 0,
+        help: 'Learn more about <a href="https://developer.mozilla.org/en-US/docs/MDN/Contribute/Howto/Tag">how to tag pages</a>.'
     },
     needsTags: {
         title: 'Needs* tags',
         link: '#Needs*_tags',
-        counter: 0
+        counter: 0,
+        help: 'Learn more about <a href="https://developer.mozilla.org/en-US/docs/MDN/Contribute/Howto/Tag#Document_metadata">how to deal with meta-tags</a>.'
     },
     requiredTags: {
         title: 'Missing tags',
         link: '#Missing_tags',
-        counter: 0
+        counter: 0,
+        help: 'Learn more about <a href="https://developer.mozilla.org/en-US/docs/MDN/Contribute/Howto/Tag">how to tag pages</a>.'
     },
     editorialReviews: {
         title: 'Editorial reviews',
         link: '#Editorial_reviews',
-        counter: 0
+        counter: 0,
+        help: 'Learn more about <a href="https://developer.mozilla.org/en-US/docs/MDN/Contribute/Howto/Do_an_editorial_review">how to do an editorial review</a>.'
     },
     technicalReviews: {
         title: 'Technical reviews',
         link: '#Technical_reviews',
-        counter: 0
+        counter: 0,
+        help: 'Learn more about <a href="https://developer.mozilla.org/en-US/docs/MDN/Contribute/Howto/Do_a_technical_review">how to do a technical review</a>.'
     },
     outdated: {
         title: 'Outdated pages',
         link: '#Outdated_pages',
-        counter: 0
+        counter: 0,
+        help: "These pages haven't been updated in over a year. Outdated pages can have problems with both content and format. Look at these pages and consider: Is this page talking about the Web of today? Does it look consistent with newer pages in this topic area? If not, make any needed changes."
     }
 };
 
@@ -347,12 +353,12 @@ if (output.hasOwnProperty(obj) && typeof metrics[obj] != 'undefined' && metrics[
     var result = output[obj];
     switch(env.locale) {
     default:
-        amount = "Found " + metrics[obj].counter + " pages:";
+        amount = "Found " + metrics[obj].counter + " pages.";
         break;
     }
 %>
 
-<p><strong><%=amount%></strong></p>
+<p><strong><%=amount%></strong> <%-metrics[obj].help%></p>
 <div class="wideColumnBox wideColumnBoxList">
 <ul>
 <% if (Array.isArray(result)) {
@@ -387,7 +393,7 @@ if (output.hasOwnProperty(obj) && typeof metrics[obj] != 'undefined' && metrics[
         var bzLink = 'https://bugzilla.mozilla.org/buglist.cgi?bug_id=';
 %>
     <h2 id="Dev-doc-needed_bugs">Dev-doc-needed bugs</h2>
-    <p><strong>Found <%=ddnBugs.bugs.length%> bugs:</strong></p>
+    <p><strong>Found <%=ddnBugs.bugs.length%> bugs.</strong> Learn more about <a href="https://developer.mozilla.org/en-US/docs/MDN/Contribute/Howto/Resolve_a_dev-doc-needed_bug">how to resolve a dev-doc-needed bug</a>.</p>
     
     <table class="standard-table">
         <thead>
@@ -419,7 +425,7 @@ if (output.hasOwnProperty(obj) && typeof metrics[obj] != 'undefined' && metrics[
         var bzLink = 'https://bugzilla.mozilla.org/buglist.cgi?bug_id=';
 %>
     <h2 id="Documentation_requests">Documentation requests</h2>
-    <p><strong>Found <%=drBugs.bugs.length%> bugs:</strong></p>
+    <p><strong>Found <%=drBugs.bugs.length%> bugs.</strong> Documentation request bugs can contain various kinds work related to MDN pages. Read through the bug and ask questions in the bug if in doubt.</p>
     
     <table class="standard-table">
         <thead>
