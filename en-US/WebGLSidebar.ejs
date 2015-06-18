@@ -1,0 +1,70 @@
+<%
+var currentSection = $0;
+var locale = env.locale;
+
+function state(section) {
+  if (section == currentSection) {
+    return "open";
+  }
+  return "closed";
+}
+
+var text = mdn.localString({
+  'en-US': {
+    'WebGL_API': 'WebGL API',
+    'WebGL_tutorial': 'WebGL tutorial',
+    'Getting_started': 'Getting started with WebGL',
+    'Examples': 'Examples',
+    'webgl_demos': 'WebGL demos in MDN Demo Studio',
+    'Interfaces': 'Interfaces',
+    'Documentation': 'Documentation:',
+    'Useful_lists': 'Useful lists',
+    'WebGL_tag': 'Pages tagged "WebGL"',
+    'Contribute': 'Contribute',
+    'Doc_status': 'WebGL doc status',
+    'The_MDN_project': 'The MDN project',
+  },
+});
+%>
+<section id="Quick_Links">
+ <ol>
+  <li><a href="/<%=locale%>/docs/Web/API/WebGL_API"><strong><%=text['WebGL_API']%></strong></a></li>
+  <li data-default-state="open"><a href="/<%=locale%>/docs/Web/API/WebGL_API/Tutorial"><strong><%=text['WebGL_tutorial']%></strong></a>
+   <ol>
+     <li><a href="/<%=locale%>/docs/Web/API/WebGL_API/Tutorial/Getting_started_with_WebGL"><%=text['Getting_started']%></a></li>
+   </ol>
+  </li>
+  <li data-default-state="open"><a href="#"><strong><%=text['Examples']%></strong></a>
+   <ol>
+    <li><a href="/<%=locale%>/demos/tag/tech:webgl"><%=text['webgl_demos']%></a></li>
+   </ol>
+  </li>
+  <li data-default-state="open"><a href="#"><strong><%=text['Interfaces']%></strong></a>
+   <ol>
+    <li><%-template("domxref", ["WebGLActiveInfo"])%></li>
+    <li><%-template("domxref", ["WebGLBuffer"])%></li>
+    <li><%-template("domxref", ["WebGLContextEvent"])%></li>
+    <li><%-template("domxref", ["WebGLFrameBuffer"])%></li>
+    <li><%-template("domxref", ["WebGLObject"])%></li>
+    <li><%-template("domxref", ["WebGLProgram"])%></li>
+    <li><%-template("domxref", ["WebGLRenderBuffer"])%></li>
+    <li><%-template("domxref", ["WebGLShader"])%></li>
+    <li><%-template("domxref", ["WebGLShaderPrecisionFormat"])%></li>
+    <li><%-template("domxref", ["WebGLTexture"])%></li>
+    <li><%-template("domxref", ["WebGLUniformLocation"])%></li>
+   </ol>
+  </li>
+  <li><strong><a href="/<%=locale%>/docs/MDN"><%=text['Documentation']%></a></strong></li>
+  <li data-default-state="<%=state('Useful lists')%>"><a href="#"><%=text['Useful_lists']%></a>
+   <ol>
+    <li><a href="/<%=locale%>/docs/tag/WebGL"><%=text['WebGL_tag']%></a></li>
+   </ol>
+  </li>
+  <li data-default-state="<%=state('Contribute')%>"><a href="#"><%=text['Contribute']%></a>
+   <ol>
+    <li><a href="/<%=locale%>/docs/MDN/Doc_status/API/WebGL"><%=text['Doc_status']%></a></li>
+    <li><a href="/<%=locale%>/docs/MDN"><%=text['The_MDN_project']%></a></li>
+   </ol>
+  </li>
+ </ol>
+</section>
