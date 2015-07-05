@@ -21,12 +21,15 @@ var text = mdn.localString({
 });
 %>
 <section id="Quick_Links">
- <ol>
-  <li><a href="/<%=locale%>/docs/Web/HTTP"><strong><%=text['HTTP']%></strong></a></li>
-  <li><a href="/<%=locale%>/docs/Web/HTTP/Session"><strong><%=text['Session']%></strong></a></li>
-  <li><a href="/<%=locale%>/docs/Web/HTTP/Headers"><strong><%=text['Headers']%></strong></a></li>
-  <li><a href="/<%=locale%>/docs/Web/HTTP/Response_codes"><strong><%=text['Response_codes']%></strong></a></li>
-  <li><a href="/<%=locale%>/docs/Web/HTTP/Cookies"><strong><%=text['Cookies']%></strong></a></li>  
-  <li><a href="/<%=locale%>/docs/Web/HTTP/Access_control_CORS"><strong><%=text['CORS']%></strong></a></li>
- </ol>
+    <ol>
+        <li data-default-state="open"><a href="/<%=locale%>/docs/Web/HTTP"><strong><%=text['HTTP']%></strong></a></li>
+            <ol>
+                <li><a href="/<%=locale%>/docs/Web/HTTP/Session"><strong><%=text['Session']%></strong></a></li>
+                <li><a href="/<%=locale%>/docs/Web/HTTP/Headers"><strong><%=text['Headers']%></strong></a></li>
+                <li><a href="/<%=locale%>/docs/Web/HTTP/Response_codes"><strong><%=text['Response_codes']%></strong></a></li>
+                <li><a href="/<%=locale%>/docs/Web/HTTP/Cookies"><strong><%=text['Cookies']%></strong></a></li>  
+                <li><a href="/<%=locale%>/docs/Web/HTTP/Access_control_CORS"><strong><%=text['CORS']%></strong></a></li>
+            </ol>
+        </li>
+    </ol>
 </section>
