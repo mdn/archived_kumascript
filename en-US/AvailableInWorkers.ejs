@@ -2,9 +2,9 @@
 var locale = env.locale;
 
 var text = mdn.localString({
-  'de': '<strong>Hinweis</strong>: Dieses Feature ist in <a href="/' + locale + '/docs/Web/API/Web_Workers_API">Web Workers</a> verfügbar.',
-  'en-US': '<p><strong>Note</strong>: This feature is available in <a href="/' + locale + '/docs/Web/API/Web_Workers_API">Web Workers</a>.</p>'
+  "de": "Dieses Feature ist in <a href=\"/" + locale + "/docs/Web/API/Web_Workers_API\">Web Workers</a> verfügbar.",
+  "en-US": "This feature is available in <a href=\"/" + locale + "/docs/Web/API/Web_Workers_API\">Web Workers</a>."
 });
 
 %>
-<%- template("Note", text) %>
+<%- template("Note", [text]) %>
