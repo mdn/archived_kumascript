@@ -11,6 +11,11 @@ function state(section) {
 
 var text = mdn.localString({
   'en-US': {
+      'NSPR' : 'NSPR',
+      'About NSPR' : 'About NSPR',
+      'NSPR API Reference' : 'NSPR API Reference',
+      'NSPR Build Instruction' : 'NSPR Build Instruction',
+      'NSPR Release Process' : 'NSPR Release Process',
       'Introduction to NSPR' : 'Introduction to NSPR',
       'NSPR Naming Conventions' : 'NSPR Naming Conventions',
       'NSPR Threads' : 'NSPR Threads',
@@ -139,12 +144,21 @@ var text = mdn.localString({
       'Error Type' : 'Error Type',
       'Error Functions' : 'Error Functions',
       'Error Codes' : 'Error Codes',
+      'Contribute' : 'Contribute',
+      'Doc_Status' : 'NSPR Documentation status',
+      'The_MDN_project' : 'The MDN Project'
+
   },
 });
 %>
 
 <section id="Quick_Links">
 <ol>
+<li><a href="/<%=locale%>/docs/Mozilla/Projects/NSPR"><%=text['NSPR']%></a></li>
+<li><a href="/<%=locale%>/docs/Mozilla/Projects/NSPR/About_NSPR"><%=text['About NSPR']%></a></li>
+<li><a href="/<%=locale%>/docs/Mozilla/Projects/NSPR/Reference"><%=text['NSPR API Reference']%></a></li>
+<li><a href="/<%=locale%>/docs/Mozilla/Projects/NSPR/NSPR_build_instructions"><%=text['NSPR Build Instruction']%></a></li>
+<li><a href="/<%=locale%>/docs/Mozilla/Projects/NSPR/Release_process"><%=text['NSPR Release Process']%></a></li>
 <li data-default-state="<%=state('Introduction to NSPR')%>"><a href="/<%=locale%>/docs/Mozilla/Projects/NSPR/Reference/Introduction_to_NSPR"><%=text['Introduction to NSPR']%></a>
 
 <ol>
@@ -483,5 +497,11 @@ var text = mdn.localString({
  <li><a href="/<%=locale%>/docs/Mozilla/Projects/NSPR/Reference/NSPR_Error_Handling#Error_Functions"><%=text['Error Functions']%></a></li>
  <li><a href="/<%=locale%>/docs/Mozilla/Projects/NSPR/Reference/NSPR_Error_Handling#Error_Codes"><%=text['Error Codes']%></a></li>
 </ol>
+<li data-default-state="<%=state('Contribute')%>"><a href="#"><%=text['Contribute']%></a>
+   <ol>
+    <li><a href="/<%=locale%>/docs/MDN/Doc_status/NSPR"><%=text['Doc_status']%></a></li>
+    <li><a href="/<%=locale%>/docs/MDN"><%=text['The_MDN_project']%></a></li>
+   </ol>
+  </li>
 </ol>
 </section>
