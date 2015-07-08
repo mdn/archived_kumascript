@@ -39,6 +39,11 @@ var total = mdn.localString({
     "ru"   : "Итого"
 });
 
+var statusStr = mdn.localString({
+   "en-US": "documentation status",
+   "fr"   : "Statut de la documentation"
+});
+
 /*** Collect doc status data ***/
 var MDN = require("MDN:Common");
 var result = {};
@@ -97,7 +102,7 @@ getPages(pageList);
             var totalUpToDatePercent = Math.floor((totalUpToDate / totalPages) * 100);
     %>
         <tr>
-            <td><a href="<%=result[key].url%>"><%=key.replace("documentation status", "", "i")%></a></td>
+            <td><a href="<%=result[key].url%>"><%=key.replace(statusStr, "", "i")%></a></td>
             <td><%=pageCounter%></td>
             <td><%=translationCounter%> (<%=translationPercent%>%)</td>
             <td><%=updateCounter%> (<%=uptodatePercent%>%)</td>
