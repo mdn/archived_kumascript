@@ -3,10 +3,11 @@
  * Inserts a link to a bug in Mozilla's Bugzilla database.
  *
  * $0 - The bug number to link to. As we follow resolved duplicate this may not be the number in the output.
- * $1 - Type of output:
+ * $1 - Type of output (optional)
  *      bug (default) - Linked bug number, title of link includes status and summary
  *      table - Row in a table, columns are linked bug number and summary
  *      summary - Linked bug number and summary
+ * $2 - Comment number to link to (optional)
  *
  * http://www.bugzilla.org/docs/tip/en/html/api/Bugzilla/WebService/Server/REST.html
  * https://wiki.mozilla.org/Bugzilla:REST_API
@@ -56,6 +57,19 @@ while (bugDupe != null) {
 
 var bugPageURL = 'https://bugzilla.mozilla.org/show_bug.cgi?id=' + bugNumber;
 
+var s_comment = "";
+
+if ($2 != undefined && !isNaN($2)) {
+    var comment = parseInt($2, 10);
+    if (!isNaN(comment)) {
+        bugPageURL += "#c" + comment;
+        
+        s_comment = mdn.localString({
+            "en-US":    ", comment " + comment
+        });
+    }
+}
+
 var s_bug = mdn.localString({
     "en-US": "bug",
     "ca"   : "errada",
@@ -77,5 +91,5 @@ if (type == 'table') { %>
 <%
 } else {
 %>
-<a href="<%= bugPageURL %>" title="<%= tipStatus + desc %>"><%=s_bug%>&nbsp;<%= bugNumber %></a>
+<a href="<%= bugPageURL %>" title="<%= tipStatus + desc %>"><%=s_bug%>&nbsp;<%= bugNumber %><%=s_comment%></a>
 <% } %>
