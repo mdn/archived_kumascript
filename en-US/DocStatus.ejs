@@ -264,12 +264,16 @@ getPages(pageList);
 /*** Missing pages ***/
 
 if (groupTags.length > 0) {
-    var group = groupTags[0];
-    var missingForGroup = missingPages[0][group];
-    for (var i = 0; i < missingForGroup.length; i++) {
-        output.missing.push({title: missingForGroup[i], url: '/en-US/docs/Web/API/' + missingForGroup[i].replace('.', '/')});
+    for (var j = 0; j < groupTags.length; j++) {
+        var group = groupTags[j];
+        var missingForGroup = missingPages[0][group] || [];
+        for (var i = 0; i < missingForGroup.length; i++) {
+            output.missing.push({title: missingForGroup[i], url: '/en-US/docs/Web/API/' + missingForGroup[i].replace('.', '/')});
+            metrics.missing.counter++;
+        }
     }
 }
+
 
 /*** Bugzilla querying ***/
 
