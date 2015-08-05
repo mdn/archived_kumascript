@@ -74,6 +74,20 @@
         }
         return b.replace(/(<([^>]+)>)/ig, "");
     },
+    
+    /**
+     * #### fetchCompatTableJSON
+     * Sets proper headers and makes a request to get compat table data
+     */
+    fetchCompatTableJSON: function(url) {
+        var options = {
+            headers: {
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/json'
+            }
+        };
+        return JSON.parse(this.fetchHTTPResource(url, options));
+    },
 
     /**
      * Accepts a relative URL or an attachment object
