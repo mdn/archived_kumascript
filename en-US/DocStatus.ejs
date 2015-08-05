@@ -23,9 +23,11 @@ if (slug.indexOf("/en-US") != -1) {
     enURL = '/en-US/docs/' + slug;
 }
 var pageList = page.subpagesExpand(enURL, '', true);
+var missingPages = '';
 var groupTags = [];
 if ($1) {
     groupTags = JSON.parse($1);
+    missingPages = string.deserialize(template("MissingPages"));
 }
 var outdate = $2;
 var bzddn = $3;
@@ -85,6 +87,12 @@ var metrics = {
 
 if (groupTags.length > 0) {
     metrics.noTags = undefined;
+    metrics.missing = {
+        title: 'Missing pages',
+        link: '#Missing_pages',
+        counter: 0,
+        help: "These pages are not yet written. Please help to create them."
+    };
 }
 
 var output = {
@@ -98,6 +106,7 @@ var output = {
 
 if (groupTags.length > 0) {
     output.noTags = undefined;
+    output.missing = [];
 }
 
 /*** Add optional and custom metrics to the metrics object ***/
@@ -251,6 +260,16 @@ function getPages(pageList) {
 
 getPages(pageList);
 
+
+/*** Missing pages ***/
+
+if (groupTags.length > 0) {
+    var group = groupTags[0];
+    var missingForGroup = missingPages[0][group];
+    for (var i = 0; i < missingForGroup.length; i++) {
+        output.missing.push({title: missingForGroup[i], url: '/en-US/docs/Web/API/' + missingForGroup[i].replace('.', '/')});
+    }
+}
 
 /*** Bugzilla querying ***/
 
