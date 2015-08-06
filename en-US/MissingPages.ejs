@@ -1433,11 +1433,7 @@
 			"XSLTProcessor.getParameter",
 			"XSLTProcessor.removeParameter",
 			"XSLTProcessor.clearParameters",
-			"XSLTProcessor.reset",
-			"MozFrameLoaderOwner",
-			"MozFrameLoaderOwner.frameLoader",
-			"MozFrameLoaderOwner.setIsPrerendered",
-			"MozFrameLoaderOwner.swapFrameLoaders"
+			"XSLTProcessor.reset"
 		],
 		"Web Animations API": [
 			"Animatable",
@@ -1549,6 +1545,13 @@
 			"Element.scrollBy",
 			"Element.mozScrollSnap",
 			"Element.getDestinationInsertionPoints",
+			"Event.composedTarget",
+			"Event.multipleActionsPrevented",
+			"Event.isSynthesized",
+			"Event.getPreventDefault",
+			"EventTarget.ownerGlobal",
+			"EventTarget.setEventHandler",
+			"EventTarget.getEventHandler",
 			"HTMLCollection.length",
 			"HTMLCollection.namedItem",
 			"MutationObserver.mutationCallback",
@@ -1708,6 +1711,8 @@
 			"HTMLButtonElement.validationMessage",
 			"HTMLButtonElement.checkValidity",
 			"HTMLButtonElement.setCustomValidity",
+			"HTMLCanvasElement.mozPrintCallback",
+			"HTMLCanvasElement.MozGetIPCContext",
 			"HTMLDListElement.compact",
 			"HTMLDataElement.value",
 			"HTMLDataListElement.options",
@@ -2073,6 +2078,7 @@
 			"HTMLSelectElement.validity",
 			"HTMLSelectElement.validationMessage",
 			"HTMLSelectElement.null",
+			"HTMLShadowElement.olderShadowRoot",
 			"HTMLSourceElement.src",
 			"HTMLSourceElement.type",
 			"HTMLSourceElement.srcset",
@@ -2291,7 +2297,9 @@
 			"CanvasRenderingContext2D.mozImageSmoothingEnabled",
 			"CanvasRenderingContext2D.drawCustomFocusRing",
 			"CanvasRenderingContext2D.drawWidgetAsOnScreen",
-			"CanvasRenderingContext2D.demote"
+			"CanvasRenderingContext2D.demote",
+			"HTMLCanvasElement.mozPrintCallback",
+			"HTMLCanvasElement.MozGetIPCContext"
 		],
 		"Websockets API": [
 			"CloseEvent.wasClean",
@@ -2314,6 +2322,13 @@
 			"CompositionEvent.data",
 			"CompositionEvent.locale",
 			"CompositionEvent.initCompositionEvent",
+			"Event.composedTarget",
+			"Event.multipleActionsPrevented",
+			"Event.isSynthesized",
+			"Event.getPreventDefault",
+			"EventTarget.ownerGlobal",
+			"EventTarget.setEventHandler",
+			"EventTarget.getEventHandler",
 			"KeyboardEvent.repeat",
 			"MouseEvent.mozMovementX",
 			"MouseEvent.mozMovementY",
@@ -2439,15 +2454,6 @@
 			"DeviceStorage.unmount",
 			"DeviceStorage.getRoot"
 		],
-		"DOM,DOM Events": [
-			"Event.composedTarget",
-			"Event.multipleActionsPrevented",
-			"Event.isSynthesized",
-			"Event.getPreventDefault",
-			"EventTarget.ownerGlobal",
-			"EventTarget.setEventHandler",
-			"EventTarget.getEventHandler"
-		],
 		"Server Sent Events": [
 			"EventSource.url",
 			"EventSource.withCredentials",
@@ -2491,12 +2497,18 @@
 			"FileReaderSync.readAsText",
 			"FileReaderSync.readAsDataURL"
 		],
-		"Canvas API,HTML DOM": [
-			"HTMLCanvasElement.mozPrintCallback",
-			"HTMLCanvasElement.MozGetIPCContext"
-		],
-		"HTML DOM,Web Components": [
-			"HTMLShadowElement.olderShadowRoot"
+		"Web Components": [
+			"HTMLShadowElement.olderShadowRoot",
+			"ShadowRoot",
+			"ShadowRoot.innerHTML",
+			"ShadowRoot.host",
+			"ShadowRoot.olderShadowRoot",
+			"ShadowRoot.applyAuthorStyles",
+			"ShadowRoot.styleSheets",
+			"ShadowRoot.getElementById",
+			"ShadowRoot.getElementsByTagName",
+			"ShadowRoot.getElementsByTagNameNS",
+			"ShadowRoot.getElementsByClassName"
 		],
 		"Fetch API": [
 			"Headers.guard",
@@ -2650,6 +2662,7 @@
 		"Service Workers API": [
 			"ServiceWorkerGlobalScope.onbeforeevicted",
 			"ServiceWorkerGlobalScope.onevicted",
+			"ServiceWorker.postMessage",
 			"ServiceWorkerContainer.onreloadpage",
 			"ServiceWorkerContainer.getScopeForUrl"
 		],
@@ -3219,20 +3232,8 @@
 			"TimeEvent.view",
 			"TimeEvent.initTimeEvent"
 		],
-		"Service Workers API,Web Workers API": [
+		"Web Workers API": [
 			"ServiceWorker.postMessage"
-		],
-		"Web Components": [
-			"ShadowRoot",
-			"ShadowRoot.innerHTML",
-			"ShadowRoot.host",
-			"ShadowRoot.olderShadowRoot",
-			"ShadowRoot.applyAuthorStyles",
-			"ShadowRoot.styleSheets",
-			"ShadowRoot.getElementById",
-			"ShadowRoot.getElementsByTagName",
-			"ShadowRoot.getElementsByTagNameNS",
-			"ShadowRoot.getElementsByClassName"
 		],
 		"Web Storage API": [
 			"StorageEvent.key",
