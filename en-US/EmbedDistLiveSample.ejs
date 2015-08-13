@@ -7,6 +7,8 @@
 //  $2 - The width of the iframe (optional)
 //  $3 - The height of the iframe (optional)
 
+var html = template('EmbedLiveSample', [$1, $2, $3, null, $0]);
+/*
 var domain = 'https://mdn.mozillademos.org';
 var url = $0.replace('https://developer.mozilla.org', domain) + '$samples/' + $1;
 
@@ -18,6 +20,6 @@ var widthHeight = "";
 if ($2 && $3) {
     widthHeight = 'width="' + $2 + '" height="' + $3 + '"';
 }
+*/
 
-
-%><iframe class="livesample" frameborder="0" <%=widthHeight%> src="<%= url %>"></iframe>
+%><%-html%>
