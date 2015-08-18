@@ -13,7 +13,6 @@ var doInline = $0 || 1;
 var noteBoxText = mdn.localString({
     "en-US":    "Note: "
 });
-log.debug("inline: " + doInline);
 
 var html = mdn.localString({
     "en-US":    "When uploading an image, please be sure to use an image optimization tool " +
@@ -25,7 +24,6 @@ var html = mdn.localString({
 
 // Wrap in a note box if requested
 
-log.debug("Now doInline is " + doInline);
 if (doInline == 0) {
     log.debug("Doing box");
     html = "<div class='note'><strong>" + noteBoxText + "</strong>" + html + "</div>";
