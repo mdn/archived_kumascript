@@ -1,8 +1,15 @@
 <%
-/* parameters:                                                                          */
-/* $0 = name of specification                                                           */
-/* $1 = anchor related to the URL (if missing, no anchor is added)                      */
-/* $2 = property/entity name      (if no anchor a default title is used and $2 ignored) */
+// Creates a link to a specification, given a "short" version of the spec's
+// name. The link will use the formal name of the specification as the link
+// text.
+//
+// Parameters:
+//  $0  The shorthand name of the specification to link to.
+//  $1  (Optional) Added text to append to the base URL; this allows you to
+//      build links to subpages in a multi-page spec, or to link to anchors.
+//  $2  (Optional) Replacement link text; this lets you specify the name of
+//      a specific method, property, or other entity to customize the
+//      appearance of the link.
 
 var spec   = $0;
 var anchor = $1;
@@ -12,7 +19,19 @@ var title;
 var result;
 var lang = env.locale;
 
-// REMINDER: When possible, always refer to the Editor Draft of a spec. The TR specs are always outdated
+// This table is used to map the short name of a specification to its formal
+// name and URL.
+//
+// REMINDERS:
+//
+// * Whenever possible, specify a link to the Editor Draft of a spec. This
+//   is the most up-to-date draft.
+//
+// * If both W3C and WHATWG publish specifications for an API, as a matter of
+//   policy MDN prefers the WHATWG specification, so please use WHATWG spec
+//   links when available.
+//
+// * Please use HTTPS links instead of HTTP links when possible.
 
 var specList = {
     'Alarm API': {
@@ -749,6 +768,8 @@ var specList = {
     }
 }
 
+// Some APIs share specifications. Here we attend to that.
+
 specList['Blending'] = specList['Compositing'];
 specList['CSS3 2D Transforms'] = specList['CSS3 3D Transforms'] = specList['CSS3 Transforms'];
 specList['CSS3 Break'] = specList['CSS3 Fragmentation'];
@@ -756,8 +777,12 @@ specList['CSS3 UI'] = specList['CSS3 Basic UI'];
 specList['WebSMS'] = specList['Messaging'];
 specList['CSS3 Template'] = specList['CSS3 Grid'];
 
+// Pull out the name and URL (or use "unknown" if not available)
+
 name = specList[spec] && specList[spec].name || 'Unknown';
 url  = specList[spec] && specList[spec].url  || 'about:unknown';
+
+// If a replacement link text is provided, use that.
 
 if ($2) {
     title = mdn.localString({
