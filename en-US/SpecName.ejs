@@ -25,18 +25,23 @@ var lang = env.locale;
 // REMINDERS:
 //
 // * Whenever possible, specify a link to the Editor Draft of a spec. This
-//   is the most up-to-date draft.
+//   is the most up-to-date draft. This is not always possible: sometimes the
+//   editor version describe a further level than the published spec: in this
+//   case list both, with the Editor Draft on top. This is the case for CSP 1.0 
+//   where the ED draft described a further level of CSP and is far from the
+//   Recommendation status.
 //
-// * If both W3C and WHATWG publish specifications for an API, as a matter of
-//   policy MDN prefers the WHATWG specification, so please use WHATWG spec
-//   links when available.
+// * If both W3C and WHATWG publish specifications for an API, we list both
+//   specifications, with the WHATWG on top of the W3C as it is where the
+//   actual work happens and it is likely to be more up-to-date than the
+//   W3C one.
 //
 // * Please use HTTPS links instead of HTTP links when possible.
 
 var specList = {
     'Alarm API': {
         name : 'Web Alarms API',
-        url  : 'http://web-alarms.sysapps.org/',
+        url  : 'https://www.w3.org/2012/sysapps/web-alarms/',
     },
     'AmbientLight':{
         name : "Ambient Light Events",
@@ -44,15 +49,15 @@ var specList = {
     },
     'Battery API':{
         name : "Battery Status API",
-        url  : "http://www.w3.org/TR/battery-status/"
+        url  : "https://dvcs.w3.org/hg/dap/raw-file/default/battery/Overview.html"
     },
     'Beacon':{
         name : 'Beacon',
-        url  : 'http://www.w3.org/TR/beacon/'
+        url  : 'https://w3c.github.io/beacon/'
     },
     'Clipboard API':{
-        name : "Clipboard API",
-        url  : "http://dev.w3.org/2006/webapi/clipops/clipops.html"
+        name : "Clipboard API and events",
+        url  : "https://w3c.github.io/clipboard-apis/"
     },
     'Compositing':{
         name : "Compositing and blending Level 1",
@@ -64,7 +69,7 @@ var specList = {
     },
     'Contacts':{
         name : "Contacts Manager API",
-        url  : "http://contacts-manager-api.sysapps.org/"
+        url  : "https://www.w3.org/2012/sysapps/contacts-manager-api/"
     },
     'CORS':{
         name : "CORS",
@@ -76,7 +81,7 @@ var specList = {
     },
     'CSP 1.1':{
         name : "Content Security Policy Level 2",
-        url  : "http://www.w3.org/TR/CSP2/"
+        url  : "https://w3c.github.io/webappsec/specs/CSP2/"
     },
     'CSS1':{
         name : "CSS Level&nbsp;1",
@@ -88,103 +93,103 @@ var specList = {
     },
     'CSS3 Animations':{
         name : "CSS Animations",
-        url  : "http://dev.w3.org/csswg/css-animations/"
+        url  : "https://drafts.csswg.org/css-animations/"
     },
     'CSS3 Backgrounds':{ // Backgrounds & Borders
         name : 'CSS Backgrounds and Borders Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css-backgrounds-3/"
+        url  : "https://drafts.csswg.org/css-backgrounds-3/"
     },
     'CSS3 Basic UI':{
         name : 'CSS Basic User Interface Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css3-ui/"
+        url  : "https://drafts.csswg.org/css-ui-3/"
     },
     'CSS3 Box':{
         name : 'CSS Basic Box Model',
-        url  : "http://dev.w3.org/csswg/css3-box/"
+        url  : "https://drafts.csswg.org/css-box-3/"
     },
     'CSS3 Box Alignment':{
         name : 'CSS Box Alignment Module',
-        url  : "http://dev.w3.org/csswg/css-align/"
+        url  : "https://drafts.csswg.org/css-align/"
     },
     'CSS3 Cascade':{
         name : 'CSS Cascading and Inheritance Level&nbsp;3',
-        url  : "http://www.w3.org/TR/css-cascade-3/"
+        url  : "https://drafts.csswg.org/css-cascade-3/"
     },
     'CSS3 Colors':{
         name : 'CSS Color Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css3-color/"
+        url  : "https://drafts.csswg.org/css-color-3/"
     },
     'CSS3 Conditional':{
         name : 'CSS Conditional Rules Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css3-conditional/"
+        url  : "https://drafts.csswg.org/css-color-3/"
     },
     'CSS3 Content':{
         name : 'CSS Generated Content Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css3-content/",
+        url  : "https://drafts.csswg.org/css-content-3/",
     },
     'CSS3 Counter Styles':{
         name : "CSS Counter Styles Level&nbsp;3",
-        url  : "http://dev.w3.org/csswg/css-counter-styles-3/",
+        url  : "https://drafts.csswg.org/css-counter-styles-3/",
     },
     'CSS3 Device':{
         name : 'CSS Device Adaptation',
-        url  : "http://dev.w3.org/csswg/css-device-adapt/",
+        url  : "https://drafts.csswg.org/css-device-adapt/",
     },
     'CSS3 Display':{
         name : 'CSS Display Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css-display/",
+        url  : "https://drafts.csswg.org/css-display/",
     },
     'CSS3 Flexbox':{
         name : 'CSS Flexible Box Layout Module',
-        url  : "http://dev.w3.org/csswg/css3-flexbox/",
+        url  : "https://drafts.csswg.org/css-flexbox-1/",
     },
     'CSS3 Font Loading':{
         name : 'CSS Font Loading Module Level&nbsp;3',
-        url  : 'http://dev.w3.org/csswg/css-font-loading/',
+        url  : 'https://drafts.csswg.org/css-font-loading/',
     },
     'CSS3 Fonts':{
         name : 'CSS Fonts Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css3-fonts/",
+        url  : "https://drafts.csswg.org/css-fonts-3/",
     },
     'CSS3 Fragmentation':{
         name : 'CSS Fragmentation Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css3-break/"
+        url  : "https://drafts.csswg.org/css-break-3/"
     },
     'CSS3 GCPM':{
         name : 'CSS Generated Content for Paged Media Module',
-        url  : "http://dev.w3.org/csswg/css3-gcpm/"
+        url  : "https://drafts.csswg.org/css-gcpm-3/"
     },
     'CSS3 Grid':{ /* This is 'grid layout' and not 'grid positioning' which has been abandoned */
         name : 'CSS Grid Layout',
-        url  : "http://dev.w3.org/csswg/css-grid/"
+        url  : "https://drafts.csswg.org/css-grid/"
     },
     'CSS3 Images':{
         name : 'CSS Image Values and Replaced Content Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css3-images/"
+        url  : "https://drafts.csswg.org/css-images-3/"
     },
     'CSS3 Inline':{
         name : 'CSS Inline Layout',
-        url  : "http://dev.w3.org/csswg/css-inline/"
+        url  : "https://drafts.csswg.org/css-inline/"
     },
     'CSS3 Lists':{
         name : 'CSS Lists and Counters Module Level&nbsp;3',
-        url  : "http://dev.w3.org/csswg/css3-lists/"
+        url  : "https://drafts.csswg.org/css-lists-3/"
     },
     'CSS3 Media Queries':{
         name : 'Media Queries',
-        url  : "http://dev.w3.org/csswg/css3-mediaqueries/"
+        url  : "https://drafts.csswg.org/mediaqueries-3/"
     },
     'CSS3 Multicol':{
         name : 'CSS Multi-column Layout Module',
-        url  : "http://dev.w3.org/csswg/css3-multicol/"
+        url  : "https://drafts.csswg.org/css-multicol-1/"
     },
     'CSS3 Overflow':{
         name : 'CSS Overflow Module Level 3',
-        url  : "http://dev.w3.org/csswg/css-overflow-3/"
+        url  : "https://drafts.csswg.org/css-overflow-3/"
     },  
     'CSS3 Namespaces':{
         name : 'CSS Namespaces Module',
-        url  : "http://dev.w3.org/csswg/css3-namespace/"
+        url  : "https://drafts.csswg.org/css-namespaces-3/"
     },
     'CSS3 Paged Media':{
         name : 'CSS Paged Media Module Level&nbsp;3',
