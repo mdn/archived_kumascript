@@ -497,9 +497,9 @@ var specList = {
     },
     'HTML5 Web Messaging':{
         name : 'HTML5 Web Messaging',
-        url  : 'http://dev.w3.org/html5/postmsg/'
+        url  : 'https://w3c.github.io/webmessaging/'
     },
-    'HTML5 Web application':{
+    'HTML5 Web application':{ /* This is a subset of HTML5/HTML5.1 and must replaced by these */
         name : 'HTML5 Web application',
         url  : 'http://www.w3.org/html/wg/drafts/html/master/webappapis.html'
     },
@@ -517,7 +517,11 @@ var specList = {
     },
     'IndexedDB':{
         name : 'Indexed Database API',
-        url  : 'https://dvcs.w3.org/hg/IndexedDB/raw-file/tip/Overview.html'
+        url  : 'http://www.w3.org/TR/IndexedDB/'
+    },
+    'IndexedDB2': {
+        name : 'Indexed Database API (Second Edition)',
+        url  : 'https://w3c.github.io/IndexedDB/'
     },
     'Manifest': {
         name : 'Manifest for web application',
@@ -533,23 +537,23 @@ var specList = {
     },
     'Media Capture':{
         name : 'Media Capture and Streams',
-        url  : 'http://dev.w3.org/2011/webrtc/editor/getusermedia.html'
+        url  : 'http://w3c.github.io/mediacapture-main/'
     },
     'Media Capture DOM Elements':{
         name : 'Media Capture from DOM Elements',
-        url  : 'https://w3c.github.io/mediacapture-fromelement/index.html'
+        url  : 'https://w3c.github.io/mediacapture-fromelement/'
     },
     'Media Source Extensions':{
         name : 'Media Source Extensions',
-        url  : 'https://dvcs.w3.org/hg/html-media/raw-file/default/media-source/media-source.html'
+        url  : 'https://w3c.github.io/media-source/'
     },
     'MediaStream Recording':{
         name : 'MediaStream Recording',
-        url  : 'http://w3c.github.io/mediacapture-record/MediaRecorder.html'
+        url  : 'https://w3c.github.io/mediacapture-record/MediaRecorder.html'
     },
     'Messaging':{
         name : 'Messaging API',
-        url  : 'http://www.w3.org/2012/sysapps/messaging/'
+        url  : 'https://www.w3.org/2012/sysapps/messaging/'
     },
     'Motion Path Level 1':{
         name : 'Motion Path Module Level 1',
@@ -557,14 +561,14 @@ var specList = {
     },
     'Navigation Timing':{
         name : 'Navigation Timing',
-        url  : 'http://www.w3.org/TR/2012/REC-navigation-timing-20121217/'
+        url  : 'http://www.w3.org/TR/navigation-timing/
     },
     'Network Information':{
         name : 'Network Information API',
-        url  : 'http://w3c.github.io/netinfo/'
+        url  : 'https://w3c.github.io/netinfo/'
     },
     'Page Visibility API':{
-        name : 'Page Visibility API',
+        name : 'Page Visibility (Second Edition)',
         url  : 'http://www.w3.org/TR/page-visibility/'
     },
     'Permissions API':{
@@ -573,19 +577,23 @@ var specList = {
     },
     'Pointer Events': {
         name : 'Pointer Events',
-        url  : 'https://dvcs.w3.org/hg/pointerevents/raw-file/tip/pointerEvents.html'
+        url  : 'http://www.w3.org/TR/pointerevents/'
+    },
+    'Pointer Events 2': {
+        name : 'Pointer Events – Level 2',
+        url  : 'https://w3c.github.io/pointerevents/'
     },
     'Pointer Lock':{
         name : 'Pointer Lock',
-        url  : 'https://dvcs.w3.org/hg/pointerlock/raw-file/default/index.html'
+        url  : 'https://w3c.github.io/pointerlock/'
     },
-    'Progress Events':{
+    'Progress Events':{ /* Merged in XHR, we need to remove these entries */
         name : 'Progress Events',
-        url  : 'https://dvcs.w3.org/hg/progress/raw-file/tip/Overview.html'
+        url  : 'https://xhr.spec.whatwg.org/'
     },
     'Proximity Events':{
         name : 'Proximity Events',
-        url  : 'http://dvcs.w3.org/hg/dap/raw-file/tip/proximity/Overview.html'
+        url  : 'https://w3c.github.io/proximity/'
     },
     'Push API':{
         name : 'Push API',
@@ -593,7 +601,7 @@ var specList = {
     },
     'Referrer Policy':{
         name : 'Referrer Policy',
-        url  : 'http://w3c.github.io/webappsec/specs/referrer-policy/'
+        url  : 'https://w3c.github.io/webappsec/specs/referrer-policy/'
     },
     'RequestAnimationFrame':{
         name : 'Timing control for script-based animations',
@@ -601,7 +609,7 @@ var specList = {
     },
     'Screen Orientation':{
         name : 'Screen Orientation API',
-        url  : 'https://dvcs.w3.org/hg/screen-orientation/raw-file/tip/Overview.html'
+        url  : 'https://w3c.github.io/screen-orientation/'
     },
     'Selection API':{
         name : "Selection API",
@@ -609,15 +617,19 @@ var specList = {
     },
     'Server-sent events':{
         name : 'Server-Sent Events',
-        url  : 'http://dev.w3.org/html5/eventsource/'
+        url  : 'http://www.w3.org/TR/eventsource/'
+    },
+    'Server-sent events 2':{
+        name : 'Server-Sent Events (2nd edition)',
+        url  : 'http://www.w3.org/TR/eventsource/'
     },
     'Service Workers':{
         name : 'Service Workers',
-        url  : 'http://slightlyoff.github.io/ServiceWorker/spec/service_worker/'
+        url  : 'https://slightlyoff.github.io/ServiceWorker/spec/service_worker/'
     },
     'Selectors API Level 1':{
         name : 'Selectors API Level 1',
-        url  : 'http://dev.w3.org/2006/webapi/selectors-api/'
+        url  : 'http://www.w3.org/TR/selectors-api/'
     },
     'Selectors API Level 2':{
         name : 'Selectors API Level 2',
@@ -625,15 +637,15 @@ var specList = {
     },
     'Shadow DOM':{
         name : 'Shadow DOM',
-        url  : 'http://w3c.github.io/webcomponents/spec/shadow/'
+        url  : 'https://w3c.github.io/webcomponents/spec/shadow/'
     },
     'SIMD': {
         name : 'SIMD',
-        url  : 'http://tc39.github.io/ecmascript_simd/'
+        url  : 'https://tc39.github.io/ecmascript_simd/'
     },
     'Subresource Integrity':{
         name : 'Subresource Integrity',
-        url  : 'http://w3c.github.io/webappsec/specs/subresourceintegrity/'
+        url  : 'https://w3c.github.io/webappsec/specs/subresourceintegrity/'
     },
     'SVG and HTML':{
         name : 'Inline SVG in HTML5 and XHTML',
@@ -652,8 +664,12 @@ var specList = {
         url  : 'https://wiki.mozilla.org/WebAPI/WebTelephony'
     },
     'Touch Events':{
-        name : 'Touch Events version 1',
-        url  : 'https://dvcs.w3.org/hg/webevents/raw-file/v1/touchevents.html'
+        name : 'Touch Events',
+        url  : 'http://www.w3.org/TR/touch-events/'
+    },
+    'Touch Events 2': {
+        name : 'Touch Events – Level 2',
+        url  : 'https://w3c.github.io/touch-events/'
     },
     'Tracking':{
         name : 'Tracking Preference Expression (DNT)',
