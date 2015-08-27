@@ -13,6 +13,17 @@ var locale = env.locale;
 var name = $0 || slug.split("/").pop();
 var atRule = $1;
 
+var localStrings = {
+    "missing": {
+        "de": "Wert nicht in der DB gefunden!",
+        "en-US": "Value not found in DB!"
+    },
+    "inherited": {
+        "de": "Vererbt",
+        "en-US": "Inherited"
+    }
+};
+
 if (!atRule) {
     var matches = slug.match(/\/CSS\/(@.+?)(?=\/)/);
     if (matches) {
@@ -29,6 +40,8 @@ if (atRule) {
 }
 
 var result = "<ul class=\"cssprop\">";
+
+result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " + cssInfo.inherited + "</li>";
 
 result += "</ul>";
 
