@@ -15,12 +15,24 @@ var atRule = $1;
 
 var localStrings = {
     "missing": {
-        "de": "Wert nicht in der DB gefunden!",
-        "en-US": "Value not found in DB!"
+        "en-US": "Value not found in DB!",
+        "de"   : "Wert nicht in der DB gefunden!"
     },
     "inherited": {
-        "de": "Vererbt",
-        "en-US": "Inherited"
+        "en-US": "Inherited",
+        "de"   : "Vererbt"
+    },
+    "yes": {
+        "en-US": "yes",
+        "de"   : "Ja",
+        "fr"   : "oui",
+        "ja"   : "継承する"
+    },
+    "no": {
+        "en-US": "no",
+        "de"   : "Nein",
+        "fr"   : "non",
+        "ja"   : "継承しない"
     }
 };
 
@@ -41,7 +53,9 @@ if (atRule) {
 
 var result = "<ul class=\"cssprop\">";
 
-result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " + cssInfo.inherited + "</li>";
+result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
+    (cssInfo.inherited ? mdn.getLocalString("yes") : mdn.getLocalString("no")) +
+    "</li>";
 
 result += "</ul>";
 
