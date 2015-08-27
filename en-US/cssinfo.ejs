@@ -69,8 +69,11 @@ result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
     "</li>";
 
 // Displays information about the media the item applies to
-result += "<li><dfn>" + mdn.getLocalString(localStrings, "media") + "</dfn> " +
-    cssInfo.media + "</li>";
+// We have a general link to @media here. When https://bugzil.la/1133414 is
+// fixed, we may change the link.
+result += "<li><dfn><a href=\"" + locale + "/docs/Web/CSS/@media\">" +
+    mdn.getLocalString(localStrings, "media") + "</a></dfn> " + cssInfo.media +
+    "</li>";
 
 result += "</ul>";
 
