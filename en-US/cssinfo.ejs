@@ -22,6 +22,14 @@ var localStrings = {
         "en-US": "Inherited",
         "de"   : "Vererbt"
     },
+    // Plural form
+    "media": {
+        "ja" : "メディア",
+        "fr" : "Média",
+        "de" : "Medien",
+        "en-US" : "Media",
+        "zh-CN" : "适用媒体" 
+    }
     "yes": {
         "en-US": "yes",
         "de"   : "Ja",
@@ -53,11 +61,16 @@ if (atRule) {
 
 var result = "<ul class=\"cssprop\">";
 
+// Displays information whether the item's value is inherited
 result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
     (cssInfo.inherited ?
         mdn.getLocalString(localStrings, "yes") :
         mdn.getLocalString(localStrings, "no")) +
     "</li>";
+
+// Displays information about the media the item applies to
+result += "<li><dfn>" + mdn.getLocalString(localStrings, "media") + "</dfn> " +
+    cssInfo.media + "</li>" +
 
 result += "</ul>";
 
