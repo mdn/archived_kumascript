@@ -54,7 +54,9 @@ if (atRule) {
 var result = "<ul class=\"cssprop\">";
 
 result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
-    (cssInfo.inherited ? mdn.getLocalString("yes") : mdn.getLocalString("no")) +
+    (cssInfo.inherited ?
+        mdn.getLocalString(localStrings, "yes") :
+        mdn.getLocalString(localStrings, "no")) +
     "</li>";
 
 result += "</ul>";
