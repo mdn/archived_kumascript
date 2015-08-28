@@ -128,10 +128,12 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
  * Returns the canonical order of the values of a property or descriptor as
  * formatted output
  * 
+ * @param Object mdn Common functions library; needs to be passed to the 
+ *        Function, otherwise the library is not available within it
  * @param String order Order information, which may contain keywords
  * @returns String Formatted output for canonical order
  */
-function getCanonicalOrderOutput(order) {
+function getCanonicalOrderOutput(mdn, order) {
     if (!order) {
         return mdn.getLocalString(localStrings, "uniqueOrder");
     }
@@ -297,7 +299,7 @@ if (cssInfo !== null) {
     // Adds information about the canonical order of the values of the item to
     // the output
     result += "<li><dfn>" + template("Xref_csscanonicalorder") + "</dfn> " +
-        getCanonicalOrderOutput(cssInfo.order) + "</li>";
+        getCanonicalOrderOutput(mdn, cssInfo.order) + "</li>";
 
     result += "</ul>";
 } else {
