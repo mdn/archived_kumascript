@@ -26,9 +26,9 @@ function getInitialValue(propertyOrDescriptor, atRule) {
                 } else {
                     initialValue += (data.properties[longhand] ?
                         data.properties[longhand].initial :
-                        mdn.getLocalString(localStrings, "missing"));
+                        "missing");
                 }
-                    initialValue += "</li>";
+                initialValue += "</li>";
             });
             initialValue += "</ul>";
             return initialValue;
