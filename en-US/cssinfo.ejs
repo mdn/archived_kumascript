@@ -190,7 +190,7 @@ if (cssInfo !== null) {
         getInitialValueOutput(mdn, name, atRule) + "</li>";
 
     // Adds information about to which elements the item applies to the output
-    if (cssInfo.appliesTo) {
+    if (cssInfo.appliesto) {
         result += "<li><dfn>" + mdn.getLocalString(localStrings, "appliesTo") +
             "</dfn> " + cssInfo.appliesto + "</li>";
     }
