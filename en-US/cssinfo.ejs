@@ -71,7 +71,7 @@ function getAnimatableOutput(mdn, propertyOrDescriptor, atRule) {
                 } else {
                     var animatableString =
                         data.properties[longhand].animatable !== "no" ?
-                        mdn.replacePlaceHolders(mdn.getLocalString(localStrings,
+                        mdn.replacePlaceholders(mdn.getLocalString(localStrings,
                             "yesAs"), [data.properties[longhand].animatable]) :
                         mdn.getLocalString(localStrings, "no");
                     animatable += (data.properties[longhand] ? animatableString : s_missing);
@@ -82,7 +82,7 @@ function getAnimatableOutput(mdn, propertyOrDescriptor, atRule) {
             return animatable;
         } else {
             return data.properties[propertyOrDescriptor].animatable !== "no" ?
-                mdn.replacePlaceHolders(mdn.getLocalString(localStrings,
+                mdn.replacePlaceholders(mdn.getLocalString(localStrings,
                     "yesAs"),
                     [data.properties[propertyOrDescriptor].animatable]) :
                 mdn.getLocalString(localStrings, "no");
