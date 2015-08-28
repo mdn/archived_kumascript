@@ -124,6 +124,26 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
 }
 
 
+/**
+ * Returns the canonical order of the values of a property or descriptor as
+ * formatted output
+ * 
+ * @param String order Order information, which may contain keywords
+ * @returns String Formatted output for canonical order
+ */
+function getCanonicalOrderOutput(order) {
+    if (!order) {
+        return mdn.getLocalString(localStrings, "uniqueOrder");
+    }
+
+    if (order === "appearance") {
+        return mdn.getLocalString(localStrings, "orderOfAppearance");
+    }
+
+    return order;
+}
+
+
 var data = string.deserialize(template("CSSData"));
 var slug = env.slug;
 var locale = env.locale;
@@ -182,10 +202,10 @@ var localStrings = {
         "ru"   : "как каждое из свойств этого сокращённого свойства:"
     },
     "asSpecified": {
-      "en-US": "as specified",
-      "de" :   "wie spezifiziert",
-      "fr" :   "comme spécifié",
-      "ja" :   "指定値",
+        "en-US": "as specified",
+        "de"   : "wie spezifiziert",
+        "fr"   : "comme spécifié",
+        "ja"   : "指定値",
     },
     "yesAs": {
         "en-US": "Yes, as $1$",
@@ -196,6 +216,17 @@ var localStrings = {
         "de"   : "Prozentwerte",
         "fr"   : "Pourcentages",
         "ja"   : "相対値の基準"
+    },
+    "uniqueOrder": {     
+      "en-US": "the unique non-ambiguous order defined by the formal grammar",
+      "de"   : "die eindeutige Reihenfolge definiert durch die formale Grammatik",
+      "fr"   : "l'ordre unique et non-ambigu défini par la grammaire formelle",
+      "ja"   : "形式文法で定義される一意のあいまいでない順序"
+    },
+    "orderOfAppearance": {
+        "en-US": "order of appearance in the formal grammar of the values",
+        "de"   : "Reihenfolge des Auftretens in der formalen Grammatik der Werte",
+        "fr"   : "l'ordre d'apparition dans la grammaire formelle des valeurs"
     }
 };
 
@@ -262,6 +293,11 @@ if (cssInfo !== null) {
         result += "<li><dfn>" + template("Xref_cssanimatable") + "</dfn> " +
             getAnimatableOutput(mdn, name, atRule) + "</li>";
     }
+
+    // Adds information about the canonical order of the values of the item to
+    // the output
+    result += "<li><dfn>" + template("Xref_csscanonicalorder") + "</dfn> " +
+        getCanonicalOrderOutput(mdn, name, atRule) + "</li>";
 
     result += "</ul>";
 } else {
