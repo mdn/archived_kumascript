@@ -89,6 +89,83 @@ function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
 
 
 function getAnimatableOutput(mdn, propertyOrDescriptor) {
+    function formatString(mdn, string) {
+      if (string === "no") {
+        return "no";
+      }
+
+      var keywords = string.split(" ");
+      var listOf = "";
+      var desc = "";
+      var additionalInfo = "";
+      for (var i = 0; i < keywords.length; i++) {
+        // For all items except the first one add a separator
+        if (desc !== "") {
+          desc += mdn.getLocalString(localStrings, "listSeparator");
+        }
+
+        switch (keywords[i]) {
+          case "simplelist":
+            listOf += mdn.getLocalString(localStrings, "simpleList");
+            break;
+
+          case "repeatablelist":
+            listOf += mdn.getLocalString(localStrings, "repeatableList");
+            break;
+
+          case "transform":
+            desc += mdn.getLocalString(localStrings, "transform");
+            break;
+
+          case "length":
+            desc += mdn.getLocalString(localStrings, "length");
+            break;
+
+          case "lpc":
+            desc += mdn.getLocalString(localStrings, "length") + mdn.getLocalString(localStrings, "lpc");
+            additionalInfo = mdn.getLocalString(localStrings, "lpcAdditionalInfo") + additionalInfo;
+            break;
+
+          case "color":
+            desc += mdn.getLocalString(localStrings, "color");
+            break;
+
+          case "integer":
+            desc += mdn.getLocalString(localStrings, "integer");
+            break;
+
+          case "number":
+            desc += mdn.getLocalString(localStrings, "number");
+            break;
+
+          case "shadowlist":
+            desc += mdn.getLocalString(localStrings, "shadowlist");
+            break;
+
+          case "rectangle":
+            desc += mdn.getLocalString(localStrings, "rectangle");
+            break;
+
+          case "visibility":
+            desc += mdn.getLocalString(localStrings, "visibility");
+            break;
+
+          case "font_stretch":
+            desc += mdn.getLocalString(localStrings, "font_stretch");
+            break;
+
+          case "font_weight":
+            desc += mdn.getLocalString(localStrings, "font_weight");
+            break;
+
+          default:
+            desc += mdn.replacePlaceholders(formattedError, [mdn.getLocalString(localStrings, "missing")]);
+        }
+      }
+
+      return mdn.replacePlaceholders(mdn.getLocalString(localStrings, "yesAs"), [listOf, desc, additionalInfo]);
+    }
+
     if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
         if (property.shorthand) {
@@ -100,23 +177,19 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
                     shorthand) {
                     animatable += getAnimatableOutput(mdn, longhand);
                 } else {
-                    var animatableString =
-                        data.properties[longhand].animatable !== "no" ?
-                        mdn.replacePlaceholders(mdn.getLocalString(localStrings,
-                            "yesAs"), [data.properties[longhand].animatable]) :
-                        mdn.getLocalString(localStrings, "no");
-                    animatable += (data.properties[longhand] ? animatableString : s_missing);
+                    animatable += (data.properties[longhand] ?
+                        formatString(mdn, data.properties[longhand].
+                            animatable) :
+                        mdn.replacePlaceholders(formattedError,
+                            [mdn.getLocalString(localStrings, "missing"])));
                 }
                 animatable += "</li>";
             });
             animatable += "</ul>";
             return animatable;
         } else {
-            return data.properties[propertyOrDescriptor].animatable !== "no" ?
-                mdn.replacePlaceholders(mdn.getLocalString(localStrings,
-                    "yesAs"),
-                    [data.properties[propertyOrDescriptor].animatable]) :
-                mdn.getLocalString(localStrings, "no");
+            return formatString(mdn, data.properties[propertyOrDescriptor].
+                animatable);
         }
     }
 
@@ -213,6 +286,114 @@ var localStrings = {
         "en-US": "Yes, as $1$",
         "de"   : "Ja, als $1$",
     },
+    "yesAs": {
+        "en-US": "yes, as $1$$2$$3$",
+        "de"   : "ja, als $1$$2$$3$",
+        "fr"   : "oui, comme $1$$2$$3$",
+        "ja"   : "可。 $2$の値として補完します$1$$3$",
+        "ru"   : "анимируется, как $1$$2$$3$"
+    },
+    "repeatableList": {
+        "en-US": "a repeatable list of ",
+        "de"   : "mehrfache Werte der folgenden Eigenschaften: ",
+        "fr"   : "une liste répétable de ",
+        "ja"   : "の反復可能リスト",
+        "ru"   : "посторяющийся список из: "
+    },
+    "simpleList": {
+        "en-US": "a simple list of ",
+        "de"   : "ein einfacher Wert der folgenden Eigenschaften: ",
+        "fr"   : "une simple liste de ",
+        "ja"   : "の単純なリスト形式$1$",
+        "ru"   : "простой список из: "
+    },
+    "listSeparator": {
+        "en-US": ", ",
+    },
+    "transform": {
+        "en-US": "a transform",
+        "de"   : "Transformation",
+        "fr"   : "une transformation",
+        "ja"   : "transform",
+        "ru"   : "преобразование",
+    },
+    "length": {
+        "en-US": "a <a href=\"/" + lang + "/docs/CSS/length#Interpolation\" title=\"Values of the <length> CSS data type are interpolated as real, floating-point numbers.\">length</a>",
+        "de"   : "<a href=\"/" + lang + "/docs/Web/CSS/length#Interpolation\">Längenangabe</a>",
+        "fr"   : "une <a href=\"/" + lang + "/docs/CSS/longueur#Interpolation\" title=\"Les valeurs du type <longueur> sont interpolées comme des nombres réels à virgule flottante.\">longueur</a>",
+        "ja"   : "<a href=\"/" + lang + "/docs/Web/CSS/length#Interpolation\" title=\"Values of the <length> CSS data type are interpolated as real, floating-point numbers.\">length</a>",
+        "ru"   : "<a href=\"/" + lang + "/docs/CSS/length#Interpolation\" title=\"Значения типа данных CSS <длина> интерполируются как вещественные числа с плавающей запятой.\">длина</a>",
+    },
+    "lpc": {
+        "en-US": ", <a href=\"/" + lang + "/docs/CSS/percentage#Interpolation\" title=\"Values of the <percentage> CSS data type are interpolated as real, floating-point numbers.\">percentage</a> or calc();",
+        "de"   : ", <a href=\"/" + lang + "/docs/Web/CSS/percentage#Interpolation\">Prozentsatz</a> oder  <a href=\"/" + lang + "/docs/Web/CSS/calc<code>calc()</code></a>;",
+        "fr"   : ", <a href=\"/" + lang + "/docs/CSS/pourcentage#Interpolation\" title=\"Les valeurs du type <pourcentage> sont interpolées comme des nombres réels à virgule flottante.\">pourcentage</a> ou calc() ;",
+        "ja"   : " または <a href=\"/" + lang + "/docs/Web/CSS/percentage#Interpolation\" title=\"Values of the <percentage> CSS data type are interpolated as real, floating-point numbers.\">percentage</a>, calc();",
+        "ru"   : ", <a href=\"/" + lang + "/docs/CSS/percentage#Interpolation\" title=\"Значения типа данных CSS <проценты> интерполируются как вещественные числа с плавающей запятой.\">проценты</a> или функция calc();",
+    },
+    "lpcAdditionalInfo": {
+        "en-US": " when both values are lengths, they are interpolated as lengths; when both values are percentages, they are interpolated as percentages; otherwise, both values are converted into a calc() function that is the sum of a length and a percentage (each possibly zero), and these calc() functions have each half interpolated as real numbers. ",
+        "de"   : " wenn beides Längenwerte sind, werden sie als Längenwerte gehandhabt. Wenn beides Prozentsätze sind, werden sie als Prozentsätze gehandhabt. Ansonsten werden beide Werte wie in einer <code>calc()</code> Funktion addiert (Wird ggf. zu Null), and these calc() functions have each half interpolated as real numbers. ",
+        "fr"   : " quand les deux valeurs sont des longueurs, elles sont interpolées comme des longueurs ; quand les deux valeurs sont des pourcentages, elles sont interpolées comme des pourcentages ; sinon, les deux valeurs sont converties dans une fonction calc() qui est la somme d\"une longueur et d\"un pourcentage (chaque valeur pouvant être à zéro), et cette fonction calc() interpole chaque moitié comme un nombre réel. ",
+        "ja"   : "。両方の値が length の場合は、length 値として補完されます。両方の値が percentage の場合は、percentage 値として補完されます。それ以外の場合は、両方の値が calc() 関数にコンバートされ、length と percentage の合計になります (または各値が 0)。そして、これらの calc() 関数は、それぞれ半分ずつ補完された実数を持ちます",
+        "ru"   : " когда оба значения являются длинами, они интерполируются как длины; когда оба значения являются процентами, они интерполируются как проценты; в остальных случаях, оба значения преобразуются функцией calc() в сумму длины и процента (каждый из них может быть равен нулю), а затем эта функция calc() интерполирует каждую половину как вещественные числа. ",
+    },
+    "color": {
+        "en-US": "a <a href=\"/" + lang + "/docs/CSS/color_value#Interpolation\" title=\"Values of the <color> CSS data type are interpolated on each of their red, green, blue components, each handled as a real, floating-point number. Note that interpolation of colors happens in the alpha-premultiplied sRGBA color space to prevent unexpected grey colors to appear.\">color</a>",
+        "de"   : "<a href=\"/" + lang + "/docs/Web/CSS/color_value#Interpolation\">Farbe</a>",
+        "fr"   : "une <a href=\"/" + lang + "/docs/CSS/valeur_de_couleur#Interpolation\" title=\"Les valeurs de type <couleur> sont interpolées sur chacune des composantes rouge, bleue et verte, considérées chacunes comme un nombre réel à virgule flottante. Notez que l\"interpolation des couleurs a lieu dans l\"espace couleur sRGBA pré-multiplié pour éviter l\"apparition de teintes grises non désirées.\">couleur</a>",
+        "ja"   : "<a href=\"/" + lang + "/docs/Web/CSS/color_value#Interpolation\" title=\"Values of the <color> CSS data type are interpolated on each of their red, green, blue components, each handled as a real, floating-point number. Note that interpolation of colors happens in the alpha-premultiplied sRGBA color space to prevent unexpected grey colors to appear.\">color</a>",
+        "ru"   : "<a href=\"/" + lang + "/docs/CSS/color_value#Interpolation\" title=\"Значения типа данных CSS <цвет> интерполируются по каждой компоненте - красной, зелёной и голубой - как вещественные числа с плавающей запятой. Обратите внимание, что интерполяция цветов происходит в цветовом пространстве sRGBA, уже умноженного на альфу, для предотвращения появления неожиданных серых цветов.\">цвет</a>",
+    },
+    "integer": {
+        "en-US": "an <a href=\"/" + lang + "/docs/CSS/integer#Interpolation\" title=\"Values of the <integer> CSS data type are interpolated via integer discrete steps. The calculation is done as if they were real, floating-point numbers and the discrete value is obtained using the floor function.\">integer</a>",
+        "de"   : "<a href=\"/" + lang + "/docs/Web/CSS/integer#Interpolation\">Integer</a>",
+        "fr"   : "un <a href=\"/" + lang + "/docs/CSS/entier#Interpolation\" title=\"Les valeurs du type <entier> sont interpolées par incrémentation discrète. Le calcul est réalisé comme si les valeurs étaient des nombres réels, en virgule flottante et la valeur discrète est obtenue en utilisant la fonction partie entière.\">entier</a>",
+        "ja"   : "<a href=\"/" + lang + "/docs/Web/CSS/integer#Interpolation\" title=\"Values of the <integer> CSS data type are interpolated via integer discrete steps. The calculation is done as if they were real, floating-point numbers and the discrete value is obtained using the floor function.\">integer</a>",
+        "ru"   : "<a href=\"/" + lang + "/docs/CSS/integer#Interpolation\" title=\"Значения типа данных CSS <целое число> интерполируются через целое число дискретных шагов. Вычисления производятся словно над вещественными числами с плавающей запятой, а дискретные значения получаются с использованием функции floor.\">целое число</a>",
+    },
+    "number": {
+        "en-US": "a <a href=\"/" + lang + "/docs/CSS/number#Interpolation\" title=\"Values of the <number> CSS data type are interpolated as real, floating-point, numbers.\">number</a>",
+        "de"   : "<a href=\"/" + lang + "/docs/Web/CSS/number#Interpolation\">Nummer</a>",
+        "fr"   : "un <a href=\"/" + lang + "/docs/CSS/nombre#Interpolation\" title=\"Les valeurs du type <nombre> sont interpolées comme des nombres réels, en virgule flottante.\">nombre</a>",
+        "ja"   : "<a href=\"/" + lang + "/docs/Web/CSS/number#Interpolation\" title=\"Values of the <number> CSS data type are interpolated as real, floating-point, numbers.\">number</a>",
+        "ru"   : "<a href=\"/" + lang + "/docs/CSS/number#Interpolation\" title=\"Значения типа данных CSS <число> интерполируются как вещественные числа с плавающей запятой.\">число</a>",
+    },
+    "shadowlist": {
+        "en-US": "a shadow list",
+        "de"   : "Schatten",
+        "fr"   : "une liste d\"ombres",
+        "ja"   : "shadow リスト",
+        "ru"   : "список теней",
+    },
+    "visibility": {
+        "en-US": "a <a href=\"/" + lang + "/docs/CSS/visibility#Interpolation\" title=\"Values of the visibility CSS property are interpolable if the start or the end value is visible. In that case all values of the timing function which are equal to 1 map to visible and non-equal to 1 to non-visible.\">visibility</a>",
+        "de"   : "<a href=\"/" + lang + "/docs/Web/CSS/visibility#Interpolation\">Sichtbarkeit</a>",
+        "fr"   : "une <a href=\"/" + lang + "/docs/CSS/visibility#Interpolation\" title=\"Les valeurs de la propriété CSS visibility sont interpolables si une des valeurs de début ou de fin est visible. Dans ce cas, toutes les valeurs de la fonction de temporisation qui sont égales à 1 sont associées à visible, et celles non égales à 1, à non-visible.\">visibilité</a>",
+        "ja"   : "<a href=\"/" + lang + "/docs/Web/CSS/visibility#Interpolation\" title=\"Values of the visibility CSS property are interpolable if the start or the end value is visible. In that case all values of the timing function which are equal to 1 map to visible and non-equal to 1 to non-visible.\">visibility</a>",
+        "ru"   : "<a href=\"/" + lang + "/docs/CSS/visibility#Interpolation\" title=\"Значения свойства CSS visibility интерполируются, если начальное или конечное значение установлено в visible. В этом случае все значения временной функции, равные 1, отображаются на видимость, а не равные 1 отображаются на невидимость.\">видимость</a>",
+    },
+    "font_stretch": {
+        "en-US": "a <a href=\"/" + lang + "/docs/CSS/font-stretch#Interpolation\" title=\"Font stretch values are interpolated in discrete steps. The interpolation happens as though the ordered values are equally spaced real numbers; the result is rounded to the nearest value, with values exactly halfway between two values rounded towards the later value, that is the most expanded one.\">font stretch</a>",
+        "de"   : "<a href=\"/" + lang + "/docs/Web/CSS/font-stretch#Interpolation\">Schriftbreite</a>",
+        "fr"   : "une <a href=\"/" + lang + "/docs/CSS/font-stretch#Interpolation\" title=\"Font stretch values are interpolated in discrete steps. The interpolation happens as though the ordered values are equally spaced real numbers; the result is rounded to the nearest value, with values exactly halfway between two values rounded towards the later value, that is the most expanded one.\">font stretch</a>",
+        "ja"   : "<a href=\"/" + lang + "/docs/Web/CSS/font-stretch#Interpolation\" title=\"Font stretch values are interpolated in discrete steps. The interpolation happens as though the ordered values are equally spaced real numbers; the result is rounded to the nearest value, with values exactly halfway between two values rounded towards the later value, that is the most expanded one.\">font stretch</a>",
+        "ru"   : "<a href=\"/" + lang + "/docs/CSS/font-stretch#Interpolation\" title=\"Значения ширины начертания шрифта интерполируются по дискретным шагам. Интерполяция происходит по упорядоченно расположенным значениям в пространстве действительных чисел; результат округляется к ближайшему значению, значения точно между двумя соседними значениями округляются в сторону большего значения, которое является наиболее широким.\">ширина начертания шрифта</a>",
+    },
+    "font_weight": {
+        "en-US": "a <a href=\"/" + lang + "/docs/CSS/font-weight#Interpolation\" title=\"Font weight values are interpolated via discrete steps (multiples of 100). The interpolation happens in real number space and is converted to an integer by rounding to the nearest multiple of 100, with values halfway between multiples of 100 rounded towards positive infinity.\">font weight</a>",
+        "de"   : "<a href=\"/" + lang + "/docs/Web/CSS/font-weight#Interpolation\">Schriftgewichtung</a>",
+        "fr"   : "une <a href=\"/" + lang + "/docs/CSS/font-weight#Interpolation\" title=\"Les valeurs de graisse de police sont interpolées via des étapes discrètes (multiple de 100). L\"interpolation a lieu dans un espace de nombres réels et est convertis en un entier arroundi au plus proche multiple de 100, avec les valeurs à mis chemin entre les multiples de 100, arrondies vers l\"infini positif.\">graisse de police</a>",
+        "ja"   : "<a href=\"/" + lang + "/docs/Web/CSS/font-weight#Interpolation\" title=\"Font weight values are interpolated via discrete steps (multiples of 100). The interpolation happens in real number space and is converted to an integer by rounding to the nearest multiple of 100, with values halfway between multiples of 100 rounded towards positive infinity.\">font weight</a>",
+        "ru"   : "<a href=\"/" + lang + "/docs/CSS/font-weight#Interpolation\" title=\"Значения жирности шрифта интерполируются через целое число дискретных шагов (умноженных на 100). Интерполяция происходит в пространстве действительных чисел, а получившееся значение преобразуется в целое путём округления до ближайшей сотни, значения точно между соседними множителями 100 округляются в сторону положительной бесконечности.\">жирность шрифта</a>",
+    },
+    "rectangle": {
+        "en-US": "a <a href=\"/" + lang + "/docs/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
+        "de"   : "<a href=\"/" + lang + "/docs/Web/CSS/shape#Interpolation\">Rechteck</a>",
+        "fr"   : "un <a href=\"/" + lang + "/docs/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
+        "ja"   : "<a href=\"/" + lang + "/docs/Web/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
+        "ru"   : "<a href=\"/" + lang + "/docs/CSS/shape#Interpolation\" title=\"Значения типа данных CSS <фигура>, которыми являются прямоугольники интерполируются по их верхней, правой, нижней и левой компоненте, каждая из которых трактуется как вещественныое число с плавающей запятой.\">прямоугольник</a>",
+    },
     "percentages": {
         "en-US": "Percentages",
         "de"   : "Prozentwerte",
@@ -220,10 +401,10 @@ var localStrings = {
         "ja"   : "相対値の基準"
     },
     "uniqueOrder": {     
-      "en-US": "the unique non-ambiguous order defined by the formal grammar",
-      "de"   : "die eindeutige Reihenfolge definiert durch die formale Grammatik",
-      "fr"   : "l'ordre unique et non-ambigu défini par la grammaire formelle",
-      "ja"   : "形式文法で定義される一意のあいまいでない順序"
+        "en-US": "the unique non-ambiguous order defined by the formal grammar",
+        "de"   : "die eindeutige Reihenfolge definiert durch die formale Grammatik",
+        "fr"   : "l'ordre unique et non-ambigu défini par la grammaire formelle",
+        "ja"   : "形式文法で定義される一意のあいまいでない順序"
     },
     "orderOfAppearance": {
         "en-US": "order of appearance in the formal grammar of the values",
