@@ -181,8 +181,10 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
                     shorthand) {
                     animatable += getAnimatableOutput(mdn, longhand);
                 } else {
-                    animatable += (data.properties[longhand] ?
-                        formatString(data.properties[longhand].animatable) :
+                    animatable += (data.properties[longhand] &&
+                            data.properties[longhand].animatable ?
+                        formatString(mdn,
+                            data.properties[longhand].animatable) :
                         mdn.replacePlaceholders(formattedError,
                             [mdn.getLocalString(localStrings, "missing")]));
                 }
@@ -191,8 +193,11 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
             animatable += "</ul>";
             return animatable;
         } else {
-            return formatString(mdn, data.properties[propertyOrDescriptor].
-                animatable);
+            return (data.properties[propertyOrDescriptor].animatable ?
+                formatString(mdn, data.properties[propertyOrDescriptor].
+                    animatable) :
+                mdn.replacePlaceholders(formattedError,
+                    [mdn.getLocalString(localStrings, "missing")]));
         }
     }
 
