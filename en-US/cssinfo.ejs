@@ -52,6 +52,42 @@ function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
 }
 
 
+function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
+    if (atRule) {
+        if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
+            data.atRules[atRule].descriptors[propertyOrDescriptor]) {
+            return data.atRules[atRule].descriptors[propertyOrDescriptor].
+                computed || mdn.getLocalString(localStrings, "asSpecified");
+        }
+    } else if (data.properties[propertyOrDescriptor]) {
+        var property = data.properties[propertyOrDescriptor];
+        if (property.shorthand) {
+            var computedValue =
+                mdn.getLocalString(localStrings, "asLonghands") + "<ul>";
+            property.longhands.forEach(function(longhand) {
+                computedValue += "<li><code>" + longhand + "</code>: ";
+                if (data.properties[longhand] &&
+                    data.properties[longhand].shorthand) {
+                    computedValue += getComputedValueOutput(mdn, longhand);
+                } else {
+                    computedValue += (data.properties[longhand] &&
+                        data.properties[longhand].computed) ||
+                        mdn.getLocalString(localStrings, "asSpecified");
+                }
+                computedValue += "</li>";
+            });
+            computedValue += "</ul>";
+            return computedValue;
+        } else {
+            return data.properties[propertyOrDescriptor].computed ||
+                mdn.getLocalString(localStrings, "asSpecified");
+        }
+    }
+    
+    return "";
+}
+
+
 function getAnimatableOutput(mdn, propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
@@ -151,6 +187,12 @@ var localStrings = {
         "ja"   : "以下の各プロパティのショートハンドとして補完します:",
         "ru"   : "как каждое из свойств этого сокращённого свойства:"
     },
+    "asSpecified": {
+      "en-US": "as specified",
+      "de" :   "wie spezifiziert",
+      "fr" :   "comme spécifié",
+      "ja" :   "指定値",
+    },
     "yesAs": {
         "en-US": "Yes, as $1$",
         "de"   : "Ja, als $1$",
@@ -216,6 +258,10 @@ if (cssInfo !== null) {
     result += "<li><dfn><a href=\"/" + locale + "/docs/Web/CSS/@media\">" +
         mdn.getLocalString(localStrings, "media") + "</a></dfn> " +
         cssInfo.media + "</li>";
+
+    // Adds information about the computed value of the item to the output
+    result += "<li><dfn>" + template("Xref_csscomputed") + "</dfn> " +
+        getComputedValueOutput(mdn, name, atRule) + "</li>";
 
     // Adds information about whether the item is animatable to the output
     result += "<li><dfn>" + template("Xref_cssanimatable") + "</dfn> " +
