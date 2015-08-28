@@ -171,25 +171,33 @@ var result = "";
 if (cssInfo !== null) {
     result = "<ul class=\"cssprop\">";
 
-    // Displays information about the initial value of the item
+    // Adds information about the initial value of the item to the output
     result += "<li><dfn>" + template("Xref_cssinitial") + "</dfn> " +
         getInitialValueOutput(mdn, name, atRule) + "</li>";
 
-    // Displays information about whether the item's value is inherited
+    // Adds information about whether the item's value is inherited to the 
+    // output
     result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
         (cssInfo.inherited ?
             mdn.getLocalString(localStrings, "yes") :
             mdn.getLocalString(localStrings, "no")) +
         "</li>";
 
-    // Displays information about the media the item applies to
+    // Adds information about how percentages are handled to the output 
+    if (cssInfo.percentages !== "no") {
+        result += "<li><dfn>" +
+            mdn.getLocalString(localStrings, "percentages") + "</dfn> " +
+            cssInfo.percentages + "</li>";
+    }
+
+    // Adds information about the media the item applies to to the output
     // We have a general link to @media here. When https://bugzil.la/1133414 is
     // fixed, we may change the link.
     result += "<li><dfn><a href=\"/" + locale + "/docs/Web/CSS/@media\">" +
-        mdn.getLocalString(localStrings, "media") + "</a></dfn> " + cssInfo.media +
-        "</li>";
+        mdn.getLocalString(localStrings, "media") + "</a></dfn> " +
+        cssInfo.media + "</li>";
 
-    // Displays information about whether the item is animatable
+    // Adds information about whether the item is animatable to the output
     result += "<li><dfn>" + template("Xref_cssanimatable") + "</dfn> " +
         getAnimatableOutput(mdn, name, atRule) + "</li>";
 
