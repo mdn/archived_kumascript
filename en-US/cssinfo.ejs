@@ -35,7 +35,8 @@ function getInitialValue(mdn, propertyOrDescriptor, atRule) {
                 } else {
                     initialValue += (data.properties[longhand] ?
                         data.properties[longhand].initial :
-                        mdn.getLocalString(localStrings, "missing"));
+                        mdn.replacePlaceholders(formattedError,
+                            [mdn.getLocalString(localStrings, "missing")]));
                 }
                 initialValue += "</li>";
             });
@@ -53,6 +54,7 @@ function getInitialValue(mdn, propertyOrDescriptor, atRule) {
 var data = string.deserialize(template("CSSData"));
 var slug = env.slug;
 var locale = env.locale;
+var formattedError = "<span style=\"color:red;\">$1$</span>";
 
 var name = $0 || slug.split("/").pop();
 var atRule = $1;
@@ -136,7 +138,7 @@ if (cssInfo !== null) {
     
     result += "</ul>";
 } else {
-    result = "<span style=\"color: red\">" + mdn.getLocalString(localStrings,
-        "missing") + "</span>";
+    result = mdn.replacePlaceholders(formattedError,
+        [mdn.getLocalString(localStrings, "missing")]);
 }
 %><%- result %>
