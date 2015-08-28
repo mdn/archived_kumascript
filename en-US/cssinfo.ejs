@@ -6,7 +6,16 @@
   $1 - @-rule - defaults to the @-rule within the URL
 */
 
-function getInitialValue(propertyOrDescriptor, atRule) {
+/**
+ * Returns the initial value of a property or descriptor as formatted output
+ * @param Object mdn Common functions library; needs to be passed to the 
+ *        Function, otherwise the library is not available within it
+ * @param String propertyOrDescriptor Name of the property or descriptor to 
+ *        return the initial value for
+ * @param String atRule Name of the @-Rule the descriptor belongs to
+ * @returns String Formatted output for initial value
+ * /
+function getInitialValue(mdn, propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
             data.atRules[atRule].descriptors[propertyOrDescriptor]) {
@@ -16,16 +25,17 @@ function getInitialValue(propertyOrDescriptor, atRule) {
     } else if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
         if (property.shorthand) {
-            var initialValue = "longhandConcatination" + "<ul>";
+            var initialValue = mdn.getLocalString(localStrings,
+                "longhandConcatination") + "<ul>";
             property.longhands.forEach(function(longhand) {
                 initialValue += "<li><code>" + longhand + "</code>: ";
                 if (data.properties[longhand] &&
                     data.properties[longhand].shorthand) {
-                    initialValue += getInitialValue(longhand);
+                    initialValue += getInitialValue(mdn, longhand);
                 } else {
                     initialValue += (data.properties[longhand] ?
                         data.properties[longhand].initial :
-                        "missing");
+                        mdn.getLocalString(localStrings, "missing"));
                 }
                 initialValue += "</li>";
             });
@@ -103,7 +113,7 @@ var result = "<ul class=\"cssprop\">";
 
 // Displays information about the initial value of the item
 result += "<li><dfn>" + template("Xref_cssinitial") + "</dfn> " +
-    getInitialValue(name, atRule) + "</li>";
+    getInitialValue(mdn, name, atRule) + "</li>";
 
 // Displays information about whether the item's value is inherited
 result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
