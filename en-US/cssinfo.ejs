@@ -94,6 +94,8 @@ var localStrings = {
     }
 };
 
+var cssInfo = null;
+
 if (!atRule) {
     var matches = slug.match(/\/CSS\/(@.+?)(?=\/)/);
     if (matches) {
@@ -111,7 +113,7 @@ if (atRule) {
 
 var result = "";
 
-if (cssInfo) {
+if (cssInfo !== null) {
     result = "<ul class=\"cssprop\">";
     
     // Displays information about the initial value of the item
