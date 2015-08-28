@@ -16,7 +16,8 @@ function getInitialValue(propertyOrDescriptor, atRule) {
     } else if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
         if (property.shorthand) {
-            var initialValue = s_longhand_concatination + "<ul>";
+            var initialValue = mdn.getLocalString(localStrings,
+                "longhandConcatination") + "<ul>";
             property.longhands.forEach(function(longhand) {
                 initialValue += "<li><code>" + longhand + "</code>: ";
                 if (data.properties[longhand] &&
