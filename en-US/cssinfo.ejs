@@ -6,6 +6,40 @@
   $1 - @-rule - defaults to the @-rule within the URL
 */
 
+function getInitialValue(propertyOrDescriptor, atRule) {
+    if (atRule) {
+        if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
+            data.atRules[atRule].descriptors[propertyOrDescriptor]) {
+            return data.atRules[atRule].descriptors[propertyOrDescriptor].
+                initial;
+        }
+    } else if (data.properties[propertyOrDescriptor]) {
+        var property = data.properties[propertyOrDescriptor];
+        if (property.shorthand) {
+            var initialValue = s_longhand_concatination + "<ul>";
+            property.longhands.forEach(function(longhand) {
+                initialValue += "<li><code>" + longhand + "</code>: ";
+                if (data.properties[longhand] &&
+                    data.properties[longhand].shorthand) {
+                    initialValue += getOutput(longhand);
+                } else {
+                    initialValue += (data.properties[longhand] ?
+                        data.properties[longhand].initial :
+                        mdn.getLocalString(localStrings, "missing"));
+                }
+                    initialValue += "</li>";
+            });
+            initialValue += "</ul>";
+            return initialValue;
+        } else {
+            return data.properties[propertyOrDescriptor].initial;
+        }
+    }
+
+    return "";
+}
+
+
 var data = string.deserialize(template("CSSData"));
 var slug = env.slug;
 var locale = env.locale;
@@ -41,6 +75,12 @@ var localStrings = {
         "de"   : "Nein",
         "fr"   : "non",
         "ja"   : "継承しない"
+    },
+    "longhandConcatination": {
+        "en-US": "the concatenation of the initial values of its longhand properties:",
+        "de"   : "Die Verkettung der Initialwerte der Langform Eigenschaften:",
+        "fr"   : "La concaténation des valeurs initiales des propriétés associées :",
+        "ja"   : "以下の各ロングハンドプロパティの初期値が使用されます:"
     }
 };
 
@@ -61,7 +101,11 @@ if (atRule) {
 
 var result = "<ul class=\"cssprop\">";
 
-// Displays information whether the item's value is inherited
+// Displays information about the initial value of the item
+result += "<li><dfn>" + template("Xref_cssinitial") + "</dfn> " +
+    getInitialValue(name, atRule) + "</li>";
+
+// Displays information about whether the item's value is inherited
 result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
     (cssInfo.inherited ?
         mdn.getLocalString(localStrings, "yes") :
