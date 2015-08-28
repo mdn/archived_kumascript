@@ -6,15 +6,6 @@
   $1 - @-rule - defaults to the @-rule within the URL
 */
 
-/**
- * Returns the initial value of a property or descriptor as formatted output
- * @param Object mdn Common functions library; needs to be passed to the 
- *        Function, otherwise the library is not available within it
- * @param String propertyOrDescriptor Name of the property or descriptor to 
- *        return the initial value for
- * @param String atRule Name of the @-Rule the descriptor belongs to
- * @returns String Formatted output for initial value
- * /
 function getInitialValue(mdn, propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
