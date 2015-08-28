@@ -109,26 +109,32 @@ if (atRule) {
     cssInfo = data.properties[name];
 }
 
-var result = "<ul class=\"cssprop\">";
+var result = "";
 
-// Displays information about the initial value of the item
-result += "<li><dfn>" + template("Xref_cssinitial") + "</dfn> " +
-    getInitialValue(mdn, name, atRule) + "</li>";
-
-// Displays information about whether the item's value is inherited
-result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
-    (cssInfo.inherited ?
-        mdn.getLocalString(localStrings, "yes") :
-        mdn.getLocalString(localStrings, "no")) +
-    "</li>";
-
-// Displays information about the media the item applies to
-// We have a general link to @media here. When https://bugzil.la/1133414 is
-// fixed, we may change the link.
-result += "<li><dfn><a href=\"/" + locale + "/docs/Web/CSS/@media\">" +
-    mdn.getLocalString(localStrings, "media") + "</a></dfn> " + cssInfo.media +
-    "</li>";
-
-result += "</ul>";
-
+if (cssInfo) {
+    result = "<ul class=\"cssprop\">";
+    
+    // Displays information about the initial value of the item
+    result += "<li><dfn>" + template("Xref_cssinitial") + "</dfn> " +
+        getInitialValue(mdn, name, atRule) + "</li>";
+    
+    // Displays information about whether the item's value is inherited
+    result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
+        (cssInfo.inherited ?
+            mdn.getLocalString(localStrings, "yes") :
+            mdn.getLocalString(localStrings, "no")) +
+        "</li>";
+    
+    // Displays information about the media the item applies to
+    // We have a general link to @media here. When https://bugzil.la/1133414 is
+    // fixed, we may change the link.
+    result += "<li><dfn><a href=\"/" + locale + "/docs/Web/CSS/@media\">" +
+        mdn.getLocalString(localStrings, "media") + "</a></dfn> " + cssInfo.media +
+        "</li>";
+    
+    result += "</ul>";
+} else {
+    result = "<span style=\"color: red\">" + mdn.getLocalString(localStrings,
+        "missing") + "</span>";
+}
 %><%- result %>
