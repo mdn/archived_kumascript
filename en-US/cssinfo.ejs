@@ -52,52 +52,6 @@ function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
 }
 
 
-/**
- * Returns information about to which element a property or descriptor applies
- * as formatted output
- * 
- * @param Object mdn Common functions library; needs to be passed to the 
- *        function, otherwise the library is not available within it
- * @param String propertyOrDescriptor Name of the property or descriptor to 
- *        return the info for
- * @param String atRule Name of the @-Rule the descriptor belongs to
- * @returns String Formatted output of the info
- */
-function getAppliesToOutput(mdn, propertyOrDescriptor, atRule) {
-    if (atRule) {
-        if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
-            data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-            return data.atRules[atRule].descriptors[propertyOrDescriptor].
-                appliesTo;
-        }
-    } else if (data.properties[propertyOrDescriptor]) {
-        var property = data.properties[propertyOrDescriptor];
-        if (property.shorthand) {
-            var appliesTo = mdn.getLocalString(localStrings, "asLonghands") +
-                "<ul>";
-            property.longhands.forEach(function(longhand) {
-                appliesTo += "<li><code>" + longhand + "</code>: ";
-                if (data.properties[longhand] && data.properties[longhand].
-                    shorthand) {
-                    appliesTo += getAppliesToOutput(mdn, longhand);
-                } else {
-                    appliesTo += (data.properties[longhand].appliesto ||
-                        mdn.replacePlaceholders(formattedError,
-                            [mdn.getLocalString(localStrings, "missing")]));
-                }
-                appliesTo += "</li>";
-            });
-            appliesTo += "</ul>";
-            return appliesTo;
-        } else {
-            return data.properties[propertyOrDescriptor].appliesto;
-        }
-    }
-
-    return "";
-}
-
-
 function getAnimatableOutput(mdn, propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
@@ -236,8 +190,10 @@ if (cssInfo !== null) {
         getInitialValueOutput(mdn, name, atRule) + "</li>";
 
     // Adds information about to which elements the item applies to the output
-    result += "<li><dfn>" + mdn.getLocalString(localStrings, "appliesTo") +
-        "</dfn> " + getAppliesToOutput(mdn, name, atRule) + "</li>";
+    if (cssInfo.appliesTo) {
+        result += "<li><dfn>" + mdn.getLocalString(localStrings, "appliesTo") +
+            "</dfn> " + cssInfo.appliesto + "</li>";
+    }
 
     // Adds information about whether the item's value is inherited to the 
     // output
