@@ -88,14 +88,8 @@ function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
 }
 
 
-function getAnimatableOutput(mdn, propertyOrDescriptor, atRule) {
-    if (atRule) {
-        if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
-            data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-            return data.atRules[atRule].descriptors[propertyOrDescriptor].
-                animatable;
-        }
-    } else if (data.properties[propertyOrDescriptor]) {
+function getAnimatableOutput(mdn, propertyOrDescriptor) {
+    if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
         if (property.shorthand) {
             var animatable = mdn.getLocalString(localStrings, "asLonghands") +
@@ -232,7 +226,7 @@ if (cssInfo !== null) {
         getInitialValueOutput(mdn, name, atRule) + "</li>";
 
     // Adds information about to which elements the item applies to the output
-    if (cssInfo.appliesto) {
+    if (atRule) {
         result += "<li><dfn>" + mdn.getLocalString(localStrings, "appliesTo") +
             "</dfn> " + cssInfo.appliesto + "</li>";
     }
@@ -264,8 +258,10 @@ if (cssInfo !== null) {
         getComputedValueOutput(mdn, name, atRule) + "</li>";
 
     // Adds information about whether the item is animatable to the output
-    result += "<li><dfn>" + template("Xref_cssanimatable") + "</dfn> " +
-        getAnimatableOutput(mdn, name, atRule) + "</li>";
+    if (!atRule) {
+        result += "<li><dfn>" + template("Xref_cssanimatable") + "</dfn> " +
+            getAnimatableOutput(mdn, name, atRule) + "</li>";
+    }
 
     result += "</ul>";
 } else {
