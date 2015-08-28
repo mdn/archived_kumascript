@@ -122,8 +122,10 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
             break;
 
           case "lpc":
-            desc += mdn.getLocalString(localStrings, "length") + mdn.getLocalString(localStrings, "lpc");
-            additionalInfo = mdn.getLocalString(localStrings, "lpcAdditionalInfo") + additionalInfo;
+            desc += mdn.getLocalString(localStrings, "length") +
+                mdn.getLocalString(localStrings, "lpc");
+            additionalInfo = mdn.getLocalString(localStrings,
+                "lpcAdditionalInfo") + additionalInfo;
             break;
 
           case "color":
@@ -159,11 +161,13 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
             break;
 
           default:
-            desc += mdn.replacePlaceholders(formattedError, [mdn.getLocalString(localStrings, "missing")]);
+            desc += mdn.replacePlaceholders(formattedError,
+                [mdn.getLocalString(localStrings, "missing")]);
         }
       }
 
-      return mdn.replacePlaceholders(mdn.getLocalString(localStrings, "yesAs"), [listOf, desc, additionalInfo]);
+      return mdn.replacePlaceholders(mdn.getLocalString(localStrings, "yesAs"),
+        [listOf, desc, additionalInfo]);
     }
 
     if (data.properties[propertyOrDescriptor]) {
@@ -177,7 +181,10 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
                     shorthand) {
                     animatable += getAnimatableOutput(mdn, longhand);
                 } else {
-                    animatable += (data.properties[longhand] ? formatString(data.properties[longhand].animatable) : mdn.getLocalString(localStrings, "missing"));
+                    animatable += (data.properties[longhand] ?
+                        formatString(data.properties[longhand].animatable) :
+                        mdn.replacePlaceholders(formattedError,
+                            [mdn.getLocalString(localStrings, "missing")]));
                 }
                 animatable += "</li>";
             });
