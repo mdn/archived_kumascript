@@ -22,7 +22,7 @@ function getInitialValue(propertyOrDescriptor, atRule) {
                 initialValue += "<li><code>" + longhand + "</code>: ";
                 if (data.properties[longhand] &&
                     data.properties[longhand].shorthand) {
-                    initialValue += getOutput(longhand);
+                    initialValue += getInitialValue(longhand);
                 } else {
                     initialValue += (data.properties[longhand] ?
                         data.properties[longhand].initial :
