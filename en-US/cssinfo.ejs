@@ -29,7 +29,7 @@ function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
             var initialValue = mdn.getLocalString(localStrings,
                 "longhandConcatination") + "<ul>";
             property.longhands.forEach(function(longhand) {
-                initialValue += "<li><code>" + longhand + "</code>: ";
+                initialValue += "<li>" + template("cssxref", [longhand]) + ": ";
                 if (data.properties[longhand] &&
                     data.properties[longhand].shorthand) {
                     initialValue += getInitialValueOutput(mdn, longhand);
@@ -65,7 +65,7 @@ function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
             var computedValue =
                 mdn.getLocalString(localStrings, "asLonghands") + "<ul>";
             property.longhands.forEach(function(longhand) {
-                computedValue += "<li><code>" + longhand + "</code>: ";
+                computedValue += "<li>" + template("cssxref", [longhand]) + ": ";
                 if (data.properties[longhand] &&
                     data.properties[longhand].shorthand) {
                     computedValue += getComputedValueOutput(mdn, longhand);
@@ -176,7 +176,7 @@ function getAnimatableOutput(mdn, propertyOrDescriptor) {
             var animatable = mdn.getLocalString(localStrings, "asLonghands") +
                 "<ul>";
             property.longhands.forEach(function(longhand) {
-                animatable += "<li><code>" + longhand + "</code>: ";
+                animatable += "<li>" + template("cssxref", [longhand]) + ": ";
                 if (data.properties[longhand] && data.properties[longhand].
                     shorthand) {
                     animatable += getAnimatableOutput(mdn, longhand);
