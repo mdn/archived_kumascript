@@ -107,10 +107,10 @@ function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
  * 
  * @param Object mdn Common functions library; needs to be passed to the 
  *        Function, otherwise the library is not available within it
- * @param String property Name of the property to return the info for
+ * @param String propertyName Name of the property to return the info for
  * @returns String Formatted output of the info
  */
-function getAnimatableOutput(mdn, property) {
+function getAnimatableOutput(mdn, propertyName) {
     function formatString(mdn, string) {
       if (string === "no") {
         return "no";
@@ -192,8 +192,8 @@ function getAnimatableOutput(mdn, property) {
         [listOf, desc, additionalInfo]);
     }
 
-    if (data.properties[property]) {
-        var property = data.properties[property];
+    if (data.properties[propertyName]) {
+        var property = data.properties[propertyName];
         if (property.shorthand) {
             var animatable = mdn.getLocalString(localStrings, "asLonghands") +
                 "<ul>";
@@ -217,8 +217,8 @@ function getAnimatableOutput(mdn, property) {
             animatable += "</ul>";
             return animatable;
         } else {
-            return (data.properties[property].animatable ?
-                formatString(mdn, data.properties[property].animatable) :
+            return (data.properties[propertyName].animatable ?
+                formatString(mdn, data.properties[propertyName].animatable) :
                 mdn.replacePlaceholders(formattedError,
                     [mdn.getLocalString(localStrings, "missing")]));
         }
