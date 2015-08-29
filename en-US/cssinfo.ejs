@@ -14,7 +14,11 @@
  */
 function parseMacros(template, string) {
     var parsedString = string;
-    parsedString.replace(/\{\{(.+?)\}\}/g, function(match, macroName) {
+    parsedString.replace(/\{\{(.+?)(\(["'](.+?)["']\))?\}\}/g, function(match, macroName,
+        params, firstParam) {
+        if (firstParam) {
+            return template(macroName, [firstParam]);
+        }
         return template(macroName);
     });
     return parsedString;
@@ -97,7 +101,7 @@ function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
                     "</a></code>: ";
                 if (data.properties[longhand] &&
                     data.properties[longhand].shorthand) {
-                    computedValue += getComputedValueOutput(commonFunctions.mdn, longhand);
+                    computedValue += getComputedValueOutput(commonFunctions, longhand);
                 } else {
                     computedValue += (data.properties[longhand] &&
                         data.properties[longhand].computed) ||
