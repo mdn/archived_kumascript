@@ -12,7 +12,7 @@
  * @param String string String to parse
  * @returns String with replaced macros
  */
-function parseMacros(string) {
+function parseMacros(template, string) {
     var parsedString = string;
     parsedString.replace(/\{\{(.+?)\}\}/g, function(match, macroName) {
         return template(macroName);
@@ -72,45 +72,49 @@ function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
 /**
  * Returns the computed value of a property or descriptor as formatted output
  * 
- * @param Object mdn Common functions library; needs to be passed to the 
- *        Function, otherwise the library is not available within it
+ * @param Object commonFunctions Common functions; need to be passed to the 
+ *        Function, otherwise the global functions are not available within it
  * @param String propertyOrDescriptor Name of the property or descriptor to 
  *        return the info for
  * @param String atRule Name of the @-Rule the descriptor belongs to
  * @returns String Formatted output of the info
  */
-function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
+function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
             data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-            return parseMacros(data.atRules[atRule].
+            return parseMacros(commonFunctions.template, data.atRules[atRule].
                 descriptors[propertyOrDescriptor].computed) ||
-                mdn.getLocalString(localStrings, "asSpecified");
+                commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
         }
     } else if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
         if (property.shorthand) {
-            var computedValue =
-                mdn.getLocalString(localStrings, "asLonghands") + "<ul>";
+            var computedValue = commonFunctions.mdn.getLocalString(localStrings,
+                "asLonghands") + "<ul>";
             property.longhands.forEach(function(longhand) {
                 computedValue += "<li><code><a href=\"/" + locale +
                     "/docs/Web/CSS/" + longhand + "\">" + longhand +
                     "</a></code>: ";
                 if (data.properties[longhand] &&
                     data.properties[longhand].shorthand) {
-                    computedValue += getComputedValueOutput(mdn, longhand);
+                    computedValue += getComputedValueOutput(commonFunctions,
+                        longhand);
                 } else {
-                    computedValue += parseMacros(data.properties[longhand] &&
-                        data.properties[longhand].computed) ||
-                        mdn.getLocalString(localStrings, "asSpecified");
+                    computedValue += parseMacros(commonFunctions.template,
+                            data.properties[longhand] &&
+                            data.properties[longhand].computed) ||
+                        commonFunctions.mdn.getLocalString(localStrings,
+                            "asSpecified");
                 }
                 computedValue += "</li>";
             });
             computedValue += "</ul>";
             return computedValue;
         } else {
-            return parseMacros(data.properties[propertyOrDescriptor].computed) ||
-                mdn.getLocalString(localStrings, "asSpecified");
+            return parseMacros(commonFunctions.template,
+                data.properties[propertyOrDescriptor].computed) ||
+                commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
         }
     }
     
@@ -516,7 +520,8 @@ if (cssInfo !== null) {
 
     // Adds information about the computed value of the item to the output
     result += "<li><dfn>" + template("Xref_csscomputed") + "</dfn> " +
-        getComputedValueOutput(mdn, name, atRule) + "</li>";
+        getComputedValueOutput({mdn: mdn, template: template}, name, atRule) +
+        "</li>";
 
     // Adds information about whether the item is animatable to the output
     if (!atRule) {
