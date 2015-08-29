@@ -103,8 +103,8 @@ function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
                     computedValue += getComputedValueOutput(commonFunctions,
                         longhand);
                 } else {
-                    computedValue += data.properties[longhand] &&
-                            data.properties[longhand].computed ?
+                    computedValue += (data.properties[longhand] &&
+                            data.properties[longhand].computed) ?
                             parseMacros(commonFunctions.template,
                                 data.properties[longhand].computed) :
                         commonFunctions.mdn.getLocalString(localStrings,
