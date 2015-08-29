@@ -7,6 +7,21 @@
 */
 
 /**
+ * Parses all macros within a string
+ * 
+ * @param String string String to parse
+ * @returns String with replaced macros
+ */
+function parseMacros(string) {
+    var parsedString = string;
+    parsedString.replace(/\{\{(.+?)\}\}/g, function(match, macroName) {
+        return template(macroName);
+    });
+    return parsedString;
+}
+
+
+/**
  * Returns the initial value of a property or descriptor as formatted output
  * 
  * @param Object mdn Common functions library; needs to be passed to the 
@@ -68,8 +83,9 @@ function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
             data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-            return data.atRules[atRule].descriptors[propertyOrDescriptor].
-                computed || mdn.getLocalString(localStrings, "asSpecified");
+            return parseMacros(data.atRules[atRule].
+                descriptors[propertyOrDescriptor].computed) ||
+                mdn.getLocalString(localStrings, "asSpecified");
         }
     } else if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
@@ -84,7 +100,7 @@ function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
                     data.properties[longhand].shorthand) {
                     computedValue += getComputedValueOutput(mdn, longhand);
                 } else {
-                    computedValue += (data.properties[longhand] &&
+                    computedValue += parseMacros(data.properties[longhand] &&
                         data.properties[longhand].computed) ||
                         mdn.getLocalString(localStrings, "asSpecified");
                 }
@@ -93,7 +109,7 @@ function getComputedValueOutput(mdn, propertyOrDescriptor, atRule) {
             computedValue += "</ul>";
             return computedValue;
         } else {
-            return data.properties[propertyOrDescriptor].computed ||
+            return parseMacros(data.properties[propertyOrDescriptor].computed) ||
                 mdn.getLocalString(localStrings, "asSpecified");
         }
     }
