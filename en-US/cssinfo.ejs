@@ -83,8 +83,10 @@ function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
             data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-            return parseMacros(commonFunctions.template, data.atRules[atRule].
-                descriptors[propertyOrDescriptor].computed) ||
+            return data.atRules[atRule].descriptors[propertyOrDescriptor].
+                computed ?
+                parseMacros(commonFunctions.template, data.atRules[atRule].
+                descriptors[propertyOrDescriptor].computed) :
                 commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
         }
     } else if (data.properties[propertyOrDescriptor]) {
@@ -101,9 +103,10 @@ function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
                     computedValue += getComputedValueOutput(commonFunctions,
                         longhand);
                 } else {
-                    computedValue += parseMacros(commonFunctions.template,
-                            data.properties[longhand] &&
-                            data.properties[longhand].computed) ||
+                    computedValue += data.properties[longhand] &&
+                            data.properties[longhand].computed ?
+                            parseMacros(commonFunctions.template,
+                                data.properties[longhand].computed) :
                         commonFunctions.mdn.getLocalString(localStrings,
                             "asSpecified");
                 }
@@ -112,8 +115,9 @@ function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
             computedValue += "</ul>";
             return computedValue;
         } else {
-            return parseMacros(commonFunctions.template,
-                data.properties[propertyOrDescriptor].computed) ||
+            return data.properties[propertyOrDescriptor].computed ?
+                parseMacros(commonFunctions.template,
+                    data.properties[propertyOrDescriptor].computed) :
                 commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
         }
     }
