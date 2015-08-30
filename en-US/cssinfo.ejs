@@ -14,8 +14,8 @@
  */
 function parseMacros(template, string) {
     var parsedString = string;
-    parsedString.replace(/\{\{(.+?)(\((["'].+?["'])\))?\}\}/g, function(match, macroName,
-        params, firstParam) {
+    parsedString = parsedString.replace(/\{\{(.+?)(\(([^,\)]+).+)?\}\}/,
+        function(match, macroName, params, firstParam) {
         if (firstParam) {
             return template(macroName, [firstParam]);
         }
