@@ -13,6 +13,10 @@
  * @returns String with replaced macros
  */
 function parseMacros(template, string) {
+    if (!string) {
+        return undefined;
+    }
+
     var parsedString = string;
     parsedString = parsedString.replace(/\{\{(.+?)(\(([^,\)]+).+)?\}\}/,
         function(match, macroName, params, firstParam) {
