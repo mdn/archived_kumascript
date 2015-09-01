@@ -12,7 +12,7 @@
  * @param String string String to parse
  * @returns String with replaced macros
  */
-function parseMacros(template, string) {
+function parseMacros(commonFunctions, string) {
     if (!string) {
         return undefined;
     }
@@ -88,6 +88,7 @@ function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
  * @returns String Formatted output of the info
  */
 function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
+    //that.log.debug("bar");
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
             data.atRules[atRule].descriptors[propertyOrDescriptor]) {
@@ -109,7 +110,7 @@ function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
                 } else {
                     computedValue += (data.properties[longhand] &&
                         data.properties[longhand].computed) ?
-                        parseMacros(commonFunctions.template, data.properties[longhand].computed) :
+                        data.properties[longhand].computed :
                         commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
                 }
                 computedValue += "</li>";
@@ -522,9 +523,11 @@ if (cssInfo !== null) {
         mdn.getLocalString(localStrings, "media") + "</a></dfn> " +
         cssInfo.media + "</li>";
 
+    var that = this;
+
     // Adds information about the computed value of the item to the output
     result += "<li><dfn>" + template("Xref_csscomputed") + "</dfn> " +
-        getComputedValueOutput({mdn: mdn, template: template}, name, atRule) + "</li>";
+        getComputedValueOutput({mdn: mdn, template: template, log: log}, name, atRule) + "</li>";
 
     // Adds information about whether the item is animatable to the output
     if (!atRule) {
