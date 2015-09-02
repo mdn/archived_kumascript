@@ -12,7 +12,7 @@
  * @param String string String to parse
  * @returns String with replaced macros
  */
-function parseMacros(commonFunctions, string) {
+function parseMacros(string) {
     if (!string) {
         return undefined;
     }
@@ -21,9 +21,9 @@ function parseMacros(commonFunctions, string) {
     parsedString = parsedString.replace(/\{\{(.+?)(\(([^,\)]+).+)?\}\}/,
         function(match, macroName, params, firstParam) {
         if (firstParam) {
-            return template(macroName, [firstParam]);
+            return self.template(macroName, [firstParam]);
         }
-        return template(macroName);
+        return self.template(macroName);
     });
     return parsedString;
 }
@@ -118,7 +118,7 @@ function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
             computedValue += "</ul>";
             return computedValue;
         } else {
-            return data.properties[propertyOrDescriptor].computed ||
+            return parseMacros(data.properties[propertyOrDescriptor].computed) ||
                 commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
         }
     }
@@ -523,7 +523,7 @@ if (cssInfo !== null) {
         mdn.getLocalString(localStrings, "media") + "</a></dfn> " +
         cssInfo.media + "</li>";
 
-    var that = this;
+    var self = this;
 
     // Adds information about the computed value of the item to the output
     result += "<li><dfn>" + template("Xref_csscomputed") + "</dfn> " +
