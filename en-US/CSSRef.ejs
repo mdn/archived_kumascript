@@ -1,152 +1,192 @@
 <%
-// $0 is an optional tag that can be forced to (instead of inferring)
+// CSS Sidebar
 
-function containsTag(tagList, tag) {
-    if (!tagList || typeof tagList == 'undefined') return 0;
-    tag = tag.toLowerCase();
-    for (var i = 0, len = tagList.length; i < len; i++) {
-        if (tagList[i].toLowerCase() == tag) return 1;
+var slug = env.slug;
+var locale = env.locale;
+var CSSHref = '/' + locale + '/docs/Web/CSS';
+var CSSRefHref = '/' + locale + '/docs/Web/CSS/Reference';
+var output = "";
+
+// slug is not available in preview mode.
+if (slug) {
+
+var name = slug.replace('Web/CSS/','').split('/')[0];
+var hasTag = page.hasTag;
+var escapeQuotes = mdn.escapeQuotes;
+var htmlEscape = kuma.htmlEscape;
+var rtlLocales = ['ar', 'he', 'fa'];
+
+var data = string.deserialize(template("CSSData"));
+var commonl10n = string.deserialize(template('L10n:Common'));
+var cssl10n = string.deserialize(template('L10n:CSS'));
+
+var text = {
+    'Properties': mdn.getLocalString(commonl10n, 'Properties'),
+    'translate': mdn.getLocalString(commonl10n, '[Translate]'),
+    'title': mdn.getLocalString(commonl10n, 'TranslationCTA'),
+    'css_ref_title': mdn.getLocalString(cssl10n, 'css_ref_title'),
+    'at_rules': mdn.getLocalString(cssl10n, 'at_rules'),
+    'Guides': mdn.getLocalString(commonl10n, 'Guides'),
+};
+
+function isAtRule(foo) {
+  return foo.indexOf('@') !== -1;
+}
+
+var group = '';
+
+var isOverviewPage = slug.indexOf("_") !== -1;
+if (isOverviewPage) {
+  group = name.replace(/_/g, ' ');
+} else {
+    name = name.toLowerCase();
+    // Find group of this page in CSSData
+    if (isAtRule(slug) && data.atRules[name] && data.atRules[name].groups) {
+        group = data.atRules[name].groups[0];
+    } else if (data.properties[name] && data.properties[name].groups) {
+        group = data.properties[name].groups[0];
     }
-    return 0;
 }
 
-var s_css_href = '/en-US/docs/Web/CSS';
-var s_css_title = 'CSS';
-var s_css_ref_href = '/en-US/docs/Web/CSS/Reference';
-var s_css_ref_title = 'CSS Reference';
-var s_api_href = '/' + env.locale + '/docs/Web/API';
-var s_guide_href = '/' + env.locale + '/docs/Web/Guide/CSS';
-
-switch (env.locale) {
-    case 'es':
-        s_css_href = false;
-        s_css_ref_href = '/es/docs/Guía_de_referencia_de_CSS';
-        s_css_ref_title = 'Referencia CSS';
-        break;
-    case 'fr':
-        s_css_href = '/fr/docs/Web/CSS';
-        s_css_ref_href = '/fr/docs/Web/CSS/Référence_CSS';
-        s_css_ref_title = 'Référence CSS';
-        break;
-    case 'ja':
-        s_css_href = '/ja/docs/Web/CSS';
-        s_css_ref_href = '/ja/docs/Web/CSS/Reference';
-        s_css_ref_title = 'CSS リファレンス';
-        break;
-    case 'ko':
-        s_css_href = false;
-        s_css_ref_href = '/ko/docs/CSS_Reference';
-        s_css_ref_title = 'CSS Reference';
-        break;
-    case 'pl':
-        s_css_href = '/pl/docs/CSS';
-        s_css_ref_href = '/pl/docs/Dokumentacja_CSS';
-        s_css_ref_title = 'Dokumentacja CSS';
-        break;
-    case 'pt-PT':
-        s_css_href = false;
-        s_css_ref_href = '/pt-PT/docs/Referência_CSS';
-        s_css_ref_title = 'Referência CSS';
-        break;
-    case 'pt-BR':
-        s_css_href = '/pt-BR/docs/CSS';
-        s_css_ref_href = '/pt-BR/docs/CSS/CSS_Reference';
-        s_css_ref_title = 'Referência CSS';
-        break;
-    case 'zh-CN':
-        s_css_href = false;
-        s_css_ref_href = '/zh-CN/docs/CSS_Reference';
-        s_css_ref_title = 'CSS 参考';
-        break;
-    case 'de':
-        s_css_href = '/de/docs/Web/CSS';
-        s_css_ref_href = '/de/docs/Web/CSS/CSS_Referenz';
-        s_css_ref_title = 'CSS Referenz';
-        break;
-    default: break;
+// Find other pages with this group
+var groupData = [];
+for (var property in data.properties) {
+    if (data.properties[property].groups[0] === group) {
+        groupData.push(property);
+    }
+}
+for (var atRule in data.atRules) {
+    if (data.atRules[atRule].groups[0] === group) {
+        groupData.push(atRule);
+    }
 }
 
-// Find the section of CSS this page belongs to (that is the first tag of the form "CSS XYZ")
-if (!$0) {
-    var tags = env.tags;
-    var found_tag = '';
-    for (i in tags) {
-        if ((tags.hasOwnProperty(i)) &&
-            (tags[i] != 'CSS Reference') &&
-            (tags[i] != 'CSS Référence') &&
-            (tags[i] != 'CSS Property') &&
-            (tags[i] != s_css_ref_title)) { // Only keep this one one the 'accent' bug is fixed
-            if (tags[i].substr(0, 4) == 'CSS ') {
-                found_tag = tags[i];
-                break;
+// Load the CSS pages data, gather info for the found properties and atRules
+var pageList = page.subpagesExpand('/en-US/docs/Web/CSS');
+var properties = [];
+var atRules = [];
+for (var i in pageList) {
+  var aPage = pageList[i];
+  for (var x in groupData) {
+    if (aPage.slug.split("/").pop() === groupData[x]) {
+      if (isAtRule(groupData[x])) {
+        atRules.push(aPage);
+      } else  {
+        properties.push(aPage);
+      }
+    }
+  }
+}
+
+// Load sub pages of the group
+var groupPages = [];
+if (group !== '') {
+    groupPages = page.subpagesExpand('/en-US/docs/Web/CSS/' + group.replace(/ /g, '_'));
+}
+
+// output helpers
+var badges = {
+  ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
+  NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
+  DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
+  ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
+}
+
+function buildSublist(pages, title, noCodeTags) {
+  var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
+  var code    = !noCodeTags ? '<code>'  : '';
+  var endcode = !noCodeTags ? '</code>' : '';
+
+  for (var i in pages) {
+    var aPage = pages[i];
+    var summary = escapeQuotes(aPage.summary) || '';
+    var url = aPage.url.replace('en-US', locale);
+    var title = htmlEscape(aPage.title);
+
+    var translated = false;
+    if (locale != 'en-US') {
+        aPage.translations.forEach(function(translation){
+            if(translation.locale === locale) {
+                summary = escapeQuotes(translation.summary) || '';
+                url = translation.url;
+                title = htmlEscape(translation.title);
+                translated = true;
             }
-        }
+        });
     }
-}
-else { // Explicitly given tag
-    found_tag = $0;
-}
 
-// Find the CSS entities belonging to the same subject
-if (found_tag) {
-    // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
-    var pageList = page.subpagesExpand(s_css_href);   // Get subpages, including tags
-    var resultCSS = [];
-
-    for (aPage in pageList) {
-        if (containsTag(pageList[aPage].tags, found_tag)) {
-            resultCSS.push({title: pageList[aPage].title.replace('<','&lt;').replace('>','&gt;'), url: pageList[aPage].url});
-        }
+    var cta = '';
+     if (!translated && locale != 'en-US') {
+        cta += ' <a href="'+ url +'$translate" style="opacity:0.5" title="'+ text['title'] + '">' + text['translate'] + '</a>';
     }
-}
 
+    result += '<li>';
 
-// Find the interfaces belonging to the same subject
-if (found_tag) {
-    // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
-    var pageList = page.subpagesExpand(s_api_href);   // Get subpages, including tags
-    var resultAPI = [];
-
-    for (aPage in pageList) {
-        if (containsTag(pageList[aPage].tags, found_tag) &&
-            containsTag(pageList[aPage].tags, "Interface")) { // We only want interfaces, not properties or methods
-            resultAPI.push(pageList[aPage].title);
-        }
+    if (hasTag(aPage, 'Experimental')) {
+        result += badges.ExperimentalBadge;
     }
-}
 
-// Find the guides, tutorials, ... belonging to the same subject
-if (found_tag) {
-    // Find the pages, sub-pages of CSS/ that are tagged with that specific tag
-    var pageList = page.subpagesExpand(s_guide_href);   // Get subpages, including tags
-    var resultGuide = [];
-
-    for (aPage in pageList) {
-        if (containsTag(pageList[aPage].tags, found_tag)) {
-            resultGuide.push({title: pageList[aPage].title, url: pageList[aPage].url});
-        }
+    if (hasTag(aPage, 'Non-standard') || hasTag(aPage, 'Non Standard')) {
+        result += badges.NonStandardBadge;
     }
+
+    if (hasTag(aPage, 'Deprecated')) {
+        result += badges.DeprecatedBadge;
+    }
+
+    if (hasTag(aPage, 'Obsolete')) {
+        result += badges.ObsoleteBadge;
+        result += '<s class="obsoleteElement">';
+    }
+
+    if (rtlLocales.indexOf(locale) != -1) {
+        result += '<bdi>';
+    }
+
+    if (slug == aPage.slug) {
+        result += '<em>' + code + aPage.title + endcode + '</em>'
+    } else {
+        result += '<a href="' + url + '" title="' + summary + '">' + code + title + endcode + '</a>' + cta;
+    }
+
+    if (rtlLocales.indexOf(locale) != -1) {
+        result += '</bdi>';
+    }
+
+    if (hasTag(aPage, 'Obsolete')) {
+        result += '</s>';
+    }
+
+    result += '</li>';
+  }
+
+  result += '</ol></li>';
+
+  return result;
 }
-%><% if (s_css_href) {  %>
-  <section class="Quick_links" id="Quick_Links">
-   <ol>
-  <% if (found_tag) { 
-        for( aPage in resultGuide) { // Tutorials and guides matching
-  %>
-            <li><a href="<%-resultGuide[aPage].url%>"><%-resultGuide[aPage].title%></a></li>
-  <%    }
-        for ( aPage in resultCSS) { // CSS entities matching 
-  %>
-            <li><a href="<%- resultCSS[aPage].url %>"><code><%-resultCSS[aPage].title%></code></a></li>
-  <%    } 
-        for (aTitle in resultAPI) { // CSSOM interfaces matching 
-  %>
-            <li><%- template("domxref", [resultAPI[aTitle]]) %></li>
-  <%    } 
-  %>
-            <li><a href="<%- s_css_ref_href %>"><%- s_css_ref_title %></a></li>
-  <%
-    } %>
-   </ol>
-  </section>
-  <%}%>
+
+
+// output
+output = '<section class="Quick_links" id="Quick_Links"><ol>';
+output += '<li><strong><a href="' +  CSSHref + '">CSS</a></strong></li>';
+output += '<li><strong><a href="' +  CSSRefHref + '">' + text['css_ref_title'] + '</a></strong></li>';
+output += '<li><strong><a href="' +  CSSHref + '/' + group.replace(/ /g, '_') + '">' + group + '</a></strong></li>';
+
+if (groupPages.length > 0) {
+  output += buildSublist(groupPages, text['Guides'], true);
+}
+
+if (atRules.length > 0) {
+  output += buildSublist(atRules, text['at_rules']);
+}
+
+if (properties.length > 0) {
+  output += buildSublist(properties, text['Properties']);
+}
+
+
+output += '</ol></section>';
+}
+%>
+
+<%-output%>
