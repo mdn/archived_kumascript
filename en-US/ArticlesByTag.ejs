@@ -17,6 +17,18 @@ var l10n = {
     noArticles : mdn.localString({
         "en-US": "There have been no articles written yet. <a href=\"/en-US/docs/MDN/Getting_started\">Please consider contributing</a>.",
         "fr"   : "Aucun article n'a encore été écrit ou traduit. <a href=\"/fr/docs/MDN/Débuter_sur_MDN\">N'hésitez pas à contribuer.</a>"
+    }),
+    rootLearn : mdn.localString({
+        "en-US": '/Learn',
+        "fr"   : '/Apprendre'
+    }),
+    rootGuide : mdn.localString({
+        "en-US": '/docs/Web/Guide',
+        "fr"   : '/docs/Web/Guide'
+    }),
+    rootTutorials : mdn.localString({
+        "en-US": '/docs/Web/Tutorials',
+        "fr"   : '/docs/Web/Tutoriels'
     })
 }
 
@@ -27,9 +39,9 @@ var ARTICLES  = [];
 var DEEP      = $0.recursive ? null : 1;
 var TAGS      = $0.tags && Array.isArray($0.tags) ? $0.tags : [$0];
 var URL_ROOTS = $0.urls && Array.isArray($0.urls) ? $0.urls : [
-    '/Learn',
-    '/docs/Web/Guide',
-    '/docs/Web/Tutorials'
+    l10n.rootLearn,
+    l10n.rootGuide,
+    l10n.rootTutorials
 ];
 
 
