@@ -24,7 +24,7 @@ function parseMacros(string) {
             return tpl(macroName, [firstParam]);
         }
         return tpl(macroName);*/
-        return tpl.call(this, "experimental_inline");
+        return tpl.call(self, "experimental_inline");
     });
     return parsedString;
 }
@@ -272,6 +272,7 @@ var formattedError = "<span style=\"color:red;\">$1$</span>";
 var localize = mdn.getLocalString;
 var substitute = mdn.replacePlaceholders;
 var tpl = template;
+var self = this;
 
 var name = $0 || slug.split("/").pop();
 var atRule = $1;
