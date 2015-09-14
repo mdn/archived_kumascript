@@ -24,7 +24,7 @@ function parseMacros(string) {
             return tpl(macroName, [firstParam]);
         }
         return tpl(macroName);*/
-        return tpl("experimental_inline");
+        return tpl.call(this, "experimental_inline");
     });
     return parsedString;
 }
