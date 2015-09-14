@@ -270,7 +270,10 @@ var locale = env.locale;
 var formattedError = "<span style=\"color:red;\">$1$</span>";
 var localize = mdn.getLocalString;
 var substitute = mdn.replacePlaceholders;
-var template = template;
+var tpl = template;
+
+log.debug(template);
+log.debug(tpl);
 
 var name = $0 || slug.split("/").pop();
 var atRule = $1;
