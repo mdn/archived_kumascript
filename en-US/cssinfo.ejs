@@ -20,10 +20,11 @@ function parseMacros(string) {
     var parsedString = string;
     parsedString = parsedString.replace(/\{\{(.+?)(\(([^,\)]+).+)?\}\}/,
         function(match, macroName, params, firstParam) {
-        if (firstParam) {
+        /*if (firstParam) {
             return tpl(macroName, [firstParam]);
         }
-        return tpl(macroName);
+        return tpl(macroName);*/
+        return tpl("experimental_inline");
     });
     return parsedString;
 }
