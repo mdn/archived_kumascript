@@ -1,4 +1,4 @@
-<% 
+<%
 /*
   Displays general information about a CSS property or descriptor
 
@@ -8,7 +8,7 @@
 
 /**
  * Parses all macros within a string
- * 
+ *
  * @param String string String to parse
  * @returns String with replaced macros
  */
@@ -21,9 +21,9 @@ function parseMacros(string) {
     parsedString = parsedString.replace(/\{\{(.+?)(\(([^,\)]+).+)?\}\}/,
         function(match, macroName, params, firstParam) {
         if (firstParam) {
-            return self.template(macroName, [firstParam]);
+            return template(macroName, [firstParam]);
         }
-        return self.template(macroName);
+        return template(macroName);
     });
     return parsedString;
 }
@@ -31,15 +31,13 @@ function parseMacros(string) {
 
 /**
  * Returns the initial value of a property or descriptor as formatted output
- * 
- * @param Object mdn Common functions library; needs to be passed to the 
- *        Function, otherwise the library is not available within it
+ *
  * @param String propertyOrDescriptor Name of the property or descriptor to 
  *        return the info for
  * @param String atRule Name of the @-Rule the descriptor belongs to
  * @returns String Formatted of the info
  */
-function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
+function getInitialValueOutput(propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
             data.atRules[atRule].descriptors[propertyOrDescriptor]) {
@@ -49,7 +47,7 @@ function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
     } else if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
         if (property.shorthand) {
-            var initialValue = mdn.getLocalString(localStrings,
+            var initialValue = localize(localStrings,
                 "longhandConcatination") + "<ul>";
             property.longhands.forEach(function(longhand) {
                 initialValue += "<li><code><a href=\"/" + locale +
@@ -57,12 +55,12 @@ function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
                     "</a></code>: ";
                 if (data.properties[longhand] &&
                     data.properties[longhand].shorthand) {
-                    initialValue += getInitialValueOutput(mdn, longhand);
+                    initialValue += getInitialValueOutput(longhand);
                 } else {
                     initialValue += (data.properties[longhand] ?
                         data.properties[longhand].initial :
-                        mdn.replacePlaceholders(formattedError,
-                            [mdn.getLocalString(localStrings, "missing")]));
+                        substitute(formattedError,
+                            [localize(localStrings, "missing")]));
                 }
                 initialValue += "</li>";
             });
@@ -79,39 +77,35 @@ function getInitialValueOutput(mdn, propertyOrDescriptor, atRule) {
 
 /**
  * Returns the computed value of a property or descriptor as formatted output
- * 
- * @param Object commonFunctions Common functions; needs to be passed to the 
- *        Function, otherwise the general functions are not available within it
+ *
  * @param String propertyOrDescriptor Name of the property or descriptor to 
  *        return the info for
  * @param String atRule Name of the @-Rule the descriptor belongs to
  * @returns String Formatted output of the info
  */
-function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
-    //that.log.debug("bar");
+function getComputedValueOutput(propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
             data.atRules[atRule].descriptors[propertyOrDescriptor]) {
             return data.atRules[atRule].descriptors[propertyOrDescriptor].
-                computed || commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
+                computed || localize(localStrings, "asSpecified");
         }
     } else if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
         if (property.shorthand) {
-            var computedValue =
-                commonFunctions.mdn.getLocalString(localStrings, "asLonghands") + "<ul>";
+            var computedValue = localize(localStrings, "asLonghands") + "<ul>";
             property.longhands.forEach(function(longhand) {
                 computedValue += "<li><code><a href=\"/" + locale +
                     "/docs/Web/CSS/" + longhand + "\">" + longhand +
                     "</a></code>: ";
                 if (data.properties[longhand] &&
                     data.properties[longhand].shorthand) {
-                    computedValue += getComputedValueOutput(commonFunctions, longhand);
+                    computedValue += getComputedValueOutput(longhand);
                 } else {
                     computedValue += (data.properties[longhand] &&
                         data.properties[longhand].computed) ?
                         data.properties[longhand].computed :
-                        commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
+                        localize(localStrings, "asSpecified");
                 }
                 computedValue += "</li>";
             });
@@ -119,24 +113,22 @@ function getComputedValueOutput(commonFunctions, propertyOrDescriptor, atRule) {
             return computedValue;
         } else {
             return parseMacros(data.properties[propertyOrDescriptor].computed) ||
-                commonFunctions.mdn.getLocalString(localStrings, "asSpecified");
+                localize(localStrings, "asSpecified");
         }
     }
-    
+
     return "";
 }
 
 
 /**
  * Returns the information whether a property is animatable as formatted output
- * 
- * @param Object mdn Common functions library; needs to be passed to the 
- *        Function, otherwise the library is not available within it
+ *
  * @param String propertyName Name of the property to return the info for
  * @returns String Formatted output of the info
  */
-function getAnimatableOutput(mdn, propertyName) {
-    function formatString(mdn, string) {
+function getAnimatableOutput(propertyName) {
+    function formatString(string) {
       if (string === "no") {
         return "no";
       }
@@ -148,79 +140,79 @@ function getAnimatableOutput(mdn, propertyName) {
       for (var i = 0; i < keywords.length; i++) {
         // For all items except the first one add a separator
         if (desc !== "") {
-          desc += mdn.getLocalString(localStrings, "listSeparator");
+          desc += localize(localStrings, "listSeparator");
         }
 
         switch (keywords[i]) {
           case "simplelist":
-            listOf += mdn.getLocalString(localStrings, "simpleList");
+            listOf += localize(localStrings, "simpleList");
             break;
 
           case "repeatablelist":
-            listOf += mdn.getLocalString(localStrings, "repeatableList");
+            listOf += localize(localStrings, "repeatableList");
             break;
 
           case "transform":
-            desc += mdn.getLocalString(localStrings, "transform");
+            desc += localize(localStrings, "transform");
             break;
 
           case "length":
-            desc += mdn.getLocalString(localStrings, "length");
+            desc += localize(localStrings, "length");
             break;
 
           case "lpc":
-            desc += mdn.getLocalString(localStrings, "length") +
-                mdn.getLocalString(localStrings, "lpc");
-            additionalInfo = mdn.getLocalString(localStrings,
+            desc += localize(localStrings, "length") +
+                localize(localStrings, "lpc");
+            additionalInfo = localize(localStrings,
                 "lpcAdditionalInfo") + additionalInfo;
             break;
 
           case "color":
-            desc += mdn.getLocalString(localStrings, "color");
+            desc += localize(localStrings, "color");
             break;
 
           case "integer":
-            desc += mdn.getLocalString(localStrings, "integer");
+            desc += localize(localStrings, "integer");
             break;
 
           case "number":
-            desc += mdn.getLocalString(localStrings, "number");
+            desc += localize(localStrings, "number");
             break;
 
           case "shadowlist":
-            desc += mdn.getLocalString(localStrings, "shadowlist");
+            desc += localize(localStrings, "shadowlist");
             break;
 
           case "rectangle":
-            desc += mdn.getLocalString(localStrings, "rectangle");
+            desc += localize(localStrings, "rectangle");
             break;
 
           case "visibility":
-            desc += mdn.getLocalString(localStrings, "visibility");
+            desc += localize(localStrings, "visibility");
             break;
 
           case "font_stretch":
-            desc += mdn.getLocalString(localStrings, "font_stretch");
+            desc += localize(localStrings, "font_stretch");
             break;
 
           case "font_weight":
-            desc += mdn.getLocalString(localStrings, "font_weight");
+            desc += localize(localStrings, "font_weight");
             break;
 
           default:
-            desc += mdn.replacePlaceholders(formattedError,
-                [mdn.getLocalString(localStrings, "missing")]);
+            desc += substitute(formattedError,
+                [localize(localStrings, "missing")]);
         }
       }
 
-      return mdn.replacePlaceholders(mdn.getLocalString(localStrings, "yesAs"),
+      return substitute(localize(localStrings, "yesAs"),
         [listOf, desc, additionalInfo]);
     }
 
     if (data.properties[propertyName]) {
         var property = data.properties[propertyName];
         if (property.shorthand) {
-            var animatable = mdn.getLocalString(localStrings, "asLonghands") +
+            var animatable = localize(localStrings, "asLonghands") +
                 "<ul>";
             property.longhands.forEach(function(longhand) {
                 animatable += "<li><code><a href=\"/" + locale +
@@ -228,14 +220,13 @@ function getAnimatableOutput(mdn, propertyName) {
                     "</a></code>: ";
                 if (data.properties[longhand] && data.properties[longhand].
                     shorthand) {
-                    animatable += getAnimatableOutput(mdn, longhand);
+                    animatable += getAnimatableOutput(longhand);
                 } else {
                     animatable += (data.properties[longhand] &&
                             data.properties[longhand].animatable ?
-                        formatString(mdn,
-                            data.properties[longhand].animatable) :
-                        mdn.replacePlaceholders(formattedError,
-                            [mdn.getLocalString(localStrings, "missing")]));
+                        formatString(data.properties[longhand].animatable) :
+                        substitute(formattedError,
+                            [localize(localStrings, "missing")]));
                 }
                 animatable += "</li>";
             });
@@ -243,9 +234,9 @@ function getAnimatableOutput(mdn, propertyName) {
             return animatable;
         } else {
             return (data.properties[propertyName].animatable ?
-                formatString(mdn, data.properties[propertyName].animatable) :
-                mdn.replacePlaceholders(formattedError,
-                    [mdn.getLocalString(localStrings, "missing")]));
+                formatString(data.properties[propertyName].animatable) :
+                substitute(formattedError,
+                    [localize(localStrings, "missing")]));
         }
     }
 
@@ -256,19 +247,17 @@ function getAnimatableOutput(mdn, propertyName) {
 /**
  * Returns the canonical order of the values of a property or descriptor as
  * formatted output
- * 
- * @param Object mdn Common functions library; needs to be passed to the 
- *        Function, otherwise the library is not available within it
+ *
  * @param String order Order information, which may contain keywords
  * @returns String Formatted output of the info
  */
-function getCanonicalOrderOutput(mdn, order) {
+function getCanonicalOrderOutput(order) {
     if (!order) {
-        return mdn.getLocalString(localStrings, "uniqueOrder");
+        return localize(localStrings, "uniqueOrder");
     }
 
     if (order === "appearance") {
-        return mdn.getLocalString(localStrings, "orderOfAppearance");
+        return localize(localStrings, "orderOfAppearance");
     }
 
     return order;
@@ -279,6 +268,9 @@ var data = string.deserialize(template("CSSData"));
 var slug = env.slug;
 var locale = env.locale;
 var formattedError = "<span style=\"color:red;\">$1$</span>";
+var localize = mdn.getLocalString;
+var substitute = mdn.replacePlaceholders;
+var template = template;
 
 var name = $0 || slug.split("/").pop();
 var atRule = $1;
@@ -456,7 +448,7 @@ var localStrings = {
         "fr"   : "Pourcentages",
         "ja"   : "相対値の基準"
     },
-    "uniqueOrder": {     
+    "uniqueOrder": {
         "en-US": "the unique non-ambiguous order defined by the formal grammar",
         "de"   : "die eindeutige Reihenfolge definiert durch die formale Grammatik",
         "fr"   : "l'ordre unique et non-ambigu défini par la grammaire formelle",
@@ -493,11 +485,11 @@ if (cssInfo !== null) {
 
     // Adds information about the initial value of the item to the output
     result += "<li><dfn>" + template("Xref_cssinitial") + "</dfn> " +
-        getInitialValueOutput(mdn, name, atRule) + "</li>";
+        getInitialValueOutput(name, atRule) + "</li>";
 
     // Adds information about to which elements the item applies to the output
     if (!atRule) {
-        result += "<li><dfn>" + mdn.getLocalString(localStrings, "appliesTo") +
+        result += "<li><dfn>" + localize(localStrings, "appliesTo") +
             "</dfn> " + cssInfo.appliesto + "</li>";
     }
 
@@ -505,14 +497,14 @@ if (cssInfo !== null) {
     // output
     result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
         (cssInfo.inherited ?
-            mdn.getLocalString(localStrings, "yes") :
-            mdn.getLocalString(localStrings, "no")) +
+            localize(localStrings, "yes") :
+            localize(localStrings, "no")) +
         "</li>";
 
     // Adds information about how percentages are handled to the output 
     if (cssInfo.percentages !== "no") {
         result += "<li><dfn>" +
-            mdn.getLocalString(localStrings, "percentages") + "</dfn> " +
+            localize(localStrings, "percentages") + "</dfn> " +
             cssInfo.percentages + "</li>";
     }
 
@@ -520,31 +512,26 @@ if (cssInfo !== null) {
     // We have a general link to @media here. When https://bugzil.la/1133414 is
     // fixed, we may change the link.
     result += "<li><dfn><a href=\"/" + locale + "/docs/Web/CSS/@media\">" +
-        mdn.getLocalString(localStrings, "media") + "</a></dfn> " +
+        localize(localStrings, "media") + "</a></dfn> " +
         cssInfo.media + "</li>";
-
-    var self = this;
-    log.debug(mdn);
-    log.debug(self.mdn);
 
     // Adds information about the computed value of the item to the output
     result += "<li><dfn>" + template("Xref_csscomputed") + "</dfn> " +
-        getComputedValueOutput({mdn: mdn, template: template, log: log}, name, atRule) + "</li>";
+        getComputedValueOutput(name, atRule) + "</li>";
 
     // Adds information about whether the item is animatable to the output
     if (!atRule) {
         result += "<li><dfn>" + template("Xref_cssanimatable") + "</dfn> " +
-            getAnimatableOutput(mdn, name, atRule) + "</li>";
+            getAnimatableOutput(name, atRule) + "</li>";
     }
 
     // Adds information about the canonical order of the values of the item to
     // the output
     result += "<li><dfn>" + template("Xref_csscanonicalorder") + "</dfn> " +
-        getCanonicalOrderOutput(mdn, cssInfo.order) + "</li>";
+        getCanonicalOrderOutput(cssInfo.order) + "</li>";
 
     result += "</ul>";
 } else {
-    result = mdn.replacePlaceholders(formattedError,
-        [mdn.getLocalString(localStrings, "missing")]);
+    result = substitute(formattedError, [localize(localStrings, "missing")]);
 }
 %><%- result %>
