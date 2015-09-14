@@ -1,0 +1,10 @@
+<%
+// An example of how to use modules from within KumaScript functions.
+//
+
+function test(url) {
+    template("LandingPageListSubpages", [url]);
+}
+
+%>
+<%-test("https://developer.mozilla.org/en-US/docs/Web")%>
