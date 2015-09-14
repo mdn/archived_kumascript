@@ -501,6 +501,10 @@ var localStrings = {
         "en-US": "order of appearance in the formal grammar of the values",
         "de"   : "Reihenfolge des Auftretens in der formalen Grammatik der Werte",
         "fr"   : "l'ordre d'apparition dans la grammaire formelle des valeurs"
+    },
+    "createsStackingContext": {
+      "en-US": "Creates <a href=\"/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context\">stacking context</a>",
+      "de"   : "Erstellt Stapelkontext"
     }
 };
 
@@ -572,6 +576,12 @@ if (cssInfo !== null) {
     // the output
     result += "<li><dfn>" + template("Xref_csscanonicalorder") + "</dfn> " +
         getCanonicalOrderOutput(cssInfo.order) + "</li>";
+
+    if (cssInfo.stacking) {
+        result += "<li><dfn>" +
+            mdn.getLocalString(localStrings, "createsStackingContext") +
+            "</dfn> " + mdn.getLocalString(localStrings, "yes") + "</li>";
+    }
 
     result += "</ul>";
 } else {
