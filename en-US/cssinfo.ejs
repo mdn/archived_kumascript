@@ -20,7 +20,7 @@ function parseMacros(string) {
     var parsedString = string;
     parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/,
         function(match, macroName, paramsString) {
-            var params = paramsString.split(/, ?/);
+            var params = paramsString ? paramsString.split(/, ?/) : [];
             return tpl(macroName, params);
         }
     );
@@ -71,6 +71,41 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
     }
 
     return "";
+}
+
+
+function getAppliesToOutput(cssInfo) {
+    var appliesTo = "";
+    if (cssInfo.alsoAppliesTo) {
+        var additionalApplies = "";
+        cssInfo.alsoAppliesTo.forEach(function(applyingElements, index, array) {
+            switch (applyingElements) {
+                case "firstletter":
+                    additionalApplies += tpl("cssxref", ["::first-letter"]);
+                    break;
+                
+                case "firstline":
+                    additionalApplies += tpl("cssxref", ["::first-line"]);
+                    break;
+                
+                case "placeholder":
+                    additionalApplies += tpl("cssxref", ["::-moz-placeholder"]);
+                    break;
+            }
+            
+            if (index < array.length - 2) {
+                additionalApplies += localize(localStrings, "listSeparator");
+            } else if (index < array.length - 1) {
+                additionalApplies += localize(localStrings, "andInEnumeration");
+            }
+            appliesTo = substitute(localize(localStrings,
+                "applyingToMultiple"), [cssInfo.appliesto, additionalApplies]);
+        });
+    } else {
+        appliesTo = cssInfo.appliesto;
+    }
+
+    return appliesTo;
 }
 
 
@@ -287,6 +322,14 @@ var localStrings = {
         "ja" : "適用対象",
         "zh-CN" : "适用元素"
     },
+    "applyingToMultiple": {
+        "en-US": "$1$. It also applies to $2$.",
+        "de": "$1$. Auch anwendbar auf $2$."
+    },
+    "andInEnumeration": {
+        "en-US": " and ",
+        "de": " und "
+    },
     "inherited": {
         "en-US": "Inherited",
         "de"   : "Vererbt"
@@ -356,7 +399,7 @@ var localStrings = {
         "ru"   : "простой список из: "
     },
     "listSeparator": {
-        "en-US": ", ",
+        "en-US": ", "
     },
     "transform": {
         "en-US": "a transform",
@@ -490,7 +533,7 @@ if (cssInfo !== null) {
     // Adds information about to which elements the item applies to the output
     if (!atRule) {
         result += "<li><dfn>" + localize(localStrings, "appliesTo") +
-            "</dfn> " + cssInfo.appliesto + "</li>";
+            "</dfn> " + getAppliesToOutput(cssInfo) + "</li>";
     }
 
     // Adds information about whether the item's value is inherited to the 
