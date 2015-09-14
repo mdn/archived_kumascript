@@ -18,14 +18,12 @@ function parseMacros(string) {
     }
 
     var parsedString = string;
-    parsedString = parsedString.replace(/\{\{(.+?)(\(([^,\)]+).+)?\}\}/,
-        function(match, macroName, params, firstParam) {
-        /*if (firstParam) {
-            return tpl(macroName, [firstParam]);
+    parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/,
+        function(match, macroName, paramsString) {
+            var params = paramsString.split(/, ?/);
+            return tpl(macroName, params);
         }
-        return tpl(macroName);*/
-        return tpl.call(self, "experimental_inline");
-    });
+    );
     return parsedString;
 }
 
