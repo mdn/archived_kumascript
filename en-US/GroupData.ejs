@@ -539,7 +539,35 @@
                             "cancel",
                             "change",
                             "click",
-                            "close"]
+                            "close",
+                            "connect",
+                            "contextmenu",
+                            "error",
+                            "focus",
+                            "hashchange",
+                            "input",
+                            "invalid",
+                            "languagechange",
+                            "load",
+                            "loadend",
+                            "loadstart",
+                            "message",
+                            "offline",
+                            "online",
+                            "open",
+                            "pagehide",
+                            "pageshow",
+                            "popstate",
+                            "progress",
+                            "readystatechange",
+                            "reset",
+                            "select",
+                            "show",
+                            "sort",
+                            "storage",
+                            "submit",
+                            "toggle",
+                            "unload" ]
         },
         "IndexedDB": {
             "interfaces": [ "IDBCursor",
@@ -565,7 +593,14 @@
                             "IDBVersionChangeRequest" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "upgradeneeded",
+                            "complete",
+                            "abort",
+                            "success",
+                            "error",
+                            "blocked",
+                            "versionchange",
+                            "close" ]
         },
         "Media Capture and Streams": {
             "interfaces": [ "BlobEvent",
@@ -574,20 +609,42 @@
                             "CanvasCaptureMediaStream" ],
             "methods":    [ "HTMLCanvasElement.captureStream()" ],
             "properties": [],
-            "events":     []
+            "events":     [ "inactive",
+                            "active",
+                            "addtrack",
+                            "removetrack",
+                            "ended",
+                            "mute",
+                            "unmute",
+                            "overconstrained",
+                            "ratechange",
+                            "devicechange" ]
         },
         "Media Recorder API": {
             "interfaces": [ "MediaRecorder" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "start",
+                            "stop",
+                            "dataavailable",
+                            "pause",
+                            "resume" ]
         },
         "Media Source Extensions": {
             "interfaces": [ "MediaSource",
                             "VideoPlaybackQuality" ],
             "methods":    [ "HTMLVideoElement.getVideoPlaybackQuality()" ],
             "properties": [],
-            "events":     []
+            "events":     [ "sourceopen",
+                            "sourceended",
+                            "sourceclose",
+                            "updatestart",
+                            "update",
+                            "updateend",
+                            "error",
+                            "abort",
+                            "addsourcebuffer",
+                            "removesourcebuffer" ]
         },
         "Navigation Timing": {
             "interfaces": [ "Performance",
@@ -602,7 +659,7 @@
                             "Connection"],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "change" ]
         },
         "Persona": {
             "interfaces": [ "IdentityManager" ],
@@ -614,14 +671,16 @@
             "interfaces": [ "PushManager" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "push",
+                            "pushsubscriptionchange" ]
         },
         "Proximity Events": {
             "interfaces": [ "DeviceProximityEvent",
                             "UserProximityEvent" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "userproximity",
+                            "deviceproximity" ]
         },
         "Server Sent Events": {
             "interfaces": [ "EventSource" ],
@@ -948,9 +1007,13 @@
             "events":     []
         },
         "Web Notifications": {
-            "interfaces": [ "Notification" ],
-            "methods":    [],
-            "properties": [],
+            "overview":   [ "Notifications API" ],
+            "interfaces": [ "Notification",
+                            "NotificationEvent" ],
+            "methods":    [ "ServiceWorkerRegistration.showNotification()",
+                            "ServiceWorkerRegistration.getNotifications()",
+                            ],
+            "properties": [ "ServiceWorkerRegistration.onnotificationclick"],
             "events":     []
         },
         "WebRTC": {
