@@ -17,6 +17,7 @@ var event = slug.replace('Web/Events/','').split('/')[0];
 
 // output
 output = '<section class="Quick_links" id="Quick_Links"><ol>';
+output += '<li><strong><a href="' +  EventHref + '">Events</a></strong></li>';
 
 function buildEventList(name, events, open) {
   var openstr = open ? ' data-default-state="open"' : '';
@@ -35,7 +36,7 @@ for (g in groups) {
         open = true;
     }
     if (aGroup.events.length > 0) {
-      output += buildEventList(g, aGroup.events, open);
+      output += buildEventList(g.replace(/events/i, '') + ' events', aGroup.events, open);
     }
 }
 
