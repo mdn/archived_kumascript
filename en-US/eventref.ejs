@@ -22,20 +22,16 @@ function buildEventList(name, events, open) {
   var openstr = open ? 'data-default-state="open"' : '';
   var result = '<li'+ openstr +'><a href="#"><strong>' + name + '</strong></a><ol>';
   for (var i = 0; i < events.length; i++) {
-    result += '<li><a href="' + EventHref + '/' + url + '"><code>' + events[i] + '</code></a></li>';
+    result += '<li><a href="' + EventHref + '/' + events[i] + '"><code>' + events[i] + '</code></a></li>';
   }
   result += '</ol></li>';
   return result;
 }
 
-
-// find our group
-var group = '';
 for (g in groups) {
     var aGroup = groups[g];
     var open = false;
     if (aGroup.events.indexOf(event) !== -1) {
-        group = g;
         open = true;
     }
     if (aGroup.events > 0) {
