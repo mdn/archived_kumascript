@@ -17,6 +17,8 @@
         },
         "Battery API": {
             "overview":   [ "Battery Status API" ],
+            "guides":     [ { "url":   "/Apps/Build/gather_and_modify_data/retrieving_battery_status_information",
+                              "title": "Retrieving battery status information" } ],
             "interfaces": [ "BatteryManager" ],
             "methods":    [ "Navigator.getBattery()"],
             "properties": [ "Navigator.battery" ],
@@ -293,7 +295,12 @@
                             "Blob" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "loadstart",
+                            "progress",
+                            "abort",
+                            "error",
+                            "load",
+                            "loadend" ]
         },
         "File System API": {
             "interfaces": [ "DirectoryEntry",
@@ -382,7 +389,8 @@
                             "GamepadEvent"],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "gamepadconnected",
+                            "gamepaddisconnected" ]
         },
         "Geolocation API": {
             "interfaces": [ "Coordinates",
@@ -518,7 +526,20 @@
                             "WebVTT" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "abort",
+                            "autocomplete",
+                            "autocompleteerror",
+                            "DOMContentLoaded",
+                            "afterprint",
+                            "afterscriptexecute",
+                            "beforeprint",
+                            "beforescriptexecute",
+                            "beforeunload",
+                            "blur",
+                            "cancel",
+                            "change",
+                            "click",
+                            "close"]
         },
         "IndexedDB": {
             "interfaces": [ "IDBCursor",
