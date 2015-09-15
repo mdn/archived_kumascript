@@ -1,10 +1,11 @@
 <%
-// Inserts the contents of a page into the document.
+// Inserts the contents of a page into the document. This process is often
+// referred to as "transclusion."
 //
 // Parameters:
 //
 //  $0 - URL of page to insert. Example: "/en-US/docs". Do not use https://etc.
-//  $1 - (optional) section name of a section to insert (rather than the whole page)
+//  $1 - (optional) section name of a section to transclude (rather than the whole page)
 //       Can be a section title like "Quick Start", can also be an id attribute
 //       like this: <div id="grabme">
 //       Example: {{Page("/en-US/docs/MyPage", "grabme")}}
