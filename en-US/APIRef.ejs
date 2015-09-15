@@ -8,6 +8,7 @@
 var slug = env.slug;
 var locale = env.locale;
 var APIHref = '/' + locale + '/docs/Web/API';
+var EventHref = '/' + locale + '/docs/Web/Events';
 var output = "";
 // slug is not available in preview mode.
 if (slug) {
@@ -35,6 +36,7 @@ var text = {
     'Related': mdn.getLocalString(commonl10n, 'Related_pages').replace('$1', group),
     'translate': mdn.getLocalString(commonl10n, '[Translate]'),
     'title': mdn.getLocalString(commonl10n, 'TranslationCTA'),
+    'Events': mdn.getLocalString(commonl10n, 'Events'),
 };
 
 
@@ -43,12 +45,14 @@ var mainIFPages = page.subpagesExpand('/en-US/docs/Web/API/' + mainIF);
 var impl = webAPIData[0][mainIF] != undefined ? webAPIData[0][mainIF].impl : [];
 var inh = webAPIData[0][mainIF] != undefined ? webAPIData[0][mainIF].inh : '';
 var related = [];
+var events 0 []
 if (group) {
   var rel_if = webAPIGroups[0][group].interfaces || [];
   var rel_met = webAPIGroups[0][group].methods || [];
   var rel_prop = webAPIGroups[0][group].properties || [];
   related = rel_if.concat(rel_met, rel_prop);
   related.sort();
+  events = webAPIGroups[0][group].events || [];
 }
     
 var pageList = mainIFPages;
@@ -210,6 +214,18 @@ function buildIFList(interfaces, title) {
   return result;
 }
 
+function buildEventList(events, title) {
+  var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
+
+  for (var i = 0; i < events.length; i++) {
+    result += '<li><a href="' + EventHref + '/' + events[i] + '"><code>' + events[i] + '</code></a></li>';
+  }
+
+  result += '</ol></li>';
+
+  return result;
+}
+
 
 // output
 output = '<section class="Quick_links" id="Quick_Links"><ol>';
@@ -234,6 +250,9 @@ if (implementedBy.length > 0) {
 }
 if (related.length > 0) {
   output += buildIFList(related, text['Related']);
+}
+if (events.length > 0) {
+  output += buildIFList(events, text['Events']);
 }
 
 output += '</ol></section>';
