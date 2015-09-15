@@ -248,11 +248,12 @@ if (inh.length > 0) {
 if (implementedBy.length > 0) {
   output += buildIFList(implementedBy, text['Implemented_by']);
 }
+if (events.length > 0) {
+  output += buildEventList(events, text['Events']);
+}
+
 if (related.length > 0) {
   output += buildIFList(related, text['Related']);
-}
-if (events.length > 0) {
-  output += buildIFList(events, text['Events']);
 }
 
 output += '</ol></section>';
