@@ -19,7 +19,7 @@ var event = slug.replace('Web/Events/','').split('/')[0];
 output = '<section class="Quick_links" id="Quick_Links"><ol>';
 
 function buildEventList(name, events, open) {
-  var openstr = open ? 'data-default-state="open"' : '';
+  var openstr = open ? ' data-default-state="open"' : '';
   var result = '<li'+ openstr +'><a href="#"><strong>' + name + '</strong></a><ol>';
   for (var i = 0; i < events.length; i++) {
     result += '<li><a href="' + EventHref + '/' + events[i] + '"><code>' + events[i] + '</code></a></li>';
@@ -34,7 +34,7 @@ for (g in groups) {
     if (aGroup.events.indexOf(event) !== -1) {
         open = true;
     }
-    if (aGroup.events > 0) {
+    if (aGroup.events.length > 0) {
       output += buildEventList(g, aGroup.events, open);
     }
 }
