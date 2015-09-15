@@ -1,0 +1,86 @@
+<%
+// API Sidebar for overview pages
+//
+// Parameters:
+//  $0  Name of the API group in GroupData
+
+// Variables and data
+var slug = env.slug;
+var locale = env.locale;
+var APIHref = '/' + locale + '/docs/Web/API';
+var EventHref = '/' + locale + '/docs/Web/Events';
+var output = "";
+var group = $0;
+// slug is not available in preview mode.
+if (slug && group) {
+
+var webAPIGroups = string.deserialize(template("GroupData"));
+
+var commonl10n = string.deserialize(template('L10n:Common'));
+
+var text = {
+    'Methods': mdn.getLocalString(commonl10n, 'Methods'),
+    'Properties': mdn.getLocalString(commonl10n, 'Properties'),
+    'Events': mdn.getLocalString(commonl10n, 'Events'),
+};
+
+var interfaces = webAPIGroups[0][group].interfaces || [];
+var methods = webAPIGroups[0][group].methods || [];
+var properties = webAPIGroups[0][group].properties || [];
+var events = webAPIGroups[0][group].events || [];
+
+
+function buildIFList(interfaces, title) {
+  var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
+
+  for (var i = 0; i < interfaces.length; i++) {
+    var url = interfaces[i].replace('()', '').replace('.', '/');
+    result += '<li><a href="' + APIHref + '/' + url + '"><code>' + interfaces[i] + '</code></a></li>';
+  }
+
+  result += '</ol></li>';
+
+  return result;
+}
+
+function buildEventList(events, title) {
+  var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
+
+  for (var i = 0; i < events.length; i++) {
+    result += '<li><a href="' + EventHref + '/' + events[i] + '"><code>' + events[i] + '</code></a></li>';
+  }
+
+  result += '</ol></li>';
+
+  return result;
+}
+
+
+// output
+output = '<section class="Quick_links" id="Quick_Links"><ol>';
+
+if (webAPIGroups[0][group].overview) {
+  output += '<li><strong><a href="' +  APIHref + '/' + webAPIGroups[0][group].overview[0].replace(/ /g, '_') + '">' + webAPIGroups[0][group].overview[0] + '</a></strong></li>';
+}
+
+if (interfaces.length > 0) {
+  output += buildIFList(interfaces, text['Interfaces']);
+}
+
+if (properties.length > 0) {
+  output += buildIFList(properties, text['Properties']);
+}
+
+if (methods.length > 0) {
+  output += buildIFList(methods, text['Methods']);
+}
+
+if (events.length > 0) {
+  output += buildEventList(events, text['Events']);
+}
+
+output += '</ol></section>';
+}
+%>
+
+<%-output%>
