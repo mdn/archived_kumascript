@@ -10,6 +10,11 @@ var l10nHeading = mdn.localString({
     "fr"   : "#nbP# pages trouvées&nbsp;:"
 });
 
+var l10nNumber = mdn.localString({
+    "en-US": "#",
+    "fr"   : "N°"
+});
+
 var l10nPage = mdn.localString({
     "en-US": "Page",
     "fr"   : "Page"
@@ -43,7 +48,7 @@ getPages(pageList);
 <p><strong><%=l10nHeading.replace("#nbP#",result.length)%></strong></p>
 <table class="fullwidth-table standard-table">
 <thead>
-    <th>#</th>
+    <th><%=l10nNumber%></th>
     <th><%=l10nPage%></th>
     <th><%=l10nTags%></th>
 </thead>
