@@ -26,7 +26,11 @@ var text = {
     'Events': mdn.getLocalString(commonl10n, 'Events'),
     'Interfaces': mdn.getLocalString(commonl10n, 'Interfaces'),
     'Guides': mdn.getLocalString(commonl10n, 'Guides'),
+    'translate': mdn.getLocalString(commonl10n, '[Translate]'),
+    'title': mdn.getLocalString(commonl10n, 'TranslationCTA'),
 };
+
+if (webAPIGroups[0][group]) {
 
 var interfaces = webAPIGroups[0][group].interfaces || [];
 var methods = webAPIGroups[0][group].methods || [];
@@ -35,9 +39,9 @@ var events = webAPIGroups[0][group].events || [];
 var guides = [];
 
 if (webAPIGroups[0][group].overview) {
-    guides = page.subpagesExpand('/en-US/docs/Web/API/' + webAPIGroups[0][group].overview[0]);
+    guides = page.subpagesExpand('/en-US/docs/Web/API/' + webAPIGroups[0][group].overview[0].replace(/ /g, '_'));
     var otherGuides = webAPIGroups[0][group].guides || [];
-    guides.concat(otherGuides);
+    guides = guides.concat(otherGuides);
 }
 
 function buildSublist(pages, title) {
@@ -45,7 +49,7 @@ function buildSublist(pages, title) {
 
   for (var i in pages) {
     var aPage = pages[i];
-    var summary = escapeQuotes(aPage.summary) || '';
+    var summary = escapeQuotes(aPage.summary || '');
     var url = aPage.url.replace('en-US', locale);
     var title = htmlEscape(aPage.title);
     
@@ -110,7 +114,7 @@ if (webAPIGroups[0][group].overview) {
 }
 
 if (guides.length > 0) {
-  output += buildSubList(guides, text['Guides']);
+  output += buildSublist(guides, text['Guides']);
 }
 
 if (interfaces.length > 0) {
@@ -130,7 +134,7 @@ if (events.length > 0) {
 }
 
 output += '</ol></section>';
-}
+}}
 %>
 
 <%-output%>
