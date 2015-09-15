@@ -6,6 +6,17 @@
                 "properties": [ "Window.ondevicelight" ],
                 "events":     [ "devicelight" ]
             },
+            "App Cache": {
+                "interfaces": [],
+                "methods":    [],
+                "properties": [],
+                "events":     [ "cached", 
+                                "checking",
+                                "downloading",
+                                "noupdate",
+                                "obsolete",
+                                "updateready" ]
+            },
             "Apps": {
                 "interfaces": [ "DOMApplication",
                                 "DOMApplicationsManager",
@@ -124,10 +135,14 @@
                                 "LinkStyle",
                                 "StyleSheet",
                                 "StyleSheetList",
-                                "TransitionEvent" ],
+                                "TransitionEvent",
+                                "AnimationEvent" ],
                 "methods":    [],
                 "properties": [],
-                "events":     []
+                "events":     [ "animationstart",
+                                "animationend",
+                                "animationiteration",
+                                "transitionend" ]
             },
             "CSSOM View": {
                 "interfaces": [ "MediaQueryList",
@@ -383,6 +398,13 @@
                 "properties": [],
                 "events":     []
             },
+            "Fullscreen API": {
+                "interfaces": [],
+                "methods":    [],
+                "properties": [],
+                "events":     [ "fullscreenchange",
+                                "fullscreenerror" ]
+            },
             "Gamepad API": {
                 "interfaces": [ "Gamepad",
                                 "GamepadButton",
@@ -567,10 +589,29 @@
                                 "storage",
                                 "submit",
                                 "toggle",
-                                "unload" ]
+                                "unload",
+                                "loadeddata",
+                                "loadedmetadata",
+                                "canplay",
+                                "playing",
+                                "play",
+                                "canplaythrough",
+                                "seeked",
+                                "seeking",
+                                "stalled",
+                                "suspend",
+                                "timeupdate",
+                                "drag",
+                                "dragend",
+                                "dragenter",
+                                "dragleave",
+                                "dragover",
+                                "dragstart",
+                                "drop",
+                                "durationchange",
+                                "emptied" ]
             },
             "IndexedDB": {
-                "overview":   [ "IndexedDB API" ],
                 "interfaces": [ "IDBCursor",
                                 "IDBCursorSync",
                                 "IDBCursorWithValue",
@@ -662,11 +703,28 @@
                 "properties": [],
                 "events":     [ "change" ]
             },
+            "Page Visibility API": {
+                "interfaces": [],
+                "methods":    [],
+                "properties": [ "Document.hidden",
+                                "Document.visibilityState" ],
+                "events":     [ "visibilitychange" ]
+            },
             "Persona": {
                 "interfaces": [ "IdentityManager" ],
                 "methods":    [],
                 "properties": [],
                 "events":     []
+            },
+            "Pointer Lock API": {
+                "interfaces": [],
+                "methods":    [ "Element.requestPointerLock()",
+                                "Document.exitPointerLock" ],
+                "properties": [ "Document.pointerLockElement",
+                                "Document.onpointerlockchange",
+                                "Document.onpointerlockerror" ],
+                "events":     [ "pointerlockchange", 
+                                "pointerlockerror"]
             },
             "Push API": {
                 "interfaces": [ "PushManager" ],
@@ -682,6 +740,12 @@
                 "properties": [],
                 "events":     [ "userproximity",
                                 "deviceproximity" ]
+            },
+            "Screen Orientation API": {
+                "interfaces": [ "ScreenOrientation" ],
+                "methods":    [],
+                "properties": [ "Screen.orientation"],
+                "events":     [ "change" ]
             },
             "Server Sent Events": {
                 "interfaces": [ "EventSource" ],
@@ -865,7 +929,32 @@
                                 "TimeEvent" ],
                 "methods":    [],
                 "properties": [],
-                "events":     []
+                "events":     [ "focusin",
+                                "focusout",
+                                "activate",
+                                "click",
+                                "mousedown",
+                                "mouseup",
+                                "mouseover",
+                                "mousemove",
+                                "mouseout",
+                                "DOMSubtreeModified",
+                                "DOMNodeInserted",
+                                "DOMNodeRemoved",
+                                "DOMNodeRemovedFromDocument",
+                                "DOMNodeInsertedIntoDocument",
+                                "DOMAttrModified",
+                                "DOMCharacterDataModified",
+                                "SVGLoad",
+                                "SVGUnload",
+                                "SVGAbort",
+                                "SVGError",
+                                "SVGResize",
+                                "SVGScroll",
+                                "SVGZoom",
+                                "beginEvent",
+                                "endEvent",
+                                "repeatEvent" ]
             },
             "Touch Events": {
                 "interfaces": [ "Touch",
@@ -875,6 +964,8 @@
                 "properties": [],
                 "events":     [ "touchstart",
                                 "touchend",
+                                "touchenter",
+                                "touchleave",
                                 "touchmove",
                                 "touchcancel" ]
             },
