@@ -686,7 +686,9 @@
             "interfaces": [ "EventSource" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "open",
+                            "message",
+                            "error" ]
         },
         "Service Workers API": {
             "interfaces": [ "Cache",
@@ -701,7 +703,14 @@
                             "ServiceWorkerRegistration" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "statechange",
+                            "updatefound",
+                            "controllerchange",
+                            "error",
+                            "message",
+                            "install",
+                            "activate",
+                            "fetch" ]
         },
         "Social API": {
             "interfaces": [ "MozSocial" ],
@@ -863,7 +872,10 @@
                             "TouchList" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "touchstart",
+                            "touchend",
+                            "touchmove",
+                            "touchcancel" ]
         },
         "TV API": {
             "interfaces": [ "TVChannel",
@@ -877,7 +889,10 @@
                             "TVTuner" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "currentsourcechanged",
+                            "currentchannelchanged",
+                            "eitbroadcasted",
+                            "scanningstatechanged" ]
         },
         "URL API": {
             "interfaces": [ "URL",
@@ -903,7 +918,8 @@
                             "SharedKeyframeList" ],
             "methods":    [],
             "properties": [ "Document.timeline" ],
-            "events":     []
+            "events":     [ "finish",
+                            "cancel" ]
         },
         "Web Audio API": {
             "interfaces": [ "AnalyserNode",
@@ -937,7 +953,13 @@
                             "StereoPannerNode" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "statechange", 
+                            "complete",
+                            "ended",
+                            "message",
+                            "loaded",
+                            "audioprocess",
+                            "nodecreate"]
         },
         "Web Components": {
             "interfaces": [ "HTMLContentElement",
@@ -1004,15 +1026,16 @@
                             "EXT_disjoint_timer_query" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "webglcontextlost",
+                            "webglcontextrestored",
+                            "webglcontextcreationerror" ]
         },
         "Web Notifications": {
             "overview":   [ "Notifications API" ],
             "interfaces": [ "Notification",
                             "NotificationEvent" ],
             "methods":    [ "ServiceWorkerRegistration.showNotification()",
-                            "ServiceWorkerRegistration.getNotifications()",
-                            ],
+                            "ServiceWorkerRegistration.getNotifications()" ],
             "properties": [ "ServiceWorkerRegistration.onnotificationclick"],
             "events":     []
         },
