@@ -230,7 +230,9 @@ function buildEventList(events, title) {
 
 // output
 output = '<section class="Quick_links" id="Quick_Links"><ol>';
-// output += '<li><strong><a href="' +  APIHref + '/' + group.replace(/ /g, '_') + '">' + group + '</a></strong></li>';  wait for overview pages to be done
+if (group && webAPIGroups[0][group].overview) {
+  output += '<li><strong><a href="' +  APIHref + '/' + webAPIGroups[0][group].overview.replace(/ /g, '_') + '">' + webAPIGroups[0][group].overview + '</a></strong></li>';
+}
 output += '<li><strong><a href="' +  APIHref + '/' + mainIF + '"><code>' + mainIF + '</a></code></strong></li>';
 
 if (ctors.length > 0) { 
