@@ -5,6 +5,7 @@
   $0 - width - defaults to 600
   $1 - height  - defaults to 70
   $2 - offset - defaults to 50
+  $3 - Interface name
 */
 
 var data = string.deserialize(template("InterfaceData"));
@@ -14,7 +15,7 @@ var result = "";
 if (slug) {
 var locale = env.locale;
 var href = 'https://developer.mozilla.org/' + locale + '/docs/Web/API/';
-var mainIF = slug.replace('Web/API/','').split('/')[0];
+var mainIF = $3 || slug.replace('Web/API/','').split('/')[0];
 var rtlLocales = ['ar', 'he', 'fa'];
 var inheritanceChain = [mainIF];
 var descendants = [];
