@@ -29,14 +29,30 @@ function buildEventList(name, events, open) {
   return result;
 }
 
+var foundGroup = false;
+var collectedGroups = []
 for (g in groups) {
     var aGroup = groups[g];
-    var open = false;
     if (aGroup.events.indexOf(event) !== -1) {
-        open = true;
+        foundGroup = true;
+        collectedGroups.push({name: g, events: aGroup.events.sort()});
     }
-    if (aGroup.events.length > 0) {
-      output += buildEventList(g.replace(/events/i, '') + ' events', aGroup.events, open);
+}
+
+if (collectedGroups.length === 1) {
+    output += buildEventList(collectedGroups[0].name.replace(/events/i, '') + ' events', collectedGroups[0].events, true);
+} else if (collectedGroups.length > 1) {
+    for (x in collectedGroups) {
+        output += buildEventList(collectedGroups[x].name.replace(/events/i, '') + ' events', collectedGroups[x].events, false);
+    }
+}
+
+if (!foundGroup) {
+    for (g in groups) {
+        var aGroup = groups[g];
+        if (aGroup.events.length > 0) {
+          output += buildEventList(g.replace(/events/i, '') + ' events', aGroup.events.sort(), false);
+        }
     }
 }
 
