@@ -111,10 +111,14 @@
             },
             "Contacts API": {
                 "overview":   [ "Contacts API"],
-                "interfaces": [ "ContactManager" ],
+                "interfaces": [ "ContactManager",
+                                "MozContact",
+                                "MozContactChangeEvent" ],
                 "methods":    [],
-                "properties": [],
-                "events":     []
+                "properties": [ "Navigator.mozContacts" ],
+                "events":     [ "success",
+                                "error",
+                                "contactchange" ]
             },
             "Console API": {
                 "interfaces": [ "Console" ],
