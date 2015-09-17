@@ -40,7 +40,8 @@ function parseMacros(string) {
     parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/,
         function (match, macroName, paramsString) {
             var params = paramsString ? paramsString.split(/, ?/) : [];
-            var apiName = (params.length !== 0 ? params[0].toLowerCase() : "");
+            var apiName = (params.length !== 0 ?
+                params[0].toLowerCase().slice(1, -1) : "");
             switch (macroName.toLowerCase()) {
                 case "xref_csslength":
                     apiName = "length";
