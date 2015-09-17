@@ -178,7 +178,7 @@ function getComputedValueOutput(propertyOrDescriptor, atRule) {
                 } else {
                     computedValue += (data.properties[longhand] &&
                         data.properties[longhand].computed) ?
-                        parseMacros(data.properties[longhand].computed) :
+                        data.properties[longhand].computed :
                         localize(localStrings, "asSpecified");
                 }
                 computedValue += "</li>";
