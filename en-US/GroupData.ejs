@@ -786,9 +786,14 @@
             },
             "Push API": {
                 "overview":   [ "Push API" ],
-                "interfaces": [ "PushManager" ],
+                "interfaces": [ "PushManager",
+                                "PushSubscription",
+                                "PushEvent",
+                                "PushMessageData" ],
                 "methods":    [],
-                "properties": [],
+                "properties": [ "ServiceWorkerRegistration.pushManager",
+                                "ServiceWorkerGlobalScope.onpush",
+                                "ServiceWorkerGlobalScope.onpushsubscriptionchange" ],
                 "events":     [ "push",
                                 "pushsubscriptionchange" ]
             },
