@@ -11,6 +11,7 @@
 var lang = env.locale;
 var url = "";
 var str = ($1 || $0);
+var localStrings = template("L10n:Common");
 
 str = str.toLowerCase();
 url = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
@@ -33,7 +34,7 @@ if (!$2) {
     if (thisPage && thisPage.summary) {
         summary = mdn.escapeQuotes(thisPage.summary);
     } else {
-        summary = "The documentation about this has not yet been written; please consider contributing!";
+        summary = mdn.getLocalString(localStrings, "summary");
     }
 }
 
