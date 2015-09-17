@@ -122,6 +122,12 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
 }
 
 
+/*
+  Returns the info to which elements a property or descriptor applies as
+  formatted output
+
+  cssInfo - Information related to the property or descriptor
+*/
 function getAppliesToOutput(cssInfo) {
     var appliesTo = "";
     if (cssInfo.alsoAppliesTo) {
