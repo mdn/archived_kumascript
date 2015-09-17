@@ -96,7 +96,7 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
                     initialValue += getInitialValueOutput(longhand);
                 } else {
                     initialValue += (data.properties[longhand] ?
-                        parseMacros(data.properties[longhand].initial) :
+                        data.properties[longhand].initial :
                         replacePlaceholders(formattedError,
                             [localize(localStrings, "missing")]));
                 }
@@ -105,7 +105,7 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
             initialValue += "</ul>";
             return initialValue;
         } else {
-            return parseMacros(data.properties[propertyOrDescriptor].initial);
+            return data.properties[propertyOrDescriptor].initial;
         }
     }
 
