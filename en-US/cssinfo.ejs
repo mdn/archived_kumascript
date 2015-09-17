@@ -18,7 +18,7 @@ function createLink(apiName, area) {
 
     var summary = (thisPage && thisPage.summary) ?
         escapeQuotes(thisPage.summary) :
-        localize(localStrings, "summary");
+        localize(commonLocalStrings, "summary");
 
     return "<a href=\"" + url + "\"" +
         (summary ? " title=\"" + summary + "\"" : "") + "><code>" +
@@ -96,7 +96,7 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
                     initialValue += getInitialValueOutput(longhand);
                 } else {
                     initialValue += (data.properties[longhand] ?
-                        data.properties[longhand].initial :
+                        parseMacros(data.properties[longhand].initial) :
                         replacePlaceholders(formattedError,
                             [localize(localStrings, "missing")]));
                 }
@@ -105,7 +105,7 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
             initialValue += "</ul>";
             return initialValue;
         } else {
-            return data.properties[propertyOrDescriptor].initial;
+            return parseMacros(data.properties[propertyOrDescriptor].initial);
         }
     }
 
@@ -178,7 +178,7 @@ function getComputedValueOutput(propertyOrDescriptor, atRule) {
                 } else {
                     computedValue += (data.properties[longhand] &&
                         data.properties[longhand].computed) ?
-                        data.properties[longhand].computed :
+                        parseMacros(data.properties[longhand].computed) :
                         localize(localStrings, "asSpecified");
                 }
                 computedValue += "</li>";
