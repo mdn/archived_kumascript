@@ -6,6 +6,25 @@
   $1 - @-rule - defaults to the @-rule within the URL
 */
 
+
+function createLink(apiName, area) {
+    var linkName = apiName;
+    var url = "/" + locale + "/docs/Web/" + (area || "CSS") + "/" + apiName;
+    var thisPage = localWiki.getPage(url);
+
+    if (currentPage.hasTag(thisPage, "CSS Function")) {
+        linkName += "()";
+    }
+
+    var summary = (thisPage && thisPage.summary) ?
+        escapeQuotes(thisPage.summary) :
+        localize(localStrings, "summary");
+
+    return "<a href=\"" + url + "\"" +
+        (summary ? " title=\"" + summary + "\"" : "") + "><code>" +
+        linkName + "</code></a>";
+}
+
 /**
  * Parses all macros within a string
  *
@@ -19,9 +38,19 @@ function parseMacros(string) {
 
     var parsedString = string;
     parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/,
-        function(match, macroName, paramsString) {
+        function (match, macroName, paramsString) {
             var params = paramsString ? paramsString.split(/, ?/) : [];
-            return tpl(macroName, params);
+            var apiName = params[0].toLowerCase();
+            switch (macroName) {
+                case "SVGElement":
+                    area = "SVG";
+                    break;
+
+                default:
+                    area = "CSS";
+            }
+
+            return createLink(apiName, area);
         }
     );
     return parsedString;
@@ -81,15 +110,15 @@ function getAppliesToOutput(cssInfo) {
         cssInfo.alsoAppliesTo.forEach(function(applyingElements, index, array) {
             switch (applyingElements) {
                 case "firstletter":
-                    additionalApplies += tpl("cssxref", ["::first-letter"]);
+                    additionalApplies += createLink("::first-letter");
                     break;
                 
                 case "firstline":
-                    additionalApplies += tpl("cssxref", ["::first-line"]);
+                    additionalApplies += createLink("::first-line");
                     break;
                 
                 case "placeholder":
-                    additionalApplies += tpl("cssxref", ["::-moz-placeholder"]);
+                    additionalApplies += createLink("::-moz-placeholder");
                     break;
             }
             
@@ -304,8 +333,10 @@ var locale = env.locale;
 var formattedError = "<span style=\"color:red;\">$1$</span>";
 var localize = mdn.getLocalString;
 var replacePlaceholders = mdn.replacePlaceholders;
-var tpl = template;
-var self = this;
+var escapeQuotes = mdn.escapeQuotes;
+var commonLocalStrings = string.deserialize(template("L10n:Common"));
+var localWiki = wiki;
+var currentPage = page;
 
 var name = $0 || slug.split("/").pop();
 var atRule = $1;
