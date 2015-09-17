@@ -218,71 +218,72 @@ function getAnimatableOutput(propertyName) {
             if (desc !== "") {
                 desc += localize(localStrings, "listSeparator");
             }
-            
+
             switch (keywords[i]) {
                 case "simplelist":
                     listOf += localize(localStrings, "simpleList");
                     break;
-                
+
                 case "repeatablelist":
                     listOf += localize(localStrings, "repeatableList");
                     break;
-                
+
                 case "transform":
                     desc += localize(localStrings, "transform");
                     break;
-                
+
                 case "length":
                     desc += localize(localStrings, "length");
                     break;
-                
+
                 case "lpc":
                     desc += localize(localStrings, "length") +
                         localize(localStrings, "lpc");
                         additionalInfo = localize(localStrings,
                         "lpcAdditionalInfo") + additionalInfo;
                     break;
-                
+
                 case "color":
                     desc += localize(localStrings, "color");
                     break;
-                
+
                 case "integer":
                     desc += localize(localStrings, "integer");
                     break;
-                
+
                 case "number":
                     desc += localize(localStrings, "number");
                     break;
-                
+
                 case "shadowlist":
                     desc += localize(localStrings, "shadowlist");
                     break;
-                
+
                 case "rectangle":
                     desc += localize(localStrings, "rectangle");
                     break;
-                
+
                 case "visibility":
                     desc += localize(localStrings, "visibility");
                     break;
-                
+
                 case "font_stretch":
                     desc += localize(localStrings, "font_stretch");
                     break;
-                
+
                 case "font_weight":
                     desc += localize(localStrings, "font_weight");
                     break;
-                
+
                 default:
                     desc += replacePlaceholders(formattedError,
                         [localize(localStrings, "missing")]);
             }
         }
-        
-        return parts.unshift(replacePlaceholders(localize(localStrings, "yesAs"),
-            [listOf, desc, additionalInfo])).join(".");
+
+        parts.unshift(replacePlaceholders(localize(localStrings, "yesAs"),
+            [listOf, desc, additionalInfo]));
+        return parts.join(".");
     }
 
     if (data.properties[propertyName]) {
