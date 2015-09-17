@@ -11,7 +11,7 @@
 var lang = env.locale;
 var url = "";
 var str = ($1 || $0);
-var localStrings = template("L10n:Common");
+var localStrings = string.deserialize(template("L10n:Common"));
 
 str = str.toLowerCase();
 url = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
