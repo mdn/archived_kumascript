@@ -6,7 +6,15 @@
   $1 - @-rule - defaults to the @-rule within the URL
 */
 
+/*
+  Creates a link to another API, e.g. a CSS property or SVG element
 
+  This function is used as a workaround for not being able to call other
+  templates like 'cssxref' from within functions (see https://bugzil.la/939214)
+
+  apiName - Name of the API to link to
+  area - Area of the API (i.e. CSS, SVG, etc.)
+*/
 function createLink(apiName, area) {
     var linkName = apiName;
     var url = "/" + locale + "/docs/Web/" + (area || "CSS") + "/" + apiName;
