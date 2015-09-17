@@ -33,12 +33,11 @@ function createLink(apiName, area) {
         linkName + "</code></a>";
 }
 
-/**
- * Parses all macros within a string
- *
- * @param String string String to parse
- * @returns String with replaced macros
- */
+/*
+  Parses all macros within a string
+
+  string - String to parse
+*/
 function parseMacros(string) {
     if (string === undefined) {
         return undefined;
@@ -76,14 +75,13 @@ function parseMacros(string) {
 }
 
 
-/**
- * Returns the initial value of a property or descriptor as formatted output
- *
- * @param String propertyOrDescriptor Name of the property or descriptor to 
- *        return the info for
- * @param String atRule Name of the @-Rule the descriptor belongs to
- * @returns String Formatted of the info
- */
+/*
+  Returns the initial value of a property or descriptor as formatted output
+
+  propertyOrDescriptor - Name of the property or descriptor to return the
+      info for
+  atRule - Name of the @-Rule the descriptor belongs to
+*/
 function getInitialValueOutput(propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
@@ -164,14 +162,13 @@ function getAppliesToOutput(cssInfo) {
 }
 
 
-/**
- * Returns the computed value of a property or descriptor as formatted output
- *
- * @param String propertyOrDescriptor Name of the property or descriptor to 
- *        return the info for
- * @param String atRule Name of the @-Rule the descriptor belongs to
- * @returns String Formatted output of the info
- */
+/*
+  Returns the computed value of a property or descriptor as formatted output
+
+  propertyOrDescriptor - Name of the property or descriptor to return the 
+      info for
+  atRule - Name of the @-Rule the descriptor belongs to
+*/
 function getComputedValueOutput(propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
@@ -210,12 +207,11 @@ function getComputedValueOutput(propertyOrDescriptor, atRule) {
 }
 
 
-/**
- * Returns the information whether a property is animatable as formatted output
- *
- * @param String propertyName Name of the property to return the info for
- * @returns String Formatted output of the info
- */
+/*
+  Returns the information whether a property is animatable as formatted output
+
+  propertyName - Name of the property to return the info for
+*/
 function getAnimatableOutput(propertyName) {
     function formatString(string) {
         if (string === "no") {
@@ -335,13 +331,12 @@ function getAnimatableOutput(propertyName) {
 }
 
 
-/**
- * Returns the canonical order of the values of a property or descriptor as
- * formatted output
- *
- * @param String order Order information, which may contain keywords
- * @returns String Formatted output of the info
- */
+/*
+  Returns the canonical order of the values of a property or descriptor as
+  formatted output
+
+  order - Order information, which may contain keywords
+*/
 function getCanonicalOrderOutput(order) {
     if (!order) {
         return localize(localStrings, "uniqueOrder");
