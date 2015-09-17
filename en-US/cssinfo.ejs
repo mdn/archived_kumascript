@@ -32,7 +32,7 @@ function createLink(apiName, area) {
  * @returns String with replaced macros
  */
 function parseMacros(string) {
-    if (!string) {
+    if (string === undefined) {
         return undefined;
     }
 
