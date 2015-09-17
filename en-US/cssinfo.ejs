@@ -79,8 +79,8 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
             data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-            return data.atRules[atRule].descriptors[propertyOrDescriptor].
-                initial;
+            return parseMacros(data.atRules[atRule].
+                descriptors[propertyOrDescriptor].initial);
         }
     } else if (data.properties[propertyOrDescriptor]) {
         var property = data.properties[propertyOrDescriptor];
@@ -96,7 +96,7 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
                     initialValue += getInitialValueOutput(longhand);
                 } else {
                     initialValue += (data.properties[longhand] ?
-                        data.properties[longhand].initial :
+                        parseMacros(data.properties[longhand].initial) :
                         replacePlaceholders(formattedError,
                             [localize(localStrings, "missing")]));
                 }
@@ -105,7 +105,7 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
             initialValue += "</ul>";
             return initialValue;
         } else {
-            return data.properties[propertyOrDescriptor].initial;
+            return parseMacros(data.properties[propertyOrDescriptor].initial);
         }
     }
 
@@ -138,7 +138,8 @@ function getAppliesToOutput(cssInfo) {
                 additionalApplies += localize(localStrings, "andInEnumeration");
             }
             appliesTo = replacePlaceholders(localize(localStrings,
-                "applyingToMultiple"), [cssInfo.appliesto, additionalApplies]);
+                    "applyingToMultiple"), [parseMacros(cssInfo.appliesto),
+                    additionalApplies]);
         });
     } else {
         appliesTo = cssInfo.appliesto;
@@ -177,7 +178,7 @@ function getComputedValueOutput(propertyOrDescriptor, atRule) {
                 } else {
                     computedValue += (data.properties[longhand] &&
                         data.properties[longhand].computed) ?
-                        data.properties[longhand].computed :
+                        parseMacros(data.properties[longhand].computed) :
                         localize(localStrings, "asSpecified");
                 }
                 computedValue += "</li>";
