@@ -40,9 +40,19 @@ function parseMacros(string) {
     parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/,
         function (match, macroName, paramsString) {
             var params = paramsString ? paramsString.split(/, ?/) : [];
-            var apiName = params[0].toLowerCase();
-            switch (macroName) {
-                case "SVGElement":
+            var apiName = (params.length !== 0 ? params[0].toLowerCase() : "");
+            switch (macroName.toLowerCase()) {
+                case "xref_csslength":
+                    apiName = "length";
+                    area = "CSS";
+                    break;
+
+                case "xref_cssangle":
+                    apiName = "angle";
+                    area = "CSS";
+                    break;
+
+                case "svgelement":
                     area = "SVG";
                     break;
 
