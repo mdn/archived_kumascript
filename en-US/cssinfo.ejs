@@ -58,7 +58,7 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
                 } else {
                     initialValue += (data.properties[longhand] ?
                         data.properties[longhand].initial :
-                        substitute(formattedError,
+                        replacePlaceholders(formattedError,
                             [localize(localStrings, "missing")]));
                 }
                 initialValue += "</li>";
@@ -98,7 +98,7 @@ function getAppliesToOutput(cssInfo) {
             } else if (index < array.length - 1) {
                 additionalApplies += localize(localStrings, "andInEnumeration");
             }
-            appliesTo = substitute(localize(localStrings,
+            appliesTo = replacePlaceholders(localize(localStrings,
                 "applyingToMultiple"), [cssInfo.appliesto, additionalApplies]);
         });
     } else {
@@ -234,12 +234,12 @@ function getAnimatableOutput(propertyName) {
             break;
 
           default:
-            desc += substitute(formattedError,
+            desc += replacePlaceholders(formattedError,
                 [localize(localStrings, "missing")]);
         }
       }
 
-      return substitute(localize(localStrings, "yesAs"),
+      return replacePlaceholders(localize(localStrings, "yesAs"),
         [listOf, desc, additionalInfo]);
     }
 
@@ -259,7 +259,7 @@ function getAnimatableOutput(propertyName) {
                     animatable += (data.properties[longhand] &&
                             data.properties[longhand].animatable ?
                         formatString(data.properties[longhand].animatable) :
-                        substitute(formattedError,
+                        replacePlaceholders(formattedError,
                             [localize(localStrings, "missing")]));
                 }
                 animatable += "</li>";
@@ -269,7 +269,7 @@ function getAnimatableOutput(propertyName) {
         } else {
             return (data.properties[propertyName].animatable ?
                 formatString(data.properties[propertyName].animatable) :
-                substitute(formattedError,
+                replacePlaceholders(formattedError,
                     [localize(localStrings, "missing")]));
         }
     }
@@ -303,7 +303,7 @@ var slug = env.slug;
 var locale = env.locale;
 var formattedError = "<span style=\"color:red;\">$1$</span>";
 var localize = mdn.getLocalString;
-var substitute = mdn.replacePlaceholders;
+var replacePlaceholders = mdn.replacePlaceholders;
 var tpl = template;
 var self = this;
 
@@ -585,6 +585,6 @@ if (cssInfo !== null) {
 
     result += "</ul>";
 } else {
-    result = substitute(formattedError, [localize(localStrings, "missing")]);
+    result = replacePlaceholders(formattedError, [localize(localStrings, "missing")]);
 }
 %><%- result %>
