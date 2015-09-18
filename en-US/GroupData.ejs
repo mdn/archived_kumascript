@@ -398,15 +398,12 @@
                                 "MozVoicemail",
                                 "MozVoicemailEvent",
                                 "MozVoicemailStatus",
-                                "MozWifiConnectionInfoEvent",
                                 "MozWifiP2pGroupOwner",
                                 "MozWifiP2pManager",
-                                "MozWifiStatusChangeEvent",
                                 "PermissionSettings",
                                 "PowerManager",
                                 "SettingsLock",
-                                "SettingsManager",
-                                "WifiManager" ],
+                                "SettingsManager" ],
                 "methods":    [],
                 "properties": [],
                 "events":     []
@@ -754,7 +751,14 @@
                 "events":     [ "open",
                                 "message",
                                 "error",
-                                "close" ]
+                                "close",
+                                "sending",
+                                "sent",
+                                "failed",
+                                "deliverysuccess",
+                                "deliveryerror",
+                                "retrieving".
+                                "received" ]
             },
             "Navigation Timing": {
                 "overview":   [ "Navigation timing API" ],
@@ -1360,6 +1364,16 @@
                                 "cuechange",
                                 "enter",
                                 "exit" ]
+            },
+            "WiFi Information API": {
+                "overview":   [ "WiFi Information API" ],
+                "interfaces": [ "WifiManager",
+                                "MozWifiConnectionInfoEvent",
+                                "MozWifiStatusChangeEvent" ],
+                "methods":    [],
+                "properties": [ "Navigator.mozWifiManager"],
+                "events":     [ "statuschange",
+                                "connectioninfoupdate" ]
             },
             "XDomain": {
                 "interfaces": [ "XDomainrequest" ],
