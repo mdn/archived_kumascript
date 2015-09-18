@@ -393,17 +393,13 @@
                                 "MozNetworkStats",
                                 "MozNetworkStatsData",
                                 "MozNetworkStatsManager",
-                                "MozSettingsEvent",
                                 "MozTimeManager",
                                 "MozVoicemail",
                                 "MozVoicemailEvent",
                                 "MozVoicemailStatus",
                                 "MozWifiP2pGroupOwner",
                                 "MozWifiP2pManager",
-                                "PermissionSettings",
-                                "PowerManager",
-                                "SettingsLock",
-                                "SettingsManager" ],
+                                "PermissionSettings" ],
                 "methods":    [],
                 "properties": [],
                 "events":     []
@@ -802,6 +798,13 @@
                 "events":     [ "pointerlockchange", 
                                 "pointerlockerror"]
             },
+            "Power Management API": {
+                "overview":   [ "Power Management API" ],
+                "interfaces": [ "PowerManager" ],
+                "methods":    [ "Navigator.requestWakeLock()"],
+                "properties": [ "Navigator.mozPower" ],
+                "events":     []
+            },
             "Push API": {
                 "overview":   [ "Push API" ],
                 "interfaces": [ "PushManager",
@@ -875,10 +878,11 @@
             },
             "Settings API": {
                 "overview":   [ "Settings API" ],
-                "guide":      [ { "url":   "/docs/Mozilla/Firefox_OS/Platform/Settings_list",
+                "guides":     [ { "url":   "/docs/Mozilla/Firefox_OS/Platform/Settings_list",
                                   "title": "Firefox OS settings list" } ],
                 "interfaces": [ "SettingsManager",
-                                "MozSettingsEvent" ],
+                                "MozSettingsEvent",
+                                "SettingsLock" ],
                 "methods":    [],
                 "properties": [ "Navigator.mozSettings" ],
                 "events":     [ "settingchange"]
