@@ -414,16 +414,10 @@
                 "events":     []
             },
             "Firefox OS": {
-                "interfaces": [ "MozActivity",
-                                "MozActivityOptions",
-                                "MozActivityRequestHandler",
-                                "MozAlarmsManager",
+                "interfaces": [ "MozAlarmsManager",
                                 "MozContact",
                                 "MozContactChangeEvent",
                                 "MozMobileNetworkInfo",
-                                "MozNetworkStats",
-                                "MozNetworkStatsData",
-                                "MozNetworkStatsManager",
                                 "MozVoicemail",
                                 "MozVoicemailEvent",
                                 "MozVoicemailStatus",
@@ -1201,6 +1195,15 @@
                 "overview":   [ "Vibration API" ],
                 "interfaces": [],
                 "methods":    [ "Navigator.vibrate()" ],
+                "properties": [],
+                "events":     []
+            },
+            "Web Activities": {
+                "overview":   [ "Web Activities" ],
+                "interfaces": [ "MozActivity",
+                                "MozActivityRequestHandler",
+                                "MozActivityOptions" ],
+                "methods":    [ "Navigator.mozSetMessageHandler" ],
                 "properties": [],
                 "events":     []
             },
