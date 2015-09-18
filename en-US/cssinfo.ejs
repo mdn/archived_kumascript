@@ -218,7 +218,8 @@ function getAnimatableOutput(propertyName) {
            return "no";
         }
 
-        var parts = string.split(".");
+        var parts = string.match(/((?:(?:repeatablelist|simplelist|lpc) ?)*)(?:\. ?)?(.*)/);
+        parts.shift();
         var keywords = parts.shift().split(" ");
         var listOf = "";
         var desc = "";
@@ -292,7 +293,7 @@ function getAnimatableOutput(propertyName) {
 
         parts.unshift(replacePlaceholders(localize(localStrings, "yesAs"),
             [listOf, desc, additionalInfo]));
-        return parts.join(".");
+        return parts.join("");
     }
 
     if (data.properties[propertyName]) {
