@@ -19,13 +19,28 @@
                                 "updateready" ]
             },
             "Apps": {
+                "guides":     [ { "url":   "/Apps/Build/JavaScript_API",
+                                  "title": "App Installation and Management APIs" } ],
                 "interfaces": [ "DOMApplication",
                                 "DOMApplicationsManager",
                                 "DOMApplicationsRegistry",
                                 "InstallTrigger" ],
                 "methods":    [],
-                "properties": [],
+                "properties": [ "Navigator.mozApps"],
                 "events":     []
+            },
+            "Audio Channels API": {
+                "overview":   [ "Audio Channels API" ],
+                "interfaces": [ "MozAudioChannelManager",
+                                "BrowserElementAudioChannel" ],
+                "methods":    [],
+                "properties": [ "Navigator.mozAudioChannelManager",
+                                "HTMLMediaElement.mozAudioChannelType",
+                                "HTMLMediaElement.mozchannelpaused",
+                                "HTMLMediaElement.onmozinterrupbegin",
+                                "HTMLMediaElement.onmozinterruptend" ],
+                "events":     [ "interruptbegin",
+                                "interruptend" ]
             },
             "Battery API": {
                 "overview":   [ "Battery Status API" ],
@@ -415,8 +430,6 @@
             },
             "Firefox OS": {
                 "interfaces": [ "MozAlarmsManager",
-                                "MozContact",
-                                "MozContactChangeEvent",
                                 "MozMobileNetworkInfo",
                                 "MozVoicemail",
                                 "MozVoicemailEvent",
@@ -871,6 +884,15 @@
                 "properties": [ "Navigator.mozPower" ],
                 "events":     []
             },
+            "Proximity Events": {
+                "overview":   [ "Proximity Events" ],
+                "interfaces": [ "DeviceProximityEvent",
+                                "UserProximityEvent" ],
+                "methods":    [],
+                "properties": [],
+                "events":     [ "userproximity",
+                                "deviceproximity" ]
+            },
             "Push API": {
                 "overview":   [ "Push API" ],
                 "interfaces": [ "PushManager",
@@ -883,15 +905,6 @@
                                 "ServiceWorkerGlobalScope.onpushsubscriptionchange" ],
                 "events":     [ "push",
                                 "pushsubscriptionchange" ]
-            },
-            "Proximity Events": {
-                "overview":   [ "Proximity Events" ],
-                "interfaces": [ "DeviceProximityEvent",
-                                "UserProximityEvent" ],
-                "methods":    [],
-                "properties": [],
-                "events":     [ "userproximity",
-                                "deviceproximity" ]
             },
             "Screen Orientation API": {
                 "guides":     [ { "url":   "/en-US/docs/Web/API/CSS_Object_Model/Managing_screen_orientation",
@@ -1203,7 +1216,7 @@
                 "interfaces": [ "MozActivity",
                                 "MozActivityRequestHandler",
                                 "MozActivityOptions" ],
-                "methods":    [ "Navigator.mozSetMessageHandler" ],
+                "methods":    [ "Navigator.mozSetMessageHandler()" ],
                 "properties": [],
                 "events":     []
             },
