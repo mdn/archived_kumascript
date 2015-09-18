@@ -291,9 +291,9 @@ function getAnimatableOutput(propertyName) {
             }
         }
 
-        parts.unshift(parseMacros(replacePlaceholders(localize(localStrings, "yesAs"),
-            [listOf, desc, additionalInfo])));
-        return parts.join("");
+        parts.unshift(replacePlaceholders(localize(localStrings, "yesAs"),
+            [listOf, desc, additionalInfo]));
+        return parseMacros(parts.join(""));
     }
 
     if (data.properties[propertyName]) {
