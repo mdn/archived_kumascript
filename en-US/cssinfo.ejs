@@ -291,8 +291,8 @@ function getAnimatableOutput(propertyName) {
             }
         }
 
-        parts.unshift(replacePlaceholders(localize(localStrings, "yesAs"),
-            [listOf, desc, additionalInfo]));
+        parts.unshift(parseMacros(replacePlaceholders(localize(localStrings, "yesAs"),
+            [listOf, desc, additionalInfo])));
         return parts.join("");
     }
 
