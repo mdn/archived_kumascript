@@ -44,7 +44,7 @@ function parseMacros(string) {
     }
 
     var parsedString = string;
-    parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/,
+    parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/g,
         function (match, macroName, paramsString) {
             var params = paramsString ? paramsString.split(/, ?/) : [];
             var apiName = (params.length !== 0 ?
