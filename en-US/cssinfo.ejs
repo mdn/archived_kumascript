@@ -192,8 +192,7 @@ function getPercentagesOutput(cssInfo) {
         percentagesValue += "</ul>";
         return percentagesValue;
     } else {
-        return parseMacros(data.properties[propertyOrDescriptor].computed) ||
-            localize(localStrings, "asSpecified");
+        return cssInfo.percentages;
     }
 }
 
