@@ -418,6 +418,10 @@ var localStrings = {
         "en-US": "Value not found in DB!",
         "de"   : "Wert nicht in der DB gefunden!"
     },
+    "relatedAtRule": {
+       "de"    : "Zugehörige <a href=\"/" + locale + "/docs/Web/CSS/At-Regel\">@-Regel</a>",
+       "en-US" : "Related <a href=\"/" + locale + "/docs/Web/CSS/At-rule\">at-rule</a>"
+    },
     "appliesTo": {
         "en-US" : "Applies to",
         "de" : "Anwendbar auf",
@@ -637,6 +641,12 @@ var result = "";
 
 if (cssInfo !== null) {
     result = "<ul class=\"cssprop\">";
+
+    // Adds information about to which @-rule the descriptor belongs
+    if (atRule) {
+        result += "<li><dfn>" + localize(localStrings, "relatedAtRule") +
+            "</dfn> " + atRule + "</li>";
+    }
 
     // Adds information about the initial value of the item to the output
     result += "<li><dfn>" + template("Xref_cssinitial") + "</dfn> " +
