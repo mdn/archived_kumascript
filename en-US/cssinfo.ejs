@@ -22,6 +22,8 @@ function createLink(apiName, area) {
 
     if (currentPage.hasTag(thisPage, "CSS Function")) {
         linkName += "()";
+    } else if (currentPage.hasTag(thisPage, "CSS Data Type")) {
+        linkName = "&lt;" + linkName + "&gt;";
     }
 
     var summary = (thisPage && thisPage.summary) ?
