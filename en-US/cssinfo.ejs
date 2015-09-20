@@ -205,42 +205,56 @@ function getPercentagesOutput(cssInfo) {
   atRule - Name of the @-Rule the descriptor belongs to
 */
 function getComputedValueOutput(propertyOrDescriptor, atRule) {
-    if (atRule) {
-        if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
-            data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-            return data.atRules[atRule].descriptors[propertyOrDescriptor].
-                computed || localize(localStrings, "asSpecified");
-        }
-    } else if (data.properties[propertyOrDescriptor]) {
-        var property = data.properties[propertyOrDescriptor];
-        if (property.shorthand) {
-            var computedValue = localize(localStrings, "asLonghands") + "<ul>";
-            property.longhands.forEach(function(longhand) {
-                computedValue += "<li><code><a href=\"/" + locale +
-                    "/docs/Web/CSS/" + longhand + "\">" + longhand +
-                    "</a></code>: ";
-                if (data.properties[longhand] &&
-                    data.properties[longhand].shorthand) {
-                    computedValue += getComputedValueOutput(longhand);
-                } else {
-                    computedValue += (data.properties[longhand] &&
-                        data.properties[longhand].computed) ?
-                        parseMacros(data.properties[longhand].computed) :
-                        localize(localStrings, "asSpecified");
-                }
-                computedValue += "</li>";
-            });
-            computedValue += "</ul>";
-            return computedValue;
-        } else {
-            return parseMacros(data.properties[propertyOrDescriptor].computed) ||
-                localize(localStrings, "asSpecified");
-        }
-    }
+  if (atRule) {
+      if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
+          data.atRules[atRule].descriptors[propertyOrDescriptor]) {
+          var computedValue = data.atRules[atRule].descriptors[propertyOrDescriptor].
+              computed;
+          if (computedValue === "color") {
+              computedValue = data.properties.color.computed;
+          }
+          return computedValue || localize(localStrings, "asSpecified");
+      }
+  } else if (data.properties[propertyOrDescriptor]) {
+      var property = data.properties[propertyOrDescriptor];
+      if (property.shorthand) {
+          var computedValue = localize(localStrings, "asLonghands") + "<ul>";
+          property.longhands.forEach(function(longhand) {
+              computedValue += "<li><code><a href=\"/" + locale +
+                  "/docs/Web/CSS/" + longhand + "\">" + longhand +
+                  "</a></code>: ";
+              if (data.properties[longhand] &&
+                  data.properties[longhand].shorthand) {
+                  var longhandComputedValue = getComputedValueOutput(longhand);
+                  if (longhandComputedValue === "color") {
+                      longhandComputedValue = data.properties.color.computed;
+                  }
+                  computedValue += longhandComputedValue;
+              } else {
+                  var longhandComputedValue = (data.properties[longhand] &&
+                      data.properties[longhand].computed) ?
+                      parseMacros(data.properties[longhand].computed) :
+                      localize(localStrings, "asSpecified");
+                  if (longhandComputedValue === "color") {
+                      longhandComputedValue = data.properties.color.computed;
+                  }
+                  computedValue += longhandComputedValue;
+              }
+              computedValue += "</li>";
+          });
+          computedValue += "</ul>";
+          return computedValue;
+      } else {
+          var computedValue = data.properties[propertyOrDescriptor].computed;
+          if (computedValue === "color") {
+              computedValue = data.properties.color.computed;
+          }
+          return parseMacros(computedValue) || localize(localStrings, "asSpecified");
+      }
+  }
 
-    return "";
+  return "";
 }
-
 
 /*
   Returns the information whether a property is animatable as formatted output
