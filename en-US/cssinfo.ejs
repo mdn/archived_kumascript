@@ -645,7 +645,8 @@ if (cssInfo !== null) {
     // Adds information about to which @-rule the descriptor belongs
     if (atRule) {
         result += "<li><dfn>" + localize(localStrings, "relatedAtRule") +
-            "</dfn> " + atRule + "</li>";
+            "</dfn><a href=\"/" + locale + "/docs/Web/CSS/" + atRule + \">" +
+            atRule + "</a></li>";
     }
 
     // Adds information about the initial value of the item to the output
