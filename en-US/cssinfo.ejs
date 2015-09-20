@@ -340,8 +340,11 @@ function getAnimatableOutput(propertyName) {
             }
         }
 
-        parts.unshift(replacePlaceholders(localize(localStrings, "yesAs"),
-            [listOf, desc, additionalInfo]));
+        if (listOf !== "" || desc !== "" || additionalInfo !== "") {
+            parts.unshift(replacePlaceholders(localize(localStrings, "yesAs"),
+                [listOf, desc, additionalInfo]));
+        }
+
         return parseMacros(parts.join(""));
     }
 
@@ -484,10 +487,6 @@ var localStrings = {
         "de"   : "wie spezifiziert",
         "fr"   : "comme spécifié",
         "ja"   : "指定値",
-    },
-    "yesAs": {
-        "en-US": "Yes, as $1$",
-        "de"   : "Ja, als $1$",
     },
     "yesAs": {
         "en-US": "yes, as $1$$2$$3$",
