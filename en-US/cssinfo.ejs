@@ -650,11 +650,13 @@ if (cssInfo !== null) {
 
     // Adds information about whether the item's value is inherited to the 
     // output
-    result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
-        (cssInfo.inherited ?
-            localize(localStrings, "yes") :
-            localize(localStrings, "no")) +
-        "</li>";
+    if (cssInfo.hasOwnProperty("inherited")) {
+        result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
+            (cssInfo.inherited ?
+                localize(localStrings, "yes") :
+                localize(localStrings, "no")) +
+            "</li>";
+    }
 
     // Adds information about how percentages are handled to the output 
     if (cssInfo.percentages !== "no") {
