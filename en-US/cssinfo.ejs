@@ -267,7 +267,7 @@ function getAnimatableOutput(propertyName) {
            return "no";
         }
 
-        var parts = string.match(/((?:(?:simplelist|repeatablelist|transform|length|lpc|color|integer|number|position|shadowlist|rectangle|visibility|font_stretch|font_weight) ?)*)(?:\. ?)?(.*)/);
+        var parts = string.match(/((?:(?:simplelist|repeatablelist|transform|length|lpc|color|integer|number|position|shadowlist|rectangle|visibility|font_stretch|font_weight|basic-shape) ?)*)(?:\. ?)?(.*)/);
         parts.shift();
         var keywords = parts.shift().split(" ");
         var listOf = "";
@@ -337,6 +337,10 @@ function getAnimatableOutput(propertyName) {
 
                 case "font_weight":
                     desc += localize(localStrings, "font_weight");
+                    break;
+
+                case "basic-shape":
+                    desc += localize(localStrings, "basicShape");
                     break;
 
                 default:
@@ -603,6 +607,10 @@ var localStrings = {
         "fr"   : "un <a href=\"/" + locale + "/docs/Web/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
         "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
         "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/shape#Interpolation\" title=\"Значения типа данных CSS <фигура>, которыми являются прямоугольники интерполируются по их верхней, правой, нижней и левой компоненте, каждая из которых трактуется как вещественныое число с плавающей запятой.\">прямоугольник</a>",
+    },
+    "basicShape": {
+        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/shape-outside#Interpolation\" title=\"Values of the <basic-shape> CSS data type interpolate as a simple list. The list values interpolate as length, percentage, or calc where possible. If list values are not one of those types but are identical, those values do interpolate.\">basic shape</a>",
+        "de"   : "eine <a href=\"/" + locale + "/docs/Web/CSS/shape-outside#Interpolation\" title=\"Werte des <basic-shape> CSS Datentyps interpolieren als einfache Liste. Die Listenwerte interpolieren als Länge, Prozentwert oder calc, wo möglich. Falls Listenwerte nicht einem dieser Typen entsprechen, aber identisch sind, werden diese Werte interpoliert.\">einfache Form</a>"
     },
     "percentages": {
         "en-US": "Percentages",
