@@ -267,7 +267,7 @@ function getAnimatableOutput(propertyName) {
            return "no";
         }
 
-        var parts = string.match(/((?:(?:repeatablelist|simplelist|lpc) ?)*)(?:\. ?)?(.*)/);
+        var parts = string.match(/((?:(?:simplelist|repeatablelist|transform|length|lpc|color|integer|number|shadowlist|rectangle|visibility|font_stretch|font_weight) ?)*)(?:\. ?)?(.*)/);
         parts.shift();
         var keywords = parts.shift().split(" ");
         var listOf = "";
