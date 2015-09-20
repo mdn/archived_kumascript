@@ -165,6 +165,40 @@ function getAppliesToOutput(cssInfo) {
 
 
 /*
+Returns the percentages information for a property or descriptor as
+formatted output
+
+cssInfo - Information related to the property or descriptor
+*/
+function getPercentagesOutput(cssInfo) {
+    if (cssInfo.shorthand) {
+        var percentagesValue = localize(localStrings, "percentageLonghands") +
+            "<ul>";
+        cssInfo.percentages.forEach(function(longhand) {
+        percentagesValue += "<li><code><a href=\"/" + locale +
+              "/docs/Web/CSS/" + longhand + "\">" + longhand +
+              "</a></code>: ";
+            if (data.properties[longhand] &&
+                data.properties[longhand].shorthand) {
+                percentagesValue += getPercentagesOutput(longhand);
+            } else {
+              percentagesValue += (data.properties[longhand] &&
+                  data.properties[longhand].percentages) ?
+                  data.properties[longhand].percentages :
+                  localize(localStrings, "asSpecified");
+            }
+            percentagesValue += "</li>";
+        });
+        percentagesValue += "</ul>";
+        return percentagesValue;
+    } else {
+        return parseMacros(data.properties[propertyOrDescriptor].computed) ||
+            localize(localStrings, "asSpecified");
+    }
+}
+
+
+/*
   Returns the computed value of a property or descriptor as formatted output
 
   propertyOrDescriptor - Name of the property or descriptor to return the 
@@ -423,6 +457,11 @@ var localStrings = {
         "ja"   : "以下の各プロパティのショートハンドとして補完します:",
         "ru"   : "как каждое из свойств этого сокращённого свойства:"
     },
+    "percentageLonghands": {
+        "en-US": "The values of its longhand properties the percentage value belongs to:",
+        "de"   : "Die Werte seiner Langschreibweise Eigenschaften, zu denen der Prozentwert gehört:",
+        "fr"   : "les valeurs de ses propriétés auxquelles se rapportent les pourcentages:"
+    },
     "asSpecified": {
         "en-US": "as specified",
         "de"   : "wie spezifiziert",
@@ -608,7 +647,7 @@ if (cssInfo !== null) {
     if (cssInfo.percentages !== "no") {
         result += "<li><dfn>" +
             localize(localStrings, "percentages") + "</dfn> " +
-            cssInfo.percentages + "</li>";
+            getPercentagesOutput(cssInfo) + "</li>";
     }
 
     // Adds information about the media the item applies to to the output
