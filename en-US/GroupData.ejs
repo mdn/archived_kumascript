@@ -950,14 +950,6 @@
             "events":     [ "push",
                             "pushsubscriptionchange" ]
         },
-        "Screen Orientation API": {
-            "guides":     [ { "url":   "/en-US/docs/Web/API/CSS_Object_Model/Managing_screen_orientation",
-                              "title": "Managing screen orientation" } ],
-            "interfaces": [ "ScreenOrientation" ],
-            "methods":    [],
-            "properties": [ "Screen.orientation"],
-            "events":     [ "change" ]
-        },
         "Request Sync API": {
             "interfaces": [ "RequestManager",
                             "RequestSyncTask",
@@ -965,6 +957,14 @@
             "methods":    [],
             "properties": [ "Navigator.syncManager"],
             "events":     []
+        },
+        "Screen Orientation API": {
+            "guides":     [ { "url":   "/en-US/docs/Web/API/CSS_Object_Model/Managing_screen_orientation",
+                              "title": "Managing screen orientation" } ],
+            "interfaces": [ "ScreenOrientation" ],
+            "methods":    [],
+            "properties": [ "Screen.orientation"],
+            "events":     [ "change" ]
         },
         "Server Sent Events": {
             "overview":   [ "Server-sent events" ],
@@ -1196,6 +1196,13 @@
                             "beginEvent",
                             "endEvent",
                             "repeatEvent" ]
+        },
+        "System Update API": {
+            "interfaces": [ "SystemUpdateProvider",
+                            "SystemUpdateManager" ],
+            "methods":    [],
+            "properties": [ "Navigator.updateManager" ],
+            "events":     []
         },
         "TCP Socket API": {
             "overview":   [ "TCP Socket API" ],
