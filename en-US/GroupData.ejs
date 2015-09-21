@@ -936,11 +936,17 @@
         },
         "Presentation API": {
             "interfaces": [ "Presentation",
-                            "PresentationAvailableEvent",
-                            "PresentationSession" ],
+                            "PresentationAvailability",
+                            "PresentationDeviceInfoManager",
+                            "PresentationRequest",
+                            "PresentationSession",
+                            "PresentationSessionConnectEvent" ],
             "methods":    [],
-            "properties": [ "Navigator.presentation" ],
-            "events":     []
+            "properties": [ "Navigator.presentation",
+                            "Navigator.mozPresentationDeviceInfo" ],
+            "events":     [ "change",
+                            "sessionavailable",
+                            "sessionconnect" ]
         },
         "Proximity Events": {
             "overview":   [ "Proximity Events" ],
