@@ -366,7 +366,7 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (isOutdated(result[i].last_edit, translation.last_edit)) {
             var days = daysBetween(translation.last_edit, result[i].last_edit); %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=mdn.replacePlaceholders(l10nStateOutofdate, [days])%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else { %>
