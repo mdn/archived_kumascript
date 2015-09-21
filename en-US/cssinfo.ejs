@@ -440,7 +440,7 @@ var commonLocalStrings = string.deserialize(template("L10n:Common"));
 var localWiki = wiki;
 var currentPage = page;
 
-var name = $0 || slug.split("/").pop();
+var name = $0 || slug.split("/").pop().toLowerCase();
 var atRule = $1;
 
 var localStrings = {
