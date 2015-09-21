@@ -22,7 +22,8 @@ function createLink(apiName, area) {
 
     if (currentPage.hasTag(thisPage, "CSS Function")) {
         linkName += "()";
-    } else if (currentPage.hasTag(thisPage, "CSS Data Type")) {
+    } else if (currentPage.hasTag(thisPage, "CSS Data Type") ||
+        currentPage.hasTag(thisPage, "Element")) {
         linkName = "&lt;" + linkName + "&gt;";
     }
 
@@ -63,7 +64,7 @@ function parseMacros(string) {
                     break;
 
                 case "svgelement":
-                    area = "SVG";
+                    area = "SVG/Element";
                     break;
 
                 default:
