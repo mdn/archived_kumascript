@@ -172,7 +172,7 @@ formatted output
 cssInfo - Information related to the property or descriptor
 */
 function getPercentagesOutput(cssInfo) {
-    if (cssInfo.shorthand) {
+    if (Array.isArray(cssInfo.percentages)) {
         var percentagesValue = localize(localStrings, "percentageLonghands") +
             "<ul>";
         cssInfo.percentages.forEach(function(longhand) {
