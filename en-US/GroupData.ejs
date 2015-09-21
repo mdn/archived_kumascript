@@ -851,6 +851,15 @@
             "properties": [ "Navigator.connection" ],
             "events":     [ "change" ]
         },
+        "Network Stats API": {
+            "overview":   [ "Network Stats API" ],
+            "interfaces": [ "MozNetworkStats",
+                            "MozNetworkStatsData",
+                            "MozNetworkStatsManager" ],
+            "methods":    [],
+            "properties": [ "Navigator.mozNetworkStats" ],
+            "events":     []
+        },
         "NFC API": {
             "overview":   [ "NFC API" ],
             "interfaces": [ "MozNDEFRecord",
@@ -859,15 +868,6 @@
                             "MozNFCTag" ],
             "methods":    [],
             "properties": [ "Navigator.mozNfc" ],
-            "events":     []
-        },
-        "Network Stats API": {
-            "overview":   [ "Network Stats API" ],
-            "interfaces": [ "MozNetworkStats",
-                            "MozNetworkStatsData",
-                            "MozNetworkStatsManager" ],
-            "methods":    [],
-            "properties": [ "Navigator.mozNetworkStats" ],
             "events":     []
         },
         "Page Visibility API": {
@@ -947,6 +947,14 @@
             "methods":    [],
             "properties": [ "Screen.orientation"],
             "events":     [ "change" ]
+        },
+        "Request Sync API": {
+            "interfaces": [ "RequestManager",
+                            "RequestSyncTask",
+                            "RequestSyncApp" ],
+            "methods":    [],
+            "properties": [ "Navigator.syncManager"],
+            "events":     []
         },
         "Server Sent Events": {
             "overview":   [ "Server-sent events" ],
