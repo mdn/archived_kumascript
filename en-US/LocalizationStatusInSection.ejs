@@ -71,21 +71,21 @@ var l10nTranslateNow = mdn.localString({
 });
 
 var l10nStateUptodate = mdn.localString({
-    "en-US": "Yes, and up to date",
-    "de"   : "Ja, und aktuell",
-    "fr"   : "Oui et à jour",
-    "pt-BR": "Sim e atualizado",
-    "ru"   : "Перевод есть и актуален",
-    "zh-CN": "翻译完成！哦耶～"
+    "en-US": "Yes, and up to date.",
+    "de"   : "Ja, und aktuell.",
+    "fr"   : "Oui et à jour.",
+    "pt-BR": "Sim e atualizado.",
+    "ru"   : "Перевод есть и актуален.",
+    "zh-CN": "翻译完成！哦耶～。"
 });
 
 var l10nStateOutofdate = mdn.localString({
-    "en-US": "Yes, but not up to date (#d# days older).",
-    "de"   : "Ja, aber nicht aktuell (#d# Tage älter).",
-    "fr"   : "Oui mais pas à jour (#d# jours d'écart).",
-    "pt-BR": "Sim, mas desatualizado (há #d# dias).",
-    "ru"   : "Перевод есть, но он не актуален (устарел на #d# дня).",
-    "zh-CN": "以前翻译过但现在没有与最新的英文文档保持同步（英文文档更新于 #d# 天前）。"
+    "en-US": "Yes, but not up to date ($1$ days older).",
+    "de"   : "Ja, aber nicht aktuell ($1$ Tage älter).",
+    "fr"   : "Oui mais pas à jour ($1$ jours d'écart).",
+    "pt-BR": "Sim, mas desatualizado (há $1$ dias).",
+    "ru"   : "Перевод есть, но он не актуален (устарел на $1$ дня).",
+    "zh-CN": "以前翻译过但现在没有与最新的英文文档保持同步（英文文档更新于 $1$ 天前）。"
 });
 
 var l10nStateInprogress = mdn.localString({
@@ -331,7 +331,7 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
             var days = daysBetween(translation.last_edit, priorities[i].last_edit); %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateOutofdate.replace("#d#",days)%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=mdn.replacePlaceholders(l10nStateOutofdate, [days])%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else { %>
