@@ -130,7 +130,28 @@ function getInitialValueOutput(propertyOrDescriptor, atRule) {
   cssInfo - Information related to the property or descriptor
 */
 function getAppliesToOutput(cssInfo) {
-    var appliesTo = "";
+    if (Array.isArray(cssInfo.appliesto)) {
+        var appliesToValue = localize(localStrings, "asLonghands") + "<ul>";
+        cssInfo.appliesto.forEach(function(longhand) {
+            appliesToValue += "<li><code><a href=\"/" + locale +
+                "/docs/Web/CSS/" + longhand + "\">" + longhand +
+                "</a></code>: ";
+            if (data.properties[longhand] &&
+                data.properties[longhand].shorthand) {
+                appliesToValue += getAppliesToOutput(longhand);
+            } else {
+                appliesToValue += (data.properties[longhand] ?
+                    parseMacros(data.properties[longhand].appliesto) :
+                    replacePlaceholders(formattedError,
+                        [localize(localStrings, "missing")]));
+            }
+            appliesToValue += "</li>";
+        });
+        appliesToValue += "</ul>";
+    } else {
+        appliesToValue = cssInfo.appliesto;
+    }
+
     if (cssInfo.alsoAppliesTo) {
         var additionalApplies = "";
         cssInfo.alsoAppliesTo.forEach(function(applyingElements, index, array) {
@@ -153,15 +174,12 @@ function getAppliesToOutput(cssInfo) {
             } else if (index < array.length - 1) {
                 additionalApplies += localize(localStrings, "andInEnumeration");
             }
-            appliesTo = replacePlaceholders(localize(localStrings,
-                    "applyingToMultiple"), [parseMacros(cssInfo.appliesto),
-                    additionalApplies]);
         });
-    } else {
-        appliesTo = cssInfo.appliesto;
+        appliesToValue = replacePlaceholders(localize(localStrings,
+            "applyingToMultiple"), [appliesToValue, additionalApplies]);
     }
 
-    return parseMacros(appliesTo);
+    return parseMacros(appliesToValue);
 }
 
 
