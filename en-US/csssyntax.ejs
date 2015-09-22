@@ -206,14 +206,17 @@ function formatSyntax(rawSyntax) {
 function formatTypesSyntax(formattedSyntax) {
 	var formattedTypesSyntax = "";
 	var types = [];
-	var typeAnchorAttributes = formattedSyntax.match(/href="#.+?"/g);
-	if (typeAnchorAttributes) {
-		typeAnchorAttributes.forEach(function(typeAnchorAttribute) {
-			var type = typeAnchorAttribute.match(/#(.+?)"/);
-			if (types.indexOf(type[1]) === -1) {
-				types.push(type[1]);
-			}
-		});
+        var typeAnchorAttributes = formattedSyntax.match(/href=".+?"/g);
+        if (typeAnchorAttributes) {
+            typeAnchorAttributes.forEach(function(typeAnchorAttribute) {
+            var type = typeAnchorAttribute.match(/href="(?:#|.*\/)(.+?)"/);
+            if (types.indexOf(type[1]) === -1) {
+                // Some data type page names have '_value' appended,
+                // which needs to be removed in order to find the syntax
+                var subType = type[1].replace("_value", "");
+                types.push(subType);
+            }
+        });
 
 		if (types.length > 0) {
 			var typesSyntax = "";
