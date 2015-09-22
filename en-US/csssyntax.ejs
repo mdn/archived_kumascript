@@ -114,7 +114,7 @@ var operators = [
         anchor: "Single_bar"
     },
     {
-        regexp: /&&/g,
+        regexp: /&amp;&amp;/g,
         title: "Double ampersand",
         anchor: "Double_ampersand"
     },
@@ -198,7 +198,7 @@ function formatSyntax(rawSyntax) {
 			return link;
 		});
 	});
-	formattedSyntax = formattedSyntax.replace(/<([a-z0-9\(\)\'\-]+?)>/gi, buildLink);
+	formattedSyntax = formattedSyntax.replace(/&lt;([a-z0-9\(\)\'\-]+?)&gt;/gi, buildLink);
 
 	return formattedSyntax;
 }
