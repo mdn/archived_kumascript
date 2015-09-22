@@ -1,25 +1,264 @@
-<%
+<% 
+/*
+  Displays the syntax of a CSS property or descriptor
 
-// Load the whole page (wiki.page does cache the original page
+  $0 - property/descriptor name - defaults to the slug name
+  $1 - @-rule - defaults to the @-rule within the URL
+*/
 
-var page = wiki.page(mdn.localString({
-    "en-US": "en-US/docs/Web/CSS/CSS_values_syntax",
-    "ja"   : "ja/docs/Web/CSS/CSS_values_syntax",
-    "fr"   : "fr/docs/CSS/Syntaxe_des_valeurs_CSS",
-    "de"   : "de/docs/CSS/CSS_werte_syntax",
-    "zh-CN": "en-US/docs/Web/CSS/CSS_values_syntax"
-})); // "en-US" is default.
+var data = string.deserialize(template("CSSData"));
+var slug = env.slug;
+var locale = env.locale;
 
-var re = new RegExp("<\\s*span\\s+id\\s*=\\s*"+'"syntax-'+$0+'"'+"[^>]*>(.*)<\\s*/\\s*span\\s*\\>","igm");
-var result = re.exec(page);
+var name = $0 || slug.split("/").pop();
+var atRule = $1;
+var rawSyntax = "";
+var formattedSyntax = "";
 
-var missing = mdn.localString({
+var s_missing = mdn.localString({
     "en-US": "Syntax not found in DB!",
     "fr"   : "La syntaxe n'a pas été trouvée !",
     "de"   : "Syntax nicht in der Datenbank gefunden!",
-	"zh-CN": "该属性的语法尚未添加"
+    "zh-CN": "该属性的语法尚未添加"
 });
 
-result = (!result) ? missing : result[1];
+var s_where = mdn.localString({
+    "en-US": "where ",
+    "de"   : "wo ",
+    "fr"   : "où "
+});
+    					 
+var s_syntax_value_definition = mdn.localString({
+    "en-US": "Value_definition_syntax",
+    "de"   : "Wertdefinitionssyntax",
+    "fr"   : "Syntaxe_de_d%C3%A9finition_des_valeurs"
+});
+						 
+var s_and = mdn.localString({
+    "en-US": "and ",
+    "de"   : "und ",
+    "fr"   : "et ",
+	"ja"   : "と"
+});
+
+var s_or = mdn.localString({
+    "en-US": "or",
+    "de"   : "oder"
+});
+
+var s_possible_values = mdn.localString({
+    "en-US": "Possible values: ",
+    "de"   : "Mögliche Werte: "
+});
+
+var s_number_followed_by = mdn.localString({
+    "en-US": "a number followed by",
+    "de"   : "eine Nummer gefolgt von"
+});
+
+var s_like = mdn.localString({
+    "en-US": "like",
+    "de"   : "wie"
+});
+
+var typeInfo = {
+    "string": {},
+    "url": {},
+    "uri": {},
+    "integer": {},
+    "number": {},
+    "percentage": {},
+    "length": {
+        "title": s_possible_values + s_number_followed_by + "'em', 'ex', 'ch', 'rem', 'px', 'cm', 'mm', 'in', 'vh', 'vw', 'vmin', 'vmax', 'pt', 'pc' " + s_or + " 'px', " + s_like + " 3px, 1.5cm, -0.5em " + s_or + " 0"
+    },
+    "angle": {
+        "title": s_possible_values + s_number_followed_by + "'deg', 'grad', 'rad' " + s_or + " 'turn', " + s_like + " 2turn, 1.3rad, -60deg " + s_or + " 0grad."
+    },
+    "time": {
+        "title": s_possible_values + s_number_followed_by + "'s' " + s_or + " 'ms', " + s_like + " 3s, -2.5ms " + s_or + " 0s."
+    },
+    "frequency": {},
+    "resolution": {},
+    "color": {
+        "typeLinkName": "color_value"
+    },
+    "image": {},
+    "position": {
+        "typeLinkName": "position_value"
+    },
+    "timing-function": {
+        "title": s_possible_values + "cubic-bezier(), steps(), linear, ease, ease-in, ease-out, east-in-out, step-start-step-end"
+    },
+    "transform-function": {
+        "title": s_possible_values + "matrix(), matrix3d(), rotate(), rotate3d(), rotateX(), rotateY(), rotateZ(), scale(), scale3d(), scaleX(), scaleY(), scaleZ(), skewX(), skewY(), translate(), translate3d(), translateX(), translateY(), translateZ()"
+    },
+    "blend-mode": {
+        "title": s_possible_values + "normal, multiply, screen, overlay, darken, lighten, color-dodge, color-burn, hard-light, soft-light, difference, exclusion, hue, saturation, color, luminosity"
+    }
+};
+
+var operators = [
+    {
+        regexp: /\#/g,
+        title: "Hash mark",
+        anchor: "Hash_mark_(.23)"
+    },
+    {
+        regexp: /\|\|/g,
+        title: "Double bar",
+        anchor: "Double_bar"
+    },
+    {
+        regexp: /[^\|](\|)[^\|]/g,
+        title: "Single bar",
+        anchor: "Single_bar"
+    },
+    {
+        regexp: /&&/g,
+        title: "Double ampersand",
+        anchor: "Double_ampersand"
+    },
+    {
+        regexp: /\?/g,
+        title: "Question mark",
+        anchor: "Question_mark_(.3F)"
+    },
+    {
+        regexp: /\*/g,
+        title: "Asterisk",
+        anchor: "Asterisk_(*)"
+    },
+    {
+        regexp: /\+/g,
+        title: "Plus",
+        anchor: "Plus_(.2B)"
+    },
+    {
+        regexp: /\[|\]/g,
+        title: "Brackets",
+        anchor: "Brackets"
+    },
+    {
+        regexp: /\{|\}/g,
+        title: "Curly braces",
+        anchor: "Curly_braces_(.7B_.7D)"
+    }
+];
+
+function buildLink(match, type) {
+    var link = "/" + locale + "/docs/Web/CSS/";
+    var title = "";
+    var propertyName = type.match(/\'(.+?)\'/);
+
+    // Handle property references like <'color'>
+    if (propertyName) {
+        if (data.properties[propertyName[1]]) {
+            title = data.properties[propertyName[1]].syntax;
+        }
+        return "<a href=\"" + link + propertyName[1] + "\" title=\"" + title + "\">&lt;" + propertyName[0] + "&gt;</a>";
+
+    // Handle basic types
+    } else if (typeInfo.hasOwnProperty(type)) {
+        if (typeInfo[type].title) {
+            title = typeInfo[type].title;
+        }
+
+        if (typeInfo[type].typeLinkName) {
+            link += typeInfo[type].typeLinkName;
+        } else {
+            link += type;
+        }
+
+    // Handle advanced types having their syntax defined within the 'CSSData' template
+    } else if (data.syntaxes[type]) {
+        return "<a href=\"#" + type + "\">&lt;" + type + "&gt;</a>";
+
+    // Handled advanced types having their syntax not defined
+    } else {
+        return "&lt;" + type + "&gt;";
+    }
+
+    return "<a href=\"" + link + "\" title=\"" + title + "\">&lt;" + type + "&gt;</a>";
+}
+
+function formatSyntax(rawSyntax) {
+	if (rawSyntax === "") {
+		return "";
+	}
+
+	var formattedSyntax = rawSyntax;
+	operators.forEach(function(operator) {
+		formattedSyntax = formattedSyntax.replace(operator.regexp, function(match, text) {
+			text = (typeof text === "string" ? text : match);
+
+			var link = "<a href=\"/" + locale + "/docs/CSS/" + s_syntax_value_definition + "#" + operator.anchor + "\" title=\"" + operator.title + "\">" + text + "</a>";
+			if (text === "|") {
+				link = " " + link + " ";
+			}
+			return link;
+		});
+	});
+	formattedSyntax = formattedSyntax.replace(/<([a-z0-9\(\)\'\-]+?)>/gi, buildLink);
+
+	return formattedSyntax;
+}
+
+function formatTypesSyntax(formattedSyntax) {
+	var formattedTypesSyntax = "";
+	var types = [];
+	var typeAnchorAttributes = formattedSyntax.match(/href="#.+?"/g);
+	if (typeAnchorAttributes) {
+		typeAnchorAttributes.forEach(function(typeAnchorAttribute) {
+			var type = typeAnchorAttribute.match(/#(.+?)"/);
+			if (types.indexOf(type[1]) === -1) {
+				types.push(type[1]);
+			}
+		});
+
+		if (types.length > 0) {
+			var typesSyntax = "";
+
+			types.forEach(function(type, index, types) {
+				if (data.syntaxes.hasOwnProperty(type)) {
+					typesSyntax += "<span id=\"" + type + "\">&lt;" + type + "&gt;</span> = " + formatSyntax(data.syntaxes[type]);
+					if (index < types.length - 1) {
+					  typesSyntax += "<br/>";
+					}
+				}
+			});
+
+			if (typesSyntax !== "") {
+				formattedTypesSyntax += "<p style=\"font-family:Open Sans,Arial,sans-serif; margin: 10px 0 0 0;\">" +
+					"where<br/><code style=\"font-family:Consolas,Monaco,&quot;Andale Mono&quot;,monospace;\">" + typesSyntax + "</code></p>";
+			}
+		}
+
+		return formattedTypesSyntax + formatTypesSyntax(typesSyntax);
+	}
+
+	return formattedTypesSyntax;
+}
+
+var rawSyntax = "";
+
+if (!atRule) {
+    var matches = slug.match(/\/CSS\/(@.+?)(?=\/)/);
+    if (matches) {
+        atRule = matches[1];
+    }
+}
+
+if (atRule) {
+  if (data.atRules[atRule] && data.atRules[atRule].descriptors) {
+	  rawSyntax = data.atRules[atRule].descriptors[name].syntax;
+  }
+} else if (data.properties[name]) {
+	rawSyntax = data.properties[name].syntax;
+}
+
+var formattedSyntax = formatSyntax(rawSyntax);
+formattedSyntax += formatTypesSyntax(formattedSyntax);
+
+var result = formattedSyntax || s_missing;
 
 %><%- result %>
