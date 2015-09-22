@@ -784,6 +784,12 @@
                             "Element.undomanager" ],
             "events":     []
         },
+        "Identity": {
+            "interfaces": [ "IdentityManager" ],
+            "methods":    [],
+            "properties": [ "Navigator.mozId"],
+            "events":     []
+        },
         "Idle API": {
             "overview":   [ "Idle API" ],
             "interfaces": [],
@@ -1069,12 +1075,6 @@
             "properties": [ "Navigator.mozPermissionSettings"],
             "events":     []
         },
-        "Identity": {
-            "interfaces": [ "IdentityManager" ],
-            "methods":    [],
-            "properties": [ "Navigator.mozId"],
-            "events":     []
-        },
         "Pointer Events": {
             "interfaces": [ "PointerEvent"],
             "methods":    [ "Element.setPointerCapture()",
@@ -1239,6 +1239,14 @@
             "methods":    [],
             "properties": [ "Navigator.mozSettings" ],
             "events":     [ "settingchange"]
+        },
+        "Simple Push API": {
+            "overview":   [ "Simple Push API" ],
+            "interfaces": [ "PushManager" ],
+            "methods":    [],
+            "properties": [ "Navigator.mozPush" ],
+            "events":     [ "success",
+                            "error" ]
         },
         "Social API": {
             "interfaces": [ "MozSocial" ],
