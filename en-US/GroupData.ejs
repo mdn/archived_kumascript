@@ -1858,13 +1858,35 @@
         },
         "WiFi Information API": {
             "overview":   [ "WiFi Information API" ],
-            "interfaces": [ "WifiManager",
+            "interfaces": [ "MozWifiManager",
+                            "MozWifiCapabilities",
+                            "MozWifiConnectionInfo",
+                            "MozWifiConnection",
+                            "MozWifiNetwork",
                             "MozWifiConnectionInfoEvent",
+                            "MozWifiStationChangeEvent",
                             "MozWifiStatusChangeEvent" ],
             "methods":    [],
-            "properties": [ "Navigator.mozWifiManager"],
+            "properties": [ "Navigator.mozWifiManager" ],
             "events":     [ "statuschange",
                             "connectioninfoupdate" ]
+        },
+        "WiFi P2P API": {
+            "interfaces": [ "MozWifiP2pGroupOwner",
+                            "MozWifiP2pManager",
+                            "MozWifiP2pStatusChangeEvent" ],
+            "methods":    [],
+            "properties": [ "Navigator.mozWifiP2pManager"],
+            "events":     [ "peerinfoupdate",
+                            "statuschange",
+                            "enabled",
+                            "disabled" ]
+        },
+        "WiFi Tethering API": {
+            "interfaces": [ "MozTetheringManager" ],
+            "methods":    [],
+            "properties": [ "Navigator.mozTetheringManager" ],
+            "events":     []
         },
         "XDomain": {
             "interfaces": [ "XDomainrequest" ],
