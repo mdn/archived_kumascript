@@ -182,64 +182,71 @@ function buildLink(match, type) {
 }
 
 function formatSyntax(rawSyntax) {
-	if (rawSyntax === "") {
-		return "";
-	}
+    if (rawSyntax === "") {
+        return "";
+    }
 
-	var formattedSyntax = rawSyntax;
-	operators.forEach(function(operator) {
-		formattedSyntax = formattedSyntax.replace(operator.regexp, function(match, text) {
-			text = (typeof text === "string" ? text : match);
+    var formattedSyntax = rawSyntax;
+    operators.forEach(function(operator) {
+        formattedSyntax = formattedSyntax.replace(operator.regexp,
+            function(match, text) {
+            text = (typeof text === "string" ? text : match);
 
-			var link = "<a href=\"/" + locale + "/docs/CSS/" + s_syntax_value_definition + "#" + operator.anchor + "\" title=\"" + operator.title + "\">" + text + "</a>";
-			if (text === "|") {
-				link = " " + link + " ";
-			}
-			return link;
-		});
-	});
-	formattedSyntax = formattedSyntax.replace(/&lt;([a-z0-9\(\)\'\-]+?)&gt;/gi, buildLink);
+            var link = "<a href=\"/" + locale + "/docs/CSS/" +
+                s_syntax_value_definition + "#" + operator.anchor +
+                "\" title=\"" + operator.title + "\">" + text + "</a>";
+            if (text === "|") {
+                link = " " + link + " ";
+            }
+            return link;
+        });
+    });
+    formattedSyntax = formattedSyntax.replace(/&lt;([a-z0-9\(\)\'\-]+?)&gt;/gi,
+        buildLink);
 
-	return formattedSyntax;
+    return formattedSyntax;
 }
 
 function formatTypesSyntax(formattedSyntax) {
-	var formattedTypesSyntax = "";
-	var types = [];
-        var typeAnchorAttributes = formattedSyntax.match(/href=".+?"/g);
-        if (typeAnchorAttributes) {
-            typeAnchorAttributes.forEach(function(typeAnchorAttribute) {
+    var formattedTypesSyntax = "";
+    var types = [];
+    var typeAnchorAttributes = formattedSyntax.match(/href=".+?"/g);
+    if (typeAnchorAttributes) {
+        typeAnchorAttributes.forEach(function(typeAnchorAttribute) {
             var type = typeAnchorAttribute.match(/href="(?:#|.*\/)(.+?)"/);
-            if (types.indexOf(type[1]) === -1) {
+            if (types.indexOf(type[1]) === -1 &&
+                type[1].indexOf(s_syntax_value_definition) === -1) {
                 // Some data type page names have '_value' appended,
                 // which needs to be removed in order to find the syntax
                 var subType = type[1].replace("_value", "");
-                types.push(subType);
+                if (data.syntaxes.hasOwnProperty(subType)) {
+                    types.push(subType);
+                }
             }
         });
 
-		if (types.length > 0) {
-			var typesSyntax = "";
+    var typesSyntax = "";
+    if (types.length > 0) {
+        types.forEach(function(type, index, types) {
+            typesSyntax += "<span id=\"" + type + "\">&lt;" + type +
+                "&gt;</span> = " + formatSyntax(data.syntaxes[type]);
+            if (index < types.length - 1) {
+                typesSyntax += "<br/>";
+            }
+        });
 
-			types.forEach(function(type, index, types) {
-				if (data.syntaxes.hasOwnProperty(type)) {
-					typesSyntax += "<span id=\"" + type + "\">&lt;" + type + "&gt;</span> = " + formatSyntax(data.syntaxes[type]);
-					if (index < types.length - 1) {
-					  typesSyntax += "<br/>";
-					}
-				}
-			});
+        if (typesSyntax !== "") {
+            formattedTypesSyntax += "<p style=\"font-family:Open Sans,Arial," +
+                "sans-serif; margin: 10px 0 0 0;\">where<br/><code style=\"" +
+                "font-family:Consolas,Monaco,&quot;Andale Mono&quot;," +
+                "monospace;\">" + typesSyntax + "</code></p>";
+        }
+    }
 
-			if (typesSyntax !== "") {
-				formattedTypesSyntax += "<p style=\"font-family:Open Sans,Arial,sans-serif; margin: 10px 0 0 0;\">" +
-					"where<br/><code style=\"font-family:Consolas,Monaco,&quot;Andale Mono&quot;,monospace;\">" + typesSyntax + "</code></p>";
-			}
-		}
+    return formattedTypesSyntax + formatTypesSyntax(typesSyntax);
+}
 
-		return formattedTypesSyntax + formatTypesSyntax(typesSyntax);
-	}
-
-	return formattedTypesSyntax;
+return formattedTypesSyntax;
 }
 
 var rawSyntax = "";
