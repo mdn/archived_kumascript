@@ -24,7 +24,7 @@ var s_missing = mdn.localString({
 
 var s_where = mdn.localString({
     "en-US": "where ",
-    "de"   : "wo ",
+    "de"   : "wobei ",
     "fr"   : "où "
 });
     					 
@@ -237,9 +237,10 @@ function formatTypesSyntax(formattedSyntax) {
 
         if (typesSyntax !== "") {
             formattedTypesSyntax += "<p style=\"font-family:Open Sans,Arial," +
-                "sans-serif; margin: 10px 0 0 0;\">where<br/><code style=\"" +
-                "font-family:Consolas,Monaco,&quot;Andale Mono&quot;," +
-                "monospace;\">" + typesSyntax + "</code></p>";
+                "sans-serif; margin: 10px 0 0 0;\">" + s_where +
+                "<br/><code style=\"font-family:Consolas,Monaco," +
+                "&quot;Andale Mono&quot;,monospace;\">" + typesSyntax +
+                "</code></p>";
         }
     }
 
