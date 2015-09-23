@@ -283,7 +283,7 @@ function getComputedValueOutput(propertyOrDescriptor, atRule) {
 function getAnimatableOutput(propertyName) {
     function formatString(string) {
         if (string === "no") {
-           return "no";
+           return localize(localStrings, "no");
         }
 
         var parts = string.match(/((?:(?:simplelist|repeatablelist|transform|length|lpc|color|integer|number|position|shadowlist|rectangle|visibility|font_stretch|font_weight|basic-shape) ?)*)(?:\. ?)?(.*)/);
