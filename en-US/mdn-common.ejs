@@ -35,7 +35,20 @@
         if (!(lang in strings)) lang = 'en-US';
         return strings[lang];
     },
-    
+
+    /**
+     * Given a set of strings like this:
+     *   {
+     *    "hello": { "en-US": "Hello!", "de": "Hallo!" },
+     *    "bye": { "en-US": "Goodbye!", "de": "Auf Wiedersehen!" }
+     *   }
+     * Returns the one, which matches the current locale.
+     * 
+     * Example:
+     *   getLocalString({"hello": {"en-US": "Hello!", "de": "Hallo!"}},
+     *       "hello");
+     *   => "Hallo!" (in case the locale is 'de')
+     */
     getLocalString: function (strings, key) {
         if (!strings.hasOwnProperty(key)) {
             return key;
