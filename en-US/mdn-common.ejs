@@ -37,8 +37,15 @@
     },
     
     getLocalString: function (strings, key) {
+        if (!strings.hasOwnProperty(key)) {
+            return key;
+        }
+
         var lang = env.locale;
-        if (!(lang in strings[key])) lang = 'en-US';
+        if (!(lang in strings[key])) {
+            lang = 'en-US';
+        }
+
         return strings[key][lang];
     },
     
