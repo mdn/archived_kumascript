@@ -405,6 +405,10 @@ function loadTable(payload, locale) {
 
         }
 
+        if(output == '') {
+            output += '&nbsp';
+        }
+
         return output;
     }
 
@@ -458,7 +462,7 @@ function loadTable(payload, locale) {
 
     // Returns either the browser version number or "Yes" / "No" / "Partial"  for support text blocks
     function getBrowserSupportText(versionObj, browserObj) {
-        if(versionObj && versionObj.version) {
+        if(versionObj && versionObj.version && versionObj.version != 'current') {
             return versionObj.version;
         }
         else {
@@ -646,10 +650,14 @@ function loadTable(payload, locale) {
             substituteObject.icon1 = 'opera';
             substituteObject.icon2 = 'mobile';
         }
-        else if(icon == 'android') {
+        else if(icon == 'chrome_for_android') {
             template = templates.mobile;
             substituteObject.icon1 = 'chrome';
-            substituteObject.icon2 = 'mobile';
+            substituteObject.icon2 = 'android';
+        }
+        else if(icon == 'android') {
+            template = templates.mobile;
+            substituteObject.icon1 = 'android_browser';
         }
 
         output += '<th class="bc-browser-' + icon + ' ' + extraClass + '">';
@@ -670,6 +678,6 @@ if(!content) {
 response = JSON.stringify(response);
 
 %>
-<div id="compat-api" class="hidden">
+<div class="bc-api hidden">
 <%-content%>
 </div>
