@@ -21,6 +21,11 @@ var URL    = mdn.localString({
     "ru"   : "/ru/docs/Словарь/"
 });
 
+var sep = mdn.localString({
+    "en-US":": ",
+    "fr"   :"&nbsp;: "
+});
+
 URL_EN += $0.replace(/\s+/g,'_');
 URL    += $0.replace(/\s+/g,'_');
 
@@ -43,7 +48,7 @@ if (page && page.summary) {
                 URL  = obj.url;
                 page = wiki.getPage(URL);
                 if (page && page.summary) {
-                    summary = str + ': ' + mdn.escapeQuotes(page.summary);
+                    summary = str + sep + mdn.escapeQuotes(page.summary);
                 }
             }
         })
