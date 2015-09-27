@@ -33,12 +33,12 @@ var page    = wiki.getPage(URL);
 var summary = mdn.localString({
     "en-US": "The definition of that term (" + str + ") has not been written yet; please consider contributing it!",
     "de"   : "Die Definition dieses Ausdrucks (" + str + ") wurde noch nicht geschrieben; bitte hilf mit und trage sie bei!",
-    "fr"   : "La définition de ce terme ("+ str + ") n'a pas encore été rédigée. Nous serions heureux de vous voir l'écrire&nbsp;!",
+    "fr"   : "La définition de ce terme («&nbsp;"+ str +"&nbsp;») n'a pas encore été rédigée. Nous serions heureux de vous voir l'écrire&nbsp;!",
     "ru"   : "Определение термина «" + str + "» ещё не написано; может быть, вы напишете?"
 });
 
 if (page && page.summary) {
-    summary = str + ': ' + mdn.escapeQuotes(page.summary);
+    summary = str + sep + mdn.escapeQuotes(page.summary);
 } else if (env.locale !== "en-US") {
     page = wiki.getPage(URL_EN);
     URL  = URL_EN.replace('en-US', env.locale);
