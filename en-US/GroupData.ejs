@@ -234,7 +234,9 @@
                             "FontFaceSetLoadEvent" ],
             "methods":    [],
             "properties": [],
-            "events":     []
+            "events":     [ "loading",
+                            "loadingdone",
+                            "loadingerror" ]
         },
         "CSSOM": {
             "overview":   [ "CSS Object Model" ],
@@ -305,6 +307,15 @@
                             "Navigator.getDeviceStorages()" ],
             "properties": [],
             "events":     [ "change" ]
+        },
+        "Directory Upload API": {
+            "interfaces": [ "Directory" ],
+            "methods":    [ "HTMLInputElement.getFilesAndDirectories()",
+                            "HTMLInputElement.chooseDirectory()",
+                            "DataTransfer.getFilesAndDirectories()" ],
+            "properties": [ "HTMLInputElement.directory",
+                            "HTMLInputElement.isFilesAndDirectoriesSupported" ],
+            "events":     []
         },
         "DOM": {
             "overview":   [ "Document Object Model" ],
@@ -1116,7 +1127,7 @@
         "Power Management API": {
             "overview":   [ "Power Management API" ],
             "interfaces": [ "PowerManager" ],
-            "methods":    [ "Navigator.requestWakeLock()"],
+            "methods":    [],
             "properties": [ "Navigator.mozPower" ],
             "events":     []
         },
@@ -1544,7 +1555,7 @@
         },
         "Wake Lock API": {
             "interfaces": [ "MozWakeLock" ],
-            "methods":    [],
+            "methods":    [ "Navigator.requestWakeLock()"],
             "properties": [],
             "events":     []
         },
