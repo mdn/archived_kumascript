@@ -47,6 +47,8 @@ function loadTable(payload, locale) {
 
             // Features, used in the left-most column
             features: {
+                basicsupport: 'Basic Support',
+
                 experimental: 'Experimental',
                 experimentalLong: 'Experimental. Expect behavior to change in the future.',
 
@@ -159,13 +161,48 @@ function loadTable(payload, locale) {
     // BODY
     // ===============================
     output += '<tbody>';
-    payload.linked.features.forEach(function(feature) {
 
+    // current feature aka Basic Support
+    output += outputFeatureRow(payload.features, true);
+
+    // each linked feature
+    payload.linked.features.forEach( function(feature){
+        output += outputFeatureRow(feature);
+    });
+
+    output += '</tbody>';
+
+    // Table close
+    output += '</table>';
+
+    
+    // LEGEND
+    // ===============================
+    output += '<section class="bc-legend">';
+    output += '<h3 class="offscreen">' + getStringBasedOnLocale('legend', 'heading') + '</h3>';
+    output += '<dl>' + outputLegend() + '</dl>';
+    output += '</section>';
+
+    // Done!
+    return output;
+
+
+
+
+    // UTILITY FUNCTIONS
+    // ===============================
+
+    // creates a table row based on feature input
+    function outputFeatureRow(feature, isBasicSupport) {
+        isBasicSupport = typeof isBasicSupport !== 'undefined' ? isBasicSupport : false;
+        var output = '';
         var name = getLocaleOrDefaultFromObject(feature.name);
 
         output += '<tr>';
         output += '<th scope="row">';
-        if(feature.canonical) {
+        if(isBasicSupport){
+            output += getStringBasedOnLocale('features', 'basicsupport');
+        }else if(feature.canonical) {
             output += '<code>' + name + '</code>';
         }
         else {
@@ -254,7 +291,7 @@ function loadTable(payload, locale) {
                         browserFeatureHistory.reverse();
                         browserFeatureHistory.forEach(function(historyItemId) {
                             var historyItemObject = findObjectByIdInArray(historyItemId, payload.linked.supports);
-                            var historyItemVersionObject = findObjectByIdInArray(historyItemObject.links.version, payload.linked.versions)
+                            var historyItemVersionObject = findObjectByIdInArray(historyItemObject.links.version, payload.linked.versions);
 
                             cell.content += '<dt class="bc-supports-' + historyItemObject.support +' bc-supports">';
 
@@ -287,29 +324,8 @@ function loadTable(payload, locale) {
         });
 
         output += '</tr>';
-    });
-
-    output += '</tbody>';
-
-    // Table close
-    output += '</table>';
-
-    
-    // LEGEND
-    // ===============================
-    output += '<section class="bc-legend">';
-    output += '<h3 class="offscreen">' + getStringBasedOnLocale('legend', 'heading') + '</h3>';
-    output += '<dl>' + outputLegend() + '</dl>';
-    output += '</section>';
-
-    // Done!
-    return output;
-
-
-
-
-    // UTILITY FUNCTIONS
-    // ===============================
+        return output;
+    }
 
     // Simple true/false logic determining if a browser history object meets "extra info" criteria
     function meetsIconCriteria(historyObject) {
@@ -322,7 +338,7 @@ function loadTable(payload, locale) {
     }
 
     function meetsConfigCriteria(historyObject) {
-        historyObject.requires_config > 0 && historyObject.default_config != historyObject.requires_config;
+        return historyObject.requires_config > 0 && historyObject.default_config != historyObject.requires_config;
     }
 
     // Evaluate a browser history object, place icons as needed
@@ -405,7 +421,7 @@ function loadTable(payload, locale) {
 
         }
 
-        if(output == '') {
+        if(output === '') {
             output += '&nbsp';
         }
 
@@ -507,7 +523,7 @@ function loadTable(payload, locale) {
     function substitute(str, object) {
         return str.replace((/\\?\{([^{}]+)\}/g), function(match, name) {
             if (match.charAt(0) == '\\') return match.slice(1);
-            return (object[name] != null) ? object[name] : '';
+            return (object[name] !== null) ? object[name] : '';
         });
     }
 
