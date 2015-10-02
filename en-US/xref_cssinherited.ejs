@@ -1,14 +1,14 @@
 <%
-var url = {
-    "en-US": env.locale + "/docs/CSS/inheritance",
-    "de"   : env.locale + "/docs/CSS/Vererbung",
-    "es"   : env.locale + "/docs/CSS/inheritance",
-    "fr"   : env.locale + "/docs/CSS/H%c3%a9ritage",
-    "ja"   : env.locale + "/docs/CSS/inheritance",
-    "ko"   : env.locale + "/docs/CSS/inheritance",
-    "pl"   : env.locale + "/docs/CSS/dziedziczenie",
-    "zh-CN": env.locale + "/docs/CSS/inheritance",
-    "zh-TW": env.locale + "/docs/CSS/inheritance"
+var page = {
+    "en-US": "inheritance",
+    "de"   : "Vererbung",
+    "es"   : "inheritance",
+    "fr"   : "H%c3%a9ritage",
+    "ja"   : "inheritance",
+    "ko"   : "inheritance",
+    "pl"   : "dziedziczenie",
+    "zh-CN": "inheritance",
+    "zh-TW": "inheritance"
 };
 
 var linkText = {
@@ -23,7 +23,7 @@ var linkText = {
     "zh-TW": "繼承與否"
 };
 
-var link = "<a href=\"$1$\">$2$</a>";
+var link = "<a href=\"/" + env.locale + "/docs/CSS/$1$\">$2$</a>";
 %>
 <%- mdn.replacePlaceholders(link,
     [mdn.localString(url), mdn.localString(linkText)]) %>
