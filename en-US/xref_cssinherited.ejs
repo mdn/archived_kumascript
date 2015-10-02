@@ -1,19 +1,29 @@
-<% if ("es" == env.locale) { %>
-<a href="/es/docs/CSS/inheritance">Heredable</a>
-<% } else if ("fr" == env.locale) { %>
-<a href="/fr/docs/CSS/H%c3%a9ritage">Héritée</a>
-<% } else if ("ja" == env.locale) { %>
-<a href="/ja/docs/CSS/inheritance">継承</a>
-<% } else if ("ko" == env.locale) { %>
-<a href="/ko/docs/CSS/inheritance">상속</a>
-<% } else if ("pl" == env.locale) { %>
-<a href="/pl/docs/CSS/dziedziczenie">Dziedziczona</a>
-<% } else if ("zh-CN" == env.locale) { %>
-<a href="/zh-CN/docs/CSS/inheritance">是否是继承属性</a>
-<% } else if ("zh-TW" == env.locale) { %>
-<a href="/zh-TW/docs/CSS/inheritance">繼承與否</a>
-<% } else if ("de" == env.locale) { %>
-<a href="/de/docs/CSS/Vererbung">Vererbt</a>
-<% } else { %>
-<a href="/en-US/docs/CSS/inheritance">Inherited</a>
-<% } %>
+<%
+var url = {
+    "en-US": env.locale + "/docs/CSS/inheritance",
+    "de"   : env.locale + "/docs/CSS/Vererbung",
+    "es"   : env.locale + "/docs/CSS/inheritance",
+    "fr"   : env.locale + "/docs/CSS/H%c3%a9ritage",
+    "ja"   : env.locale + "/docs/CSS/inheritance",
+    "ko"   : env.locale + "/docs/CSS/inheritance",
+    "pl"   : env.locale + "/docs/CSS/dziedziczenie",
+    "zh-CN": env.locale + "/docs/CSS/inheritance",
+    "zh-TW": env.locale + "/docs/CSS/inheritance"
+};
+
+var linkText = {
+    "en-US": "Inherited",
+    "de"   : "Vererbt",
+    "es"   : "Heredable",
+    "fr"   : "Héritée",
+    "ja"   : "継承",
+    "ko"   : "상속",
+    "pl"   : "Dziedziczona",
+    "zh-CN": "是否是继承属性",
+    "zh-TW": "繼承與否"
+};
+
+var link = "<a href=\"$1$\">$2$</a>";
+%>
+<%- mdn.replacePlaceholders(link,
+    [mdn.localString(url), mdn.localString(linkText)]) %>
