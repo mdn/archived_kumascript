@@ -6,6 +6,22 @@
   $1 - @-rule - defaults to the @-rule within the URL
 */
 
+var name = $0 || env.slug.split("/").pop().toLowerCase();
+var atRule = $1;
+
+var data = string.deserialize(template("CSSData"));
+var formattedError = "<span style=\"color:red;\">$1$</span>";
+var commonLocalStrings = string.deserialize(template("L10n:Common"));
+var locale = env.locale;
+var escapeQuotes = mdn.escapeQuotes;
+var localize = mdn.getLocalString;
+var localizeString = mdn.localString;
+var replacePlaceholders = mdn.replacePlaceholders;
+var localWiki = wiki;
+var currentPage = page;
+
+var localStrings = string.deserialize(template("L10n:CSS"));
+
 /*
   Creates a link to another API, e.g. a CSS property or SVG element
 
@@ -26,15 +42,16 @@ function createLink(apiName, area) {
         currentPage.hasTag(thisPage, "Element")) {
         linkName = "&lt;" + linkName + "&gt;";
     }
-
+    
     var summary = (thisPage && thisPage.summary) ?
         escapeQuotes(thisPage.summary) :
         localize(commonLocalStrings, "summary");
-
+    
     return "<a href=\"" + url + "\"" +
         (summary ? " title=\"" + summary + "\"" : "") + "><code>" +
         linkName + "</code></a>";
 }
+
 
 /*
   Parses all macros within a string
@@ -46,6 +63,8 @@ function parseMacros(string) {
         return undefined;
     }
 
+    var apiName = "";
+    var area = "";
     var parsedString = string;
     parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/g,
         function (match, macroName, paramsString) {
@@ -79,585 +98,78 @@ function parseMacros(string) {
 
 
 /*
-  Returns the initial value of a property or descriptor as formatted output
+  Parses all macros within a string
 
-  propertyOrDescriptor - Name of the property or descriptor to return the
-      info for
-  atRule - Name of the @-Rule the descriptor belongs to
+  string - String to parse
 */
-function getInitialValueOutput(propertyOrDescriptor, atRule) {
-    if (atRule) {
-        if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
-            data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-            return parseMacros(data.atRules[atRule].
-                descriptors[propertyOrDescriptor].initial);
-        }
-    } else if (data.properties[propertyOrDescriptor]) {
-        var property = data.properties[propertyOrDescriptor];
-        if (property.shorthand) {
-            var initialValue = localize(localStrings,
-                "longhandConcatination") + "<ul>";
-            property.longhands.forEach(function(longhand) {
-                initialValue += "<li><code><a href=\"/" + locale +
-                    "/docs/Web/CSS/" + longhand + "\">" + longhand +
-                    "</a></code>: ";
-                if (data.properties[longhand] &&
-                    data.properties[longhand].shorthand) {
-                    initialValue += getInitialValueOutput(longhand);
-                } else {
-                    initialValue += (data.properties[longhand] ?
-                        parseMacros(data.properties[longhand].initial) :
-                        replacePlaceholders(formattedError,
-                            [localize(localStrings, "missing")]));
-                }
-                initialValue += "</li>";
-            });
-            initialValue += "</ul>";
-            return initialValue;
+function getValueOutput(cssInfo, property, atRule) {
+    if (property === "relatedAtRule") {
+        return atRule;
+    }
+
+    var value = cssInfo[property];
+    if (typeof value === "string") {
+        if (property === "initial") {
+            return value;
         } else {
-            return parseMacros(data.properties[propertyOrDescriptor].initial);
+            var keywords = value.split(", ");
+            var replacedKeywords = keywords.map(function(keyword) {
+                return localize(localStrings, keyword);
+            });
+            return parseMacros(replacedKeywords.join(", "));
         }
-    }
-
-    return "";
-}
-
-
-/*
-  Returns the info to which elements a property or descriptor applies as
-  formatted output
-
-  cssInfo - Information related to the property or descriptor
-*/
-function getAppliesToOutput(cssInfo) {
-    if (Array.isArray(cssInfo.appliesto)) {
-        var appliesToValue = localize(localStrings, "asLonghands") + "<ul>";
-        cssInfo.appliesto.forEach(function(longhand) {
-            appliesToValue += "<li><code><a href=\"/" + locale +
-                "/docs/Web/CSS/" + longhand + "\">" + longhand +
-                "</a></code>: ";
-            if (data.properties[longhand] &&
-                data.properties[longhand].shorthand) {
-                appliesToValue += getAppliesToOutput(longhand);
-            } else {
-                appliesToValue += (data.properties[longhand] ?
-                    parseMacros(data.properties[longhand].appliesto) :
-                    replacePlaceholders(formattedError,
-                        [localize(localStrings, "missing")]));
-            }
-            appliesToValue += "</li>";
-        });
-        appliesToValue += "</ul>";
-    } else {
-        appliesToValue = cssInfo.appliesto;
-    }
-
-    if (cssInfo.alsoAppliesTo) {
-        var additionalApplies = "";
-        cssInfo.alsoAppliesTo.forEach(function(applyingElements, index, array) {
-            switch (applyingElements) {
-                case "firstletter":
-                    additionalApplies += createLink("::first-letter");
-                    break;
-                
-                case "firstline":
-                    additionalApplies += createLink("::first-line");
-                    break;
-                
-                case "placeholder":
-                    additionalApplies += createLink("::-moz-placeholder");
-                    break;
-            }
-            
-            if (index < array.length - 2) {
-                additionalApplies += localize(localStrings, "listSeparator");
-            } else if (index < array.length - 1) {
-                additionalApplies += localize(localStrings, "andInEnumeration");
-            }
-        });
-        appliesToValue = replacePlaceholders(localize(localStrings,
-            "applyingToMultiple"), [appliesToValue, additionalApplies]);
-    }
-
-    return parseMacros(appliesToValue);
-}
-
-
-/*
-Returns the percentages information for a property or descriptor as
-formatted output
-
-cssInfo - Information related to the property or descriptor
-*/
-function getPercentagesOutput(cssInfo) {
-    if (Array.isArray(cssInfo.percentages)) {
-        var percentagesValue = localize(localStrings, "percentageLonghands") +
+    } else if (Array.isArray(value)) {
+        var output = localize(localStrings, "asLonghands") + "<br/>" +
             "<ul>";
-        cssInfo.percentages.forEach(function(longhand) {
-        percentagesValue += "<li><code><a href=\"/" + locale +
-              "/docs/Web/CSS/" + longhand + "\">" + longhand +
-              "</a></code>: ";
-            if (data.properties[longhand] &&
-                data.properties[longhand].shorthand) {
-                percentagesValue += getPercentagesOutput(longhand);
-            } else {
-              percentagesValue += (data.properties[longhand] &&
-                  data.properties[longhand].percentages) ?
-                  data.properties[longhand].percentages :
-                  localize(localStrings, "asSpecified");
-            }
-            percentagesValue += "</li>";
+        value.forEach(function(longhand) {
+            output += "<li><a href=\"" + longhand + "\">" + longhand + 
+                "</a>: " + (data.properties.hasOwnProperty(longhand) ?
+                    getValueOutput(data.properties[longhand], property) :
+                    replacePlaceholders(formattedError, [localize(localStrings,
+                        "missing")])) +
+                "</li>";
         });
-        percentagesValue += "</ul>";
-        return percentagesValue;
-    } else {
-        return cssInfo.percentages;
-    }
-}
-
-
-/*
-  Returns the computed value of a property or descriptor as formatted output
-
-  propertyOrDescriptor - Name of the property or descriptor to return the 
-      info for
-  atRule - Name of the @-Rule the descriptor belongs to
-*/
-function getComputedValueOutput(propertyOrDescriptor, atRule) {
-  if (atRule) {
-      if (data.atRules[atRule] && data.atRules[atRule].descriptors &&
-          data.atRules[atRule].descriptors[propertyOrDescriptor]) {
-          var computedValue = data.atRules[atRule].descriptors[propertyOrDescriptor].
-              computed;
-          if (computedValue === "color") {
-              computedValue = data.properties.color.computed;
-          }
-          return computedValue || localize(localStrings, "asSpecified");
-      }
-  } else if (data.properties[propertyOrDescriptor]) {
-      var property = data.properties[propertyOrDescriptor];
-      if (property.shorthand) {
-          var computedValue = localize(localStrings, "asLonghands") + "<ul>";
-          property.longhands.forEach(function(longhand) {
-              computedValue += "<li><code><a href=\"/" + locale +
-                  "/docs/Web/CSS/" + longhand + "\">" + longhand +
-                  "</a></code>: ";
-              if (data.properties[longhand] &&
-                  data.properties[longhand].shorthand) {
-                  var longhandComputedValue = getComputedValueOutput(longhand);
-                  if (longhandComputedValue === "color") {
-                      longhandComputedValue = data.properties.color.computed;
-                  }
-                  computedValue += longhandComputedValue;
-              } else {
-                  var longhandComputedValue = (data.properties[longhand] &&
-                      data.properties[longhand].computed) ?
-                      parseMacros(data.properties[longhand].computed) :
-                      localize(localStrings, "asSpecified");
-                  if (longhandComputedValue === "color") {
-                      longhandComputedValue = data.properties.color.computed;
-                  }
-                  computedValue += longhandComputedValue;
-              }
-              computedValue += "</li>";
-          });
-          computedValue += "</ul>";
-          return computedValue;
-      } else {
-          var computedValue = data.properties[propertyOrDescriptor].computed;
-          if (computedValue === "color") {
-              computedValue = data.properties.color.computed;
-          }
-          return parseMacros(computedValue) || localize(localStrings, "asSpecified");
-      }
-  }
-
-  return "";
-}
-
-/*
-  Returns the information whether a property is animatable as formatted output
-
-  propertyName - Name of the property to return the info for
-*/
-function getAnimatableOutput(propertyName) {
-    function formatString(string) {
-        if (string === "no") {
-           return localize(localStrings, "no");
-        }
-
-        var parts = string.match(/((?:(?:simplelist|repeatablelist|transform|length|lpc|color|integer|number|position|shadowlist|rectangle|visibility|font_stretch|font_weight|basic-shape) ?)*)(?:\. ?)?(.*)/);
-        parts.shift();
-        var keywords = parts.shift().split(" ");
-        var listOf = "";
-        var desc = "";
-        var additionalInfo = "";
-        for (var i = 0; i < keywords.length; i++) {
-            // For all items except the first one add a separator
-            if (desc !== "") {
-                desc += localize(localStrings, "listSeparator");
-            }
-
-            switch (keywords[i]) {
-                case "simplelist":
-                    listOf += localize(localStrings, "simpleList");
-                    break;
-
-                case "repeatablelist":
-                    listOf += localize(localStrings, "repeatableList");
-                    break;
-
-                case "transform":
-                    desc += localize(localStrings, "transform");
-                    break;
-
-                case "length":
-                    desc += localize(localStrings, "length");
-                    break;
-
-                case "lpc":
-                    desc += localize(localStrings, "length") +
-                        localize(localStrings, "lpc");
-                        additionalInfo = localize(localStrings,
-                        "lpcAdditionalInfo") + additionalInfo;
-                    break;
-
-                case "color":
-                    desc += localize(localStrings, "color");
-                    break;
-
-                case "integer":
-                    desc += localize(localStrings, "integer");
-                    break;
-
-                case "number":
-                    desc += localize(localStrings, "number");
-                    break;
-
-                case "position":
-                    desc += localize(localStrings, "position");
-                    break;
-
-                case "shadowlist":
-                    desc += localize(localStrings, "shadowlist");
-                    break;
-
-                case "rectangle":
-                    desc += localize(localStrings, "rectangle");
-                    break;
-
-                case "visibility":
-                    desc += localize(localStrings, "visibility");
-                    break;
-
-                case "font_stretch":
-                    desc += localize(localStrings, "font_stretch");
-                    break;
-
-                case "font_weight":
-                    desc += localize(localStrings, "font_weight");
-                    break;
-
-                case "basic-shape":
-                    desc += localize(localStrings, "basicShape");
-                    break;
-
-                default:
-                    desc += keywords[i];
-            }
-        }
-
-        if (listOf !== "" || desc !== "" || additionalInfo !== "") {
-            parts.unshift(replacePlaceholders(localize(localStrings, "yesAs"),
-                [listOf, desc, additionalInfo]));
-        }
-
-        return parseMacros(parts.join(""));
-    }
-
-    if (data.properties[propertyName]) {
-        var property = data.properties[propertyName];
-        if (Array.isArray(property.animatable)) {
-            var animatable = localize(localStrings, "asLonghands") +
-                "<ul>";
-            property.animatable.forEach(function(longhand) {
-                animatable += "<li><code><a href=\"/" + locale +
-                    "/docs/Web/CSS/" + longhand + "\">" + longhand +
-                    "</a></code>: ";
-                if (data.properties[longhand] && data.properties[longhand].
-                    shorthand) {
-                    animatable += getAnimatableOutput(longhand);
-                } else {
-                    animatable += (data.properties[longhand] &&
-                            data.properties[longhand].animatable ?
-                        formatString(data.properties[longhand].animatable) :
-                        replacePlaceholders(formattedError,
-                            [localize(localStrings, "missing")]));
+        output += "</ul>";
+        return output;
+    } else if (typeof value === "object") {
+        var note = value.note || "";
+        var output = "";
+        if (property === "animatable" && value.hasOwnProperty("as") &&
+            value.as !== "yes") {
+            var animatableValues = value.as.split(" ");
+            var parsedAnimtableValues =
+                animatableValues.map(function(animatableValue) {
+                var localizedString = localize(localStrings, animatableValue);
+                if (animatableValue === "lpc") {
+                    localizedString = replacePlaceholders(localizedString,
+                        [localize(localStrings, "length")]);
+                    note = localize(localStrings, "lpcNote") + note;
                 }
-                animatable += "</li>";
+                return localizedString;
             });
-            animatable += "</ul>";
-            return animatable;
+
+            output = replacePlaceholders(localize(localStrings, "yesAs"),
+                [parsedAnimtableValues.join(""), note]);
         } else {
-            return (data.properties[propertyName].animatable ?
-                formatString(data.properties[propertyName].animatable) :
-                replacePlaceholders(formattedError,
-                    [localize(localStrings, "missing")]));
+            output = localizeString(value);
         }
+
+        return parseMacros(output); 
+    } else if (typeof value === "boolean") {
+        return localize(localStrings, value ? "yes" : "no"); 
+    } else if (typeof value === "undefined") {
+        return replacePlaceholders(formattedError, [localize(localStrings,
+            "missing")]);
     }
 
-    return "";
+    return parseMacros(value);
 }
 
-
-/*
-  Returns the canonical order of the values of a property or descriptor as
-  formatted output
-
-  order - Order information, which may contain keywords
-*/
-function getCanonicalOrderOutput(order) {
-    if (!order) {
-        return localize(localStrings, "uniqueOrder");
-    }
-
-    if (order === "appearance") {
-        return localize(localStrings, "orderOfAppearance");
-    }
-
-    return order;
-}
-
-
-var data = string.deserialize(template("CSSData"));
-var slug = env.slug;
-var locale = env.locale;
-var formattedError = "<span style=\"color:red;\">$1$</span>";
-var localize = mdn.getLocalString;
-var replacePlaceholders = mdn.replacePlaceholders;
-var escapeQuotes = mdn.escapeQuotes;
-var commonLocalStrings = string.deserialize(template("L10n:Common"));
-var localWiki = wiki;
-var currentPage = page;
-
-var name = $0 || slug.split("/").pop().toLowerCase();
-var atRule = $1;
-
-var localStrings = {
-    "missing": {
-        "en-US": "Value not found in DB!",
-        "de"   : "Wert nicht in der DB gefunden!"
-    },
-    "relatedAtRule": {
-       "de"    : "Zugehörige <a href=\"/" + locale + "/docs/Web/CSS/At-Regel\">@-Regel</a>",
-       "en-US" : "Related <a href=\"/" + locale + "/docs/Web/CSS/At-rule\">at-rule</a>"
-    },
-    "appliesTo": {
-        "en-US" : "Applies to",
-        "de" : "Anwendbar auf",
-        "fr" : "S'applique à",
-        "ja" : "適用対象",
-        "zh-CN" : "适用元素"
-    },
-    "applyingToMultiple": {
-        "en-US": "$1$. It also applies to $2$.",
-        "de": "$1$. Auch anwendbar auf $2$."
-    },
-    "andInEnumeration": {
-        "en-US": " and ",
-        "de": " und "
-    },
-    "inherited": {
-        "en-US": "Inherited",
-        "de"   : "Vererbt"
-    },
-    // Plural form
-    "media": {
-        "en-US": "Media",
-        "de"   : "Medien",
-        "fr"   : "Média",
-        "ja"   : "メディア",
-        "zh-CN": "适用媒体" 
-    },
-    "yes": {
-        "en-US": "yes",
-        "de"   : "Ja",
-        "fr"   : "oui",
-        "ja"   : "可"
-    },
-    "no": {
-        "en-US": "no",
-        "de"   : "Nein",
-        "fr"   : "non",
-        "ja"   : "不可"
-    },
-    "longhandConcatination": {
-        "en-US": "the concatenation of the initial values of its longhand properties:",
-        "de"   : "Die Verkettung der Initialwerte der Langform Eigenschaften:",
-        "fr"   : "La concaténation des valeurs initiales des propriétés associées :",
-        "ja"   : "以下の各ロングハンドプロパティの初期値が使用されます:"
-    },
-    "asLonghands": {
-        "en-US": "as each of the properties of the shorthand:",
-        "de"   : "wie die jeweiligen Kurzschreibweisen:",
-        "fr"   : "pour chaque propriété individuelle de la propriété raccourcie :",
-        "ja"   : "以下の各プロパティのショートハンドとして補完します:",
-        "ru"   : "как каждое из свойств этого сокращённого свойства:"
-    },
-    "percentageLonghands": {
-        "en-US": "The values of its longhand properties the percentage value belongs to:",
-        "de"   : "Die Werte seiner Langschreibweise Eigenschaften, zu denen der Prozentwert gehört:",
-        "fr"   : "les valeurs de ses propriétés auxquelles se rapportent les pourcentages:"
-    },
-    "asSpecified": {
-        "en-US": "as specified",
-        "de"   : "wie spezifiziert",
-        "fr"   : "comme spécifié",
-        "ja"   : "指定値",
-    },
-    "yesAs": {
-        "en-US": "yes, as $1$$2$$3$",
-        "de"   : "ja, als $1$$2$$3$",
-        "fr"   : "oui, comme $1$$2$$3$",
-        "ja"   : "可。 $2$の値として補完します$1$$3$",
-        "ru"   : "анимируется, как $1$$2$$3$"
-    },
-    "repeatableList": {
-        "en-US": "a repeatable list of ",
-        "de"   : "mehrfache Werte der folgenden Eigenschaften: ",
-        "fr"   : "une liste répétable de ",
-        "ja"   : "の反復可能リスト",
-        "ru"   : "посторяющийся список из: "
-    },
-    "simpleList": {
-        "en-US": "a simple list of ",
-        "de"   : "ein einfacher Wert der folgenden Eigenschaften: ",
-        "fr"   : "une simple liste de ",
-        "ja"   : "の単純なリスト形式$1$",
-        "ru"   : "простой список из: "
-    },
-    "listSeparator": {
-        "en-US": ", "
-    },
-    "transform": {
-        "en-US": "a transform",
-        "de"   : "Transformation",
-        "fr"   : "une transformation",
-        "ja"   : "transform",
-        "ru"   : "преобразование",
-    },
-    "length": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/length#Interpolation\" title=\"Values of the <length> CSS data type are interpolated as real, floating-point numbers.\">length</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/length#Interpolation\">Längenangabe</a>",
-        "fr"   : "une <a href=\"/" + locale + "/docs/Web/CSS/longueur#Interpolation\" title=\"Les valeurs du type <longueur> sont interpolées comme des nombres réels à virgule flottante.\">longueur</a>",
-        "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/length#Interpolation\" title=\"Values of the <length> CSS data type are interpolated as real, floating-point numbers.\">length</a>",
-        "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/length#Interpolation\" title=\"Значения типа данных CSS <длина> интерполируются как вещественные числа с плавающей запятой.\">длина</a>",
-    },
-    "lpc": {
-        "en-US": ", <a href=\"/" + locale + "/docs/Web/CSS/percentage#Interpolation\" title=\"Values of the <percentage> CSS data type are interpolated as real, floating-point numbers.\">percentage</a> or calc();",
-        "de"   : ", <a href=\"/" + locale + "/docs/Web/CSS/percentage#Interpolation\">Prozentsatz</a> oder  <a href=\"/" + locale + "/docs/Web/CSS/calc\"><code>calc()</code></a>;",
-        "fr"   : ", <a href=\"/" + locale + "/docs/Web/CSS/pourcentage#Interpolation\" title=\"Les valeurs du type <pourcentage> sont interpolées comme des nombres réels à virgule flottante.\">pourcentage</a> ou calc() ;",
-        "ja"   : " または <a href=\"/" + locale + "/docs/Web/CSS/percentage#Interpolation\" title=\"Values of the <percentage> CSS data type are interpolated as real, floating-point numbers.\">percentage</a>, calc();",
-        "ru"   : ", <a href=\"/" + locale + "/docs/Web/CSS/percentage#Interpolation\" title=\"Значения типа данных CSS <проценты> интерполируются как вещественные числа с плавающей запятой.\">проценты</a> или функция calc();",
-    },
-    "lpcAdditionalInfo": {
-        "en-US": " when both values are lengths, they are interpolated as lengths; when both values are percentages, they are interpolated as percentages; otherwise, both values are converted into a calc() function that is the sum of a length and a percentage (each possibly zero), and these calc() functions have each half interpolated as real numbers. ",
-        "de"   : " wenn beides Längenwerte sind, werden sie als Längenwerte gehandhabt. Wenn beides Prozentsätze sind, werden sie als Prozentsätze gehandhabt. Ansonsten werden beide Werte wie in einer <code>calc()</code> Funktion addiert (Wird ggf. zu Null), and these calc() functions have each half interpolated as real numbers. ",
-        "fr"   : " quand les deux valeurs sont des longueurs, elles sont interpolées comme des longueurs ; quand les deux valeurs sont des pourcentages, elles sont interpolées comme des pourcentages ; sinon, les deux valeurs sont converties dans une fonction calc() qui est la somme d\"une longueur et d\"un pourcentage (chaque valeur pouvant être à zéro), et cette fonction calc() interpole chaque moitié comme un nombre réel. ",
-        "ja"   : "。両方の値が length の場合は、length 値として補完されます。両方の値が percentage の場合は、percentage 値として補完されます。それ以外の場合は、両方の値が calc() 関数にコンバートされ、length と percentage の合計になります (または各値が 0)。そして、これらの calc() 関数は、それぞれ半分ずつ補完された実数を持ちます",
-        "ru"   : " когда оба значения являются длинами, они интерполируются как длины; когда оба значения являются процентами, они интерполируются как проценты; в остальных случаях, оба значения преобразуются функцией calc() в сумму длины и процента (каждый из них может быть равен нулю), а затем эта функция calc() интерполирует каждую половину как вещественные числа. ",
-    },
-    "color": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/color_value#Interpolation\" title=\"Values of the <color> CSS data type are interpolated on each of their red, green, blue components, each handled as a real, floating-point number. Note that interpolation of colors happens in the alpha-premultiplied sRGBA color space to prevent unexpected grey colors to appear.\">color</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/color_value#Interpolation\">Farbe</a>",
-        "fr"   : "une <a href=\"/" + locale + "/docs/Web/CSS/valeur_de_couleur#Interpolation\" title=\"Les valeurs de type <couleur> sont interpolées sur chacune des composantes rouge, bleue et verte, considérées chacunes comme un nombre réel à virgule flottante. Notez que l\"interpolation des couleurs a lieu dans l\"espace couleur sRGBA pré-multiplié pour éviter l\"apparition de teintes grises non désirées.\">couleur</a>",
-        "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/color_value#Interpolation\" title=\"Values of the <color> CSS data type are interpolated on each of their red, green, blue components, each handled as a real, floating-point number. Note that interpolation of colors happens in the alpha-premultiplied sRGBA color space to prevent unexpected grey colors to appear.\">color</a>",
-        "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/color_value#Interpolation\" title=\"Значения типа данных CSS <цвет> интерполируются по каждой компоненте - красной, зелёной и голубой - как вещественные числа с плавающей запятой. Обратите внимание, что интерполяция цветов происходит в цветовом пространстве sRGBA, уже умноженного на альфу, для предотвращения появления неожиданных серых цветов.\">цвет</a>",
-    },
-    "integer": {
-        "en-US": "an <a href=\"/" + locale + "/docs/Web/CSS/integer#Interpolation\" title=\"Values of the <integer> CSS data type are interpolated via integer discrete steps. The calculation is done as if they were real, floating-point numbers and the discrete value is obtained using the floor function.\">integer</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/integer#Interpolation\">Integer</a>",
-        "fr"   : "un <a href=\"/" + locale + "/docs/Web/CSS/entier#Interpolation\" title=\"Les valeurs du type <entier> sont interpolées par incrémentation discrète. Le calcul est réalisé comme si les valeurs étaient des nombres réels, en virgule flottante et la valeur discrète est obtenue en utilisant la fonction partie entière.\">entier</a>",
-        "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/integer#Interpolation\" title=\"Values of the <integer> CSS data type are interpolated via integer discrete steps. The calculation is done as if they were real, floating-point numbers and the discrete value is obtained using the floor function.\">integer</a>",
-        "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/integer#Interpolation\" title=\"Значения типа данных CSS <целое число> интерполируются через целое число дискретных шагов. Вычисления производятся словно над вещественными числами с плавающей запятой, а дискретные значения получаются с использованием функции floor.\">целое число</a>",
-    },
-    "number": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/number#Interpolation\" title=\"Values of the <number> CSS data type are interpolated as real, floating-point, numbers.\">number</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/number#Interpolation\">Nummer</a>",
-        "fr"   : "un <a href=\"/" + locale + "/docs/Web/CSS/nombre#Interpolation\" title=\"Les valeurs du type <nombre> sont interpolées comme des nombres réels, en virgule flottante.\">nombre</a>",
-        "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/number#Interpolation\" title=\"Values of the <number> CSS data type are interpolated as real, floating-point, numbers.\">number</a>",
-        "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/number#Interpolation\" title=\"Значения типа данных CSS <число> интерполируются как вещественные числа с плавающей запятой.\">число</a>",
-    },
-    "position": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/position_value#Interpolation\" title=\"Values of the <position> data type are interpolated independently for the abscissa and ordinate. As the speed is defined by the same <timing-function> for both, the point will move following a line.\">position</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/number#Interpolation\" title=\"Werte des <position> Datentyps werden unabhängig für Abszisse und Ordinate interpoliert. Da die Geschwindigkeit für beide durch dieselbe <timing-function> bestimmt wird, wird der Punkt einer Linie folgen.\">Position</a>"
-    },
-    "shadowlist": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/box-shadow#Interpolation\" title=\"The color, x, y, blur and spread (if applicable) components of shadow lists are interpolated independently. If the inset value of any shadow pair differs between both lists, the whole list is uninterpolable. If one list is smaller than the other, it gets padded with transparent shadows with all their lengths set to 0 and its inset value matching the longer list.\">shadow list</a>",
-        "de"   : "eine <a href=\"/" + locale + "/docs/Web/CSS/box-shadow#Interpolation\" title=\"Die color, x, y, blur und spread (falls anwendbar) Komponenten einer Schattenliste werden unabhängig voneinander interpoliert. Falls sich der inset-Wert irgendeines Schattenpaares der beiden Listen unterscheidet, gilt die gesamte liste als nicht interpolierbar. Falls eine Liste kürzer ist als die andere, wird die kürzere mit transparenten Schatten aufgefüllt, deren Längen alle auf 0 gesetzt sind und deren inset-Wert der längeren Liste entspricht.\">Liste von Schatten</a>",
-        "fr"   : "une liste d\"ombres",
-        "ja"   : "shadow リスト",
-        "ru"   : "список теней",
-    },
-    "visibility": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/visibility#Interpolation\" title=\"Values of the visibility CSS property are interpolable if the start or the end value is visible. In that case all values of the timing function which are equal to 1 map to visible and non-equal to 1 to non-visible.\">visibility</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/visibility#Interpolation\">Sichtbarkeit</a>",
-        "fr"   : "une <a href=\"/" + locale + "/docs/Web/CSS/visibility#Interpolation\" title=\"Les valeurs de la propriété CSS visibility sont interpolables si une des valeurs de début ou de fin est visible. Dans ce cas, toutes les valeurs de la fonction de temporisation qui sont égales à 1 sont associées à visible, et celles non égales à 1, à non-visible.\">visibilité</a>",
-        "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/visibility#Interpolation\" title=\"Values of the visibility CSS property are interpolable if the start or the end value is visible. In that case all values of the timing function which are equal to 1 map to visible and non-equal to 1 to non-visible.\">visibility</a>",
-        "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/visibility#Interpolation\" title=\"Значения свойства CSS visibility интерполируются, если начальное или конечное значение установлено в visible. В этом случае все значения временной функции, равные 1, отображаются на видимость, а не равные 1 отображаются на невидимость.\">видимость</a>",
-    },
-    "font_stretch": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/font-stretch#Interpolation\" title=\"Font stretch values are interpolated in discrete steps. The interpolation happens as though the ordered values are equally spaced real numbers; the result is rounded to the nearest value, with values exactly halfway between two values rounded towards the later value, that is the most expanded one.\">font stretch</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/font-stretch#Interpolation\">Schriftbreite</a>",
-        "fr"   : "une <a href=\"/" + locale + "/docs/CSS/font-stretch#Interpolation\" title=\"Font stretch values are interpolated in discrete steps. The interpolation happens as though the ordered values are equally spaced real numbers; the result is rounded to the nearest value, with values exactly halfway between two values rounded towards the later value, that is the most expanded one.\">font stretch</a>",
-        "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/font-stretch#Interpolation\" title=\"Font stretch values are interpolated in discrete steps. The interpolation happens as though the ordered values are equally spaced real numbers; the result is rounded to the nearest value, with values exactly halfway between two values rounded towards the later value, that is the most expanded one.\">font stretch</a>",
-        "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/font-stretch#Interpolation\" title=\"Значения ширины начертания шрифта интерполируются по дискретным шагам. Интерполяция происходит по упорядоченно расположенным значениям в пространстве действительных чисел; результат округляется к ближайшему значению, значения точно между двумя соседними значениями округляются в сторону большего значения, которое является наиболее широким.\">ширина начертания шрифта</a>",
-    },
-    "font_weight": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/font-weight#Interpolation\" title=\"Font weight values are interpolated via discrete steps (multiples of 100). The interpolation happens in real number space and is converted to an integer by rounding to the nearest multiple of 100, with values halfway between multiples of 100 rounded towards positive infinity.\">font weight</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/font-weight#Interpolation\">Schriftgewichtung</a>",
-        "fr"   : "une <a href=\"/" + locale + "/docs/Web/CSS/font-weight#Interpolation\" title=\"Les valeurs de graisse de police sont interpolées via des étapes discrètes (multiple de 100). L\"interpolation a lieu dans un espace de nombres réels et est convertis en un entier arroundi au plus proche multiple de 100, avec les valeurs à mis chemin entre les multiples de 100, arrondies vers l\"infini positif.\">graisse de police</a>",
-        "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/font-weight#Interpolation\" title=\"Font weight values are interpolated via discrete steps (multiples of 100). The interpolation happens in real number space and is converted to an integer by rounding to the nearest multiple of 100, with values halfway between multiples of 100 rounded towards positive infinity.\">font weight</a>",
-        "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/font-weight#Interpolation\" title=\"Значения жирности шрифта интерполируются через целое число дискретных шагов (умноженных на 100). Интерполяция происходит в пространстве действительных чисел, а получившееся значение преобразуется в целое путём округления до ближайшей сотни, значения точно между соседними множителями 100 округляются в сторону положительной бесконечности.\">жирность шрифта</a>",
-    },
-    "rectangle": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
-        "de"   : "<a href=\"/" + locale + "/docs/Web/CSS/shape#Interpolation\">Rechteck</a>",
-        "fr"   : "un <a href=\"/" + locale + "/docs/Web/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
-        "ja"   : "<a href=\"/" + locale + "/docs/Web/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
-        "ru"   : "<a href=\"/" + locale + "/docs/Web/CSS/shape#Interpolation\" title=\"Значения типа данных CSS <фигура>, которыми являются прямоугольники интерполируются по их верхней, правой, нижней и левой компоненте, каждая из которых трактуется как вещественныое число с плавающей запятой.\">прямоугольник</a>",
-    },
-    "basicShape": {
-        "en-US": "a <a href=\"/" + locale + "/docs/Web/CSS/shape-outside#Interpolation\" title=\"Values of the <basic-shape> CSS data type interpolate as a simple list. The list values interpolate as length, percentage, or calc where possible. If list values are not one of those types but are identical, those values do interpolate.\">basic shape</a>",
-        "de"   : "eine <a href=\"/" + locale + "/docs/Web/CSS/shape-outside#Interpolation\" title=\"Werte des <basic-shape> CSS Datentyps interpolieren als einfache Liste. Die Listenwerte interpolieren als Länge, Prozentwert oder calc, wo möglich. Falls Listenwerte nicht einem dieser Typen entsprechen, aber identisch sind, werden diese Werte interpoliert.\">einfache Form</a>"
-    },
-    "percentages": {
-        "en-US": "Percentages",
-        "de"   : "Prozentwerte",
-        "fr"   : "Pourcentages",
-        "ja"   : "相対値の基準"
-    },
-    "uniqueOrder": {
-        "en-US": "the unique non-ambiguous order defined by the formal grammar",
-        "de"   : "die eindeutige Reihenfolge definiert durch die formale Grammatik",
-        "fr"   : "l'ordre unique et non-ambigu défini par la grammaire formelle",
-        "ja"   : "形式文法で定義される一意のあいまいでない順序"
-    },
-    "orderOfAppearance": {
-        "en-US": "order of appearance in the formal grammar of the values",
-        "de"   : "Reihenfolge des Auftretens in der formalen Grammatik der Werte",
-        "fr"   : "l'ordre d'apparition dans la grammaire formelle des valeurs"
-    },
-    "createsStackingContext": {
-      "en-US": "Creates <a href=\"/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context\">stacking context</a>",
-      "de"   : "Erstellt Stapelkontext"
-    }
-};
 
 var cssInfo = null;
 
 if (!atRule) {
-    var matches = slug.match(/\/CSS\/(@.+?)(?=\/)/);
+    var matches = env.slug.match(/\/CSS\/(@.+?)(?=\/)/);
     if (matches) {
         atRule = matches[1];
     }
@@ -671,75 +183,75 @@ if (atRule) {
     cssInfo = data.properties[name];
 }
 
-var result = "";
-
-if (cssInfo !== null) {
-    result = "<ul class=\"cssprop\">";
-
-    // Adds information about to which @-rule the descriptor belongs
-    if (atRule) {
-        result += "<li><dfn>" + localize(localStrings, "relatedAtRule") +
-            "</dfn><a href=\"/" + locale + "/docs/Web/CSS/" + atRule + "\">" +
-            atRule + "</a></li>";
-    }
-
-    // Adds information about the initial value of the item to the output
-    result += "<li><dfn>" + template("Xref_cssinitial") + "</dfn> " +
-        getInitialValueOutput(name, atRule) + "</li>";
-
-    // Adds information about to which elements the item applies to the output
-    if (!atRule) {
-        result += "<li><dfn>" + localize(localStrings, "appliesTo") +
-            "</dfn> " + getAppliesToOutput(cssInfo) + "</li>";
-    }
-
-    // Adds information about whether the item's value is inherited to the 
-    // output
-    if (cssInfo.hasOwnProperty("inherited")) {
-        result += "<li><dfn>" + template("Xref_cssinherited") + "</dfn> " +
-            (cssInfo.inherited ?
-                localize(localStrings, "yes") :
-                localize(localStrings, "no")) +
-            "</li>";
-    }
-
-    // Adds information about how percentages are handled to the output 
-    if (cssInfo.percentages !== "no") {
-        result += "<li><dfn>" +
-            localize(localStrings, "percentages") + "</dfn> " +
-            getPercentagesOutput(cssInfo) + "</li>";
-    }
-
-    // Adds information about the media the item applies to to the output
-    // We have a general link to @media here. When https://bugzil.la/1133414 is
-    // fixed, we may change the link.
-    result += "<li><dfn><a href=\"/" + locale + "/docs/Web/CSS/@media\">" +
-        localize(localStrings, "media") + "</a></dfn> " +
-        cssInfo.media + "</li>";
-
-    // Adds information about the computed value of the item to the output
-    result += "<li><dfn>" + template("Xref_csscomputed") + "</dfn> " +
-        getComputedValueOutput(name, atRule) + "</li>";
-
-    // Adds information about whether the item is animatable to the output
-    if (!atRule) {
-        result += "<li><dfn>" + template("Xref_cssanimatable") + "</dfn> " +
-            getAnimatableOutput(name, atRule) + "</li>";
-    }
-
-    // Adds information about the canonical order of the values of the item to
-    // the output
-    result += "<li><dfn>" + template("Xref_csscanonicalorder") + "</dfn> " +
-        getCanonicalOrderOutput(cssInfo.order) + "</li>";
-
-    if (cssInfo.stacking) {
-        result += "<li><dfn>" +
-            mdn.getLocalString(localStrings, "createsStackingContext") +
-            "</dfn> " + mdn.getLocalString(localStrings, "yes") + "</li>";
-    }
-
-    result += "</ul>";
-} else {
-    result = replacePlaceholders(formattedError, [localize(localStrings, "missing")]);
+var result = "<table class=\"properties\">" +
+    "<tbody>";
+var properties = [];
+if (atRule) {
+    properties = properties.concat({
+        name: "relatedAtRule",
+        label: localize(localStrings, "relatedAtRule")
+    });
 }
+
+properties = properties.concat({
+    name: "initial",
+    label: template("Xref_cssinitial")
+});
+
+if (!atRule) {
+    properties = properties.concat({
+        name: "appliesto",
+        label: localize(localStrings, "appliesTo")
+    });
+}
+
+if (cssInfo.hasOwnProperty("inherited")) {
+    properties = properties.concat({
+        name: "inherited",
+        label: template("Xref_cssinherited")
+    });
+}
+
+if (cssInfo.percentages !== "no") {
+    properties = properties.concat({
+        name: "percentages",
+        label: localize(localStrings, "percentages")
+    });
+}
+
+properties = properties.concat({
+    name: "media",
+    label: localize(localStrings, "media")
+},
+{
+    name: "computed",
+    label: template("Xref_csscomputed")
+});
+
+if (!atRule) {
+    properties = properties.concat({
+        name: "animatable",
+        label: template("Xref_cssanimatable")
+    });
+}
+
+properties = properties.concat({
+    name: "order",
+    label: template("Xref_csscanonicalorder")
+});
+
+if (cssInfo.stacking) {
+    properties = properties.concat({
+        name: "stacking",
+        label: localize(localStrings, "createsStackingContext")
+    });
+}
+
+properties.forEach(function(property) {
+    result += "<tr>" +
+        "<th scope=\"row\">" + property.label + "</th><td>" +
+        getValueOutput(cssInfo, property.name, atRule) + "</td>";
+});
+result += "</tbody>" +
+    "</table>";
 %><%- result %>
