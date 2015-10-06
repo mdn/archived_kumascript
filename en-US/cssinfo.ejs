@@ -183,8 +183,7 @@ if (atRule) {
     cssInfo = data.properties[name];
 }
 
-var result = "<table class=\"properties\">" +
-    "<tbody>";
+var result = "<ul class=\"cssprop\">";
 var properties = [];
 if (atRule) {
     properties = properties.concat({
@@ -248,10 +247,8 @@ if (cssInfo.stacking) {
 }
 
 properties.forEach(function(property) {
-    result += "<tr>" +
-        "<th scope=\"row\">" + property.label + "</th><td>" +
-        getValueOutput(cssInfo, property.name, atRule) + "</td>";
+    result += "<li><dfn>" + property.label + "</dfn>" +
+        getValueOutput(cssInfo, property.name, atRule) + "<li>";
 });
-result += "</tbody>" +
-    "</table>";
+result += "</ul>";
 %><%- result %>
