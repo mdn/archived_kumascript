@@ -201,8 +201,8 @@ function getValueOutput(cssInfo, property, atRule) {
             output = localizeString(value);
         }
 
-        return addAdditionalAppliesToOutput(parseMacros(output), property,
-            cssInfo); 
+        return parseMacros(addAdditionalAppliesToOutput(output, property,
+            cssInfo)); 
     } else if (typeof value === "boolean") {
         return localize(localStrings, value ? "yes" : "no"); 
     } else if (typeof value === "undefined") {
