@@ -148,7 +148,12 @@ function addAdditionalAppliesToOutput(output, property, cssInfo) {
 */
 function getValueOutput(cssInfo, property, atRule) {
     if (property === "relatedAtRule") {
-        return atRule;
+        var page = localWiki.getPage(atRule);
+        var summary = (page && page.summary) ? escapeQuotes(page.summary) :
+            localize(commonLocalStrings, "summary");
+
+        return "<a href=\"/" + locale + "/docs/Web/CSS/" + atRule +
+            "\" title=\"" + summary + "\"><code>" + atRule + "</code></a>";
     }
 
     var value = cssInfo[property];
