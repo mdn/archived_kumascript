@@ -127,10 +127,10 @@ function addAdditionalAppliesToOutput(output, property, cssInfo) {
         }
 
         if (index < array.length - 2) {
-            additionalApplies += mdn.getLocalString(localStrings,
+            additionalApplies += localize(localStrings,
                 "listSeparator");
         } else if (index < array.length - 1) {
-            additionalApplies += mdn.getLocalString(localStrings,
+            additionalApplies += localize(localStrings,
                 "andInEnumeration");
         }
     });
