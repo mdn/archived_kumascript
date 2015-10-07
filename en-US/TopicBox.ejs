@@ -28,7 +28,7 @@ switch ($0) {
         driver =    {   "name"      : "Florian Scholz",
                         "ircPseudo" : "fscholz",
                         "mdnPseudo" : "fscholz",
-                        "docStatus" : "MDN/Doc_status/" + $0
+                        "docStatus" : "MDN/Doc_status"
                     };
     break;
     case 'DevTools':
@@ -68,9 +68,9 @@ ircLink = "<a href='irc://irc.mozilla.org/" + ircChannelName + "'>#" + ircChanne
 switch(env.locale) {
     case "fr":  // French
         headingStr = "Aidez le projet de documentation '" + $0 + "'…";
-        statusStr = "Consultez le <a href='/fr/docs/" + driver.docStatus + "'>statut</a>< de la documentation '" + $0 + "'.";
-        topicDriverStr = "Coordinateur du domaine : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (Pseudo IRC: " + driver.ircPseudo + ")";
-        ircStr = "N'hésitez pas à nous contacter sur #" + ircLink + "ou sur la liste de diffusion " + mlName + " :";
+        statusStr = "Consultez le <a href='/fr/docs/" + driver.docStatus + "'>statut</a> de la documentation '" + $0 + "'.";
+        topicDriverStr = "Coordinateur du domaine : <a href='/en-US/profiles/" + driver.mdnPseudo + "'>" + driver.name + "</a> (Pseudo IRC&nbsp;: " + driver.ircPseudo + ")";
+        ircStr = "N'hésitez pas à nous contacter sur " + ircLink + " ou sur la liste de diffusion " + mlName + " :";
         break;
     case "ru":  // Russian
         headingStr = "Помочь проекту документирования '" + $0 + "'…";
