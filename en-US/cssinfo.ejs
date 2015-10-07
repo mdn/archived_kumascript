@@ -203,7 +203,7 @@ function getValueOutput(cssInfo, property, atRule) {
             output = replacePlaceholders(localize(localStrings, "yesAs"),
                 [parsedAnimtableValues.join(""), note]);
         } else {
-            output = mdn.localString(value);
+            output = localizeString(value);
         }
 
         return addAdditionalAppliesToOutput(parseMacros(output), property,
