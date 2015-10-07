@@ -120,6 +120,12 @@ function addAdditionalAppliesToOutput(output, property, cssInfo) {
     if (placeholderIndex !== -1) {
       cssInfo.alsoAppliesTo.splice(placeholderIndex, 1);
     }
+
+    // In case there are no items left, the output is returned unchanged
+    if (cssInfo.alsoAppliesTo.length === 0) {
+      return output;
+    }
+
     cssInfo.alsoAppliesTo.forEach(function(element, index, elements) {
         additionalApplies += "{{cssxref(\"" + element + "\")}}";
 
