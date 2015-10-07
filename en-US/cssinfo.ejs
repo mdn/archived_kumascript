@@ -34,7 +34,7 @@ var localStrings = string.deserialize(template("L10n:CSS"));
 */
 function createLink(apiName, area, linkName) {
     var formattedLinkName = linkName || apiName;
-    var url = "/" + env.locale + "/docs/Web/" + (area || "CSS") + "/" + apiName;
+    var url = "/" + locale + "/docs/Web/" + (area || "CSS") + "/" + apiName;
     var thisPage = localWiki.getPage(url);
 
     if (currentPage.hasTag(thisPage, "CSS Function")) {
