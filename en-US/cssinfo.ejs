@@ -70,8 +70,10 @@ function parseMacros(string) {
     parsedString = parsedString.replace(/\{\{(.+?)(?:\((.+?)\))?\}\}/g,
         function (match, macroName, paramsString) {
             var params = paramsString ? paramsString.split(/, ?/) : [];
-            var apiName = (params.length !== 0 ?
-                params[0].toLowerCase().slice(1, -1) : "");
+            params.forEach(function(param, index, params) {
+              params[index] = params[index].toLowerCase().slice(1, -1);
+            });
+            var apiName = (params.length !== 0 ? params[0] : "");
             switch (macroName.toLowerCase()) {
                 case "xref_csslength":
                     apiName = "length";
@@ -91,7 +93,7 @@ function parseMacros(string) {
                     area = "CSS";
             }
 
-            return createLink(apiName, area);
+            return createLink(apiName, area, params[1]);
         }
     );
     return parsedString;
