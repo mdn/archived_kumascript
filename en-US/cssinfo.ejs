@@ -114,27 +114,17 @@ function addAdditionalAppliesToOutput(output, property, cssInfo) {
     }
 
     var additionalApplies = "";
-    cssInfo.alsoAppliesTo.forEach(function(applyingElements, index, array) {
-        switch (applyingElements) {
-            case "firstletter":
-                additionalApplies += "<code>::first-letter</code>";
-                break;
+    // Remove 'placeholder' from array to avoid displaying it,
+    // because it's not standardized yet
+    cssInfo.alsoAppliesTo.splice(cssInfo.alsoAppliesTo.indexOf("placeholder"),
+        1);
+    cssInfo.alsoAppliesTo.forEach(function(element, index, elements) {
+        additionalApplies += "{{cssxref(\"" + element + "\")}}";
 
-            case "firstline":
-                additionalApplies += "<code>::first-letter</code>";
-                break;
-
-            case "placeholder":
-                additionalApplies += "<code>::placeholder</code>";
-                break;
-        }
-
-        if (index < array.length - 2) {
-            additionalApplies += localize(localStrings,
-                "listSeparator");
-        } else if (index < array.length - 1) {
-            additionalApplies += localize(localStrings,
-                "andInEnumeration");
+        if (index < elements.length - 2) {
+            additionalApplies += localize(localStrings, "listSeparator");
+        } else if (index < elements.length - 1) {
+            additionalApplies += localize(localStrings, "andInEnumeration");
         }
     });
 
