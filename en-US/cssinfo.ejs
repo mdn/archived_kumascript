@@ -204,7 +204,8 @@ function getValueOutput(cssInfo, property, atRule) {
                 });
 
             output = replacePlaceholders(localize(localStrings, "yesAs"),
-                [parsedAnimtableValues.join(""), note]);
+                [parsedAnimtableValues.join(localize(localStrings,
+                    "listSeparator")), note]);
         } else {
             output = localizeString(value);
         }
