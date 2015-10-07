@@ -98,6 +98,49 @@ function parseMacros(string) {
 
 
 /*
+  Appends information about to which pseudo-elements a CSS property applies to
+  the output to which normal elements it applies
+
+  output - Current value output
+  property - CSS info item name
+  cssInfo - Structure containing information about a CSS property
+*/
+function addAdditionalAppliesToOutput(output, property, cssInfo) {
+    if (property !== "appliesto" || !cssInfo.hasOwnProperty("alsoAppliesTo")) {
+        return output;
+    }
+
+    var additionalApplies = "";
+    cssInfo.alsoAppliesTo.forEach(function(applyingElements, index, array) {
+        switch (applyingElements) {
+            case "firstletter":
+                additionalApplies += "<code>::first-letter</code>";
+                break;
+
+            case "firstline":
+                additionalApplies += "<code>::first-letter</code>";
+                break;
+
+            case "placeholder":
+                additionalApplies += "<code>::placeholder</code>";
+                break;
+        }
+
+        if (index < array.length - 2) {
+            additionalApplies += mdn.getLocalString(localStrings,
+                "listSeparator");
+        } else if (index < array.length - 1) {
+            additionalApplies += mdn.getLocalString(localStrings,
+                "andInEnumeration");
+        }
+    });
+
+    return replacePlaceholders(localize(localStrings, "applyingToMultiple"),
+        [output, additionalApplies]);
+}
+
+
+/*
   Parses all macros within a string
 
   string - String to parse
@@ -116,21 +159,24 @@ function getValueOutput(cssInfo, property, atRule) {
             var replacedKeywords = keywords.map(function(keyword) {
                 return localize(localStrings, keyword);
             });
-            return parseMacros(replacedKeywords.join(", "));
+
+            var output = addAdditionalAppliesToOutput(
+                replacedKeywords.join(", "), property, cssInfo);
+            return parseMacros(output);
         }
     } else if (Array.isArray(value)) {
         var output = localize(localStrings, "asLonghands") + "<br/>" +
-            "<ul>";
+        "<ul>";
         value.forEach(function(longhand) {
-            output += "<li><a href=\"" + longhand + "\">" + longhand + 
+            output += "<li><a href=\"" + longhand + "\">" + longhand +
                 "</a>: " + (data.properties.hasOwnProperty(longhand) ?
                     getValueOutput(data.properties[longhand], property) :
-                    replacePlaceholders(formattedError, [localize(localStrings,
-                        "missing")])) +
+                    replacePlaceholders(formattedError,
+                        [localize(localStrings, "missing")])) +
                 "</li>";
         });
         output += "</ul>";
-        return output;
+        return addAdditionalAppliesToOutput(output, property, cssInfo);
     } else if (typeof value === "object") {
         var note = value.note || "";
         var output = "";
@@ -139,22 +185,24 @@ function getValueOutput(cssInfo, property, atRule) {
             var animatableValues = value.as.split(" ");
             var parsedAnimtableValues =
                 animatableValues.map(function(animatableValue) {
-                var localizedString = localize(localStrings, animatableValue);
-                if (animatableValue === "lpc") {
-                    localizedString = replacePlaceholders(localizedString,
-                        [localize(localStrings, "length")]);
-                    note = localize(localStrings, "lpcNote") + note;
-                }
-                return localizedString;
-            });
+                    var localizedString = localize(localStrings,
+                        animatableValue);
+                    if (animatableValue === "lpc") {
+                        localizedString = replacePlaceholders(localizedString,
+                            [localize(localStrings, "length")]);
+                        note = localize(localStrings, "lpcNote") + note;
+                    }
+                    return localizedString;
+                });
 
             output = replacePlaceholders(localize(localStrings, "yesAs"),
                 [parsedAnimtableValues.join(""), note]);
         } else {
-            output = localizeString(value);
+            output = mdn.localString(value);
         }
 
-        return parseMacros(output); 
+        return addAdditionalAppliesToOutput(parseMacros(output), property,
+            cssInfo); 
     } else if (typeof value === "boolean") {
         return localize(localStrings, value ? "yes" : "no"); 
     } else if (typeof value === "undefined") {
