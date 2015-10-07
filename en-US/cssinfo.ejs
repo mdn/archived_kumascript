@@ -114,10 +114,12 @@ function addAdditionalAppliesToOutput(output, property, cssInfo) {
     }
 
     var additionalApplies = "";
-    // Remove 'placeholder' from array to avoid displaying it,
+    // Remove '::placeholder' from array to avoid displaying it,
     // because it's not standardized yet
-    cssInfo.alsoAppliesTo.splice(cssInfo.alsoAppliesTo.indexOf("placeholder"),
-        1);
+    var placeholderIndex = cssInfo.alsoAppliesTo.indexOf("::placeholder");
+    if (placeholderIndex !== -1) {
+      cssInfo.alsoAppliesTo.splice(placeholderIndex, 1);
+    }
     cssInfo.alsoAppliesTo.forEach(function(element, index, elements) {
         additionalApplies += "{{cssxref(\"" + element + "\")}}";
 
