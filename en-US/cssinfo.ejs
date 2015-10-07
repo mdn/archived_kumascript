@@ -174,15 +174,17 @@ function getValueOutput(cssInfo, property, atRule) {
         var output = localize(localStrings, "asLonghands") + "<br/>" +
         "<ul>";
         value.forEach(function(longhand) {
-            output += "<li><a href=\"" + longhand + "\">" + longhand +
-                "</a>: " + (data.properties.hasOwnProperty(longhand) ?
+            output += "<li>{{cssxref(\"" + longhand + "\")}}: " +
+                (data.properties.hasOwnProperty(longhand) ?
                     getValueOutput(data.properties[longhand], property) :
                     replacePlaceholders(formattedError,
                         [localize(localStrings, "missing")])) +
                 "</li>";
         });
         output += "</ul>";
-        return addAdditionalAppliesToOutput(output, property, cssInfo);
+
+        return parseMacros(addAdditionalAppliesToOutput(output, property,
+            cssInfo));
     } else if (typeof value === "object") {
         var note = value.note || "";
         var output = "";
