@@ -17,10 +17,13 @@ var sectionName = mdn.localString({
     "en-US": "Element"
 });
 var url = "/" + env.locale + "/docs/Web/HTML/" + sectionName + "/" +
-    elementName + $2;
+    elementName;
 var page = wiki.getPage(url);
 var summary = (page && page.summary) ? mdn.escapeQuotes(page.summary) :
     mdn.getLocalString(commonLocalStrings, "summary");
+
+// Add anchor after fetching the page contents
+url += $2;
 
 if (linkText === elementName && elementName.indexOf(" ") === -1) {
     linkText = "<code>&lt;" + linkText + "&gt;</code>";
