@@ -15,14 +15,14 @@ var commonLocalStrings = string.deserialize(template("L10n:Common"));
 var sectionName = mdn.localString({
     "es": "Elemento",
     "en-US": "Element"
-};
+});
 var url = "/" + env.locale + "/docs/Web/HTML/" + sectionName + "/" +
     elementName + $2;
 var page = wiki.getPage(url);
 var summary = (page && page.summary) ? mdn.escapeQuotes(page.summary) :
     mdn.getLocalString(commonLocalStrings, "summary");
 
-if (elementName.indexOf(" ") === -1) {
+if (linkText === elementName && elementName.indexOf(" ") === -1) {
     linkText = "<code>&lt;" + linkText + "&gt;</code>";
 }
 
