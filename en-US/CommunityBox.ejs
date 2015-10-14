@@ -50,7 +50,7 @@ switch(env.locale) {
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "mehr erfahren</a>)</span>";
         }
-    break;
+        break;
     case "fr":
         headingStr = "Rejoignez la communauté " + $0 ;
         messageStr = "Liste de diffusion/newsgroup :";
@@ -58,7 +58,7 @@ switch(env.locale) {
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "en apprendre plus</a>)</span>";
         }
-    break;
+        break;
     case "it":
         headingStr = "Unisciti alla comunità " + $0;
         messageStr = "Mailing list/newsgroup:";
@@ -102,6 +102,14 @@ switch(env.locale) {
         messageNoteStr = "Choose your preferred method for joining the discussion:";
         if ($3) {
             ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "learn more</a>)</span>";
+        }
+        break;
+    case "ja":
+        headingStr = $0 + "コミュニティに参加してください"; 
+        messageStr = "メーリングリスト／ニュースグループ:";
+        messageNoteStr = "Sあなたの好きな方法でディスカッションに参加してください";
+        if ($3) {
+            ircInfoStr = "<span class='smaller'>(" + ircInfoLink + "さらに詳しく/a>)</span>";
         }
         break;
     default: // Like English + info about ltr!
