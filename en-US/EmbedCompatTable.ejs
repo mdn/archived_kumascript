@@ -84,6 +84,67 @@ function loadTable(payload, locale) {
                 prefixLong: 'Requires a vendor prefix or different name for use.',
                 alternateLong: 'Uses a non-standard name.'
             }
+        },
+        fr: {
+            // Browser Types
+            browserTypes: {
+                desktop: 'Ordinateur',
+                mobile: 'Mobile'
+            },
+
+            // Basic yes and no
+            supportsShort: {
+                yes: 'Oui',
+                no: 'Non',
+                parital: 'Partiel'
+            },
+
+            // Support levels
+            supportsLong: {
+                yes: 'Support complet',
+                no: 'Aucun support',
+                partial: 'Support partiel'
+            },
+
+            // Features, used in the left-most column
+            features: {
+                basicsupport: 'Support simple',
+
+                experimental: 'Expérimentale',
+                experimentalLong: 'Fonctionnalité experimentale. Celle-ci peut être amenée à changer par la suite.',
+
+                nonstandard: 'Non-standard',
+                nonstandardLong: 'Fonctionnalité non-standard. Celle-ci peut être incorrectement supportée par les autres navigateurs.',
+
+                obsolete: 'Obsolète',
+                obsoleteLong: 'Fonctionnalité obsolète. Celle-ci ne doit pas être utilisée pour de nouveaux sites web.'
+            },
+            
+            // Version requirements
+            requirements: {
+                prefix: 'Préfixée',
+                prefixLong: 'Nécessite l\'utilisation d\'un préfixe&nbsp;: <code>{prefix}</code>',
+
+                note: 'Notes',
+                noteLong: 'Voir les notes d\'implémentation',
+
+                alternate: 'Autre nom',
+                alternateLong: 'Cette fonctionnalité utilise le nom non-standard&nbsp;: <code>{name}</code>',
+
+                'protected': 'Protégée',
+                protectedLong: 'Cette fonctionnalité est protégée. Des étapes supplémentaires sont nécessaires pour pouvoir l\'utiliser.',
+
+                disabled: 'Désactivée',
+                disabledRequires: 'L\'utilisateur doit changer {default} à {requires} afin d\'activer cette fonctionnalité.',
+                disabledDefault: 'L\'utilisateur doit changer {default} afin d\'activer cette fonctionnalité.'
+            },
+
+            // Legend text
+            legend: {
+                heading: 'Légende',
+                prefixLong: 'Cette fonctionnalité nécessite un préfixe particulier ou utilise un autre nom.',
+                alternateLong: 'Cette fonctionnalité utilise un nom non-standard.'
+            }
         }
     };
 
