@@ -85,6 +85,7 @@ function loadTable(payload, locale) {
                 alternateLong: 'Uses a non-standard name.'
             }
         },
+        // FR dictionary for static strings
         "fr": {
             // Browser Types
             browserTypes: {
@@ -560,13 +561,13 @@ function loadTable(payload, locale) {
 
     // Tries to find the locale string for a given name object based on the navigator locale
     function getLocaleOrDefaultFromObject(nameObject) {
-        return typeof nameObject === 'string' ? nameObject : (nameObject[locale] || nameObject[locale.split('-')[0]] || nameObject[env.locale]);
+        return typeof nameObject === 'string' ? nameObject : (nameObject[locale] || nameObject[locale.split('-')[0]] || nameObject['en']);
     }
 
     // Finds a string in the dictionary for the given language object
-    // TODO:  Accomodate for more locales
+    // Uses the locale (from env.locale) to accomodate for other locales
     function getStringBasedOnLocale(langDictKey, stringKey, obj) {
-        return substitute(langDictionary[env.locale][langDictKey][stringKey], obj || {}) || '[UNKNOWN]';
+        return substitute(langDictionary[locale][langDictKey][stringKey], obj || {}) || '[UNKNOWN]';
     }
 
     // Given an array of objects, this finds the desired object based on provided ID
