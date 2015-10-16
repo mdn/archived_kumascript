@@ -24,7 +24,7 @@ else if(response.errors) {
 function loadTable(payload, locale) {
 
     var langDictionary = {
-        en: {
+        "en-US": {
             // Browser Types
             browserTypes: {
                 desktop: 'Desktop',
@@ -85,7 +85,7 @@ function loadTable(payload, locale) {
                 alternateLong: 'Uses a non-standard name.'
             }
         },
-        fr: {
+        "fr": {
             // Browser Types
             browserTypes: {
                 desktop: 'Ordinateur',
@@ -560,13 +560,13 @@ function loadTable(payload, locale) {
 
     // Tries to find the locale string for a given name object based on the navigator locale
     function getLocaleOrDefaultFromObject(nameObject) {
-        return typeof nameObject === 'string' ? nameObject : (nameObject[locale] || nameObject[locale.split('-')[0]] || nameObject['en']);
+        return typeof nameObject === 'string' ? nameObject : (nameObject[locale] || nameObject[locale.split('-')[0]] || nameObject[env.locale]);
     }
 
     // Finds a string in the dictionary for the given language object
     // TODO:  Accomodate for more locales
     function getStringBasedOnLocale(langDictKey, stringKey, obj) {
-        return substitute(langDictionary['en'][langDictKey][stringKey], obj || {}) || '[UNKNOWN]';
+        return substitute(langDictionary[env.locale][langDictKey][stringKey], obj || {}) || '[UNKNOWN]';
     }
 
     // Given an array of objects, this finds the desired object based on provided ID
