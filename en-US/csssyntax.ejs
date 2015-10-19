@@ -139,7 +139,7 @@ var operators = [
         anchor: "Brackets"
     },
     {
-        regexp: /\{|\}/g,
+        regexp: /\{(?!\n)|(?:\d)\}/g,
         title: "Curly braces",
         anchor: "Curly_braces_(.7B_.7D)"
     }
@@ -260,9 +260,13 @@ if (!atRule) {
 }
 
 if (atRule) {
-  if (data.atRules[atRule] && data.atRules[atRule].descriptors) {
-	  rawSyntax = data.atRules[atRule].descriptors[name].syntax;
-  }
+    if (data.atRules[atRule] && data.atRules[atRule].descriptors) {
+	    rawSyntax = data.atRules[atRule].descriptors[name].syntax;
+    }
+} else if (name[0] === "@") {
+    if (data.atRules[name].syntax) {
+        rawSyntax = data.atRules[name].syntax;
+    }
 } else if (data.properties[name]) {
 	rawSyntax = data.properties[name].syntax;
 }
