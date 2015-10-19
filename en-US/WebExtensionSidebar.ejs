@@ -1,10 +1,38 @@
 <%
 
 var sidebarUtils = require("SidebarUtilities");
+var hasTag = page.hasTag;
 var pageModule = page;
+
 var slug = env.slug;
 
-var output = "hello<br/>";
+var output = "";
+
+function classifyPages(subpages) {
+  var collection = {
+      properties: [],
+      methods: [],
+      events: [],
+      types: []
+  }
+  
+  subpages.forEach(function(subpage) {
+    if (hasTag(subpage, "Property")) {
+      collection.properties.push(subpage);
+    }
+    if (hasTag(subpage, "Method")) {
+      collection.methods.push(subpage);
+    }
+    if (hasTag(subpage, "Type")) {
+      collection.types.push(subpage);
+    }
+    if (hasTag(subpage, "Event")) {
+      collection.events.push(subpage);
+    }
+  });
+
+  return collection;
+}
 
 function buildSidebar(slug) {
   if (!slug) {
@@ -29,13 +57,11 @@ function buildSidebar(slug) {
       // 2) we are at an API overview
       apiPath = slug;
       buildSidebarForAPI(apiPath, leafDocument);
-
     }
     else {
       // 3) we are at an API component page (method, property, ...)
       apiPath = slug.slice(0, apiPath.length - (leafDocument.length + 1));
       buildSidebarForAPI(apiPath, parentDocument);
-
     }
   }
 }
@@ -49,14 +75,28 @@ function buildSidebarForRoot(path) {
 
 function buildSidebarForAPI(path, parent) {
   output = '<section class="Quick_links" id="Quick_Links"><ol>';
+  output += '<li><strong><a href="' +  "/en-US/docs/" + path + '"><code>' + parent + '</a></code></strong></li>';
+  
   var subpages = pageModule.subpagesExpand("/en-US/docs/" + path);
-  output += sidebarUtils.buildSublist(subpages, parent);
+  var pageCollection = classifyPages(subpages);
+  
+  if (pageCollection.methods.length > 0) {
+    output += sidebarUtils.buildSublist(pageCollection.methods, "Methods");
+  }
+  if (pageCollection.properties.length > 0) {
+    output += sidebarUtils.buildSublist(pageCollection.properties, "Properties");
+  }
+  if (pageCollection.types.length > 0) {
+    output += sidebarUtils.buildSublist(pageCollection.types, "Types");
+  }
+  if (pageCollection.events.length > 0) {
+    output += sidebarUtils.buildSublist(pageCollection.events, "Events");
+  }
   output += '</ol></section>';
 }
 
 buildSidebar(env.slug);
 
-output += 'goodbye<br/>';
 %>
 
 <%-output%>
