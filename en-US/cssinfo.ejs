@@ -322,6 +322,6 @@ if (cssInfo) {
         "</table>";
 } else {
     result = replacePlaceholders(formattedError,
-        localize(localStrings, "missing")]))
+        [localize(localStrings, "missing")]));
 }
 %><%- result %>
