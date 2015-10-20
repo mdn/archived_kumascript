@@ -246,75 +246,82 @@ if (atRule) {
     cssInfo = data.properties[name];
 }
 
-var result = "<table class=\"properties\">" +
-    "<tbody>";
-var properties = [];
-if (atRule) {
+var result = "";
+
+if (cssInfo) {
+    result = "<table class=\"properties\">" +
+        "<tbody>";
+    var properties = [];
+    if (atRule) {
+        properties = properties.concat({
+            name: "relatedAtRule",
+            label: localize(localStrings, "relatedAtRule")
+        });
+    }
+
     properties = properties.concat({
-        name: "relatedAtRule",
-        label: localize(localStrings, "relatedAtRule")
+        name: "initial",
+        label: template("Xref_cssinitial")
     });
-}
 
-properties = properties.concat({
-    name: "initial",
-    label: template("Xref_cssinitial")
-});
+    if (!atRule) {
+        properties = properties.concat({
+            name: "appliesto",
+            label: localize(localStrings, "appliesTo")
+        });
+    }
 
-if (!atRule) {
+    if (cssInfo.hasOwnProperty("inherited")) {
+        properties = properties.concat({
+            name: "inherited",
+            label: template("Xref_cssinherited")
+        });
+    }
+
+    if (cssInfo.percentages !== "no") {
+        properties = properties.concat({
+            name: "percentages",
+            label: localize(localStrings, "percentages")
+        });
+    }
+
     properties = properties.concat({
-        name: "appliesto",
-        label: localize(localStrings, "appliesTo")
+        name: "media",
+        label: localize(localStrings, "media")
+    },
+    {
+        name: "computed",
+        label: template("Xref_csscomputed")
     });
-}
 
-if (cssInfo.hasOwnProperty("inherited")) {
+    if (!atRule) {
+        properties = properties.concat({
+            name: "animatable",
+            label: localize(localStrings, "animatable")
+        });
+    }
+
     properties = properties.concat({
-        name: "inherited",
-        label: template("Xref_cssinherited")
+        name: "order",
+        label: localize(localStrings, "canonicalOrder")
     });
-}
 
-if (cssInfo.percentages !== "no") {
-    properties = properties.concat({
-        name: "percentages",
-        label: localize(localStrings, "percentages")
+    if (cssInfo.stacking) {
+        properties = properties.concat({
+            name: "stacking",
+            label: localize(localStrings, "createsStackingContext")
+        });
+    }
+
+    properties.forEach(function(property) {
+        result += "<tr>" +
+            "<th scope=\"row\">" + property.label + "</th><td>" +
+            getValueOutput(cssInfo, property.name, atRule) + "</td>";
     });
+    result += "</tbody>" +
+        "</table>";
+} else {
+    result = replacePlaceholders(formattedError,
+        localize(localStrings, "missing")]))
 }
-
-properties = properties.concat({
-    name: "media",
-    label: localize(localStrings, "media")
-},
-{
-    name: "computed",
-    label: template("Xref_csscomputed")
-});
-
-if (!atRule) {
-    properties = properties.concat({
-        name: "animatable",
-        label: localize(localStrings, "animatable")
-    });
-}
-
-properties = properties.concat({
-    name: "order",
-    label: localize(localStrings, "canonicalOrder")
-});
-
-if (cssInfo.stacking) {
-    properties = properties.concat({
-        name: "stacking",
-        label: localize(localStrings, "createsStackingContext")
-    });
-}
-
-properties.forEach(function(property) {
-    result += "<tr>" +
-        "<th scope=\"row\">" + property.label + "</th><td>" +
-        getValueOutput(cssInfo, property.name, atRule) + "</td>";
-});
-result += "</tbody>" +
-    "</table>";
 %><%- result %>
