@@ -139,7 +139,7 @@ var operators = [
         anchor: "Brackets"
     },
     {
-        regexp: /\{(?!\n)|(?:\d)\}/g,
+        regexp: /\{|\}/g,
         title: "Curly braces",
         anchor: "Curly_braces_(.7B_.7D)"
     }
@@ -188,6 +188,11 @@ function formatSyntax(rawSyntax) {
 
     var formattedSyntax = rawSyntax;
     operators.forEach(function(operator) {
+        if (formattedSyntax.indexOf("\n") !== -1 &&
+            operator.title === "Curly braces") {
+		    return "";
+        }
+
         formattedSyntax = formattedSyntax.replace(operator.regexp,
             function(match, text) {
             text = (typeof text === "string" ? text : match);
