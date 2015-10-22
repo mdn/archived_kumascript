@@ -266,7 +266,7 @@ function loadTable(payload, locale) {
         output += '<th scope="row">';
         if(isBasicSupport){
             output += getStringBasedOnLocale('features', 'basicsupport');
-        }else if(feature.canonical) {
+        }else if(nameIsCanonical(name, feature)) {
             output += '<code>' + name + '</code>';
         }
         else {
@@ -386,6 +386,10 @@ function loadTable(payload, locale) {
 
         output += '</tr>';
         return output;
+    }
+
+    function nameIsCanonical(name, feature){
+        return (name == feature.name);
     }
 
     function meetsHistoryCriteria(currentBrowserObj, browserFeatureHistory) {
