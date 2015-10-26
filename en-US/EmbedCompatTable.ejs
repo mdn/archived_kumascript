@@ -15,10 +15,16 @@ var content = false;
 var response = mdn.fetchCompatTableJSON(url);
 
 if(response === null) {
-    content = 'Unable to contact CompatTable service.';
+    content = mdn.localString({
+        "en-US": 'Unable to contact CompatTable service.',
+        "de" : 'Es ist nicht möglich, den CompatTable Service zu kontaktieren.'
+    });
 }
 else if(response.errors) {
-    content = 'Compat service error returned: ' + JSON.stringify(response.errors);
+    content = mdn.replacePlaceholders(mdn.localString({
+        "en-US": 'Compat service error returned: $1$',
+        "de"   : 'Compat Service hat einen Fehler zurückgeliefert: $1$'
+    }), [JSON.stringify(response.errors)]);
 }
 
 function loadTable(payload, locale) {
