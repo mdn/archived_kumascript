@@ -87,7 +87,73 @@ function loadTable(payload, locale) {
                 disabledLong: 'User must explicitly enable this feature.'
             }
         },
-        // FR dictionary for static strings
+
+        // German dictionary for static strings
+        "de": {
+            // Browser Types
+            browserTypes: {
+                desktop: 'Desktop',
+                mobile: 'Mobile',
+                non: 'Nicht-Browser-Umgebung'
+            },
+
+            // Basic yes and no
+            supportsShort: {
+                yes: 'Ja',
+                no: 'Nein',
+                parital: 'Teilweise'
+            },
+
+            // Support levels
+            supportsLong: {
+                yes: 'Vollständige Unterstützung',
+                no: 'Keine Unterstützung',
+                partial: 'Teilweise Unterstützung'
+            },
+
+            // Features, used in the left-most column
+            features: {
+                basicsupport: 'Grundlegende Unterstützung',
+
+                experimental: 'Experimentell',
+                experimentalLong: 'Experimentell. Das Verhalten kann sich zukünftig ändern.',
+
+                nonstandard: 'Nicht standardisiert',
+                nonstandardLong: 'Nicht standardisiert. Erwarte schlechte browserübergreifende Unterstützung.',
+
+                obsolete: 'Veraltet',
+                obsoleteLong: 'Veraltet. Nicht zur Verwendung in neuen Webseiten geeignet.'
+            },
+            
+            // Version requirements
+            requirements: {
+                prefix: 'mit Präfix',
+                prefixLong: 'Benötigt das Herstellerpräfix: <code>{prefix}</code>',
+
+                note: 'Hinweise',
+                noteLong: 'Siehe Implementierungshinweise',
+
+                alternate: 'Alternativer Name',
+                alternateLong: 'Verwendet den nicht standardisierten Namen: <code>{name}</code>',
+
+                'protected': 'Geschützt',
+                protectedLong: 'Geschützt. Zusätzliche Schritte werden benötigt, um die Erlaubnis oder die Zertifizierung für den Gebrauch zu erhalten.',
+
+                disabled: 'Deaktiviert',
+                disabledRequires: 'Der Benutzer muss <code>{default}</code> ändern, um <code>{requires}</code> dieses Feature zu aktivieren.',
+                disabledDefault: 'Der Benutzer muss <code>{default}</code> ändern, um dieses Feature zu aktivieren.'
+            },
+
+            // Legend text
+            legend: {
+                heading: 'Legende',
+                prefixLong: 'Benötigt ein Herstellerpräfix oder einen anderen Namen zur Verwendung.',
+                alternateLong: 'Verwendet einen nicht standardisierten Namen.',
+                disabledLong: 'Benutzer muss dieses Feature explizit aktivieren.'
+            }
+        },
+
+        // French dictionary for static strings
         "fr": {
             // Browser Types
             browserTypes: {
