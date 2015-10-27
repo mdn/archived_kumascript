@@ -65,7 +65,8 @@ if (svgInfo) {
 
     result = template("propertiesbox", [string.serialize(properties)]);
 } else {
+    log.debug(name);
     result = replacePlaceholders(formattedError,
-        [localize(localStrings, "missing")]);
+        [localize(commonLocalStrings, "missing")]);
 }
 %><%- result %>
