@@ -30,7 +30,9 @@ if (svgInfo) {
     });
 
     // Add permitted content
-    var permittedContent = mdn.localString(svgInfo.content.description);
+    var permittedContent = typeof svgInfo.content.description === "string" ?
+        mdn.getLocalString(localStrings, svgInfo.content.description) :
+        mdn.localString(svgInfo.content.description);
     if (svgInfo.content.elements) {
         var elementGroups = [];
         var elements = [];
