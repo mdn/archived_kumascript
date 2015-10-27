@@ -299,7 +299,9 @@ function loadTable(payload, locale) {
     output += '<tbody>';
 
     // current feature aka Basic Support
-    output += outputFeatureRow(payload.features, true);
+    if(payload.features.links.supports.length > 0) {
+        output += outputFeatureRow(payload.features, true);
+    }
 
     // each linked feature
     payload.linked.features.forEach( function(feature){
