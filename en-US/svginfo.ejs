@@ -54,7 +54,9 @@ if (svgInfo) {
             }
         }
 
-        permittedContent += "<br/>" + elementGroups.join("<br/>");
+        if (elementGroups.length !== 0) {
+          permittedContent += "<br/>" + elementGroups.join("<br/>");
+        }
         if (elements.length !== 0) {
             permittedContent += "<br/>" + elements.join(localize(
                 commonLocalStrings, "listSeparator"));
