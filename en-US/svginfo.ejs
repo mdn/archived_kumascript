@@ -5,7 +5,7 @@
   $0 - SVG element name - defaults to the slug name (optional, uses last part of URL as default)
 */
 
-var name = $0 || env.slug.split("/").pop().toLowerCase();
+var name = $0 || env.slug.split("/").pop();
 var data = string.deserialize(template("SVGData"));
 var formattedError = "<span style=\"color:red;\">$1$</span>";
 var commonLocalStrings = string.deserialize(template("L10n:Common"));
@@ -65,7 +65,6 @@ if (svgInfo) {
 
     result = template("propertiesbox", [string.serialize(properties)]);
 } else {
-    log.debug(name);
     result = replacePlaceholders(formattedError,
         [localize(commonLocalStrings, "missing")]);
 }
