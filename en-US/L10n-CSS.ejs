@@ -18,12 +18,12 @@
     "missing": {
         "en-US": "Value not found in DB!",
         "de": "Wert nicht in der DB gefunden!",
-        "ru": "Значение не найдено в базе данных"
+        "ru": "Значение не найдено в базе данных!"
     },
     "relatedAtRule": {
         "en-US": "Related <a href=\"/en-US/docs/Web/CSS/At-rule\">at-rule</a>",
         "de": "Zugehörige <a href=\"/de/docs/Web/CSS/At-Regel\">@-Regel</a>",
-        "ru": "Связанное с <a href=\"/en-US/docs/Web/CSS/At-rule\">@-правило</a>"
+        "ru": "Связано с <a href=\"/ru/docs/Web/CSS/At-rule\">@-правило</a>"
     },
     "all": {
         "en-US": "all",
@@ -51,7 +51,7 @@
         "fr": "Animable",
         "ja": "アニメーションの可否",
         "de": "Animierbar",
-        "ru": "Анимируемый"
+        "ru": "Анимируемость"
     },
     "asSpecified": {
         "en-US": "as specified",
@@ -93,7 +93,7 @@
         "ja": "メディア",
         "zh-CN": "适用媒体",
         "pt-BR": "Midia",
-        "ru": "Медиа"
+        "ru": "Отображение"
     },
     "percentages": {
         "en-US": "Percentages",
@@ -138,7 +138,7 @@
         "de": "wie die jeweiligen Kurzschreibweisen:",
         "fr": "pour chaque propriété individuelle de la propriété raccourcie&nbsp;:",
         "ja": "以下の各プロパティのショートハンドとして補完します:",
-        "ru": "как и у каждого из свойств этой короткой записи свойств:"
+        "ru": "как и у каждого из подсвойств этой короткой записи:"
     },
     "yesAs": {
         "en-US": "yes, as $1$$2$",
@@ -191,7 +191,7 @@
         "de": " wenn beides Längenwerte sind, werden sie als Längenwerte gehandhabt. Wenn beides Prozentsätze sind, werden sie als Prozentsätze gehandhabt. Ansonsten werden beide Werte wie in einer <code>calc()</code> Funktion addiert (Wird ggf. zu Null). Und bei diesen <code>calc()</code> Funktionen wird jede Hälfte als Realzahl interpoliert. ",
         "fr": " quand les deux valeurs sont des longueurs, elles sont interpolées comme des longueurs&nbsp;; quand les deux valeurs sont des pourcentages, elles sont interpolées comme des pourcentages ; sinon, les deux valeurs sont converties dans une fonction <code>calc()</code> qui est la somme d'une longueur et d'un pourcentage (chaque valeur pouvant être à zéro), et cette fonction <code>calc()</code> interpole chaque moitié comme un nombre réel. ",
         "ja": "。両方の値が length の場合は、length 値として補完されます。両方の値が percentage の場合は、percentage 値として補完されます。それ以外の場合は、両方の値が calc() 関数にコンバートされ、length と percentage の合計になります (または各値が 0)。そして、これらの <code>calc()</code> 関数は、それぞれ半分ずつ補完された実数を持ちます",
-        "ru": " когда оба значения являются длинами, они интерполируются как длины; когда оба значения являются процентами, они интерполируются как проценты; в остальных случаях, оба значения преобразуются функцией <code>calc()</code> в сумму длины и процента (каждый из них может быть равен нулю), а затем эта функция <code>calc()</code> интерполирует каждую половину как вещественные числа."
+        "ru": " когда оба значения являются длинами, они интерполируются как длины; когда оба значения являются процентами, они интерполируются как проценты; в остальных случаях, оба значения преобразуются функцией <code>calc()</code> в сумму длины и процента (каждый из них может быть равен нулю), а затем эта функция интерполирует каждую половину как вещественные числа."
     },
     "integer": {
         "en-US": "an <a href=\"/en-US/docs/Web/CSS/integer#Interpolation\" title=\"Values of the <integer> CSS data type are interpolated via integer discrete steps. The calculation is done as if they were real, floating-point numbers and the discrete value is obtained using the floor function.\">integer</a>",
@@ -217,7 +217,7 @@
         "de": "eine <a href=\"/de/docs/Web/CSS/box-shadow#Interpolation\" title=\"Die color, x, y, blur und spread (falls anwendbar) Komponenten einer Schattenliste werden unabhängig voneinander interpoliert. Falls sich der inset-Wert irgendeines Schattenpaares der beiden Listen unterscheidet, gilt die gesamte liste als nicht interpolierbar. Falls eine Liste kürzer ist als die andere, wird die kürzere mit transparenten Schatten aufgefüllt, deren Längen alle auf 0 gesetzt sind und deren inset-Wert der längeren Liste entspricht.\">Liste von Schatten</a>",
         "fr": "une liste d\"ombres",
         "ja": "shadow リスト",
-        "ru": "<a href=\"/ru/docs/Web/CSS/box-shadow#Interpolation\" title=\"The color, x, y, blur and spread (if applicable) components of shadow lists are interpolated independently. If the inset value of any shadow pair differs between both lists, the whole list is uninterpolable. If one list is smaller than the other, it gets padded with transparent shadows with all their lengths set to 0 and its inset value matching the longer list.\">список теней</a>"
+        "ru": "<a href=\"/ru/docs/Web/CSS/box-shadow#Interpolation\" title=\"Цвет, абсцисса, ордината, размытие и компонент распространения (если применен) списка теней интерполируются независимо. Если один список меньше остальных, он дополняется прозрачностью теней со всей их длинной установленной в 0 и его внутреннее значение соответвует длинным..\">список теней</a>"
     },
     "visibility": {
         "en-US": "a <a href=\"/en-US/docs/Web/CSS/visibility#Interpolation\" title=\"Values of the visibility CSS property are interpolable if the start or the end value is visible. In that case all values of the timing function which are equal to 1 map to visible and non-equal to 1 to non-visible.\">visibility</a>",
@@ -238,7 +238,7 @@
         "de": "<a href=\"/de/docs/Web/CSS/font-weight#Interpolation\">Schriftgewichtung</a>",
         "fr": "une <a href=\"/fr/docs/Web/CSS/font-weight#Interpolation\" title=\"Les valeurs de graisse de police sont interpolées via des étapes discrètes (multiple de 100). L'interpolation a lieu dans un espace de nombres réels et est convertis en un entier arroundi au plus proche multiple de 100, avec les valeurs à mis chemin entre les multiples de 100, arrondies vers l'infini positif.\">graisse de police</a>",
         "ja": "<a href=\"/ja/docs/Web/CSS/font-weight#Interpolation\" title=\"Font weight values are interpolated via discrete steps (multiples of 100). The interpolation happens in real number space and is converted to an integer by rounding to the nearest multiple of 100, with values halfway between multiples of 100 rounded towards positive infinity.\">font weight</a>",
-        "ru": "<a href=\"/ru/docs/Web/CSS/font-weight#Interpolation\" title=\"Значения жирности шрифта интерполируются через целое число дискретных шагов (умноженных на 100). Интерполяция происходит в пространстве действительных чисел, а получившееся значение преобразуется в целое путём округления до ближайшей сотни, значения точно между соседними множителями 100 округляются в сторону положительной бесконечности.\">жирность шрифта</a>"
+        "ru": "<a href=\"/ru/docs/Web/CSS/font-weight#Interpolation\" title=\"Значения жирности шрифта интерполируются через целое число дискретных шагов (умноженных на 100). Интерполяция происходит в пространстве действительных чисел, а получившееся значение преобразуется в целое путём округления до ближайшей сотни, со значениями точно между соседними множителями округляются в сторону положительной бесконечности.\">жирность шрифта</a>"
     },
     "rectangle": {
         "en-US": "a <a href=\"/en-US/docs/Web/CSS/shape#Interpolation\" title=\"Values of the <shape> CSS data type which are rectangles are interpolated over their top, right, bottom and left component, each treated as a real, floating-point number.\">rectangle</a>",
@@ -250,7 +250,7 @@
     "basicShape": {
         "en-US": "a <a href=\"/en-US/docs/Web/CSS/shape-outside#Interpolation\" title=\"Values of the <basic-shape> CSS data type interpolate as a simple list. The list values interpolate as length, percentage, or calc where possible. If list values are not one of those types but are identical, those values do interpolate.\">basic shape</a>",
         "de": "eine <a href=\"/de/docs/Web/CSS/shape-outside#Interpolation\" title=\"Werte des <basic-shape> CSS Datentyps interpolieren als einfache Liste. Die Listenwerte interpolieren als Länge, Prozentwert oder calc, wo möglich. Falls Listenwerte nicht einem dieser Typen entsprechen, aber identisch sind, werden diese Werte interpoliert.\">einfache Form</a>",
-        "ru": "<a href=\"/ru/docs/Web/CSS/shape-outside#Interpolation\" title=\"Значения типа <базовая фигура> интерполируются как лист значений. Лист значений интерполируется как длина, проценты, или расчёт, где возможен. Если лист значений не идеитичных типов, эти значения интерполируются.\">базовая фигура</a>"
+        "ru": "<a href=\"/ru/docs/Web/CSS/shape-outside#Interpolation\" title=\"Значения типа <базовая фигура> интерполируются как лист значений. Лист значений интерполируется как длина, проценты, или расчёт, где возможен. Если лист значений не идентичных типов, эти значения интерполируются.\">базовая фигура</a>"
     },
     "allElements": {
         "en-US": "all elements",
@@ -272,21 +272,21 @@
         "en-US": "all elements; In SVG, it applies to container elements excluding the {{SVGElement(\"defs\")}} element and all graphics elements",
         "de": "alle Elemente; In SVG gilt betrifft dies Containerelemente mit Ausnahme des {{SVGElement(\"defs\")}} Elements und allen Grafikelementen",
         "fr": "tous les éléments; en SVG, s'applique à tous les conteneurs à l'exclusion de l'élément {{SVGElement(\"defs\")}} et des éléments graphiques",
-        "ru": "все элементы; в SVG, это применяется к контейнерным элементам, исключая элемент {{SVGElement(\"defs\")}} и все графические элементы"
+        "ru": "все элементы; в SVG, это применяется к контейнерам, исключая элемент {{SVGElement(\"defs\")}} и все графические элементы"
     },
     "nonReplacedBlockElements": {
         "en-US": "non-replaced <code>block</code> elements (except <code>table</code> elements), <code>table-cell</code> or <code>inline-block</code> elements",
         "de": "Nicht ersetzte <code>block</code>-Elemente (außer <code>table</code>-Elemente), <code>table-cell</code>- oder <code>inline-block</code>-Elemente",
         "fr": "éléments non-replacés de type <code>block</code> ou <code>table</code>, ou éléments de type <code>table-cell</code> ou <code>inline-block</code>",
         "ja": "非置換ブロック要素（テーブル要素を除く）、テーブルセル、インラインブロック要素",
-        "ru": "не заменяемые <code>block</code> элементы (кроме элементов <code>table</code>), <code>table-cell</code> или <code>inline-block</code> элементов"
+        "ru": "не заменяемые блочные элементы (кроме элементов <code>table</code>), <code>table-cell</code> или <code>inline-block</code> элементы"
     },
     "blockLevelElements": {
         "en-US": "block-level elements",
         "de": "Blocklevel Elemente",
         "fr": "éléments de type bloc",
         "ja": "ブロックレベル要素",
-        "ru": "элементы блочного уровня"
+        "ru": "блочные элементы"
     },
     "blockContainers": {
         "en-US": "block containers",
@@ -326,20 +326,20 @@
         "en-US": "all elements; but User Agents are not required to apply to <code>table</code> and <code>inline-table</code> elements when {{cssxref(\"border-collapse\")}} is <code>collapse</code>. The behavior on internal table elements is undefined for the moment.",
         "de": "alle Elemente; aber User Agents sind nicht gezwungen dies auf <code>table</code> und <code>inline-table</code> Elemente anzuwenden, falls {{cssxref(\"border-collapse\")}} <code>collapse</code> ist. Das Verhalten bei internen Tabellenelementen ist momentan undefiniert.",
         "fr": "tous les éléments, mais les agents utilisateurs ne sont pas tenus de l'appliquer aux éléments de type <code>table</code> ou <code>inline-table</code> lorsque {{cssxref(\"border-collapse\")}} vaut <code>collapse</code>. Le comportement sur les éléments de type table interne est pour l'instant indéfini.",
-        "ru": "все элемены, но браузеры не требуют применять <code>table</code> и <code>inline-table</code> элементы, когда {{cssxref(\"border-collapse\")}} <code>collapse</code>. Поведение на внутренных элементах не определено."
+        "ru": "все элемены, но браузеры не применяют к <code>table</code> и <code>inline-table</code> элементам, когда {{cssxref(\"border-collapse\")}}:<code>collapse</code>. Поведение на внутритабличных элементах не определено"
     },
     "allElementsExceptTableElementsWhenCollapse": {
         "en-US": "all elements, except internal table elements when {{cssxref(\"border-collapse\")}} is <code>collapse</code>",
         "de": "Alle Elemente, außer interne Tabellenelemente, falls {{cssxref(\"border-collapse\")}} <code>collapse</code> ist",
         "fr": "tous les éléments sauf les éléments de table internes lorsque {{cssxref(\"border-collapse\")}} vaut <code>collapse</code>",
         "ja": "全要素。ただし <code>border-collapse</code> が <code>collapse</code> のときはテーブル要素内部にあるものを除く",
-        "ru": "все элементы, кроме внутренних табличных элементов, когда {{cssxref(\"border-collapse\")}} <code>collapse</code>"
+        "ru": "все элементы, кроме внутренних табличных элементов, когда {{cssxref(\"border-collapse\")}}:<code>collapse</code>"
     },
     "allElementsExceptTableDisplayTypes": {
         "en-US": "all elements, except elements with table {{cssxref(\"display\")}} types other than <code>table-caption</code>, <code>table</code> and <code>inline-table</code>",
         "de": "alle Elemente außer Elemente mit Tabellen-{{cssxref(\"display\")}}-Typen, die nicht <code>table-caption</code>, <code>table</code> und <code>inline-table</code> entsprechen",
         "ja": "テーブル系要素を除く全ての要素。ただし、<code>table-caption</code>、<code>table</code>、<code>inline-table</code> には適用できます。",
-        "ru": "все элементы, кроме элементов с table {{cssxref(\"display\")}} типом, другие чем <code>table-caption</code>, <code>table</code> и <code>inline-table</code>"
+        "ru": "все элементы, кроме элементов с табличным {{cssxref(\"display\")}} типом, отличным от <code>table-caption</code>, <code>table</code> и <code>inline-table</code>"
     },
     "allElementsExceptInternalTableDisplayTypes": {
         "en-US": "all elements, except <code>table-row-group</code>, <code>table-header-group</code>, <code>table-footer-group</code>, <code>table-row</code>, <code>table-column-group</code> and <code>table-column</code>",
@@ -350,18 +350,18 @@
         "en-US": "all elements but non-replaced inline elements, table columns, and column groups",
         "de": "alle Elemente außer nicht ersetzte Inlineelemente, Tabellenspalten und Spaltengruppen",
         "ja": "次の要素を除く全要素：非置換インライン要素、テーブルの列、列グループ",
-        "ru": "все элементы, не заменяются inline элементы, табличные колонки и группы колонок"
+        "ru": "все элементы, кроме незаменяемых строчных элементов, табличных колонок и групп колонок"
     },
     "allElementsButNonReplacedAndTableRows": {
         "en-US": "all elements but non-replaced inline elements, table rows, and row groups",
         "de": "alle Elemente außer nicht ersetzte Inlineelemente, Tabellenzeilen und Zeilengruppen",
-        "ru": "все элементы, не заменяются inline элементы, табличные строки и группы строк"
+        "ru": "все элементы, кроме незаменяемых строчных элементов, табличных строк и групп строк"
     },
     "nonReplacedBlockAndInlineBlockElements": {
         "en-US": "non-replaced block-level elements and non-replaced inline-block elements",
         "de": "nicht ersetzte Blocklevel Elemente und nicht ersetzte Inlineblock Elemente",
         "ja": "非置換ブロックレベル要素と非置換インラインブロック要素",
-        "ru": "не заменяются элементы блочного уровня и inline-block элементы"
+        "ru": "не заменяются блочные и inline-block элементы"
     },
     "tableElements": {
         "en-US": "<code>table</code> and <code>inline-table</code> elements",
@@ -392,11 +392,11 @@
     "blockElementsInNormalFlow": {
         "en-US": "block-level elements in the normal flow of the root element. User agents may also apply it to other elements like <code>table-row</code> elements.",
         "de": "Blocklevelelemente in normalem Fluss des Wurzelelements. User Agents können es auch auf andere Elemente wie <code>table-row</code>-Elemente anwenden.",
-        "ru": "элементы блочного уровня в нормальном потоке родительского элемента. Браузеры могут также применять это к другим элементам типа <code>table-row</code>."
+        "ru": "блочные элементы в нормальном потоке родительского элемента. Браузеры могут также применять это к другим элементам типа <code>table-row</code>."
     },
     "floats": {
         "en-US": "floats",
-        "ru": "плавающие"
+        "ru": "плавает"
     },
     "sameAsWidthAndHeight": {
         "en-US": "same as {{cssxref(\"width\")}} and {{cssxref(\"height\")}}",
@@ -482,7 +482,7 @@
     "sameAsBoxOffsets": {
         "en-US": "same as box offsets: {{cssxref(\"top\")}}, {{cssxref(\"right\")}}, {{cssxref(\"bottom\")}}, {{cssxref(\"left\")}} properties except that directions are logical",
         "de": "wie die Boxoffsets: {{cssxref(\"top\")}}, {{cssxref(\"right\")}}, {{cssxref(\"bottom\")}}, {{cssxref(\"left\")}} Eigenschaften, mit dem Unterschied, dass die Richtungen logisch sind",
-        "ru": "так же так и смещения блоков свойствами: {{cssxref(\"top\")}}, {{cssxref(\"right\")}}, {{cssxref(\"bottom\")}}, {{cssxref(\"left\")}}, кроме того направления логичны"
+        "ru": "также как смещение блоков свойствами: {{cssxref(\"top\")}}, {{cssxref(\"right\")}}, {{cssxref(\"bottom\")}}, {{cssxref(\"left\")}}, кроме того направления логичны"
     },
     "asLength": {
         "en-US": "as {{cssxref(\"length\")}}",
@@ -491,7 +491,7 @@
     "absoluteLengthZeroIfBorderStyleNoneOrHidden": {
         "en-US": "absolute length; <code>0</code> if the border style is <code>none</code> or <code>hidden</code>",
         "de": "absolute Länge; <code>0</code>, falls der Rahmenstil <code>none</code> oder <code>hidden</code> ist",
-        "ru": "абсолютная длина; <code>0</code> если стиль рамки <code>none</code> или <code>hidden</code>"
+        "ru": "абсолютная длина; <code>0</code>, если стиль рамки <code>none</code> или <code>hidden</code>"
     },
     "autoNonNegativeOrPercentage": {
         "en-US": "<code>auto</code>, or a non-negative number or percentage as specified",
