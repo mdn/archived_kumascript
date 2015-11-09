@@ -654,7 +654,11 @@ function loadTable(payload, locale) {
     // Finds a string in the dictionary for the given language object
     // Uses the locale (from env.locale) to accomodate for other locales
     function getStringBasedOnLocale(langDictKey, stringKey, obj) {
-        return substitute(langDictionary[locale][langDictKey][stringKey], obj || {}) || '[UNKNOWN]';
+        var useLocale = locale;
+        if (!langDictionary.hasOwnProperty(locale)) {
+            useLocale = 'en-US';
+        }
+        return substitute(langDictionary[useLocale][langDictKey][stringKey], obj || {}) || '[UNKNOWN]';
     }
 
     // Given an array of objects, this finds the desired object based on provided ID
