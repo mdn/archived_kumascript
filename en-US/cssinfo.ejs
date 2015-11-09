@@ -20,7 +20,8 @@ var replacePlaceholders = mdn.replacePlaceholders;
 var localWiki = wiki;
 var currentPage = page;
 
-var localStrings = string.deserialize(template("L10n:CSS"));
+var cssLocalStrings = string.deserialize(template("L10n:CSS"));
+var localStrings = string.deserialize(template("L10n:CSSData"));
 
 /*
   Creates a link to another API, e.g. a CSS property or SVG element
@@ -184,7 +185,7 @@ function getValueOutput(cssInfo, property, atRule) {
                 (data.properties.hasOwnProperty(longhand) ?
                     getValueOutput(data.properties[longhand], property) :
                     replacePlaceholders(formattedError,
-                        [localize(localStrings, "missing")])) +
+                        [localize(cssLocalStrings, "missing")])) +
                 "</li>";
         });
         output += "</ul>";
@@ -221,7 +222,7 @@ function getValueOutput(cssInfo, property, atRule) {
     } else if (typeof value === "boolean") {
         return localize(localStrings, value ? "yes" : "no"); 
     } else if (typeof value === "undefined") {
-        return replacePlaceholders(formattedError, [localize(localStrings,
+        return replacePlaceholders(formattedError, [localize(cssLocalStrings,
             "missing")]);
     }
 
@@ -322,6 +323,6 @@ if (cssInfo) {
         "</table>";
 } else {
     result = replacePlaceholders(formattedError,
-        [localize(localStrings, "missing")]);
+        [localize(cssLocalStrings, "missing")]);
 }
 %><%- result %>
