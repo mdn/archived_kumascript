@@ -38,12 +38,12 @@ function loadTable(payload, locale) {
 
     // Templates
     var templates = {
-        icon: '<abbr title="{title}" class="only-icon"><span>{text}</span><i class="ic-{icon}" aria-hidden="true"></i></abbr>',
-        iconx2: '<abbr title="{title}" class="only-icon"><span>{text}</span><i class="ic-{icon1}" aria-hidden="true"></i> <i class="ic-{icon2}" aria-hidden="true"></i></abbr>',
-        support: '<abbr title="{title}" class="bc-level bc-level-{icon} only-icon"><span>{text}</span><img src="/media/img/wiki-compat-tables-support-sprite.gif" aria-hidden="true"></abbr>',
-        legendItem: '<dt>{icon}</dt><dd>{text}</dd>'
+        icon: '<abbr title="$title$" class="only-icon"><span>$text$</span><i class="ic-$icon$" aria-hidden="true"></i></abbr>',
+        iconx2: '<abbr title="$title$" class="only-icon"><span>$text$</span><i class="ic-$icon1$" aria-hidden="true"></i> <i class="ic-$icon2$" aria-hidden="true"></i></abbr>',
+        support: '<abbr title="$title$" class="bc-level bc-level-$icon$ only-icon"><span>$text$</span><img src="/media/img/wiki-compat-tables-support-sprite.gif" aria-hidden="true"></abbr>',
+        legendItem: '<dt>$icon$</dt><dd>$text$</dd>'
     };
-    templates.historySupport = templates.icon + ' {title}';
+    templates.historySupport = templates.icon + ' $title$';
 
     // Conditions object so we know what to put into the legend
     var legendConditions = {
@@ -164,7 +164,7 @@ function loadTable(payload, locale) {
             }
             if (feature.obsolete) {
                 output += getObsoleteIcon();
-                setLegendCondition('obsolete');
+                setLegendCondition('obsolute');
             }
             output += '</div>';
 
@@ -207,7 +207,7 @@ function loadTable(payload, locale) {
                     // This is going to need a ton of logic 
                     browserVersionObj = findObjectByIdInArray(currentBrowserObj.links.version, payload.linked.versions);
 
-                    // Add "Yes", "No", "Partial" or {version}
+                    // Add "Yes", "No", "Partial" or $version$
                     cell.content += getBrowserSupportText(browserVersionObj, currentBrowserObj);
                     cell.content += getSupportIcon(currentBrowserObj);
 
@@ -464,19 +464,10 @@ function loadTable(payload, locale) {
         return match;
     }
 
-    // Substitutes { key: value } objects into a template string
-    // Example:  <abbr title="{title}" class="only-icon">    { title: 'Something' }
-    function substitute(str, object) {
-        return str.replace((/\\?\{([^{}]+)\}/g), function(match, name) {
-            if (match.charAt(0) == '\\') return match.slice(1);
-            return (object[name] !== null) ? object[name] : '';
-        });
-    }
-
     // ICON BUILDERS
     // ===============================
     function _getBasicIcon(langKey, longTextKey, shortTextKey, icon) {
-        return substitute(templates.icon, {
+        return replacePlaceholders(templates.icon, {
                     title: localize(localStrings, langKey + '_' + longTextKey),
                     text: localize(localStrings, langKey + '_' + shortTextKey),
                     icon: (icon || shortTextKey)
@@ -504,7 +495,7 @@ function loadTable(payload, locale) {
     }
 
     function getConfigIcon(historyObject) {
-        return substitute(templates.icon, {
+        return replacePlaceholders(templates.icon, {
                     title: getConfigText(historyObject),
                     text: localize(localStrings, 'requirements_disabled'),
                     icon: 'disabled'
@@ -518,7 +509,7 @@ function loadTable(payload, locale) {
     }
 
     function getAlternateIcon(historyObject) {
-        return substitute(templates.icon, {
+        return replacePlaceholders(templates.icon, {
                     title: getAlternateText(historyObject),
                     text: localize(localStrings, 'requirements_alternate'),
                     icon: 'altname'
@@ -537,7 +528,7 @@ function loadTable(payload, locale) {
     }
 
     function getPrefixIcon(historyObject) {
-        return substitute(templates.icon, {
+        return replacePlaceholders(templates.icon, {
                     title: getPrefixText(historyObject),
                     text: localize(localStrings, 'requirements_prefix'),
                     icon: 'prefix'
@@ -550,7 +541,7 @@ function loadTable(payload, locale) {
     }
 
     function getSupportIcon(browserObj) {
-        return substitute(templates.support, {
+        return replacePlaceholders(templates.support, {
                         title: localize(localStrings, 'supportsLong_' + browserObj.support),
                         icon: browserObj.support,
                         text: localize(localStrings, 'supportsLong_' + browserObj.support)
@@ -558,7 +549,7 @@ function loadTable(payload, locale) {
     }
 
     function getLegendHTML(icon, text) {
-        return substitute(templates.legendItem, {
+        return replacePlaceholders(templates.legendItem, {
             icon: icon,
             text: text
         });
@@ -579,7 +570,7 @@ function loadTable(payload, locale) {
 
         output += '<th colspan="' + tab.browsers.length +'" class="bc-medium-' + tabIcon + '">';
 
-        output += substitute(templates.icon, {
+        output += replacePlaceholders(templates.icon, {
             title: tabName,
             text: tabName,
             icon: tabIcon
@@ -657,7 +648,7 @@ function loadTable(payload, locale) {
 
         output += '<th class="bc-browser-' + icon + ' ' + extraClass + '">';
 
-        output += substitute(template, substituteObject);
+        output += replacePlaceholders(template, substituteObject);
 
         output += '</th>';
 
