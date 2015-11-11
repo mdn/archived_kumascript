@@ -63,23 +63,36 @@
     },
     
     /**
-     * Given a string, replaces all placeholders outlined by $1$, $2$, etc.
+     * Given a string, replaces all placeholders outlined by
+     * $1$, $2$, etc. (i.e. numeric placeholders) or
+     * $firstVariable$, $secondVariable$, etc. (i.e. string placeholders)
      * within it.
      * 
-     * The number within the placeholder indicates the index within the
+     * If numeric placeholders are used, the 'replacements' parameter must be
+     * an array. The number within the placeholder indicates the index within the
      * replacement array starting by 1.
+     * If string placeholders are used, the 'replacements' parameter must be an
+     * object. Its property names represent the placeholder names and their
+     * values the values to be inserted.
      * 
-     * Example:
-     *   replacePlaceholders("$1$ $2$, $1$ $3$", ["hello", "world", "editor"])
-     *   => "hello world, hello editor"
+     * Examples:
+     *   replacePlaceholders("$1$ $2$, $1$ $3$!", ["hello", "world", "contributor"])
+     *   => "hello world, hello contributor!"
+     * 
+     *   replacePlaceholders("$hello$ $world$, $hello$ $contributor$!",
+     *       {hello: "hallo", world: "Welt", contributor: "Mitwirkender"})
+     *   => "hallo Welt, hallo Mitwirkender!"
      */
     replacePlaceholders: function (string, replacements) {
-        function replacePlaceholder(placeholder, offset, string) {
-          var index = placeholder.substring(1, placeholder.length - 1) - 1;
-          return index < replacements.length ? replacements[index] : '';
+      function replacePlaceholder(placeholder, offset, string) {
+        var index = placeholder.substring(1, placeholder.length - 1);
+        if (!Number.isNaN(Number(index))) {
+            index--;
         }
+        return index in replacements ? replacements[index] : '';
+      }
 
-        return string.replace(/\$\d+\$/g, replacePlaceholder);
+      return string.replace(/\$\w+\$/g, replacePlaceholder);
     },
 
     /**
