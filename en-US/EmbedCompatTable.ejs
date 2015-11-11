@@ -606,43 +606,57 @@ function loadTable(payload, locale) {
             icon: icon
         };
 
-        if (icon == 'chrome_desktop') {
-            substituteObject.icon = 'chrome';
-        }
-        else if (icon == 'chrome_for_android') {
-            template = templates.iconx2;
-            substituteObject.icon1 = 'chrome';
-            substituteObject.icon2 = 'android';
-        }
-        else if (icon == 'firefox_desktop') {
-            substituteObject.icon = 'firefox';
-        }
-        else if (icon == 'firefox_android') {
-            template = templates.iconx2;
-            substituteObject.icon1 = 'firefox';
-            substituteObject.icon2 = 'android';
-        }
-        else if (icon == 'ie_desktop' || icon == 'ie_mobile') {
-            substituteObject.icon = 'ie';
-        }
-        else if (icon == 'opera_desktop') {
-            substituteObject.icon = 'opera';
-        }
-        else if (icon == 'opera_mobile') {
-            template = templates.iconx2;
-            substituteObject.icon1 = 'opera';
-            substituteObject.icon2 = 'mobile';
-        }
-        else if (icon == 'opera_mini') {
-            template = templates.iconx2;
-            substituteObject.icon1 = 'opera';
-            substituteObject.icon2 = 'mini';
-        }
-        else if (icon == 'safari_desktop' || icon == 'safari_ios') {
-            substituteObject.icon = 'safari';
-        }
-        else if (icon == 'android' || icon == 'android_webview') {
-            substituteObject.icon = 'android_browser';
+        switch (icon) {
+            case 'chrome_desktop':
+                substituteObject.icon = 'chrome';
+                break;
+    
+            case 'chrome_for_android':
+                template = templates.iconx2;
+                substituteObject.icon1 = 'chrome';
+                substituteObject.icon2 = 'android';
+                break;
+
+            case 'firefox_desktop':
+                substituteObject.icon = 'firefox';
+                break;
+
+            case 'firefox_android':
+                template = templates.iconx2;
+                substituteObject.icon1 = 'firefox';
+                substituteObject.icon2 = 'android';
+                break;
+
+            case 'ie_desktop':
+            case 'ie_mobile':
+                substituteObject.icon = 'ie';
+                break;
+
+            case 'opera_desktop':
+                substituteObject.icon = 'opera';
+                break;
+
+            case 'opera_mobile':
+                template = templates.iconx2;
+                substituteObject.icon1 = 'opera';
+                substituteObject.icon2 = 'mobile';
+                break;
+
+            case 'opera_mini':
+                template = templates.iconx2;
+                substituteObject.icon1 = 'opera';
+                substituteObject.icon2 = 'mini';
+                break;
+
+            case 'safari_desktop':
+            case 'safari_ios':
+                substituteObject.icon = 'safari';
+                break;
+
+            case 'android':
+            case 'android_webview':
+                substituteObject.icon = 'android_browser';
+                break;
         }
 
 
