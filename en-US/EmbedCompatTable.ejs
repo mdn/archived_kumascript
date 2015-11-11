@@ -12,19 +12,18 @@ var url = encodeURI('https://browsercompat.herokuapp.com/api/v1/view_features/' 
 
 var content = false;
 
+var localStrings = string.deserialize(template('L10n:CompatTable'));
+
+var localize = mdn.getLocalString;
+var replacePlaceholders = mdn.replacePlaceholders;
+
 var response = mdn.fetchCompatTableJSON(url);
 
-if(response === null) {
-    content = mdn.localString({
-        "en-US": 'Unable to contact CompatTable service.',
-        "de" : 'Es ist nicht möglich, den CompatTable Service zu kontaktieren.'
-    });
+if (response === null) {
+    content = localize(localStrings, 'connectionFailure');
 }
-else if(response.errors) {
-    content = mdn.replacePlaceholders(mdn.localString({
-        "en-US": 'Compat service error returned: $1$',
-        "de"   : 'Compat Service hat einen Fehler zurückgeliefert: $1$'
-    }), [JSON.stringify(response.errors)]);
+else if (response.errors) {
+    content = replacePlaceholders(localize(localStrings, 'compatServiceError'), {error: JSON.stringify(response.errors)});
 }
 
 function loadTable(payload, locale) {
@@ -299,7 +298,7 @@ function loadTable(payload, locale) {
     output += '<tbody>';
 
     // current feature aka Basic Support
-    if(payload.features.links.supports.length > 0) {
+    if (payload.features.links.supports.length > 0) {
         output += outputFeatureRow(payload.features, true);
     }
 
@@ -317,7 +316,7 @@ function loadTable(payload, locale) {
     // LEGEND
     // ===============================
     output += '<section class="bc-legend">';
-    output += '<strong class="offscreen">' + getStringBasedOnLocale('legend', 'heading') + '</strong>';
+    output += '<strong class="offscreen">' + localize(localStrings, 'legend') + '</strong>';
     output += '<dl>' + outputLegend() + '</dl>';
     output += '</section>';
 
@@ -338,9 +337,9 @@ function loadTable(payload, locale) {
 
         output += '<tr>';
         output += '<th scope="row">';
-        if(isBasicSupport){
-            output += getStringBasedOnLocale('features', 'basicsupport');
-        }else if(nameIsCanonical(name, feature)) {
+        if (isBasicSupport){
+            output += localize(localStrings, 'features_basicsupport');
+        }else if (nameIsCanonical(name, feature)) {
             output += '<code>' + name + '</code>';
         }
         else {
@@ -348,18 +347,18 @@ function loadTable(payload, locale) {
         }
 
         // Account for icons in this cell
-        if(feature.experimental || feature.standardized === false || feature.obsolete) {
+        if (feature.experimental || feature.standardized === false || feature.obsolete) {
 
             output += '<div class="bc-icons">';
-            if(feature.experimental) {
+            if (feature.experimental) {
                 output += getExperimentalIcon();
                 setLegendCondition('experimental');
             }
-            if(feature.standardized === false) {
+            if (feature.standardized === false) {
                 output += getNonStandardIcon();
                 setLegendCondition('nonstandard');
             }
-            if(feature.obsolete) {
+            if (feature.obsolete) {
                 output += getObsoleteIcon();
                 setLegendCondition('obsolute');
             }
@@ -386,12 +385,12 @@ function loadTable(payload, locale) {
                 };
 
                 // Apply the extra margin if first cell in second tab
-                if(addExtraLeftBorder) {
+                if (addExtraLeftBorder) {
                     cell.classes.push('bc-medium-border');
                     addExtraLeftBorder = false;
                 }
 
-                if(browserFeatureHistory) {
+                if (browserFeatureHistory) {
 
                     // Assume the last item is the "current"
                     // This will likely need to change in the future
@@ -415,7 +414,7 @@ function loadTable(payload, locale) {
 
                     // History stuff goes here
                     var needsHistory = meetsHistoryCriteria(currentBrowserObj, browserFeatureHistory);
-                    if(needsHistory) {
+                    if (needsHistory) {
 
                         cell.classes.push('bc-has-history');
 
@@ -467,9 +466,9 @@ function loadTable(payload, locale) {
     }
 
     function meetsHistoryCriteria(currentBrowserObj, browserFeatureHistory) {
-        if(browserFeatureHistory.length > 1){
+        if (browserFeatureHistory.length > 1){
             return true;
-        } else if(meetsIconCriteria(currentBrowserObj)) {
+        } else if (meetsIconCriteria(currentBrowserObj)) {
             return true;
         } else {
             return false;
@@ -495,36 +494,36 @@ function loadTable(payload, locale) {
         var output = '';
 
         // Account for any required icons
-        if(meetsIconCriteria(historyObject)) {
+        if (meetsIconCriteria(historyObject)) {
 
             output += '<div class="bc-icons">';
 
             // Browser Prefix
-            if(historyObject.prefix_mandatory) {
+            if (historyObject.prefix_mandatory) {
                 output += getPrefixIcon(historyObject);
                 setLegendCondition('prefix');
             }
 
             // Alternate Name Mandatory
-            if(historyObject.alternate_name_mandatory) {
+            if (historyObject.alternate_name_mandatory) {
                 output += getAlternateIcon(historyObject);
                 setLegendCondition('alternate');
             }
 
             // Requires/Default config
-            if(meetsConfigCriteria(historyObject)) {
+            if (meetsConfigCriteria(historyObject)) {
                 output += getConfigIcon(historyObject);
                 setLegendCondition('config');
             }
 
             // Protected
-            if(historyObject['protected']) {
+            if (historyObject['protected']) {
                 output += getProtectedIcon();
                 setLegendCondition('protected');
             }
 
             // Notes
-            if(historyObject.note) {
+            if (historyObject.note) {
                 output += getNoteIcon();
                 setLegendCondition('note');
             }
@@ -541,36 +540,36 @@ function loadTable(payload, locale) {
         var output = '';
 
         // Account for any required icons
-        if(meetsIconCriteria(historyObject)) {
+        if (meetsIconCriteria(historyObject)) {
 
             // Browser Prefix
-            if(historyObject.prefix_mandatory) {
+            if (historyObject.prefix_mandatory) {
                 output += getPrefixIcon(historyObject) + ' ' + getPrefixText(historyObject) + '<br>';
             }
 
             // Alternate Name Mandatory
-            if(historyObject.alternate_name_mandatory) {
+            if (historyObject.alternate_name_mandatory) {
                 output += getAlternateIcon(historyObject) + ' ' + getAlternateText(historyObject) + '<br>';
             }
 
             // Requires/Default config
-            if(meetsConfigCriteria(historyObject)) {
+            if (meetsConfigCriteria(historyObject)) {
                 output += getConfigIcon(historyObject) + ' ' + getConfigText(historyObject) + '<br>';
             }
 
             // Protected
-            if(historyObject['protected']) {
+            if (historyObject['protected']) {
                 output += getProtectedIcon() + 'FIX ME :: PROTECTED';
             }
 
             // Notes
-            if(historyObject.note) {
+            if (historyObject.note) {
                 output += getNoteIcon() + getLocaleOrDefaultFromObject(historyObject.note) + '<br>';
             }
 
         }
 
-        if(output === '') {
+        if (output === '') {
             output += '&nbsp';
         }
 
@@ -583,37 +582,37 @@ function loadTable(payload, locale) {
 
         // Basic supports
         ['yes', 'partial', 'no'].forEach(function(key) {
-            if(legendConditions[key]) {
-                output += getLegendHTML('<span class="bc-supports-' + key + ' bc-supports">' + getSupportIcon({ support: key }) + '&nbsp;</span>', getStringBasedOnLocale('supportsLong', key));
+            if (legendConditions[key]) {
+                output += getLegendHTML('<span class="bc-supports-' + key + ' bc-supports">' + getSupportIcon({ support: key }) + '&nbsp;</span>', localize(localStrings, 'supportsLong_' + key));
             }
         });
 
         // Browser support details
-        if(legendConditions.prefix) {
-            output += getLegendHTML(getPrefixIcon(), getStringBasedOnLocale('legend', 'prefixLong'));
+        if (legendConditions.prefix) {
+            output += getLegendHTML(getPrefixIcon(), localize(localStrings, 'legend_prefixLong'));
         }
-        if(legendConditions.alternate) {
+        if (legendConditions.alternate) {
             output += getLegendHTML(getAlternateIcon(), getAlternateText());
         }
-        if(legendConditions['protected']) {
-            output += getLegendHTML(getProtectedIcon(), getStringBasedOnLocale('requirements', 'protectedLong'));
+        if (legendConditions['protected']) {
+            output += getLegendHTML(getProtectedIcon(), localize(localStrings, 'requirements_protectedLong'));
         }
-        if(legendConditions.note) {
-            output += getLegendHTML(getNoteIcon(), getStringBasedOnLocale('requirements', 'noteLong'));
+        if (legendConditions.note) {
+            output += getLegendHTML(getNoteIcon(), localize(localStrings, 'requirements_noteLong'));
         }
-        if(legendConditions.config) { // FIX ME
-            output += getLegendHTML(getConfigIcon(), getStringBasedOnLocale('legend', 'disabledLong'));
+        if (legendConditions.config) { // FIX ME
+            output += getLegendHTML(getConfigIcon(), localize(localStrings, 'legend_disabledLong'));
         }
 
         // Feature details
-        if(legendConditions.experimental) {
-            output += getLegendHTML(getExperimentalIcon(), getStringBasedOnLocale('features', 'experimentalLong'));
+        if (legendConditions.experimental) {
+            output += getLegendHTML(getExperimentalIcon(), localize(localStrings, 'features_experimentalLong'));
         }
-        if(legendConditions.nonstandard) {
-            output += getLegendHTML(getNonStandardIcon(), getStringBasedOnLocale('features', 'nonstandardLong'));
+        if (legendConditions.nonstandard) {
+            output += getLegendHTML(getNonStandardIcon(), localize(localStrings, 'features_nonstandardLong'));
         }
-        if(legendConditions.obsolete) {
-            output += getLegendHTML(getObsoleteIcon(), getStringBasedOnLocale('features', 'obsoleteLong'));
+        if (legendConditions.obsolete) {
+            output += getLegendHTML(getObsoleteIcon(), localize(localStrings, 'features_obsoleteLong'));
         }
 
         return output;
@@ -627,11 +626,11 @@ function loadTable(payload, locale) {
 
     // Returns either the browser version number or "Yes" / "No" / "Partial"  for support text blocks
     function getBrowserSupportText(versionObj, browserObj) {
-        if(versionObj && versionObj.version && versionObj.version != 'current') {
+        if (versionObj && versionObj.version && versionObj.version != 'current') {
             return versionObj.version;
         }
         else {
-            return getStringBasedOnLocale('supportsShort', browserObj.support); // PROBLEM:  This requires localization for "Yes" and "No"
+            return localize(localStrings, 'supportsShort_' + browserObj.support); // PROBLEM:  This requires localization for "Yes" and "No"
         }
     }
 
@@ -651,22 +650,12 @@ function loadTable(payload, locale) {
         return typeof nameObject === 'string' ? nameObject : (nameObject[locale] || nameObject[locale.split('-')[0]] || nameObject['en']);
     }
 
-    // Finds a string in the dictionary for the given language object
-    // Uses the locale (from env.locale) to accomodate for other locales
-    function getStringBasedOnLocale(langDictKey, stringKey, obj) {
-        var useLocale = locale;
-        if (!langDictionary.hasOwnProperty(locale)) {
-            useLocale = 'en-US';
-        }
-        return substitute(langDictionary[useLocale][langDictKey][stringKey], obj || {}) || '[UNKNOWN]';
-    }
-
     // Given an array of objects, this finds the desired object based on provided ID
     function findObjectByIdInArray(id, array) {
         var match;
         array.forEach(function(obj) {
-            if(match) return;
-            if(obj.id === id) match = obj;
+            if (match) return;
+            if (obj.id === id) match = obj;
         });
         return match;
     }
@@ -684,8 +673,8 @@ function loadTable(payload, locale) {
     // ===============================
     function _getBasicIcon(langKey, longTextKey, shortTextKey, icon) {
         return substitute(templates.icon, {
-                    title: getStringBasedOnLocale(langKey, longTextKey),
-                    text: getStringBasedOnLocale(langKey, shortTextKey),
+                    title: localize(localStrings, langKey + '_' + longTextKey),
+                    text: localize(localStrings, langKey + '_' + shortTextKey),
                     icon: (icon || shortTextKey)
                 });
     }
@@ -713,12 +702,12 @@ function loadTable(payload, locale) {
     function getConfigIcon(historyObject) {
         return substitute(templates.icon, {
                     title: getConfigText(historyObject),
-                    text: getStringBasedOnLocale('requirements', 'disabled'),
+                    text: localize(localStrings, 'requirements_disabled'),
                     icon: 'disabled'
                 });
     }
     function getConfigText(historyObject) {
-        return getStringBasedOnLocale('requirements', (historyObject.requires_config && historyObject.default_config) ? 'disabledRequires' : 'disabledDefault', {
+        return replacePlaceholders(localize(localStrings, 'requirements_' + (historyObject.requires_config && historyObject.default_config) ? 'disabledRequires' : 'disabledDefault'), {
                         'default': historyObject.default_config,
                         'requires': historyObject.requires_config
                     });
@@ -727,18 +716,18 @@ function loadTable(payload, locale) {
     function getAlternateIcon(historyObject) {
         return substitute(templates.icon, {
                     title: getAlternateText(historyObject),
-                    text: getStringBasedOnLocale('requirements', 'alternate'),
+                    text: localize(localStrings, 'requirements_alternate'),
                     icon: 'altname'
                 });
     }
     function getAlternateText(historyObject) {
-        if(historyObject) {
-            return getStringBasedOnLocale('requirements', 'alternateLong', {
+        if (historyObject) {
+            return replacePlaceholders(localize(localStrings, 'requirements_alternateLong'), {
                             prefix: historyObject ? historyObject.alternate_name : ''
                         });
         }
         else {
-            return getStringBasedOnLocale('legend', 'alternateLong');
+            return localize(localStrings, 'legend_alternateLong');
         }
         
     }
@@ -746,21 +735,21 @@ function loadTable(payload, locale) {
     function getPrefixIcon(historyObject) {
         return substitute(templates.icon, {
                     title: getPrefixText(historyObject),
-                    text: getStringBasedOnLocale('requirements', 'prefix'),
+                    text: localize(localStrings, 'requirements_prefix'),
                     icon: 'prefix'
                 });
     }
     function getPrefixText(historyObject) {
-        return getStringBasedOnLocale('requirements', 'prefixLong', {
+        return replacePlaceholders(localize(localStrings, 'requirements_prefixLong'), {
                         prefix: historyObject ? historyObject.prefix : ''
                     });
     }
 
     function getSupportIcon(browserObj) {
         return substitute(templates.support, {
-                        title: getStringBasedOnLocale('supportsLong', browserObj.support),
+                        title: localize(localStrings, 'supportsLong_' + browserObj.support),
                         icon: browserObj.support,
-                        text: getStringBasedOnLocale('supportsLong', browserObj.support)
+                        text: localize(localStrings, 'supportsLong_' + browserObj.support)
                     });
     }
 
@@ -800,11 +789,11 @@ function loadTable(payload, locale) {
     function _hackEnvironmentIcon(tab) {
         var tabName = tab.name.en.toLowerCase();
         var iconName = '';
-        if(tabName.indexOf('desktop') != -1){
+        if (tabName.indexOf('desktop') != -1){
             iconName = 'desktop';
-        } else if(tabName.indexOf('mobile') != -1) {
+        } else if (tabName.indexOf('mobile') != -1) {
             iconName = 'mobile';
-        } else if(tabName.indexOf('non-browser') != -1){
+        } else if (tabName.indexOf('non-browser') != -1){
             iconName = 'non';
         }
         return iconName;
@@ -822,39 +811,39 @@ function loadTable(payload, locale) {
             icon: icon
         };
 
-               if(icon == 'chrome_desktop') {
+        if (icon == 'chrome_desktop') {
             substituteObject.icon = 'chrome';
         }
-        else if(icon == 'chrome_for_android') {
+        else if (icon == 'chrome_for_android') {
             template = templates.iconx2;
             substituteObject.icon1 = 'chrome';
             substituteObject.icon2 = 'android';
         }
-        else if(icon == 'firefox_desktop') {
+        else if (icon == 'firefox_desktop') {
             substituteObject.icon = 'firefox';
         }
-        else if(icon == 'firefox_android') {
+        else if (icon == 'firefox_android') {
             template = templates.iconx2;
             substituteObject.icon1 = 'firefox';
             substituteObject.icon2 = 'android';
         }
-        else if(icon == 'ie_desktop' || icon == 'ie_mobile') {
+        else if (icon == 'ie_desktop' || icon == 'ie_mobile') {
             substituteObject.icon = 'ie';
         }
-        else if(icon == 'opera_desktop') {
+        else if (icon == 'opera_desktop') {
             substituteObject.icon = 'opera';
         }
-        else if(icon == 'opera_mobile') {
+        else if (icon == 'opera_mobile') {
             template = templates.iconx2;
             substituteObject.icon1 = 'opera';
             substituteObject.icon2 = 'mobile';
         }
-        else if(icon == 'opera_mini') {
+        else if (icon == 'opera_mini') {
             template = templates.iconx2;
             substituteObject.icon1 = 'opera';
             substituteObject.icon2 = 'mini';
         }
-        else if(icon == 'safari_desktop' || icon == 'safari_ios') {
+        else if (icon == 'safari_desktop' || icon == 'safari_ios') {
             substituteObject.icon = 'safari';
         }
         else if (icon == 'android' || icon == 'android_webview') {
@@ -873,7 +862,7 @@ function loadTable(payload, locale) {
 
 }
 
-if(!content) {
+if (!content) {
     content = loadTable(response, env.locale);
 }
 
