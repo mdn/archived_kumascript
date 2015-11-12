@@ -51,7 +51,7 @@ function loadTable(payload, locale) {
         yes: false,
         partial: false,
         no: false,
-        
+
         // Individual browser support details
         prefix: false,
         alternate: false,
@@ -142,7 +142,7 @@ function loadTable(payload, locale) {
         output += '<tr>';
         output += '<th scope="row">';
         if (isBasicSupport){
-            output += localize(localStrings, 'features_basicsupport');
+            output += localize(localStrings, 'feature_basicsupport');
         }else if (nameIsCanonical(name, feature)) {
             output += '<code>' + name + '</code>';
         }
@@ -410,13 +410,13 @@ function loadTable(payload, locale) {
 
         // Feature details
         if (legendConditions.experimental) {
-            output += getLegendHTML(getExperimentalIcon(), localize(localStrings, 'features_experimentalLong'));
+            output += getLegendHTML(getExperimentalIcon(), localize(localStrings, 'feature_experimentalLong'));
         }
         if (legendConditions.nonstandard) {
-            output += getLegendHTML(getNonStandardIcon(), localize(localStrings, 'features_nonstandardLong'));
+            output += getLegendHTML(getNonStandardIcon(), localize(localStrings, 'feature_nonstandardLong'));
         }
         if (legendConditions.obsolete) {
-            output += getLegendHTML(getObsoleteIcon(), localize(localStrings, 'features_obsoleteLong'));
+            output += getLegendHTML(getObsoleteIcon(), localize(localStrings, 'feature_obsoleteLong'));
         }
 
         return output;
