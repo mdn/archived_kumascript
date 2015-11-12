@@ -5,7 +5,6 @@
 //  $0  -  The slug to build the table for (e.g. "/en-us/docs/Web/JavaScript")
 //  $1  -  The locale to check for the localization status
 //  $2  -  (optional) Group tags. An array of tags to filter the section even more (only pages with these tags are included then; OR logic).
-//  $3  -  (optional) l10n macros. An array of macros' names that are used for localizing strings for templates of this section
 
 /* LOCALISATION STRINGS */
 var l10nSummary = mdn.localString({
@@ -215,7 +214,18 @@ var groupTags = [];
 if ($2) {
     groupTags = JSON.parse($2);
 }
-var l10nMacros = ($3) ? JSON.parse($3) : [];
+
+// Defining used l10n macros
+var speL10nMacros = {
+  "CSS": ["L10n:CSS", "L10n:CSSData"],
+  "SVG": ["L10n:SVG"],
+  "JavaScript": ["L10n:JavaScript"]
+};
+// These are l10n macros for every section
+var miscL10nMacros = ["L10n:Common","L10n:CompatTable"];
+
+//$0.substr($0.lastIndexOf("/")+1) will give JavaScript if $0 equals "/en-us/docs/Web/JavaScript"
+var l10nMacros = miscL10nMacros.concat(speL10nMacros[$0.substr($0.lastIndexOf("/")+1)]);
 
 var pageList = page.subpagesExpand(section, '', true);
 var result = [];
