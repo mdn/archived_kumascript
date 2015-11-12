@@ -350,8 +350,8 @@ function crawlL10nMacro(json) {
 
 var l10nMacroDetails = [];
 for (var i = 0; i < l10nMacros.length; i++) {
-    var m = string.deserialize(template("L10n:" + l10nMacros[i]));
-    var res = crawlL10nMacro(m);
+    var macroData = string.deserialize(template("L10n:" + l10nMacros[i]));
+    var res = crawlL10nMacro(macroData);
     l10nMacroDetails.push({
         "name": l10nMacros[i],
         "total": res.total,
@@ -488,7 +488,7 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
 
 <% for (var i = 0; i < l10nMacroDetails.length; i++) { %>
     <tr>
-    <td><a href='/en-US/docs/Template:<%=l10nMacroDetails[i].name%>'><%=l10nMacroDetails[i].name%></a></td>
+    <td><a href='/en-US/docs/Template:L10n:<%=l10nMacroDetails[i].name%>'><%=l10nMacroDetails[i].name%></a></td>
     <td><%=l10nMacroDetails[i].total%></td>
     <% if (l10nMacroDetails[i].translated < l10nMacroDetails[i].total) { %>
         <td style="background-color: #FF9"><%=l10nMacroDetails[i].translated%></td>
