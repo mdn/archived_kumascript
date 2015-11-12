@@ -399,10 +399,10 @@ function loadTable(payload, locale) {
             output += getLegendHTML(getAlternateIcon(), getAlternateText());
         }
         if (legendConditions['protected']) {
-            output += getLegendHTML(getProtectedIcon(), localize(localStrings, 'requirements_protectedLong'));
+            output += getLegendHTML(getProtectedIcon(), localize(localStrings, 'requirement_protectedLong'));
         }
         if (legendConditions.note) {
-            output += getLegendHTML(getNoteIcon(), localize(localStrings, 'requirements_noteLong'));
+            output += getLegendHTML(getNoteIcon(), localize(localStrings, 'requirement_noteLong'));
         }
         if (legendConditions.config) { // FIX ME
             output += getLegendHTML(getConfigIcon(), localize(localStrings, 'legend_disabledLong'));
@@ -487,22 +487,22 @@ function loadTable(payload, locale) {
     }
 
     function getProtectedIcon() {
-        return _getBasicIcon('requirements', 'protectedLong', 'protected');
+        return _getBasicIcon('requirement', 'protectedLong', 'protected');
     }
 
     function getNoteIcon() {
-        return _getBasicIcon('requirements', 'noteLong', 'note', 'footnote');
+        return _getBasicIcon('requirement', 'noteLong', 'note', 'footnote');
     }
 
     function getConfigIcon(historyObject) {
         return replacePlaceholders(templates.icon, {
                     title: getConfigText(historyObject),
-                    text: localize(localStrings, 'requirements_disabled'),
+                    text: localize(localStrings, 'requirement_disabled'),
                     icon: 'disabled'
                 });
     }
     function getConfigText(historyObject) {
-        return replacePlaceholders(localize(localStrings, 'requirements_' + (historyObject.requires_config && historyObject.default_config) ? 'disabledRequires' : 'disabledDefault'), {
+        return replacePlaceholders(localize(localStrings, 'requirement_' + (historyObject.requires_config && historyObject.default_config) ? 'disabledRequires' : 'disabledDefault'), {
                         'default': historyObject.default_config,
                         'requires': historyObject.requires_config
                     });
@@ -511,13 +511,13 @@ function loadTable(payload, locale) {
     function getAlternateIcon(historyObject) {
         return replacePlaceholders(templates.icon, {
                     title: getAlternateText(historyObject),
-                    text: localize(localStrings, 'requirements_alternate'),
+                    text: localize(localStrings, 'requirement_alternate'),
                     icon: 'altname'
                 });
     }
     function getAlternateText(historyObject) {
         if (historyObject) {
-            return replacePlaceholders(localize(localStrings, 'requirements_alternateLong'), {
+            return replacePlaceholders(localize(localStrings, 'requirement_alternateLong'), {
                             prefix: historyObject ? historyObject.alternate_name : ''
                         });
         }
@@ -530,12 +530,12 @@ function loadTable(payload, locale) {
     function getPrefixIcon(historyObject) {
         return replacePlaceholders(templates.icon, {
                     title: getPrefixText(historyObject),
-                    text: localize(localStrings, 'requirements_prefix'),
+                    text: localize(localStrings, 'requirement_prefix'),
                     icon: 'prefix'
                 });
     }
     function getPrefixText(historyObject) {
-        return replacePlaceholders(localize(localStrings, 'requirements_prefixLong'), {
+        return replacePlaceholders(localize(localStrings, 'requirement_prefixLong'), {
                         prefix: historyObject ? historyObject.prefix : ''
                     });
     }
