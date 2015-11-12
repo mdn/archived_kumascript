@@ -1,6 +1,7 @@
 <%
-// $0 : type
+// $0 : Type
 // $1 : Description
+// $2 : name of property — usually detail or details
 
 var type = $0 || 'any';
 var desc = $1 || mdn.localString({
@@ -9,9 +10,11 @@ var desc = $1 || mdn.localString({
     "ja"    : "イベント初期化時に渡されたデータ"
 });
 
+var propName = $2 || 'detail';
+
 
 %> <tr>
-    <td><code>detail</code> <%- template("readonlyInline", [])%></td>
+    <td><code><%= propName %></code> <%- template("readonlyInline", [])%></td>
     <td><code><%= type %></code></td>
     <td><%= desc %></td>
  </tr>
