@@ -215,12 +215,12 @@ if ($2) {
 
 // Defining used l10n macros
 var speL10nMacros = {
-  "CSS": ["L10n:CSS", "L10n:CSSData"],
-  "SVG": ["L10n:SVG"],
-  "JavaScript": ["L10n:JavaScript"]
+  "CSS": ["CSS", "CSSData"],
+  "SVG": ["SVG"],
+  "JavaScript": ["JavaScript"]
 };
 // These are l10n macros for every section
-var miscL10nMacros = ["L10n:Common","L10n:CompatTable"];
+var miscL10nMacros = ["Common", "CompatTable"];
 
 //$0.substr($0.lastIndexOf("/")+1) will give JavaScript if $0 equals "/en-us/docs/Web/JavaScript"
 var l10nMacros = miscL10nMacros.concat(speL10nMacros[$0.substr($0.lastIndexOf("/")+1)]);
@@ -349,11 +349,18 @@ function crawlL10nMacro(json) {
 }
 
 var l10nMacroDetails = [];
-for (var i = 0; i < l10nMacros.length; i++){
-    var m = string.deserialize(template(l10nMacros[i]));
+for (var i = 0; i < l10nMacros.length; i++) {
+    var m = string.deserialize(template("L10n:" + l10nMacros[i]));
     var res = crawlL10nMacro(m);
-    l10nMacroDetails.push({"name":l10nMacros[i],"total":res.total,"translated":res.translated});
-    if (res.total === res.translated) translationMacroCounter ++;
+    l10nMacroDetails.push({
+        "name": l10nMacros[i],
+        "total": res.total,
+        "translated": res.translated
+    });
+
+    if (res.total === res.translated) {
+        translationMacroCounter++;
+    }
 }
 
 
