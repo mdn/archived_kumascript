@@ -467,6 +467,9 @@ function loadTable(payload, locale) {
     // ICON BUILDERS
     // ===============================
     function _getBasicIcon(langKey, longTextKey, shortTextKey, icon, showTitle) {
+        if (typeof showTitle === "undefined") {
+            showTitle = true;
+        }
         return replacePlaceholders(templates.icon, {
                     title: showTitle ? localize(localStrings, langKey + '_' + longTextKey) : '',
                     text: localize(localStrings, langKey + '_' + shortTextKey),
