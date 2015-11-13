@@ -393,30 +393,30 @@ function loadTable(payload, locale) {
 
         // Browser support details
         if (legendConditions.prefix) {
-            output += getLegendHTML(getPrefixIcon(), localize(localStrings, 'legend_prefixLong'));
+            output += getLegendHTML(getPrefixIcon(false), localize(localStrings, 'legend_prefixLong'));
         }
         if (legendConditions.alternate) {
-            output += getLegendHTML(getAlternateIcon(), getAlternateText());
+            output += getLegendHTML(getAlternateIcon(false), getAlternateText());
         }
         if (legendConditions['protected']) {
-            output += getLegendHTML(getProtectedIcon(), localize(localStrings, 'requirement_protectedLong'));
+            output += getLegendHTML(getProtectedIcon(false), localize(localStrings, 'requirement_protectedLong'));
         }
         if (legendConditions.note) {
-            output += getLegendHTML(getNoteIcon(), localize(localStrings, 'requirement_noteLong'));
+            output += getLegendHTML(getNoteIcon(false), localize(localStrings, 'requirement_noteLong'));
         }
         if (legendConditions.config) { // FIX ME
-            output += getLegendHTML(getConfigIcon(), localize(localStrings, 'legend_disabledLong'));
+            output += getLegendHTML(getConfigIcon(null, false), localize(localStrings, 'legend_disabledLong'));
         }
 
         // Feature details
         if (legendConditions.experimental) {
-            output += getLegendHTML(getExperimentalIcon(), localize(localStrings, 'feature_experimentalLong'));
+            output += getLegendHTML(getExperimentalIcon(false), localize(localStrings, 'feature_experimentalLong'));
         }
         if (legendConditions.nonstandard) {
-            output += getLegendHTML(getNonStandardIcon(), localize(localStrings, 'feature_nonstandardLong'));
+            output += getLegendHTML(getNonStandardIcon(false), localize(localStrings, 'feature_nonstandardLong'));
         }
         if (legendConditions.obsolete) {
-            output += getLegendHTML(getObsoleteIcon(), localize(localStrings, 'feature_obsoleteLong'));
+            output += getLegendHTML(getObsoleteIcon(false), localize(localStrings, 'feature_obsoleteLong'));
         }
 
         return output;
@@ -466,37 +466,37 @@ function loadTable(payload, locale) {
 
     // ICON BUILDERS
     // ===============================
-    function _getBasicIcon(langKey, longTextKey, shortTextKey, icon) {
+    function _getBasicIcon(langKey, longTextKey, shortTextKey, icon, showTitle) {
         return replacePlaceholders(templates.icon, {
-                    title: localize(localStrings, langKey + '_' + longTextKey),
+                    title: showTitle ? localize(localStrings, langKey + '_' + longTextKey) : '',
                     text: localize(localStrings, langKey + '_' + shortTextKey),
                     icon: (icon || shortTextKey)
                 });
     }
 
-    function getExperimentalIcon() {
-        return _getBasicIcon('features', 'experimentalLong', 'experimental');
+    function getExperimentalIcon(showTitle) {
+        return _getBasicIcon('features', 'experimentalLong', 'experimental', showTitle);
     }
 
-    function getNonStandardIcon() {
-        return _getBasicIcon('features', 'nonstandardLong', 'nonstandard', 'non-standard');
+    function getNonStandardIcon(showTitle) {
+        return _getBasicIcon('features', 'nonstandardLong', 'nonstandard', 'non-standard', showTitle);
     }
 
-    function getObsoleteIcon() {
-        return _getBasicIcon('features', 'obsoleteLong', 'obsolete');
+    function getObsoleteIcon(showTitle) {
+        return _getBasicIcon('features', 'obsoleteLong', 'obsolete', showTitle);
     }
 
-    function getProtectedIcon() {
-        return _getBasicIcon('requirement', 'protectedLong', 'protected');
+    function getProtectedIcon(showTitle) {
+        return _getBasicIcon('requirement', 'protectedLong', 'protected', showTitle);
     }
 
-    function getNoteIcon() {
-        return _getBasicIcon('requirement', 'noteLong', 'note', 'footnote');
+    function getNoteIcon(showTitle) {
+        return _getBasicIcon('requirement', 'noteLong', 'note', 'footnote', showTitle);
     }
 
-    function getConfigIcon(historyObject) {
+    function getConfigIcon(historyObject, showTitle) {
         return replacePlaceholders(templates.icon, {
-                    title: getConfigText(historyObject),
+                    title: showTitle ? getConfigText(historyObject) : '',
                     text: localize(localStrings, 'requirement_disabled'),
                     icon: 'disabled'
                 });
