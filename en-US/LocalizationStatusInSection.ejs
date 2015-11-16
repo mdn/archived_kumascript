@@ -194,10 +194,14 @@ var l10nStrings = mdn.localString({
     "fr"   : "Chaînes"
 });
 
-var l10nMacroStatus = mdn.localString({
-    "en-US": "Macros",
-    "de"   : "Makros",
-    "fr"   : "Macros"
+var l10nMacroStrings = mdn.localString({
+    "en-US": "Macros strings",
+    "de"   : "Makrostrings"
+});
+
+var l10nMacroStringsTranslated = mdn.localString({
+    "en-US": "Translated macros strings",
+    "de"   : "Übersetzte Makrostrings"
 });
 
 var l10nMacrol10n = mdn.localString({
@@ -237,7 +241,8 @@ var priorityCounter = 0;
 var inprogressCounter = 0;
 var editorialCounter = 0;
 var technicalCounter = 0;
-var translationMacroCounter = 0;
+var macroStringsCounter = 0;
+var macroStringsTranslatedCounter = 0;
 
 function collect(page) {
     result.push({title: page.title.replace('<','&lt;').replace('>','&gt;'), url: page.url, translations: page.translations, last_edit: page.last_edit})
@@ -355,15 +360,13 @@ var l10nMacroDetails = [];
 for (var i = 0; i < l10nMacros.length; i++) {
     var macroData = string.deserialize(template("L10n:" + l10nMacros[i]));
     var res = crawlL10nMacro(macroData);
+    macroStringsCounter += res.total;
+    macroStringsTranslatedCounter += res.translated;
     l10nMacroDetails.push({
         "name": l10nMacros[i],
         "total": res.total,
         "translated": res.translated
     });
-
-    if (res.total === res.translated) {
-        translationMacroCounter++;
-    }
 }
 
 
@@ -377,8 +380,7 @@ var editCounter = translationCounter - editorialCounter;
 var editPercent = Math.floor((editCounter / translationCounter) * 100);
 var techCounter = translationCounter - technicalCounter;
 var techPercent = Math.floor((techCounter / translationCounter) * 100);
-
-var translationMacroPercent = (l10nMacros.length > 0) ? Math.floor((translationMacroCounter / l10nMacros.length) * 100) : 100;
+var macroTranslationPercent = (l10nMacros.length > 0) ? Math.floor((macroStringsTranslatedCounter / macroStringsCounter) * 100) : 100;
 
 if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
 %>
@@ -392,7 +394,8 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
       <th><%=l10nTechReviewed%></th>
       <th><%=l10nEditReviewed%></th>
       <% if (l10nMacros.length > 0) { %>
-      <th><%=l10nMacrol10n%></th>
+      <th><%=l10nMacroStrings%></th>
+      <th><%=l10nMacroStringsTranslated%></th>
       <% } %>
     </tr>
   </thead>
@@ -404,7 +407,8 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
       <td><%=techCounter%> (<%=techPercent%>%)</td>
       <td><%=editCounter%> (<%=editPercent%>%)</td>
       <% if (l10nMacros.length > 0) { %>
-      <td><%=translationMacroCounter%>/<%=l10nMacros.length%> (<%=translationMacroPercent%>%)</td>
+      <td><%=macroStringsCounter%></td>
+      <td><%=macroStringsTranslatedCounter%> (<%=macroTranslationPercent%>%)</td>
       <% } %>
     </tr>
   </tbody>
