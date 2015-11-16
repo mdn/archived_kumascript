@@ -187,7 +187,7 @@ function buildSublist(pages, title, noCodeTags) {
     }
 
     if (slug == aPage.slug) {
-        result += '<em>' + code + aPage.title + endcode + '</em>'
+        result += '<em>' + code + title + endcode + '</em>'
     } else {
         result += '<a href="' + url + '" title="' + summary + '">' + code + title + endcode + '</a>' + cta;
     }
