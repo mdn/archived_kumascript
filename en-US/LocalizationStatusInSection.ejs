@@ -241,6 +241,7 @@ var priorityCounter = 0;
 var inprogressCounter = 0;
 var editorialCounter = 0;
 var technicalCounter = 0;
+var macroTranslationCounter = 0;
 var macroStringsCounter = 0;
 var macroStringsTranslatedCounter = 0;
 
@@ -360,6 +361,9 @@ var l10nMacroDetails = [];
 for (var i = 0; i < l10nMacros.length; i++) {
     var macroData = string.deserialize(template("L10n:" + l10nMacros[i]));
     var res = crawlL10nMacro(macroData);
+    if (res.translated === res.total) {
+        macroTranslationCounter++;
+    }
     macroStringsCounter += res.total;
     macroStringsTranslatedCounter += res.translated;
     l10nMacroDetails.push({
@@ -539,7 +543,7 @@ var metrics = {
     },
     l10nMacrosTranslated: {
         title: 'Number of l10n-macros fully translated',
-        counter: translationMacroCounter
+        counter: macroTranslationCounter
     }
 };
 %>
