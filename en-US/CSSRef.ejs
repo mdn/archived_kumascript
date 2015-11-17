@@ -28,6 +28,7 @@ var text = {
     'title': mdn.getLocalString(commonl10n, 'TranslationCTA'),
     'css_ref_title': mdn.getLocalString(cssl10n, 'css_ref_title'),
     'at_rules': mdn.getLocalString(cssl10n, 'at_rules'),
+    'types': mdn.getLocalString(cssl10n, 'types'),
     'Guides': mdn.getLocalString(commonl10n, 'Guides'),
 };
 
@@ -243,7 +244,7 @@ if (properties.length > 0) {
 }
 
 if (types.length > 0) {
-  output += buildSublist(types, 'Types');
+  output += buildSublist(types, text['types']);
 }
 
 if (isSelector) {
