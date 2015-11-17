@@ -4,6 +4,7 @@
 var slug = env.slug;
 var locale = env.locale;
 var pageTags = env.tags;
+var title = env.title;
 var CSSHref = '/' + locale + '/docs/Web/CSS';
 var CSSRefHref = '/' + locale + '/docs/Web/CSS/Reference';
 var output = "";
@@ -33,6 +34,9 @@ var text = {
 function isAtRule(foo) {
   return foo.indexOf('@') !== -1;
 }
+function isType(foo) {
+  return foo.indexOf('<') !== -1 && foo.indexOf('>') !== -1;
+}
 function containsTag(tagList, tag) {
     if (!tagList || typeof tagList == 'undefined') return 0;
     tag = tag.toLowerCase();
@@ -57,6 +61,8 @@ if (isOverviewPage && !isSelector) {
         group = data.atRules[name].groups[0];
     } else if (data.properties[name] && data.properties[name].groups) {
         group = data.properties[name].groups[0];
+    } else if (isType(title) && data.types[title] && data.types[title].groups) {
+        group = data.types[title].groups[0];
     }
 }
 
@@ -64,6 +70,8 @@ var groupData = [];
 var properties = [];
 var atRules = [];
 var selectors = [];
+var types = [];
+
 if (!isSelector) {
     // I am a property or an at-rule
     // Find other pages with this group
@@ -75,6 +83,11 @@ if (!isSelector) {
     for (var atRule in data.atRules) {
         if (data.atRules[atRule].groups[0] === group) {
             groupData.push(atRule);
+        }
+    }
+    for (var type in data.types) {
+        if (data.types[type].groups[0] === group) {
+            groupData.push(type);
         }
     }  
 } else {
@@ -92,6 +105,8 @@ for (var i in pageList) {
     if (aPage.slug.split("/").pop() === groupData[x].replace(/ /g, '_')) {
       if (isAtRule(groupData[x])) {
         atRules.push(aPage);
+      } else if (isType(groupData[x])) {
+        types.push(aPage);
       } else if (aPage.slug.indexOf('selectors') !== -1 || aPage.slug.indexOf(':') !== -1 ) {
         selectors.push(aPage);
       } else  {
@@ -225,6 +240,10 @@ if (atRules.length > 0) {
 
 if (properties.length > 0) {
   output += buildSublist(properties, text['Properties']);
+}
+
+if (types.length > 0) {
+  output += buildSublist(types, 'Types');
 }
 
 if (isSelector) {
