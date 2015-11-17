@@ -105,13 +105,13 @@ for (var i in pageList) {
     if (aPage.slug.split("/").pop() === groupData[x].replace(/ /g, '_')) {
       if (isAtRule(groupData[x])) {
         atRules.push(aPage);
-      } else if (isType(groupData[x])) {
-        types.push(aPage);
       } else if (aPage.slug.indexOf('selectors') !== -1 || aPage.slug.indexOf(':') !== -1 ) {
         selectors.push(aPage);
-      } else  {
+      } else {
         properties.push(aPage);
       }
+    } else if (aPage.title === groupData[x] && isType(groupData[x])) {
+        types.push(aPage);
     }
   }
 }
