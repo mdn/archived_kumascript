@@ -164,7 +164,7 @@ function getValueOutput(cssInfo, property, atRule) {
         if (propMatches) {
             return getValueOutput(data.properties[propMatches[1]], property);
         } else {
-            if (property === "initial") {
+            if (property === "initial" && value[0] === "<") {
                 return value;
             } else {
                 var keywords = value.split(", ");
