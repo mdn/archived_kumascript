@@ -47,23 +47,23 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
-var group = '';
+var group = [];
 var isSelector = containsTag(pageTags, 'Selectors') || slug.indexOf(':') !== -1;
 var isOverviewPage = slug.indexOf("_") !== -1;
 
 if (isOverviewPage && !isSelector) {
-  group = name.replace(/_/g, ' ');
+  group.push(name.replace(/_/g, ' '));
 } else if (isSelector) {
-  group = 'CSS Selectors';
+  group.push('CSS Selectors');
 } else {
     name = name.toLowerCase();
     // Find group of this page in CSSData
     if (isAtRule(slug) && data.atRules[name] && data.atRules[name].groups) {
-        group = data.atRules[name].groups[0];
+        group.push(data.atRules[name].groups);
     } else if (data.properties[name] && data.properties[name].groups) {
-        group = data.properties[name].groups[0];
+        group.push(data.properties[name].groups);
     } else if (isType(title) && data.types[title] && data.types[title].groups) {
-        group = data.types[title].groups[0];
+        group.push(data.types[title].groups);
     }
 }
 
@@ -73,27 +73,41 @@ var atRules = [];
 var selectors = [];
 var types = [];
 
-if (!isSelector) {
+// I am a selector or a type, we want to list all of them.
+if (isSelector) {
+  for (var selector in data.selectors) {
+    groupData.push(selector);
+  }
+} else if (isType(title)) {
+  for (var type in data.types) {
+    groupData.push(type);
+  }
+} else {
     // I am a property or an at-rule
-    // Find other pages with this group
+    // Find other properties, at-rules or types with these groups
     for (var property in data.properties) {
-        if (data.properties[property].groups[0] === group) {
+        var propertyGroup = data.properties[property].group;
+        for (var g in propertyGroup) {
+          if (group.indexOf(propertyGroup[g]) !== -1) {
             groupData.push(property);
+          }
         }
     }
     for (var atRule in data.atRules) {
-        if (data.atRules[atRule].groups[0] === group) {
+        var atRuleGroup = data.atRules[atRule].group;
+        for (var g in atRuleGroup) {
+          if (group.indexOf(atRuleGroup[g]) !== -1) {
             groupData.push(atRule);
+          }
         }
     }
     for (var type in data.types) {
-        if (data.types[type].groups[0] === group) {
+        var typeGroup = data.types[type].group;
+        for (var g in typeGroup) {
+          if (group.indexOf(typeGroup[g]) !== -1) {
             groupData.push(type);
+          }
         }
-    }  
-} else {
-    for (var selector in data.selectors) {
-        groupData.push(selector);
     }
 }
 
@@ -139,8 +153,8 @@ if (isSelector) {
 
 // Load sub pages of the group
 var groupPages = [];
-if (group !== '') {
-    groupPages = page.subpagesExpand('/en-US/docs/Web/CSS/' + group.replace(/ /g, '_'));
+if (group.length > 0) {
+    groupPages = page.subpagesExpand('/en-US/docs/Web/CSS/' + group[0].replace(/ /g, '_'));
 }
 
 // output helpers
@@ -229,7 +243,7 @@ function buildSublist(pages, title, noCodeTags) {
 output = '<section class="Quick_links" id="Quick_Links"><ol>';
 output += '<li><strong><a href="' +  CSSHref + '">CSS</a></strong></li>';
 output += '<li><strong><a href="' +  CSSRefHref + '">' + text['css_ref_title'] + '</a></strong></li>';
-output += '<li><strong><a href="' +  CSSHref + '/' + group.replace(/ /g, '_') + '">' + group + '</a></strong></li>';
+output += '<li><strong><a href="' +  CSSHref + '/' + group[0].replace(/ /g, '_') + '">' + group[0] + '</a></strong></li>';
 
 if (groupPages.length > 0) {
   output += buildSublist(groupPages, text['Guides'], true);
