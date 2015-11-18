@@ -88,13 +88,13 @@ var l10nStateUptodate = mdn.localString({
 });
 
 var l10nStateOutofdate = mdn.localString({
-    "en-US": "Yes, but not up to date ($1$ days older).",
-    "de"   : "Ja, aber nicht aktuell ($1$ Tage älter).",
-    "fr"   : "Oui mais pas à jour ($1$ jours d'écart).",
-    "ja"   : "はい、ただし最新の状態ではありません ($1$ 日前)。",
-    "pt-BR": "Sim, mas desatualizado (há $1$ dias).",
-    "ru"   : "Перевод есть, но он не актуален (устарел на $1$ дня).",
-    "zh-CN": "以前翻译过但现在没有与最新的英文文档保持同步（英文文档更新于 $1$ 天前）。"
+    "en-US": "Yes, but not up to date ($1$ older).",
+    "de"   : "Ja, aber nicht aktuell ($1$ älter).",
+    "fr"   : "Oui mais pas à jour ($1$ d'écart).",
+    "ja"   : "はい、ただし最新の状態ではありません ($1$ 前)。",
+    "pt-BR": "Sim, mas desatualizado (há $1$).",
+    "ru"   : "Перевод есть, но он не актуален (устарел на $1$).",
+    "zh-CN": "以前翻译过但现在没有与最新的英文文档保持同步（英文文档更新于 $1$）。"
 });
 
 var l10nStateInprogress = mdn.localString({
@@ -208,7 +208,50 @@ var l10nMacrol10n = mdn.localString({
     "en-US": "Macros",
     "de"   : "Makros",
     "fr"   : "Macros"
-})
+});
+
+var l10nDays = mdn.localString({
+    "en-US": "days",
+    "de"   : "Tage",
+    "es"   : "dias",
+    "fr"   : "jours",
+    "ja"   : "日",
+    "pt-BR": "dias",
+    "ru"   : "дня",
+    "zh-CN": "天前"
+});
+
+var l10nDay = mdn.localString({
+    "en-US": "day",
+    "de"   : "Tag",
+    "es"   : "dia",
+    "fr"   : "jour",
+    "pt-BR": "dia"
+});
+
+var l10nHours = mdn.localString({
+    "en-US": "hours",
+    "de"   : "Stunden",
+    "es"   : "horas"
+});
+
+var l10nHour = mdn.localString({
+    "en-US": "hour",
+    "de"   : "Stunde",
+    "es"   : "hora"
+});
+
+var l10nMinutes = mdn.localString({
+    "en-US": "minutes",
+    "de"   : "Minuten",
+    "es"   : "minutos"
+});
+
+var l10nMinute = mdn.localString({
+    "en-US": "minute",
+    "de"   : "Minute",
+    "es"   : "minuto"
+});
 
 var section = $0;
 var locale = $1;
@@ -297,17 +340,37 @@ function isOutdated(enDate, l10nDate) {
     return 0;
 }
 
-function daysBetween(date1, date2) {
-  date1 = new Date(date1);
-  date2 = new Date(date2);
-  
-  var aDay = 1000*60*60*24;
+function getTimeSpan(dateTime1, dateTime2) {
+    dateTime1 = new Date(dateTime1);
+    dateTime2 = new Date(dateTime2);
+    var timeSpan = (dateTime2 - dateTime1) / 86400000;
 
-  var d1ms = date1.getTime();
-  var d2ms = date2.getTime();
-  var diff = d2ms - d1ms;
-    
-  return Math.round(diff/aDay); 
+    var timeUnits = [
+        {
+            unitPlural: l10nMinutes,
+            unitSingular: l10nMinute,
+            interval: 60
+        },
+        {
+            unitPlural: l10nHours,
+            unitSingular: l10nHour,
+            interval: 24
+        },
+        {
+            unitPlural: l10nDays,
+            unitSingular: l10nDay,
+            interval: 1
+        }
+    ];
+
+    for (var i = timeUnits.length - 1; i >= 0; i--) {
+        var roundedTimeSpan = Math.round(timeSpan);
+        if (roundedTimeSpan > 0 || i === 0) {
+            return roundedTimeSpan + " " + timeUnits[i]["unit" + (roundedTimeSpan === 1 ? "Singular" : "Plural")];
+        }
+
+        timeSpan *= timeUnits[i - 1].interval;
+    }
 }
 
 function hasTranslation(pageTranslations, locale) {
@@ -436,8 +499,8 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
         <% } else  if (translation.review_tags && hasFlags(translation.review_tags, "technical")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (isOutdated(priorities[i].last_edit, translation.last_edit)) { 
-            var days = daysBetween(translation.last_edit, priorities[i].last_edit); %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=mdn.replacePlaceholders(l10nStateOutofdate, [days])%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
+            var timeSpan = getTimeSpan(translation.last_edit, priorities[i].last_edit); %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=mdn.replacePlaceholders(l10nStateOutofdate, [timeSpan])%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else { %>
@@ -471,8 +534,8 @@ if (isNaN(uptodatePercent)) { uptodatePercent = 0; }
         <% } else  if (translation.review_tags && hasFlags(translation.review_tags, "technical")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateTechnical%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (isOutdated(result[i].last_edit, translation.last_edit)) {
-            var days = daysBetween(translation.last_edit, result[i].last_edit); %>
-            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=mdn.replacePlaceholders(l10nStateOutofdate, [days])%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
+            var timeSpan = getTimeSpan(translation.last_edit, result[i].last_edit); %>
+            <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=mdn.replacePlaceholders(l10nStateOutofdate, [timeSpan])%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else if (translation.localization_tags && hasFlags(translation.localization_tags, "inprogress")) { %>
             <td style="background-color: #FF9"><a href="<%=translation.url%>"><%=l10nStateInprogress%></a> <a href="<%=translation.url%>$edit"><%=l10nEditTranslation%></a></td>
         <% } else { %>
