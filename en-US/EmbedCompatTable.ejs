@@ -12,6 +12,7 @@ var url = encodeURI('https://browsercompat.herokuapp.com/api/v1/view_features/' 
 
 var content = false;
 
+var lang = env.locale;
 var localStrings = string.deserialize(template('L10n:CompatTable'));
 
 var localize = mdn.getLocalString;
@@ -25,6 +26,31 @@ if (response === null) {
 else if (response.errors) {
     content = replacePlaceholders(localize(localStrings, 'compatServiceError'), {error: JSON.stringify(response.errors)});
 }
+
+// check we have localized strings for > 80% of strings 
+function translationsExist(strings, lang) {
+
+    var countStrings = 0;
+    var countLang = 0;
+    
+    for (var i in strings) {
+        countStrings ++;
+        if(strings[i][lang]) {
+           countLang ++;
+        }
+    }
+    
+    if ( (countLang / countStrings) > 0.8) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+if ( lang != 'en-US' && !translationsExist(localStrings, lang)) {
+    content = 'Less than 80% of macro strings have been translated. Falling back to wiki table.';
+}
+
 
 function loadTable(payload, locale) {
     // Payload Shortcuts
@@ -675,7 +701,7 @@ function loadTable(payload, locale) {
 }
 
 if (!content) {
-    content = loadTable(response, env.locale);
+    content = loadTable(response, lang);
 }
 
 response = JSON.stringify(response);
