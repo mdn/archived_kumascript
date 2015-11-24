@@ -184,6 +184,8 @@ var listElem = "<ul";
 if ($2 && ($2 != undefined)) {
     listElem += " class='" + $2 + "'";
 }
+
+listElem += ">"; //Final ">" of the open <ul> tag
 %>
 
 <%-listElem %>
