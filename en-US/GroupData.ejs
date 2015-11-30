@@ -1095,13 +1095,15 @@
             "events":     [ "visibilitychange" ]
         },
         "Performance Timeline API": {
-            "interfaces": [ "PerformanceEntry",
+            "interfaces": [ "Performance",
+                            "PerformanceEntry",            
                             "PerformanceObserver",
-                            "PerformanceObserverEntryList" ],
+                            "PerformanceObserverEntryList"
+                            "PerformanceResourceTiming" ],
             "methods":    [ "Performance.getEntries()", 
                             "Performance.getEntriesByType()",
                             "Performance.getEntriesByName()" ],
-            "properties": [],
+            "properties": [ "Window.performance" ],
             "events":     []
         },
         "Permissions API": {
