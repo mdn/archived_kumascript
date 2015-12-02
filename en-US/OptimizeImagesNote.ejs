@@ -11,7 +11,8 @@
 var doInline = $0 || 0;
 
 var noteBoxText = mdn.localString({
-    "en-US":    "Note: "
+    "en-US":    "Note: ",
+    "ru"   :    "Замечание: "
 });
 
 var html = mdn.localString({
@@ -19,7 +20,12 @@ var html = mdn.localString({
                 "to make the file as small a download as possible. This improves page " +
                 "load time and helps MDN's performance overall. You may use your " +
                 "preferred tool, if you have one. Otherwise, we suggest " +
-                "<a href='https://tinypng.com/'>TinyPNG</a>, a handy Web tool."
+                "<a href='https://tinypng.com/'>TinyPNG</a>, a handy Web tool.",
+    "ru"   :    "При загрузке изображения, пожалуйста, убедитесь, что используете инструменты "+
+                "оптимизации, чтобы сделать файл маленьким, а загрузку возможной. Это улучшает "+
+                "время загрузки страницы и помогает производительности MDN в целом. Вы можете "+
+                "использовать свой любимый инструмент, если он у вас есть. Иначе, мы предлагаем "+
+                "<a href='https://tinypng.com/'>TinyPNG</a> - удобный Веб инструмент."
 });
 
 // Wrap in a note box if requested
