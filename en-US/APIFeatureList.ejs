@@ -1,0 +1,37 @@
+<%
+// Variables and data
+var giantSlug = env.slug;
+var slugArray = giantSlug.split('/');
+var slug = slugArray[slugArray.length-1];
+
+var locale = env.locale;
+var APIHref = '/' + locale + '/docs/Web/API';
+var finalSlugList = [];
+
+var webAPIGroups = string.deserialize(template('GroupData'));
+var webAPIInterfaces = webAPIGroups[0][slug.replace('_',' ')]['interfaces'];
+
+
+for(i = 0; i < webAPIInterfaces.length ; i++) {
+  var childPages = page.subpages('/' + locale + '/docs/Web/API/VRDevice');
+  for(j = 0; j < childPages.length ; j++) {
+        if(childPages.subpages.length === 0) { 
+          finalSlugList.push(childPages.title);
+        } else {
+          var subpages = childPages.subpages;
+          for(k = 0 ; k < subpages.length ; k++) {
+            finalSlugList.push(subpages[k].title);
+          }
+        }
+  }
+}
+
+var output = '';
+output += '<ul>';
+
+for(l = 0 ; l < finalSlugList ; l++) {
+  output += '<li><a href="' + template('domxref', [finalSlugList[l]]) + '"></li>';
+}
+%>
+
+<% output %>
