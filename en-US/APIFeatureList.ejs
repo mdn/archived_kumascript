@@ -10,28 +10,44 @@ var finalSlugList = [];
 
 var webAPIGroups = string.deserialize(template('GroupData'));
 var webAPIInterfaces = webAPIGroups[0][slug.replace('_',' ')]['interfaces'];
+var webAPIMethods = webAPIGroups[0][slug.replace('_',' ')]['methods'];
+var webAPIProperties = webAPIGroups[0][slug.replace('_',' ')]['properties'];
 
+var output = '';
 
 for(i = 0; i < webAPIInterfaces.length ; i++) {
-  var childPages = page.subpages('/' + locale + '/docs/Web/API/VRDevice');
-  for(j = 0; j < childPages.length ; j++) {
-        if(childPages.subpages.length === 0) { 
-          finalSlugList.push(childPages.title);
-        } else {
-          var subpages = childPages.subpages;
-          for(k = 0 ; k < subpages.length ; k++) {
-            finalSlugList.push(subpages[k].title);
-          }
-        }
+  var childPages = page.subpages('/' + locale + '/docs/Web/API/' + webAPIInterfaces[i]);
+  if(childPages.length === 0) {
+    finalSlugList.push(webAPIInterfaces[i]);
+  } else {
+   for(j = 0; j < childPages.length ; j++) {
+     finalSlugList.push(childPages[j].title);
+   }
+ }
+}
+
+if(webAPIMethods.length > 0) {
+  for(m = 0; m < webAPIMethods.length ; m++) {
+    finalSlugList.push(webAPIMethods[m]);
   }
 }
 
-var output = '';
-output += '<ul>';
-
-for(l = 0 ; l < finalSlugList ; l++) {
-  output += '<li><a href="' + template('domxref', [finalSlugList[l]]) + '"></li>';
+if(webAPIProperties.length > 0) {
+  for(p = 0; p < webAPIProperties.length ; p++) {
+    finalSlugList.push(webAPIProperties[p]);
+  }
 }
+
+output += '<h2 id="Methods_and_properties_list">Methods and properties list</h2><ul>';
+
+finalSlugList.sort();
+
+for(l = 0 ; l < finalSlugList.length ; l++) {
+  output += '<li>' + template('domxref', [finalSlugList[l]]) + '</li>';
+}
+
+output += '</ul>';
+
 %>
 
-<% output %>
+<%-output %>
