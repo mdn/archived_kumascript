@@ -1,19 +1,23 @@
 <%
 // Variables and data
-var giantSlug = env.slug;
-var slugArray = giantSlug.split('/');
-var slug = slugArray[slugArray.length-1];
+
+// $0 is the API whose properties/methods you want listed on the page, as listed in the GroupData macro
+// see https://developer.mozilla.org/en-US/docs/Template:GroupData
+
+var slug = $0;
 
 var locale = env.locale;
 var APIHref = '/' + locale + '/docs/Web/API';
 var finalSlugList = [];
 
 var webAPIGroups = string.deserialize(template('GroupData'));
-var webAPIInterfaces = webAPIGroups[0][slug.replace('_',' ')]['interfaces'];
-var webAPIMethods = webAPIGroups[0][slug.replace('_',' ')]['methods'];
-var webAPIProperties = webAPIGroups[0][slug.replace('_',' ')]['properties'];
+var webAPIInterfaces = webAPIGroups[0][slug]['interfaces'];
+var webAPIMethods = webAPIGroups[0][slug]['methods'];
+var webAPIProperties = webAPIGroups[0][slug]['properties'];
 
 var output = '';
+
+// Populating the output
 
 for(i = 0; i < webAPIInterfaces.length ; i++) {
   var childPages = page.subpages('/' + locale + '/docs/Web/API/' + webAPIInterfaces[i]);
