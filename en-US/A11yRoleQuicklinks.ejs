@@ -21,4 +21,6 @@ switch(lang) {
         break;
 }
 %>
-<%-template("QuickLinksWithSubpages", [url])%>
+<section class="Quick_links" id="Quick_Links">
+<%-wiki.tree($0, 2, 0, 0, 1)%>
+</section>
