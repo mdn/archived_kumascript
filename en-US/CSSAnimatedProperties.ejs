@@ -4,10 +4,6 @@
   in columns
 */
 
-function csslink(prop) {
-    return '<code><a href="/' + locale + '/docs/Web/CSS/' + prop + '">' + prop + '</a></code>';   
-}
-
 // Read all CSSData and extract animated properties
 
 var data = string.deserialize(template("CSSData"));
@@ -26,7 +22,8 @@ animatedProps.sort();
 
 // Build the output string
 var result = '<div class="index">\n  <ul>\n';
-for (var prop in animatedProps) {
+for (var propIndex in animatedProps) {
+    var prop = animatedProps[propIndex];
     if (result) {
         result += ' ';
     }
