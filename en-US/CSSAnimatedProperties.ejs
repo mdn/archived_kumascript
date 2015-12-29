@@ -14,7 +14,7 @@ var data = string.deserialize(template("CSSData"));
 var animatedProps = [];
 
 // Go through all properties, and test if they are animated. If so, add them to
-// the animatedProp array.
+// the animatedProps array.
 for (var property in data.properties) {
     if (data.properties.hasOwnProperty(property)) {
         if (data.properties[property].animatable !== 'no') {
@@ -26,12 +26,12 @@ animatedProps.sort();
 
 // Build the output string
 var result = '<div class="index">\n  <ul>\n';
-animatedProps.forEach(function(prop) {
+for (var prop in animatedProps) {
     if (result) {
         result += ' ';
     }
-    result += '    <li>' + csslink(prop) + '</li>\n';
-});
+    result += '    <li>' + template("cssxref", [prop]) + '</li>\n';
+}
 result += '  </ul>\n</div>';
 
 %><%- result %>
