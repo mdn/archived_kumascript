@@ -1,15 +1,8 @@
 <%
-// This macro search in CSSData all CSS Properties that are animated and list
-// them in a localized comma-separated string.
-
-// The locale defines the separator
-var locale = env.locale;
-var separator = ', '; // Default separator
-switch(locale) {
-    case 'ja': 
-        separator = '、';
-        break;
-}
+/*
+  Searches all CSS properties in CSSData that are animated and lists them
+  in columns
+*/
 
 function csslink(prop) {
     return '<code><a href="/' + locale + '/docs/Web/CSS/' + prop + '">' + prop + '</a></code>';   
@@ -18,27 +11,27 @@ function csslink(prop) {
 // Read all CSSData and extract animated properties
 
 var data = string.deserialize(template("CSSData"));
-var animatedProp = [];
+var animatedProps = [];
 
 // Go through all properties, and test if they are animated. If so, add them to
 // the animatedProp array.
 for (var property in data.properties) {
     if (data.properties.hasOwnProperty(property)) {
-        if (data.properties[property].animatable != 'no') {
-            animatedProp.push(property);
+        if (data.properties[property].animatable !== 'no') {
+            animatedProps.push(property);
         }
     }
 }
-animatedProp.sort();
+animatedProps.sort();
 
-// Build the final string
-var result = '<div class="index">\n  <ol>\n';
-animatedProp.forEach(function(prop) {
+// Build the output string
+var result = '<div class="index">\n  <ul>\n';
+animatedProps.forEach(function(prop) {
     if (result) {
         result += ' ';
     }
     result += '    <li>' + csslink(prop) + '</li>\n';
 });
-result += '  </ol>\n</div>';
+result += '  </ul>\n</div>';
 
 %><%- result %>
