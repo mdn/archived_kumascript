@@ -21,19 +21,21 @@ var section = $0;
 
 var pageList = page.subpagesExpand(section, '', true);
 var result = {};
+var lastPageWithTag = {};
 
 function getTags(pageList) {
     if (pageList) {
         for (var i = 0; i < pageList.length; i++) {
             pageList[i].tags.sort().forEach(function(tag) {
                 result[tag] = result[tag] + 1 || 1;
+                lastPageWithTag[tag] = pageList[i];
             });
-            var subpage = getPages(pageList[i].subpages);
+            var subpage = getTags(pageList[i].subpages);
         }
     }
 }
 
-getPages(pageList);
+getTags(pageList);
 
 %>
 
@@ -46,8 +48,12 @@ getPages(pageList);
 
 <% for (var tag in result) { %>
 <tr>
-    <td><%=tag%></td>
+    <td><a href="https://developer.mozilla.org/<%=env.locale%>/docs/tag/<%=tag%>"><%=tag%></a></td>
+    <% if (result[tag] === 1) { %>
+    <td><%=result[tag]%> (<a href="<%=lastPageWithTag[tag].url%>">page</a>)</td>
+    <% } else { %>
     <td><%=result[tag]%></td>
+    <% } %>
 </tr>
 <% } %>
 
