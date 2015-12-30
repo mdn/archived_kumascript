@@ -16,13 +16,9 @@ var localStrings = string.deserialize(template("L10n:Common"));
 str = str.toLowerCase();
 url = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
 
-var thisPage = null; // Will be lazy evaluated
-if (!$1) {
-    thisPage = wiki.getPage(url); // lazy evaluation
-
-    if (page.hasTag(thisPage, "CSS Function")) {
-        str += "()";
-    }
+var thisPage = wiki.getPage(url);
+if (page.hasTag(thisPage, "CSS Function")) {
+    str += "()";
 }
 
 var summary = "";
