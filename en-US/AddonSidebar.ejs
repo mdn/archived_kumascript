@@ -1,102 +1,200 @@
 <%
-
-var sidebarUtils = require("SidebarUtilities");
-var hasTag = page.hasTag;
-var pageModule = page;
-
+var currentSection = $0;
+var locale = env.locale;
 var slug = env.slug;
+var baseURL = "/" + locale + "/docs/Mozilla/Add-ons/";
 
-var output = "";
-
-function classifyPages(subpages) {
-  var collection = {
-      properties: [],
-      methods: [],
-      events: [],
-      types: []
+function currentPageIsUnder(root) {
+  rootSlug = "Mozilla/Add-ons/" + root;
+  if (slug.indexOf(rootSlug) != -1) {
+    return "open";
   }
-  
-  subpages.forEach(function(subpage) {
-    if (hasTag(subpage, "Property")) {
-      collection.properties.push(subpage);
-    }
-    if (hasTag(subpage, "Method")) {
-      collection.methods.push(subpage);
-    }
-    if (hasTag(subpage, "Type")) {
-      collection.types.push(subpage);
-    }
-    if (hasTag(subpage, "Event")) {
-      collection.events.push(subpage);
-    }
-  });
-
-  return collection;
+  return "closed";
 }
 
-function buildSidebar(slug) {
-  if (!slug) {
-    return;
-  }
-  
-  var pathComponents = slug.split("/");
-  if (pathComponents < 2) {
-    return;
-  }
-  
-  // find out where we are in the tree
-  var leafDocument = pathComponents[pathComponents.length-1];
-  // 1) we are at the root
-  if (leafDocument == "API") {
-    buildSidebarForRoot(slug);
-  }
-  else {
-    parentDocument = pathComponents[pathComponents.length-2];
-    var apiPath = "";
-    if (parentDocument == "API") {
-      // 2) we are at an API overview
-      apiPath = slug;
-      buildSidebarForAPI(apiPath, leafDocument);
-    }
-    else {
-      // 3) we are at an API component page (method, property, ...)
-      apiPath = slug.slice(0, apiPath.length - (leafDocument.length + 1));
-      buildSidebarForAPI(apiPath, parentDocument);
-    }
-  }
-}
+var text = mdn.localString({
+  'en-US': {
+    'WebExtensions': 'WebExtensions',
+    'Getting_started': 'Getting started',
+    'Prerequisites':'Prerequisites',
+    'Anatomy_of_a_WebExtension': 'Anatomy of a WebExtension',
+    'Packaging_and_Installation':'Packaging and Installation',
+    'Walkthrough':'Walkthrough',
+    'Examples':'Examples',
+    'Tutorials': 'Tutorials',
+    'Guides': 'Guides',
+    'Troubleshooting': 'Troubleshooting',
 
-function buildSidebarForRoot(path) {
-  output = '<section class="Quick_links" id="Quick_Links"><ol>';
-  var subpages = pageModule.subpagesExpand("/en-US/docs/" + path);
-  output += sidebarUtils.buildSublist(subpages, "API Reference");
-  output += '</ol></section>';
-}
+    'Content_scripts': 'Content scripts',
+    'Messaging': 'Messaging',
+    'Porting_from_Google_Chrome': 'Porting from Google Chrome',
+    'Match_patterns': 'Match patterns',
+    'Internationalization': 'Internationalization',
+    'Debugging': 'Debugging',
+    'UX_style_guide': 'UX style guide',
+    'Security_practices': 'Security practices', 
+    'Chrome_incompatibilities': 'Chrome incompatibilities', 
 
-function buildSidebarForAPI(path, parent) {
-  output = '<section class="Quick_links" id="Quick_Links"><ol>';
-  output += '<li><strong><a href="' +  "/en-US/docs/" + path + '"><code>' + parent + '</a></code></strong></li>';
+    'JavaScript_APIs': 'JavaScript APIs',
+    'Manifest_keys': 'Manifest keys',
+    
+    'Add-on_SDK': 'Add-on SDK',
+    'Installation': 'Installation',
+    'High-Level_APIs': 'High-Level APIs',
+    'Low-Level_APIs': 'Low-Level APIs',
+    
+    'Mobile': 'Mobile',
+    'Firefox_for_Android': 'Firefox for Android',
+    'Code_snippets': 'Code snippets',
+    'APIs': 'APIs',
+    
+    'Legacy': 'Legacy',
+    'Overview': 'Overview',
+    'Overlay_extensions': 'Overlay extensions',
+    'Restartless_extensions': 'Restartless extensions',
   
-  var subpages = pageModule.subpagesExpand("/en-US/docs/" + path);
-  var pageCollection = classifyPages(subpages);
-  
-  if (pageCollection.methods.length > 0) {
-    output += sidebarUtils.buildSublist(pageCollection.methods, "Methods");
-  }
-  if (pageCollection.properties.length > 0) {
-    output += sidebarUtils.buildSublist(pageCollection.properties, "Properties");
-  }
-  if (pageCollection.types.length > 0) {
-    output += sidebarUtils.buildSublist(pageCollection.types, "Types");
-  }
-  if (pageCollection.events.length > 0) {
-    output += sidebarUtils.buildSublist(pageCollection.events, "Events");
-  }
-  output += '</ol></section>';
-}
+    'Themes': 'Themes',
+    'Lightweight_themes': 'Lightweight themes',
+    'Lightweight_themes_FAQ': 'Lightweight themes FAQ',
+    'Complete_themes': 'Complete themes',
 
-buildSidebar(env.slug);
+    'Publishing_add-ons': 'Publishing add-ons',
+    'Signing_and_distribution_overview': 'Signing and distribution overview',
+    'Submit_an_add-on': 'Submit an add-on',
+    'Add-ons_Manager_API': 'Add-ons Manager API',
+    'Policies': 'Policies',
+    'Review_policies': 'Review policies',
+    'Developer_agreement': 'Developer agreement',
+    'Featured_add-ons': 'Featured add-ons',
+    'Contact_addons.mozilla.org': 'Contact addons.mozilla.org',
 
+    'Community_and_support': 'Community and support',
+    'Channels': 'Channels',
+    'Add-ons_blog': 'Add-ons blog',
+    'Add-on_forums': 'Add-on forums',
+    'Stack_Overflow': 'Stack Overflow',
+    'Development_newsgroup': 'Development newsgroup',
+    'IRC_channel': 'IRC channel',
+  }
+});
 %>
 
-<%-output%>
+<section class="Quick_links" id="Quick_Links">
+  <ol>
+    <li><a href="<%=baseURL%>WebExtensions"><strong><%=text['WebExtensions']%></strong></a></li>
+
+    <li><a href="<%=baseURL%>WebExtensions#Getting_started"><%=text['Getting_started']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>WebExtensions/Prerequisites"><%=text['Prerequisites']%></a></li>
+        <li><a href="<%=baseURL%>WebExtensions/Anatomy_of_a_WebExtension"><%=text['Anatomy_of_a_WebExtension']%></a></li>
+        <li><a href="<%=baseURL%>WebExtensions/Packaging_and_Installation"><%=text['Packaging_and_Installation']%></a>
+        <li><a href="<%=baseURL%>WebExtensions/Walkthrough"><%=text['Walkthrough']%></a>
+        <li><a href="<%=baseURL%>WebExtensions/Examples"><%=text['Examples']%></a>
+      </ol>
+    </li>
+    
+    <li><a href="<%=baseURL%>WebExtensions#Guides"><%=text['Guides']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>WebExtensions/Content_scripts"><%=text['Content_scripts']%></a></li>
+        <li><a href="<%=baseURL%>WebExtensions/Porting_from_Google_Chrome"><%=text['Porting_from_Google_Chrome']%></a>
+        <li><a href="<%=baseURL%>WebExtensions/Match_patterns"><%=text['Match_patterns']%></a>
+        <li><a href="<%=baseURL%>WebExtensions/Debugging"><%=text['Debugging']%></a></li>
+        <li><a href="<%=baseURL%>WebExtensions/Chrome_incompatibilities"><%=text['Chrome_incompatibilities']%></a>
+      </ol>
+    </li>  
+    
+    <li data-default-state="<%=currentPageIsUnder('WebExtensions/API')%>"><a href="<%=baseURL%>WebExtensions/API"><%=text['JavaScript_APIs']%></a>
+     <%-template("WebExtAPISidebar", [])%>
+    </li>
+    
+    <li><a href="<%=baseURL%>WebExtensions/manifest.json"><%=text['Manifest_keys']%></a>
+    <%-
+      wiki.tree(baseURL + "WebExtensions/manifest.json", 1, 0, 0, 1)
+    %>
+    </li>
+    
+    <li><a href="<%=baseURL%>Add-on_SDK"><strong><%=text['Add-on_SDK']%></strong></a></li>
+    <li><a href="<%=baseURL%>WebExtensions#Getting_started"><%=text['Getting_started']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>SDK/Tutorials/Installation"><%=text['Installation']%></a></li>
+        <li><a href="<%=baseURL%>SDK/Tutorials/Getting_started"><%=text['Getting_started']%></a></li>
+        <li><a href="<%=baseURL%>SDK/Tutorials/Troubleshooting"><%=text['Troubleshooting']%></a></li>
+      </ol>
+    </li>
+    
+    <li data-default-state="<%=currentPageIsUnder('SDK/High-Level_APIs')%>"><a href="<%=baseURL%>SDK/High-Level_APIs"><%=text['High-Level_APIs']%></a>
+      <%-
+        wiki.tree(baseURL + "SDK/High-Level_APIs", 1, 0, 0, 1)
+      %>
+    </li>
+    <li data-default-state="<%=currentPageIsUnder('SDK/Low-Level_APIs')%>"><a href="<%=baseURL%>SDK/Low-Level_APIs"><%=text['Low-Level_APIs']%></a>
+      <%-
+        wiki.tree(baseURL + "SDK/Low-Level_APIs", 1, 0, 0, 1)
+      %>
+    </li> 
+
+    <li><a href="<%=baseURL%>Firefox_for_Android"><strong><%=text['Firefox_for_Android']%></strong></a></li>
+    <li><a href="<%=baseURL%>Firefox_for_Android"><%=text['Getting_started']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>Firefox_for_Android/Walkthrough"><%=text['Walkthrough']%></a></li>
+        <li><a href="<%=locale%>/docs/Tools/Remote_Debugging/Debugging_Firefox_for_Android_with_WebIDE"><%=text['Debugging']%></a></li>
+        <li><a href="<%=baseURL%>Firefox_for_Android/Code_snippets"><%=text['Code_snippets']%></a></li>
+      </ol>
+    </li>
+
+    <li><a href="<%=baseURL%>Firefox_for_Android/API"><%=text['APIs']%></a>
+      <%-
+        wiki.tree(baseURL + "Firefox_for_Android/API", 1, 0, 0, 1)
+      %>
+    </li> 
+
+    <li><a href="<%=baseURL%>Legacy"><strong><%=text['Legacy']%></strong></a></li>
+    
+    <li><a href="<%=baseURL%>Bootstrapped_Extensions"><%=text['Restartless_extensions']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>Bootstrapped_extensions"><%=text['Overview']%></a></li>
+      </ol>
+    </li>
+    <li><a href="<%=baseURL%>Overlay_Extensions"><%=text['Overlay_extensions']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>Overlay_Extensions"><%=text['Overview']%></a></li>
+      </ol>
+    </li>
+
+    <li><a href="<%=baseURL%>Themes"><strong><%=text['Themes']%></strong></a></li>
+    
+    <li><a href="<%=baseURL%>Themes/Background"><%=text['Lightweight_themes']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>Themes/Background"><%=text['Overview']%></a></li>
+      </ol>
+    </li>
+    <li><a href="<%=baseURL%>Themes/Complete_themes"><%=text['Complete_themes']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>Themes"><%=text['Overview']%></a></li>
+      </ol>
+    </li>
+
+    <li><a href="<%=baseURL%>Distribution"><strong><%=text['Publishing_add-ons']%></strong></a></li>
+    <li><a href="<%=baseURL%>Distribution"><%=text['Guides']%></a>
+      <ol>
+        <li><a href="<%=baseURL%>Distribution"><%=text['Signing_and_distribution_overview']%></a></li>
+        <li><a href="https://addons.mozilla.org/developers/addon/submit/"><%=text['Submit_an_add-on']%></a></li>
+        <li><a href="<%=baseURL%>AMO/Policy/Reviews"><%=text['Review_policies']%></a></li>
+        <li><a href="<%=baseURL%>AMO/Policy/Agreement"><%=text['Developer_agreement']%></a></li>
+        <li><a href="<%=baseURL%>AMO/Policy/Featured"><%=text['Featured_add-ons']%></a></li>
+        <li><a href="<%=baseURL%>AMO/Policy/Contact"><%=text['Contact_addons.mozilla.org']%></a></li>
+      </ol>
+    </li>
+
+    <li><a href="https://discourse.mozilla-community.org/c/add-ons"><strong><%=text['Community_and_support']%></a></strong></li>
+    <li><a href="<%=baseURL%>Channels"><%=text['Channels']%></a>
+      <ol>
+        <li><a href="https://blog.mozilla.org/addons"><%=text['Add-ons_blog']%></a></li>
+        <li><a href="https://discourse.mozilla-community.org/c/add-ons"><%=text['Add-on_forums']%></a></li>
+        <li><a href="http://stackoverflow.com/questions/tagged/firefox-addon"><%=text['Stack_Overflow']%></a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/mozilla.dev.extensions"><%=text['Development_newsgroup']%></a></li>
+        <li><a href="irc://irc.mozilla.org/extdev">IRC Channel</a></li>
+      </ol>
+    </li>
+  </ol>
+</section>
