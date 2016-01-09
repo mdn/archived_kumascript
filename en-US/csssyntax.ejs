@@ -12,7 +12,7 @@ var locale = env.locale;
 
 var name = $0;
 if (!name) {
-    if (slug.match(/preview-wiki-content$/) {
+    if (slug.match(/preview-wiki-content$/)) {
         name = env.title;
     } else {
         name = slug.split("/").pop().toLowerCase();
