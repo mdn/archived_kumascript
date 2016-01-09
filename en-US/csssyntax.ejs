@@ -10,7 +10,15 @@ var data = string.deserialize(template("CSSData"));
 var slug = env.slug;
 var locale = env.locale;
 
-var name = $0 || slug.split("/").pop().toLowerCase();
+var name = $0;
+if (!name) {
+    if (slug.match(/preview-wiki-content$/) {
+        name = env.title;
+    } else {
+        name = slug.split("/").pop().toLowerCase();
+    }
+}
+
 var atRule = $1;
 var rawSyntax = "";
 var formattedSyntax = "";
