@@ -269,7 +269,7 @@ if (!atRule) {
 
 var formattedSyntax = "";
 if (name === "preview-wiki-content") {
-    formattedSyntax = "<p>Syntax in preview not available</p>";
+    formattedSyntax = "<span style=\"color:red;\">Syntax in preview not available</span>";
 } else {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors) {
