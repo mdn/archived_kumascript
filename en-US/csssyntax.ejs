@@ -11,6 +11,7 @@ var slug = env.slug;
 var locale = env.locale;
 
 var name = $0;
+log.debug(env.title);
 if (!name) {
     if (slug.match(/preview-wiki-content$/)) {
         name = env.title;
