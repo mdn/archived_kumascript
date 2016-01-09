@@ -6,7 +6,8 @@
   $1 - @-rule - defaults to the @-rule within the URL
 */
 
-var name = $0 || env.slug.split("/").pop().toLowerCase();
+var name = $0 || (env.slug ? env.slug.split("/").pop().toLowerCase() :
+    "preview-wiki-content");
 var atRule = $1;
 
 var data = string.deserialize(template("CSSData"));
@@ -233,23 +234,32 @@ function getValueOutput(cssInfo, property, atRule) {
 var cssInfo = null;
 
 if (!atRule) {
-    var matches = env.slug.match(/\/CSS\/(@.+?)(?=\/)/);
+    var matches = null;
+    if (slug) {
+        matches = slug.match(/\/CSS\/(@.+?)(?=\/)/);
+    }
+
     if (matches) {
         atRule = matches[1];
     }
 }
 
-if (atRule) {
-    if (data.atRules[atRule] && data.atRules[atRule].descriptors) {
-        cssInfo = data.atRules[atRule].descriptors[name];
+if (name !== "preview-wiki-content") {
+    if (atRule) {
+        if (data.atRules[atRule] && data.atRules[atRule].descriptors) {
+            cssInfo = data.atRules[atRule].descriptors[name];
+        }
+    } else if (data.properties[name]) {
+        cssInfo = data.properties[name];
     }
-} else if (data.properties[name]) {
-    cssInfo = data.properties[name];
 }
 
 var result = "";
 
-if (cssInfo) {
+if (name === "preview-wiki-content") {
+    result = "<span style=\"color:red;\">CSS info in preview not " +
+        "available</span>";
+} else if (cssInfo) {
     result = "<table class=\"properties\">" +
         "<tbody>";
     var properties = [];
