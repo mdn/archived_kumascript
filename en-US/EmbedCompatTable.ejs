@@ -249,7 +249,9 @@ function loadTable(payload, locale) {
                         cell.classes.push('bc-has-history');
 
                         // Setup the section
-                        cell.content += '<section class="bc-history hidden" aria-hidden="true"><dl>';
+                        cell.content += '<section class="bc-history hidden" aria-hidden="true">';
+                        cell.content += '<p class="bc-history-head">' + localize(localStrings, 'bc_history_head') + '</p>';
+                        cell.content += '<dl>';
 
                         // Reverse the array to show support newest -> oldest
                         browserFeatureHistory.reverse();
@@ -394,13 +396,13 @@ function loadTable(payload, locale) {
 
             // Notes
             if (historyObject.note) {
-                output += getNoteIcon() + getLocaleOrDefaultFromObject(historyObject.note) + '<br>';
+                output += getNoteIcon() + ' ' + getLocaleOrDefaultFromObject(historyObject.note) + '<br>';
             }
 
         }
 
         if (output === '') {
-            output += '&nbsp';
+            output += '&nbsp;';
         }
 
         return output;
