@@ -20,13 +20,18 @@ var thisPage = null; // Will be lazy evaluated
 if (!$1) {
     thisPage = wiki.getPage(url); // lazy evaluation
 
+    // Append parameter brackets to CSS functions
     if (page.hasTag(thisPage, "CSS Function")) {
         str += "()";
+    }
+
+    // Enclose CSS data types in arrow brackets
+    if (page.hasTag(thisPage, "CSS Data Type") && !/^&lt;.+&gt;$/.test(str)) {
+        str += "&lt;" + str + "&gt;";
     }
 }
 
 var summary = "";
-
 
 if (!$2) {
     //if (!thisPage) thisPage = wiki.getPage(url); // lazy evaluation // Disabled to test performance (we get a lot of Kumascript errors)
