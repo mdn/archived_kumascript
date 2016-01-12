@@ -90,6 +90,9 @@ var resultAPI = [];
             <li><a href="<%-resultGuide[aPage].url%>"><%-resultGuide[aPage].title%></a></li>
   <%    }
         for (aTitle in resultHTML) { // HTML entities matching 
+  %>
+            <li>' <%-resultHTML[aTitle]]'%></li>
+  <%
             if (resultHTML[aTitle] === "heading elements") { // Special case for <h1>…<h6>
   %>
             <li><%- template("HTMLelement", ["Heading_elements", "Heading elements"]) %></li>
