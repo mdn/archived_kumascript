@@ -14,7 +14,7 @@ var badges = {
   ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
 }
 
-function buildSublist(pages, title) {
+function buildSublist(pages, title, ignoreBadges) {
   var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
 
   for (var i in pages) {
@@ -22,10 +22,17 @@ function buildSublist(pages, title) {
     var summary = escapeQuotes(aPage.summary) || '';
     var url = aPage.url.replace('en-US', locale);
     var title = htmlEscape(aPage.title);
+
+    var apiComponentName = title;
+    var titlePieces = title.split(".");
+    if (titlePieces.length > 1) {
+      apiComponentName = titlePieces[1];
+    }
+
     
     var translated = false;
     if (locale != 'en-US') {
-        aPage.translations.forEach(function(translation){
+        aPage.translations.forEach(function(translation) {
             if(translation.locale === locale) {
                 summary = escapeQuotes(translation.summary) || '';
                 url = translation.url;
@@ -43,21 +50,24 @@ function buildSublist(pages, title) {
     
     result += '<li>';
     
-    if (hasTag(aPage, 'Experimental')) {
-        result += badges.ExperimentalBadge;
-    }
+    if (!ignoreBadges) {
+    
+        if (hasTag(aPage, 'Experimental')) {
+            result += badges.ExperimentalBadge;
+        }
 
-    if (hasTag(aPage, 'Non-standard') || hasTag(aPage, 'Non Standard')) {
-        result += badges.NonStandardBadge;
-    }
+        if (hasTag(aPage, 'Non-standard') || hasTag(aPage, 'Non Standard')) {
+            result += badges.NonStandardBadge;
+        }
 
-    if (hasTag(aPage, 'Deprecated')) {
-        result += badges.DeprecatedBadge;
-    }
+        if (hasTag(aPage, 'Deprecated')) {
+            result += badges.DeprecatedBadge;
+        }
 
-    if (hasTag(aPage, 'Obsolete')) {
-        result += badges.ObsoleteBadge;
-        result += '<s class="obsoleteElement">';
+        if (hasTag(aPage, 'Obsolete')) {
+            result += badges.ObsoleteBadge;
+            result += '<s class="obsoleteElement">';
+        }
     }
     
     if (rtlLocales.indexOf(locale) != -1) {
@@ -65,9 +75,9 @@ function buildSublist(pages, title) {
     }
     
     if (slug == aPage.slug) {
-        result += '<em><code>' + aPage.title + '</code></em>'
+        result += '<em><code>' + apiComponentName + '</code></em>'
     } else {
-        result += '<a href="' + url + '" title="' + summary + '"><code>' + title + '</code></a>' + cta;
+        result += '<a href="' + url + '" title="' + summary + '"><code>' + apiComponentName + '</code></a>' + cta;
     }
     
     if (rtlLocales.indexOf(locale) != -1) {
