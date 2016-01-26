@@ -13,8 +13,16 @@ var url = "";
 var str = ($1 || $0);
 var localStrings = string.deserialize(template("L10n:Common"));
 
+// Deal with CSS types by removing <>
+var slug = $0.replace(/&lt;(.*)&gt;/, '$1', 'g');
+
+// Special case: <color>
+if ($0 === '&lt;color&gt;') {
+    slug = 'color_value';   
+}
+
 str = str.toLowerCase();
-url = "/" + lang + "/docs/Web/CSS/" + $0 + $2;
+url = "/" + lang + "/docs/Web/CSS/" + slug + $2;
 
 var thisPage = null; // Will be lazy evaluated
 if (!$1) {
