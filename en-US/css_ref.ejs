@@ -9,7 +9,7 @@
 <li><%- template("Cssxref", ["align-items"]) %></li> 
 <li><%- template("Cssxref", ["align-self"]) %></li> 
 <li><%- template("Cssxref", ["all"]) %></li>
-<li><%- template("Xref_cssangle") %></li> 
+<li><%- template("Cssxref", ["<angle>"]) %></li> 
 <li><%- template("Cssxref", ["animation"]) %></li> 
 <li><%- template("Cssxref", ["animation-delay"]) %></li> 
 <li><%- template("Cssxref", ["animation-direction"]) %></li> 
@@ -39,7 +39,7 @@
 <li><%- template("Cssxref", ["background-size"]) %></li> 
 <li><%- template("Cssxref", ["basic-shape", "&lt;basic-shape&gt;"]) %></li>
 <li><%- template("Cssxref", ["::before", "::before (:before)"]) %></li>
-<li><%- template("Xref_cssblendmode") %></li> 
+<li><%- template("Cssxref", ["<blend-mode>"]) %></li> 
 <li><%- template("Cssxref", ["block-size"]) %></li>
 <li><%- template("Cssxref", ["filter", "blur()", "#blur()"]) %></li>
 <li><%- template("Cssxref", ["border"]) %></li>
@@ -115,7 +115,7 @@
 <li><%- template("Cssxref", ["clip-path"]) %></li> 
 <li><%- template("Cssxref", ["length", "cm", "#cm"]) %></li>
 <li><%- template("Cssxref", ["color"]) %></li> 
-<li><%- template("Xref_csscolorvalue") %></li> 
+<li><%- template("Cssxref", ["<color>"]") %></li> 
 <li><%- template("Cssxref", ["columns"]) %></li> 
 <li><%- template("Cssxref", ["column-count"]) %></li> 
 <li><%- template("Cssxref", ["column-fill"]) %></li> 
@@ -128,7 +128,7 @@
 <li><%- template("Cssxref", ["column-width"]) %></li> 
 <li><%- template("Cssxref", ["content"]) %></li> 
 <li><%- template("Cssxref", ["filter", "contrast()", "#contrast()"]) %></li>
-<li><%- template("Xref_csscounter") %></li> 
+<li><%- template("Cssxref", ["<counter>"]") %></li> 
 <li><%- template("Cssxref", ["counter-increment"]) %></li> 
 <li><%- template("Cssxref", ["counter-reset"]) %></li> 
 <li><%- template("Cssxref", ["@counter-style"]) %></li>
@@ -203,13 +203,13 @@
 <li><%- template("Cssxref", ["font-variant-position"]) %></li> 
 <li><%- template("Cssxref", ["font-weight", "font-weight (property)"]) %></li> 
 <li><%- template("Cssxref", ["@font-face/font-weight", "font-weight (descriptor)"]) %></li> 
-<li><%- template("Xref_cssfrequency") %></li>
+<li><%- template("Cssxref", ["<frequency>"]") %></li>
 <li><%- template("Cssxref", [":fullscreen"]) %></li> 
 </ol></li>
 <li>G
 <ol> 
 <li><%- template("Cssxref", ["angle", "grad", "#grad"]) %></li>
-<li><%- template("Xref_cssgradient") %></li>
+<li><%- template("Cssxref", ["<gradient>"]") %></li>
 <li><%- template("Cssxref", ["filter", "grayscale()", "#grayscale()"]) %></li>
 <li><%- template("Cssxref", ["grid"]) %></li>
 <li><%- template("Cssxref", ["grid-area"]) %></li>
@@ -233,15 +233,15 @@
 <li><%- template("Cssxref", ["height"]) %></li> 
 <li><%- template("Cssxref", ["@viewport/height", "height"]) %></li> 
 <li><%- template("Cssxref", [":hover"]) %></li> 
-<li><%- template("Xref_csscolorvalue", ["hsl()", "#hsl()"]) %></li> 
-<li><%- template("Xref_csscolorvalue", ["hsla()","#hsla()"]) %></li> 
+<li><%- template("Cssxref", ["<color>", ["hsl()", "#hsl()"]) %></li> 
+<li><%- template("Cssxref", ["<color>", ["hsla()","#hsla()"]) %></li> 
 <li><%- template("Cssxref", ["filter", "hue-rotate()", "#hue-rotate()"]) %></li>
 <li><%- template("Cssxref", ["hyphens"]) %></li>
 <li><%- template("Cssxref", ["frequency", "Hz", "#Hz"]) %></li>
 </ol></li>
 <li>I
 <ol> 
-<li><%- template("Xref_cssimage") %></li> 
+<li><%- template("Cssxref", ["<image>"]") %></li> 
 <li><%- template("Cssxref", ["image", "image()"]) %></li> 
 <li><%- template("Cssxref", ["image-rendering"]) %></li> 
 <li><%- template("Cssxref", ["image-resolution"]) %></li> 
@@ -255,7 +255,7 @@
 <li><%- template("Cssxref", ["inline-size"]) %></li>
 <li><%- template("Cssxref", [":in-range"]) %></li> 
 <li><%- template("Cssxref", ["&lt;basic-shape&gt;", "inset()", "#inset"]) %></li> 
-<li><%- template("Xref_cssinteger") %></li> 
+<li><%- template("Cssxref", ["<integer>"]) %></li> 
 <li><%- template("Cssxref", [":invalid"]) %></li> 
 <li><%- template("Cssxref", ["filter", "invert()", "#invert()"]) %></li>
 <li><%- template("Cssxref", ["isolation"]) %></li>
@@ -276,7 +276,7 @@
 <li><%- template("Cssxref", [":last-of-type"]) %></li> 
 <li><%- template("Cssxref", ["left"]) %></li> 
 <li><%- template("Cssxref", [":left"]) %></li> 
-<li><%- template("Xref_csslength") %></li> 
+<li><%- template("Cssxref", ["<length>"]") %></li> 
 <li><%- template("Cssxref", ["letter-spacing"]) %></li> 
 <li><%- template("Cssxref", ["linear-gradient", "linear-gradient()"]) %></li>
 <li><%- template("Cssxref", ["line-break"]) %></li>
@@ -332,7 +332,7 @@
 <li><%- template("Cssxref", [":nth-last-child", ":nth-last-child()"]) %></li> 
 <li><%- template("Cssxref", [":nth-last-of-type", ":nth-last-of-type()"]) %></li> 
 <li><%- template("Cssxref", [":nth-of-type", ":nth-of-type()"]) %></li> 
-<li><%- template("Xref_cssnumber") %></li>
+<li><%- template("Cssxref", ["<number>"]") %></li>
 </ol></li>
 <li>O
 <ol> 
@@ -380,14 +380,14 @@
 <li><%- template("Cssxref", ["page-break-before"]) %></li> 
 <li><%- template("Cssxref", ["page-break-inside"]) %></li> 
 <li><%- template("Cssxref", ["length", "pc", "#pc"]) %></li> 
-<li><%- template("Xref_csspercentage") %></li> 
+<li><%- template("Cssxref", ["<percentage>"]") %></li> 
 <li><%- template("Cssxref", ["perspective"]) %></li> 
 <li><%- template("Cssxref", ["transform-function","perspective()","#perspective()"]) %></li> 
 <li><%- template("Cssxref", ["perspective-origin"]) %></li> 
 <li><%- template("Cssxref", ["pointer-events"]) %></li>
 <li><%- template("Cssxref", ["&lt;basic-shape&gt;", "polygon()", "#polygon"]) %></li> 
 <li><%- template("Cssxref", ["position"]) %></li>
-<li><%- template("xref_cssposition") %></li> 
+<li><%- template("Cssxref", ["<position>"]") %></li> 
 <li><%- template("Cssxref", ["@counter-style/prefix", "prefix"]) %></li> 
 <li><%- template("Cssxref", ["length", "pt", "#pt"]) %></li> 
 <li><%- template("Cssxref", ["length", "px", "#px"]) %></li>
@@ -401,7 +401,7 @@
 <li><%- template("Cssxref", ["angle", "rad", "#rad"]) %></li>
 <li><%- template("Cssxref", ["radial-gradient", "radial-gradient()"]) %></li> 
 <li><%- template("Cssxref", ["@counter-style/range", "range"]) %></li> 
-<li><%- template("Xref_cssratio") %></li> 
+<li><%- template("Cssxref", ["<ratio>"]") %></li> 
 <li><%- template("Cssxref", [":read-only"]) %></li> 
 <li><%- template("Cssxref", [":read-write"]) %></li> 
 <li><%- template("Cssxref", ["shape","rect()","#Syntax"]) %></li> 
@@ -413,10 +413,10 @@
 <li><%- template("Cssxref", ["repeating-radial-gradient","repeating-radial-gradient()"]) %></li> 
 <li><%- template("Cssxref", [":required"]) %></li> 
 <li><%- template("Cssxref", ["resize"]) %></li> 
-<li><%- template("Xref_cssresolution") %></li> 
+<li><%- template("Cssxref", ["<resolution>"]") %></li> 
 <li><%- template("Cssxref", ["revert"]) %></li>
-<li><%- template("Xref_csscolorvalue", ["rgb()","#rgb()"]) %></li>
-<li><%- template("Xref_csscolorvalue", ["rgba()","#rgba()"]) %></li>
+<li><%- template("Cssxref", ["<color>"]", ["rgb()","#rgb()"]) %></li>
+<li><%- template("Cssxref", ["<color>"]", ["rgba()","#rgba()"]) %></li>
 <li><%- template("Cssxref", ["right"]) %></li> 
 <li><%- template("Cssxref", [":right"]) %></li> 
 <li><%- template("Cssxref", [":root"]) %></li>
@@ -449,7 +449,7 @@
 <li><%- template("Cssxref", ["scroll-snap-type-y"]) %></li>
 <li><%- template("Cssxref", ["::selection"]) %></li> 
 <li><%- template("Cssxref", ["filter", "sepia()", "#sepia()"]) %></li>
-<li><%- template("Xref_cssshape") %></li> 
+<li><%- template("Cssxref", ["<shape>"]") %></li> 
 <li><%- template("Cssxref", ["shape-image-threshold"]) %></li>
 <li><%- template("Cssxref", ["shape-margin"]) %></li>
 <li><%- template("Cssxref", ["shape-outside"]) %></li>
@@ -459,7 +459,7 @@
 <li><%- template("Cssxref", ["@counter-style/speak-as", "speak-as"]) %></li> 
 <li><%- template("Cssxref", ["@font-face/src", "src"]) %></li> 
 <li><%- template("Cssxref", ["timing-function","steps()","#The_steps()_class_of_timing-functions"]) %></li> 
-<li><%- template("Xref_cssstring") %></li>
+<li><%- template("Cssxref", ["<string>"]") %></li>
 <li><%- template("Cssxref", ["@font-feature-values", "@styleset", "#@styleset"]) %></li>
 <li><%- template("Cssxref", ["font-variant-alternates", "styleset()", "#styleset()"]) %></li>
 <li><%- template("Cssxref", ["@font-feature-values", "@stylistic", "#@stylistic"]) %></li>
@@ -493,8 +493,8 @@
 <li><%- template("Cssxref", ["text-shadow"]) %></li>
 <li><%- template("Cssxref", ["text-transform"]) %></li>
 <li><%- template("Cssxref", ["text-underline-position"]) %></li> 
-<li><%- template("Xref_csstime") %></li> 
-<li><%- template("Xref_csstimingfunction") %></li> 
+<li><%- template("Cssxref", ["<time>"]") %></li> 
+<li><%- template("Cssxref", ["<timing-function>"]") %></li> 
 <li><%- template("Cssxref", ["top"]) %></li> 
 <li><%- template("cssxref", ["touch-action"]) %></li> 
 <li><%- template("Cssxref", ["transform"]) %></li>
@@ -519,7 +519,7 @@
 <li><%- template("Cssxref", ["@font-face/unicode-range", "unicode-range"]) %></li> 
 <li><%- template("Cssxref", [":unresolved"]) %></li>
 <li><%- template("Cssxref", ["unset"]) %></li> 
-<li><%- template("Xref_cssuri") %></li> 
+<li><%- template("Cssxref", ["<uri>"]") %></li> 
 <li><%- template("Cssxref", ["uri","url()","#The_url()_functional_notation"]) %></li>
 <li><%- template("Cssxref", ["@viewport/user-zoom", "user-zoom"]) %></li> 
 </ol></li>
