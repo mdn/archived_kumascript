@@ -1,6 +1,5 @@
 <%
-// Inserts a link to an API located at the top level of the site;
-// these should really move to where they actually belong, but there you go.
+// Inserts a link to a Plug-in API.
 //
 // Parameters:
 //
@@ -10,4 +9,4 @@ var lang = env.locale;
 
 var URL = '<a href="/' + lang + '/Add-ons/Plugins/Reference/' + $0 + '">' + $0 + '</a>';
 %>
-<%- URL %>
+<code><%- URL %></code>
