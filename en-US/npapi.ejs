@@ -6,7 +6,14 @@
 //  $0 - API name
 
 var lang = env.locale;
+var slug;
+if (lang == "en-US") {
+    slug = '/Add-ons/Plugins/Reference/';
+}
+else {
+    slug = '/docs/';
+}
 
-var URL = '<a href="/' + lang + '/Add-ons/Plugins/Reference/' + $0 + '">' + $0 + '</a>';
+var URL = '<a href="/' + lang + slug + $0 + '">' + $0 + '</a>';
 %>
 <code><%- URL %></code>
