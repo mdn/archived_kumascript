@@ -137,7 +137,8 @@ function buildSublist(pages, title) {
     var aPage = pages[i];
     var summary = escapeQuotes(aPage.summary) || '';
     var url = aPage.url.replace('en-US', locale);
-    var title = htmlEscape(aPage.title);
+    var titleSplit = htmlEscape(aPage.title).split('.'); // Two cases, as sometimes the interface name is forgotten in the title:
+    var title = titleSplit[titleSplit.length - 1];       // "WebGLRenderingContext.activeTexture()" and "activeTexture()" should both become "activeTexture()"
     
     var translated = false;
     if (locale != 'en-US') {
@@ -145,7 +146,8 @@ function buildSublist(pages, title) {
             if(translation.locale === locale) {
                 summary = escapeQuotes(translation.summary) || '';
                 url = translation.url;
-                title = htmlEscape(translation.title);
+                titleSplit = htmlEscape(translation.title).split('.');
+                title = titleSplit[titleSplit.length - 1];
                 translated = true;
             }
         });
@@ -181,7 +183,7 @@ function buildSublist(pages, title) {
     }
     
     if (slug == aPage.slug) {
-        result += '<em><code>' + aPage.title + '</code></em>'
+        result += '<em><code>' + title + '</code></em>'
     } else {
         result += '<a href="' + url + '" title="' + summary + '"><code>' + title + '</code></a>' + cta;
     }
