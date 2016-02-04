@@ -1,0 +1,12 @@
+<%
+var bugPageURL = 'https://code.google.com/p/chromium/issues/detail?id=' + $0;
+var s = "";
+var linkLabel = mdn.replacePlaceholders(mdn.localString({
+    "en-US": "Chromium bug $1$",
+    "de": "Chromium Bug $1$",
+    "ca": "Chromium errada $1$",
+    "cs": "Chromium chyba $1$",
+    "pl": "Chromium błąd $1$"
+}), [$0]);
+%>
+<a rel="external" href="<%= bugPageURL %>" class="external"><%= linkLabel %></a>
