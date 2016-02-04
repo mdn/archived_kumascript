@@ -180,6 +180,10 @@ function buildLink(match, type) {
     return "<a href=\"" + link + "\" title=\"" + title + "\">&lt;" + type + "&gt;</a>";
 }
 
+function addBrackets(str) {
+    return str.match(/\(\)$/) ? str : str + "()";
+}
+
 function formatSyntax(rawSyntax) {
     if (rawSyntax === "") {
         return "";
@@ -280,7 +284,9 @@ if (name === "preview-wiki-content") {
             rawSyntax = data.atRules[name].syntax;
         }
     } else if (data.properties[name]) {
-    	rawSyntax = data.properties[name].syntax;
+        rawSyntax = data.properties[name].syntax;
+    } else if (data.syntaxes[addBrackets(name)]) {
+        rawSyntax = data.syntaxes[addBrackets(name)];
     }
 
     formattedSyntax = formatSyntax(rawSyntax);
