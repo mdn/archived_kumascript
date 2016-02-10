@@ -1,6 +1,8 @@
 <%
 // Creates a list of API Interfaces sorted alphabeticlly
 
+var APIHref = $2 || '/en-US/docs/Web/API';
+
 function isInterface(pageSlug) {
     var spaceIndex = pageSlug.indexOf('_');
     
@@ -63,7 +65,7 @@ function containsTag(tagList, tag) {
     return 0;
 }
 
-var pages = page.subpagesExpand('/en-US/docs/Web/API'); // get subpages, including tags
+var pages = page.subpagesExpand(APIHref); // get subpages, including tags
 var slug = env.slug;
 var locale = env.locale;
 var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
