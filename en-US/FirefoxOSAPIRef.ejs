@@ -8,6 +8,7 @@
 var slug = env.slug;
 var locale = env.locale;
 var APIHref = '/' + locale + '/docs/Mozilla/Firefox_OS/API/';
+var StdAPIHref = '/' + locale + '/docs/Web/API';
 var EventHref = '/' + locale + '/docs/Web/Events';
 var output = "";
 // slug is not available in preview mode.
@@ -204,12 +205,14 @@ function buildSublist(pages, title) {
   return result;
 }
 
-function buildIFList(interfaces, title) {
+function buildIFList(interfaces, title, slug) {
+
+  var slug = slug || APIHref;
   var result = '<li data-default-state="open"><a href="#"><strong>' + title + '</strong></a><ol>';
 
   for (var i = 0; i < interfaces.length; i++) {
     var url = interfaces[i].replace('()', '').replace('.', '/');
-    result += '<li><a href="' + APIHref + '/' + url + '"><code>' + interfaces[i] + '</code></a></li>';
+    result += '<li><a href="' + slug + '/' + url + '"><code>' + interfaces[i] + '</code></a></li>';
   }
 
   result += '</ol></li>';
@@ -248,7 +251,7 @@ if (methods.length > 0) {
   output += buildSublist(methods, text['Methods']);
 }
 if (inh.length > 0) {
-  output += buildIFList(inheritedIF, text['Inheritance']);
+  output += buildIFList(inheritedIF, text['Inheritance'], StdAPIHref);
 }
 if (implementedBy.length > 0) {
   output += buildIFList(implementedBy, text['Implemented_by']);
