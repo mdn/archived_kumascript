@@ -8,6 +8,7 @@
 var slug = env.slug;
 var locale = env.locale;
 var APIHref = '/' + locale + '/docs/Mozilla/Firefox_OS/API';
+var standardAPIHref = '/' + locale + '/docs/Web/API';
 var EventHref = '/' + locale + '/docs/Web/Events';
 var output = "";
 var group = $0;
@@ -85,7 +86,12 @@ function buildIFList(interfaces, title) {
 
   for (var i = 0; i < interfaces.length; i++) {
     var url = interfaces[i].replace('()', '').replace('.', '/');
-    result += '<li><a href="' + APIHref + '/' + url + '"><code>' + interfaces[i] + '</code></a></li>';
+    if (url.substring(0,9) == 'Navigator') { // Non-standard 'Navigator' additions have not been moved to Firefox_OS/
+        result += '<li><a href="' + standardAPIHref + '/' + url + '"><code>' + interfaces[i] + '</code></a></li>';
+    }
+    else {
+        result += '<li><a href="' + APIHref + '/' + url + '"><code>' + interfaces[i] + '</code></a></li>';
+    }
   }
 
   result += '</ol></li>';
