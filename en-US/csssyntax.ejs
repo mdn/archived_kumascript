@@ -215,7 +215,7 @@ function formatSyntax(rawSyntax) {
     return formattedSyntax;
 }
 
-function formatTypesSyntax(formattedSyntax) {
+function formatTypesSyntax(formattedSyntax, describedTypes) {
     var formattedTypesSyntax = "";
     var types = [];
     var typeAnchorAttributes = formattedSyntax.match(/href=".+?"/g);
@@ -236,10 +236,15 @@ function formatTypesSyntax(formattedSyntax) {
         var typesSyntax = "";
         if (types.length > 0) {
             types.forEach(function(type, index, types) {
-                typesSyntax += "<span id=\"" + type + "\">&lt;" + type +
-                    "&gt;</span> = " + formatSyntax(data.syntaxes[type]);
-                if (index < types.length - 1) {
-                    typesSyntax += "<br/>";
+                // Avoid recursions by checking whether a type was already
+                // described before
+                if (describedTypes.indexOf(type) === -1) {
+                    typesSyntax += "<span id=\"" + type + "\">&lt;" + type +
+                        "&gt;</span> = " + formatSyntax(data.syntaxes[type]);
+                    if (index < types.length - 1) {
+                        typesSyntax += "<br/>";
+                    }
+                    describedTypes.push(type);
                 }
             });
 
@@ -252,7 +257,7 @@ function formatTypesSyntax(formattedSyntax) {
             }
         }
 
-        return formattedTypesSyntax + formatTypesSyntax(typesSyntax);
+        return formattedTypesSyntax + formatTypesSyntax(typesSyntax, describedTypes);
     }
 
     return formattedTypesSyntax;
@@ -290,7 +295,7 @@ if (name === "preview-wiki-content") {
     }
 
     formattedSyntax = formatSyntax(rawSyntax);
-    formattedSyntax += formatTypesSyntax(formattedSyntax);
+    formattedSyntax += formatTypesSyntax(formattedSyntax, []);
 }
 
 var result = formattedSyntax || s_missing;
