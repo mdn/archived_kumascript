@@ -233,29 +233,29 @@ function formatTypesSyntax(formattedSyntax) {
             }
         });
 
-    var typesSyntax = "";
-    if (types.length > 0) {
-        types.forEach(function(type, index, types) {
-            typesSyntax += "<span id=\"" + type + "\">&lt;" + type +
-                "&gt;</span> = " + formatSyntax(data.syntaxes[type]);
-            if (index < types.length - 1) {
-                typesSyntax += "<br/>";
-            }
-        });
+        var typesSyntax = "";
+        if (types.length > 0) {
+            types.forEach(function(type, index, types) {
+                typesSyntax += "<span id=\"" + type + "\">&lt;" + type +
+                    "&gt;</span> = " + formatSyntax(data.syntaxes[type]);
+                if (index < types.length - 1) {
+                    typesSyntax += "<br/>";
+                }
+            });
 
-        if (typesSyntax !== "") {
-            formattedTypesSyntax += "<p style=\"font-family:Open Sans,Arial," +
-                "sans-serif; margin: 10px 0 0 0;\">" + s_where +
-                "<br/><code style=\"font-family:Consolas,Monaco," +
-                "&quot;Andale Mono&quot;,monospace;\">" + typesSyntax +
-                "</code></p>";
+            if (typesSyntax !== "") {
+                formattedTypesSyntax += "<p style=\"font-family:Open Sans,Arial," +
+                    "sans-serif; margin: 10px 0 0 0;\">" + s_where +
+                    "<br/><code style=\"font-family:Consolas,Monaco," +
+                    "&quot;Andale Mono&quot;,monospace;\">" + typesSyntax +
+                    "</code></p>";
+            }
         }
+
+        return formattedTypesSyntax + formatTypesSyntax(typesSyntax);
     }
 
-    return formattedTypesSyntax + formatTypesSyntax(typesSyntax);
-}
-
-return formattedTypesSyntax;
+    return formattedTypesSyntax;
 }
 
 var rawSyntax = "";
