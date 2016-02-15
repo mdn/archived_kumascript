@@ -42,15 +42,15 @@ var localStrings = {
         "ko"   : "<a href=\"/ko/docs/Preferences_System/New_attributes\">새 속성</a>",
         "pl"   : "<a href=\"/pl/docs/System_preferencji/Nowe_atrybuty\">Nowe atrybuty</a>"
     }
-}
+};
 
-var output = "<div class=\"moreinfo\">
-                <p><strong>$prefSystemTitle$</strong></p>
-                <ul>
-                  <li>$introduction$$gettingStarted$ | $examples$ | $troubleshooting$</li>
-                  <li>$reference$$prefwindow$ | $prefpane$ | $preferences$ | $preference$ | $xulAttributes</li>
-                </ul>
-              </div>";
+var output = "<div class=\"moreinfo\">" +
+             "  <p><strong>$prefSystemTitle$</strong></p>" +
+             "  <ul>" +
+             "    <li>$introduction$$gettingStarted$ | $examples$ | $troubleshooting$</li>" +
+             "    <li>$reference$$prefwindow$ | $prefpane$ | $preferences$ | $preference$ | $xulAttributes</li>" +
+             "  </ul>" +
+             "</div>";
 var output = mdn.replacePlaceholders(
                 output,
                 {
