@@ -1,19 +1,39 @@
 <%
-// Inserts a link to a CSS entity documentation
-// Appropriate styling is applied.
-//
-// Parameters:
-//
-//  $0 - API name
-//  $1 - name to display (optional)
-//  $2 - anchor (#xyz) (optional)
+/*
+  Inserts a link to a CSS entity documentation
+  Appropriate styling is applied.
+
+  This template handles CSS data types and CSS functions gracefully by
+  automatically adding arrow brackets or round brackets, respectively.
+
+  Parameters:
+  $0 - API name to refer to
+  $1 - name of the link to display (optional)
+  $2 - anchor within the article to jump to of the form '#xyz' (optional)
+
+  Examples:
+  {{cssxref("background")}} =>
+      <a href="/en-US/docs/Web/CSS/background" title="The background CSS 
+      property is..."><code>background</code></a>
+  {{cssxref("length")}} =>
+      <a href="/en-US/docs/Web/CSS/length" title="The <length> CSS data type
+      denotes..."><code>&lt;length&gt;</code></a>
+  {{cssxref("linear-gradient")}} =>
+      <a href="/en-US/docs/Web/CSS/linear-gradient" title="The CSS
+      linear-gradient() function creates..."><code>linear-gradient()</code></a>
+  {{cssxref("margin-top", "top margin")}} =>
+      <a href="/en-US/docs/Web/CSS/margin-top" title="The margin-top CSS 
+      property of an element sets..."><code>top margin</code></a>
+  {{cssxref("filter", "", "#url")}} =>
+      <a href="/en-US/docs/Web/CSS/filter#url()"><code>filter</code></a>
+*/
 
 var lang = env.locale;
 var url = "";
 var str = ($1 || $0);
 var localStrings = string.deserialize(template("L10n:Common"));
 
-// Deal with CSS types by removing <>
+// Deal with CSS data types by removing <>
 var slug = $0.replace(/&lt;(.*)&gt;/, '$1', 'g');
 
 // Special case: <color>
