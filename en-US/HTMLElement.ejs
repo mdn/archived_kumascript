@@ -10,6 +10,14 @@
 */
 var elementName = $0.toString().toLowerCase();
 var linkText = ($1 || elementName);
+switch (env.locale) {
+    case 'ja':
+        if (elementName === linkText && elementName.indexOf(" 要素") !== -1){
+            elementName = linkText.replace(" 要素","");
+        }
+        break;
+    default: break;
+}
 
 var commonLocalStrings = string.deserialize(template("L10n:Common"));
 var sectionName = mdn.localString({
