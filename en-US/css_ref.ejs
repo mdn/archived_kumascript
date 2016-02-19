@@ -116,7 +116,6 @@
 <li><%- template("Cssxref", ["&lt;length&gt;", "cm", "#cm"]) %></li>
 <li><%- template("Cssxref", ["color"]) %></li> 
 <li><%- template("Cssxref", ["&lt;color&gt;"]) %></li> 
-<li><%- template("Cssxref", ["columns"]) %></li> 
 <li><%- template("Cssxref", ["column-count"]) %></li> 
 <li><%- template("Cssxref", ["column-fill"]) %></li> 
 <li><%- template("Cssxref", ["column-gap"]) %></li> 
@@ -126,6 +125,7 @@
 <li><%- template("Cssxref", ["column-rule-width"]) %></li> 
 <li><%- template("Cssxref", ["column-span"]) %></li> 
 <li><%- template("Cssxref", ["column-width"]) %></li> 
+<li><%- template("Cssxref", ["columns"]) %></li> 
 <li><%- template("Cssxref", ["content"]) %></li> 
 <li><%- template("Cssxref", ["filter", "contrast()", "#contrast()"]) %></li>
 <li><%- template("Cssxref", ["&lt;counter&gt;"]) %></li> 
@@ -246,9 +246,9 @@
 <ol> 
 <li><%- template("Cssxref", ["&lt;image&gt;"]) %></li> 
 <li><%- template("Cssxref", ["image", "image()"]) %></li> 
+<li><%- template("Cssxref", ["image-orientation"]) %></li> 
 <li><%- template("Cssxref", ["image-rendering"]) %></li> 
 <li><%- template("Cssxref", ["image-resolution"]) %></li> 
-<li><%- template("Cssxref", ["image-orientation"]) %></li> 
 <li><%- template("Cssxref", ["ime-mode"]) %></li> 
 <li><%- template("Cssxref", ["@import"]) %></li> 
 <li><%- template("Cssxref", ["&lt;length&gt;", "in", "#in"]) %></li>
@@ -281,9 +281,9 @@
 <li><%- template("Cssxref", [":left"]) %></li> 
 <li><%- template("Cssxref", ["&lt;length&gt;"]) %></li> 
 <li><%- template("Cssxref", ["letter-spacing"]) %></li> 
-<li><%- template("Cssxref", ["linear-gradient", "linear-gradient()"]) %></li>
 <li><%- template("Cssxref", ["line-break"]) %></li>
 <li><%- template("Cssxref", ["line-height"]) %></li>
+<li><%- template("Cssxref", ["linear-gradient", "linear-gradient()"]) %></li>
 <li><%- template("Cssxref", [":link"]) %></li>  
 <li><%- template("Cssxref", ["list-style"]) %></li> 
 <li><%- template("Cssxref", ["list-style-image"]) %></li> 
@@ -326,10 +326,10 @@
 <li><%- template("Cssxref", ["min-height"]) %></li> 
 <li><%- template("Cssxref", ["@viewport/min-height", "min-height"]) %></li> 
 <li><%- template("Cssxref", ["min-inline-size"]) %></li>
-<li><%- template("Cssxref", ["minmax", "minmax()"]) %></li>
 <li><%- template("Cssxref", ["min-width"]) %></li> 
 <li><%- template("Cssxref", ["@viewport/min-width", "min-width"]) %></li> 
 <li><%- template("Cssxref", ["@viewport/min-zoom", "min-zoom"]) %></li> 
+<li><%- template("Cssxref", ["minmax", "minmax()"]) %></li>
 <li><%- template("Cssxref", ["mix-blend-mode"]) %></li> 
 <li><%- template("Cssxref", ["&lt;length&gt;", "mm", "#mm"]) %></li>
 <li><%- template("Cssxref", ["&lt;time&gt;", "ms", "#ms"]) %></li>
@@ -432,10 +432,10 @@
 <li><%- template("Cssxref", [":right"]) %></li> 
 <li><%- template("Cssxref", [":root"]) %></li>
 <li><%- template("Cssxref", ["transform-function","rotate()","#rotate()"]) %></li> 
+<li><%- template("Cssxref", ["transform-function","rotate3d()","#rotate3d()"]) %></li>
 <li><%- template("Cssxref", ["transform-function","rotateX()","#rotateX()"]) %></li> 
 <li><%- template("Cssxref", ["transform-function","rotateY()","#rotateY()"]) %></li> 
 <li><%- template("Cssxref", ["transform-function","rotateZ()","#rotateZ()"]) %></li> 
-<li><%- template("Cssxref", ["transform-function","rotate3d()","#rotate3d()"]) %></li>
 <li><%- template("Cssxref", ["ruby-align"]) %></li> 
 <li><%- template("Cssxref", ["ruby-merge"]) %></li>
 <li><%- template("Cssxref", ["ruby-position"]) %></li> 
@@ -445,10 +445,10 @@
 <li><%- template("Cssxref", ["&lt;time&gt;", "s", "#s"]) %></li>
 <li><%- template("Cssxref", ["filter", "saturate()", "#saturate()"]) %></li>
 <li><%- template("Cssxref", ["transform-function","scale()","#scale()"]) %></li> 
+<li><%- template("Cssxref", ["transform-function","scale3d()","#scale3d()"]) %></li> 
 <li><%- template("Cssxref", ["transform-function","scaleX()","#scaleX()"]) %></li> 
 <li><%- template("Cssxref", ["transform-function","scaleY()","#scaleY()"]) %></li> 
 <li><%- template("Cssxref", ["transform-function","scaleZ()","#scaleZ()"]) %></li> 
-<li><%- template("Cssxref", ["transform-function","scale3d()","#scale3d()"]) %></li> 
 <li><%- template("Cssxref", [":scope"]) %></li>
 <li><%- template("Cssxref", ["scroll-behavior"]) %></li>
 <li><%- template("Cssxref", ["scroll-snap-coordinate"]) %></li>
@@ -484,8 +484,8 @@
 <li><%- template("Cssxref", ["@counter-style/system", "system"]) %></li> 
 </ol>T
 <ol> 
-<li><%- template("Cssxref", ["table-layout"]) %></li> 
 <li><%- template("Cssxref", ["tab-size"]) %></li>
+<li><%- template("Cssxref", ["table-layout"]) %></li> 
 <li><%- template("Cssxref", [":target"]) %></li> 
 <li><%- template("Cssxref", ["text-align"]) %></li> 
 <li><%- template("Cssxref", ["text-align-last"]) %></li>
