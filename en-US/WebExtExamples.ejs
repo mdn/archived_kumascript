@@ -1,6 +1,69 @@
 <%
 
+var allExamples = string.deserialize(template("WebExtExamplesData"));
+
+function getExamplesForModule(module) {
+  var examplesForModule = [];
+  for (var i = 0; i < allExamples.length; i++) {
+    var example = allExamples[i];
+    for (var j = 0; j < example.javascript_modules.length; j++) {
+      var exampleModule = example.javascript_modules[j];
+      if (exampleModule.name === module) {
+        examplesForModule.push(example);
+      }
+    }
+  }
+  return examplesForModule;
+}
+
+function getExamplesForAPI(module, api) {
+  var examplesForAPI = [];
+  var examplesForModule = getExamplesForModule(module);
+  for (var i = 0; i < examplesForModule.length; i++) {
+    var example = examplesForModule[i];
+    for (var j = 0; j < example.javascript_modules.length; j++) {
+      var exampleModule = example.javascript_modules[j];
+      if (exampleModule.name == module) {
+        for (var k = 0; k < exampleModule.apis.length; k++) {
+          var exampleAPI = exampleModule.apis[k];
+          if (api == exampleAPI) {
+            examplesForAPI.push(example);
+          }
+        }
+      }
+    }
+  }
+  return examplesForAPI;
+}
+
+function writeExamples(examples) {
+  var output = "";
+  if (examples.length > 0) {
+    output = "<h2>Examples</h2>";
+    output += "<ul>";
+    for (var i = 0; i < examples.length; i++) {
+      var example = examples[i];
+      output += "<li>";
+      output += '<a href="' + example.url + '">' + example.name + '</a>';
+      output += "</li>";
+    }
+    output += "</ul>";
+  }
+  return output;
+}
+
 var output = "";
+
+var pieces = env.slug.split("/");
+var last = pieces[pieces.length-1];
+var secondLast = pieces[pieces.length-2];
+
+if (secondLast == "API") {
+  output = writeExamples(getExamplesForModule(last));
+}
+else {
+  output = writeExamples(getExamplesForAPI(secondLast, last));
+}
 
 %>
 
