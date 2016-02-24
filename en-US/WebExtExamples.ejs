@@ -36,7 +36,51 @@ function getExamplesForAPI(module, api) {
   return examplesForAPI;
 }
 
-function writeExamples(examples) {
+var lang = env.locale;
+
+function writeExampleDetails(examples) {
+  var output = "";
+  for (var i = 0; i < examples.length; i++) {
+    var example = examples[i]; 
+    output += "<hr/>";
+    output += "<h2>" + example.name + "</h2>";
+    output += '<p><a href="' + example.url + '">' + example.url + '</a></p>';
+    output += '<p>' + example.description + '</p>';
+
+    if (example.manifest_keys.length > 0) {
+        output += "<h3>" + "Manifest keys" + "</h3>";
+        output += "<ul>";
+        for (var j = 0; j < example.manifest_keys.length; j++) {
+          var manifest_key = example.manifest_keys[j];
+          output += '<li><a href="/' + lang + "/Add-ons/WebExtensions/manifest.json/" + manifest_key + '"><code>' + manifest_key + '</code></a></li>';
+        }
+        output += "</ul>";
+    }
+    
+    if (example.javascript_modules.length > 0) {
+      output += "<h3>" + "JavaScript modules" + "</h3>";
+        output += "<ul>";
+        for (var k = 0; k < example.javascript_modules.length; k++) {
+          var module = example.javascript_modules[k];
+          output += '<li><a href="/' + lang + "/Add-ons/WebExtensions/API/" + module.name + '"><code>' + module.name + '</code></a>';
+          output += "<ul>";
+          for (var l = 0; l < module.apis.length; l++) {
+            var api = module.apis[l];
+            output += '<li><a href="/' + lang + "/Add-ons/WebExtensions/API/" + module.name + '/' + api + '"><code>' + api + '</code></a></li>';
+
+          }
+          output += "</ul>";
+          output += "</li>";
+          
+        }
+        output += "</ul>";
+    }
+  }
+  return output;
+}
+
+
+function writeExampleLinks(examples) {
   var output = "";
   if (examples.length > 0) {
     output = "<h2>Examples</h2>";
@@ -58,11 +102,13 @@ var pieces = env.slug.split("/");
 var last = pieces[pieces.length-1];
 var secondLast = pieces[pieces.length-2];
 
-if (secondLast == "API") {
-  output = writeExamples(getExamplesForModule(last));
+if (last == "Examples") {
+  output = writeExampleDetails(allExamples);
+} else if (secondLast == "API") {
+  output = writeExampleLinks(getExamplesForModule(last));
 }
 else {
-  output = writeExamples(getExamplesForAPI(secondLast, last));
+  output = writeExampleLinks(getExamplesForAPI(secondLast, last));
 }
 
 %>
