@@ -1,0 +1,108 @@
+<%
+// Outputs a menu-formatted list of page titles and summaries for articles
+// which are subpages of the specified page and have one or more of the
+// specified tags.
+//
+// Parameters:
+//  $0  -   The page whose subpages are to be listed; if not specified, null,
+//          or empty, the current page is used.
+//  $1  -   (Optional) Comma-delineated list of tags to match, as a single
+//          string.
+
+function pageSorter(a, b) {
+    return a.title.localeCompare(b.title);
+}
+
+var termList;
+var html = "";
+
+// Get the initial list of subpages
+
+if ($0 && ($0 != undefined)) {
+    termList = JSON.parse($0);
+} else {
+    termList = page.subpagesExpand();
+}
+
+// Search the list and remove any pages that don't have any of the listed
+// tags.
+
+var requestedTags = new Array;
+
+if (termList.length && (($1 && $1 !== undefined))) {
+    requestedTags = $1.split(',');
+    
+    for (i=0; i<requestedTags.length; i++) {
+        requestedTags[i] = requestedTags[i].trim();
+    }
+    
+    // We have a list of the tags now in array form, so start pruning the
+    // article list.
+    
+    var prunedList = new Array;
+    
+    termList.forEach(function(item, itemIdx, theArray)) {
+        var tags = termList[i].categories;
+        
+        var tagMatch = true;
+        
+        if (tags) {
+        } else {
+            if (requestedTags.length) {
+                tagMatch = false;
+            }
+        }
+        
+        if (tagMatch) {
+            prunedList.push(termList[i]);
+        }
+    }
+}
+
+// Now switch over to the pruned version of the list.
+
+termList = prunedList;
+var numTerms = termList.length;
+
+// Now take the remaining items, if any, and alphabetize the list, then
+// move any pages tagged "Important" to the top. Finally, output the result.
+
+if (numTerms) {
+    var importantList = [];
+    var regularList = [];
+    
+    // Alphabetize the list
+    
+    termList.sort(pageSorter);
+    
+    // Now move the important items to the top; these are items tagged "Important".
+    
+    for (var i=0; i<numTerms; i++) {
+        if (page.hasTag(termList[i], "Important")) {
+            importantList.push(termList[i]);
+        } else {
+            regularList.push(termList[i]);
+        }
+    }
+    
+    termList = importantList.concat(regularList);
+    
+    var termIndex = 0;
+    html += "<dl>";
+    
+    for (var i=0; i<numTerms; i++) {
+        var aPage = termList[i];
+        
+        if (!page.hasTag(aPage, "junk") && (aPage.title != "Index")) {
+            var title = aPage.title;
+            var summary = aPage.summary.replace(/<img[^>]*>/g," ");
+            var url = aPage.url;
+        
+            html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>";
+        }
+    }
+    
+    html += "</dl>";
+}
+%>
+<%-html%>
