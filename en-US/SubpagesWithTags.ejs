@@ -18,8 +18,8 @@ var html = "";
 
 // Get the initial list of subpages
 
-if ($0 && ($0 != undefined)) {
-    termList = JSON.parse($0);
+if ($0 && ($0 !== undefined)) {
+    termList = page.subpagesExpand($0);
 } else {
     termList = page.subpagesExpand();
 }
@@ -27,41 +27,45 @@ if ($0 && ($0 != undefined)) {
 // Search the list and remove any pages that don't have any of the listed
 // tags.
 
-var requestedTags = new Array;
+var requestedTags = [];
 
-if (termList.length && (($1 && $1 !== undefined))) {
+if (termList.length && ($1 && $1 !== undefined)) {
     requestedTags = $1.split(',');
     
-    for (i=0; i<requestedTags.length; i++) {
+    for (var i=0; i<requestedTags.length; i++) {
         requestedTags[i] = requestedTags[i].trim();
     }
     
     // We have a list of the tags now in array form, so start pruning the
     // article list.
     
-    var prunedList = new Array;
+    var prunedList = [];
     
-    termList.forEach(function(item, itemIdx, theArray)) {
-        var tags = termList[i].categories;
+    for (var i=0; i<termList.length; i++) {
+        var page = termList[i];
+        var tags = page.categories;
         
-        var tagMatch = true;
+        var tagMatch = false;
         
         if (tags) {
-        } else {
-            if (requestedTags.length) {
-                tagMatch = false;
+            for (var tagIdx=0; tagIdx<requestedTags.length; tagIdx++) {
+                if (tags[requestedTags[tagIdx]]) {
+                    tagMatch = true;
+                    break;
+                }
             }
         }
         
         if (tagMatch) {
-            prunedList.push(termList[i]);
+            prunedList.push(page);
         }
     }
+
+    // Now switch over to the pruned version of the list.
+
+    termList = prunedList;
 }
 
-// Now switch over to the pruned version of the list.
-
-termList = prunedList;
 var numTerms = termList.length;
 
 // Now take the remaining items, if any, and alphabetize the list, then
