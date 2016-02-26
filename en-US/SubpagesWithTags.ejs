@@ -19,9 +19,9 @@ var html = "";
 // Get the initial list of subpages
 
 if ($0 && ($0 !== undefined)) {
-    termList = page.subpagesExpand($0);
+    termList = page.subpagesExpand($0, 6);
 } else {
-    termList = page.subpagesExpand();
+    termList = page.subpagesExpand(null, 6);
 }
 
 // Search the list and remove any pages that don't have any of the listed
@@ -31,33 +31,42 @@ var requestedTags = [];
 
 if (termList.length && ($1 && $1 !== undefined)) {
     requestedTags = $1.split(',');
-    
+        
     for (var i=0; i<requestedTags.length; i++) {
         requestedTags[i] = requestedTags[i].trim();
     }
-    
+
     // We have a list of the tags now in array form, so start pruning the
     // article list.
     
     var prunedList = [];
     
     for (var i=0; i<termList.length; i++) {
-        var page = termList[i];
-        var tags = page.categories;
+        var curPage = termList[i];
+        var tags = curPage.tags;
         
         var tagMatch = false;
-        
+                
         if (tags) {
             for (var tagIdx=0; tagIdx<requestedTags.length; tagIdx++) {
-                if (tags[requestedTags[tagIdx]]) {
-                    tagMatch = true;
-                    break;
+                var thisTag = requestedTags[tagIdx].toLowerCase();
+                
+                for (var pageTagIdx=0; pageTagIdx<tags.length; pageTagIdx++) {
+                    if (tags[pageTagIdx].toLowerCase() == thisTag) {
+                        tagMatch = true;
+                        break;
+                    }
+                    
+                    if (tagMatch) {
+                        break;
+                    }
                 }
+
             }
         }
         
         if (tagMatch) {
-            prunedList.push(page);
+            prunedList.push(curPage);
         }
     }
 
@@ -91,6 +100,10 @@ if (numTerms) {
     
     termList = importantList.concat(regularList);
     
+    // Fetch common strings we need
+    
+    var commonLocalStrings = string.deserialize(template("L10n:Common"));
+    
     var termIndex = 0;
     html += "<dl>";
     
@@ -99,7 +112,13 @@ if (numTerms) {
         
         if (!page.hasTag(aPage, "junk") && (aPage.title != "Index")) {
             var title = aPage.title;
-            var summary = aPage.summary.replace(/<img[^>]*>/g," ");
+            var summary = aPage.summary;
+            
+            if (summary && summary != undefined) {
+                summary = summary.replace(/<img[^>]*>/g," ");
+            } else {
+                summary = mdn.getLocalString(commonLocalStrings, "summary");
+            }
             var url = aPage.url;
         
             html += "<dt class='landingPageList'><a href='" + url + "'>" + title + "</a></dt><dd class='landingPageList'>" + summary + "</dd>";
@@ -109,4 +128,4 @@ if (numTerms) {
     html += "</dl>";
 }
 %>
-<%-html%>
+<%-template("MakeColumnsForDL", [html])%>
