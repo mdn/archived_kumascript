@@ -50,6 +50,7 @@ var text = mdn.localString({
     'Statements': 'Statements &amp; declarations',
     'Functions': 'Functions',
     'Classes': 'Classes',
+    'Errors': 'Errors',
     'More': 'Misc',
     'New_in_JS': 'New in JavaScript',
     'Lexical_grammar': 'Lexical grammar',
@@ -109,6 +110,7 @@ var text = mdn.localString({
     'Statements': 'Инструкции и объявления',
     'Functions': 'Функции',
     'Classes': 'Classes',
+    'Errors': 'Errors',
     'More': 'Ещё',
     'New_in_JS': 'New in JavaScript',
     'Lexical_grammar': 'Лексическая грамматика',
@@ -168,6 +170,7 @@ var text = mdn.localString({
     'Statements': 'Instructions &amp; déclarations',
     'Functions': 'Fonctions',
     'Classes': 'Classes',
+    'Errors': 'Errors',
     'More': 'Plus',
     'New_in_JS': 'Nouveautés de JavaScript',
     'Lexical_grammar': 'Grammaire lexicale',
@@ -227,6 +230,7 @@ var text = mdn.localString({
     'Statements': '语句和声明',
     'Functions': '函数',
     'Classes': 'Classes',
+    'Errors': 'Errors',
     'More': '更多',
     'New_in_JS': 'New in JavaScript',
     'Lexical_grammar': '词法文法',
@@ -286,6 +290,7 @@ var text = mdn.localString({
     'Statements': 'Anweisungen &amp; Deklarationen',
     'Functions': 'Funktionen',
     'Classes': 'Klassen',
+    'Errors': 'Fehler',
     'More': 'Weiteres',
     'New_in_JS': 'Neu in JavaScript',
     'Lexical_grammar': 'Lexikalische Grammatik',
@@ -345,6 +350,7 @@ var text = mdn.localString({
     'Statements': '文と宣言',
     'Functions': '関数',
     'Classes': 'クラス',
+    'Errors': 'Errors',
     'More': 'その他',
     'New_in_JS': 'JavaScript の新機能',
     'Lexical_grammar': '字句文法',
@@ -429,6 +435,9 @@ var text = mdn.localString({
   </li>
   <li data-default-state="<%=state('Classes')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Classes"><%=text['Classes']%></a>
    <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Classes', 1])%>
+  </li>
+  <li data-default-state="<%=state('Errors')%>"><a href="/<%=locale%>/docs/Web/JavaScript/Reference/Errors"><%=text['Errors']%></a>
+   <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/JavaScript/Reference/Errors', 1])%>
   </li>
   <li data-default-state="<%=state('More')%>"><a href="#"><%=text['More']%></a>
    <ol>
