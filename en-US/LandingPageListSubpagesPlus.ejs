@@ -89,7 +89,8 @@ var relatedBox = "";
 
 if ($0.community && $0.community != undefined) {
     var obj = $0.community;
-    communityBox = template("LandingPageCommunityBox", [obj.name, obj.listname, obj.newsgroup, obj.channel]);
+    //communityBox = template("LandingPageCommunityBox", [obj.name, obj.listname, obj.newsgroup, obj.channel]);
+    communityBox = template("CommunityBox", [obj.name, obj.listname, obj.newsgroup, obj.channel]);
 }
 
 // Build the related topics box. We pass the "related" object into
@@ -102,7 +103,7 @@ if ($0.related && $0.related != undefined) {
 // Now we have the entire list in HTML. Let's go through it and try to split it into two columns by force.
 
 var len = html.length;
-var fullLen = len + communityBox.length + relatedBox.length;
+var fullLen = len + relatedBox.length;
 
 if (fullLen) {
     var col1 = "";
@@ -117,11 +118,11 @@ if (fullLen) {
             ofs = col2.search("<dt ");
             pt += ofs;
         }
-        col2 = communityBox + relatedBox + html.substr(pt);
+        col2 = relatedBox + html.substr(pt);
         col1 = html.substr(0, pt);
     } else {
         col1 = html;
-        col2 = communityBox + relatedBox;
+        col2 = relatedBox;
     }
     
     %>
@@ -130,6 +131,7 @@ if (fullLen) {
     <div class="section"><%-col1%></div>
     <div class="section"><%-col2%></div>
     </div>
+    <%-communityBox%>
     </div>
     <%
 } else {
