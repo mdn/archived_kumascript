@@ -3,9 +3,12 @@
 // returning the resulting JavaScript object.
 //
 // Parameters:
-//  $0  Git subpath (such as "mozilla/kuma/contribute.json")
+//  $0  Git subpath (such as "mozilla/kuma/master/contribute.json")
     
-    var url = encodeURI("https://raw.githubusercontent.com/" + $0);
+    var url = "https://raw.githubusercontent.com/" + $0;
     var data = mdn.fetchJSONResource(url);
-    return data;
+    var output = kuma.inspect(data);
 %>
+<pre class="brush: json">
+<%-output%>
+</pre>
