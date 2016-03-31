@@ -52,7 +52,7 @@ function finalizeCompatTableMacro() {
   return '</div>';
 }
 
-function writeTableRow(columns, name, data) {
+function writeTableRow(columns, name, data, notesCollection) {
   var output = "";
 
   output += '<tr>';
@@ -66,10 +66,33 @@ function writeTableRow(columns, name, data) {
     if (supported == "Unknown") {
         supported = "?";
     }
+    var notes = data[columns[i]].notes;
+    if (notes) {
+      var id = name + "-" + columns[i].replace(/ /g, '-');
+      supported += '<a href="#' + id + '"><strong><sup>' + (notesCollection.length + 1) + '</sup></strong></a>';
+      var newNote = {
+          anchor: id,
+          content: notes
+      }
+      notesCollection.push(newNote);
+    }
     output += '<td>' + supported + '</td>';
   }
   output += '</tr>';
   
+  return output;
+}
+
+function writeNotes(notesCollection) {
+  if (!notesCollection.length) {
+      return "";
+  }
+  var output = "<p>";
+  for (var i = 0; i < notesCollection.length; i++) {
+    var note = notesCollection[i];
+    output += '<a name="' + note.anchor + '">' + (i+1) + '. ' + note.content + '</a><br/>';
+  }
+  output += "</p>";
   return output;
 }
 
@@ -97,7 +120,7 @@ function initTables() {
          }
 }
 
-function writeOutput(tables) {
+function writeOutput(tables, notesCollection) {
   desktopTable = finalizeTable(tables.desktopTable);
   mobileTable = finalizeTable(tables.mobileTable);
 
@@ -105,6 +128,8 @@ function writeOutput(tables) {
   output += desktopTable;
   output += mobileTable;
   output += finalizeCompatTableMacro();
+  output += writeNotes(notesCollection);
+
   return output;
 }
 
@@ -113,16 +138,17 @@ function tableForModule(moduleName) {
 
   var moduleData = data[moduleName];     
   var apiElementNames = Object.keys(moduleData).sort();
-  
+  var notesCollection = [];
+
   for (var i = 0; i < apiElementNames.length; i++) {
     var apiElementName = apiElementNames[i];
     var apiElementData = moduleData[apiElementName];
 
-    tables.desktopTable += writeTableRow(desktopBrowsers, apiElementName, apiElementData["desktop_browsers"]);
-    tables.mobileTable += writeTableRow(mobileBrowsers, apiElementName, apiElementData["mobile_browsers"]); 
+    tables.desktopTable += writeTableRow(desktopBrowsers, apiElementName, apiElementData["desktop_browsers"], notesCollection);
+    tables.mobileTable += writeTableRow(mobileBrowsers, apiElementName, apiElementData["mobile_browsers"], notesCollection); 
   }
 
-  return writeOutput(tables);
+  return writeOutput(tables, notesCollection);
 }
 
 function tableForAPI(moduleName, apiName) {
@@ -130,11 +156,12 @@ function tableForAPI(moduleName, apiName) {
   
   var moduleData = data[moduleName];
   var apiElementName = moduleData[apiName];
+  var notesCollection = [];
 
-  tables.desktopTable += writeTableRow(desktopBrowsers, null, apiElementName["desktop_browsers"]);
-  tables.mobileTable += writeTableRow(mobileBrowsers, null, apiElementName["mobile_browsers"]); 
+  tables.desktopTable += writeTableRow(desktopBrowsers, null, apiElementName["desktop_browsers"], notesCollection);
+  tables.mobileTable += writeTableRow(mobileBrowsers, null, apiElementName["mobile_browsers"], notesCollection); 
 
-  return writeOutput(tables);
+  return writeOutput(tables, notesCollection);
 }
 
 var url = "https://raw.githubusercontent.com/wbamberg/browser-compat-data/master/webextensions/browser-compat-data.json";
