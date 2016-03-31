@@ -185,7 +185,7 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Platform/Settings_list"><%=text['Settings_list']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS"><%=text['Build_and_install']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Building_and_installing_Firefox_OS')%>"><a href="<%=baseURL%>Building_and_installing_Firefox_OS"><%=text['Build_and_install']%></a>
   <ol>
    <li><strong><a href="<%=baseURL%>Building_and_installing_Firefox_OS"><%=text['Build_and_install_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS/Firefox_OS_build_process_summary"><%=text['Firefox_OS_build_process_summary']%></a></li>
@@ -204,7 +204,7 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS/B2G_Build_Variables_Reference_Sheet"><%=text['B2G_build_variables_reference_sheet']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Developing_Firefox_OS"><%=text['Developing_Firefox_OS']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Developing_Firefox_OS')%>"><a href="<%=baseURL%>Developing_Firefox_OS"><%=text['Developing_Firefox_OS']%></a>
   <ol>
    <li><strong><a href="<%=baseURL%>Developing_Firefox_OS"><%=text['Developing_Firefox_OS_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>Developing_Firefox_OS/Filing_bugs_against_Firefox_OS"><%=text['Filing_bugs_against_Firefox_OS']%></a></li>
@@ -214,14 +214,14 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Developing_Firefox_OS/Customizing_DNS"><%=text['Customizing_DNS']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Porting_Firefox_OS"><%=text['Porting_Firefox_OS']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Porting_Firefox_OS')%>"><a href="<%=baseURL%>Porting_Firefox_OS"><%=text['Porting_Firefox_OS']%></a>
   <ol>
    <li><strong><a href="<%=baseURL%>Porting_Firefox_OS"><%=text['Porting_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>Porting_Firefox_OS/basics"><%=text['Porting_basics']%></a></li>
    <li><a href="<%=baseURL%>Porting_Firefox_OS/Porting_on_CyanogenMod"><%=text['Porting_on_CyanogenMod']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Developing_Gaia">Developing Gaia</a>
+ <li data-default-state="<%=currentPageIsUnder('Developing_Gaia')%>"><a href="<%=baseURL%>Developing_Gaia">Developing Gaia</a>
   <ol>
    <li><strong><a href="<%=baseURL%>Developing_Gaia"><%=text['Developing_Gaia_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>Developing_Gaia/Running_the_Gaia_codebase"><%=text['Running_the_Gaia_codebase']%></a></li>
@@ -239,13 +239,13 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Developing_Gaia/Gaia_tools_reference"><%=text['Gaia_tools_reference']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Add-ons"><%=text['Firefox_OS_add-ons']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Add-ons')%>"><a href="<%=baseURL%>Add-ons"><%=text['Firefox_OS_add-ons']%></a>
   <ol>
    <li><a href="<%=baseURL%>Add-ons"><%=text['Firefox_OS_add-ons_overview']%></a></li>
    <li><a href="<%=baseURL%>Add-ons/Developing_Firefox_OS_add-ons"><%=text['Developing_Firefox_OS_add-ons']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Phone_guide"><%=text['Firefox_OS_phone_guide']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Phone_guide')%>"><a href="<%=baseURL%>Phone_guide"><%=text['Firefox_OS_phone_guide']%></a>
   <ol>
    <li><strong><a href="<%=baseURL%>Phone_guide"><%=text['Firefox_OS_phone_guide_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>Developer_phone_guide/Phone_specs"><%=text['Phone_and_device_specs']%></a></li>
@@ -258,7 +258,7 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Developer_phone_guide/Best_practices_open_reference_devices"><%=text['Best_practices_for_open_reference_devices']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>TV"><%=text['Firefox_OS_for_TV']%></a>
+ <li data-default-state="<%=currentPageIsUnder('TV')%>"><a href="<%=baseURL%>TV"><%=text['Firefox_OS_for_TV']%></a>
   <ol>
    <li><strong><a href="<%=baseURL%>TV"><%=text['TVs_and_connected_devices_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>TV/How_to_connect_WebIDE_to_TV_%28VIErA%29"><%=text['How_to_connect_WebIDE_to_TV_(VIERA_CX/CR_series)']%></a></li>
@@ -270,7 +270,7 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>TV/Firefox_OS_TV_UX"><%=text['Firefox_OS_for_TV_UX_Overview']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Releases"><%=text['Firefox_OS_release_notes']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Releases')%>"><a href="<%=baseURL%>Releases"><%=text['Firefox_OS_release_notes']%></a>
   <ol>
    <li><a href="<%=baseURL%>Releases"><%=text['Firefox_OS_release_notes_overview']%></a></li>
    <li><a href="<%=baseURL%>Releases/2.5"><%=text['Firefox_OS_2.5_for_developers']%></a></li>
@@ -284,7 +284,7 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Releases/1.0.1"><%=text['Firefox_OS_1.0.1_for_developers']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Automated_testing"><%=text['Automated_testing']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Automated_testing')%>"><a href="<%=baseURL%>Automated_testing"><%=text['Automated_testing']%></a>
   <ol>
    <li><strong><a href="<%=baseURL%>Automated_testing"><%=text['Firefox_OS_automated_testing_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>Running_Tests_on_Firefox_OS_for_Developers"><%=text['Running_tests_on_Firefox_OS:_A_guide_for_developers']%></a></li>
@@ -302,7 +302,7 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Automated_testing/Treeherder"><%=text['Treeherder']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Debugging"><%=text['Debugging']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Debugging')%>"><a href="<%=baseURL%>Debugging"><%=text['Debugging']%></a>
   <ol>
    <li><strong><a href="<%=baseURL%>Debugging"><%=text['Firefox_OS_debugging_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>Debugging/Developer_settings"><%=text['Developer_settings_for_Firefox_OS']%></a></li>
@@ -319,7 +319,7 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Debugging/Debugging_B2G_using_valgrind"><%=text['Debugging_B2G_using_Valgrind']%></a></li>
   </ol>
  </li>
- <li><a href="<%=baseURL%>Firefox_OS_apps"><%=text['Firefox OS apps']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Firefox_OS_apps')%>"><a href="<%=baseURL%>Firefox_OS_apps"><%=text['Firefox OS apps']%></a>
    <ol>
      <li><strong><a href="<%=baseURL%>Firefox_OS_apps"><%=text['Firefox OS apps overview']%></a></strong></li>
      <li><a href="<%=baseURL%>Firefox_OS_apps/Building_apps_for_Firefox_OS"><%=text['Building apps for Firefox OS']%></a></li>
