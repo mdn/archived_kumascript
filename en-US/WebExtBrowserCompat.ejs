@@ -1,0 +1,170 @@
+<%
+/*
+Generates a compatibility table from the remote JSON data.
+
+This takes zero, one, or two arguments.
+
+Called with one argument, it treats the argument as the name of a module, and
+generates a compat table for that module.
+
+Called with 2 arguments, it treats $0 as the name of a module and $1 as
+the name of an API in that module, and generates a compat table for that API.
+
+Called with no arguments:
+
+* if it thinks it's in a module page, it generates a compat table for that module.
+* if it thinks it's in an API page, it generates a compat table for that API.
+
+*/
+
+var desktopBrowsers = [
+  "Edge",
+  "Firefox",
+  "Chrome",
+  "Opera"
+];
+
+var mobileBrowsers = [
+  "Firefox"
+];
+
+var s_header = mdn.localString({
+  "en-US": [ "Desktop", "Mobile" ],
+  "cs":    [ "Plocha", "Mobile" ],
+  "ja":    [ "デスクトップ", "モバイル" ],
+  "pl":    [ "Pulpit", "Mobile" ],
+  "de":    [ "Desktop", "Mobile" ],
+  "ru":    [ "Настольные", "Мобильные" ],
+  "fr":    [ "Ordinateur", "Mobile" ]
+});
+
+function initCompatTableMacro() {
+  var output = '<div class="htab">' +
+                '    <a id="AutoCompatibilityTable" name="AutoCompatibilityTable"></a>' +
+                '    <ul>' +
+                '        <li class="selected"><a href="javascript:;">' + s_header[0] + '</a></li>' +
+                '        <li><a href="javascript:;">' + s_header[1] + '</a></li>' + 
+                '    </ul>';
+  return output;
+}
+
+function finalizeCompatTableMacro() {
+  return '</div>';
+}
+
+function writeTableRow(columns, name, data) {
+  var output = "";
+
+  output += '<tr>';
+  if (name) {
+    output += '<td><code>' + name + '</code></td>';
+  } else {
+    output += '<td>Basic support</td>';
+  }
+  for (var i = 0; i < columns.length; i++) {
+    var supported = data[columns[i]].support;
+    if (supported == "Unknown") {
+        supported = "?";
+    }
+    output += '<td>' + supported + '</td>';
+  }
+  output += '</tr>';
+  
+  return output;
+}
+
+function initTable(id, browsers) {
+  var output = '<div id="' + id + '">' +
+               '<table class="compat-table">' +
+               '<tbody>' +
+               '<tr>' +
+               '<th></th>';
+  for (var i = 0; i < browsers.length; i++) {
+    output += '<th>' + browsers[i] + '</th>';
+  }
+  output += '</tr>';
+  return output;
+}
+
+function finalizeTable(output) {
+  return output + '</tbody></table></div>';
+}
+
+function initTables() {
+  return {
+          desktopTable: initTable('compat-desktop', desktopBrowsers),
+          mobileTable: initTable('compat-mobile', mobileBrowsers)
+         }
+}
+
+function writeOutput(tables) {
+  desktopTable = finalizeTable(tables.desktopTable);
+  mobileTable = finalizeTable(tables.mobileTable);
+
+  output = initCompatTableMacro();
+  output += desktopTable;
+  output += mobileTable;
+  output += finalizeCompatTableMacro();
+  return output;
+}
+
+function tableForModule(moduleName) {
+  var tables = initTables();
+
+  var moduleData = data[moduleName];     
+  var apiElementNames = Object.keys(moduleData).sort();
+  
+  for (var i = 0; i < apiElementNames.length; i++) {
+    var apiElementName = apiElementNames[i];
+    var apiElementData = moduleData[apiElementName];
+
+    tables.desktopTable += writeTableRow(desktopBrowsers, apiElementName, apiElementData["desktop_browsers"]);
+    tables.mobileTable += writeTableRow(mobileBrowsers, apiElementName, apiElementData["mobile_browsers"]); 
+  }
+
+  return writeOutput(tables);
+}
+
+function tableForAPI(moduleName, apiName) {
+  var tables = initTables();
+  
+  var moduleData = data[moduleName];
+  var apiElementName = moduleData[apiName];
+
+  tables.desktopTable += writeTableRow(desktopBrowsers, null, apiElementName["desktop_browsers"]);
+  tables.mobileTable += writeTableRow(mobileBrowsers, null, apiElementName["mobile_browsers"]); 
+
+  return writeOutput(tables);
+}
+
+var url = "https://raw.githubusercontent.com/wbamberg/browser-compat-data/master/webextensions/browser-compat-data.json";
+var data = mdn.fetchJSONResource(url);
+var output = "";
+
+// if any args are given, use them
+// $0 is the module name, $1 is the api name
+if ($0) {
+  if ($1) {
+    output = tableForAPI($0, $1);
+  }
+  else {
+    output = tableForModule($0);
+  }
+// if no args are given: if this is a module page: make a table for that module
+//                       if this is an API page: make a table for that API
+} else {
+  var urlPieces = env.slug.split("/");
+  if (urlPieces.length < 2) {
+    return;
+  }
+  var last = urlPieces[urlPieces.length - 1];
+  var secondLast = urlPieces[urlPieces.length - 2];
+  if (secondLast == "API") {
+    output = tableForModule(last);
+  } else {
+    output = tableForAPI(secondLast, last);
+  }
+}
+
+%>
+<%-output%>
