@@ -163,7 +163,7 @@ var text = mdn.localString({
 
 <ol>
  <li><a href="<%=baseURL%>Introduction"><%=text['Introduction']%></a></li>
- <li><a href="<%=baseURL%>Platform"><%=text['Platform_guide']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Platform')%>"><a href="<%=baseURL%>Platform"><%=text['Platform_guide']%></a>
   <ol>
    <li><strong><a href="<%=baseURL%>Platform"><%=text['Platform_guide_overview']%></a></strong></li>
    <li><a href="<%=baseURL%>Platform/Architecture"><%=text['Architecture_overview']%></a></li>
