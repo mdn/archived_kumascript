@@ -1,6 +1,6 @@
 <%
 
-var allExamples = string.deserialize(template("WebExtExamplesData"));
+var allExamples = mdn.fetchJSONResource("https://raw.githubusercontent.com/mdn/webextensions-examples/master/examples.json");
 
 var examplesInAPIHeading = $0 || "h3";
 
@@ -101,16 +101,21 @@ function writeExampleLinks(examples) {
 var output = "";
 
 var pieces = env.slug.split("/");
-var last = pieces[pieces.length-1];
-var secondLast = pieces[pieces.length-2];
+var leaf = pieces[pieces.length-1];
+var parent = pieces[pieces.length-2];
+var grandparent = pieces[pieces.length-3];
 
-if (last == "Examples") {
+if (leaf == "Examples") {
   output = writeExampleDetails(allExamples);
-} else if (secondLast == "API") {
-  output = writeExampleLinks(getExamplesForModule(last));
+} else if (parent == "API") {
+  output = writeExampleLinks(getExamplesForModule(leaf));
 }
 else {
-  output = writeExampleLinks(getExamplesForAPI(secondLast, last));
+    if (grandparent != "API") {
+        leaf = parent + "/" + leaf;
+        parent = grandparent;
+    }
+  output = writeExampleLinks(getExamplesForAPI(parent, leaf));
 }
 
 %>
