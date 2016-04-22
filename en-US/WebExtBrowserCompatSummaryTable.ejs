@@ -1,0 +1,146 @@
+<%
+
+var desktopBrowsers = [
+  "Edge",
+  "Firefox",
+  "Chrome",
+  "Opera"
+];
+
+var mobileBrowsers = [
+  "Firefox"
+];
+
+function writeSummaryTableHead(desktopSummaries, mobileSummaries) {
+  var desktopBrowserNames = Object.keys(desktopSummaries);
+  var mobileBrowserNames = Object.keys(mobileSummaries);
+    
+  var output = '<table class="webext-summary-compat-table">\n' +
+               '  <colgroup  span="' + desktopBrowserNames.length + '"></colgroup>\n' +
+               '  <colgroup  span="' + mobileBrowserNames.length + '"></colgroup>\n' +
+               '  <thead>\n' +
+               '    <tr class="browser-family">\n' +
+               '      <th colspan=' + desktopBrowserNames.length + '>Desktop</th>\n' +
+               '      <th colspan=' + mobileBrowserNames.length + '>Mobile</th>\n' +
+               '    </tr>\n';
+
+  output += '    <tr>\n';
+            '  </thead>\n';
+  return output;
+}
+
+function writeSummaryTableCell(browserName, summaryInfo, width) {
+  var coverage = summaryInfo.supported/summaryInfo.total;
+  var cellClass = "unknown-support";
+
+  switch (coverage) {
+    case 0:
+      cellClass = "no-support";
+      break;
+    case 1:
+      cellClass = "full-support";
+      break;
+    default:
+      cellClass = "partial-support";
+    }
+
+  var cellContents = browserName + ": " + summaryInfo.supported + "/" + summaryInfo.total;
+ 
+  return '      <td style="width:' + width +
+         '%" class="' + cellClass + '">' + cellContents + '</td>\n';  
+}
+
+function writeSummaryTableBody(desktopSummaries, mobileSummaries) {
+  var desktopBrowserNames = Object.keys(desktopSummaries);
+  var mobileBrowserNames = Object.keys(mobileSummaries);
+    
+  var width = 100/(desktopBrowserNames.length + mobileBrowserNames.length)
+    
+  output = '  <tbody>\n' +
+           '    <tr>\n';
+
+  for (var i = 0; i < desktopBrowserNames.length; i++) {
+    var browserName = desktopBrowserNames[i];
+    output += writeSummaryTableCell(browserName, desktopSummaries[browserName], width);
+  }
+    
+  for (var i = 0; i < mobileBrowserNames.length; i++) {
+    var browserName = mobileBrowserNames[i];
+    output += writeSummaryTableCell(browserName, mobileSummaries[browserName], width);
+  }
+    
+  output += '  </tbody>\n';
+
+  return output;
+  
+}
+
+function writeSummaryTableFinal() {
+  return '</table>\n';
+}
+
+function addToSummary(name, data, summary) {
+  var browsers = Object.keys(summary);
+  for (var i = 0; i < browsers.length; i++) {
+      switch (data[browsers[i]].support) {
+        case "No":
+          summary[browsers[i]].unsupported++;
+          break;
+        case "Unknown":
+          summary[browsers[i]].unknown++;
+          break;
+        default:
+          summary[browsers[i]].supported++;
+    }
+    if (data[browsers[i]].notes) {
+        summary[browsers[i]].hasNotes = true;
+    }
+  }
+}
+
+function summariesForBrowserSet(moduleData, browserSet, browserSetName) {
+  
+  function BrowserSupportSummary(total) {
+    this.supported = 0;
+    this.unsupported = 0;
+    this.unknown = 0;
+    this.hasNotes = false;
+    this.total = total;
+  }
+    
+  var summaries = {};
+  var apiElementNames = Object.keys(moduleData).sort();
+  
+  for (var i = 0; i < browserSet.length; i++) {
+     summaries[browserSet[i]] = new BrowserSupportSummary(apiElementNames.length);
+  }
+
+  var apiElementNames = Object.keys(moduleData).sort();
+    
+  for (var i = 0; i < apiElementNames.length; i++) {
+    var apiElementName = apiElementNames[i];
+    var apiElementData = moduleData[apiElementName];
+    var browserData = apiElementData[browserSetName];
+
+    addToSummary(apiElementName, browserData, summaries);
+  }
+    
+  return summaries;  
+}
+
+function summaryTableForModule(moduleData) {
+
+  desktopSummaries = summariesForBrowserSet(moduleData, desktopBrowsers, "desktop_browsers")
+  mobileSummaries = summariesForBrowserSet(moduleData, mobileBrowsers, "mobile_browsers")
+
+  var table = writeSummaryTableHead(desktopSummaries, mobileSummaries);
+  table += writeSummaryTableBody(desktopSummaries, mobileSummaries);
+  table += writeSummaryTableFinal();
+    
+  return table;
+}
+
+var output = summaryTableForModule($0);
+
+%>
+<%-output%>
