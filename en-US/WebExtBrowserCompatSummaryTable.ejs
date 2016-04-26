@@ -22,16 +22,12 @@ function writeSummaryTableHead(desktopSummaries, mobileSummaries) {
   var mobileBrowserNames = Object.keys(mobileSummaries);
     
   var output = '<table class="webext-summary-compat-table">\n' +
-               '  <colgroup  span="' + desktopBrowserNames.length + '"></colgroup>\n' +
-               '  <colgroup  span="' + mobileBrowserNames.length + '"></colgroup>\n' +
                '  <thead>\n' +
                '    <tr class="browser-family">\n' +
                '      <th colspan=' + desktopBrowserNames.length + '>Desktop</th>\n' +
                '      <th colspan=' + mobileBrowserNames.length + '>Mobile</th>\n' +
-               '    </tr>\n';
-
-  output += '    <tr>\n';
-            '  </thead>\n';
+               '    </tr>\n' +
+               '  </thead>\n';
   return output;
 }
 
