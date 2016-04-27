@@ -126,8 +126,8 @@ function tableForModule(compatData) {
     var apiElementName = apiElementNames[i];
     var apiElementData = compatData[apiElementName];
 
-    tables.desktopTable += writeTableRow(desktopBrowsers, apiElementName, compatData["desktop_browsers"], notesCollection);
-    tables.mobileTable += writeTableRow(mobileBrowsers, apiElementName, compatData["mobile_browsers"], notesCollection); 
+    tables.desktopTable += writeTableRow(desktopBrowsers, apiElementName, apiElementData["desktop_browsers"], notesCollection);
+    tables.mobileTable += writeTableRow(mobileBrowsers, apiElementName, apiElementData["mobile_browsers"], notesCollection); 
   }
 
   return writeOutput(tables, notesCollection);
@@ -144,18 +144,13 @@ function tableForAPI(compatData) {
   return writeOutput(tables, notesCollection);
 }
 
-var output = "that one";
-output += $1;
+var output = "";
+if ($1 == "api") {
+  output = tableForModule($0);
+  output += "this one";
+} else if ($1 == "api-item") {
+  output = tableForAPI($0);
+}
 
-//if ($1 == "api") {
-//  output = tableForModule($0);
-//  output += "this one";
-//} else if ($1 == "api-item") {
-//  output = tableForAPI($0);
-//}
-
-//output = "that one";
-//output += $1;
-*/
 %>
 <%-output%>
