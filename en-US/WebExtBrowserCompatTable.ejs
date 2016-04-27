@@ -144,13 +144,18 @@ function tableForAPI(compatData) {
   return writeOutput(tables, notesCollection);
 }
 
-var output = "";
+var output = "that one";
+output += $1;
 
 if ($1 == "api") {
   output = tableForModule($0);
+  output += "this one";
 } else if ($1 == "api-item") {
   output = tableForAPI($0);
 }
+
+output = "that one";
+output += $1;
 
 %>
 <%-output%>
