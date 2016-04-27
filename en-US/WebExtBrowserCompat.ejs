@@ -43,153 +43,6 @@ So if there are three path components underneath "API", we will:
 
 */
 
-var desktopBrowsers = [
-  "Edge",
-  "Firefox",
-  "Chrome",
-  "Opera"
-];
-
-var mobileBrowsers = [
-  "Firefox"
-];
-
-var s_header = mdn.localString({
-  "en-US": [ "Desktop", "Mobile" ],
-  "cs":    [ "Plocha", "Mobile" ],
-  "ja":    [ "デスクトップ", "モバイル" ],
-  "pl":    [ "Pulpit", "Mobile" ],
-  "de":    [ "Desktop", "Mobile" ],
-  "ru":    [ "Настольные", "Мобильные" ],
-  "fr":    [ "Ordinateur", "Mobile" ]
-});
-
-function initCompatTableMacro() {
-  var output = '<div class="htab">' +
-                '    <a id="AutoCompatibilityTable" name="AutoCompatibilityTable"></a>' +
-                '    <ul>' +
-                '        <li class="selected"><a href="javascript:;">' + s_header[0] + '</a></li>' +
-                '        <li><a href="javascript:;">' + s_header[1] + '</a></li>' + 
-                '    </ul>';
-  return output;
-}
-
-function finalizeCompatTableMacro() {
-  return '</div>';
-}
-
-function writeTableRow(columns, name, data, notesCollection) {
-  var output = "";
-
-  output += '<tr>';
-  if (name) {
-    output += '<td><code>' + name + '</code></td>';
-  } else {
-    output += '<td>Basic support</td>';
-  }
-  for (var i = 0; i < columns.length; i++) {
-    var supported = data[columns[i]].support;
-    if (supported == "Unknown") {
-        supported = "?";
-    }
-    var notes = data[columns[i]].notes;
-    if (notes) {
-      var id = name + "-" + columns[i].replace(/ /g, '-');
-      supported += '<a href="#' + id + '"><strong><sup>' + (notesCollection.length + 1) + '</sup></strong></a>';
-      var newNote = {
-          anchor: id,
-          content: notes
-      }
-      notesCollection.push(newNote);
-    }
-    output += '<td>' + supported + '</td>';
-  }
-  output += '</tr>';
-  
-  return output;
-}
-
-function writeNotes(notesCollection) {
-  if (!notesCollection.length) {
-      return "";
-  }
-  var output = "<p>";
-  for (var i = 0; i < notesCollection.length; i++) {
-    var note = notesCollection[i];
-    output += '<a name="' + note.anchor + '">' + (i+1) + '. ' + note.content + '</a><br/>';
-  }
-  output += "</p>";
-  return output;
-}
-
-function initTable(id, browsers) {
-  var output = '<div id="' + id + '">' +
-               '<table class="compat-table">' +
-               '<tbody>' +
-               '<tr>' +
-               '<th></th>';
-  for (var i = 0; i < browsers.length; i++) {
-    output += '<th>' + browsers[i] + '</th>';
-  }
-  output += '</tr>';
-  return output;
-}
-
-function finalizeTable(output) {
-  return output + '</tbody></table></div>';
-}
-
-function initTables() {
-  return {
-          desktopTable: initTable('compat-desktop', desktopBrowsers),
-          mobileTable: initTable('compat-mobile', mobileBrowsers)
-         }
-}
-
-function writeOutput(tables, notesCollection) {
-  desktopTable = finalizeTable(tables.desktopTable);
-  mobileTable = finalizeTable(tables.mobileTable);
-
-  output = initCompatTableMacro();
-  output += desktopTable;
-  output += mobileTable;
-  output += finalizeCompatTableMacro();
-  output += writeNotes(notesCollection);
-
-  return output;
-}
-
-function tableForModule(moduleName) {
-  var tables = initTables();
-
-  var moduleData = data[moduleName];     
-  var apiElementNames = Object.keys(moduleData).sort();
-  var notesCollection = [];
-
-  for (var i = 0; i < apiElementNames.length; i++) {
-    var apiElementName = apiElementNames[i];
-    var apiElementData = moduleData[apiElementName];
-
-    tables.desktopTable += writeTableRow(desktopBrowsers, apiElementName, apiElementData["desktop_browsers"], notesCollection);
-    tables.mobileTable += writeTableRow(mobileBrowsers, apiElementName, apiElementData["mobile_browsers"], notesCollection); 
-  }
-
-  return writeOutput(tables, notesCollection);
-}
-
-function tableForAPI(moduleName, apiName) {
-  var tables = initTables();
-  
-  var moduleData = data[moduleName];
-  var apiElementName = moduleData[apiName];
-  var notesCollection = [];
-
-  tables.desktopTable += writeTableRow(desktopBrowsers, null, apiElementName["desktop_browsers"], notesCollection);
-  tables.mobileTable += writeTableRow(mobileBrowsers, null, apiElementName["mobile_browsers"], notesCollection); 
-
-  return writeOutput(tables, notesCollection);
-}
-
 var url = "https://raw.githubusercontent.com/mdn/browser-compat-data/master/webextensions/browser-compat-data.json";
 var data = mdn.fetchJSONResource(url);
 var output = "";
@@ -198,10 +51,10 @@ var output = "";
 // $0 is the module name, $1 is the api name
 if ($0) {
   if ($1) {
-    output = tableForAPI($0, $1);
+    output = template("WebExtBrowserCompatTable", [data[$0][$1], "api-item"]);
   }
   else {
-    output = tableForModule($0);
+    output = template("WebExtBrowserCompatTable", [data[$0], "api"]);
   }
 // if no args are given: if this is a module page: make a table for that module
 //                       if this is an API page: make a table for that API
@@ -215,12 +68,13 @@ if ($0) {
   var grandparent = urlPieces[urlPieces.length - 3];
  
   if (parent == "API") {
-    output = tableForModule(leaf);
+    output = template("WebExtBrowserCompatTable", [data[leaf], "api"]);
   } else {
       if (grandparent == "API") {
-        output = tableForAPI(parent, leaf);
+        output = template("WebExtBrowserCompatTable", [data[parent][leaf], "api-item"]);
       } else {
-        output = tableForAPI(grandparent, [parent, leaf].join("."));
+        var apiItem = [parent, leaf].join(".");
+        output = template("WebExtBrowserCompatTable", [data[grandparent][apiItem], "api-item"]);
       }
   }
 }
