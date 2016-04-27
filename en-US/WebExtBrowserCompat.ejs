@@ -69,6 +69,7 @@ if ($0) {
  
   if (parent == "API") {
     output = template("WebExtBrowserCompatTable", [data[leaf], "api"]);
+    output += "this one";
   } else {
       if (grandparent == "API") {
         output = template("WebExtBrowserCompatTable", [data[parent][leaf], "api-item"]);
