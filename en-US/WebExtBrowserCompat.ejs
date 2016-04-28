@@ -68,7 +68,7 @@ if ($0) {
   var grandparent = urlPieces[urlPieces.length - 3];
  
   if (parent == "API") {
-    output = template("WebExtBrowserCompatTable", [data[leaf], "api"]);
+    output = template("WebExtBrowserCompatTable", [data[leaf], "api", leaf]);
   } else {
       if (grandparent == "API") {
         output = template("WebExtBrowserCompatTable", [data[parent][leaf], "api-item"]);
