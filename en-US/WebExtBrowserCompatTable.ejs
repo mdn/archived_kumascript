@@ -96,7 +96,7 @@ function tableForModule(compatData, moduleName) {
     var apiElementData = compatData[apiElementName];
 
     var apiPieces = [lang, baseURL, moduleName].concat(apiElementName.split("."));
-    apiItemUrl = apiPieces.join("/");
+    apiItemUrl = "/" + apiPieces.join("/");
 
     output += '    <tr>\n';
     output += '      <td><a href="' + apiItemUrl + '"><code>' + apiElementName + '</code></a></td>\n';
