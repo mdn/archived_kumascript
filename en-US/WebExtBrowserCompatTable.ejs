@@ -125,7 +125,7 @@ function tableForAPI(compatData) {
 
 var output = "";
 if ($1 == "api") {
-  output = tableForModule($0);
+  output = tableForModule($0, $2);
 } else if ($1 == "api-item") {
   output = tableForAPI($0);
 }
