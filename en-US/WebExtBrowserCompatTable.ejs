@@ -11,6 +11,9 @@ var mobileBrowsers = [
   "Firefox"
 ];
 
+var lang = env.locale;
+var baseURL = "docs/Mozilla/Add-ons/WebExtensions/API";
+
 function writeTableHead(desktopBrowserNames, mobileBrowserNames) {
 
   var desktopWidth = (desktopBrowserNames.length / (desktopBrowserNames.length + mobileBrowserNames.length) * 100) * 0.6;
@@ -80,7 +83,7 @@ function writeNotes(notesCollection) {
 }
 
 
-function tableForModule(compatData) {
+function tableForModule(compatData, moduleName) {
   var apiElementNames = Object.keys(compatData).sort();
   var notesCollection = [];
 
@@ -92,8 +95,11 @@ function tableForModule(compatData) {
     var apiElementName = apiElementNames[i];
     var apiElementData = compatData[apiElementName];
 
+    var apiPieces = [lang, baseURL, moduleName].concat(apiElementName.split("."));
+    apiItemUrl = apiPieces.join("/");
+
     output += '    <tr>\n';
-    output += '      <td><code>' + apiElementName + '</code></td>\n';
+    output += '      <td><a href="' + apiItemUrl + '"><code>' + apiElementName + '</code></a></td>\n';
     output += writeTableCells(desktopBrowsers, apiElementName, apiElementData["desktop_browsers"], notesCollection);
     output += writeTableCells(mobileBrowsers, apiElementName, apiElementData["mobile_browsers"], notesCollection);
     output += '    </tr>\n';
