@@ -4,7 +4,7 @@
 // Parameters:
 //
 //  $0  The mailing list name
-//  $1  The newsgroup name
+//  $1  The newsgroup name (optional)
 //  $2  The class name to use for the list (null if none)
 //  $3  Name of the topic/community (was $0 in CommunityBox template)
 //  $4  Twitter ID (null if none)
@@ -141,47 +141,36 @@ switch(lang) {
 var stackOverflowURL = null;
 var soHTML = "";
 
-if ($5 && ($5 != undefined) && ($5.length != 0)) {
+if ($5) {
     stackOverflowURL = "http://stackoverflow.com/questions/tagged/" + $5;
     soHTML = "<li>" + web.link(stackOverflowURL, stackOverflow) + "</li>";
 }
-
-/*** OLD HACK THAT GUESSED (USUALLY WRONG) SO LINKS ***
-if ($3 == "Firefox OS" || $3 == "Open Web Apps") {
-   stackoverflowURL = "http://stackoverflow.com/questions/tagged/firefox-os";
-} else if ($3 == "Developer tools") {
-   stackoverflowURL = "http://stackoverflow.com/questions/tagged/firefox-developer-tools";    
-} else {
-   stackoverflowURL = "http://stackoverflow.com/r/mozilla";    
-} */
 
 // Build the Twitter link (if any)
 
 var twitterURL = null;
 var twitHTML = "";
 
-if ($4 && ($4 != undefined) && ($4.length != 0)) {
+if ($4) {
     twitterURL = "https://twitter.com/" + $4;
     twitHTML = "<li>" + web.link(twitterURL, twitter) + "</li>";
 }
 
-/***** OLD GUESSING MECHANISM FOR CREATING TWITTER LINKS °°°°°
-if ($3 == "Firefox OS") {
-   twitterURLFragment = "Boot2Gecko";
-} else if ($3 == "Developer tools") {
-   twitterURLFragment = "FirefoxDevTools";    
-} else if ($3 == "Open Web Apps") {
-   twitterURLFragment = "mozappsdev";    
-} else {
-   twitterURLFragment = "mozilla";    
+// Build the newsgroup and feed links, if newsgroup is given in $1
+
+var newsgroupHTML = "";
+var newsgroupFeedHTML = "";
+
+if ($1) {
+    newsgroupHTML = "<li>" + web.link('http://groups.google.com/group/' + $1, googleGroup) + "</li>";
+    newsgroupFeedHTML = "<li>" + web.link('http://groups.google.com/group/' + $1 + '/feeds', webFeed) + "</li>";
 }
-*/
 
 // Build the <ul> element
 
 var listElem = "<ul";
 
-if ($2 && ($2 != undefined)) {
+if ($2) {
     listElem += " class='" + $2 + "'";
 }
 
@@ -208,6 +197,6 @@ function makeListTarget(param) {
   <li><%- web.link(makeListTarget($0), mailingList) %></li>
   <%- twitHTML %>
   <%- soHTML %>
-  <li><%- web.link('http://groups.google.com/group/' + $1, googleGroup) %></li>
-  <li><%- web.link('http://groups.google.com/group/' + $1 + '/feeds', webFeed) %></li>
+  <%- newsgroupHTML %>
+  <%- newsgroupFeedHTML %>
 </ul>
