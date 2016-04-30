@@ -30,7 +30,8 @@ var text = {
     'at_rules': mdn.getLocalString(cssl10n, 'at_rules'),
     'types': mdn.getLocalString(cssl10n, 'types'),
     'Guides': mdn.getLocalString(commonl10n, 'Guides'),
-};
+    'tag_selectors':  mdn.getLocalString(cssl10n, 'tag_selectors')
+}
 
 function isAtRule(foo) {
   return foo.indexOf('@') !== -1;
@@ -48,7 +49,7 @@ function containsTag(tagList, tag) {
 }
 
 var group = [];
-var isSelector = containsTag(pageTags, 'Selectors') || slug.indexOf(':') !== -1;
+var isSelector = containsTag(pageTags, text['tag_selectors']) || slug.indexOf(':') !== -1;
 var isOverviewPage = slug.indexOf("_") !== -1 && !isType(title);
 
 if (isOverviewPage && !isSelector) {
