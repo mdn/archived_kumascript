@@ -1,4 +1,13 @@
 <%
+// Insert a banner indicating that the page is a draft. If a parameter is
+// provided, it's added to the box as an explanation for the draft status;
+// this could be used to include information about who's working on the
+// page, what hasn't been done yet, or even what specifically could use
+// some review help.
+//
+// Parameters:
+//  $0  (optional) A string providing details about why the page is a draft.
+
 var s_draft = 'Draft';
 var s_not_complete = 'This page is not complete.';
 
@@ -46,4 +55,7 @@ switch (env.locale) {
 %><div class="overheadIndicator draft">
     <p><strong><%=s_draft%></strong><br/>
     <%=s_not_complete%></p>
+<% if ($0) { %>
+    <em><%-$0%></em>
+<% } %>
 </div>
