@@ -7,9 +7,28 @@
 //
 // Parameters:
 //  $0  (optional) A string providing details about why the page is a draft.
+//      You can make MDN usernames link to the corresponding profile by
+//      prefacing them with "~~", like "~~supereditordeluxe".
+//
+// If you use a profile link, make sure your profile includes a way to
+// contact you.
 
 var s_draft = 'Draft';
 var s_not_complete = 'This page is not complete.';
+
+// Handle the optional string
+
+var s_details = '';
+
+if ($0) {
+    s_details = $0;
+    
+    var pattern = /~~(\w+)(\W)/ig;
+    
+    s_details = "<em>" + s_details.replace(pattern, function replacer(match, username, endchar) {
+        return "<a href='https://developer.mozilla.org/profiles/" + username + "'>" + username + "</a>" + endchar;
+    }) + "</em>";
+}
 
 switch (env.locale) {
     case 'es':
@@ -55,7 +74,5 @@ switch (env.locale) {
 %><div class="overheadIndicator draft">
     <p><strong><%=s_draft%></strong><br/>
     <%=s_not_complete%></p>
-<% if ($0) { %>
-    <em><%-$0%></em>
-<% } %>
+    <%-s_details%>
 </div>
