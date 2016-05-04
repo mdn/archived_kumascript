@@ -2,10 +2,10 @@
 var currentSection = $0;
 var locale = env.locale;
 var slug = env.slug;
-var baseURL = "/" + locale + "/docs/Mozilla/Firefox_OS/";
+var baseURL = "/" + locale + "/docs/Mozilla/B2G_OS/";
 
 function currentPageIsUnder(root) {
-  rootSlug = "Firefox_OS/" + root;
+  rootSlug = "B2G_OS/" + root;
   if (slug.indexOf(rootSlug) != -1) {
     return "open";
   }
@@ -14,47 +14,23 @@ function currentPageIsUnder(root) {
 
 var text = mdn.localString({
   'en-US': {
-    'Introduction': 'Introduction',
-    'Platform_guide': 'Platform guide',
-    'Platform_guide_overview': 'Platform guide overview',
-    'Architecture_overview': 'Architecture overview',
-    'Apps_architecture': 'Apps architecture',
-    'Gonk': 'Gonk',
-    'Gecko': 'Gecko',
-    'Gaia': 'Gaia',
-    'Gaia_apps_guide': 'Gaia apps guide',
-    'Security': 'Security',
-    'Firefox_OS_security_model': 'The Firefox OS security model',
-    'System_security': 'System security',
-    'Application_security_in_Firefox_OS': 'Application security in Firefox OS',
-    'Securely_installing_and_updating_applications': 'Securely installing and updating applications',
-    'Out_of_memory_management_on_Firefox_OS': 'Out of memory management on Firefox OS',
-    'Feature_support_chart': 'Feature support chart',
-    'Settings_list': 'Settings list',
     'Build_and_install': 'Build and install',
     'Build_and_install_overview': 'Build and install overview',
-    'Firefox_OS_build_process_summary': 'Firefox OS build process summary',
+    'B2G_OS_build_process_summary': 'B2G OS build process summary',
     'Build_prerequisites': 'Build prerequisites',
     'Preparing_for_your_first_build': 'Preparing for your first build',
-    'Building_Firefox_OS': 'Building Firefox OS',
+    'Building_B2G_OS': 'Building B2G OS',
     'B2G_installer_add-on': 'B2G installer add-on',
-    'Building_Firefox_OS_for_Flame_on_Mac_OS_X': 'Building Firefox OS for Flame on Mac OS X',
-    'Choosing_how_to_run_Gaia_or_Firefox_OS': 'Choosing how to run Gaia or Firefox OS',
+    'Building_B2G_OS_for_Flame_on_Mac_OS_X': 'Building B2G OS for Flame on Mac OS X',
+    'Choosing_how_to_run_Gaia_or_B2G_OS': 'Choosing how to run Gaia or B2G OS',
     'Compatible_Devices': 'Compatible Devices',
-    'Building_the_Firefox_OS_simulator': 'Building the Firefox OS simulator',
-    'Using_the_Firefox_OS_emulators': 'Using the Firefox OS emulators',
-    'Installing_Firefox_OS_on_a_mobile_device': 'Installing Firefox OS on a mobile device',
-    'Creating_and_applying_Firefox_OS_update_packages': 'Creating and applying Firefox OS update packages',
+    'Building_the_B2G_OS_simulator': 'Building the B2G OS simulator',
+    'Using_the_B2G_OS_emulators': 'Using the B2G OS emulators',
+    'Installing_B2G_OS_on_a_mobile_device': 'Installing B2G OS on a mobile device',
+    'Creating_and_applying_B2G_OS_update_packages': 'Creating and applying B2G OS update packages',
     'Building_and_installing_FOTA_community_builds': 'Building and installing FOTA community builds',
     'B2G_build_variables_reference_sheet': 'B2G build variables reference sheet',
-    'Developing_Firefox_OS': 'Developing Firefox OS',
-    'Developing_Firefox_OS_overview': 'Developing Firefox OS overview',
-    'Filing_bugs_against_Firefox_OS': 'Filing bugs against Firefox OS',
-    'Modifying_the_hosts_file': 'Modifying the hosts file',
-    'Customization_with_the_.userconfig_file': 'Customization with the .userconfig file',
-    'Customizing_the_b2g.sh_script': 'Customizing the b2g.sh script',
-    'Customizing_DNS': 'Customizing DNS',
-    'Porting_Firefox_OS': 'Porting Firefox OS',
+    'Porting_B2G_OS': 'Porting B2G OS',
     'Porting_overview': 'Porting overview',
     'Porting_basics': 'Porting basics',
     'Porting_on_CyanogenMod': 'Porting on CyanogenMod',
@@ -68,84 +44,14 @@ var text = mdn.localString({
     'Gaia_build_system_primer': 'Gaia build system primer',
     'Customizing_build-time_apps': 'Customizing build-time apps',
     'Market_customizations_guide': 'Market customizations guide',
-    'Customizing_the_keyboard_in_Firefox_OS_apps': 'Customizing the keyboard in Firefox OS apps',
-    'Localizing_Firefox_OS': 'Localizing Firefox OS',
-    'L10n_Best_Practices': 'L10n Best Practices',
+    'Customizing_the_keyboard_in_B2G_OS_apps': 'Customizing the keyboard in B2G OS apps',
+    'Localizing_B2G_OS': 'Localizing B2G OS',
     'Make_options_reference': 'Make options reference',
     'Gaia_tools_reference': 'Gaia tools reference',
-    'Firefox_OS_add-ons': 'Firefox OS add-ons',
-    'Firefox_OS_add-ons_overview': 'Firefox OS add-ons overview',
-    'Developing_Firefox_OS_add-ons': 'Developing Firefox OS add-ons',
-    'Firefox_OS_phone_guide': 'Firefox OS phone guide',
-    'Firefox_OS_phone_guide_overview': 'Firefox OS phone guide overview',
-    'Phone_and_device_specs': 'Phone and device specs',
-    'Geeksphone': 'Geeksphone',
-    'ZTE_OPEN': 'ZTE OPEN',
-    'ZTE_OPEN_C': 'ZTE OPEN C',
-    'Flame': 'Flame',
-    'General_device_features': 'General device features',
-    'Troubleshooting': 'Troubleshooting',
-    'Best_practices_for_open_reference_devices': 'Best practices for open reference devices',
-    'Firefox_OS_release_notes': 'Firefox OS release notes',
-    'Firefox_OS_release_notes_overview': 'Firefox OS release notes overview',
-    'Firefox_OS_2.5_for_developers': 'Firefox OS 2.5 for developers',
-    'Firefox_OS_2.2_for_developers': 'Firefox OS 2.2 for developers',
-    'Firefox_OS_2.1_for_developers': 'Firefox OS 2.1 for developers',
-    'Firefox_OS_2.0_for_developers': 'Firefox OS 2.0 for developers',
-    'Firefox_OS_1.4_for_developers': 'Firefox OS 1.4 for developers',
-    'Firefox_OS_1.3_for_developers': 'Firefox OS 1.3 for developers',
-    'Firefox_OS_1.2_for_developers': 'Firefox OS 1.2 for developers',
-    'Firefox_OS_1.1_for_developers': 'Firefox OS 1.1 for developers',
-    'Firefox_OS_1.0.1_for_developers': 'Firefox OS 1.0.1 for developers',
-    'Automated_testing': 'Automated testing',
-    'Firefox_OS_automated_testing_overview': 'Firefox OS automated testing overview',
-    'Running_tests_on_Firefox_OS:_A_guide_for_developers': 'Running tests on Firefox OS: A guide for developers',
-    'Mozilla_integrated_tools_package': 'The Mozilla integrated tools package',
-    'Gaia_UI_tests': 'Gaia UI tests',
-    'Gaia_integration_tests': 'Gaia integration tests',
-    'Gaia_unit_tests': 'Gaia unit tests',
-    'Gaia_performance_tests': 'Gaia performance tests',
-    'Mochitests': 'Mochitests',
-    'Reftests': 'Reftests',
-    'WebAPI_tests': 'WebAPI tests',
-    'xpcshell_tests': 'xpcshell tests',
-    'MTBF_tests': 'MTBF tests',
-    'Marionette': 'Marionette',
-    'Treeherder': 'Treeherder',
-    'Debugging': 'Debugging',
-    'Firefox_OS_debugging_overview': 'Firefox OS debugging overview',
-    'Developer_settings_for_Firefox_OS': 'Developer settings for Firefox OS',
-    'Connecting_a_Firefox_OS_device_to_the_desktop': 'Connecting a Firefox OS device to the desktop',
-    'Setting_up_to_debug_Firefox_OS_using_Firefox_developer_tools': 'Setting up to debug Firefox OS using Firefox developer tools',
-    'On-device_console_logging': 'On-device console logging',
-    'Installing_and_using_ADB': 'Installing and using ADB',
-    'Taking_screenshots': 'Taking screenshots',
-    'Using_the_WebIDE': 'Using the WebIDE',
-    'Firefox_OS_crash_reporting': 'Firefox OS crash reporting',
-    'Debugging_out_of_memory_errors_on_Firefox_OS': 'Debugging out of memory errors on Firefox OS',
-    'Debugging_and_security_testing_with_Firefox_OS': 'Debugging and security testing with FirefoxOS',
-    'Debugging_B2G_using_gdb': 'Debugging B2G using gdb',
-    'Debugging_B2G_using_Valgrind': 'Debugging B2G using Valgrind',
-    'Firefox_OS_APIs': 'Firefox OS APIs',
-    'Firefox OS apps': 'Firefox OS apps',
-    'Firefox OS apps overview': 'Firefox OS apps overview',
-    'Building apps for Firefox OS': 'Building apps for Firefox OS',
-    'Localization': 'Localization',
-    'Performance': 'Performance',
-    'Firefox Accounts on Firefox OS': 'Firefox Accounts on Firefox OS',
-    'Reference apps': 'Reference apps',
-    'Screencast series: App Basics for Firefox OS': 'Screencast series: App Basics for Firefox OS',
-    'Building Blocks': 'Building Blocks',
-    'Firefox OS Visual styleguide': 'Firefox OS Visual styleguide',
-    'Firefox OS Copy styleguide': 'Firefox OS Copy styleguide',
-    'Firefox OS in Arabic': 'Firefox OS in Arabic',
-    'Firefox OS design asset library': 'Firefox OS design asset library',
-    'Firefox OS icon font': 'Firefox OS icon font',
-    'Firefox OS transitions': 'Firefox OS transitions',
-    'Firefox OS device APIs': 'Firefox OS device APIs',
-    'Firefox OS app tools': 'Firefox OS app tools',
-    'Porting Chrome apps to Firefox OS Apps': 'Porting Chrome apps to Firefox OS Apps',
-    'App development FAQ': 'App development FAQ',
+    'B2G_OS_add-ons': 'B2G OS add-ons',
+    'B2G_OS_add-ons_overview': 'B2G OS add-ons overview',
+    'Developing_B2G_OS_add-ons': 'Developing B2G OS add-ons',
+    'B2G_OS_APIs': 'B2G OS APIs',
     'Porting_B2G_onto_Nexus_Player_(Lollipop)' : 'Porting B2G onto Nexus Player (Lollipop)'
   }
 });
@@ -154,64 +60,31 @@ var text = mdn.localString({
 <section class="Quick_links" id="Quick_Links">
 
 <ol>
- <li><a href="<%=baseURL%>Introduction"><%=text['Introduction']%></a></li>
- <li data-default-state="<%=currentPageIsUnder('Platform')%>"><a href="<%=baseURL%>Platform"><%=text['Platform_guide']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Building_and_installing_B2G_OS')%>"><a href="<%=baseURL%>Building_and_installing_B2G_OS"><%=text['Build_and_install']%></a>
   <ol>
-   <li><strong><a href="<%=baseURL%>Platform"><%=text['Platform_guide_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Platform/Architecture"><%=text['Architecture_overview']%></a></li>
-   <li><a href="<%=baseURL%>Platform/Apps_architecture"><%=text['Apps_architecture']%></a></li>
-   <li><a href="<%=baseURL%>Platform/Gonk" ><%=text['Gonk']%></a></li>
-   <li><a href="/en-US/Gecko"><%=text['Gecko']%></a></li>
-   <li><a href="<%=baseURL%>Platform/Gaia"><%=text['Gaia']%></a></li>
-   <li><a href="<%=baseURL%>Platform/Gaia/Gaia_apps"><%=text['Gaia_apps_guide']%></a></li>
-   <li><a href="<%=baseURL%>Security"><%=text['Security']%></a>
-    <ol>
-     <li><a href="<%=baseURL%>Security/Security_model"><%=text['Firefox_OS_security_model']%></a></li>
-     <li><a href="<%=baseURL%>Security/System_security"><%=text['System_security']%></a></li>
-     <li><a href="<%=baseURL%>Security/Application_security"><%=text['Application_security_in_Firefox_OS']%></a></li>
-     <li><a href="<%=baseURL%>Security/Installing_and_updating_applications"><%=text['Securely_installing_and_updating_applications']%></a></li>
-    </ol>
-   </li>
-   <li><a href="<%=baseURL%>Platform/Out_of_memory_management_on_Firefox_OS"><%=text['Out_of_memory_management_on_Firefox_OS']%></a></li>
-   <li><a href="<%=baseURL%>Platform/Feature_support_chart"><%=text['Feature_support_chart']%></a></li>
-   <li><a href="<%=baseURL%>Platform/Settings_list"><%=text['Settings_list']%></a></li>
-  </ol>
- </li>
- <li data-default-state="<%=currentPageIsUnder('Building_and_installing_Firefox_OS')%>"><a href="<%=baseURL%>Building_and_installing_Firefox_OS"><%=text['Build_and_install']%></a>
-  <ol>
-   <li><strong><a href="<%=baseURL%>Building_and_installing_Firefox_OS"><%=text['Build_and_install_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS/Firefox_OS_build_process_summary"><%=text['Firefox_OS_build_process_summary']%></a></li>
-   <li><a href="<%=baseURL%>Firefox_OS_build_prerequisites"><%=text['Build_prerequisites']%></a></li>
+   <li><strong><a href="<%=baseURL%>Building_and_installing_B2G_OS"><%=text['Build_and_install_overview']%></a></strong></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_OS_build_process_summary"><%=text['B2G_OS_build_process_summary']%></a></li>
+   <li><a href="<%=baseURL%>B2G_OS_build_prerequisites"><%=text['Build_prerequisites']%></a></li>
    <li><a href="<%=baseURL%>Preparing_for_your_first_B2G_build"><%=text['Preparing_for_your_first_build']%></a></li>
-   <li><a href="<%=baseURL%>Building"><%=text['Building_Firefox_OS']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS/B2G_installer_add-on"><%=text['B2G_installer_add-on']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS/Building_for_Flame_on_OS_X"><%=text['Building_Firefox_OS_for_Flame_on_Mac_OS_X']%></a></li>
-   <li><a href="<%=baseURL%>Choosing_how_to_run_Gaia_or_B2G"><%=text['Choosing_how_to_run_Gaia_or_Firefox_OS']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS/Compatible_Devices"><%=text['Compatible_Devices']%></a></li>
-   <li><a href="<%=baseURL%>Building_the_Firefox_OS_simulator"><%=text['Building_the_Firefox_OS_simulator']%></a></li>
-   <li><a href="<%=baseURL%>Using_the_B2G_emulators"><%=text['Using_the_Firefox_OS_emulators']%></a></li>
-   <li><a href="<%=baseURL%>Installing_on_a_mobile_device"><%=text['Installing_Firefox_OS_on_a_mobile_device']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS/Firefox_OS_update_packages"><%=text['Creating_and_applying_Firefox_OS_update_packages']%></a></li>
+   <li><a href="<%=baseURL%>Building"><%=text['Building_B2G_OS']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_installer_add-on"><%=text['B2G_installer_add-on']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/Building_for_Flame_on_OS_X"><%=text['Building_B2G_OS_for_Flame_on_Mac_OS_X']%></a></li>
+   <li><a href="<%=baseURL%>Choosing_how_to_run_Gaia_or_B2G"><%=text['Choosing_how_to_run_Gaia_or_B2G_OS']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/Compatible_Devices"><%=text['Compatible_Devices']%></a></li>
+   <li><a href="<%=baseURL%>Building_the_B2G_OS_simulator"><%=text['Building_the_B2G_OS_simulator']%></a></li>
+   <li><a href="<%=baseURL%>Using_the_B2G_emulators"><%=text['Using_the_B2G_OS_emulators']%></a></li>
+   <li><a href="<%=baseURL%>Installing_on_a_mobile_device"><%=text['Installing_B2G_OS_on_a_mobile_device']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_OS_update_packages"><%=text['Creating_and_applying_B2G_OS_update_packages']%></a></li>
    <li><a href="<%=baseURL%>Building/FOTA_community_builds"><%=text['Building_and_installing_FOTA_community_builds']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_Firefox_OS/B2G_Build_Variables_Reference_Sheet"><%=text['B2G_build_variables_reference_sheet']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_Build_Variables_Reference_Sheet"><%=text['B2G_build_variables_reference_sheet']%></a></li>
   </ol>
  </li>
- <li data-default-state="<%=currentPageIsUnder('Developing_Firefox_OS')%>"><a href="<%=baseURL%>Developing_Firefox_OS"><%=text['Developing_Firefox_OS']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Porting_B2G_OS')%>"><a href="<%=baseURL%>Porting_B2G_OS"><%=text['Porting_B2G_OS']%></a>
   <ol>
-   <li><strong><a href="<%=baseURL%>Developing_Firefox_OS"><%=text['Developing_Firefox_OS_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Developing_Firefox_OS/Filing_bugs_against_Firefox_OS"><%=text['Filing_bugs_against_Firefox_OS']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Firefox_OS/modifying_hosts_file"><%=text['Modifying_the_hosts_file']%></a></li>
-   <li><a href="<%=baseURL%>Customization_with_the_.userconfig_file"><%=text['Customization_with_the_.userconfig_file']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Firefox_OS/Customizing_the_b2g.sh_script"><%=text['Customizing_the_b2g.sh_script']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Firefox_OS/Customizing_DNS"><%=text['Customizing_DNS']%></a></li>
-  </ol>
- </li>
- <li data-default-state="<%=currentPageIsUnder('Porting_Firefox_OS')%>"><a href="<%=baseURL%>Porting_Firefox_OS"><%=text['Porting_Firefox_OS']%></a>
-  <ol>
-   <li><strong><a href="<%=baseURL%>Porting_Firefox_OS"><%=text['Porting_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Porting_Firefox_OS/basics"><%=text['Porting_basics']%></a></li>
-   <li><a href="<%=baseURL%>Porting_Firefox_OS/Porting_on_CyanogenMod"><%=text['Porting_on_CyanogenMod']%></a></li>
-   <li><a href="<%=baseURL%>Porting_Firefox_OS/B2G_Nexus_Player"><%=text['Porting_B2G_onto_Nexus_Player_(Lollipop)']%></a></li>
+   <li><strong><a href="<%=baseURL%>Porting_B2G_OS"><%=text['Porting_overview']%></a></strong></li>
+   <li><a href="<%=baseURL%>Porting_B2G_OS/basics"><%=text['Porting_basics']%></a></li>
+   <li><a href="<%=baseURL%>Porting_B2G_OS/Porting_on_CyanogenMod"><%=text['Porting_on_CyanogenMod']%></a></li>
+   <li><a href="<%=baseURL%>Porting_B2G_OS/B2G_Nexus_Player"><%=text['Porting_B2G_onto_Nexus_Player_(Lollipop)']%></a></li>
   </ol>
  </li>
  <li data-default-state="<%=currentPageIsUnder('Developing_Gaia')%>"><a href="<%=baseURL%>Developing_Gaia">Developing Gaia</a>
@@ -220,108 +93,23 @@ var text = mdn.localString({
    <li><a href="<%=baseURL%>Developing_Gaia/Running_the_Gaia_codebase"><%=text['Running_the_Gaia_codebase']%></a></li>
    <li><a href="<%=baseURL%>Developing_Gaia/Understanding_the_Gaia_codebase"><%=text['Understanding_the_Gaia_codebase']%></a></li>
    <li><a href="<%=baseURL%>Developing_Gaia/Making_Gaia_code_changes"><%=text['Making_Gaia_code_changes']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Test_Gaia_code_changes"><%=text['Testing_Gaia_code_changes']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Testing_Gaia_code_changes"><%=text['Testing_Gaia_code_changes']%></a></li>
    <li><a href="<%=baseURL%>Developing_Gaia/Submitting_a_Gaia_patch"><%=text['Submitting_a_Gaia_patch']%></a></li>
-   <li><a href="<%=baseURL%>Platform/Gaia/Build_System_Primer"><%=text['Gaia_build_system_primer']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Build_System_Primer"><%=text['Gaia_build_system_primer']%></a></li>
    <li><a href="<%=baseURL%>Developing_Gaia/Customizing_build-time_apps"><%=text['Customizing_build-time_apps']%></a></li>
    <li><a href="<%=baseURL%>Developing_Gaia/Market_customizations_guide"><%=text['Market_customizations_guide']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Customizing_the_keyboard"><%=text['Customizing_the_keyboard_in_Firefox_OS_apps']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Localizing_Firefox_OS"><%=text['Localizing_Firefox_OS']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/L10n_Best_Practices"><%=text['L10n_Best_Practices']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Customizing_the_keyboard"><%=text['Customizing_the_keyboard_in_B2G_OS_apps']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Localizing_B2G_OS"><%=text['Localizing_B2G_OS']%></a></li>
    <li><a href="<%=baseURL%>Developing_Gaia/make_options_reference"><%=text['Make_options_reference']%></a></li>
    <li><a href="<%=baseURL%>Developing_Gaia/Gaia_tools_reference"><%=text['Gaia_tools_reference']%></a></li>
   </ol>
  </li>
- <li data-default-state="<%=currentPageIsUnder('Add-ons')%>"><a href="<%=baseURL%>Add-ons"><%=text['Firefox_OS_add-ons']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Add-ons')%>"><a href="<%=baseURL%>Add-ons"><%=text['B2G_OS_add-ons']%></a>
   <ol>
-   <li><a href="<%=baseURL%>Add-ons"><%=text['Firefox_OS_add-ons_overview']%></a></li>
-   <li><a href="<%=baseURL%>Add-ons/Developing_Firefox_OS_add-ons"><%=text['Developing_Firefox_OS_add-ons']%></a></li>
+   <li><a href="<%=baseURL%>Add-ons"><%=text['B2G_OS_add-ons_overview']%></a></li>
+   <li><a href="<%=baseURL%>Add-ons/Developing_B2G_OS_add-ons"><%=text['Developing_B2G_OS_add-ons']%></a></li>
   </ol>
  </li>
- <li data-default-state="<%=currentPageIsUnder('Phone_guide')%>"><a href="<%=baseURL%>Phone_guide"><%=text['Firefox_OS_phone_guide']%></a>
-  <ol>
-   <li><strong><a href="<%=baseURL%>Phone_guide"><%=text['Firefox_OS_phone_guide_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Developer_phone_guide/Phone_specs"><%=text['Phone_and_device_specs']%></a></li>
-   <li><a href="<%=baseURL%>Developer_phone_guide/Geeksphone"><%=text['Geeksphone']%></a></li>
-   <li><a href="<%=baseURL%>Developer_phone_guide/ZTE_OPEN"><%=text['ZTE_OPEN']%></a></li>
-   <li><a href="<%=baseURL%>Developer_phone_guide/ZTE_OPEN_C"><%=text['ZTE_OPEN_C']%></a></li>
-   <li><a href="<%=baseURL%>Developer_phone_guide/Flame"><%=text['Flame']%></a></li>
-   <li><a href="<%=baseURL%>Developer_phone_guide/Firefox_OS_device_features"><%=text['General_device_features']%></a></li>
-   <li><a href="<%=baseURL%>Troubleshooting"><%=text['Troubleshooting']%></a></li>
-   <li><a href="<%=baseURL%>Developer_phone_guide/Best_practices_open_reference_devices"><%=text['Best_practices_for_open_reference_devices']%></a></li>
-  </ol>
- </li>
- <li data-default-state="<%=currentPageIsUnder('Releases')%>"><a href="<%=baseURL%>Releases"><%=text['Firefox_OS_release_notes']%></a>
-  <ol>
-   <li><a href="<%=baseURL%>Releases"><%=text['Firefox_OS_release_notes_overview']%></a></li>
-   <li><a href="<%=baseURL%>Releases/2.5"><%=text['Firefox_OS_2.5_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Releases/2.2"><%=text['Firefox_OS_2.2_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Releases/2.1"><%=text['Firefox_OS_2.1_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Releases/2.0"><%=text['Firefox_OS_2.0_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Releases/1.4"><%=text['Firefox_OS_1.4_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Releases/1.3"><%=text['Firefox_OS_1.3_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Releases/1.2"><%=text['Firefox_OS_1.2_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Releases/1.1"><%=text['Firefox_OS_1.1_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Releases/1.0.1"><%=text['Firefox_OS_1.0.1_for_developers']%></a></li>
-  </ol>
- </li>
- <li data-default-state="<%=currentPageIsUnder('Automated_testing')%>"><a href="<%=baseURL%>Automated_testing"><%=text['Automated_testing']%></a>
-  <ol>
-   <li><strong><a href="<%=baseURL%>Automated_testing"><%=text['Firefox_OS_automated_testing_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Running_Tests_on_Firefox_OS_for_Developers"><%=text['Running_tests_on_Firefox_OS:_A_guide_for_developers']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/MozITP"><%=text['Mozilla_integrated_tools_package']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/gaia-ui-tests"><%=text['Gaia_UI_tests']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/Gaia_integration_tests"><%=text['Gaia_integration_tests']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/Gaia_unit_tests"><%=text['Gaia_unit_tests']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/Gaia_performance_tests"><%=text['Gaia_performance_tests']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/Mochitests"><%=text['Mochitests']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/Reftests"><%=text['Reftests']%></a></li>
-   <li><a href="/en-US/docs/Marionette/Marionette_JavaScript_Tests"><%=text['WebAPI_tests']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/XPCShell"><%=text['xpcshell_tests']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/MTBF_tests"><%=text['MTBF_tests']%></a></li>
-   <li><a href="/en-US/docs/Marionette"><%=text['Marionette']%></a></li>
-   <li><a href="<%=baseURL%>Automated_testing/Treeherder"><%=text['Treeherder']%></a></li>
-  </ol>
- </li>
- <li data-default-state="<%=currentPageIsUnder('Debugging')%>"><a href="<%=baseURL%>Debugging"><%=text['Debugging']%></a>
-  <ol>
-   <li><strong><a href="<%=baseURL%>Debugging"><%=text['Firefox_OS_debugging_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Debugging/Developer_settings"><%=text['Developer_settings_for_Firefox_OS']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/Connecting_a_Firefox_OS_device_to_the_desktop"><%=text['Connecting_a_Firefox_OS_device_to_the_desktop']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/Setting_up"><%=text['Setting_up_to_debug_Firefox_OS_using_Firefox_developer_tools']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/On-device_console_logging"><%=text['On-device_console_logging']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/Installing_ADB"><%=text['Installing_and_using_ADB']%></a></li>
-   <li><a href="<%=baseURL%>Firefox_OS_usage_tips/taking_screenshots"><%=text['Taking_screenshots']%></a></li>
-   <li><a href="/en-US/docs/Tools/WebIDE"><%=text['Using_the_WebIDE']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/Firefox_OS_crash_reporting"><%=text['Firefox_OS_crash_reporting']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/Debugging_OOMs"><%=text['Debugging_out_of_memory_errors_on_Firefox_OS']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/Debugging_and_security_testing"><%=text['Debugging_and_security_testing_with_Firefox_OS']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/Debugging_B2G_using_gdb"><%=text['Debugging_B2G_using_gdb']%></a></li>
-   <li><a href="<%=baseURL%>Debugging/Debugging_B2G_using_valgrind"><%=text['Debugging_B2G_using_Valgrind']%></a></li>
-  </ol>
- </li>
- <li data-default-state="<%=currentPageIsUnder('Firefox_OS_apps')%>"><a href="<%=baseURL%>Firefox_OS_apps"><%=text['Firefox OS apps']%></a>
-   <ol>
-     <li><strong><a href="<%=baseURL%>Firefox_OS_apps"><%=text['Firefox OS apps overview']%></a></strong></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Building_apps_for_Firefox_OS"><%=text['Building apps for Firefox OS']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Localization"><%=text['Localization']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Performance"><%=text['Performance']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Firefox_Accounts_on_Firefox_OS"><%=text['Firefox Accounts on Firefox OS']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Reference_apps"><%=text['Reference apps']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Screencast_series:_App_Basics_for_Firefox_OS"><%=text['Screencast series: App Basics for Firefox OS']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Building_blocks"><%=text['Building Blocks']%></a></li>
-     <li><a href="https://www.mozilla.org/en-US/styleguide/products/firefox-os/"><%=text['Firefox OS Visual styleguide']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Copy_styleguide"><%=text['Firefox OS Copy styleguide']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Firefox_OS_in_Arabic"><%=text['Firefox OS in Arabic']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Design_asset_library"><%=text['Firefox OS design asset library']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Icon_font"><%=text['Firefox OS icon font']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Transitions"><%=text['Firefox OS transitions']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Firefox_OS_device_APIs"><%=text['Firefox OS device APIs']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Firefox_OS_app_tools"><%=text['Firefox OS app tools']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/Porting_Chrome_apps"><%=text['Porting Chrome apps to Firefox OS Apps']%></a></li>
-     <li><a href="<%=baseURL%>Firefox_OS_apps/App_development_FAQ"><%=text['App development FAQ']%></a></li> 
-   </ol>
- </li>
- <li><a href="<%=baseURL%>API"><%=text['Firefox_OS_APIs']%></a></li>
+ <li><a href="<%=baseURL%>API"><%=text['B2G_OS_APIs']%></a></li>
 </ol>
 </section>
