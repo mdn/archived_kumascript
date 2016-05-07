@@ -1,0 +1,217 @@
+<%
+// Constructs an API overview for the API rooted at the current page.
+//
+// Parameters:
+//  $0  The API group name; used to locate info about related APIs
+
+var slug = env.slug;
+var locale = env.locale;
+var APIHref = '/' + locale + '/docs/Web/API';
+var output = "";
+
+// Slug isn't available in preview mode, so don't do anything if it's
+// not available.
+
+if (slug) {
+    var mainIF = slug.replace('Web/API/', '').split('/')[0];
+    mainIF = mainIF.charAt(0).toUpperCase() + mainIF.slice(1);
+    
+    // Convenience to shorten some function names
+    
+    var hasTag = page.hasTag;
+    var escapeQuotes = mdn.escapeQuotes;
+    var htmlEscape = kuma.htmlEscape;
+    var getLocalString = mdn.getLocalString;
+    
+    var rtlLocales = ['ar', 'he', 'fa'];
+    
+    // Fetch the databases
+    
+    var webAPIData = string.deserialize(template('InterfaceData'));
+    
+    if (group) {
+        var webAPIGroups = string.deserialize(template('GroupData'));
+    }
+    
+    var commonl10n = string.deserialize(template('L10n:Common'));
+    
+    // Get translations of strings we need
+    
+    var text = {
+        'Methods': getLocalString(commonl10n, 'Methods');
+        'Properties': getLocalString(commonl10n, 'Properties');
+        'Constructor': getLocalString(commonl10n, 'Constructor');
+        'Events': getLocalString(commonl10n, 'Events');
+        'translate': getLocalString(commonl10n, '[Translate]'),
+        'title': getLocalString(commonl10n, 'TranslationCTA'),
+    };
+    
+    // Get the information about this API specifically out of the
+    // databases, as well as from the subtree below this page.
+    
+    var mainIFPages = page.subpagesExpand('/en-US/docs/Web/API/' + mainIF);
+    var events = [];
+    
+    if (group && webAPIGroups[0][group]) {
+        // ADD HERE ANY CODE NEEDED TO PULL OTHER INFO FROM GROUPDATA
+        events = webAPIGroups[0][group].events || [];
+    }
+    
+    // IDEA: SCAN FOR PROPERTIES NAMED "ON" + THE NAME OF EVENTS AND
+    // USE THAT TO BUILD LIST FOR AN EVENT HANDLERS SECTION
+
+    // Scan the pages and collect the information we need about them
+    
+    var pageList = mainIFPages;
+    
+    var properties = [];
+    var methods = [];
+    var ctors = [];
+    
+    function collect(pageList) {
+        for (var i in pageList) {
+            var aPage = pageList[i];
+            if (hasTag(aPage, "Property")) {
+                properties.push(aPage);
+            }
+            if (hasTag(aPage, "Method")) {
+                methods.push(aPage);
+            }
+            if (hasTag(aPage, "Constructor")) {
+                ctors.push(aPage);
+            }
+        }
+    }
+    
+    collect(mainIFPages);
+    
+    // Now sort the lists
+    
+    function APISort(a, b) {
+        var aSplit = a.title.split('.');
+        var a = aSplit[aSplit.length - 1];
+        var bSplit = b.title.split('.');
+        var b = bSplit[bSplit.length - 1];
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+    }
+    
+    properties.sort(APISort);
+    methods.sort(APISort);
+    ctors.sort(APISort);
+    
+    // Preconstructed HTML for each type of badge
+    
+    var badges = {
+        ExperimentalBadge : '<span class="sidebar-icon">' + template("ExperimentalBadge", [1]) + '</span>',
+        NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
+        DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
+        ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
+    }
+    
+    // Function to construct one section of the page, given
+    // its title and an array of the pages in the section.
+    
+    function buildSection(title, pages) {
+        var result = '<h2>' + title + '</h2><dl>';
+        
+        for (var i in pages) {
+            var aPage = pages[i];
+            var summary = escapeQuotes(aPage.summary) || '';    // MAYBE A "TEXT NEEDED" NOTICE?
+            var url = aPage.url.replace('en-US', locale);
+            var titleSplit = htmlEscape(aPage.title).split('.');    // Handle both when writer correctly uses "memberName" and
+            var title = titleSplit[titleSplit.length-1];            // when incorrectly uses interface.memberName as page title
+            
+            // Has the page been translated? If so, we need to use its
+            // text instead of the text for English.
+            
+            var translated = false;
+            if (locale != 'en-US') {
+                aPage.translations.forEach(function(translation) {
+                    if (translation.locale === locale) {
+                        summary = escapeQuotes(translation.summary) || '';
+                        url = translation.url;
+                        titleSplit = htmlEscape(aPage.title).split('.');
+                        title = titleSplit[titleSplit.length-1];
+                        translated = true;
+                    }
+                });
+            }
+            
+            // If the page hasn't been translated, we need a call to action!
+            
+            var cta = '';
+             if (!translated && locale != 'en-US') {
+                cta += ' <a href="'+ url +'$translate" style="opacity:0.5" title="'+ text['title'] + '">' + text['translate'] + '</a>';
+            }
+            
+            // Strike through items which are obsolete
+            
+            if (hasTag(aPage, 'Obsolete')) {
+                result += '<s class="obsoleteElement">';
+            }
+            
+            // Now construct the text for the page's entry in the list
+                        
+            if (rtlLocales.indexOf(locale) != -1) {
+                result += '<bdi>';
+            }
+            
+            result += '<dt><a href="' + url + '"><code>' + title + '</code></a>';
+            
+            // Close any case-specific elements
+            
+            if (rtlLocales.indexOf(locale) != -1) {
+                result += '</bdi>';
+            }
+            
+            if (hasTag(aPage, 'Obsolete')) {
+                result += '</s>';
+            }
+            
+            // Add badges. We need them, seriously.
+            
+            if (aPage.hasTag(aPage, 'Experimental')) {
+                result += badges.ExperimentalBadge;
+            }
+            if (aPage.hasTag(aPage, 'Non-standard') || aPage.hasTag(aPage, 'Non Standard')) {
+                result += badges.NonStandardBadge;
+            }
+            if (aPage.hasTag(aPage, 'Deprecated')) {
+                result += badges.DeprecatedBadge;
+            }
+            if (aPage.hasTag(aPage, 'Obsolete')) {
+                result += badges.ObsoleteBadge;
+            }
+            
+            // Add the call to action, if any, and close the title
+            
+            result += cta + '</dt>';
+            
+            // Add the summary
+            
+            result += '<dd>' + summary + '</dd>';
+        }
+        
+        return result;
+    }
+    
+    // Time to do the output of the whole thing!
+    
+    if (ctors.length > 0) {
+        output += buildSublist(text['Constructor'], ctors);
+    }
+    
+    if (properties.length > 0) {
+        output += buildSublist(text['Properties'], properties);
+    }
+    
+    if (methods.length > 0) {
+        output += buildSublist(text['Methods'], methods);
+    }
+    
+    // Wrap it up
+    
+    output += '</dl>';
+}
+%>
+<%-output%>
