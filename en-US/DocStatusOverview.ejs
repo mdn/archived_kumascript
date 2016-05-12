@@ -19,6 +19,35 @@ var totalPages = 0,
     totalOutdated = 0,
     totalddn = 0,
     totaldr = 0;
+    
+//localisation
+var s_section = 'Section',
+    s_pages = 'Pages',
+    s_no_tags = 'No tags',
+    s_needs_tags = 'Needs* tags',
+    s_editorial = 'Editorial reviews',
+    s_techical = 'Technical reviews',
+    s_outdated = 'Outdated pages',
+    s_bugs = 'Dev-doc-needed bugs',
+    s_requests = 'Documentation requests',
+    s_n_a = 'n/a',
+    s_total = 'Total';
+switch (env.locale) {
+    case 'ru':
+        s_section = 'Раздел';
+        s_pages = 'Страницы';
+        s_no_tags = 'Тегов нет';
+        s_needs_tags = 'Нужны* теги';
+        s_editorial = 'Нужна редакторская проверка';
+        s_techical = 'Нужна техническая проверка';
+        s_outdated = 'Устаревшие страницы';
+        s_bugs = 'Баги, которые нужно задоментировать';
+        s_requests = 'Запросы документации';
+        s_n_a = '-';
+        s_total = 'Всего';
+        break;
+    default: break;
+}
 
 var pageList = page.subpagesExpand('/en-US/docs/MDN/Doc_status');
 
@@ -47,15 +76,15 @@ getPages(pageList, $0);
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
-        <th>Section</th>
-        <th>Pages</th>
-        <th>No tags</th>
-        <th>Needs* tags</th>
-        <th>Editorial reviews</th>
-        <th>Technical reviews</th>
-        <th>Outdated pages</th>
-        <th>Dev-doc-needed bugs</th>
-        <th>Documentation requests</th>
+        <th><%=s_section%></th>
+        <th><%=s_pages%></th>
+        <th><%=s_no_tags%></th>
+        <th><%=s_needs_tags%></th>
+        <th><%=s_editorial%></th>
+        <th><%=s_technical%></th>
+        <th><%=s_outdated%></th>
+        <th><%=s_bugs%></th>
+        <th><%=s_requests%></th>
     </tr>
   </thead>
   <tbody>
@@ -86,12 +115,12 @@ getPages(pageList, $0);
                     if (percent >= 10) { color = "rgb(255, 204, 204)" }
                 }
              %>
-                <td style="background-color: <%=color%>;"><%if(result[key].metrics[metric]){ %><%=result[key].metrics[metric].counter%> (<%=percent%>%)<%}else{%>n/a<%}%></td>
+                <td style="background-color: <%=color%>;"><%if(result[key].metrics[metric]){ %><%=result[key].metrics[metric].counter%> (<%=percent%>%)<%}else{%><%=s_n_a%><%}%></td>
             <% } %>
         </tr>
     <% } %>
     <tr>
-        <td><strong>Total</strong></td>
+        <td><strong><%=s_total%></strong></td>
         <td><strong><%=totalPages%></strong></td>
         <td><strong><%=totalNoTags%></strong></td>
         <td><strong><%=totalNeedsTags%></strong></td>
