@@ -3,9 +3,14 @@
 //
 // Parameters:
 //  $0  The API group name; used to locate info about related APIs
+//  $1  (FOR TESTING ONLY) Slug of root page of API
 
 var slug = env.slug;
+if ($1) {
+    slug = $1;
+}
 var locale = env.locale;
+var group = $0;
 var APIHref = '/' + locale + '/docs/Web/API';
 var output = '';
 
@@ -48,7 +53,7 @@ if (slug) {
 
     // Get the information about this API specifically out of the
     // databases, as well as from the subtree below this page.
-
+    
     var mainIFPages = page.subpagesExpand('/en-US/docs/Web/API/' + mainIF);
     var events = [];
 
@@ -80,7 +85,7 @@ if (slug) {
             }
         }
     }
-
+    
     collect(mainIFPages);
 
     // Now sort the lists
@@ -92,7 +97,7 @@ if (slug) {
         b = bSplit[bSplit.length - 1];
         return a.toLowerCase().localeCompare(b.toLowerCase());
     }
-
+    
     properties.sort(APISort);
     methods.sort(APISort);
     ctors.sort(APISort);
@@ -114,8 +119,9 @@ if (slug) {
 
         for (var i in pages) {
             var aPage = pages[i];
-            var summary = escapeQuotes(aPage.summary) || '';    // MAYBE A "TEXT NEEDED" NOTICE?
-            var url = aPage.url.replace('en-US', locale);
+            //var summary = escapeQuotes(aPage.summary) || '';    // MAYBE A "TEXT NEEDED" NOTICE?
+            var summary = aPage.summary.replace(/img[^>]*>/g, " ");
+            var url = aPage.url.replace('/en-US/', "/" + locale + "/");
             var titleSplit = htmlEscape(aPage.title).split('.');    // Handle both when writer correctly uses "memberName" and
             var title = titleSplit[titleSplit.length-1];            // when incorrectly uses interface.memberName as page title
 
@@ -168,16 +174,16 @@ if (slug) {
 
             // Add badges. We need them, seriously.
 
-            if (aPage.hasTag(aPage, 'Experimental')) {
+            if (hasTag(aPage, 'Experimental')) {
                 result += badges.ExperimentalBadge;
             }
-            if (aPage.hasTag(aPage, 'Non-standard') || aPage.hasTag(aPage, 'Non Standard')) {
+            if (hasTag(aPage, 'Non-standard') || hasTag(aPage, 'Non Standard')) {
                 result += badges.NonStandardBadge;
             }
-            if (aPage.hasTag(aPage, 'Deprecated')) {
+            if (hasTag(aPage, 'Deprecated')) {
                 result += badges.DeprecatedBadge;
             }
-            if (aPage.hasTag(aPage, 'Obsolete')) {
+            if (hasTag(aPage, 'Obsolete')) {
                 result += badges.ObsoleteBadge;
             }
 
@@ -192,19 +198,19 @@ if (slug) {
 
         return result;
     }
-
+    
     // Time to do the output of the whole thing!
 
     if (ctors.length > 0) {
-        output += buildSublist(text['Constructor'], ctors);
+        output += buildSection(text['Constructor'], ctors);
     }
 
     if (properties.length > 0) {
-        output += buildSublist(text['Properties'], properties);
+        output += buildSection(text['Properties'], properties);
     }
 
     if (methods.length > 0) {
-        output += buildSublist(text['Methods'], methods);
+        output += buildSection(text['Methods'], methods);
     }
 
     // Wrap it up
