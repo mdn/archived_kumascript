@@ -8,6 +8,9 @@ switch(lang) {
   case 'ja':
     searchfor = ' で <code>' + $2 + '</code> を';
     break;
+  case 'ru':
+    searchfor = ' Искать <code>' + $2 + '</code>';
+    break;
 }
 %>
 <a href="http://mxr.mozilla.org/mozilla-central/<%= $0 + '?' + $1 + '=' + $2 %>"><%-
