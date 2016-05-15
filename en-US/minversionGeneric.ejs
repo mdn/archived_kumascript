@@ -62,7 +62,9 @@ switch(lang) {
         break;
     case 'ru':
         articleName = productVersion + " для разработчиков";
+        text = "Этот контент описывает возможности, представленные в " + web.link(wiki.uri(link), productVersion);
         newIn = "Нововведение в ";
+        note = "Замечание по "+productVersion;
         break;
     case 'zh-CN':
         articleName = productVersion + " for developers";
