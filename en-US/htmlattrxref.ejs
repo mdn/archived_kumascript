@@ -12,6 +12,12 @@
 var lang = env.locale;
 var url = "";
 
+var globalAttrSlug = mdn.localString({
+    "en-US": "Global_attributes",
+    "fr"   : "Attributs_globaux"
+});
+
+
 $0 = $0.toLowerCase();
 
 var text = ($2 && ($2!=undefined))?$2:$0;
@@ -19,7 +25,7 @@ var text = ($2 && ($2!=undefined))?$2:$0;
 if ($1 && ($1 != undefined)) {
     url = '/' + lang + '/docs/Web/HTML/Element/' + $1;
 } else {
-    url = '/' + lang + '/docs/Web/HTML/Global_attributes';
+    url = '/' + lang + '/docs/Web/HTML/' + globalAttrSlug;
 }
 var result = '<code><a href="' + url + '#attr-' + $0 +'">' + text + '</a></code>';
 %>
