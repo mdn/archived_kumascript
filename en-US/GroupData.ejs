@@ -1910,12 +1910,17 @@
         "WebVR API": {
             "overview":   [ "WebVR API" ],
             "interfaces": [ "VRDisplay",
+                            "VRDisplayCapabilities",
                             "VRPose",
                             "VREyeParameters",
-                            "VRFieldOfView" ],
-            "methods":    [ "Navigator.getVRDevices()" ],
-            "properties": [],
-            "events":     []
+                            "VRFieldOfView",
+                            "VRStageParameters" ],
+            "methods":    [ "Navigator.getVRDisplays()" ],
+            "properties": [ "Gamepad.displayId",
+                            "Navigator.activeVRDisplays" ],
+            "events":     [ "vrdisplayconnected",
+                            "vrdisplaydisconnected",
+                            "vrdisplaypresentchange" ]
         },
         "WebVTT": {
             "guides":     [ { "url":   "/docs/Web/API/Web_Video_Text_Tracks_Format",
