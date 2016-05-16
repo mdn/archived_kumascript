@@ -55,7 +55,9 @@ switch(lang){
 	    break;
 	case 'ru':
 		articleName = "Thunderbird " + version + " для разработчиков";
+        text = "Эта статья покрывает возможности, представленные в " + web.link(wiki.uri(lang + '/docs/' + articleName), "Thunderbird " + version);
 		newIn = "Нововведение в ";
+        note = "Замечание по Thunderbird " + version;
 	    break;
 	case 'zh-CN':
 		articleName = "Thunderbird " + version + " for developers";
