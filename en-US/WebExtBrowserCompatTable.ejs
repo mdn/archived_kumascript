@@ -41,6 +41,17 @@ function writeTableHead(desktopBrowserNames, mobileBrowserNames) {
 }
 
 function writeTableCells(columns, name, data, notesCollection) {
+
+  function getNote(noteContent, notesCollection) {
+    for (var i = 0; i < notesCollection.length; i++) {
+      var note = notesCollection[i];
+      if (note.content == noteContent) {
+          return i;
+      }
+    }
+    return -1;
+  }
+
   var output = "";
 
   for (var i = 0; i < columns.length; i++) {
@@ -55,13 +66,19 @@ function writeTableCells(columns, name, data, notesCollection) {
     }
     var notes = data[columns[i]].notes;
     if (notes) {
-      var id = name + "-" + columns[i].replace(/ /g, '-');
-      supported += '<a href="#' + id + '"><strong><sup>' + (notesCollection.length + 1) + '</sup></strong></a>';
-      var newNote = {
-          anchor: id,
-          content: notes
+      var existingNoteIndex = getNote(notes, notesCollection);
+      if (existingNoteIndex != -1) {
+        var existingNote = notesCollection[existingNoteIndex];
+        supported += '<a href="#' + existingNote.anchor + '"><strong><sup>' + (existingNoteIndex + 1) + '</sup></strong></a>';
+      } else {
+        var id = name + "-" + columns[i].replace(/ /g, '-');
+        supported += '<a href="#' + id + '"><strong><sup>' + (notesCollection.length + 1) + '</sup></strong></a>';
+        var newNote = {
+            anchor: id,
+            content: notes
+        }
+        notesCollection.push(newNote);
       }
-      notesCollection.push(newNote);
     }
     output += '      <td class="' + supportedClass + '">' + supported + '</td>\n';
   }
