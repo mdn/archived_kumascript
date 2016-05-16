@@ -57,6 +57,15 @@ switch (env.locale) {
     // s_original = " ";
     // s_note = " ";
     break;
+  case 'ru':
+    s_title = "Информация об оригинальном документе";
+    s_author = "Автор(ы): ";
+    s_others = "Другие помощники: ";
+    s_date = "Дата последнего обновления: ";
+    s_copyright = "Информация об авторских правах: ";
+    s_original = "Оригинальное расположение: ";
+    s_note = "Замечание: ";
+    break;
 };
 var out = [];
 if ($0.author) {out.push('<li>' + s_author + $0.author + '</li>');}
