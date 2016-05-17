@@ -49,7 +49,7 @@ switch (env.locale) {
     default: break;
 }
 
-var pageList = page.subpagesExpand('/en-US/docs/MDN/Doc_status');
+var pageList = page.subpagesExpand('/'+ env.locale+'/docs/MDN/Doc_status');
 
 function getPages(pageList, filterString) {
     if (pageList) {
