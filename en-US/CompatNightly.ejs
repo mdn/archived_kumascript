@@ -1,5 +1,13 @@
 <%
-/* can eventually add code to link to nightlies for a specified browser */
+/*
+  Displays a note about compatibility in a nightly or snapshot build of a browser
+
+  Parameters:
+    $0 - Keyword indicating the browser to create a link to a nightly or
+         snapshot build page
+         Valid values: 'firefox', 'firefoxmobile', 'safari', 'chrome' and 'opera'
+*/
+
 var str = 'Nightly build';
 var url = '';
   if ($0) {
