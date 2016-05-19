@@ -56,7 +56,8 @@ var pageList = page.subpagesExpand('/' + env.locale + '/docs/MDN/Doc_status');
 function getPages(pageList) {
     if (pageList) {
         for (var aPage in pageList) {
-            if (pageList[aPage].url.indexOf("Doc_status/Overview") == -1) {
+            if (pageList[aPage].url.indexOf("Doc_status/Overview") == -1 ||
+                pageList[aPage].url.indexOf("Doc_status/l10nPriority") == -1 ) {
                 var url = 'https://developer.mozilla.org' + pageList[aPage].url + '?raw&macros&section=json';
                 var resource = MDN.fetchHTTPResource(url);
                 if (resource != '') {
