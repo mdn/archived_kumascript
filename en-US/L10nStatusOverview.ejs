@@ -56,16 +56,14 @@ var pageList = page.subpagesExpand('/' + env.locale + '/docs/MDN/Doc_status');
 function getPages(pageList) {
     if (pageList) {
         for (var aPage in pageList) {
-            if (pageList[aPage].url.indexOf("Doc_status/Overview") == -1 ||
-                pageList[aPage].url.indexOf("Doc_status/l10nPriority") == -1 ) {
-                var url = 'https://developer.mozilla.org' + pageList[aPage].url + '?raw&macros&section=json';
+            if (pageList[aPage].url.indexOf("Doc_status/Overview") == -1) {
+                var url = 'https://developer.mozilla.org/' + pageList[aPage].locale + '/docs/' + pageList[aPage].slug + '?raw&macros&section=json';
                 var resource = MDN.fetchHTTPResource(url);
                 if (resource != '') {
                     result[pageList[aPage].title] = {};
                     result[pageList[aPage].title].metrics = JSON.parse(resource);
                     result[pageList[aPage].title].url = pageList[aPage].url;
                 }
-            
                 var subpage = getPages(pageList[aPage].subpages);
             }
         }
