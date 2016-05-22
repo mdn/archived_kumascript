@@ -1,7 +1,7 @@
 <%
 var l = env.locale;
 
-if(env.locale === "ru"){
+if(l === "ru"){
 %>
 <section id="Quick_Links">
 <ol><li><a href="/<%- l %>/docs/Web/Guide/CSS/Getting_Started/What_is_CSS">Что такое CSS?</a></li>
@@ -24,6 +24,7 @@ if(env.locale === "ru"){
 	<li><a href="/<%- l %>/docs/Web/Guide/CSS/Getting_Started/XUL_user_interfaces">Пользовательские интерфейсы XUL</a></li>
 </ol>
 </section>
+<%
 } else {
 %>
 <section id="Quick_Links">
