@@ -15,6 +15,9 @@ var lang = env.locale;
 channelURL = "irc://irc.mozilla.org/" + channelName;
 
 switch(lang) {
+    case "ru":
+        tooltip = "Присоединиться к каналу #" + channelName + " на irc.mozilla.org. Требуется IRC клиент.";
+        break;
     default: // en-US and unspecified languages
         tooltip = "Connect to the #" + channelName + " channel on irc.mozilla.org. Requires an IRC client.";
         break;
