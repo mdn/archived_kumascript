@@ -16,6 +16,9 @@ var url = $0 + "#" + $1;
 url = Web.spacesToUnderscores(url);
 
 switch(lang) {
+    case "ru":
+        text = '"<a href="' + url + '">' + $1 + '</a>" в <a href="' + $0 + '">' + title + '</a>';
+        break;
     default:
         text = '"<a href="' + url + '">' + $1 + '</a>" in <a href="' + $0 + '">' + title + '</a>';
         break;
