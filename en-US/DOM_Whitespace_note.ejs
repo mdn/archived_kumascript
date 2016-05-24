@@ -75,6 +75,17 @@ function showJapanese() {%>
     <p>より多くの情報を得る為には『<a href="/ja/docs/Web/Guide/DOM/Whitespace_in_the_DOM">DOM 中の空白文字</a>』と『<a class="external" href="http://www.w3.org/DOM/faq.html#emptytext">W3C DOM 3 FAQ: Why are some Text nodes empty?</a>』を参照してください。</p>
 <%}
 
+function showRussian() {
+%>
+    <p>Браузеры, основанные на Gecko, вставляют текстовые узлы в документ для представления пробелов в разметке.
+    Поэтому узел, полученный, например, при использовании <%-linkFirstChild%> или <%-linkPrevSib%> может относиться к
+    пробелу, а нет к настоящему элементу, который автор хотел получить.</p>
+    
+    <p>Смотрите <a href="/ru/docs/Web/Guide/DOM/Whitespace_in_the_DOM">Пробел в DOM</a> и
+    <a href="http://www.w3.org/DOM/faq.html#emptytext">W3C DOM 3 FAQ: Почему некоторые текстовые узлы пустые?</a>
+    для дополнительной информации.</p>
+<%
+}
 
 switch(lang) {
     case 'zh-CN':
@@ -91,6 +102,9 @@ switch(lang) {
         break;
     case 'ja':
         showJapanese();
+        break;
+    case 'ru':
+        showRussian();
         break;
     default:
         showEnglish();
