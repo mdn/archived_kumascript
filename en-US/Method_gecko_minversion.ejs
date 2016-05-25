@@ -33,7 +33,7 @@ if (parseInt(currentGecko, 10) - parseInt($1, 10) < 9) {
 if (parseInt(currentGecko, 10) - parseInt($1, 10) < 9) {
 %>
     <span class="indicatorInHeadline standardNote standardNoteMethod"><%-
-     replacePlaceholders(str, [$1]) %> <%- template("geckoRelease", [$1])
+     mdn.replacePlaceholders(str, [$1]) %> <%- template("geckoRelease", [$1])
     %></span>
 </div>
 <%
