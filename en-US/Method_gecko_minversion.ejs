@@ -9,10 +9,10 @@ Parameters:
 */
   
 var str = mdn.localString({
-    "en-US": ["Requires Gecko ", ""],
-    "de": ["Benötigt Gecko  ", ""],
-    "ja": ["要 Gecko ", ""],
-    "ru": ["Требует Gecko ", ""]
+    "en-US": "Requires Gecko $version$",
+    "de": "Benötigt Gecko $version$",
+    "ja": "要 Gecko $version$",
+    "ru": "Требует Gecko $version$"
 });
   
 var headlineLevel = $2 || "3";
@@ -33,7 +33,7 @@ if (parseInt(currentGecko, 10) - parseInt($1, 10) < 9) {
 if (parseInt(currentGecko, 10) - parseInt($1, 10) < 9) {
 %>
     <span class="indicatorInHeadline standardNote standardNoteMethod"><%-
-     str[0] %><%= $1 %><%- str[1] %> <%- template("geckoRelease", [$1])
+     replacePlaceholders(str, [$1]) %> <%- template("geckoRelease", [$1])
     %></span>
 </div>
 <%
