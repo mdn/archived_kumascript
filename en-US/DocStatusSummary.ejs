@@ -6,14 +6,40 @@
 //  $1  -  Custom status metrics. Object containg the headline as the key and the metric number plus a anchor as an array.
 // (e.g. { "cleanup": ["Clean-up", "#Cleanup_on_standard_built-in_ECMAScript_objects", "250"], "missingPages": ["Missing pages", "#Missing_pages", "42"] }).
 
+//Switching locales
+var s_pages = mdn.localString({
+    "en-US" : "Pages",
+    "ru"    : "Страницы"
+});
+
+var s_no_tags = mdn.localString({
+    "en-US" : "No tags",
+    "ru"    : "Нет меток"
+});
+
+var s_needs_tags = mdn.localString({
+    "en-US" : "Needs* tags",
+    "ru"    : "Метки Needs*"
+});
+
+var s_editorial = mdn.localString({
+    "en-US" : "Editorial reviews",
+    "ru"    : "Редакторско одобренных"
+});
+
+var s_technical = mdn.localString({
+    "en-US" : "Technical reviews",
+    "ru"    : "Технически одобренных"
+});
+
 var pageList = page.subpagesExpand($0);
 var pageCounter = 0;
 var metrics = {
                       // title, link, counter
-  "noTags":           ["No tags", "#No_tags", 0],
-  "needsTags":        ["Needs* tags", "#Need_tags", 0],
-  "editorialReviews": ["Editorial reviews", "#Editorial_reviews", 0],
-  "technicalReviews": ["Technical reviews", "#Technical_reviews", 0],
+  "noTags":           [s_no_tags, "#No_tags", 0],
+  "needsTags":        [s_needs_tags, "#Need_tags", 0],
+  "editorialReviews": [s_editorial, "#Editorial_reviews", 0],
+  "technicalReviews": [s_technical, "#Technical_reviews", 0],
 }
 
 if ($1) {
@@ -74,7 +100,7 @@ var indexPage = $0 + '/Index';
 <table class="docstatussummary standard-table">
   <thead>
     <tr>
-      <th><a href="<%=indexPage%>">Pages</a></th>
+      <th><a href="<%=indexPage%>"><%=s_pages%></a></th>
 <%
  for (var key in metrics) {
   if (metrics.hasOwnProperty(key)) { 
