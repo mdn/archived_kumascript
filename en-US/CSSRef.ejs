@@ -86,25 +86,28 @@ if (slug) {
         for (var property in data.properties) {
             var propertyGroup = data.properties[property].groups;
             for (var g in propertyGroup) {
-              if (group.indexOf(propertyGroup[g]) !== -1) {
-                groupData.push(property);
-              }
+                if (group.indexOf(propertyGroup[g]) !== -1 &&
+                        groupData.indexOf(property) === -1) {
+                    groupData.push(property);
+                }
             }
         }
         for (var atRule in data.atRules) {
             var atRuleGroup = data.atRules[atRule].groups;
             for (var g in atRuleGroup) {
-              if (group.indexOf(atRuleGroup[g]) !== -1) {
-                groupData.push(atRule);
-              }
+                if (group.indexOf(atRuleGroup[g]) !== -1 &&
+                        groupData.indexOf(atRule) === -1) {
+                    groupData.push(atRule);
+                }
             }
         }
         for (var type in data.types) {
             var typeGroup = data.types[type].groups;
             for (var g in typeGroup) {
-              if (group.indexOf(typeGroup[g]) !== -1 && groupData.indexOf(type) === -1) {
-                groupData.push(type);
-              }
+                if (group.indexOf(typeGroup[g]) !== -1 &&
+                        groupData.indexOf(type) === -1) {
+                    groupData.push(type);
+                }
             }
         }
     }
