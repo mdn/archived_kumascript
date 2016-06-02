@@ -27,8 +27,7 @@ var sectionName = mdn.localString({
 var url = "/" + env.locale + "/docs/Web/HTML/" + sectionName + "/" +
     elementName;
 var page = wiki.getPage(url);
-var summary = (page && page.summary) ?
-    mdn.escapeQuotes(page.summary).replace(/>/g, "&gt;") :
+var summary = (page && page.summary) ? mdn.escapeQuotes(page.summary) :
     mdn.getLocalString(commonLocalStrings, "summary");
 
 // Add anchor after fetching the page contents
