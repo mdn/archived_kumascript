@@ -587,8 +587,12 @@
         "Fullscreen API": {
             "overview":   [ "Fullscreen API" ],
             "interfaces": [],
-            "methods":    [ "Element.requestFullscreen()" ],
-            "properties": [],
+            "methods":    [ "Document.exitFullscreen()", 
+                            "Element.requestFullscreen()" ],
+            "properties": [ "Document.fullscreen", 
+                            "Document.fullscreenElement", 
+                            "Document.onfullscreenchange",
+                            "Document.onfullscreenerror" ],
             "events":     [ "fullscreenchange",
                             "fullscreenerror" ]
         },
