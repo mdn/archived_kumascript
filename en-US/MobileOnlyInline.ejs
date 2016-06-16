@@ -8,7 +8,7 @@ var title = "";
 switch(env.locale) {
   case 'zh-cn':
     str = "只支持Gecko移动设备" + ($0?("(Gecko" + $0 +"以上)"):"");
-    title = "只在内核为Gecko " + ($0?($0 + " " + template(geckoRelease, [$0]) + "以上版本"):"") + "的Firefox Mobile中可用";
+    title = "只在内核为Gecko " + ($0?($0 + " " + template("geckoRelease", [$0]) + "以上版本"):"") + "的Firefox Mobile中可用";
     break;
   default:
     str = "Mobile Only in Gecko " + $0;
