@@ -12,11 +12,13 @@ function state(section) {
 var text = mdn.localString({
   'en-US': {
     'HTTP': 'HTTP',
-    'Session': 'A basic session',
+    'Session': 'A basic HTTP session',
     'Headers': 'Headers',
     'Response_codes': 'Response codes',
-    'Cookies': 'Cookies',
-    'CORS': 'HTTP Access Control (CORS)'
+    'Cookies': 'HTTP cookies',
+    'CORS': 'HTTP Access Control (CORS)',
+    'Guides': 'Guides:',
+    'Reference': 'References:'
   },
   'ru': {
     'HTTP': 'HTTP',
@@ -24,20 +26,25 @@ var text = mdn.localString({
     'Headers': 'Заголовки',
     'Response_codes': 'Коды ответа',
     'Cookies': 'Куки',
-    'CORS': 'HTTP контроль доступа (CORS)'
+    'CORS': 'HTTP контроль доступа (CORS)',
+    'Guides': 'Guides:',
+    'Reference': 'References:'
   }
 });
 %>
-<section id="Quick_Links">
-    <ol>
-        <li data-default-state="open"><a href="/<%=locale%>/docs/Web/HTTP"><strong><%=text['HTTP']%></strong></a></li>
-            <ol>
-                <li><a href="/<%=locale%>/docs/Web/HTTP/Session"><strong><%=text['Session']%></strong></a></li>
-                <li><a href="/<%=locale%>/docs/Web/HTTP/Headers"><strong><%=text['Headers']%></strong></a></li>
-                <li><a href="/<%=locale%>/docs/Web/HTTP/Response_codes"><strong><%=text['Response_codes']%></strong></a></li>
-                <li><a href="/<%=locale%>/docs/Web/HTTP/Cookies"><strong><%=text['Cookies']%></strong></a></li>  
-                <li><a href="/<%=locale%>/docs/Web/HTTP/Access_control_CORS"><strong><%=text['CORS']%></strong></a></li>
-            </ol>
-        </li>
-    </ol>
+
+
+<section class="Quick_links" id="Quick_Links">
+  <ol>
+    <li><a href="/<%=locale%>/docs/Web/HTTP"><strong><em><%=text['HTTP']%></em></strong></a></li>
+    <li><strong><%=text['Guides']%></strong></li>
+    <li><a href="/<%=locale%>/docs/Web/HTTP/Session"><%=text['Session']%></a></li>
+    <li><a href="/<%=locale%>/docs/Web/HTTP/Cookies"><%=text['Cookies']%></a></li>  
+    <li><a href="/<%=locale%>/docs/Web/HTTP/Access_control_CORS"><%=text['CORS']%></a></li>
+    <li><strong><%=text['Reference']%></strong></li>
+    <li><a href="/<%=locale%>/docs/Web/HTTP/Response_codes"><%=text['Response_codes']%></a></li>
+    <li data-default-state="<%=state('Headers')%>"><a href="/<%=locale%>/docs/Web/HTTP/Headers"><%=text['Headers']%></a>
+      <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/HTTP/Headers', 1])%>
+    </li>
+  </ol>
 </section>
