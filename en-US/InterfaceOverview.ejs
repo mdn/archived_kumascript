@@ -42,7 +42,21 @@ if (slug) {
 
     var commonl10n = string.deserialize(template('L10n:Common'));
 
-    // Get translations of strings we need
+    // Strings that need translating
+
+    var strNone = getLocalString({
+      "en-US": "This interface has no $1."
+    });
+
+    var strInherits = getLocalString({
+      "en-US": "This interface has no $1, but inherits $1 from: $2"
+    });
+
+    var strAlsoInherits = getLocalString({
+      "en-US": "Also inherits $1 from: $2"
+    });
+    
+  // Get translations of strings we need
 
     var text = {
         Methods: getLocalString(commonl10n, 'Methods'),
@@ -50,7 +64,8 @@ if (slug) {
         Constructor: getLocalString(commonl10n, 'Constructor'),
         Events: getLocalString(commonl10n, 'Events'),
         translate: getLocalString(commonl10n, '[Translate]'),
-        title: getLocalString(commonl10n, 'TranslationCTA')
+        title: getLocalString(commonl10n, 'TranslationCTA'),
+        separator: getLocalString(commonl10n, 'listSeparator')
     };
 
     // Get the information about this API specifically out of the
@@ -90,6 +105,21 @@ if (slug) {
     
     collect(mainIFPages);
 
+    // Build inheritance information, if any
+
+    var inherited = [];
+
+    var impl = webAPIData[0][mainIF] != undefined ? webAPIData[0][mainIF].impl : [];
+    var inh = webAPIData[0][mainIF] != undefined ? webAPIData[0][mainIF].inh : '';
+
+    if (inh) {
+      inherited.push(inh);
+    }
+    
+    impl.forEach(function(value, index, ar) {
+      inherited.push(value);
+    });
+
     // Now sort the lists
 
     function APISort(a, b) {
@@ -103,6 +133,11 @@ if (slug) {
     properties.sort(APISort);
     methods.sort(APISort);
     ctors.sort(APISort);
+    inherited.sort(APISort);
+
+    // Build inheritance list string
+    
+    var inheritanceList = inherited.join(text.separator);
 
     // Preconstructed HTML for each type of badge
 
@@ -118,7 +153,38 @@ if (slug) {
     // its title and an array of the pages in the section.
 
     function buildSection(title, pages) {
-        var result = '<h2>' + title + '</h2><dl>';
+        var result = '<h2>' + title + '</h2>';
+        var inheritText = '';
+        
+        // If there are any items in the section and there are
+        // inherited interfaces:
+        
+        if (pages.length && inherited.length) {
+          //inheritText = strAlsoInherits.replace("$1",
+          //              title.toLocaleLowerCase());
+          //inheritText = inheritText.replace("$2", inheritanceList);
+        }
+
+        // ... if there are no items in the sections and no inherited
+        // interfaces:
+        else if (!pages.length && !inherited.length) {
+          inheritText = strNone.replace("$1", title.toLocaleLowerCase());
+        }
+
+        // ... if there are no items in the section but there are inherited
+        // interfaces:
+
+        else if (!pages.length) {
+          inheritText = strInherits.replace("$1", title.toLocaleLowerCase());
+        }
+
+        // ... otherwise, there are items in the section but none inherited.
+
+        if (inheritText.length) {
+          result += '<em>' + inheritText + '</em>';
+        }
+
+        result += '<dl>';
 
         for (var i in pages) {
             var aPage = pages[i];
