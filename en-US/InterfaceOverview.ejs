@@ -1,4 +1,6 @@
 <%
+// *** EXPERIMENTAL - DO NOT USE! ***
+//
 // Constructs an API overview for the API rooted at the current page.
 //
 // Parameters:
@@ -109,6 +111,7 @@ if (slug) {
         NonStandardBadge  : '<span class="sidebar-icon">' + template("NonStandardBadge", [1]) + '</span>',
         DeprecatedBadge   : '<span class="sidebar-icon">' + template("DeprecatedBadge", [1]) + '</span>',
         ObsoleteBadge     : '<span class="sidebar-icon">' + template("ObsoleteBadge", [1]) + '</span>',
+        ReadOnlyBadge     : template("ReadOnlyInline"),
     };
 
     // Function to construct one section of the page, given
@@ -185,6 +188,9 @@ if (slug) {
             }
             if (hasTag(aPage, 'Obsolete')) {
                 result += badges.ObsoleteBadge;
+            }
+            if (hasTag(aPage, 'Read-only')) {
+                result += badges.ReadOnlyBadge;
             }
 
             // Add the call to action, if any, and close the title
