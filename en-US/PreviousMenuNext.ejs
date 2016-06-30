@@ -55,7 +55,7 @@ switch(lang) {
 
 
 if ($0) {
-    strPrevious = '<a href="/' + lang + '/docs/' + string.replace($0, ' ', '_') + '">' + s_PreviousNext[0] + '</a>';
+    strPrevious = '<a style="float:' + floatValue + ';" href="/' + lang + '/docs/' + string.replace($0, ' ', '_') + '">' + s_PreviousNext[0] + '</a>';
 }
 
 if ($1) {
@@ -63,13 +63,11 @@ if ($1) {
 }
 
 if ($2) {
-    strMenu = '<a href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>'
+    strMenu = '<a style="float:' + floatValue + '; margin-left: 10%;" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>'
 }
-
-var paraStyle= 'display:flex;justify-content:space-between;';
 
 
 
 %><div class="prevnext" style="text-align:<%- textAlign %>;">
-    <p style="<%- paraStyle %>"><%- strPrevious %><%- strMenu %><%- strNext %></p>
+    <p><%- strPrevious %><%- strMenu %><%- strNext %></p>
 </div>
