@@ -68,7 +68,13 @@ if ($1) {
 }
 
 if ($2) {
-    strMenu = '<a style="float:' + prevFloatValue + '; width: 33%;text-align: center;" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>'
+  if($0 && $1) {
+    strMenu = '<a style="float:' + prevFloatValue + '; width: 33%;text-align: center;" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>';
+  } else if($0) {
+    strMenu = '<a style="float:' + nextFloatValue + '; width: 33%;text-align: ' + nextTextAlign + ';" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>';
+  } else if($1) {
+    strMenu = '<a style="float:' + prevFloatValue + '; width: 33%;text-align: ' + prevTextAlign + ';" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>';
+  }
 }
 
 
