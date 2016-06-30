@@ -38,16 +38,21 @@ var s_Menu = mdn.localString({
 
 
 // for LTR
-var textAlign = "right";
-var floatValue = "left";
+var prevTextAlign = "left";
+var nextTextAlign = "right";
+
+var prevFloatValue = "left";
+var nextFloatValue = "right";
 
 // for RTL
 switch(lang) {
     case "ar":
     case "fa":
     case "he":
-        textAlign = "left";
-        floatValue = "right";
+        prevTextAlign = "right";
+        nextTextAlign = "left";
+        prevFloatValue = "right";
+        nextFloatValue = "left";
         break;
     default:
         break;
@@ -55,19 +60,20 @@ switch(lang) {
 
 
 if ($0) {
-    strPrevious = '<a style="float:' + floatValue + ';" href="/' + lang + '/docs/' + string.replace($0, ' ', '_') + '">' + s_PreviousNext[0] + '</a>';
+    strPrevious = '<a style="float:' + prevFloatValue + '; width: 33%;text-align:' + prevTextAlign + ';" href="/' + lang + '/docs/' + string.replace($0, ' ', '_') + '">' + s_PreviousNext[0] + '</a>';
 }
 
 if ($1) {
-    strNext = '<a href="/' + lang + '/docs/' + string.replace($1, ' ', '_') + '">' + s_PreviousNext[1] + '</a>';
+    strNext = '<a style="width: 33%;float:' + nextFloatValue + ';text-align: ' + nextTextAlign + ';" href="/' + lang + '/docs/' + string.replace($1, ' ', '_') + '">' + s_PreviousNext[1] + '</a>';
 }
 
 if ($2) {
-    strMenu = '<a style="float:' + floatValue + '; margin-left: 10%;" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>'
+    strMenu = '<a style="float:' + prevFloatValue + '; width: 33%;text-align: center;" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>'
 }
 
 
 
-%><div class="prevnext" style="text-align:<%- textAlign %>;">
+%><div class="prevnext">
     <p><%- strPrevious %><%- strMenu %><%- strNext %></p>
+    <p>&nbsp;</p>
 </div>
