@@ -33,7 +33,7 @@ var s_PreviousNext = mdn.localString({
 });
 
 var s_Menu = mdn.localString({
-    "en-US": "Main menu"    
+    "en-US": "^ Overview: "    
 });
 
 
@@ -68,12 +68,18 @@ if ($1) {
 }
 
 if ($2) {
+  var startString = $2;
+  var linkTextArray = startString.split('/');
+  var linkText = linkTextArray[linkTextArray.length-1];
+  var re = /_/gi;
+  var finalString = linkText.replace(re,' ');
+  
   if($0 && $1) {
-    strMenu = '<a style="float:' + prevFloatValue + '; width: 33%;text-align: center;" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>';
+    strMenu = '<a style="float:' + prevFloatValue + '; width: 33%;text-align: center;" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + finalString + '</a>';
   } else if($0) {
-    strMenu = '<a style="float:' + nextFloatValue + '; width: 33%;text-align: ' + nextTextAlign + ';" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>';
+    strMenu = '<a style="float:' + nextFloatValue + '; width: 33%;text-align: ' + nextTextAlign + ';" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + finalString + '</a>';
   } else if($1) {
-    strMenu = '<a style="float:' + prevFloatValue + '; width: 33%;text-align: ' + prevTextAlign + ';" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + '</a>';
+    strMenu = '<a style="float:' + prevFloatValue + '; width: 33%;text-align: ' + prevTextAlign + ';" href="/' + lang + '/docs/' + string.replace($2, ' ', '_') + '">' + s_Menu + finalString + '</a>';
   }
 }
 
