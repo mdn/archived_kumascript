@@ -6,16 +6,18 @@
 // Parameters:
 //  $0 - The path of the page whose subpages should be listed.
 //  $1 - If true, do not put the text in <code></code>.
+//  $2 - If true, do add the parent page to the list
 
 var path = $0;
 var locale = env.locale;
+var parent = $2 ? 1 : 0;
 
 // If the path ends with a slash, remove it.    
 if (path.substr(-1, 1) === '/') {
     path = path.slice(0, -1);
 }
     
-var pages = page.subpagesExpand(path, -1, 1);
+var pages = page.subpagesExpand(path, -1, parent);
 var containsTag = page.hasTag;
 var escapeQuotes = mdn.escapeQuotes;
 var htmlEscape = kuma.htmlEscape;
