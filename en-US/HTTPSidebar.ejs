@@ -20,7 +20,8 @@ var text = mdn.localString({
     'CORS': 'HTTP Access Control (CORS)',
     'Guides': 'Guides:',
     'Reference': 'References:',
-    'Methods': 'HTTP request methods'
+    'Methods': 'HTTP request methods',
+    'Status': 'HTTP response status codes'
   },
   'ru': {
     'HTTP': 'HTTP',
@@ -44,12 +45,14 @@ var text = mdn.localString({
     <li><a href="/<%=locale%>/docs/Web/HTTP/Cookies"><%=text['Cookies']%></a></li>  
     <li><a href="/<%=locale%>/docs/Web/HTTP/Access_control_CORS"><%=text['CORS']%></a></li>
     <li><strong><%=text['Reference']%></strong></li>
-    <li><a href="/<%=locale%>/docs/Web/HTTP/Response_codes"><%=text['Response_codes']%></a></li>
     <li data-default-state="<%=state('Web/HTTP/Headers')%>"><a href="/<%=locale%>/docs/Web/HTTP/Headers"><%=text['Headers']%></a>
       <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/HTTP/Headers'])%>
     </li>
     <li data-default-state="<%=state('Web/HTTP/Methods')%>"><a href="/<%=locale%>/docs/Web/HTTP/Methods"><%=text['Methods']%></a>
       <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/HTTP/Methods'])%>
+    </li>
+    <li data-default-state="<%=state('Web/HTTP/Status')%>"><a href="/<%=locale%>/docs/Web/HTTP/Status"><%=text['Status']%></a>
+      <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/HTTP/Status'])%>
     </li>
   </ol>
 </section>
