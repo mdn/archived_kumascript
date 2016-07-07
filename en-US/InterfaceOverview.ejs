@@ -29,6 +29,7 @@ if (slug) {
     var escapeQuotes = mdn.escapeQuotes;
     var htmlEscape = kuma.htmlEscape;
     var getLocalString = mdn.getLocalString;
+    var localString = mdn.localString;
 
     var rtlLocales = ['ar', 'he', 'fa'];
 
@@ -44,15 +45,15 @@ if (slug) {
 
     // Strings that need translating
 
-    var strNone = getLocalString({
+    var strNone = localString({
       "en-US": "This interface has no $1."
     });
 
-    var strInherits = getLocalString({
+    var strInherits = localString({
       "en-US": "This interface has no $1, but inherits $1 from: $2"
     });
 
-    var strAlsoInherits = getLocalString({
+    var strAlsoInherits = localString({
       "en-US": "Also inherits $1 from: $2"
     });
     
@@ -137,7 +138,14 @@ if (slug) {
 
     // Build inheritance list string
     
-    var inheritanceList = inherited.join(text.separator);
+    var inheritanceList = "";
+    
+    inherited.forEach(function(val, index, ar) {
+        inheritanceList += template("domxref", [val]);
+        if (index != ar.length-1) {
+            inheritanceList += text.separator;
+        }
+    }, this);
 
     // Preconstructed HTML for each type of badge
 
@@ -156,35 +164,38 @@ if (slug) {
         var result = '<h2>' + title + '</h2>';
         var inheritText = '';
         
-        // If there are any items in the section and there are
-        // inherited interfaces:
+        if (title != text.Constructor) {
+            // If there are any items in the section and there are
+            // inherited interfaces:
+            
+            if (pages.length && inherited.length) {
+              inheritText = strAlsoInherits.replace(/\$1/ig,
+                            title.toLocaleLowerCase());
+              inheritText = inheritText.replace(/\$2/ig, inheritanceList);
+            }
+    
+            // ... if there are no items in the section and no inherited
+            // interfaces:
+            else if (!pages.length && !inherited.length) {
+              inheritText = strNone.replace(/\$1/ig, title.toLocaleLowerCase());
+            }
+    
+            // ... if there are no items in the section but there are inherited
+            // interfaces:
+    
+            else if (!pages.length) {
+              inheritText = strInherits.replace(/\$1/ig, title.toLocaleLowerCase());
+              inheritText = inheritText.replace(/\$2/ig, inheritanceList);
+            }
+    
+            // ... otherwise, there are items in the section but none inherited,
+            // so we don't have any special text at all.
+    
+            if (inheritText.length) {
+              result += '<p><em>' + inheritText + '</em></p>';
+            }
+        }
         
-        if (pages.length && inherited.length) {
-          //inheritText = strAlsoInherits.replace("$1",
-          //              title.toLocaleLowerCase());
-          //inheritText = inheritText.replace("$2", inheritanceList);
-          inheritText = inheritanceList;
-        }
-
-        // ... if there are no items in the sections and no inherited
-        // interfaces:
-        else if (!pages.length && !inherited.length) {
-          inheritText = strNone.replace("$1", title.toLocaleLowerCase());
-        }
-
-        // ... if there are no items in the section but there are inherited
-        // interfaces:
-
-        else if (!pages.length) {
-          inheritText = strInherits.replace("$1", title.toLocaleLowerCase());
-        }
-
-        // ... otherwise, there are items in the section but none inherited.
-
-        if (inheritText.length) {
-          result += '<em>' + inheritText + '</em>';
-        }
-
         result += '<dl>';
 
         for (var i in pages) {
@@ -278,13 +289,13 @@ if (slug) {
         output += buildSection(text['Constructor'], ctors);
     }
 
-    if (properties.length > 0) {
+//    if (properties.length > 0) {
         output += buildSection(text['Properties'], properties);
-    }
+//    }
 
-    if (methods.length > 0) {
+//    if (methods.length > 0) {
         output += buildSection(text['Methods'], methods);
-    }
+//    }
 
     // Wrap it up
 
