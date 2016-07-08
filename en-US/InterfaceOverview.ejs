@@ -62,6 +62,7 @@ if (slug) {
     var text = {
         Methods: getLocalString(commonl10n, 'Methods'),
         Properties: getLocalString(commonl10n, 'Properties'),
+        EventHandlers: getLocalString(commonl10n, 'Event_handlers'),
         Constructor: getLocalString(commonl10n, 'Constructor'),
         Events: getLocalString(commonl10n, 'Events'),
         translate: getLocalString(commonl10n, '[Translate]'),
@@ -80,19 +81,19 @@ if (slug) {
         events = webAPIGroups[0][group].events || [];
     }
 
-    // IDEA: SCAN FOR PROPERTIES NAMED "ON" + THE NAME OF EVENTS AND
-    // USE THAT TO BUILD LIST FOR AN EVENT HANDLERS SECTION
-
     // Scan the pages and collect the information we need about them
 
     var properties = [];
+    var eventHandlers = [];
     var methods = [];
     var ctors = [];
 
     function collect(pageList) {
         for (var i in pageList) {
             var aPage = pageList[i];
-            if (hasTag(aPage, 'Property')) {
+            if (hasTag(aPage, 'Event Handler')) {
+              eventHandlers.push(aPage);
+            } else if (hasTag(aPage, 'Property')) { // "else" because handlers are also properties
                 properties.push(aPage);
             }
             if (hasTag(aPage, 'Method')) {
@@ -131,6 +132,7 @@ if (slug) {
         return a.toLowerCase().localeCompare(b.toLowerCase());
     }
     
+    eventHandlers.sort(APISort);
     properties.sort(APISort);
     methods.sort(APISort);
     ctors.sort(APISort);
@@ -160,8 +162,11 @@ if (slug) {
     // Function to construct one section of the page, given
     // its title and an array of the pages in the section.
 
-    function buildSection(title, pages) {
-        var result = '<h2>' + title + '</h2>';
+    function buildSection(title, pages, headLevel) {
+        if (!headLevel) {
+          headLevel = 2;
+        }
+        var result = '<h' + headLevel + '>' + title + '</h' + headLevel + '>';
         var inheritText = '';
         
         if (title != text.Constructor) {
@@ -256,19 +261,19 @@ if (slug) {
             // Add badges. We need them, seriously.
 
             if (hasTag(aPage, 'Experimental')) {
-                result += badges.ExperimentalBadge;
+                result += " " + badges.ExperimentalBadge;
             }
             if (hasTag(aPage, 'Non-standard') || hasTag(aPage, 'Non Standard')) {
-                result += badges.NonStandardBadge;
+                result += " " + badges.NonStandardBadge;
             }
             if (hasTag(aPage, 'Deprecated')) {
-                result += badges.DeprecatedBadge;
+                result += " " + badges.DeprecatedBadge;
             }
             if (hasTag(aPage, 'Obsolete')) {
-                result += badges.ObsoleteBadge;
+                result += " " + badges.ObsoleteBadge;
             }
             if (hasTag(aPage, 'Read-only')) {
-                result += badges.ReadOnlyBadge;
+                result += " " + badges.ReadOnlyBadge;
             }
 
             // Add the call to action, if any, and close the title
@@ -292,6 +297,10 @@ if (slug) {
 //    if (properties.length > 0) {
         output += buildSection(text['Properties'], properties);
 //    }
+
+      if (eventHandlers.length > 0) {
+        output += buildSection(text['EventHandlers'], eventHandlers, 3);
+      }
 
 //    if (methods.length > 0) {
         output += buildSection(text['Methods'], methods);
