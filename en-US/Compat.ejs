@@ -1,0 +1,58 @@
+<%
+
+// If no arguments are given figure out which json belongs to the current page
+// If arguments are given:
+//    $0 – path to json, e.g. "web/http/headers.json"
+//    $1 – feature to be queried, e.g. "Cache-Control"
+
+var baseURL = "https://raw.githubusercontent.com/mdn/browser-compat-data/master/";
+var currentSlug = env.slug;
+var url = "";
+var output = "";
+var leaf = "";
+
+var map = {
+  "Web/HTTP/Headers": "web/http/headers.json",
+  "Web/HTTP/Methods": "web/http/methods.json",
+  "Web/HTTP/Status" : "web/http/status.json",
+}
+
+// We are on a main page, e.g.:
+// Web/HTTP/Headers
+// Web/JavaScript/Reference/Global_Objects/Object
+// Web/API/WebGLRenderingContext
+if (map.hasOwnProperty(currentSlug)) {
+  url = baseURL + map[currentSlug];
+} else {
+  // We are on a leaf page, e.g.:
+  // Web/HTTP/Headers/Cache-Control
+  // Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+  // Web/API/WebGLRenderingContext/texImage2D
+  var parentSlug = currentSlug.substring(0, currentSlug.lastIndexOf('/'));
+  if (map.hasOwnProperty(parentSlug)) {
+    url = baseURL + map[parentSlug];
+    var urlPieces = currentSlug.split("/");
+    leaf = urlPieces[urlPieces.length - 1]
+  }
+}
+
+if ($0) {
+  url = baseURL + $0;
+  if ($1) {
+    leaf = $1;
+  }
+}
+
+
+if (url !== "") {
+  var data = mdn.fetchJSONResource(url);
+  if (leaf !== "") {
+    output = template("CompatDataTable", [data[leaf], "api"]);
+  } else {
+    output = template("CompatDataTable", [data, "module"]);
+  }
+} else {
+  output = "No compat data found."
+}
+
+<%-output%>
