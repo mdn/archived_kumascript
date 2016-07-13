@@ -1,16 +1,15 @@
 <%
 
 // TODO
-// move out l10n strings
-// Generate browser list from JSON (currently stored in desktopBrowsers, mobileBrowsers)
 // Find a way to call CompatGeckoDesktop
 // CompatNightly case not handled yet.
 
 var lang = env.locale;
 var slug = env.slug;
 var test = log.debug;
-var l10n = mdn.localString;
+var localize = mdn.getLocalString;
 var notesCollection = [];
+var compatStrings = string.deserialize(template("L10n:CompatTable"));
 
 var desktopBrowsers = [
   "Chrome",
@@ -21,7 +20,6 @@ var desktopBrowsers = [
   "Safari",
   "Servo"
 ];
-
 var mobileBrowsers = [
   "Android",
   "Chrome for Android",
@@ -32,83 +30,18 @@ var mobileBrowsers = [
   "Safari Mobile"
 ];
 
-var s_header = mdn.localString({
-    "en-US": [ "Desktop", "Mobile" ],
-    "cs":    [ "Plocha", "Mobile" ],
-    "ja":    [ "デスクトップ", "モバイル" ],
-    "pl":    [ "Pulpit", "Mobile" ],
-    "de":    [ "Desktop", "Mobile" ],
-    "ru":    [ "Настольные", "Мобильные" ],
-    "fr":    [ "Ordinateur", "Mobile" ]
-});
-
-function compatNo() {
-    var text = l10n({
-        "en-US": "No&nbsp;support",
-        "de"   : "Nicht unterstützt",
-        "fr"   : "Pas de support",
-        "ja"   : "未サポート",
-        "pt-BR": "Não suportado",
-        "ru"   : "Нет",
-        "zh-CN": "未实现"
-    });
-
-    return '<span style="color:#f00;">' + text + '</span>';
-}
-
-function compatVersionUnknown() {
-    var str = l10n({
-       "en-US": {
-           'title': "Please update this with the earliest version of support.",
-           'text':  "Yes"
-       },
-       "fr": {
-           'title': "Veuillez mettre à jour avec la version minimale du support",
-           'text':  "Oui"
-       },
-       "ja": {
-           'title': "最新の対応状況に更新してください。",
-           'text':  "有"
-       },
-       "de": {
-           'title': "Bitte mit der frühsten Version des Supports updaten.",
-           'text':  "Ja"
-       },
-       "ru": {
-           'title': "Пожалуйста, замените этот шаблон на указание самой ранней поддерживаемой версии.",
-           'text':  "Да"
-       }
-    });
-
-    return '<span style="color: #888" title="' + str['title'] + '">(' + str['text'] + ')</span>';
-}
-
-function compatUnknown() {
-
-    switch(lang) {
-        case 'ru':
-            title = "Совместимость неизвестна; пожалуйста, обновите информацию.";
-            str = "?";
-            break;
-        default:
-            title = "Compatibility unknown; please update this.";
-            str = "?";
-            break;
-    }
-    
-    return '<span title="' + title + '" style="color: rgb(255, 153, 0);">' + str + '</span>';
-}
-
 function getSupportString(browser, support) {
   var output = support;
   if (support === true) {
-    output = compatVersionUnknown();
+    output = '<span style="color: #888">(' + localize(compatStrings, "supportsShort_yes") + ')</span>';
   }
   if (support === false) {
-    output = compatNo();
+    output = '<span style="color:#f00;">' + localize(compatStrings, "supportsLong_no") + '</span>';
   }
   if (support === null) {
-    output = compatUnknown();
+    output = '<span title="' + localize(compatStrings, "supportsShort_unknown_title");
+    output += '" style="color: rgb(255, 153, 0);">';
+    output += localize(compatStrings, "supportsShort_unknown") + '</span>';
   }
   /*if (browser === "Firefox" && typeof support === "string") {
     output = compatGeckoDesktop([support);
@@ -121,7 +54,7 @@ function writeTableHead(environment, browserNames) {
                '<table class="compat-table">' +
                '  <thead>' +
                '    <tr>' +
-               '      <th>Feature</th>';
+               '      <th>' + localize(compatStrings, "feature") + '</th>';
   for (var i = 0; i < browserNames.length; i++) {
     output += '      <th>' + browserNames[i] + '</th>\n';
   }
@@ -180,7 +113,11 @@ function writeTableCells(environment, data, mode) {
   var output = '<tbody>';
   for (var prop in data) {
     output += '<tr>';
-    output += '<td>' + prop + '</td>';
+    if (prop === "Basic support") {
+      output += '<td>' + localize(compatStrings, "feature_basicsupport") + '</td>';
+    } else {
+      output += '<td>' + prop + '</td>';
+    }
     var compatData = data[prop][environment];
     if (mode === "module") {
       compatData = data[prop]["Basic support"][environment];
@@ -211,13 +148,12 @@ function writeNotes(notesCollection) {
   return output;
 }
 
-
 function createTable(compatData, mode) {
   var output = '<div class="htab">';
   output += '<a id="AutoCompatibilityTable" name="AutoCompatibilityTable"></a>';
   output += '<ul>';
-  output += '<li class="selected"><a href="javascript:;">' + s_header[0] + '</a></li>';
-  output += '<li><a href="javascript:;">' + s_header[1] + '</a></li>';
+  output += '<li class="selected"><a href="javascript:;">' + localize(compatStrings, "browserType_desktop") + '</a></li>';
+  output += '<li><a href="javascript:;">' + localize(compatStrings, "browserType_mobile") + '</a></li>';
   output += '</ul>';
   output += '</div>';
   output += writeTableHead("desktop", desktopBrowsers);
