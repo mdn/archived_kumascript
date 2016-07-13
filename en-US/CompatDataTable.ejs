@@ -1,7 +1,16 @@
 <%
 
+// TODO
+// move out l10n strings
+// Generate browser list from JSON (currently stored in desktopBrowsers, mobileBrowsers)
+// Find a way to call CompatGeckoDesktop
+// CompatNightly case not handled yet.
+
 var lang = env.locale;
 var slug = env.slug;
+var test = log.debug;
+var l10n = mdn.localString;
+var notesCollection = [];
 
 var desktopBrowsers = [
   "Chrome",
@@ -23,6 +32,90 @@ var mobileBrowsers = [
   "Safari Mobile"
 ];
 
+var s_header = mdn.localString({
+    "en-US": [ "Desktop", "Mobile" ],
+    "cs":    [ "Plocha", "Mobile" ],
+    "ja":    [ "デスクトップ", "モバイル" ],
+    "pl":    [ "Pulpit", "Mobile" ],
+    "de":    [ "Desktop", "Mobile" ],
+    "ru":    [ "Настольные", "Мобильные" ],
+    "fr":    [ "Ordinateur", "Mobile" ]
+});
+
+function compatNo() {
+    var text = l10n({
+        "en-US": "No&nbsp;support",
+        "de"   : "Nicht unterstützt",
+        "fr"   : "Pas de support",
+        "ja"   : "未サポート",
+        "pt-BR": "Não suportado",
+        "ru"   : "Нет",
+        "zh-CN": "未实现"
+    });
+
+    return '<span style="color:#f00;">' + text + '</span>';
+}
+
+function compatVersionUnknown() {
+    var str = l10n({
+       "en-US": {
+           'title': "Please update this with the earliest version of support.",
+           'text':  "Yes"
+       },
+       "fr": {
+           'title': "Veuillez mettre à jour avec la version minimale du support",
+           'text':  "Oui"
+       },
+       "ja": {
+           'title': "最新の対応状況に更新してください。",
+           'text':  "有"
+       },
+       "de": {
+           'title': "Bitte mit der frühsten Version des Supports updaten.",
+           'text':  "Ja"
+       },
+       "ru": {
+           'title': "Пожалуйста, замените этот шаблон на указание самой ранней поддерживаемой версии.",
+           'text':  "Да"
+       }
+    });
+
+    return '<span style="color: #888" title="' + str['title'] + '">(' + str['text'] + ')</span>';
+}
+
+function compatUnknown() {
+
+    switch(lang) {
+        case 'ru':
+            title = "Совместимость неизвестна; пожалуйста, обновите информацию.";
+            str = "?";
+            break;
+        default:
+            title = "Compatibility unknown; please update this.";
+            str = "?";
+            break;
+    }
+    
+    return '<span title="' + title + '" style="color: rgb(255, 153, 0);">' + str + '</span>';
+}
+
+function getSupportString(browser, support) {
+  var output = support;
+  if (support === true) {
+    output = compatVersionUnknown();
+  }
+  if (support === false) {
+    output = compatNo();
+  }
+  if (support === null) {
+    output = compatUnknown();
+  }
+  /*if (browser === "Firefox" && typeof support === "string") {
+    output = compatGeckoDesktop([support);
+  }*/
+  return output;
+}
+
 function writeTableHead(environment, browserNames) {
   var output = '<div id="compat-' + environment + '">' +
                '<table class="compat-table">' +
@@ -37,59 +130,112 @@ function writeTableHead(environment, browserNames) {
   return output;
 }
 
-function writeTableCells(environment, data) {
-  var output = '<tbody>';
+function writeTableCells(environment, data, mode) {
+    
 
+  function processNotes(notesArray, accumulatedNotes) {
+    
+    function getExistingNote(noteContent, notesCollection) {
+      for (var i = 0; i < notesCollection.length; i++) {
+        var note = notesCollection[i];
+        if (note.content == noteContent) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    var output = "";
+    if (!notesArray) {
+      return output;
+    }
+    for (var j = 0; j < notesArray.length; j++) {
+      if (output) {
+        output += "<sup>,</sup>";
+      }
+      var note = notesArray[j];
+      // if this note exists already
+      var existingNoteIndex = getExistingNote(note, accumulatedNotes);
+      if (existingNoteIndex != -1) {
+        // then just link to the existing note
+        var existingNote = accumulatedNotes[existingNoteIndex];
+        output += '<a href="#' + existingNote.anchor + '"><strong><sup>' +
+                   (existingNoteIndex + 1) + '</sup></strong></a>';
+      } else {
+        // otherwise, create a new note, and link to it
+        var noteIndex = accumulatedNotes.length + 1;
+        var id = "note-" + noteIndex;
+        output += '<a href="#' + id + '"><strong><sup>' + noteIndex + '</sup></strong></a>';
+        
+        var newNote = {
+          anchor: id,
+          content: note
+        }
+        accumulatedNotes.push(newNote);
+      }
+    }
+    return output;
+  }    
+    
+  var output = '<tbody>';
   for (var prop in data) {
     output += '<tr>';
     output += '<td>' + prop + '</td>';
     var compatData = data[prop][environment];
-    for (var browsers in compatData) {
-       output += '<td>' + compatData.browsers.support + '</td>';
+    if (mode === "module") {
+      compatData = data[prop]["Basic support"][environment];
+    }
+    for (var browser in compatData) {
+       output += '<td>' + getSupportString(browser, compatData[browser].support);
+       if (compatData[browser].notes) {
+           output += processNotes(compatData[browser].notes, notesCollection);
+       }
+       output += '</td>';
     }
     output += '</tr>';
   }
 
   output   += '</tbody>';
+  return output;
+}
 
+function writeNotes(notesCollection) {
+  var output = "";
+  if (!notesCollection.length) {
+      return "";
+  }
+  for (var i = 0; i < notesCollection.length; i++) {
+    var note = notesCollection[i];
+    output += '<p id="' + note.anchor + '">' + (i+1) + '. ' + note.content + '</p>';
+  }
   return output;
 }
 
 
-function tableForAPI(compatData) {
-  var output = writeTableHead("desktop", desktopBrowsers);
-  output += writeTableCells("desktop", compatData);
+function createTable(compatData, mode) {
+  var output = '<div class="htab">';
+  output += '<a id="AutoCompatibilityTable" name="AutoCompatibilityTable"></a>';
+  output += '<ul>';
+  output += '<li class="selected"><a href="javascript:;">' + s_header[0] + '</a></li>';
+  output += '<li><a href="javascript:;">' + s_header[1] + '</a></li>';
+  output += '</ul>';
+  output += '</div>';
+  output += writeTableHead("desktop", desktopBrowsers);
+  output += writeTableCells("desktop", compatData, mode);
   output += '</table></div>';
   output += writeTableHead("mobile", mobileBrowsers);
-  output += writeTableCells("mobile", compatData);
+  output += writeTableCells("mobile", compatData, mode);
   output += '</table></div>';
+  output += writeNotes(notesCollection);
   return output;
 }
 
 var output = "";
-if ($1 == "module") {
-  // output = tableForModule($0, $1);
-} else if ($1 == "api") {
-  output = tableForAPI($0);
+if ($0) {
+  output = createTable($0, $1);
+} else {
+  output = 'No compatibility data found. Please contribute data for "' + env.title + '" to the <a href="https://github.com/mdn/browser-compat-data">MDN compatibility data repository</a>.';
 }
 
-var s_header = mdn.localString({
-    "en-US": [ "Desktop", "Mobile" ],
-    "cs":    [ "Plocha", "Mobile" ],
-    "ja":    [ "デスクトップ", "モバイル" ],
-    "pl":    [ "Pulpit", "Mobile" ],
-    "de":    [ "Desktop", "Mobile" ],
-    "ru":    [ "Настольные", "Мобильные" ],
-    "fr":    [ "Ordinateur", "Mobile" ]
-});
-
 %>
-<div class="htab">
-  <a id="AutoCompatibilityTable" name="AutoCompatibilityTable"></a>
-  <ul>
-    <li class="selected"><a href="javascript:;"><%- s_header[0] %></a></li>
-    <li><a href="javascript:;"><%- s_header[1] %></a></li>
-  </ul>
-</div>
-
 <%-output%>
