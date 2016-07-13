@@ -15,7 +15,7 @@ var map = {
   "Web/HTTP/Headers": "http/headers.json",
   "Web/HTTP/Methods": "http/methods.json",
   "Web/HTTP/Status" : "http/status.json",
-  "Web/Web/JavaScript/Reference/Global_Objects/Promise": "javascript/promise.json",
+  "Web/JavaScript/Reference/Global_Objects/Promise": "javascript/promise.json",
 };
 
 // We are on a main page, e.g.:
@@ -32,8 +32,7 @@ if (map.hasOwnProperty(currentSlug)) {
   var parentSlug = currentSlug.substring(0, currentSlug.lastIndexOf('/'));
   if (map.hasOwnProperty(parentSlug)) {
     url = baseURL + map[parentSlug];
-    var urlPieces = currentSlug.split("/");
-    leaf = urlPieces[urlPieces.length - 1]
+    leaf = env.title.replace('()', '');
   }
 }
 
