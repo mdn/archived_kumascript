@@ -115,19 +115,22 @@ function writeTableCells(environment, data, mode) {
     output += '<tr>';
     if (prop === "Basic support") {
       output += '<td>' + localize(compatStrings, "feature_basicsupport") + '</td>';
-    } else {
+    } else if (prop !== "status") {
       output += '<td>' + prop + '</td>';
     }
-    var compatData = data[prop][environment];
+    var compatData = data[prop];
     if (mode === "module") {
-      compatData = data[prop]["Basic support"][environment];
+      compatData = data[prop]["Basic support"];
     }
     for (var browser in compatData) {
-       output += '<td>' + getSupportString(browser, compatData[browser].support);
-       if (compatData[browser].notes) {
-           output += processNotes(compatData[browser].notes, notesCollection);
+       if ( (environment === "desktop" && desktopBrowsers.indexOf(browser) !== -1) ||
+            (environment === "mobile" && mobileBrowsers.indexOf(browser) !== -1) ) {
+         output += '<td>' + getSupportString(browser, compatData[browser].support);
+         if (compatData[browser].notes) {
+             output += processNotes(compatData[browser].notes, notesCollection);
+         }
+         output += '</td>';
        }
-       output += '</td>';
     }
     output += '</tr>';
   }
