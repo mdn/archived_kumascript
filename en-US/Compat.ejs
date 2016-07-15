@@ -7,16 +7,30 @@
 
 var baseURL = "https://raw.githubusercontent.com/mdn/browser-compat-data/master/";
 var currentSlug = env.slug;
+var locale = env.locale;
 var url = "";
 var output = "";
 var leaf = "";
 
-var map = {
-  "Web/HTTP/Headers": "http/headers.json",
-  "Web/HTTP/Methods": "http/methods.json",
-  "Web/HTTP/Status" : "http/status.json",
-  "Web/JavaScript/Reference/Global_Objects/Promise": "javascript/promise.json",
+// Adding "l10n" object since computed names (mdn.localString)
+// cannot be used to build "map"
+
+var mapL10n = {
+    "en-US": {
+       "Web/HTTP/Headers": "http/headers.json",
+       "Web/HTTP/Methods": "http/methods.json",
+       "Web/HTTP/Status" : "http/status.json",
+       "Web/JavaScript/Reference/Global_Objects/Promise": "javascript/promise.json"
+    },
+    "fr"  : {
+       "Web/HTTP/En-têtes": "http/headers.json",
+       "Web/HTTP/Méthodes": "http/methods.json",
+       "Web/HTTP/Statut"  : "http/status.json",
+       "Web/JavaScript/Reference/Objets_globaux/Promise": "javascript/promise.json"
+    }
 };
+
+var map = mapL10n[locale];
 
 // We are on a main page, e.g.:
 // Web/HTTP/Headers
