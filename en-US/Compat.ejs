@@ -12,6 +12,11 @@ var url = "";
 var output = "";
 var leaf = "";
 
+var noDataFoundl10n = mdn.localString({
+    "en-US": "No compat data found.",
+    "fr"   : "Aucune donnée de compatibilité trouvée"
+});
+
 // Adding "l10n" object since computed names (mdn.localString)
 // cannot be used to build "map"
 
@@ -66,7 +71,7 @@ if (url !== "") {
     output = template("CompatDataTable", [data, "module"]);
   }
 } else {
-  output = "No compat data found."
+  output = noDataFoundl10n;
 }
 
 %>
