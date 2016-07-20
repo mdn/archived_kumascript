@@ -297,6 +297,8 @@ if (name === "preview-wiki-content") {
         if (data.atRules[name].syntax) {
             rawSyntax = data.atRules[name].syntax;
         }
+    } else if (name[0] === ":") {
+        rawSyntax = data.selectors[name].syntax;
     } else if (data.properties[name]) {
         rawSyntax = data.properties[name].syntax;
     } else if (data.syntaxes[addBrackets(name)]) {
