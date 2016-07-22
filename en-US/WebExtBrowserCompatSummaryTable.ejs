@@ -6,30 +6,13 @@ https://github.com/mdn/browser-compat-data/tree/master/webextensions
 ... this macro generates a table summarising the compatibility data.
 */
 
-var desktopBrowsers = [
+var browserNames = [
+  "Chrome",
   "Edge",
   "Firefox",
-  "Chrome",
+  "Firefox for Android",
   "Opera"
 ];
-
-var mobileBrowsers = [
-  "Firefox"
-];
-
-function writeSummaryTableHead(desktopSummaries, mobileSummaries) {
-  var desktopBrowserNames = Object.keys(desktopSummaries);
-  var mobileBrowserNames = Object.keys(mobileSummaries);
-    
-  var output = '<table class="webext-summary-compat-table">\n' +
-               '  <thead>\n' +
-               '    <tr class="browser-family">\n' +
-               '      <th colspan=' + desktopBrowserNames.length + '>Desktop</th>\n' +
-               '      <th colspan=' + mobileBrowserNames.length + '>Mobile</th>\n' +
-               '    </tr>\n' +
-               '  </thead>\n';
-  return output;
-}
 
 function writeSummaryTableCell(browserName, summaryInfo, width) {
   var coverage = summaryInfo.supported/summaryInfo.total;
@@ -52,40 +35,31 @@ function writeSummaryTableCell(browserName, summaryInfo, width) {
          '%" class="' + cellClass + '">' + cellContents + '</td>\n';  
 }
 
-function writeSummaryTableBody(desktopSummaries, mobileSummaries) {
-  var desktopBrowserNames = Object.keys(desktopSummaries);
-  var mobileBrowserNames = Object.keys(mobileSummaries);
+function writeSummaryTable(summaries) {
     
-  var width = 100/(desktopBrowserNames.length + mobileBrowserNames.length)
-    
-  output = '  <tbody>\n' +
+  var width = 100/(browserNames.length)
+
+  output = '<table class="webext-summary-compat-table">\n';
+  output += '  <tbody>\n' +
            '    <tr>\n';
 
-  for (var i = 0; i < desktopBrowserNames.length; i++) {
-    var browserName = desktopBrowserNames[i];
-    output += writeSummaryTableCell(browserName, desktopSummaries[browserName], width);
-  }
-    
-  for (var i = 0; i < mobileBrowserNames.length; i++) {
-    var browserName = mobileBrowserNames[i];
-    output += writeSummaryTableCell(browserName, mobileSummaries[browserName], width);
+  for (var i = 0; i < browserNames.length; i++) {
+    var browserName = browserNames[i];
+    output += writeSummaryTableCell(browserName, summaries[browserName], width);
   }
     
   output += '  </tbody>\n';
+  output += '</table>\n';
 
   return output;
   
-}
-
-function writeSummaryTableFinal() {
-  return '</table>\n';
 }
 
 function addToSummary(name, data, summary) {
   var browsers = Object.keys(summary);
   for (var i = 0; i < browsers.length; i++) {
       switch (data[browsers[i]].support) {
-        case "No":
+        case false:
           summary[browsers[i]].unsupported++;
           break;
         case "Unknown":
@@ -100,7 +74,7 @@ function addToSummary(name, data, summary) {
   }
 }
 
-function summariesForBrowserSet(moduleData, browserSet, browserSetName) {
+function getSummaries(moduleData) {
   
   function BrowserSupportSummary(total) {
     this.supported = 0;
@@ -113,8 +87,8 @@ function summariesForBrowserSet(moduleData, browserSet, browserSetName) {
   var summaries = {};
   var apiElementNames = Object.keys(moduleData).sort();
   
-  for (var i = 0; i < browserSet.length; i++) {
-     summaries[browserSet[i]] = new BrowserSupportSummary(apiElementNames.length);
+  for (var i = 0; i < browserNames.length; i++) {
+     summaries[browserNames[i]] = new BrowserSupportSummary(apiElementNames.length);
   }
 
   var apiElementNames = Object.keys(moduleData).sort();
@@ -122,9 +96,8 @@ function summariesForBrowserSet(moduleData, browserSet, browserSetName) {
   for (var i = 0; i < apiElementNames.length; i++) {
     var apiElementName = apiElementNames[i];
     var apiElementData = moduleData[apiElementName];
-    var browserData = apiElementData[browserSetName];
 
-    addToSummary(apiElementName, browserData, summaries);
+    addToSummary(apiElementName, apiElementData, summaries);
   }
     
   return summaries;  
@@ -132,12 +105,9 @@ function summariesForBrowserSet(moduleData, browserSet, browserSetName) {
 
 function summaryTableForModule(moduleData) {
 
-  desktopSummaries = summariesForBrowserSet(moduleData, desktopBrowsers, "desktop_browsers")
-  mobileSummaries = summariesForBrowserSet(moduleData, mobileBrowsers, "mobile_browsers")
+  var summaries = getSummaries(moduleData);
 
-  var table = writeSummaryTableHead(desktopSummaries, mobileSummaries);
-  table += writeSummaryTableBody(desktopSummaries, mobileSummaries);
-  table += writeSummaryTableFinal();
+  var table = writeSummaryTable(summaries);
     
   return table;
 }
