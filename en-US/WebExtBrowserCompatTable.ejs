@@ -42,7 +42,9 @@ function writeTableCells(columns, moduleName, name, data) {
         supported = "No";
     } else {
         supportedClass = "full-support";
-        supported = "Yes";
+        if (supported === true) {
+          supported = "Yes";
+        }
     }
 
     // if we are building a module table, and there are notes...
