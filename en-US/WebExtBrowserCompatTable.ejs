@@ -1,90 +1,34 @@
 <%
-
-var desktopBrowsers = [
+var browserNames = [
+  "Chrome",
   "Edge",
   "Firefox",
-  "Chrome",
+  "Firefox for Android",
   "Opera"
-];
-
-var mobileBrowsers = [
-  "Firefox"
 ];
 
 var lang = env.locale;
 var baseURL = "docs/Mozilla/Add-ons/WebExtensions/API";
 
-function writeTableHead(desktopBrowserNames, mobileBrowserNames) {
+function writeTableHead() {
 
-  var desktopWidth = (desktopBrowserNames.length / (desktopBrowserNames.length + mobileBrowserNames.length) * 100) * 0.6;
-  var mobileWidth = (mobileBrowserNames.length / (desktopBrowserNames.length + mobileBrowserNames.length) * 100) * 0.6;
+  var browserColumnWidth = 60/browserNames.length;
 
   var output = '<table class="webext-summary-compat-table">\n' +
                '  <thead>\n' +
                '    <tr>\n' +
-               '      <th colspan=1 style="width: 40%"></th>\n' +
-               '      <th colspan=' + desktopBrowserNames.length + ' style="width:' + desktopWidth + '%"' + '>Desktop</th>\n' +
-               '      <th colspan=' + mobileBrowserNames.length + ' style="width:' + mobileWidth + '%"' + '>Mobile</th>\n' +
-               '    </tr>\n';
+               '      <th style="width: 40%"></th>\n';
+
+  for (var i = 0; i < browserNames.length; i++) {
+    output += '      <th style="width:' + browserColumnWidth + '%"' + '>' + browserNames[i] + '</th>\n';
+  }
 
   output += '    <tr>\n' +
-              '      <th></th>\n';
-  for (var i = 0; i < desktopBrowserNames.length; i++) {
-    output += '      <th>' + desktopBrowserNames[i] + '</th>\n';
-  }
-  for (var i = 0; i < mobileBrowserNames.length; i++) {
-    output += '      <th>' + mobileBrowserNames[i] + '</th>\n';
-  }
-  output += '    </tr>\n';
-  output += '  </thead>\n';
+            '  </thead>\n';
   return output;
 }
 
-function writeTableCells(columns, name, data, notesCollection) {
-
-  function processNotes(notesArray, accumulatedNotes) {
-    
-    function getExistingNote(noteContent, notesCollection) {
-      for (var i = 0; i < notesCollection.length; i++) {
-        var note = notesCollection[i];
-        if (note.content == noteContent) {
-          return i;
-        }
-      }
-      return -1;
-    }
-
-    var output = "";
-    if (!notesArray) {
-      return output;
-    }
-    for (var j = 0; j < notesArray.length; j++) {
-      if (output) {
-        output += "<sup>,</sup>";
-      }
-      var note = notesArray[j];
-      // if this note exists already
-      var existingNoteIndex = getExistingNote(note, accumulatedNotes);
-      if (existingNoteIndex != -1) {
-        // then just link to the existing note
-        var existingNote = accumulatedNotes[existingNoteIndex];
-        output += '<a href="#' + existingNote.anchor + '"><strong><sup>' +
-                   (existingNoteIndex + 1) + '</sup></strong></a>';
-      } else {
-        // otherwise, create a new note, and link to it
-        var noteIndex = accumulatedNotes.length + 1;
-        var id = name + "-" + noteIndex;
-        output += '<a href="#' + id + '"><strong><sup>' +
-                   (noteIndex) + '</sup></strong></a>';
-        var newNote = {
-          anchor: id,
-          content: note
-        }
-        accumulatedNotes.push(newNote);
-      }
-    }
-    return output;
-  }
+function writeTableCells(columns, moduleName, name, data) {
 
   var output = "";
 
@@ -93,87 +37,104 @@ function writeTableCells(columns, name, data, notesCollection) {
     var supportedClass = "unknown-support";
     if (supported == "Unknown") {
         supported = "?";
-    } else if (supported == "No") {
+    } else if (!supported) {
         supportedClass = "no-support";
+        supported = "No";
     } else {
         supportedClass = "full-support";
+        supported = "Yes";
     }
-    supported += processNotes(data[columns[i]].notes, notesCollection);
+
+    // if we are building a module table, and there are notes...
+    if (moduleName && name && data[columns[i]].notes) {
+      // then add a link to the detailed page
+      var linkToDetails = "<a href=\"" + getApiItemUrl(moduleName, name) + "#Browser_compatibility\">*</a>";
+      supported = supported + " " + linkToDetails;
+    }
     output += '      <td class="' + supportedClass + '">' + supported + '</td>\n';
   }
   
   return output;
 }
 
-function writeNotes(notesCollection) {
-  if (!notesCollection.length) {
-      return "";
-  }
-  var output = "<p>";
-  for (var i = 0; i < notesCollection.length; i++) {
-    var note = notesCollection[i];
-    output += '<a name="' + note.anchor + '">' + (i+1) + '. ' + note.content + '</a><br/>';
-  }
-  output += "</p>";
-  return output;
+function getApiItemUrl(moduleName, apiElementName) {
+  var apiPieces = [lang, baseURL, moduleName].concat(apiElementName.split("."));
+  apiItemUrl = "/" + apiPieces.join("/");
+  return apiItemUrl;
 }
-
-function writeNotes(notesCollection) {
-  if (!notesCollection.length) {
-      return "";
-  }
-  var output = "<p>";
-  for (var i = 0; i < notesCollection.length; i++) {
-    var note = notesCollection[i];
-    output += '<a name="' + note.anchor + '">' + (i+1) + '. ' + note.content + '</a><br/>';
-  }
-  output += "</p>";
-  return output;
-}
-
 
 function tableForModule(compatData, moduleName) {
   var apiElementNames = Object.keys(compatData).sort();
-  var notesCollection = [];
 
-  var output = writeTableHead(desktopBrowsers, mobileBrowsers);
+  var output = writeTableHead();
 
   output += '  <tbody>\n';  
   for (var i = 0; i < apiElementNames.length; i++) {
         
     var apiElementName = apiElementNames[i];
     var apiElementData = compatData[apiElementName];
-
-    var apiPieces = [lang, baseURL, moduleName].concat(apiElementName.split("."));
-    apiItemUrl = "/" + apiPieces.join("/");
+    var apiItemUrl = getApiItemUrl(moduleName, apiElementName);
 
     output += '    <tr>\n';
     output += '      <td><a href="' + apiItemUrl + '"><code>' + apiElementName + '</code></a></td>\n';
-    output += writeTableCells(desktopBrowsers, apiElementName, apiElementData["desktop_browsers"], notesCollection);
-    output += writeTableCells(mobileBrowsers, apiElementName, apiElementData["mobile_browsers"], notesCollection);
+    output += writeTableCells(browserNames, moduleName, apiElementName, apiElementData);
     output += '    </tr>\n';
   }
   output += '  </tbody>\n' +
             '</table>';
 
-  output += writeNotes(notesCollection);
   return output;
 }
 
 function tableForAPI(compatData) {
-  var notesCollection = [];
-  var output = writeTableHead(desktopBrowsers, mobileBrowsers);
+
+  function getCompatNotes(data) {
+    var browserNotesArray = [];
+    for (var i = 0; i < browserNames.length; i++) {
+      var browserName = browserNames[i];
+      if (data[browserName].notes) {
+        var browserNotes = {
+          browser: browserName,
+          notes: data[browserName].notes
+        }
+        browserNotesArray.push(browserNotes);
+      }
+    }
+    return browserNotesArray;
+  }
+
+  function writeCompatNotes(compatNotes) {
+    if (!compatNotes.length) {
+        return "";
+    }
+    var output = "<h3>Compatibility notes</h3>\n";
+    for (var i = 0; i < compatNotes.length; i++) {
+      var compatNote = compatNotes[i];
+      output += "<h4>" + compatNote.browser + "</h4>\n";
+      output += "<ul>\n";
+      for (var j = 0; j < compatNote.notes.length; j++) {
+        var note = compatNote.notes[j];
+        output += "  <li>" + note + "</li>\n";
+      }
+      output += "</ul>\n";
+    }
+
+    return output;
+  }
+  
+  var output = writeTableHead();
 
   output += '  <tbody>\n' +
             '    <tr>\n' +
             '      <td>Basic Support</td>\n';
-  output += writeTableCells(desktopBrowsers, null, compatData["desktop_browsers"], notesCollection);
-  output += writeTableCells(mobileBrowsers, null, compatData["mobile_browsers"], notesCollection);
+  output += writeTableCells(browserNames, null, null, compatData);
   output += '    </tr>\n' +
             '  </tbody>\n' +
             '</table>';
 
-  output += writeNotes(notesCollection);
+    
+  var compatNotes = getCompatNotes(compatData);
+  output += writeCompatNotes(compatNotes);
 
   return output;
 }
