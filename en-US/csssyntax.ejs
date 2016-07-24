@@ -207,15 +207,22 @@ function formatSyntax(rawSyntax) {
 
         formattedSyntax = formattedSyntax.replace(operator.regexp,
             function(match, text) {
-            text = (typeof text === "string" ? text : match);
-
-            var link = "<a href=\"/" + locale + "/docs/CSS/" +
-                s_syntax_value_definition + "#" + operator.anchor +
-                "\" title=\"" + operator.title + "\">" + text + "</a>";
-            if (text === "|") {
-                link = " " + link + " ";
+            var linkText = match;
+            if (typeof text === "string") {
+                linkText = text;
+            } else if (match.indexOf("*") !== -1) {
+                linkText = "*";
             }
-            return link;
+
+            var output = "<a href=\"/" + locale + "/docs/CSS/" +
+                s_syntax_value_definition + "#" + operator.anchor +
+                "\" title=\"" + operator.title + "\">" + linkText + "</a>";
+            if (linkText === "|") {
+                output = " " + output + " ";
+            } else if (linkText === "*") {
+                output = text + output;
+            }
+            return output;
         });
     });
     formattedSyntax = formattedSyntax.replace(/&lt;([a-z0-9\(\)\'\-]+?)&gt;/gi,
