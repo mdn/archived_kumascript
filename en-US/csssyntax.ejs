@@ -147,7 +147,7 @@ var operators = [
         anchor: "Brackets"
     },
     {
-        regexp: /\{|\}/g,
+        regexp: /\{(?!\s)|(\d)\}/g,
         title: "Curly braces",
         anchor: "Curly_braces_(.7B_.7D)"
     }
@@ -208,10 +208,12 @@ function formatSyntax(rawSyntax) {
         formattedSyntax = formattedSyntax.replace(operator.regexp,
             function(match, text) {
             var linkText = match;
-            if (typeof text === "string") {
-                linkText = text;
-            } else if (match.indexOf("*") !== -1) {
+            if (match.indexOf("*") !== -1) {
                 linkText = "*";
+            } else if (match.indexOf("}") !== -1) {
+                linkText = "}";
+            } else if (typeof text === "string") {
+                linkText = text;
             }
 
             var output = "<a href=\"/" + locale + "/docs/CSS/" +
@@ -219,9 +221,10 @@ function formatSyntax(rawSyntax) {
                 "\" title=\"" + operator.title + "\">" + linkText + "</a>";
             if (linkText === "|") {
                 output = " " + output + " ";
-            } else if (linkText === "*") {
+            } else if (linkText === "*" || linkText === "}") {
                 output = text + output;
             }
+
             return output;
         });
     });
