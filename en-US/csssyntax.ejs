@@ -132,7 +132,7 @@ var operators = [
         anchor: "Question_mark_(.3F)"
     },
     {
-        regexp: /\*/g,
+        regexp: /([^\/])\*(?!\/)/g,
         title: "Asterisk",
         anchor: "Asterisk_(*)"
     },
