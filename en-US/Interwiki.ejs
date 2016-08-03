@@ -14,10 +14,10 @@ var prefix = $0;
 
 switch(prefix) {
     case 'wikipedia':
-        %><a title="<%=title%>" href="<%-'http://' + lang + '.wikipedia.org/wiki/' + path%>"><%-title%></a><%
+        %><a title="<%=title%>" href="<%-'https://' + lang + '.wikipedia.org/wiki/' + path%>"><%-title%></a><%
         break;
     case 'wikimo':
-        %><a class="wikimo" title="<%=title%>" href="<%-'http://wiki.mozilla.org/' + path%>"><%-title%></a><%
+        %><a class="wikimo" title="<%=title%>" href="<%-'https://wiki.mozilla.org/' + path%>"><%-title%></a><%
         break;
     default:
         %>Unknown prefix: <%- prefix %>.<%
