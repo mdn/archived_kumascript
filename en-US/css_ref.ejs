@@ -480,6 +480,8 @@ if (groupingType === "no") {
     output = "<ul>";
 }
 
+var baseURL = "/" + env.locale + "/docs/Web/CSS/";
+
 for (var characterIndex in characters) {
     var character = characters[characterIndex];
 
@@ -488,7 +490,7 @@ for (var characterIndex in characters) {
     }
 
     for (var i = 0; i < index[character].length; i++) {
-        var url = "/en-US/docs/Web/CSS/" + index[character][i].urlPath;
+        var url = baseURL + index[character][i].urlPath;
         /*
         //var thisPage = wiki.getPage(url);   Getting the summary this way is too slow
         var summary = "";
