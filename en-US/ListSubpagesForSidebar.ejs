@@ -96,13 +96,6 @@ if (pages.length) {
         output += createLink(item);
     });
     
-    if (pages[0].subpages.length > 0) {
-      pages[0].subpages.forEach(function(item) {
-        if (!item) { return; }
-        output += createLink(item);
-      });
-    }
-    
     output += closeTag;
 }
 %>
