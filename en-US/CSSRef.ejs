@@ -29,7 +29,11 @@ if (slug) {
         'at_rules': mdn.getLocalString(cssl10n, 'at_rules'),
         'types': mdn.getLocalString(cssl10n, 'types'),
         'Guides': mdn.getLocalString(commonl10n, 'Guides'),
-        'tag_selectors':  mdn.getLocalString(cssl10n, 'tag_selectors')
+        'tag_selectors':  mdn.getLocalString(cssl10n, 'tag_selectors'),
+        'Basic Selectors': mdn.getLocalString(cssl10n, 'Basic Selectors'),
+        'Pseudo-classes': mdn.getLocalString(cssl10n, 'Pseudo-classes'),
+        'Pseudo-elements': mdn.getLocalString(cssl10n, 'Pseudo-elements'),
+        'Combinators': mdn.getLocalString(cssl10n, 'Combinators')
     }
 
     function isAtRule(foo) {
@@ -266,7 +270,7 @@ if (slug) {
       for (sg in selectorCollection) {
         var selectorGroup = selectorCollection[sg];
         if (selectorGroup.length > 0) {
-          output += buildSublist(selectorGroup, sg);
+          output += buildSublist(selectorGroup, text[sg]);
         }
       }
     }
