@@ -29,9 +29,6 @@ api = api.replace(' ', '_').replace('()', '').replace(/\./g, '/');
 if (rtlLocales.indexOf(lang) != -1) {
     str = '<bdi>' + str +'</bdi>';
 }
-// Ensure Interfaces are always uppercased in links 
-// (important for red links to create correct new pages)
-api = api.charAt(0).toUpperCase() + api.slice(1);
 
 var URL = "/" + lang + '/docs/Mozilla/Add-ons/WebExtensions/API/' + api;
 
