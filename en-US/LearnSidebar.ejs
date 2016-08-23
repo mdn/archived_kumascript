@@ -1,0 +1,105 @@
+// IMPORTANT — THIS MACRO IS A WORK IN PROGRESS, AND SHOULD NOT BE USED YET.
+// ASK CHRIS MILLS ABOUT IT ON DEV-MDC OR #MDN IRC IF YOU HAVE QUESTIONS
+
+
+
+<%
+var currentSection = $0;
+var locale = env.locale;
+var slug = env.slug;
+var baseURL = "/" + locale + "/docs/Learn/";
+
+function currentPageIsUnder(root) {
+  rootSlug = "Learn/" + root;
+  if (slug.indexOf(rootSlug) != -1) {
+    return "open";
+  }
+  return "closed";
+}
+
+var text = mdn.localString({
+  'en-US': {
+    'Getting_started_with_the_web': 'Getting started with the Web',
+      'Installing_basic_software': 'Installing basic software',
+      'What_will_your_website_look_like': 'What will your website look like?',
+      'Dealing_with_files': 'Dealing with files',
+      'HTML_basics': 'HTML basics',
+      'CSS_basics': 'CSS basics',
+      'JavaScript_basics': 'JavaScript basics',
+      'Publishing_your_website': 'Publishing your website',
+      'How_the_Web_works': 'How the Web works',
+    'HTML_—_structuring_the_Web': 'HTML — structuring the Web',
+      'Introduction_to_HTML': 'Introduction to HTML',
+        'Getting_started_with_HTML': 'Getting started with HTML',
+        'Whats_in_the_head_metadata_in_HTML': 'What\'s in the head? Metadata in HTML',
+        'HTML_text_fundamentals': 'HTML text fundamentals',
+        'Creating_hyperlinks': 'Creating hyperlinks',
+        'Advanced_text_formatting': 'Advanced text formatting',
+        'Document_and_website_structure': 'Document and websitr structure',
+        'Debugging_HTML': 'Debugging HTML',
+        'Assessment_marking_up_a_letter': 'Assessment: Marking up a letter',
+        'Assessment_structuring_a_page_of_content': 'Assessment: Structuring a page of content',
+      'Multimedia_and_embedding': 'Multimedia and embedding',
+        'Images_in_HTML': 'Images in HTML',
+        'Video_and_audio_content': 'Video and audio content',
+        'Other_embedding_technologies': 'From object to iframe — other embedding technologies',
+        'Adding_vector_graphics_to_the_Web': 'Adding vector graphics to the Web',
+        'Responsive_images': 'Responsive images',
+        'Assessment_Mozilla_splash_page': 'Assessment: Mozilla splash page',
+    'CSS_styling_the_Web': 'CSS — styling the Web',
+     
+  }
+});
+%>
+
+<section class="Quick_links" id="Quick_Links">
+
+<ol>
+ <li data-default-state="<%=currentPageIsUnder('Building_and_installing_B2G_OS')%>"><a href="<%=baseURL%>Building_and_installing_B2G_OS"><%=text['Build_and_install']%></a>
+  <ol>
+   <li><strong><a href="<%=baseURL%>Building_and_installing_B2G_OS"><%=text['Build_and_install_overview']%></a></strong></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_OS_build_process_summary"><%=text['B2G_OS_build_process_summary']%></a></li>
+   <li><a href="<%=baseURL%>B2G_OS_build_prerequisites"><%=text['Build_prerequisites']%></a></li>
+   <li><a href="<%=baseURL%>Preparing_for_your_first_B2G_build"><%=text['Preparing_for_your_first_build']%></a></li>
+   <li><a href="<%=baseURL%>Building"><%=text['Building_B2G_OS']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_installer_add-on"><%=text['B2G_installer_add-on']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/Building_for_Flame_on_OS_X"><%=text['Building_B2G_OS_for_Flame_on_Mac_OS_X']%></a></li>
+   <li><a href="<%=baseURL%>Choosing_how_to_run_Gaia_or_B2G"><%=text['Choosing_how_to_run_Gaia_or_B2G_OS']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/Compatible_Devices"><%=text['Compatible_Devices']%></a></li>
+   <li><a href="<%=baseURL%>Installing_on_a_mobile_device"><%=text['Installing_B2G_OS_on_a_mobile_device']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_OS_update_packages"><%=text['Creating_and_applying_B2G_OS_update_packages']%></a></li>
+   <li><a href="<%=baseURL%>Building/FOTA_community_builds"><%=text['Building_and_installing_FOTA_community_builds']%></a></li>
+   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_Build_Variables_Reference_Sheet"><%=text['B2G_build_variables_reference_sheet']%></a></li>
+  </ol>
+ </li>
+ <li data-default-state="<%=currentPageIsUnder('Porting_B2G_OS')%>"><a href="<%=baseURL%>Porting_B2G_OS"><%=text['Porting_B2G_OS']%></a>
+  <ol>
+   <li><strong><a href="<%=baseURL%>Porting_B2G_OS"><%=text['Porting_overview']%></a></strong></li>
+   <li><a href="<%=baseURL%>Porting_B2G_OS/basics"><%=text['Porting_basics']%></a></li>
+   <li><a href="<%=baseURL%>Porting_B2G_OS/Porting_on_CyanogenMod"><%=text['Porting_on_CyanogenMod']%></a></li>
+  </ol>
+ </li>
+ <li data-default-state="<%=currentPageIsUnder('Developing_Gaia')%>"><a href="<%=baseURL%>Developing_Gaia">Developing Gaia</a>
+  <ol>
+   <li><strong><a href="<%=baseURL%>Developing_Gaia"><%=text['Developing_Gaia_overview']%></a></strong></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Running_the_Gaia_codebase"><%=text['Running_the_Gaia_codebase']%></a></li>
+   <li><a href="<%=baseURL%>Mulet"><%=text['Mulet']%></a></li>
+   
+   <li><a href="<%=baseURL%>Developing_Gaia/Understanding_the_Gaia_codebase"><%=text['Understanding_the_Gaia_codebase']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Making_Gaia_code_changes"><%=text['Making_Gaia_code_changes']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Testing_Gaia_code_changes"><%=text['Testing_Gaia_code_changes']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Submitting_a_Gaia_patch"><%=text['Submitting_a_Gaia_patch']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Raptor"><%=text['Raptor']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Build_System_Primer"><%=text['Gaia_build_system_primer']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Different_ways_to_run_Gaia"><%=text['Different_ways_to_run_Gaia']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Customizing_build-time_apps"><%=text['Customizing_build-time_apps']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Market_customizations_guide"><%=text['Market_customizations_guide']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Customizing_the_keyboard"><%=text['Customizing_the_keyboard_in_B2G_OS_apps']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Localizing_B2G_OS"><%=text['Localizing_B2G_OS']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/make_options_reference"><%=text['Make_options_reference']%></a></li>
+   <li><a href="<%=baseURL%>Developing_Gaia/Gaia_tools_reference"><%=text['Gaia_tools_reference']%></a></li>
+  </ol>
+ </li>
+ <li><a href="<%=baseURL%>API"><%=text['B2G_OS_APIs']%></a></li>
+</ol>
+</section>
