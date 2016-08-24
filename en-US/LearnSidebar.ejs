@@ -28,7 +28,7 @@ var text = mdn.localString({
       'JavaScript_basics': 'JavaScript basics',
       'Publishing_your_website': 'Publishing your website',
       'How_the_Web_works': 'How the Web works',
-    'HTML_—_structuring_the_Web': 'HTML — structuring the Web',
+    'HTML_—_structuring_the_Web': 'HTML — Structuring the Web',
       'Introduction_to_HTML': 'Introduction to HTML',
         'Getting_started_with_HTML': 'Getting started with HTML',
         'Whats_in_the_head_metadata_in_HTML': 'What\'s in the head? Metadata in HTML',
@@ -46,8 +46,67 @@ var text = mdn.localString({
         'Adding_vector_graphics_to_the_Web': 'Adding vector graphics to the Web',
         'Responsive_images': 'Responsive images',
         'Assessment_Mozilla_splash_page': 'Assessment: Mozilla splash page',
-    'CSS_styling_the_Web': 'CSS — styling the Web',
-     
+    'CSS_styling_the_Web': 'CSS — Styling the Web',
+      'Introduction_to_CSS': 'Introduction to CSS',
+        'How_CSS_works': 'How CSS works',
+        'CSS_syntax': 'CSS syntax',
+        'Selectors_introduction': 'Selectors introduction',
+        'Simple_selectors': 'Simple selectors',
+        'Attribute_selectors': 'Attribute selectors',
+        'Pseuso-classes_and_pseudo-elements': 'Pseudo-classes and pseudo-elements',
+        'Combinators_and_multiple_selectors': 'Combinators and multiple selectors',
+        'CSS_values_and_units': 'CSS values and units',
+        'Cascade_and_inheritance': 'Cascade and inheritance',
+        'The_box_model': 'The box model',
+        'Debugging_CSS': 'Debugging CSS',
+        'Assessment_fundamental_CSS_comprehension': 'Assessment: Fundamental CSS comprehension',
+      'Styling_text': 'Styling text',
+        'Fundamental_text_and_font_styling': 'Fundamental text and font styling',
+        'Styling_lists': 'Styling lists',
+        'Styling_links': 'Styling links',
+        'Web_fonts': 'Web fonts',
+        'Assessment_typesetting_a_community_school_homepage': 'Assessment: Typesetting a community school homepage',
+      'Styling_boxes': 'Styling boxes',
+        'Box_model_recap': 'Box model recap',
+        'Backgrounds': 'Backgrounds',
+        'Borders': 'Borders',
+        'Styling_tables': 'Styling tables',
+        'Advanced_box_effects': 'Advanced box effects',
+        'Assessment_creating_fancy_letterheaded_paper': 'Assessment: Creating fancy letterheaded paper',
+        'Assessment_a_cool_looking_box': 'Assessment: A cool-looking box',
+      'CSS_layout': 'CSS layout',
+        'Floats': 'Floats',
+        'Positioning': 'Positioning',
+        'Practical_positioning_examples': 'Practical positioning examples',
+        'Flexbox': 'Flexbox',
+    'JavaScript_dynamic_web_scripting': 'JavaScript — Dynamic web scripting',
+      'JavaScript_first_steps': 'JavaScript first steps',
+        'What_is_JavaScript': 'What is JavaScript?',
+        'A_first_splash_into_JavaScript': 'A first splash into JavaScript',
+        'What_went_wrong': 'What went wrong? Troubleshooting JavaScript',
+        'Storing_the_information_you_need': 'Storing the information you need — Variables',
+        'Basic_math_in_JavaScript': 'Basic in JavaScript — Numbers and operators',
+        'Handing_text': 'Handling text — Strings in JavaScript',
+        'Useful_string_methods': 'Useful string methods',
+        'Arrays': 'Arrays',
+        'Assessment_silly_story_generator': 'Assessment: Silly story generator',
+      'JavaScript_building_blocks': 'JavaScript building blocks',
+        'Making_decisions_in_your_code': 'Making decisions in your code — Conditionals',
+        'Looping_code': 'Looping code',
+        'Functions': 'Functions — Reusable blocks of code',
+        'Build_your_own_function': 'Build your own function',
+        'Function_return_values': 'Function return values',
+        'Introduction_to_events': 'Introduction to events',
+        'Assessment_image_gallery': 'Assessment: Image gallery',
+    'Advanced_learning_material': 'Advanced learning material',
+      'WebGL_graphics_processing': 'WebGL: Graphics processing',
+    'Common_questions': 'Common questions',
+      'HTML_questions': 'HTML questions',
+      'CSS_questions': 'CSS questions',
+      'How_the_Web_works': 'How the Web works',
+      'Tools_and_setup': 'Tools and setup',
+      'Design_and_accessibility': 'Design and accessibility',
+    'How_to_contribute': 'How to contribute'    
   }
 });
 %>
@@ -55,51 +114,21 @@ var text = mdn.localString({
 <section class="Quick_links" id="Quick_Links">
 
 <ol>
- <li data-default-state="<%=currentPageIsUnder('Building_and_installing_B2G_OS')%>"><a href="<%=baseURL%>Building_and_installing_B2G_OS"><%=text['Build_and_install']%></a>
+ <li data-default-state="<%=currentPageIsUnder('Getting_started_with_the_web')%>"><a href="<%=baseURL%>Getting_started_with_the_web"><%=text['Getting_started_with_the_web']%></a>
   <ol>
-   <li><strong><a href="<%=baseURL%>Building_and_installing_B2G_OS"><%=text['Build_and_install_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_OS_build_process_summary"><%=text['B2G_OS_build_process_summary']%></a></li>
-   <li><a href="<%=baseURL%>B2G_OS_build_prerequisites"><%=text['Build_prerequisites']%></a></li>
-   <li><a href="<%=baseURL%>Preparing_for_your_first_B2G_build"><%=text['Preparing_for_your_first_build']%></a></li>
-   <li><a href="<%=baseURL%>Building"><%=text['Building_B2G_OS']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_installer_add-on"><%=text['B2G_installer_add-on']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/Building_for_Flame_on_OS_X"><%=text['Building_B2G_OS_for_Flame_on_Mac_OS_X']%></a></li>
-   <li><a href="<%=baseURL%>Choosing_how_to_run_Gaia_or_B2G"><%=text['Choosing_how_to_run_Gaia_or_B2G_OS']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/Compatible_Devices"><%=text['Compatible_Devices']%></a></li>
-   <li><a href="<%=baseURL%>Installing_on_a_mobile_device"><%=text['Installing_B2G_OS_on_a_mobile_device']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_OS_update_packages"><%=text['Creating_and_applying_B2G_OS_update_packages']%></a></li>
-   <li><a href="<%=baseURL%>Building/FOTA_community_builds"><%=text['Building_and_installing_FOTA_community_builds']%></a></li>
-   <li><a href="<%=baseURL%>Building_and_installing_B2G_OS/B2G_Build_Variables_Reference_Sheet"><%=text['B2G_build_variables_reference_sheet']%></a></li>
+   <li><strong><a href="<%=baseURL%>Getting_started_with_the_web"><%=text['Installing_basic_software']%></a></strong></li>
+   <li><strong><a href="<%=baseURL%>What_will_your_website_look_like"><%=text['What_will_your_website_look_like']%></a></strong></li>
+   <li><strong><a href="<%=baseURL%>Dealing_with_files"><%=text['Dealing_with_files']%></a></strong></li>
+   <li><strong><a href="<%=baseURL%>HTML_basics"><%=text['HTML_basics']%></a></strong></li>
+   <li><strong><a href="<%=baseURL%>CSS_basics"><%=text['CSS_basics']%></a></strong></li>
+   <li><strong><a href="<%=baseURL%>JavaScript_basics"><%=text['JavaScript_basics']%></a></strong></li>
+   <li><strong><a href="<%=baseURL%>Publishing_your_website"><%=text['Publishing_your_website']%></a></strong></li>
+   <li><strong><a href="<%=baseURL%>HTML_basics"><%=text['HTML_basics']%></a></strong></li>
+   <li><strong><a href="<%=baseURL%>How_the_Web_works"><%=text['How_the_Web_works']%></a></strong></li>
   </ol>
  </li>
- <li data-default-state="<%=currentPageIsUnder('Porting_B2G_OS')%>"><a href="<%=baseURL%>Porting_B2G_OS"><%=text['Porting_B2G_OS']%></a>
-  <ol>
-   <li><strong><a href="<%=baseURL%>Porting_B2G_OS"><%=text['Porting_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Porting_B2G_OS/basics"><%=text['Porting_basics']%></a></li>
-   <li><a href="<%=baseURL%>Porting_B2G_OS/Porting_on_CyanogenMod"><%=text['Porting_on_CyanogenMod']%></a></li>
-  </ol>
- </li>
- <li data-default-state="<%=currentPageIsUnder('Developing_Gaia')%>"><a href="<%=baseURL%>Developing_Gaia">Developing Gaia</a>
-  <ol>
-   <li><strong><a href="<%=baseURL%>Developing_Gaia"><%=text['Developing_Gaia_overview']%></a></strong></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Running_the_Gaia_codebase"><%=text['Running_the_Gaia_codebase']%></a></li>
-   <li><a href="<%=baseURL%>Mulet"><%=text['Mulet']%></a></li>
-   
-   <li><a href="<%=baseURL%>Developing_Gaia/Understanding_the_Gaia_codebase"><%=text['Understanding_the_Gaia_codebase']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Making_Gaia_code_changes"><%=text['Making_Gaia_code_changes']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Testing_Gaia_code_changes"><%=text['Testing_Gaia_code_changes']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Submitting_a_Gaia_patch"><%=text['Submitting_a_Gaia_patch']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Raptor"><%=text['Raptor']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Build_System_Primer"><%=text['Gaia_build_system_primer']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Different_ways_to_run_Gaia"><%=text['Different_ways_to_run_Gaia']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Customizing_build-time_apps"><%=text['Customizing_build-time_apps']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Market_customizations_guide"><%=text['Market_customizations_guide']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Customizing_the_keyboard"><%=text['Customizing_the_keyboard_in_B2G_OS_apps']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Localizing_B2G_OS"><%=text['Localizing_B2G_OS']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/make_options_reference"><%=text['Make_options_reference']%></a></li>
-   <li><a href="<%=baseURL%>Developing_Gaia/Gaia_tools_reference"><%=text['Gaia_tools_reference']%></a></li>
-  </ol>
- </li>
- <li><a href="<%=baseURL%>API"><%=text['B2G_OS_APIs']%></a></li>
+
+
 </ol>
+
 </section>
