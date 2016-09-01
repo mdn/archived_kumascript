@@ -50,6 +50,9 @@ if ($1) {
         } else {
             link = '/' + lang + '/docs/HTML';
         }
+    } else if (string.startswith(t, "svg")) {
+        n = string.trim(string.substr(t, 3));
+        ver = "SVG ";
     } else if (string.startswith(t, "gecko")) {
         n = string.trim( string.substr(t, 5) );
         ver = "Gecko ";
