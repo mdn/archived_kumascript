@@ -36,6 +36,9 @@ var mapL10n = {
 };
 
 var map = mapL10n[locale];
+if (mapL10n[locale] === undefined) {
+  map = mapL10n["en-US"];
+}
 
 // We are on a main page, e.g.:
 // Web/HTTP/Headers
