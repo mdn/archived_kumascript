@@ -6,7 +6,7 @@
 */
 
 var slug = env.slug;
-var name = $0 || (slug ? slug.split("/").pop().toLowerCase() :
+var name = $0 || (slug ? slug.split("/").pop() :
     "preview-wiki-content");
 var data = string.deserialize(template("SVGData"));
 var formattedError = "<span style=\"color:red;\">$1$</span>";
