@@ -252,8 +252,8 @@ if (name !== "preview-wiki-content") {
 var result = "";
 
 if (name === "preview-wiki-content") {
-    result = "<span style=\"color:red;\">CSS info in preview not " +
-        "available</span>";
+    result = "<span style=\"color:red;\">" +
+        localize(cssLocalStrings, "info_in_preview_not_available") + "</span>";
 } else if (cssInfo) {
     result = "<table class=\"properties\">" +
         "<tbody>";
