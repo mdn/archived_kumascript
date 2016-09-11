@@ -5,7 +5,9 @@
   $0 - SVG element name - defaults to the slug name (optional, uses last part of URL as default)
 */
 
-var name = $0 || env.slug.split("/").pop();
+var slug = env.slug;
+var name = $0 || (slug ? slug.split("/").pop().toLowerCase() :
+    "preview-wiki-content");
 var data = string.deserialize(template("SVGData"));
 var formattedError = "<span style=\"color:red;\">$1$</span>";
 var commonLocalStrings = string.deserialize(template("L10n:Common"));
