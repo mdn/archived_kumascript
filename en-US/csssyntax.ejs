@@ -301,7 +301,7 @@ if (!atRule) {
 var formattedSyntax = "";
 if (name === "preview-wiki-content") {
     formattedSyntax = "<span style=\"color:red;\">" +
-        localize(cssLocalStrings, "info_in_preview_not_available") + "</span>";
+        localize(localStrings, "info_in_preview_not_available") + "</span>";
 } else {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors) {
