@@ -551,7 +551,7 @@
                             "loadend" ]
         },
         "File System API": {
-            "overview":   [ "File System API" ],
+            "overview":   [ "File and Directory Entries API" ],
             "interfaces": [ "DirectoryEntry",
                             "DirectoryEntrySync",
                             "DirectoryReader",
@@ -566,12 +566,18 @@
                             "FileRequest",
                             "FileSystem",
                             "FileSystemSync",
+                            "HTMLInputElement",
                             "LocalFileSystem",
                             "LocalFileSystemSync",
                             "LockedFile" ],
-            "methods":    [],
+            "methods":    [ "Window.requestFileSystem()",
+                            "Window.resolveLocalFileSystemURL()",
+                            "WorkerGlobalScope.requestFileSystemSync()",
+                            "Window.resolveLocalFileSystemURL()" ],
             "properties": [],
-            "events":     []
+            "events":     [ "error",
+                            "writeend",
+                          ]
         },
         "Firefox OS": {
             "interfaces": [ "MozAlarmsManager",
