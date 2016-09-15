@@ -13,8 +13,9 @@ var name = $0 || (slug ? slug.split("/").pop().toLowerCase() : "preview-wiki-con
 var atRule = $1;
 var rawSyntax = "";
 var formattedSyntax = "";
+var localize = mdn.getLocalString;
 
-var localStrings = string.deserialize(template("L10n:CSSData"));
+var localStrings = string.deserialize(template("L10n:CSS"));
 
 var s_missing = mdn.localString({
     "en-US": "Syntax not found in DB!",
