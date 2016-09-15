@@ -14,6 +14,8 @@ var atRule = $1;
 var rawSyntax = "";
 var formattedSyntax = "";
 
+var localStrings = string.deserialize(template("L10n:CSSData"));
+
 var s_missing = mdn.localString({
     "en-US": "Syntax not found in DB!",
     "fr"   : "La syntaxe n'a pas été trouvée !",
@@ -297,7 +299,8 @@ if (!atRule) {
 
 var formattedSyntax = "";
 if (name === "preview-wiki-content") {
-    formattedSyntax = "<span style=\"color:red;\">Syntax in preview not available</span>";
+    formattedSyntax = "<span style=\"color:red;\">" +
+        localize(cssLocalStrings, "info_in_preview_not_available") + "</span>";
 } else {
     if (atRule) {
         if (data.atRules[atRule] && data.atRules[atRule].descriptors) {
