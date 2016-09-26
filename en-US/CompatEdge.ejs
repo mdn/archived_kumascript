@@ -186,9 +186,15 @@ var releases = {
 
 var release = releases[edgeHTMLVersion];
 if (!release) {
-    release = {
-        version: strUnknown
-    };
+    if (Math.floor(Number(edgeHTMLVersion)) <= 12) {
+        release = {
+            version: str20OrEarlier
+        };
+    } else {
+        release = {
+            version: strUnknown
+        };
+    }
 }
 var result = "";
 
