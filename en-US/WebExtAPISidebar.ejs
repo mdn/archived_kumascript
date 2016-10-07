@@ -60,6 +60,9 @@ output += '</ol>';
 
 function buildSidebarForAllAPIs() {
   output = "<ol>";
+  var browserSupportURL = baseURL + "Mozilla/Add-ons/WebExtensions/Browser_support_for_JavaScript_APIs";
+  var browserSupportTitle = "Browser support for JavaScript APIs";
+  output +=  '<li><a href="' +  browserSupportURL + '">' + browserSupportTitle + '</a>';
 
   var subpages = pageModule.subpagesExpand(baseAPIPage);
   for (var i = 0; i < subpages.length; i++) {
