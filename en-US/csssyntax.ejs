@@ -114,99 +114,99 @@ var operators = [
         title: mdn.localString({
             "en-US": "Hash mark: the entity is repeated one or several times, each occurence separated by a comma",
             "de": "Rautensymbol: Die Entität wird einmal oder mehrmals wiederholt, wobei jedes Vorkommen durch ein Komma getrennt wird"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Hash_mark_()",
             "de"   : "Rautensymbol_()"
-        }
+        })
     },
     {
         regexp: /\|\|/g,
         title: mdn.localString({
             "en-US": "Double bar: one or several of the entities must be present, in any order",
             "de"   : "Doppelter Balken: Eine oder mehrere der Entitäten muss angegeben werden, in beliebiger Reihenfolge"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Double_bar",
             "de"   : "Doppelter_Balken"
-        }
+        })
     },
     {
         regexp: /[^\|](\|)[^\|]/g,
         title: mdn.localString({
             "en-US": "Single bar: exactly one of the entities must be present",
             "de"   : "Einfacher Balken: Genau eine der Entitäten muss angegeben werden"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Single_bar",
             "de"   : "Einfacher_Balken"
-        }
+        })
     },
     {
         regexp: /&amp;&amp;/g,
         title: mdn.localString({
             "en-US": "Double ampersand: all of the entities must be present, in any order",
             "de"   : "Doppeltes Und-Zeichen: Alle Entitäten müssen angegeben werden, in beliebiger Reihenfolge"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Double_ampersand",
             "de"   : "Doppeltes_Und-Zeichen"
-        }
+        })
     },
     {
         regexp: /\?/g,
         title: mdn.localString({
             "en-US": "Question mark: the entity is optional",
             "de"   : "Fragezeichen: Die Entität ist optional"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Question_mark_()",
             "de"   : "Fragezeichen_()"
-        }
+        })
     },
     {
         regexp: /([^\/])\*(?!\/)/g,
         title: mdn.localString({
             "en-US": "Asterisk: the entity may occur zero, one or several times",
             "de"   : "Asterisk: Die Entität kann keinmal, einmal oder mehrmals vorkommen"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Asterisk_(*)",
             "de"   : "Asterisk_(*)"
-        }
+        })
     },
     {
         regexp: /\+/g,
         title: mdn.localString({
             "en-US": "Plus: the entity may occur one or several times",
             "de"   : "Plus: Die Entität kann einmal oder mehrmals vorkommen"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Plus_()",
             "de"   : "Plus_()"
-        }
+        })
     },
     {
         regexp: /\[|\]/g,
         title: mdn.localString({
             "en-US": "Brackets: enclose several entities, combinators, and multipliers to transform them as a single component",
             "de"   : "Eckige_Klammern: umschließen mehrere Entitäten, Kombinatoren und Multiplikatoren, um diese als eine gesamte Komponente zu behandeln"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Brackets",
             "de"   : "Eckige_Klammern"
-        }
+        })
     },
     {
         regexp: /\{(?!\s)|(\d)\}/g,
         title: mdn.localString({
             "en-US": "Curly braces: encloses two integers defining the minimal and maximal numbers of occurrences of the entity",
             "de"   : "Geschweifte Klammern: umschließen zwei Ganzzahlen, die die Minimal- und Maximalanzahl an Vorkommen der Entität angeben"
-        },
+        }),
         anchor: mdn.localString({
             "en-US": "Curly_braces_(_)",
             "de"   : "Geschweifte_Klammern_(_)"
-        }
+        })
     }
 ];
 
