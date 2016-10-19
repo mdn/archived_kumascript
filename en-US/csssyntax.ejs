@@ -83,41 +83,43 @@ var s_like = mdn.localString({
 });
 
 var typeInfo = {
-    "string": {},
-    "url": {},
-    "uri": {},
-    "integer": {},
-    "number": {},
-    "percentage": {},
-    "length": {
-        "title": s_possible_values + s_number_followed_by + "'em', 'ex', 'ch', 'rem', 'px', 'cm', 'mm', 'in', 'vh', 'vw', 'vmin', 'vmax', 'pt', 'pc' " + s_or + " 'px', " + s_like + " 3px, 1.5cm, -0.5em " + s_or + " 0"
-    },
     "angle": {
         "title": s_possible_values + s_number_followed_by + "'deg', 'grad', 'rad' " + s_or + " 'turn', " + s_like + " 2turn, 1.3rad, -60deg " + s_or + " 0grad."
     },
-    "time": {
-        "title": s_possible_values + s_number_followed_by + "'s' " + s_or + " 'ms', " + s_like + " 3s, -2.5ms " + s_or + " 0s."
+    "blend-mode": {
+        "title": s_possible_values + "normal, multiply, screen, overlay, darken, lighten, color-dodge, color-burn, hard-light, soft-light, difference, exclusion, hue, saturation, color, luminosity"
     },
-    "frequency": {},
-    "resolution": {},
     "color": {
         "typeLinkName": "color_value"
     },
+    "custom-ident": {},
+    "frequency": {},
+    "ident": {},
     "image": {},
+    "integer": {},
+    "length": {
+        "title": s_possible_values + s_number_followed_by + "'em', 'ex', 'ch', 'rem', 'px', 'cm', 'mm', 'in', 'vh', 'vw', 'vmin', 'vmax', 'pt', 'pc' " + s_or + " 'px', " + s_like + " 3px, 1.5cm, -0.5em " + s_or + " 0"
+    },
+    "number": {},
+    "percentage": {},
     "position": {
         "typeLinkName": "position_value"
+    },
+    "resolution": {},
+    "single-transition-timing-function": {
+        "title": s_possible_values + "cubic-bezier(), steps(), linear, ease, ease-in, ease-out, east-in-out, step-start-step-end"
+    },
+    "string": {},
+    "time": {
+        "title": s_possible_values + s_number_followed_by + "'s' " + s_or + " 'ms', " + s_like + " 3s, -2.5ms " + s_or + " 0s."
     },
     "timing-function": {
         "title": s_possible_values + "cubic-bezier(), steps(), linear, ease, ease-in, ease-out, east-in-out, step-start-step-end"
     },
-    "single-transition-timing-function": {
-        "title": s_possible_values + "cubic-bezier(), steps(), linear, ease, ease-in, ease-out, east-in-out, step-start-step-end"
-    },
+    "url": {},
+    "uri": {},
     "transform-function": {
         "title": s_possible_values + "matrix(), matrix3d(), rotate(), rotate3d(), rotateX(), rotateY(), rotateZ(), scale(), scale3d(), scaleX(), scaleY(), scaleZ(), skewX(), skewY(), translate(), translate3d(), translateX(), translateY(), translateZ()"
-    },
-    "blend-mode": {
-        "title": s_possible_values + "normal, multiply, screen, overlay, darken, lighten, color-dodge, color-burn, hard-light, soft-light, difference, exclusion, hue, saturation, color, luminosity"
     }
 };
 
