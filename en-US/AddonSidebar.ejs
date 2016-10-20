@@ -18,7 +18,7 @@ function currentPageIsUnder(root) {
   <ol>
     <li><a href="<%=baseURL%>WebExtensions"><strong>WebExtensions</strong></a></li>
 
-    <li><a href="<%=baseURL%>WebExtensions#Getting_started">Getting_started</a>
+    <li><a href="<%=baseURL%>WebExtensions#Getting_started">Getting started</a>
       <ol>
         <li><a href="<%=baseURL%>WebExtensions/What_are_WebExtensions_">What are WebExtensions?</a></li>
         <li><a href="<%=baseURL%>WebExtensions/Your_first_WebExtension">Your first WebExtension</a></li>
@@ -72,42 +72,42 @@ function currentPageIsUnder(root) {
       </ol>
     </li>  
     
-    <li data-default-state="<%=currentPageIsUnder('WebExtensions/API')%>"><a href="<%=baseURL%>WebExtensions/API">JavaScript_APIs</a>
+    <li data-default-state="<%=currentPageIsUnder('WebExtensions/API')%>"><a href="<%=baseURL%>WebExtensions/API">JavaScript APIs</a>
      <%-template("WebExtAPISidebar", [])%>
     </li>
     
-    <li><a href="<%=baseURL%>WebExtensions/manifest.json">Manifest_keys</a>
+    <li><a href="<%=baseURL%>WebExtensions/manifest.json">Manifest keys</a>
     <%-
       wiki.tree(baseURL + "WebExtensions/manifest.json", 1, 0, 0, 1)
     %>
     </li>
     
-    <li><a href="<%=baseURL%>SDK"><strong>Add-on_SDK</strong></a></li>
-    <li><a href="<%=baseURL%>WebExtensions#Getting_started">Getting_started</a>
+    <li><a href="<%=baseURL%>SDK"><strong>Add-on SDK</strong></a></li>
+    <li><a href="<%=baseURL%>WebExtensions#Getting_started">Getting started</a>
       <ol>
         <li><a href="<%=baseURL%>SDK/Tutorials/Installation">Installation</a></li>
-        <li><a href="<%=baseURL%>SDK/Tutorials/Getting_started">Getting_started</a></li>
+        <li><a href="<%=baseURL%>SDK/Tutorials/Getting_started">Getting started</a></li>
         <li><a href="<%=baseURL%>SDK/Tutorials/Troubleshooting">Troubleshooting</a></li>
       </ol>
     </li>
     
-    <li data-default-state="<%=currentPageIsUnder('SDK/High-Level_APIs')%>"><a href="<%=baseURL%>SDK/High-Level_APIs">High-Level_APIs</a>
+    <li data-default-state="<%=currentPageIsUnder('SDK/High-Level_APIs')%>"><a href="<%=baseURL%>SDK/High-Level_APIs">High-Level APIs</a>
       <%-
         wiki.tree(baseURL + "SDK/High-Level_APIs", 1, 0, 0, 1)
       %>
     </li>
-    <li data-default-state="<%=currentPageIsUnder('SDK/Low-Level_APIs')%>"><a href="<%=baseURL%>SDK/Low-Level_APIs">Low-Level_APIs</a>
+    <li data-default-state="<%=currentPageIsUnder('SDK/Low-Level_APIs')%>"><a href="<%=baseURL%>SDK/Low-Level_APIs">Low-Level APIs</a>
       <%-
         wiki.tree(baseURL + "SDK/Low-Level_APIs", 1, 0, 0, 1)
       %>
     </li> 
 
-    <li><a href="<%=baseURL%>Firefox_for_Android"><strong>Firefox_for_Android</strong></a></li>
-    <li><a href="<%=baseURL%>Firefox_for_Android">Getting_started</a>
+    <li><a href="<%=baseURL%>Firefox_for_Android"><strong>Firefox for Android</strong></a></li>
+    <li><a href="<%=baseURL%>Firefox_for_Android">Getting started</a>
       <ol>
         <li><a href="<%=baseURL%>Firefox_for_Android/Walkthrough">Walkthrough</a></li>
         <li><a href="<%=locale%>/docs/Tools/Remote_Debugging/Debugging_Firefox_for_Android_with_WebIDE">Debugging</a></li>
-        <li><a href="<%=baseURL%>Firefox_for_Android/Code_snippets">Code_snippets</a></li>
+        <li><a href="<%=baseURL%>Firefox_for_Android/Code_snippets">Code snippets</a></li>
       </ol>
     </li>
 
@@ -119,12 +119,12 @@ function currentPageIsUnder(root) {
 
     <li><a href="<%=baseURL%>Overlay_Extensions"><strong>Legacy</strong></a></li>
     
-    <li><a href="<%=baseURL%>Bootstrapped_Extensions">Restartless_extensions</a>
+    <li><a href="<%=baseURL%>Bootstrapped_Extensions">Restartless extensions</a>
       <ol>
         <li><a href="<%=baseURL%>Bootstrapped_extensions">Overview</a></li>
       </ol>
     </li>
-    <li><a href="<%=baseURL%>Overlay_Extensions">Overlay_extensions</a>
+    <li><a href="<%=baseURL%>Overlay_Extensions">Overlay extensions</a>
       <ol>
         <li><a href="<%=baseURL%>Overlay_Extensions">Overview</a></li>
       </ol>
@@ -132,36 +132,36 @@ function currentPageIsUnder(root) {
 
     <li><a href="<%=baseURL%>Themes"><strong>Themes</strong></a></li>
     
-    <li><a href="<%=baseURL%>Themes/Background">Lightweight_themes</a>
+    <li><a href="<%=baseURL%>Themes/Background">Lightweight themes</a>
       <ol>
         <li><a href="<%=baseURL%>Themes/Background">Overview</a></li>
       </ol>
     </li>
-    <li><a href="<%=baseURL%>Themes/Complete_themes">Complete_themes</a>
+    <li><a href="<%=baseURL%>Themes/Complete_themes">Complete themes</a>
       <ol>
         <li><a href="<%=baseURL%>Themes">Overview</a></li>
       </ol>
     </li>
 
-    <li><a href="<%=baseURL%>Distribution"><strong>Publishing_add-ons</strong></a></li>
+    <li><a href="<%=baseURL%>Distribution"><strong>Publishing add-ons</strong></a></li>
     <li><a href="<%=baseURL%>Distribution">Guides</a>
       <ol>
-        <li><a href="<%=baseURL%>Distribution">Signing_and_distribution_overview</a></li>
-        <li><a href="https://addons.mozilla.org/developers/addon/submit/">Submit_an_add-on</a></li>
-        <li><a href="<%=baseURL%>AMO/Policy/Reviews">Review_policies</a></li>
-        <li><a href="<%=baseURL%>AMO/Policy/Agreement">Developer_agreement</a></li>
-        <li><a href="<%=baseURL%>AMO/Policy/Featured">Featured_add-ons</a></li>
-        <li><a href="<%=baseURL%>AMO/Policy/Contact">Contact_addons.mozilla.org</a></li>
+        <li><a href="<%=baseURL%>Distribution">Signing and distribution overview</a></li>
+        <li><a href="https://addons.mozilla.org/developers/addon/submit/">Submit an add-on</a></li>
+        <li><a href="<%=baseURL%>AMO/Policy/Reviews">Review policies</a></li>
+        <li><a href="<%=baseURL%>AMO/Policy/Agreement">Developer agreement</a></li>
+        <li><a href="<%=baseURL%>AMO/Policy/Featured">Featured add-ons</a></li>
+        <li><a href="<%=baseURL%>AMO/Policy/Contact">Contact addons.mozilla.org</a></li>
       </ol>
     </li>
 
-    <li><a href="https://discourse.mozilla-community.org/c/add-ons"><strong>Community_and_support</a></strong></li>
+    <li><a href="https://discourse.mozilla-community.org/c/add-ons"><strong>Community and support</a></strong></li>
     <li><a href="<%=baseURL%>Channels">Channels</a>
       <ol>
-        <li><a href="https://blog.mozilla.org/addons">Add-ons_blog</a></li>
-        <li><a href="https://discourse.mozilla-community.org/c/add-ons">Add-on_forums</a></li>
-        <li><a href="http://stackoverflow.com/questions/tagged/firefox-addon">Stack_Overflow</a></li>
-        <li><a href="https://groups.google.com/forum/#!forum/mozilla.dev.extensions">Development_newsgroup</a></li>
+        <li><a href="https://blog.mozilla.org/addons">Add-ons blog</a></li>
+        <li><a href="https://discourse.mozilla-community.org/c/add-ons">Add-on forums</a></li>
+        <li><a href="http://stackoverflow.com/questions/tagged/firefox-addon">Stack Overflow</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/mozilla.dev.extensions">Development newsgroup</a></li>
         <li><a href="irc://irc.mozilla.org/extdev">IRC Channel</a></li>
       </ol>
     </li>
