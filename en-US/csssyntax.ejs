@@ -228,7 +228,18 @@ var operators = [
             "en-US": "Curly_braces_(_)",
             "de"   : "Geschweifte_Klammern_(_)"
         })
-    }
+    },
+    {
+        regexp: /!/g,
+        title: mdn.localString({
+            "en-US": "Exclamation point: the group must produce at least one value",
+            "de"   : "Ausrufezeichen: die Gruppe muss mindestens einen Wert erzeugen"
+        }),
+        anchor: mdn.localString({
+            "en-US": "#Exclamation_point_(!)",
+            "de"   : "Ausrufezeichen_(!)"
+        })
+    },
 ];
 
 function buildLink(match, type) {
