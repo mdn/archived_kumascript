@@ -4,6 +4,9 @@ var locale = env.locale;
 var path = env.path;
 
 function state(section) {
+  if (path.indexOf("Content-Security-Policy") !== -1 && (section === "Web/HTTP/Headers")) {
+    return "closed";
+  }
   if (path.indexOf(section) !== -1) {
     return "open";
   }
@@ -34,11 +37,12 @@ var text = mdn.localString({
     'Cookies': 'HTTP cookies',
     'Caching': 'HTTP caching',
     'CORS': 'HTTP access control (CORS)',
-    'Resources': 'Resources and specifications',
+    'Resources': 'HTTP specifications',
     'Guides': 'Guides:',
     'Reference': 'References:',
     'Methods': 'HTTP request methods',
-    'Status': 'HTTP response status codes'
+    'Status': 'HTTP response status codes',
+    'CSPDirectives': 'CSP directives'
   },
   'ru': {
     'HTTP': 'HTTP',
@@ -93,6 +97,9 @@ var text = mdn.localString({
     </li>
     <li data-default-state="<%=state('Web/HTTP/Status')%>"><a href="/<%=locale%>/docs/Web/HTTP/Status"><%=text['Status']%></a>
       <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/HTTP/Status'])%>
+    </li>
+    <li data-default-state="<%=state('Web/HTTP/Headers/Content-Security-Policy')%>"><a href="/<%=locale%>/docs/Web/HTTP/Headers/Content-Security-Policy"><%=text['CSPDirectives']%></a>
+      <%-template("ListSubpagesForSidebar", ['/en-US/docs/Web/HTTP/Headers/Content-Security-Policy'])%>
     </li>
   </ol>
 </section>
