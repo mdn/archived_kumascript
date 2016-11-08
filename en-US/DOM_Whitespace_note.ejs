@@ -71,8 +71,8 @@ function showFrench() {
 }
 
 function showJapanese() {%>
-    <p>Geckoベースのブラウザはソースマークアップの中で空白を表現するためにテキストノードをドキュメントに挿入します。しかし、<%-linkFirstChild%> や <%-linkPrevSib%> のような例で得られるノードには、作者が取得しようとした実際の要素ではなく、空白のテキストノードが参照されます。</p>
-    <p>より多くの情報を得る為には『<a href="/ja/docs/Web/Guide/DOM/Whitespace_in_the_DOM">DOM 中の空白文字</a>』と『<a class="external" href="http://www.w3.org/DOM/faq.html#emptytext">W3C DOM 3 FAQ: Why are some Text nodes empty?</a>』を参照してください。</p>
+    <p>Geckoベースのブラウザーはソースマークアップの中で空白を表現するためにテキストノードをドキュメントに挿入します。ですので、例えば <%-linkFirstChild%> や <%-linkPrevSib%> で得られるノードが、作者が取得しようとした実際の要素ではなく、空白のテキストノードを参照していることがあります。</p>
+    <p>より多くの情報を得るには『<a href="/ja/docs/Web/Guide/DOM/Whitespace_in_the_DOM">DOM 中の空白文字</a>』と『<a class="external" href="http://www.w3.org/DOM/faq.html#emptytext">W3C DOM 3 FAQ: Why are some Text nodes empty?</a>』を参照してください。</p>
 <%}
 
 function showRussian() {
