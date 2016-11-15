@@ -37,16 +37,25 @@ var leaf = $1;
 var url = githubURL + file;
 
 var noDataFoundl10n = mdn.localString({
-    "en-US": "No compat data found.",
+    "en-US": 'No compatibility data found. Please contribute data for "' + env.title + '" to the <a href="https://github.com/mdn/browser-compat-data">MDN compatibility data repository</a>.',
     "fr"   : "Aucune donnée de compatibilité trouvée"
 });
 
-var data = mdn.fetchJSONResource(url);
 
-if (leaf !== '') {
-  output = template("CompatDataTable", [data[leaf], "api"]);
-} else {
-  output = template("CompatDataTable", [data, "module"]);
+if ($0) {
+  try {
+    var data = mdn.fetchJSONResource(url);
+  } catch (e) {
+    output = 'File "' + file + '" not found or malformed.'
+  }
+}
+
+if (data) {
+    if (leaf !== '') {
+      output = template("CompatDataTable", [data[leaf], "api"]);
+    } else {
+      output = template("CompatDataTable", [data, "module"]);
+    }
 }
 
 if (output === '') {
