@@ -1,79 +1,55 @@
 <%
+/*
 
-// If no arguments are given figure out which json belongs to the current page
-// If arguments are given:
-//    $0 – path to json, e.g. "web/http/headers.json"
-//    $1 – feature to be queried, e.g. "Cache-Control"
+Compat data from GitHub repo mdn/browser-compat-data
 
-var baseURL = "https://raw.githubusercontent.com/mdn/browser-compat-data/master/";
-var currentSlug = env.slug;
+Examples (per the current tentative plan):
+MDN URL                                                 GitHub File                                                           Compat macro call
+
+Web/JavaScript/Reference/Global_Objects/Promise         javascript/built-ins/promise.json                                     {{Compat("javascript/built-ins/promise")}}
+Web/JavaScript/Reference/Global_Objects/Promise/all     javascript/built-ins/promise.json["Promise.all"]                      {{Compat("javascript/built-ins/promise","Promise.all")}}
+Web/JavaScript/Reference/Operators/Arithmetic_Operators javascript/operators/arithmetic_operators.json                        {{Compat("javascript/operators/arithmetic_operators")}}
+Web/JavaScript/Reference/Statements/for...in            javascript/statements/for-in.json                                     {{Compat("javascript/statements/for-in")}}
+Web/HTTP/Status/404                                     http/status.json["404"]                                               {{Compat("http/status", "404")}}
+Web/HTTP/Method/POST                                    http/method.json["POST"]                                              {{Compat("http/method", "POST")}}
+Web/HTTP/Headers/Content-Security-Policy/               http/headers/content-security-policy.json                             {{Compat("http/headers/content-security-policy")}}
+Web/HTTP/Headers/Content-Security-Policy/child-src      http/headers/content-security-policy.json["child-src"]                {{Compat("http/headers/content-security-policy", "child-src")}}
+Web/API/WebGL2RenderingContext/                         api/WebGL2RenderingContext.json                                       {{Compat("api/WebGL2RenderingContext")}}
+Web/API/WebGL2RenderingContext/beginQuery               api/WebGL2RenderingContext.json["WebGL2RenderingContext.beginQuery"]  {{Compat("api/WebGL2RenderingContext", "WebGL2RenderingContext.beginQuery")}}
+Web/HTML/Element/input                                  html/input.json                                                       {{Compat("html/input")}}
+Web/HTML/Element/input/date                             html/input.json["date"]                                               {{Compat("html/input", "type=date")}}
+Web/CSS/background                                      css/properties/background.json                                        {{Compat("css/properties/background")}}
+Web/CSS/:active                                         css/selectors/active.json                                             {{Compat("css/selectors/active")}}
+Web/CSS/@font-face                                      css/at-rules/font-face.json                                           {{Compat("css/at-rules/font-face")}}
+
+Parameters:
+
+$0 – json file in the repository (without ".json")
+$1 – (optional) Node in that json 
+
+*/
+
+var githubURL = "https://raw.githubusercontent.com/mdn/browser-compat-data/master/";
 var locale = env.locale;
-var url = "";
 var output = "";
-var leaf = "";
+var file = $0 + ".json";
+var leaf = $1;
+var url = githubURL + file;
 
 var noDataFoundl10n = mdn.localString({
     "en-US": "No compat data found.",
     "fr"   : "Aucune donnée de compatibilité trouvée"
 });
 
-// Adding "l10n" object since computed names (mdn.localString)
-// cannot be used to build "map"
+var data = mdn.fetchJSONResource(url);
 
-var mapL10n = {
-    "en-US": {
-       "Web/HTTP/Headers": "http/headers.json",
-       "Web/HTTP/Methods": "http/methods.json",
-       "Web/HTTP/Status" : "http/status.json",
-       "Web/JavaScript/Reference/Global_Objects/Promise": "javascript/promise.json"
-    },
-    "fr"  : {
-       "Web/HTTP/En-têtes": "http/headers.json",
-       "Web/HTTP/Méthodes": "http/methods.json",
-       "Web/HTTP/Statut"  : "http/status.json",
-       "Web/JavaScript/Reference/Objets_globaux/Promise": "javascript/promise.json"
-    }
-};
-
-var map = mapL10n[locale];
-if (mapL10n[locale] === undefined) {
-  map = mapL10n["en-US"];
-}
-
-// We are on a main page, e.g.:
-// Web/HTTP/Headers
-// Web/JavaScript/Reference/Global_Objects/Object
-// Web/API/WebGLRenderingContext
-if (map.hasOwnProperty(currentSlug)) {
-  url = baseURL + map[currentSlug];
+if (leaf !== '') {
+  output = template("CompatDataTable", [data[leaf], "api"]);
 } else {
-  // We are on a leaf page, e.g.:
-  // Web/HTTP/Headers/Cache-Control
-  // Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
-  // Web/API/WebGLRenderingContext/texImage2D
-  var parentSlug = currentSlug.substring(0, currentSlug.lastIndexOf('/'));
-  if (map.hasOwnProperty(parentSlug)) {
-    url = baseURL + map[parentSlug];
-    leaf = env.title.replace('()', '');
-  }
+  output = template("CompatDataTable", [data, "module"]);
 }
 
-if ($0) {
-  url = baseURL + $0;
-  if ($1) {
-    leaf = $1;
-  }
-}
-
-
-if (url !== "") {
-  var data = mdn.fetchJSONResource(url);
-  if (leaf !== "") {
-    output = template("CompatDataTable", [data[leaf], "api"]);
-  } else {
-    output = template("CompatDataTable", [data, "module"]);
-  }
-} else {
+if (output === '') {
   output = noDataFoundl10n;
 }
 
