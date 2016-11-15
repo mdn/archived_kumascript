@@ -3,8 +3,6 @@
 var output = "";
 var apiPages;
 var apiSummaryId = "api-summary";
-var url = "https://raw.githubusercontent.com/mdn/browser-compat-data/master/webextensions/browser-compat-data.json";
-var data = mdn.fetchJSONResource(url);
 
 if ($0) {
   apiPages = page.subpagesExpand($0);
@@ -19,9 +17,6 @@ for (var i=0; i < apiPages.length; i++) {
   var apiName = apiPageUrlPieces[apiPageUrlPieces.length-1];
   output += "<h2>" + apiName + "</h2>";
   output += '<p>' + apiPage.summary + '</p>';
-  if (data[apiName]) {
-      output += template("WebExtBrowserCompatSummaryTable", [data[apiName]]);
-  }
   output += '<p><a href="' + apiPage.url + '">API reference documentation</a></p>';
 }
 
