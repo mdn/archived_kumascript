@@ -8,10 +8,11 @@ function getExamplesForModule(module) {
   var examplesForModule = [];
   for (var i = 0; i < allExamples.length; i++) {
     var example = allExamples[i];
-    for (var j = 0; j < example.javascript_modules.length; j++) {
-      var exampleModule = example.javascript_modules[j];
-      if (exampleModule.name === module) {
+    for (var j = 0; j < example.javascript_apis.length; j++) {
+      var apiUsed = example.javascript_apis[j].split(".")[0]
+      if (apiUsed === module) {
         examplesForModule.push(example);
+        break;
       }
     }
   }
@@ -20,18 +21,13 @@ function getExamplesForModule(module) {
 
 function getExamplesForAPI(module, api) {
   var examplesForAPI = [];
-  var examplesForModule = getExamplesForModule(module);
-  for (var i = 0; i < examplesForModule.length; i++) {
-    var example = examplesForModule[i];
-    for (var j = 0; j < example.javascript_modules.length; j++) {
-      var exampleModule = example.javascript_modules[j];
-      if (exampleModule.name == module) {
-        for (var k = 0; k < exampleModule.apis.length; k++) {
-          var exampleAPI = exampleModule.apis[k];
-          if (api == exampleAPI) {
-            examplesForAPI.push(example);
-          }
-        }
+  var moduleAndAPI = module + "." + api;
+  for (var i = 0; i < allExamples.length; i++) {
+    var example = allExamples[i];
+    for (var j = 0; j < example.javascript_apis.length; j++) {
+      if (moduleAndAPI === example.javascript_apis[j]) {
+        examplesForAPI.push(example);
+        break;
       }
     }
   }
@@ -46,34 +42,17 @@ function writeExampleDetails(examples) {
     var example = examples[i]; 
     output += "<hr/>";
     output += "<h2>" + example.name + "</h2>";
-    output += '<p><a href="' + example.url + '">' + example.url + '</a></p>';
+    var exampleUrl = "https://github.com/mdn/webextensions-examples/tree/master/" + example.name;
+    output += '<p><a href="' + exampleUrl + '">' + exampleUrl + '</a></p>';
     output += '<p>' + example.description + '</p>';
-
-    if (example.manifest_keys.length > 0) {
-        output += "<h3>" + "Manifest keys" + "</h3>";
-        output += "<ul>";
-        for (var j = 0; j < example.manifest_keys.length; j++) {
-          var manifest_key = example.manifest_keys[j];
-          output += '<li><a href="/' + lang + "/Add-ons/WebExtensions/manifest.json/" + manifest_key + '"><code>' + manifest_key + '</code></a></li>';
-        }
-        output += "</ul>";
-    }
     
-    if (example.javascript_modules.length > 0) {
-      output += "<h3>" + "JavaScript modules" + "</h3>";
+    if (example.javascript_apis.length > 0) {
+      output += "<h3>" + "JavaScript APIs" + "</h3>";
         output += "<ul>";
-        for (var k = 0; k < example.javascript_modules.length; k++) {
-          var module = example.javascript_modules[k];
-          output += '<li><a href="/' + lang + "/Add-ons/WebExtensions/API/" + module.name + '"><code>' + module.name + '</code></a>';
-          output += "<ul>";
-          for (var l = 0; l < module.apis.length; l++) {
-            var api = module.apis[l];
-            output += '<li><a href="/' + lang + "/Add-ons/WebExtensions/API/" + module.name + '/' + api + '"><code>' + api + '</code></a></li>';
-
-          }
-          output += "</ul>";
+        for (var k = 0; k < example.javascript_apis.length; k++) {
+          var link = "/" + lang + "/Add-ons/WebExtensions/API/" + example.javascript_apis[k].replace(".", "/");
+          output += '<li><a href="' + link + '"><code>' + example.javascript_apis[k] + '</code></a>';
           output += "</li>";
-          
         }
         output += "</ul>";
     }
@@ -90,7 +69,8 @@ function writeExampleLinks(examples) {
     for (var i = 0; i < examples.length; i++) {
       var example = examples[i];
       output += "<li>";
-      output += '<a href="' + example.url + '">' + example.name + '</a>';
+      var exampleURL = "https://github.com/mdn/webextensions-examples/tree/master/" + example.name;
+      output += '<a href="' + exampleURL + '">' + example.name + '</a>';
       output += "</li>";
     }
     output += "</ul>";
@@ -111,10 +91,6 @@ if (leaf == "Examples") {
   output = writeExampleLinks(getExamplesForModule(leaf));
 }
 else {
-    if (grandparent != "API") {
-        leaf = parent + "/" + leaf;
-        parent = grandparent;
-    }
   output = writeExampleLinks(getExamplesForAPI(parent, leaf));
 }
 
