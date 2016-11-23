@@ -42,7 +42,8 @@ var text = mdn.localString({
     'Reference': 'References:',
     'Methods': 'HTTP request methods',
     'Status': 'HTTP response status codes',
-    'CSPDirectives': 'CSP directives'
+    'CSPDirectives': 'CSP directives',
+    'Security': 'HTTP security'
   },
   'ru': {
     'HTTP': 'HTTP',
@@ -72,12 +73,24 @@ var text = mdn.localString({
     </ol></li>
     <li><a href="/<%=locale%>/docs/Web/HTTP/Basics_of_HTTP"><%=text['Basics']%></a>
     <ol>
-        <li><a href="/<%=locale%>/docs/Web/HTTP/Overview"><%=text['Overview']%></a>
-        <li><a href="/<%=locale%>/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP"><%=text['Evolution']%></a>
-        <li><a href="/<%=locale%>/docs/Web/HTTP/Messages"><%=text['Messages']%></a>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Overview"><%=text['Overview']%></a></li>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP"><%=text['Evolution']%></a></li>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Messages"><%=text['Messages']%></a></li>
         <li><a href="/<%=locale%>/docs/Web/HTTP/Session"><%=text['Session']%></a></li>
         <li><a href="/<%=locale%>/docs/Web/HTTP/Connection_management_in_HTTP_1.x"><%=text['Connection1x']%></a></li>
-
+    </ol>
+    </li>
+    <li><a href="#"><%=text['Security']%></a>
+    <ol>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a></li>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Public_Key_Pinning">HTTP Public Key Pinning (HPKP)</a></li>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Headers/Strict-Transport-Security">HTTP Strict Transport Security (HSTS)</a></li>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Cookies#Secure_and_HttpOnly_cookies">Cookie security</a></li>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Headers/X-Content-Type-Options">X-Content-Type-Options</a></li>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Headers/X-Frame-Options">X-Frame-Options</a></li>
+        <li><a href="/<%=locale%>/docs/Web/HTTP/Headers/X-XSS-Protection">X-XSS-Protection</a></li>
+        <li><a href="https://wiki.mozilla.org/Security/Guidelines/Web_Security">Mozilla web security guidelines</a></li>
+        <li><a href="https://observatory.mozilla.org/">Mozilla Observatory</a></li>
     </ol>
     </li>
     <li><a href="/<%=locale%>/docs/Web/HTTP/Access_control_CORS"><%=text['CORS']%></a></li>
